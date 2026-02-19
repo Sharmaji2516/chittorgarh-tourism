@@ -14,27 +14,42 @@ const Hero = () => {
             <div className="absolute inset-8 md:inset-12 border border-royal-gold/20 pointer-events-none"></div>
             <div className="absolute inset-10 md:inset-14 border border-royal-gold/10 pointer-events-none"></div>
 
-            <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-                <div className="mb-4 flex justify-center">
-                    <span className="h-px w-12 bg-royal-gold inline-block self-center mr-4"></span>
-                    <span className="text-royal-gold text-sm uppercase tracking-[0.3em] font-medium">Rajasthan Tourism</span>
-                    <span className="h-px w-12 bg-royal-gold inline-block self-center ml-4"></span>
-                </div>
+            <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
+                <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="mb-6 flex justify-center items-center gap-4"
+                >
+                    <span className="h-px w-8 md:w-12 bg-royal-gold hidden sm:block"></span>
+                    <span className="text-royal-gold text-[10px] md:text-sm uppercase tracking-[0.3em] font-medium whitespace-nowrap">{t.hero.title_prefix || "Rajasthan Tourism"}</span>
+                    <span className="h-px w-8 md:w-12 bg-royal-gold hidden sm:block"></span>
+                </motion.div>
 
-                <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-royal-gold mb-6 tracking-wide drop-shadow-xl">
+                <motion.h1
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-serif font-bold text-royal-gold mb-6 tracking-wide drop-shadow-2xl leading-tight"
+                >
                     {t.hero.title}
-                </h1>
+                </motion.h1>
 
-                <p className="text-lg md:text-2xl text-royal-white/90 font-light tracking-wide mb-10 max-w-2xl mx-auto leading-relaxed">
+                <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.2 }}
+                    className="text-base md:text-2xl text-royal-white/90 font-light tracking-wide mb-10 max-w-2xl mx-auto leading-relaxed italic"
+                >
                     {t.hero.subtitle}
-                </p>
+                </motion.p>
 
-                <a
+                <motion.a
                     href="#history"
-                    className="group inline-block px-8 py-3 border-2 border-royal-gold text-royal-gold hover:bg-royal-gold hover:text-royal-black transition-all duration-300 font-serif text-lg tracking-wider"
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="group inline-block px-8 py-3 bg-royal-gold/10 border-2 border-royal-gold text-royal-gold hover:bg-royal-gold hover:text-royal-black transition-all duration-500 font-serif text-base md:text-lg tracking-[0.2em] uppercase rounded-sm"
                 >
                     {t.hero.cta}
-                </a>
+                </motion.a>
             </div>
 
             {/* Scroll Indicator */}

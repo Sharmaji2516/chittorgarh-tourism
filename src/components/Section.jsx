@@ -2,7 +2,7 @@ import React from 'react';
 
 const Section = ({ id, title, children, className = "" }) => {
     return (
-        <section id={id} className={`py-20 relative overflow-hidden ${className}`}>
+        <section id={id} className={`py-12 md:py-20 relative overflow-hidden ${className}`}>
             {/* Container */}
             <div className="container mx-auto px-4 md:px-8 relative z-10">
                 {/* Section Title with Decorative Elements */}
