@@ -8,10 +8,10 @@ const VendorCard = ({ vendor }) => {
 
     return (
         <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={typeof window !== 'undefined' && window.innerWidth > 768 ? { opacity: 0, scale: 0.95 } : { opacity: 1, scale: 1 }}
+            whileInView={typeof window !== 'undefined' && window.innerWidth > 768 ? { opacity: 1, scale: 1 } : {}}
             viewport={{ once: true }}
-            whileHover={{ y: -5 }}
+            whileHover={typeof window !== 'undefined' && window.innerWidth > 768 ? { y: -5 } : {}}
             className="glass-card flex flex-col p-6 rounded-3xl border border-royal-gold/10 hover:border-royal-gold/40 transition-colors duration-500 group relative overflow-hidden"
         >
             <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-royal-gold/20 to-transparent"></div>

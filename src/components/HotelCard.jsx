@@ -9,10 +9,10 @@ const HotelCard = ({ hotel }) => {
 
     return (
         <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={typeof window !== 'undefined' && window.innerWidth > 768 ? { opacity: 0, scale: 0.95 } : { opacity: 1, scale: 1 }}
+            whileInView={typeof window !== 'undefined' && window.innerWidth > 768 ? { opacity: 1, scale: 1 } : {}}
             viewport={{ once: true }}
-            whileHover={{ y: -5 }}
+            whileHover={typeof window !== 'undefined' && window.innerWidth > 768 ? { y: -5 } : {}}
             className="glass-card flex flex-col p-6 rounded-3xl border border-royal-gold/10 hover:border-royal-gold/40 transition-colors duration-500 group relative overflow-hidden h-full"
         >
             <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
