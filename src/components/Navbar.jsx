@@ -128,7 +128,7 @@ const Navbar = ({ onSearch }) => {
 
                     {/* Mobile Menu Actions */}
                     <div className="md:hidden flex items-center gap-3">
-                        <div className={`flex items-center gap-2 p-2 rounded-full transition-all duration-300 border ${searchTerm ? 'w-40 border-royal-gold bg-black/40' : 'w-10 border-transparent'}`}>
+                        <div className={`flex items-center gap-2 p-2 rounded-full transition-[width,border-color,background-color] duration-300 border ${searchTerm ? 'w-40 border-royal-gold bg-black/40' : 'w-10 border-transparent'}`}>
                             <Search
                                 className="w-4 h-4 text-royal-gold cursor-pointer flex-shrink-0"
                                 onClick={() => setIsMenuOpen(false)} // Close menu if opening search
