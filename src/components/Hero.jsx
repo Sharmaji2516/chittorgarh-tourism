@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import { motion } from 'framer-motion';
 
 const Hero = () => {
     const { t } = useLanguage();
