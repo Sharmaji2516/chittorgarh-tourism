@@ -25,16 +25,26 @@ const Navbar = ({ onSearch }) => {
 
     useEffect(() => {
         const handleScroll = () => {
-            setScrolled(window.scrollY > 50);
+            const isScrolled = window.scrollY > 50;
+            setScrolled(prev => {
+                if (prev === isScrolled) return prev;
+                return isScrolled;
+            });
         };
-        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', handleScroll, { passive: true });
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
+    // Search Debouncing
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            if (onSearch) onSearch(searchTerm);
+        }, 400); // 400ms debounce for mobile performance
+        return () => clearTimeout(timer);
+    }, [searchTerm, onSearch]);
+
     const handleSearchChange = (e) => {
-        const val = e.target.value;
-        setSearchTerm(val);
-        if (onSearch) onSearch(val);
+        setSearchTerm(e.target.value);
     };
 
     const navLinks = [

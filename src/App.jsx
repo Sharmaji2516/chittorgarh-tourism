@@ -36,13 +36,10 @@ const MainContent = () => {
     <div className="min-h-screen flex flex-col relative text-royal-white font-sans selection:bg-royal-gold selection:text-royal-black bg-royal-black">
       {/* Global Background Image */}
       <div className="fixed inset-0 z-0 overflow-hidden">
-        <motion.div
-          initial={{ scale: 1.1 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 10, ease: "easeOut" }}
+        <div
           className="absolute inset-0 bg-image bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: "url('https://www.tourism.rajasthan.gov.in/content/dam/rajasthan-tourism/english/city/banners/desk/Chittorgarh-Fort-banner.png')" }}
-        ></motion.div>
+        ></div>
         <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]"></div>
       </div>
 
