@@ -1,0 +1,54 @@
+import React from 'react';
+import { useLanguage } from '../context/LanguageContext';
+
+const Footer = () => {
+    const { t } = useLanguage();
+
+    return (
+        <footer className="bg-royal-black text-royal-white/60 py-12 border-t border-royal-gold/20 relative overflow-hidden">
+            {/* Background Pattern */}
+            <div className="absolute inset-0 bg-royal-pattern opacity-5 pointer-events-none"></div>
+
+            <div className="container mx-auto px-4 text-center relative z-10">
+                <div className="mb-8 flex justify-center items-center gap-4">
+                    <span className="h-px w-16 bg-royal-gold/40"></span>
+                    <span className="text-2xl text-royal-gold font-serif">❦</span>
+                    <span className="h-px w-16 bg-royal-gold/40"></span>
+                </div>
+
+                <div className="grid md:grid-cols-3 gap-8 text-sm mb-12">
+                    <div>
+                        <h4 className="text-royal-gold uppercase tracking-widest mb-4 text-xs font-bold">Explore</h4>
+                        <ul className="space-y-2">
+                            <li><a href="#history" className="hover:text-royal-gold transition-colors">History</a></li>
+                            <li><a href="#attractions" className="hover:text-royal-gold transition-colors">Attractions</a></li>
+                            <li><a href="#vendors" className="hover:text-royal-gold transition-colors">Royal Cuisine</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 className="text-royal-gold uppercase tracking-widest mb-4 text-xs font-bold">Contact</h4>
+                        <p className="mb-2">Chittorgarh Tourism Board</p>
+                        <p>info@visit-chittorgarh.com</p>
+                    </div>
+                    <div>
+                        <h4 className="text-royal-gold uppercase tracking-widest mb-4 text-xs font-bold">Social</h4>
+                        <div className="flex justify-center gap-4">
+                            <a href="#" className="hover:text-royal-gold transition-colors">Instagram</a>
+                            <a href="#" className="hover:text-royal-gold transition-colors">Twitter</a>
+                            <a href="#" className="hover:text-royal-gold transition-colors">Facebook</a>
+                        </div>
+                    </div>
+                </div>
+
+                <p className="text-xs tracking-wider uppercase opacity-50 mb-2">
+                    {t.footer.copyright}
+                </p>
+                <p className="text-[10px] tracking-widest text-royal-gold/50 font-serif italic">
+                    {t.footer.dedication}
+                </p>
+            </div>
+        </footer>
+    );
+};
+
+export default Footer;
