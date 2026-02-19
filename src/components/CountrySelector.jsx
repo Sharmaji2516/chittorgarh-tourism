@@ -48,7 +48,7 @@ const CountrySelector = () => {
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-royal-black/95 md:bg-black/80 md:backdrop-blur-sm p-4">
             <div className="bg-royal-black border border-royal-gold p-8 rounded-lg max-w-md w-full shadow-2xl relative">
                 <div className="text-center mb-6">
                     <div className="text-4xl mb-4">🌍</div>

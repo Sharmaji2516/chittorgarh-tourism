@@ -55,7 +55,7 @@ const Navbar = ({ onSearch }) => {
 
     return (
         <>
-            <nav className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? 'bg-royal-black/80 backdrop-blur-xl py-3 border-b border-royal-gold/20' : 'bg-transparent py-6'}`}>
+            <nav className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? 'bg-royal-black/95 md:bg-royal-black/80 md:backdrop-blur-xl py-3 border-b border-royal-gold/20' : 'bg-transparent py-6'}`}>
                 <div className="container mx-auto px-4 md:px-8 flex justify-between items-center">
                     {/* Logo / Brand */}
                     <motion.div
@@ -162,7 +162,7 @@ const Navbar = ({ onSearch }) => {
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             onClick={() => setIsMenuOpen(false)}
-                            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[60] md:hidden"
+                            className="fixed inset-0 bg-royal-black/90 md:bg-black/60 md:backdrop-blur-sm z-[60] md:hidden"
                         />
                         <motion.div
                             initial={{ x: '100%' }}

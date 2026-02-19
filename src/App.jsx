@@ -40,7 +40,7 @@ const MainContent = () => {
           className="absolute inset-0 bg-image bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: "url('https://www.tourism.rajasthan.gov.in/content/dam/rajasthan-tourism/english/city/banners/desk/Chittorgarh-Fort-banner.png')" }}
         ></div>
-        <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]"></div>
+        <div className="absolute inset-0 bg-black/50 md:backdrop-blur-[2px]"></div>
       </div>
 
       {/* Main Content Wrapper */}
@@ -94,7 +94,7 @@ const MainContent = () => {
 
           {/* Attractions Section */}
           {filteredAttractions.length > 0 && (
-            <Section id="attractions" title={t.attractions.title} className="bg-black/20 backdrop-blur-md border-y border-royal-gold/10">
+            <Section id="attractions" title={t.attractions.title} className="bg-black/40 md:bg-black/20 md:backdrop-blur-md border-y border-royal-gold/10">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <AnimatePresence>
                   {filteredAttractions.map(item => (
@@ -123,7 +123,7 @@ const MainContent = () => {
 
           {/* Cafes Section */}
           {filteredCafes.length > 0 && (
-            <Section id="cafes" title={t.cafes.title} className="bg-black/20 backdrop-blur-md border-y border-royal-gold/10">
+            <Section id="cafes" title={t.cafes.title} className="bg-black/40 md:bg-black/20 md:backdrop-blur-md border-y border-royal-gold/10">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
                 {filteredCafes.map(item => (
                   <VendorCard key={`cafe-${item.id}`} vendor={item} />
