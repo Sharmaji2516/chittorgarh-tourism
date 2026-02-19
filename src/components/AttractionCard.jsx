@@ -22,12 +22,13 @@ const AttractionCard = ({ attraction }) => {
 
                 <div className="absolute inset-0 flex items-center justify-center">
                     <motion.span
-                        animate={{ rotate: [0, 5, -5, 0] }}
-                        transition={{ repeat: Infinity, duration: 6, ease: "linear" }}
-                        className="text-royal-gold/10 text-9xl font-serif pointer-events-none"
+                        animate={{ rotate: [0, 360] }}
+                        transition={{ repeat: Infinity, duration: 20, ease: "linear" }}
+                        className="text-royal-gold/10 text-9xl font-serif pointer-events-none hidden md:block"
                     >
                         ❋
                     </motion.span>
+                    <span className="text-royal-gold/10 text-9xl font-serif pointer-events-none md:hidden">❋</span>
                 </div>
 
                 <div className="absolute bottom-4 left-6">

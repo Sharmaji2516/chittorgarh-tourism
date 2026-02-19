@@ -19,7 +19,7 @@ const WeatherWidget = () => {
         >
             <div className="flex items-center justify-between">
                 <span className="text-royal-gold font-serif text-[10px] md:text-sm tracking-[0.2em] uppercase truncate">Chittorgarh</span>
-                <Sun className="w-4 h-4 md:w-5 md:h-5 text-royal-gold animate-pulse flex-shrink-0" />
+                <Sun className="w-4 h-4 md:w-5 md:h-5 text-royal-gold md:animate-pulse flex-shrink-0" />
             </div>
 
             <div className="flex items-end gap-1 md:gap-2">
