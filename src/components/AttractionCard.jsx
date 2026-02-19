@@ -8,10 +8,10 @@ const AttractionCard = ({ attraction }) => {
 
     return (
         <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={window.innerWidth > 768 ? { opacity: 0, scale: 0.95 } : { opacity: 1, scale: 1 }}
+            whileInView={window.innerWidth > 768 ? { opacity: 1, scale: 1 } : {}}
             viewport={{ once: true }}
-            whileHover={{ y: -10 }}
+            whileHover={window.innerWidth > 768 ? { y: -5 } : {}}
             transition={{ duration: 0.5 }}
             className="glass-card group relative overflow-hidden rounded-3xl border border-royal-gold/10 hover:border-royal-gold/40 transition-colors duration-500"
         >
