@@ -40,12 +40,16 @@ const Footer = () => {
                     </div>
                 </div>
 
-                <p className="text-xs tracking-wider uppercase opacity-50 mb-2">
+                <p className="text-xs tracking-wider uppercase opacity-50 mb-4">
                     {t.footer.copyright}
                 </p>
-                <p className="text-[10px] tracking-widest text-royal-gold/50 font-serif italic">
-                    {t.footer.dedication}
-                </p>
+
+                <div className="border-t border-royal-gold/10 pt-6">
+                    <p className="text-sm font-serif italic text-royal-gold/80 flex justify-center items-center gap-2">
+                        <span>Developed & Maintained by</span>
+                        <span className="font-bold not-italic bg-gradient-to-r from-royal-gold to-orange-400 bg-clip-text text-transparent">Lav & Kush Sharma</span>
+                    </p>
+                </div>
             </div>
         </footer>
     );
