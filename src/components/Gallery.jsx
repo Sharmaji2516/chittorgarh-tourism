@@ -5,10 +5,10 @@ import { content } from '../data/content';
 import { useLanguage } from '../context/LanguageContext';
 
 const Gallery = () => {
-    const { language } = useLanguage();
+    const { lang } = useLanguage(); // Fixed: destructure 'lang' not 'language'
 
     // Safety check: ensure content exists for the current language, fallback to 'en'
-    const safeLanguage = content[language] ? language : 'en';
+    const safeLanguage = content[lang] ? lang : 'en';
     const localizedContent = content[safeLanguage];
 
     // If English content is missing (catastrophic failure), return null
