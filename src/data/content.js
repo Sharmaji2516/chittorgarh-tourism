@@ -29,6 +29,18 @@ export const content = {
             readMore: "Read Full History on Wikipedia",
             wikiLink: "https://en.wikipedia.org/wiki/Chittorgarh"
         },
+        timeline: [
+            { year: "7th Century", title: "Foundation", desc: "Built by the Maurya dynasty, named after Chitrangada Mori." },
+            { year: "1303", title: "First Jauhar", desc: "Alauddin Khilji sieges the fort. Queen Padmini performs Jauhar." },
+            { year: "1535", title: "Second Jauhar", desc: "Bahadur Shah of Gujarat attacks. Rani Karnavati sends Rakhi to Humayun." },
+            { year: "1568", title: "Third Jauhar", desc: "Emperor Akbar captures the fort. Jaimal and Patta show immense valor." }
+        ],
+        facts: [
+            "Largest fort in India, spanning 700 acres.",
+            "Home to 84 water bodies in the past, now only 22 remain.",
+            "The fort has 7 massive gates (Pols).",
+            "It is shaped like a fish when viewed from above."
+        ],
         attractions: {
             title: "Major Tourist Attractions",
             items: [

@@ -10,6 +10,9 @@ import Footer from './components/Footer';
 import CountrySelector from './components/CountrySelector';
 import WeatherWidget from './components/WeatherWidget';
 import InteractiveMap from './components/InteractiveMap';
+import Timeline from './components/Timeline';
+import AudioPlayer from './components/AudioPlayer';
+import FactCards from './components/FactCards';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const MainContent = () => {
@@ -49,6 +52,8 @@ const MainContent = () => {
         <CountrySelector />
         <Navbar onSearch={setSearchQuery} />
         <WeatherWidget />
+        <AudioPlayer />
+        <FactCards />
         <Hero />
 
         {/* Search Status Indicator */}
@@ -92,6 +97,9 @@ const MainContent = () => {
               </motion.div>
             </Section>
           )}
+
+          {/* Timeline Section - Only visible when not searching */}
+          {!searchQuery && <Timeline />}
 
           {/* Attractions Section */}
           {filteredAttractions.length > 0 && (
