@@ -6,15 +6,26 @@ import { useLanguage } from '../context/LanguageContext';
 const Hero = () => {
     const { t } = useLanguage();
 
+    const bgImageDesktop = "https://www.tourism.rajasthan.gov.in/content/dam/rajasthan-tourism/english/city/banners/desk/Chittorgarh-Fort-banner.png";
+    const bgImageMobile = "https://images.unsplash.com/photo-1590666066228-5d259508544e?q=80&w=800&h=1200&fit=crop"; // Vertical crop of Vijay Stambh
+
     return (
         <div className="relative h-screen flex items-center justify-center text-center px-4 overflow-hidden">
             {/* Background Image with Overlay */}
             <div
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0 transform scale-105"
+                className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0 transform scale-105 transition-all duration-1000"
                 style={{
-                    backgroundImage: "url('https://www.tourism.rajasthan.gov.in/content/dam/rajasthan-tourism/english/city/banners/desk/Chittorgarh-Fort-banner.png')",
+                    backgroundImage: `url('${bgImageMobile}')`, // Default (Mobile)
                 }}
             >
+                {/* Desktop Override via CSS (cleaner than JS resize listener) */}
+                <style>{`
+                    @media (min-width: 768px) {
+                        .bg-cover {
+                            background-image: url('${bgImageDesktop}') !important;
+                        }
+                    }
+                `}</style>
                 <div className="absolute inset-0 bg-black/40"></div>
                 <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-royal-black"></div>
             </div>
