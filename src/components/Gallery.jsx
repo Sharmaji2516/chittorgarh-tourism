@@ -6,15 +6,30 @@ import { useLanguage } from '../context/LanguageContext';
 
 const Gallery = () => {
     const { language } = useLanguage();
+
+    // Safety check: ensure content exists for the current language, fallback to 'en'
+    const safeLanguage = content[language] ? language : 'en';
+    const localizedContent = content[safeLanguage];
+
+    // If English content is missing (catastrophic failure), return null
+    if (!content.en || !content.en.attractions) return null;
+
     // Using English content for images as they are common
-    const images = content.en.attractions.items.map(item => ({
-        id: item.id,
-        src: item.image,
-        alt: content[language].attractions.items.find(i => i.id === item.id)?.name || item.name,
-        caption: content[language].attractions.items.find(i => i.id === item.id)?.name || item.name
-    })).filter(img => img.src); // Filter out items without images if any
+    const images = content.en.attractions.items.map(item => {
+        // Find localized version of the item
+        const localItem = localizedContent?.attractions?.items?.find(i => i.id === item.id);
+
+        return {
+            id: item.id,
+            src: item.image,
+            alt: localItem?.name || item.name,
+            caption: localItem?.name || item.name
+        };
+    }).filter(img => img.src);
 
     const [selectedImage, setSelectedImage] = useState(null);
+
+    if (images.length === 0) return null;
 
     return (
         <section id="gallery" className="py-20 relative bg-royal-black/90">
