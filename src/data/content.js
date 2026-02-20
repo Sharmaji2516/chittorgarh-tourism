@@ -52,7 +52,8 @@ export const content = {
                     bestTime: "Oct - March (Winter)",
                     images: [
                         "https://images.unsplash.com/photo-1590666066228-5d259508544e?q=80&w=1200",
-                        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Chittorgarh_Fort_Gaumukh.jpg/1200px-Chittorgarh_Fort_Gaumukh.jpg"
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Chittorgarh_Fort_Gaumukh.jpg/1200px-Chittorgarh_Fort_Gaumukh.jpg",
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Chittorgarh_fort.JPG/1280px-Chittorgarh_fort.JPG"
                     ],
                     coordinates: [24.8879, 74.6454],
                     distances: {
@@ -336,7 +337,8 @@ export const content = {
                     bestTime: "अक्टूबर - मार्च (सर्दी)",
                     images: [
                         "https://images.unsplash.com/photo-1590666066228-5d259508544e?q=80&w=1200",
-                        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Chittorgarh_Fort_Gaumukh.jpg/1200px-Chittorgarh_Fort_Gaumukh.jpg"
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Chittorgarh_Fort_Gaumukh.jpg/1200px-Chittorgarh_Fort_Gaumukh.jpg",
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Chittorgarh_fort.JPG/1280px-Chittorgarh_fort.JPG"
                     ],
                     distances: {
                         railway: "6 किमी",
@@ -605,7 +607,8 @@ export const content = {
                     bestTime: "Oct - Mar (Invierno)",
                     images: [
                         "https://images.unsplash.com/photo-1590666066228-5d259508544e?q=80&w=1200",
-                        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Chittorgarh_Fort_Gaumukh.jpg/1200px-Chittorgarh_Fort_Gaumukh.jpg"
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Chittorgarh_Fort_Gaumukh.jpg/1200px-Chittorgarh_Fort_Gaumukh.jpg",
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Chittorgarh_fort.JPG/1280px-Chittorgarh_fort.JPG"
                     ],
                     distances: {
                         railway: "6 km",
@@ -874,7 +877,8 @@ export const content = {
                     bestTime: "Oct - Mars (Hiver)",
                     images: [
                         "https://images.unsplash.com/photo-1590666066228-5d259508544e?q=80&w=1200",
-                        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Chittorgarh_Fort_Gaumukh.jpg/1200px-Chittorgarh_Fort_Gaumukh.jpg"
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Chittorgarh_Fort_Gaumukh.jpg/1200px-Chittorgarh_Fort_Gaumukh.jpg",
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Chittorgarh_fort.JPG/1280px-Chittorgarh_fort.JPG"
                     ],
                     distances: {
                         railway: "6 km",
@@ -1143,7 +1147,8 @@ export const content = {
                     bestTime: "10月 - 3月 (冬季)",
                     images: [
                         "https://images.unsplash.com/photo-1590666066228-5d259508544e?q=80&w=1200",
-                        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Chittorgarh_Fort_Gaumukh.jpg/1200px-Chittorgarh_Fort_Gaumukh.jpg"
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Chittorgarh_Fort_Gaumukh.jpg/1200px-Chittorgarh_Fort_Gaumukh.jpg",
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Chittorgarh_fort.JPG/1280px-Chittorgarh_fort.JPG"
                     ],
                     distances: {
                         railway: "6 公里",
