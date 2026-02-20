@@ -50,7 +50,10 @@ export const content = {
                     desc: "A UNESCO World Heritage Site and the largest fort in India. A symbol of resilience and architectural brilliance.",
                     wiki: "https://en.wikipedia.org/wiki/Chittor_Fort",
                     bestTime: "Oct - March (Winter)",
-                    image: "https://images.unsplash.com/photo-1590666066228-5d259508544e?q=80&w=1200",
+                    images: [
+                        "https://images.unsplash.com/photo-1590666066228-5d259508544e?q=80&w=1200",
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Chittorgarh_Fort_Gaumukh.jpg/1200px-Chittorgarh_Fort_Gaumukh.jpg"
+                    ],
                     coordinates: [24.8879, 74.6454],
                     distances: {
                         railway: "6 km",
@@ -331,6 +334,10 @@ export const content = {
                     desc: "यूनेस्को विश्व धरोहर स्थल और भारत का सबसे बड़ा किला। यह राजसी वास्तुकला और लचीलेपन का प्रतीक है।",
                     wiki: "https://hi.wikipedia.org/wiki/%E0%A4%9A%E0%A4%BF%E0%A4%A4%E0%A5%8D%E0%A4%A4%E0%A5%8C%E0%A4%A1%E0%A4%BC_%E0%A4%A6%E0%A5%81%E0%A4%B0%E0%A5%8D%E0%A4%97",
                     bestTime: "अक्टूबर - मार्च (सर्दी)",
+                    images: [
+                        "https://images.unsplash.com/photo-1590666066228-5d259508544e?q=80&w=1200",
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Chittorgarh_Fort_Gaumukh.jpg/1200px-Chittorgarh_Fort_Gaumukh.jpg"
+                    ],
                     distances: {
                         railway: "6 किमी",
                         bus: "8 किमी",
@@ -596,6 +603,10 @@ export const content = {
                     desc: "Patrimonio de la Humanidad por la UNESCO y el fuerte más grande de la India. Un símbolo de resistencia y brillantez arquitectónica.",
                     wiki: "https://es.wikipedia.org/wiki/Fuerte_de_Chittor",
                     bestTime: "Oct - Mar (Invierno)",
+                    images: [
+                        "https://images.unsplash.com/photo-1590666066228-5d259508544e?q=80&w=1200",
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Chittorgarh_Fort_Gaumukh.jpg/1200px-Chittorgarh_Fort_Gaumukh.jpg"
+                    ],
                     distances: {
                         railway: "6 km",
                         bus: "8 km",
@@ -861,6 +872,10 @@ export const content = {
                     desc: "Un site du patrimoine mondial de l'UNESCO et le plus grand fort de l'Inde. Un symbole de résilience.",
                     wiki: "https://fr.wikipedia.org/wiki/Fort_de_Chittorgarh",
                     bestTime: "Oct - Mars (Hiver)",
+                    images: [
+                        "https://images.unsplash.com/photo-1590666066228-5d259508544e?q=80&w=1200",
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Chittorgarh_Fort_Gaumukh.jpg/1200px-Chittorgarh_Fort_Gaumukh.jpg"
+                    ],
                     distances: {
                         railway: "6 km",
                         bus: "8 km",
@@ -1126,6 +1141,10 @@ export const content = {
                     desc: "联合国教科文组织世界遗产，印度最大的堡垒。韧性和建筑辉煌的象征。",
                     wiki: "https://zh.wikipedia.org/wiki/%E6%9F%B4%E5%A4%9A%E5%B0%94%E5%A0%A1",
                     bestTime: "10月 - 3月 (冬季)",
+                    images: [
+                        "https://images.unsplash.com/photo-1590666066228-5d259508544e?q=80&w=1200",
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Chittorgarh_Fort_Gaumukh.jpg/1200px-Chittorgarh_Fort_Gaumukh.jpg"
+                    ],
                     distances: {
                         railway: "6 公里",
                         bus: "8 公里",
