@@ -1,217 +1,133 @@
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, Menu, X, Globe } from 'lucide-react';
+import { Menu, X, Search, Globe } from 'lucide-react';
+import { cn } from '../utils/cn';
 
 const Navbar = ({ onSearch }) => {
-    const { t, changeLanguage, lang } = useLanguage();
+    const { language, changeLanguage, t } = useLanguage();
+    const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
-    const [isSearchOpen, setIsSearchOpen] = useState(false);
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [searchTerm, setSearchTerm] = useState('');
-
-    const toggleLang = () => {
-        if (lang === 'en') changeLanguage('hi');
-        else if (lang === 'hi') changeLanguage('es');
-        else if (lang === 'es') changeLanguage('fr');
-        else if (lang === 'fr') changeLanguage('zh');
-        else changeLanguage('en');
-    };
-
-    const clearSearch = () => {
-        setSearchTerm('');
-        if (onSearch) onSearch('');
-    };
+    const [showSearch, setShowSearch] = useState(false);
 
     useEffect(() => {
-        const handleScroll = () => {
-            const isScrolled = window.scrollY > 50;
-            setScrolled(prev => {
-                if (prev === isScrolled) return prev;
-                return isScrolled;
-            });
-        };
-        window.addEventListener('scroll', handleScroll, { passive: true });
+        const handleScroll = () => setScrolled(window.scrollY > 20);
+        window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Search Debouncing
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            if (onSearch) onSearch(searchTerm);
-        }, 400); // 400ms debounce for mobile performance
-        return () => clearTimeout(timer);
-    }, [searchTerm, onSearch]);
-
-    const handleSearchChange = (e) => {
-        setSearchTerm(e.target.value);
-    };
-
     const navLinks = [
-        { href: "#history", label: t.nav.history },
-        { href: "#attractions", label: t.nav.attractions },
-        { href: "#vendors", label: t.nav.vendors },
+        { name: t.nav.history, href: '#history' },
+        { name: t.nav.attractions, href: '#attractions' },
+        { name: t.nav.vendors, href: '#vendors' },
+        { name: t.nav.cafes, href: '#cafes' },
+        { name: t.nav.hotels, href: '#hotels' },
     ];
 
     return (
-        <>
-            <nav className={`fixed w-full z-50 transition-[padding,background-color,border-color] duration-500 ${scrolled ? 'bg-royal-black/95 md:bg-royal-black/80 md:backdrop-blur-xl py-3 border-b border-royal-gold/20' : 'bg-transparent py-6'}`}>
-                <div className="container mx-auto px-4 md:px-8 flex justify-between items-center">
-                    {/* Logo / Brand */}
-                    <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        className="flex items-center gap-3 cursor-pointer"
-                        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                    >
-                        <div className="h-8 w-8 md:h-10 md:w-10 border-2 border-royal-gold rounded-full flex items-center justify-center shadow-[0_0_15px_rgba(212,175,55,0.3)]">
-                            <span className="text-royal-gold font-serif text-lg md:text-xl font-bold">C</span>
+        <nav className={cn(
+            "fixed w-full z-50 transition-all duration-300 border-b border-transparent",
+            scrolled ? "bg-black/60 backdrop-blur-xl border-white/10 py-2" : "bg-transparent py-4"
+        )}>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="flex items-center justify-between h-16">
+
+                    {/* Logo */}
+                    <div className="flex-shrink-0 flex items-center gap-2">
+                        <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-royal-gold to-orange-500 flex items-center justify-center shadow-lg shadow-orange-500/20">
+                            <span className="text-white font-serif font-bold text-xl">C</span>
                         </div>
-                        <h1 className="text-lg md:text-2xl font-serif font-bold text-royal-gold tracking-[0.2em] drop-shadow-md">
-                            CHITTORGARH
-                        </h1>
-                    </motion.div>
+                        <span className="text-white text-xl font-bold font-serif tracking-wider hidden md:block">
+                            Chittorgarh<span className="text-royal-gold">Tourism</span>
+                        </span>
+                    </div>
 
                     {/* Desktop Menu */}
-                    <div className="hidden md:flex items-center gap-8">
-                        <div className="flex items-center gap-6">
-                            {navLinks.map(link => (
-                                <a key={link.href} href={link.href} className="text-royal-white/80 hover:text-royal-gold transition-colors font-medium tracking-wide text-xs uppercase">{link.label}</a>
+                    <div className="hidden md:block">
+                        <div className="ml-10 flex items-baseline space-x-8">
+                            {navLinks.map((link) => (
+                                <a
+                                    key={link.name}
+                                    href={link.href}
+                                    className="text-white/80 hover:text-royal-gold px-3 py-2 rounded-md text-sm font-medium transition-colors uppercase tracking-widest hover:bg-white/5"
+                                >
+                                    {link.name}
+                                </a>
                             ))}
                         </div>
+                    </div>
 
-                        <div className="h-6 w-px bg-royal-gold/20 mx-2"></div>
-
-                        {/* Search Field */}
-                        <div className="relative group">
-                            <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full transition-all duration-300 border ${(isSearchOpen || searchTerm) ? 'w-64 border-royal-gold bg-black/40' : 'w-10 border-transparent hover:border-royal-gold/50'}`}>
-                                <Search
-                                    className="w-4 h-4 text-royal-gold cursor-pointer flex-shrink-0"
-                                    onClick={() => setIsSearchOpen(!isSearchOpen)}
-                                />
-                                <AnimatePresence>
-                                    {(isSearchOpen || searchTerm) && (
-                                        <motion.div
-                                            initial={{ width: 0, opacity: 0 }}
-                                            animate={{ width: 'auto', opacity: 1 }}
-                                            exit={{ width: 0, opacity: 0 }}
-                                            className="flex items-center w-full"
-                                        >
-                                            <input
-                                                type="text"
-                                                placeholder="Search treasures..."
-                                                value={searchTerm}
-                                                onChange={handleSearchChange}
-                                                className="bg-transparent border-none outline-none text-royal-white text-sm w-full placeholder:text-royal-white/30"
-                                                autoFocus
-                                            />
-                                            {searchTerm && (
-                                                <X
-                                                    className="w-3 h-3 text-royal-white/40 hover:text-royal-gold cursor-pointer"
-                                                    onClick={clearSearch}
-                                                />
-                                            )}
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
-                            </div>
+                    {/* Actions */}
+                    <div className="hidden md:flex items-center gap-4">
+                        <div className={`relative flex items-center transition-all duration-300 ${showSearch ? 'w-64' : 'w-10'}`}>
+                            <button
+                                onClick={() => setShowSearch(!showSearch)}
+                                className="absolute right-0 p-2 text-white/80 hover:text-royal-gold z-10"
+                            >
+                                <Search className="w-5 h-5" />
+                            </button>
+                            <input
+                                type="text"
+                                placeholder="Search..."
+                                onChange={(e) => onSearch(e.target.value)}
+                                className={cn(
+                                    "bg-white/10 border border-white/10 text-white placeholder-gray-400 rounded-full py-1.5 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-royal-gold/50 transition-all duration-300",
+                                    showSearch ? "w-full opacity-100" : "w-0 opacity-0"
+                                )}
+                            />
                         </div>
 
-                        <button
-                            onClick={toggleLang}
-                            className="flex items-center gap-2 px-4 py-2 border border-royal-gold text-royal-gold hover:bg-royal-gold hover:text-royal-black transition-all duration-500 rounded-lg font-serif text-xs tracking-widest uppercase shadow-sm active:scale-95"
-                        >
-                            <Globe className="w-3 h-3" />
-                            {lang === 'en' ? 'HI' : lang === 'hi' ? 'ES' : lang === 'es' ? 'FR' : lang === 'fr' ? 'ZH' : 'EN'}
+                        {/* Language Selector Trigger */}
+                        <button className="p-2 text-white/80 hover:text-royal-gold transition-colors">
+                            <Globe className="w-5 h-5" />
                         </button>
                     </div>
 
-                    {/* Mobile Menu Actions */}
-                    <div className="md:hidden flex items-center gap-3">
-                        <div className={`flex items-center gap-2 p-2 rounded-full transition-[width,border-color,background-color] duration-300 border ${searchTerm ? 'w-40 border-royal-gold bg-black/40' : 'w-10 border-transparent'}`}>
-                            <Search
-                                className="w-4 h-4 text-royal-gold cursor-pointer flex-shrink-0"
-                                onClick={() => setIsMenuOpen(false)} // Close menu if opening search
-                            />
-                            {searchTerm !== undefined && (
-                                <input
-                                    type="text"
-                                    placeholder="Search..."
-                                    value={searchTerm}
-                                    onChange={handleSearchChange}
-                                    className={`bg-transparent border-none outline-none text-royal-white text-sm w-full placeholder:text-royal-white/30 ${searchTerm ? 'block' : 'hidden'}`}
-                                />
-                            )}
-                        </div>
+                    {/* Mobile Menu Button */}
+                    <div className="-mr-2 flex md:hidden">
                         <button
-                            className="text-royal-gold p-2 hover:bg-royal-gold/10 rounded-full transition-colors"
-                            onClick={() => setIsMenuOpen(true)}
+                            onClick={() => setIsOpen(!isOpen)}
+                            className="bg-white/10 inline-flex items-center justify-center p-2 rounded-md text-white hover:text-royal-gold hover:bg-white/20 focus:outline-none"
                         >
-                            <Menu className="w-6 h-6" />
+                            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
                         </button>
                     </div>
                 </div>
-            </nav>
+            </div>
 
-            {/* Mobile Drawer Overlay */}
+            {/* Mobile Menu */}
             <AnimatePresence>
-                {isMenuOpen && (
-                    <>
-                        <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            onClick={() => setIsMenuOpen(false)}
-                            className="fixed inset-0 bg-royal-black/90 md:bg-black/60 md:backdrop-blur-sm z-[60] md:hidden"
-                        />
-                        <motion.div
-                            initial={{ x: '100%' }}
-                            animate={{ x: 0 }}
-                            exit={{ x: '100%' }}
-                            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-                            className="fixed top-0 right-0 h-full w-[80%] max-w-xs bg-royal-black border-l border-royal-gold/20 z-[70] md:hidden p-8 flex flex-col"
-                        >
-                            <div className="flex justify-between items-center mb-12">
-                                <span className="text-royal-gold font-serif font-bold tracking-widest uppercase italic">Menu</span>
-                                <button onClick={() => setIsMenuOpen(false)}>
-                                    <X className="w-6 h-6 text-royal-gold" />
-                                </button>
-                            </div>
-
-                            <div className="flex flex-col gap-8 mb-auto">
-                                {navLinks.map((link, idx) => (
-                                    <motion.a
-                                        key={link.href}
-                                        href={link.href}
-                                        initial={{ opacity: 0, x: 20 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        transition={{ delay: idx * 0.1 }}
-                                        onClick={() => setIsMenuOpen(false)}
-                                        className="text-2xl font-serif text-royal-white/90 hover:text-royal-gold transition-colors flex items-center justify-between group"
-                                    >
-                                        <span>{link.label}</span>
-                                        <div className="h-px w-0 bg-royal-gold group-hover:w-8 transition-all duration-300" />
-                                    </motion.a>
-                                ))}
-                            </div>
-
-                            <div className="pt-8 border-t border-royal-gold/10 flex flex-col gap-4">
-                                <button
-                                    onClick={() => {
-                                        toggleLang();
-                                        setIsMenuOpen(false);
-                                    }}
-                                    className="flex items-center justify-center gap-3 w-full py-4 border border-royal-gold text-royal-gold rounded-xl font-serif text-sm tracking-widest uppercase active:scale-95 transition-transform"
+                {isOpen && (
+                    <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        className="md:hidden bg-black/95 backdrop-blur-xl border-b border-white/10 overflow-hidden"
+                    >
+                        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                            {navLinks.map((link) => (
+                                <a
+                                    key={link.name}
+                                    href={link.href}
+                                    onClick={() => setIsOpen(false)}
+                                    className="text-gray-300 hover:text-royal-gold hover:bg-white/5 block px-3 py-2 rounded-md text-base font-medium"
                                 >
-                                    <Globe className="w-4 h-4" />
-                                    {lang === 'en' ? 'SWITCH TO HINDI' : lang === 'hi' ? 'SWITCH TO SPANISH' : lang === 'es' ? 'SWITCH TO FRENCH' : lang === 'fr' ? 'SWITCH TO CHINES' : 'SWITCH TO ENGLISH'}
-                                </button>
+                                    {link.name}
+                                </a>
+                            ))}
+                            <div className="px-3 py-2">
+                                <input
+                                    type="text"
+                                    placeholder="Search..."
+                                    onChange={(e) => onSearch(e.target.value)}
+                                    className="w-full bg-white/10 border border-white/10 text-white placeholder-gray-400 rounded-lg py-2 px-4 focus:outline-none"
+                                />
                             </div>
-                        </motion.div>
-                    </>
+                        </div>
+                    </motion.div>
                 )}
             </AnimatePresence>
-        </>
+        </nav>
     );
 };
 
