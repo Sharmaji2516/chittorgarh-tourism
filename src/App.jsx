@@ -9,7 +9,7 @@ import HotelCard from './components/HotelCard';
 import Footer from './components/Footer';
 import CountrySelector from './components/CountrySelector';
 import WeatherWidget from './components/WeatherWidget';
-import Gallery from './components/Gallery';
+import InteractiveMap from './components/InteractiveMap';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const MainContent = () => {
@@ -106,8 +106,8 @@ const MainContent = () => {
             </Section>
           )}
 
-          {/* Heritage Gallery - Only visible when not searching */}
-          {!searchQuery && <Gallery />}
+          {/* Interactive Map - Only visible when not searching */}
+          {!searchQuery && <InteractiveMap />}
 
           {/* Vendors Section */}
           {filteredVendors.length > 0 && (

@@ -39,6 +39,7 @@ export const content = {
                     wiki: "https://en.wikipedia.org/wiki/Chittor_Fort",
                     bestTime: "Oct - March (Winter)",
                     image: "https://images.unsplash.com/photo-1590666066228-5d259508544e?q=80&w=1200",
+                    coordinates: [24.8879, 74.6454],
                     distances: {
                         railway: "6 km",
                         bus: "8 km",
@@ -52,6 +53,7 @@ export const content = {
                     wiki: "https://en.wikipedia.org/wiki/Bassi_Wildlife_Sanctuary",
                     bestTime: "Oct - Feb (Migratory Birds)",
                     image: "https://images.unsplash.com/photo-1627894483216-2138af692e32?q=80&w=1200",
+                    coordinates: [24.9960, 74.7600],
                     distances: {
                         railway: "25 km",
                         bus: "27 km",
@@ -65,6 +67,7 @@ export const content = {
                     wiki: "https://en.wikipedia.org/wiki/Sanwariaji_Temple",
                     bestTime: "Year-round (Festivals preferred)",
                     image: "https://images.unsplash.com/photo-1563720703814-1e5b15a6b093?q=80&w=1200",
+                    coordinates: [24.6067, 74.5246],
                     distances: {
                         railway: "35 km",
                         bus: "37 km",
@@ -78,6 +81,7 @@ export const content = {
                     wiki: "https://en.wikipedia.org/wiki/Vijay_Stambha",
                     bestTime: "Oct - March (Pleasant Weather)",
                     image: "https://images.unsplash.com/photo-1590666066228-5d259508544e?q=80&w=1200",
+                    coordinates: [24.8878, 74.6451],
                     distances: {
                         railway: "7 km",
                         bus: "9 km",
@@ -91,6 +95,7 @@ export const content = {
                     wiki: "https://en.wikipedia.org/wiki/Kirti_Stambha",
                     bestTime: "Oct - March",
                     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/Kirti_Stambha_Chittorgarh.jpg/640px-Kirti_Stambha_Chittorgarh.jpg",
+                    coordinates: [24.8926, 74.6460],
                     distances: {
                         railway: "6.5 km",
                         bus: "8.5 km",
@@ -104,6 +109,7 @@ export const content = {
                     wiki: "https://en.wikipedia.org/wiki/Chittor_Fort#Padmini's_Palace",
                     bestTime: "Oct - March",
                     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Padmini_Palace_Chittorgarh.jpg/640px-Padmini_Palace_Chittorgarh.jpg",
+                    coordinates: [24.8833, 74.6436],
                     distances: {
                         railway: "7.5 km",
                         bus: "9.5 km",
@@ -117,6 +123,7 @@ export const content = {
                     wiki: "https://en.wikipedia.org/wiki/Chittor_Fort#Meera_Temple",
                     bestTime: "Year-round",
                     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Meera_Temple_Chittorgarh.jpg/640px-Meera_Temple_Chittorgarh.jpg",
+                    coordinates: [24.8890, 74.6420],
                     distances: {
                         railway: "6.8 km",
                         bus: "8.8 km",
@@ -130,6 +137,7 @@ export const content = {
                     wiki: "https://en.wikipedia.org/wiki/Chittor_Fort#Gaumukh_Reservoir",
                     bestTime: "Monsoon & Winter",
                     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Gaumukh_Reservoir_Chittorgarh.jpg/640px-Gaumukh_Reservoir_Chittorgarh.jpg",
+                    coordinates: [24.8870, 74.6430],
                     distances: {
                         railway: "7.2 km",
                         bus: "9.2 km",
