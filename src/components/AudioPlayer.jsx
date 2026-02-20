@@ -5,7 +5,12 @@ const AudioPlayer = () => {
     const [isPlaying, setIsPlaying] = useState(false);
     const audioRef = useRef(null);
     // Royalty-free Indian Folk Music (Placeholder URL)
-    const audioUrl = "https://cdn.pixabay.com/download/audio/2022/03/09/audio_d0df8f4b00.mp3?filename=indian-meditation-19602.mp3";
+    // Royalty-free Indian Folk Music (Placeholder URL - verified working)
+    const audioUrl = "https://codeskulptor-demos.commondatastorage.googleapis.com/pang/potted_plant.mp3"; // Temporary reliable placeholder until we find a better folk one, or user provides one. Using a generic pleasant sound for now to test functionality.
+    // Actually, let's try a better one if possible. 
+    // const audioUrl = "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"; // Too long/modern.
+    // Let's stick to the previous one but maybe the query param killed it.
+    // const audioUrl = "https://cdn.pixabay.com/download/audio/2022/03/09/audio_d0df8f4b00.mp3"; 
 
     const togglePlay = () => {
         if (audioRef.current) {

@@ -10,7 +10,9 @@ const Hero = () => {
     // Fallback image if video fails or while loading
     const bgImage = "https://www.tourism.rajasthan.gov.in/content/dam/rajasthan-tourism/english/city/banners/desk/Chittorgarh-Fort-banner.png";
     // Cinematic Cloud/Fort Footage (Placeholder)
-    const videoUrl = "https://cdn.pixabay.com/video/2023/04/13/158782-817454247_large.mp4";
+    // Cinematic Cloud/Fort Footage (Placeholder)
+    // Using a reliable Pexels video link
+    const videoUrl = "https://videos.pexels.com/video-files/3969446/3969446-hd_1920_1080_25fps.mp4"; // Clouds/Mountains generic if specific fort video fails
 
     return (
         <div className="relative h-screen w-full overflow-hidden flex items-center justify-center">
