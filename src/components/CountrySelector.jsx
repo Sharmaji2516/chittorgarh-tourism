@@ -64,7 +64,7 @@ const CountrySelector = () => {
                         <select
                             value={selectedLanguage}
                             onChange={(e) => setSelectedLanguage(e.target.value)}
-                            className="w-full bg-charcoal text-royal-white border border-royal-gold/30 rounded px-4 py-2 focus:border-royal-gold outline-none"
+                            className="w-full bg-zinc-800 text-white border border-royal-gold/30 rounded px-4 py-2 focus:border-royal-gold outline-none"
                         >
                             <option value="en">English (International)</option>
                             <option value="hi">Hindi (India)</option>
