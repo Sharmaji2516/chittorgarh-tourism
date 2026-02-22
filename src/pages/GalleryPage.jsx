@@ -60,24 +60,7 @@ const GalleryPage = ({ t }) => {
 
     return (
         <div className="min-h-screen pt-20 pb-16">
-            <Section id="gallery-header" className="py-0">
-                <div className="text-center mb-6 md:mb-10">
-                    <motion.h1
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="text-3xl md:text-6xl font-serif text-white mb-2 md:mb-4"
-                    >
-                        {t.nav.gallery}
-                    </motion.h1>
-                    <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.2 }}
-                        className="text-royal-gold uppercase tracking-[0.2em] md:tracking-[0.3em] text-xs md:text-sm"
-                    >
-                        Explore by topic
-                    </motion.p>
-                </div>
+            <Section id="gallery-header" title={t.nav.gallery} className="pb-0">
 
                 {/* Filter Tabs — horizontally scrollable on mobile */}
                 <div className="flex overflow-x-auto gap-3 pb-2 mb-6 md:mb-10 justify-start md:justify-center scrollbar-none px-1">
