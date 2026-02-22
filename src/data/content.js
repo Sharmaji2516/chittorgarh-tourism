@@ -657,7 +657,7 @@ export const content = {
       title: "Explore Chittorgarh",
       cuisine: {
         title: "Taste the Heritage",
-        desc: "Explore the authentic flavors of Mewar, from spicy Laal Maas to the legendary Daal Baati.",
+        desc: "Discover the culinary heritage of Chittorgarh. From the spicy Dal Baati to the sweet Gulab Jamun, every bite is a royal treat.",
         link: "Explore Cuisine",
         image: "/assets/images/dal-batti-churma.jpg",
       },

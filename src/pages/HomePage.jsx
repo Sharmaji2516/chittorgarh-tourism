@@ -156,7 +156,7 @@ const HomePage = ({ t, filteredAttractions, setSelectedAttraction, searchQuery }
                                         <h3 className="text-2xl md:text-3xl font-serif text-white font-bold mb-2 group-hover:text-royal-gold transition-colors">
                                             {t.discover?.cuisine?.title}
                                         </h3>
-                                        <p className="text-white mb-6 line-clamp-2">
+                                        <p className="text-white font-medium mb-6 drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
                                             {t.discover?.cuisine?.desc}
                                         </p>
                                         <div className="flex items-center gap-4">
