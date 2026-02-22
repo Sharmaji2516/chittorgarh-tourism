@@ -139,38 +139,33 @@ const HomePage = ({ t, filteredAttractions, setSelectedAttraction, searchQuery }
                             >
                                 <NavLink
                                     to="/flavors"
-                                    className="group relative block overflow-hidden rounded-2xl glass-card border-royal-gold/20 hover:border-royal-gold/50 transition-all duration-500"
+                                    className="group block overflow-hidden rounded-2xl glass-card border-royal-gold/20 hover:border-royal-gold/50 transition-all duration-500"
                                 >
-                                    <div className="aspect-[16/9] overflow-hidden">
+                                    {/* Image */}
+                                    <div className="relative aspect-[16/9] overflow-hidden">
                                         <img
                                             src={t.discover?.cuisine?.image || "https://images.unsplash.com/photo-1589187151003-0dd55769239b?q=80&w=800&auto=format&fit=crop"}
                                             alt="Cuisine"
                                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                         />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
-                                    </div>
-                                    <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                                        <div className="mb-4 w-12 h-12 rounded-full bg-royal-gold/20 flex items-center justify-center border border-royal-gold/30 group-hover:bg-royal-gold/40 transition-colors">
-                                            <UtensilsCrossed className="w-6 h-6 text-royal-gold" />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                                        <div className="absolute top-4 left-4 w-10 h-10 rounded-full bg-royal-gold/20 flex items-center justify-center border border-royal-gold/30 group-hover:bg-royal-gold/40 transition-colors">
+                                            <UtensilsCrossed className="w-5 h-5 text-royal-gold" />
                                         </div>
-                                        <h3 className="text-2xl md:text-3xl font-serif text-white font-bold mb-2 group-hover:text-royal-gold transition-colors">
+                                    </div>
+                                    {/* Text panel below image */}
+                                    <div className="p-5 bg-black/60">
+                                        <h3 className="text-xl md:text-2xl font-serif text-white font-bold mb-2 group-hover:text-royal-gold transition-colors">
                                             {t.discover?.cuisine?.title}
                                         </h3>
-                                        <p className="text-white font-medium mb-6 drop-shadow-[0_1px_3px_rgba(0,0,0,0.9)]">
+                                        <p className="text-white/90 text-sm mb-4 leading-relaxed">
                                             {t.discover?.cuisine?.desc}
                                         </p>
                                         <div className="flex items-center gap-4">
-                                            <span className="inline-flex items-center gap-2 text-royal-gold font-bold uppercase tracking-widest text-sm">
+                                            <span className="inline-flex items-center gap-2 text-royal-gold font-bold uppercase tracking-widest text-xs">
                                                 {t.discover?.cuisine?.link}
                                                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-2" />
                                             </span>
-                                            <NavLink
-                                                to="/gallery"
-                                                className="text-royal-white/40 hover:text-royal-gold transition-colors text-[10px] uppercase tracking-[0.2em] border-b border-transparent hover:border-royal-gold"
-                                                onClick={(e) => e.stopPropagation()}
-                                            >
-                                                Food Gallery
-                                            </NavLink>
                                         </div>
                                     </div>
                                 </NavLink>

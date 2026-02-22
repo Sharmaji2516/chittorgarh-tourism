@@ -12,15 +12,7 @@ const LocalVocalPage = ({ t, filteredLocalVocal, searchQuery }) => {
                     <p className="max-w-2xl mx-auto text-gray-400 mb-4 font-light italic">
                         "{t.localVocal.subtitle}"
                     </p>
-                    <div className="mb-12">
-                        <NavLink
-                            to="/gallery"
-                            className="inline-flex items-center gap-2 text-royal-gold/60 hover:text-royal-gold transition-colors text-xs uppercase tracking-widest border-b border-royal-gold/20 hover:border-royal-gold"
-                        >
-                            View Craftsmanship Gallery
-                            <ArrowRight className="w-4 h-4" />
-                        </NavLink>
-                    </div>
+
                 </>
             )}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
