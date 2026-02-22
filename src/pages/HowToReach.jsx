@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Plane, Train, Car, MapPin, Bus, ExternalLink, Navigation } from 'lucide-react';
 import Section from '../components/Section';
 import DirectionsButton from '../components/DirectionsButton';
+import { NavLink } from 'react-router-dom';
 
 const HowToReach = () => {
+    const [isPlanning, setIsPlanning] = useState(false);
+
+    useEffect(() => {
+        setIsPlanning(localStorage.getItem('ctt_visited') === 'tourist');
+    }, []);
+
     const transport = [
         {
             icon: Train,
@@ -203,8 +210,37 @@ const HowToReach = () => {
                         </table>
                     </div>
                 </div>
-            </Section >
-        </div >
+            </Section>
+
+            {isPlanning && (
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.5 }}
+                    className="max-w-3xl mx-auto px-4 pb-12"
+                >
+                    <div className="relative rounded-2xl border border-royal-gold/40 bg-royal-gold/10 p-6 md:p-8 text-center overflow-hidden">
+                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-0.5 bg-gradient-to-r from-transparent via-royal-gold to-transparent"></div>
+                        <div className="text-3xl mb-3">🗺️</div>
+                        <h3 className="text-xl md:text-2xl font-serif text-royal-gold font-bold mb-2 tracking-wide">
+                            You've Planned Your Visit!
+                        </h3>
+                        <p className="text-white/80 mb-5 text-sm md:text-base leading-relaxed">
+                            Now that you know how to reach, explore the full website to discover the best
+                            <strong className="text-white"> attractions</strong>,
+                            <strong className="text-white"> royal cuisine</strong>, and
+                            <strong className="text-white"> places to stay</strong> in Chittorgarh.
+                        </p>
+                        <NavLink
+                            to="/"
+                            className="inline-flex items-center gap-2 bg-royal-gold text-black font-bold px-6 py-3 rounded-full uppercase tracking-widest text-xs hover:bg-royal-gold/80 transition-colors"
+                        >
+                            Explore Chittorgarh →
+                        </NavLink>
+                    </div>
+                </motion.div>
+            )}
+        </div>
     );
 };
 
