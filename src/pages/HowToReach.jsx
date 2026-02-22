@@ -187,13 +187,12 @@ const HowToReach = () => {
                                     { city: "Delhi", dist: "660 km", road: "~10 hrs", train: "~9 hrs" },
                                     { city: "Mumbai", dist: "950 km", road: "~14 hrs", train: "~15 hrs" },
                                     { city: "Ahmedabad", dist: "350 km", road: "~5.5 hrs", train: "~6 hrs" },
-                                    { city: "Kota", dist: "165 km", road: "~3 hrs", train: "~3 hrs", isSpecial: true },
+                                    { city: "Kota", dist: "165 km", road: "~3 hrs", train: "~3 hrs" },
                                     { city: "Bhopal", dist: "450 km", road: "~7 hrs", train: "~7.5 hrs" }
                                 ].map((row, i) => (
-                                    <tr key={i} className={`border-b border-royal-gold/10 hover:bg-royal-gold/5 transition-colors ${row.isSpecial ? 'bg-royal-gold/5' : ''}`}>
+                                    <tr key={i} className="border-b border-royal-gold/10 hover:bg-royal-gold/5 transition-colors">
                                         <td className="px-6 py-4 font-serif text-royal-white flex items-center gap-2">
                                             {row.city}
-                                            {row.isSpecial && <span className="text-[10px] bg-royal-gold text-royal-black px-2 py-0.5 rounded-full font-bold uppercase tracking-tighter">Your Location</span>}
                                         </td>
                                         <td className="px-6 py-4 text-gray-400 text-sm whitespace-nowrap">{row.dist}</td>
                                         <td className="px-6 py-4 text-gray-400 text-sm whitespace-nowrap">{row.road}</td>
@@ -204,8 +203,8 @@ const HowToReach = () => {
                         </table>
                     </div>
                 </div>
-            </Section>
-        </div>
+            </Section >
+        </div >
     );
 };
 
