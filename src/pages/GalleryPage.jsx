@@ -69,10 +69,10 @@ const GalleryPage = ({ t }) => {
                             key={cat.key}
                             onClick={() => setActiveTab(cat.key)}
                             className={cn(
-                                "flex-shrink-0 px-5 py-2 rounded-full border transition-all duration-300 text-xs md:text-sm tracking-widest uppercase whitespace-nowrap",
+                                "flex-shrink-0 px-5 py-2 rounded-full border transition-all duration-300 text-xs md:text-sm tracking-widest uppercase whitespace-nowrap font-semibold",
                                 activeTab === cat.key
-                                    ? "bg-royal-gold text-royal-black border-royal-gold font-bold shadow-lg shadow-royal-gold/20"
-                                    : "bg-transparent text-royal-gold/60 border-royal-gold/20 hover:border-royal-gold/40 hover:text-royal-gold"
+                                    ? "bg-royal-gold text-black border-royal-gold shadow-lg shadow-royal-gold/20"
+                                    : "bg-white text-black border-white/80 hover:bg-royal-gold hover:border-royal-gold"
                             )}
                         >
                             {cat.label}
