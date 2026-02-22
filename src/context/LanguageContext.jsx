@@ -5,6 +5,7 @@ const LanguageContext = createContext();
 
 export const LanguageProvider = ({ children }) => {
     const [lang, setLang] = useState('en'); // 'en' or 'hi'
+    const [isLangModalOpen, setIsLangModalOpen] = useState(false);
 
     const changeLanguage = (newLang) => {
         if (content[newLang]) {
@@ -12,10 +13,13 @@ export const LanguageProvider = ({ children }) => {
         }
     };
 
+    const showLangModal = () => setIsLangModalOpen(true);
+    const hideLangModal = () => setIsLangModalOpen(false);
+
     const t = content[lang];
 
     return (
-        <LanguageContext.Provider value={{ lang, changeLanguage, t }}>
+        <LanguageContext.Provider value={{ lang, changeLanguage, t, isLangModalOpen, showLangModal, hideLangModal }}>
             {children}
         </LanguageContext.Provider>
     );

@@ -12,7 +12,10 @@ const Hero = () => {
     return (
         <div className="relative h-screen flex items-center justify-center text-center px-4 overflow-hidden">
             {/* Background Image with Overlay */}
-            <div
+            <motion.div
+                initial={{ scale: 1.15 }}
+                animate={{ scale: 1.05 }}
+                transition={{ duration: 20, repeat: Infinity, repeatType: "reverse", ease: "linear" }}
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0 transform scale-105 transition-all duration-1000"
                 style={{
                     backgroundImage: `url('${bgImageMobile}')`, // Default (Mobile)
@@ -27,8 +30,8 @@ const Hero = () => {
                     }
                 `}</style>
                 <div className="absolute inset-0 bg-black/40"></div>
-                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-royal-black"></div>
-            </div>
+                <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-royal-black"></div>
+            </motion.div>
 
             {/* Content */}
             <div className="relative z-10 max-w-5xl mx-auto">
@@ -70,11 +73,24 @@ const Hero = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 1, duration: 1 }}
-                    className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce cursor-pointer text-white/50 hover:text-royal-gold transition-colors"
+                    className="absolute top-[70%] left-1/2 -translate-x-1/2 cursor-pointer text-white/50 hover:text-royal-gold transition-colors text-center"
+                    onClick={() => {
+                        const nextSection = document.getElementById('history') || document.getElementById('attractions');
+                        if (nextSection) {
+                            nextSection.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }}
                 >
                     <div className="flex flex-col items-center gap-2">
-                        <span className="text-[10px] tracking-[0.2em] uppercase">Explore</span>
-                        <ChevronDown className="w-8 h-8" />
+                        <span className="text-[10px] tracking-[0.2em] uppercase font-bold text-royal-gold">Explore the Legend</span>
+                        <div className="w-6 h-10 border-2 border-royal-gold/30 rounded-full flex justify-center p-1 shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+                            <motion.div
+                                animate={{ y: [0, 16, 0] }}
+                                transition={{ duration: 2, repeat: Infinity }}
+                                className="w-1.5 h-1.5 bg-royal-gold rounded-full"
+                            />
+                        </div>
+                        <ChevronDown className="w-6 h-6 animate-bounce text-royal-gold" />
                     </div>
                 </motion.div>
             </div>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { MapPin, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-const AttractionCard = ({ attraction }) => {
+const AttractionCard = ({ attraction, onExplore }) => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const images = attraction.images || (attraction.image ? [attraction.image] : []);
 
@@ -78,11 +78,22 @@ const AttractionCard = ({ attraction }) => {
             </div>
 
             <div className="p-6">
+                <div className="flex items-center justify-between mb-4">
+                    {attraction.bestTime && (
+                        <div className="flex items-center text-xs text-royal-gold/80 px-2 py-1 bg-royal-gold/10 rounded-full border border-royal-gold/20">
+                            <i className="mr-1">🕒</i> {attraction.bestTime.split('(')[0].trim()}
+                        </div>
+                    )}
+                </div>
+
                 <p className="text-gray-400 text-sm leading-relaxed mb-6 line-clamp-3 group-hover:line-clamp-none transition-all duration-300">
                     {attraction.desc}
                 </p>
 
-                <button className="flex items-center text-royal-gold text-sm font-bold uppercase tracking-widest hover:text-white transition-colors group/btn">
+                <button
+                    onClick={() => onExplore && onExplore(attraction)}
+                    className="flex items-center text-royal-gold text-sm font-bold uppercase tracking-widest hover:text-white transition-colors group/btn cursor-pointer py-2 px-4 border border-royal-gold/30 rounded hover:bg-royal-gold/10"
+                >
                     Explore Details
                     <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
                 </button>

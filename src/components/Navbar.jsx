@@ -3,12 +3,13 @@ import { useLanguage } from '../context/LanguageContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Search, Globe } from 'lucide-react';
 import { cn } from '../utils/cn';
+import { NavLink, useLocation } from 'react-router-dom';
 
-const Navbar = ({ onSearch }) => {
-    const { language, changeLanguage, t } = useLanguage();
+const Navbar = () => {
+    const { language, changeLanguage, t, showLangModal } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
-    const [showSearch, setShowSearch] = useState(false);
+    const location = useLocation();
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -17,69 +18,82 @@ const Navbar = ({ onSearch }) => {
     }, []);
 
     const navLinks = [
-        { name: t.nav.history, href: '#history' },
-        { name: t.nav.attractions, href: '#attractions' },
-        { name: t.nav.vendors, href: '#vendors' },
-        { name: t.nav.cafes, href: '#cafes' },
-        { name: t.nav.hotels, href: '#hotels' },
+        { name: t.nav.home || 'Home', href: '/' },
+        { name: t.nav.gallery || 'Gallery', href: '/gallery' },
+        { name: t.nav.vendors, href: '/flavors' },
+        { name: t.nav.stays || 'Stays', href: '/stays' },
+        { name: t.nav.localVocal || 'Local For Vocal', href: '/local-for-vocal' },
     ];
+
+    const isHome = location.pathname === '/';
+    const [scrollProgress, setScrollProgress] = useState(0);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (window.scrollY / totalHeight) * 100;
+            setScrollProgress(progress);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     return (
         <nav className={cn(
             "fixed w-full z-50 transition-all duration-300 border-b border-transparent",
-            scrolled ? "bg-black/60 backdrop-blur-xl border-white/10 py-2" : "bg-transparent py-4"
+            (scrolled || !isHome) ? "bg-black/80 backdrop-blur-xl border-white/10 py-2" : "bg-transparent py-4"
         )}>
+            {/* Scroll Progress Bar */}
+            <div
+                className="absolute top-0 left-0 h-[2px] bg-royal-gold z-[60] transition-all duration-100 ease-out shadow-[0_0_10px_rgba(212,175,55,0.8)]"
+                style={{ width: `${scrollProgress}%` }}
+            ></div>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-16">
 
                     {/* Logo */}
-                    <div className="flex-shrink-0 flex items-center gap-2">
-                        <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-royal-gold to-orange-500 flex items-center justify-center shadow-lg shadow-orange-500/20">
-                            <span className="text-white font-serif font-bold text-xl">C</span>
+                    <NavLink to="/" className="flex-shrink-0 flex items-center gap-2">
+                        <div className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-gradient-to-tr from-royal-gold to-orange-500 flex items-center justify-center shadow-lg shadow-orange-500/20">
+                            <span className="text-white font-serif font-bold text-lg md:text-xl">C</span>
                         </div>
-                        <span className="text-white text-xl font-bold font-serif tracking-wider hidden md:block">
+                        <span className="text-white text-sm md:text-xl font-bold font-serif tracking-wider">
                             Chittorgarh<span className="text-royal-gold">Tourism</span>
                         </span>
-                    </div>
+                    </NavLink>
 
                     {/* Desktop Menu */}
                     <div className="hidden md:block">
                         <div className="ml-10 flex items-baseline space-x-8">
                             {navLinks.map((link) => (
-                                <a
+                                <NavLink
                                     key={link.name}
-                                    href={link.href}
-                                    className="text-white/80 hover:text-royal-gold px-3 py-2 rounded-md text-sm font-medium transition-colors uppercase tracking-widest hover:bg-white/5"
+                                    to={link.href}
+                                    className={({ isActive }) => cn(
+                                        "px-3 py-2 rounded-md text-sm font-medium transition-colors uppercase tracking-widest hover:bg-white/5",
+                                        isActive ? "text-royal-gold border-b-2 border-royal-gold rounded-none" : "text-white/80 hover:text-royal-gold"
+                                    )}
                                 >
                                     {link.name}
-                                </a>
+                                </NavLink>
                             ))}
                         </div>
                     </div>
 
                     {/* Actions */}
                     <div className="hidden md:flex items-center gap-4">
-                        <div className={`relative flex items-center transition-all duration-300 ${showSearch ? 'w-64' : 'w-10'}`}>
-                            <button
-                                onClick={() => setShowSearch(!showSearch)}
-                                className="absolute right-0 p-2 text-white/80 hover:text-royal-gold z-10"
-                            >
-                                <Search className="w-5 h-5" />
-                            </button>
-                            <input
-                                type="text"
-                                placeholder="Search..."
-                                onChange={(e) => onSearch(e.target.value)}
-                                className={cn(
-                                    "bg-white/10 border border-white/10 text-white placeholder-gray-400 rounded-full py-1.5 pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-royal-gold/50 transition-all duration-300",
-                                    showSearch ? "w-full opacity-100" : "w-0 opacity-0"
-                                )}
-                            />
-                        </div>
+                        {/* Language Selector Trigger */}
 
                         {/* Language Selector Trigger */}
-                        <button className="p-2 text-white/80 hover:text-royal-gold transition-colors">
+                        <button
+                            onClick={(e) => {
+                                e.preventDefault();
+                                showLangModal();
+                            }}
+                            className="p-2 text-white/80 hover:text-royal-gold transition-colors flex items-center gap-2 group"
+                            title="Change Language"
+                        >
                             <Globe className="w-5 h-5" />
+                            <span className="text-[10px] uppercase tracking-tighter opacity-0 group-hover:opacity-100 transition-opacity">Lang</span>
                         </button>
                     </div>
 
@@ -106,22 +120,29 @@ const Navbar = ({ onSearch }) => {
                     >
                         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                             {navLinks.map((link) => (
-                                <a
+                                <NavLink
                                     key={link.name}
-                                    href={link.href}
+                                    to={link.href}
                                     onClick={() => setIsOpen(false)}
-                                    className="text-gray-300 hover:text-royal-gold hover:bg-white/5 block px-3 py-2 rounded-md text-base font-medium"
+                                    className={({ isActive }) => cn(
+                                        "block px-3 py-2 rounded-md text-base font-medium",
+                                        isActive ? "text-royal-gold bg-white/5" : "text-gray-300 hover:text-royal-gold hover:bg-white/5"
+                                    )}
                                 >
                                     {link.name}
-                                </a>
+                                </NavLink>
                             ))}
-                            <div className="px-3 py-2">
-                                <input
-                                    type="text"
-                                    placeholder="Search..."
-                                    onChange={(e) => onSearch(e.target.value)}
-                                    className="w-full bg-white/10 border border-white/10 text-white placeholder-gray-400 rounded-lg py-2 px-4 focus:outline-none"
-                                />
+                            <div className="px-3 py-2 flex items-center justify-between border-t border-white/5 mt-2 pt-4">
+                                <button
+                                    onClick={() => {
+                                        setIsOpen(false);
+                                        showLangModal();
+                                    }}
+                                    className="flex items-center gap-3 text-gray-300 hover:text-royal-gold transition-colors"
+                                >
+                                    <Globe className="w-5 h-5" />
+                                    <span className="text-sm font-medium uppercase tracking-wider">Change Language</span>
+                                </button>
                             </div>
                         </div>
                     </motion.div>

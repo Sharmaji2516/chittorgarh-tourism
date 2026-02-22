@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { motion } from 'framer-motion';
-import { Utensils, MapPin, ExternalLink, Train, Bus, Plane } from 'lucide-react';
+import { Utensils, MapPin, ExternalLink, Train, Bus, Plane, Palette, ShoppingBag, Star } from 'lucide-react';
 
 const VendorCard = ({ vendor }) => {
     const { t } = useLanguage();
@@ -18,16 +18,34 @@ const VendorCard = ({ vendor }) => {
 
             <div className="flex flex-col items-center text-center">
                 <div className="w-16 h-16 rounded-2xl border border-royal-gold/20 flex items-center justify-center mb-6 bg-royal-gold/5 group-hover:border-royal-gold transition-colors duration-500">
-                    <Utensils className="w-8 h-8 text-royal-gold" />
+                    {vendor.type === 'artise' ? (
+                        <Palette className="w-8 h-8 text-royal-gold" />
+                    ) : vendor.type === 'vendor' ? (
+                        <ShoppingBag className="w-8 h-8 text-royal-gold" />
+                    ) : (
+                        <Utensils className="w-8 h-8 text-royal-gold" />
+                    )}
                 </div>
 
                 <h3 className="text-xl font-serif font-bold text-royal-white mb-2 group-hover:text-royal-gold transition-colors duration-300">
                     {vendor.name}
                 </h3>
 
-                <span className="px-4 py-1 bg-royal-gold/5 text-royal-gold text-[10px] uppercase tracking-[0.2em] rounded-full mb-6 border border-royal-gold/10 font-bold">
+                <span className="px-4 py-1 bg-royal-gold/5 text-royal-gold text-[10px] uppercase tracking-[0.2em] rounded-full mb-4 border border-royal-gold/10 font-bold">
                     {vendor.specialty}
                 </span>
+
+                {vendor.rating && (
+                    <div className="flex flex-col items-center mb-6 group/rating relative">
+                        <div className="flex items-center gap-1 text-royal-gold">
+                            <Star className="w-4 h-4 fill-current" />
+                            <span className="text-sm font-bold">{vendor.rating}</span>
+                        </div>
+                        <div className="opacity-0 group-hover/rating:opacity-100 transition-opacity absolute -bottom-8 bg-black/90 text-[8px] text-royal-gold px-2 py-1 rounded border border-royal-gold/20 whitespace-nowrap z-50">
+                            {t.common.disclaimer}
+                        </div>
+                    </div>
+                )}
 
                 <p className="text-royal-white/60 text-sm leading-relaxed mb-6 italic font-light line-clamp-2">
                     "{vendor.desc}"

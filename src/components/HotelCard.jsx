@@ -23,7 +23,7 @@ const HotelCard = ({ hotel }) => {
                 <h3 className="text-xl font-serif font-bold text-royal-gold mb-2 group-hover:text-royal-gold-light transition-colors duration-300">
                     {hotel.name}
                 </h3>
-                <div className="flex items-center gap-1 text-royal-gold text-xs">
+                <div className="flex items-center gap-1 text-royal-gold text-xs relative group/rating">
                     <div className="flex">
                         {[...Array(5)].map((_, i) => (
                             <Star
@@ -33,6 +33,9 @@ const HotelCard = ({ hotel }) => {
                         ))}
                     </div>
                     <span className="text-royal-white/40 ml-1">({hotel.rating})</span>
+                    <div className="opacity-0 group-hover/rating:opacity-100 transition-opacity absolute -bottom-8 left-0 bg-black/90 text-[8px] text-royal-gold px-2 py-1 rounded border border-royal-gold/20 whitespace-nowrap z-50">
+                        {t.common.disclaimer}
+                    </div>
                 </div>
             </div>
 

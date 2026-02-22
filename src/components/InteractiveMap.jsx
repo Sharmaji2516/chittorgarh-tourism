@@ -4,6 +4,7 @@ import 'leaflet/dist/leaflet.css';
 import { useLanguage } from '../context/LanguageContext';
 import { content } from '../data/content';
 import L from 'leaflet';
+import DirectionsButton from './DirectionsButton';
 
 // Fix for default marker icons in React-Leaflet/Vite
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
@@ -34,9 +35,12 @@ const InteractiveMap = () => {
             <div className="container mx-auto px-4 z-10 relative">
                 <div className="text-center mb-12">
                     <span className="text-royal-gold font-serif text-lg tracking-widest uppercase mb-2 block">Navigate History</span>
-                    <h2 className="text-4xl md:text-5xl font-serif text-royal-white mb-4">
+                    <h2 className="text-4xl md:text-5xl font-serif text-royal-white mb-6">
                         Fort <span className="text-royal-gold">Map</span>
                     </h2>
+                    <div className="flex justify-center mb-6">
+                        <DirectionsButton className="bg-royal-gold/10 px-6 py-3 rounded-full border border-royal-gold/30 hover:bg-royal-gold/20" />
+                    </div>
                     <div className="h-1 w-24 bg-gradient-to-r from-transparent via-royal-gold to-transparent mx-auto"></div>
                 </div>
 

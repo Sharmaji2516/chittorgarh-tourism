@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const Section = ({ id, title, children, className = "" }) => {
     return (
@@ -7,19 +8,38 @@ const Section = ({ id, title, children, className = "" }) => {
             <div className="container mx-auto px-4 md:px-8 relative z-10">
                 {/* Section Title with Decorative Elements */}
                 <div className="text-center mb-16">
-                    <div className="flex items-center justify-center gap-4 mb-4">
+                    <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="flex items-center justify-center gap-4 mb-4"
+                    >
                         <span className="block h-px w-20 bg-gradient-to-r from-transparent via-royal-gold to-transparent opacity-50"></span>
-                        <div className="w-2 h-2 rotate-45 bg-royal-gold"></div>
+                        <motion.div
+                            animate={{ rotate: 135 }}
+                            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                            className="w-2 h-2 rotate-45 bg-royal-gold shadow-[0_0_10px_rgba(212,175,55,0.5)]"
+                        ></motion.div>
                         <span className="block h-px w-20 bg-gradient-to-r from-transparent via-royal-gold to-transparent opacity-50"></span>
-                    </div>
+                    </motion.div>
 
-                    <h2 className="text-3xl md:text-5xl font-serif text-royal-gold font-bold tracking-wide uppercase drop-shadow-md">
+                    <motion.h2
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6 }}
+                        className="text-3xl md:text-5xl font-serif text-royal-gold font-bold tracking-widest uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)]"
+                    >
                         {title}
-                    </h2>
+                    </motion.h2>
 
-                    <div className="flex items-center justify-center gap-4 mt-4">
-                        <span className="block w-24 h-1 bg-royal-gold/20 rounded-full"></span>
-                    </div>
+                    <motion.div
+                        initial={{ width: 0 }}
+                        whileInView={{ width: "6rem" }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.8, delay: 0.2 }}
+                        className="h-1 bg-gradient-to-r from-transparent via-royal-gold to-transparent mx-auto mt-6"
+                    />
                 </div>
 
                 {/* Content */}
