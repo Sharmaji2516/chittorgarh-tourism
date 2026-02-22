@@ -36,7 +36,7 @@ const HomePage = ({ t, filteredAttractions, setSelectedAttraction, searchQuery }
                             viewport={{ once: true }}
                             className="max-w-4xl mx-auto text-center"
                         >
-                            <p className="text-lg md:text-xl text-royal-white/80 leading-relaxed font-light mb-8 font-serif">
+                            <p className="text-lg md:text-xl text-white leading-relaxed font-light mb-8 font-serif">
                                 {t.history.text}
                             </p>
                             <div className="flex items-center justify-center gap-6">
