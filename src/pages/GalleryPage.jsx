@@ -102,7 +102,7 @@ const GalleryPage = ({ t }) => {
                 id="gallery-grid"
                 className="bg-transparent py-0"
             >
-                <div className="columns-2 sm:columns-2 lg:columns-3 xl:columns-4 gap-3 md:gap-4 space-y-3 md:space-y-4 max-w-7xl mx-auto px-3 md:px-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 max-w-7xl mx-auto px-3 md:px-4">
                     <AnimatePresence mode="popLayout">
                         {filteredImages.map((image, index) => (
                             <motion.div
@@ -112,29 +112,31 @@ const GalleryPage = ({ t }) => {
                                 animate={{ opacity: 1, scale: 1 }}
                                 exit={{ opacity: 0, scale: 0.9 }}
                                 transition={{ duration: 0.4 }}
-                                className="relative group overflow-hidden rounded-xl glass-card border-royal-gold/10 hover:border-royal-gold/40 transition-all duration-500 break-inside-avoid shadow-2xl"
+                                className="relative group overflow-hidden rounded-xl glass-card border-royal-gold/10 hover:border-royal-gold/40 transition-all duration-500 shadow-xl"
                             >
-                                <img
-                                    src={image.url}
-                                    alt={image.categoryKey === 'dishes' ? image.title : ""}
-                                    className="w-full h-auto object-cover transition-transform duration-700 group-hover:scale-110"
-                                    loading="lazy"
-                                    onError={(e) => { e.target.style.display = 'none'; e.target.parentElement.style.display = 'none'; }}
-                                />
-                                {/* On mobile: always show dish name. On desktop: show on hover only */}
-                                {image.categoryKey === 'dishes' && (
-                                    <>
-                                        {/* Mobile: permanent label */}
-                                        <div className="md:hidden absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/90 to-transparent px-3 py-3 flex flex-col justify-end">
-                                            <h3 className="text-white font-serif text-xs leading-tight">{image.title}</h3>
-                                        </div>
-                                        {/* Desktop: hover label */}
-                                        <div className="hidden md:flex absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex-col justify-end p-6">
-                                            <span className="text-royal-gold text-[10px] uppercase tracking-[0.3em] mb-1 font-bold">{image.categoryLabel}</span>
-                                            <h3 className="text-white font-serif text-lg leading-tight">{image.title}</h3>
-                                        </div>
-                                    </>
-                                )}
+                                <div className="relative aspect-video sm:aspect-square overflow-hidden">
+                                    <img
+                                        src={image.url}
+                                        alt={image.categoryKey === 'dishes' ? image.title : ""}
+                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                        loading="lazy"
+                                        onError={(e) => { e.target.style.display = 'none'; e.target.parentElement.parentElement.style.display = 'none'; }}
+                                    />
+                                    {/* On mobile: always show dish name. On desktop: show on hover only */}
+                                    {image.categoryKey === 'dishes' && (
+                                        <>
+                                            {/* Mobile: permanent label */}
+                                            <div className="md:hidden absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/90 to-transparent px-3 py-3 flex flex-col justify-end">
+                                                <h3 className="text-white font-serif text-xs leading-tight">{image.title}</h3>
+                                            </div>
+                                            {/* Desktop: hover label */}
+                                            <div className="hidden md:flex absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex-col justify-end p-6">
+                                                <span className="text-royal-gold text-[10px] uppercase tracking-[0.3em] mb-1 font-bold">{image.categoryLabel}</span>
+                                                <h3 className="text-white font-serif text-lg leading-tight">{image.title}</h3>
+                                            </div>
+                                        </>
+                                    )}
+                                </div>
                             </motion.div>
                         ))}
                     </AnimatePresence>
