@@ -156,7 +156,7 @@ const HomePage = ({ t, filteredAttractions, setSelectedAttraction, searchQuery }
                                         <h3 className="text-2xl md:text-3xl font-serif text-white font-bold mb-2 group-hover:text-royal-gold transition-colors">
                                             {t.discover?.cuisine?.title}
                                         </h3>
-                                        <p className="text-royal-white/70 mb-6 line-clamp-2">
+                                        <p className="text-white mb-6 line-clamp-2">
                                             {t.discover?.cuisine?.desc}
                                         </p>
                                         <div className="flex items-center gap-4">
@@ -201,7 +201,7 @@ const HomePage = ({ t, filteredAttractions, setSelectedAttraction, searchQuery }
                                         <h3 className="text-2xl md:text-3xl font-serif text-white font-bold mb-2 group-hover:text-royal-gold transition-colors">
                                             {t.discover?.stays?.title}
                                         </h3>
-                                        <p className="text-royal-white/70 mb-6 line-clamp-2">
+                                        <p className="text-white mb-6 line-clamp-2">
                                             {t.discover?.stays?.desc}
                                         </p>
                                         <span className="inline-flex items-center gap-2 text-royal-gold font-bold uppercase tracking-widest text-sm">
@@ -237,7 +237,7 @@ const HomePage = ({ t, filteredAttractions, setSelectedAttraction, searchQuery }
                                         <h3 className="text-2xl md:text-3xl font-serif text-white font-bold mb-2 group-hover:text-royal-gold transition-colors">
                                             {t.nav.gallery}
                                         </h3>
-                                        <p className="text-royal-white/70 mb-6 line-clamp-2">
+                                        <p className="text-white mb-6 line-clamp-2">
                                             Explore the visual majesty of Chittorgarh.
                                         </p>
                                         <span className="inline-flex items-center gap-2 text-royal-gold font-bold uppercase tracking-widest text-sm">
