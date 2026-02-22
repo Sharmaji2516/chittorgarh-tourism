@@ -69,12 +69,7 @@ export const content = {
           desc: "A UNESCO World Heritage Site and the largest fort in India. A symbol of resilience and architectural brilliance.",
           wiki: "https://en.wikipedia.org/wiki/Chittor_Fort",
           bestTime: "Oct - March (Winter)",
-          images: [
-            "/assets/images/Chittorgarh Fort.webp",
-            "/assets/images/chittorgarh-fort-new.jpg",
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Chittorgarh_Fort_Gaumukh.jpg/1200px-Chittorgarh_Fort_Gaumukh.jpg",
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Chittorgarh_fort.JPG/1280px-Chittorgarh_fort.JPG",
-          ],
+          image: "/assets/images/Chittorgarh Fort.webp",
           coordinates: [24.8879, 74.6454],
           distances: {
             railway: "6 km",
@@ -102,10 +97,7 @@ export const content = {
           desc: "A revered temple dedicated to Lord Krishna, known as 'Sanwaria Seth', attracting millions of devotees.",
           wiki: "https://en.wikipedia.org/wiki/Sanwariaji_Temple",
           bestTime: "Year-round (Festivals preferred)",
-          images: [
-            "/assets/images/Sanvliya-ji-Temple.jpg",
-            "/assets/images/sanwariya-temple-new.jpg",
-          ],
+          image: "/assets/images/Sanvliya-ji-Temple.jpg",
           coordinates: [24.6067, 74.5246],
           distances: {
             railway: "40 km",
@@ -119,10 +111,7 @@ export const content = {
           desc: "Built by Rana Kumbha to commemorate his victory. A 9-story tower adorned with intricate sculptures.",
           wiki: "https://en.wikipedia.org/wiki/Vijay_Stambha",
           bestTime: "Oct - March (Pleasant Weather)",
-          images: [
-            "/assets/images/Vjay.jpg",
-            "/assets/images/vijay-stambh-new.jpg",
-          ],
+          image: "/assets/images/Vjay.jpg",
           coordinates: [24.8878, 74.6451],
           distances: {
             railway: "6 km",
@@ -136,10 +125,7 @@ export const content = {
           desc: "A 22-meter high tower dedicated to the first Jain Tirthankara, Adinath. Famous for its intricate Jain sculptures.",
           wiki: "https://en.wikipedia.org/wiki/Kirti_Stambha",
           bestTime: "Oct - March",
-          images: [
-            "/assets/images/Kirti Stambh.jpg",
-            "/assets/images/Kirti.jpg",
-          ],
+          image: "/assets/images/Kirti Stambh.jpg",
           coordinates: [24.8926, 74.646],
           distances: {
             railway: "6 km",
@@ -153,10 +139,7 @@ export const content = {
           desc: "The royal abode of Queen Padmini, surrounded by a lotus pool. A place of legendary beauty and tragedy.",
           wiki: "https://en.wikipedia.org/wiki/Chittor_Fort#Padmini's_Palace",
           bestTime: "Oct - March",
-          images: [
-            "/assets/images/Padmini Palace.jpg",
-            "/assets/images/padmini-palace-new.jpg",
-          ],
+          image: "/assets/images/Padmini Palace.jpg",
           coordinates: [24.8833, 74.6436],
           distances: {
             railway: "7 km",
@@ -170,10 +153,7 @@ export const content = {
           desc: "An ornate temple dedicated to Meera Bai, a mystic poetess and devotee of Lord Krishna.",
           wiki: "https://en.wikipedia.org/wiki/Chittor_Fort#Meera_Temple",
           bestTime: "Year-round",
-          images: [
-            "/assets/images/Meera Temple.jpg",
-            "/assets/images/Meera.jpg",
-          ],
+          image: "/assets/images/Meera Temple.jpg",
           coordinates: [24.889, 74.642],
           distances: {
             railway: "6 km",
@@ -187,10 +167,7 @@ export const content = {
           desc: "A sacred water tank shaped like a cow's mouth, vital for the fort's water supply and a scenic spot.",
           wiki: "https://en.wikipedia.org/wiki/Chittor_Fort#Gaumukh_Reservoir",
           bestTime: "Monsoon & Winter",
-          images: [
-            "/assets/images/gaumukh-reservoir4.jpg",
-            "/assets/images/gaumukh.jpg",
-          ],
+          image: "/assets/images/gaumukh-reservoir4.jpg",
           coordinates: [24.887, 74.643],
           distances: {
             railway: "6 km",
@@ -218,10 +195,7 @@ export const content = {
           desc: "A magnificent palace built by Maharana Fateh Singh, now a museum appointed with royal artifacts.",
           wiki: "https://en.wikipedia.org/wiki/Chittor_Fort",
           bestTime: "Oct - March",
-          images: [
-            "/assets/images/Fateh.jpg",
-            "/assets/images/fateh-prakash-new.jpg",
-          ],
+          image: "/assets/images/Fateh.jpg",
           coordinates: [24.89, 74.644],
           distances: {
             railway: "8 km",
@@ -235,10 +209,7 @@ export const content = {
           desc: "A ruined palace of great historical importance, birth place of Maharana Udai Singh and home to Meera Bai.",
           wiki: "https://en.wikipedia.org/wiki/Kumbha_Palace",
           bestTime: "Oct - March",
-          images: [
-            "/assets/images/Rana kumbha.jpg",
-            "/assets/images/kumbha-palace-new.jpg",
-          ],
+          image: "/assets/images/Rana kumbha.jpg",
           coordinates: [24.886, 74.6425],
           distances: {
             railway: "6 km",
@@ -252,10 +223,7 @@ export const content = {
           desc: "An 8th-century sun temple converted to a Kali temple, known for its intricate carvings and spiritual aura.",
           wiki: "https://en.wikipedia.org/wiki/Kalika_Mata_Temple,_Chittorgarh_Fort",
           bestTime: "Oct - March",
-          images: [
-            "/assets/images/Kalika.jpg",
-            "/assets/images/kalika-mata-new.jpg",
-          ],
+          image: "/assets/images/Kalika.jpg",
           coordinates: [24.8845, 74.6438],
           distances: {
             railway: "8 km",
@@ -269,10 +237,7 @@ export const content = {
           desc: "A group of 27 ancient Jain temples known for their intricate carvings and architectural splendor.",
           wiki: "https://en.wikipedia.org/wiki/Chittor_Fort",
           bestTime: "Oct - March",
-          images: [
-            "/assets/images/Kumbha SHyam.jpg",
-            "/assets/images/kumbha-shyam-new.jpg",
-          ],
+          image: "/assets/images/Kumbha SHyam.jpg",
           coordinates: [24.8885, 74.646],
           distances: {
             railway: "6 km",
@@ -300,10 +265,7 @@ export const content = {
           desc: "Known as the 'Mini Khajuraho', this site features a massive waterfall and 11th-century temples.",
           wiki: "https://en.wikipedia.org/wiki/Menal",
           bestTime: "July - Sept (Monsoon)",
-          images: [
-            "/assets/images/Menal.jpg",
-            "/assets/images/menal-waterfall-new.jpg",
-          ],
+          image: "/assets/images/menal-waterfall-new.jpg",
           coordinates: [25.044, 75.148],
           distances: {
             railway: "85 km",
@@ -333,7 +295,6 @@ export const content = {
         {
           id: 1,
           name: "RR Hotel",
-          rating: "4.8/5",
           specialty: "Authentic Rajasthani Thali",
           location: "Chittorgarh",
           desc: "Famous for its traditional Daal Baati Churma and rustic ambiance. A true taste of Rajasthan.",
@@ -348,7 +309,6 @@ export const content = {
         {
           id: 2,
           name: "Agarsen Sweets",
-          rating: "4.7/5",
           specialty: "Gulab Jamun",
           location: "Chittorgarh Fort Road",
           desc: "Famous for its melt-in-the-mouth Gulab Jamuns, a treat for every sweet tooth visiting the Fort.",
@@ -363,7 +323,6 @@ export const content = {
         {
           id: 3,
           name: "Somani Restaurant",
-          rating: "4.9/5",
           specialty: "Famous Gulab Jamun",
           location: "Bassi, Chittorgarh",
           desc: "Renowned across the region for its rich and delicious Gulab Jamuns. A must-visit stop in Bassi.",
@@ -378,7 +337,6 @@ export const content = {
         {
           id: 4,
           name: "Manuhar Dining Hall",
-          rating: "4.6/5",
           specialty: "Authentic Daal Baati Churma",
           location: "Collectorate Road",
           desc: "The ultimate destination for pilgrims and foodies seeking the most authentic Rajasthani Thali experience in town.",
@@ -393,7 +351,6 @@ export const content = {
         {
           id: 5,
           name: "Barbarik Restaurant",
-          rating: "4.5/5",
           specialty: "Bajra Roti & Ker Sangri",
           location: "Fort Village",
           desc: "Located right inside the fort village, offering a rustic experience with traditional wood-fired cooking flavors.",
@@ -409,7 +366,6 @@ export const content = {
         {
           id: 6,
           name: "Akbari Restaurant",
-          rating: "4.7/5",
           specialty: "Rajasthani Laal Maas",
           location: "Near Fort Entrance",
           desc: "A legendary spot for non-vegetarian lovers, serving the spiciest and most flavorful Laal Maas in the region.",
@@ -429,7 +385,6 @@ export const content = {
         {
           id: 1,
           name: "The Muds For Buds",
-          rating: "4.8/5",
           specialty: "Rooftop Cafe",
           location: "Chittorgarh Fort Road",
           desc: "A cozy rooftop cafe with stunning fort views, known for its creative ambiance and delicious coffee.",
@@ -443,7 +398,6 @@ export const content = {
         {
           id: 2,
           name: "The Rawal Kothi",
-          rating: "4.9/5",
           specialty: "Heritage Dining",
           location: "Near City View Point",
           desc: "Experience royal dining in a restored 1800s palace with panoramic views of Chittorgarh Fort.",
@@ -457,7 +411,6 @@ export const content = {
         {
           id: 3,
           name: "Zero Degree",
-          rating: "4.4/5",
           specialty: "Italian & Shakes",
           location: "City Center",
           desc: "A vibrant hangout spot for the youth, offering the best shakes, mocktails and cheesy pizzas in a modern setting.",
@@ -471,7 +424,6 @@ export const content = {
         {
           id: 4,
           name: "Agarwal Coffee House",
-          rating: "4.6/5",
           specialty: "Heritage Filter Coffee",
           location: "Old City",
           desc: "A legendary spot known for its classic filter coffee and warm hospitality that has lasted generations.",
@@ -486,7 +438,6 @@ export const content = {
         {
           id: 5,
           name: "360 Cafe & Restro",
-          rating: "4.7/5",
           specialty: "Fort View Dining",
           location: "Near Ram Pol",
           desc: "Enjoy a breathtaking 360-degree view of the fort while savoring a mix of global and local flavors.",
@@ -506,7 +457,6 @@ export const content = {
         {
           id: 1,
           name: "Hotel The Grand Chittor",
-          rating: "4.0/5",
           desc: "Luxury hotel featuring a rooftop pool with stunning city and fort views.",
           bookingLink:
             "https://www.google.com/search?q=Hotel+The+Grand+Chittor+booking",
@@ -519,7 +469,6 @@ export const content = {
         {
           id: 2,
           name: "Kukda Resort",
-          rating: "4.2/5",
           desc: "Modern architecture with a beautiful garden and swimming pool, perfect for families.",
           bookingLink:
             "https://www.google.com/search?q=Kukda+Resort+Chittorgarh+booking",
@@ -532,7 +481,6 @@ export const content = {
         {
           id: 3,
           name: "Hotel Kumbha Retreat & SPA",
-          rating: "4.5/5",
           desc: "A luxurious experience with an on-site spa, offering comfort and elegance.",
           bookingLink:
             "https://www.google.com/search?q=Hotel+Kumbha+Retreat+SPA+Chittorgarh+booking",
@@ -545,7 +493,6 @@ export const content = {
         {
           id: 4,
           name: "Hotel Pratap Palace",
-          rating: "4.3/5",
           desc: "Known for warm hospitality and refined ambiance, a great blend of luxury and tradition.",
           bookingLink:
             "https://www.google.com/search?q=Hotel+Pratap+Palace+Chittorgarh+booking",
@@ -558,7 +505,6 @@ export const content = {
         {
           id: 5,
           name: "jüSTa Lake Nahargarh Palace",
-          rating: "4.8/5",
           desc: "A breathtaking lake palace resort surrounded by the Aravalli Hills, offering a truly royal and secluded experience.",
           bookingLink:
             "https://www.google.com/search?q=justa+lake+nahargarh+palace+booking",
@@ -571,7 +517,6 @@ export const content = {
         {
           id: 6,
           name: "Bassi Fort Palace",
-          rating: "4.6/5",
           desc: "A 16th-century fort converted into a luxury heritage hotel, keeping the old-world charm alive with modern comforts.",
           bookingLink:
             "https://www.google.com/search?q=bassi+fort+palace+booking",
@@ -584,7 +529,6 @@ export const content = {
         {
           id: 7,
           name: "Shree Anandam Resort",
-          rating: "4.4/5",
           desc: "A sprawling resort with lush green gardens and traditional architecture, perfect for a relaxing family getaway.",
           bookingLink:
             "https://www.google.com/search?q=shree+anandam+resort+booking",
@@ -599,7 +543,6 @@ export const content = {
     itineraries: {
       title: "Travel Itineraries",
       subtitle: "Plan Your Perfect Trip",
-      emailTitle: "Email My Itinerary",
       plans: [
         {
           id: "oneDay",
@@ -607,9 +550,21 @@ export const content = {
           title: "The Fort Legacy",
           desc: "Cover the major highlights of Chittorgarh Fort in a single day.",
           timeline: [
-            "Morning: Chittorgarh Fort Entry & Kumbha Palace",
-            "Afternoon: Vijay Stambh, Kirti Stambh & Padmini Palace",
-            "Evening: Gaumukh Reservoir & Sunset at Fort",
+            {
+              time: "09:00 AM",
+              visit: "Kumbha Palace & Fateh Prakash Palace",
+              stay: "Recommended to start early from Hotel The Grand Chittor"
+            },
+            {
+              time: "12:00 PM",
+              visit: "Vijay Stambh, Meera Temple & Padmini Palace",
+              stay: "Lunch at Manuhar Dining Hall (Traditional Thali)"
+            },
+            {
+              time: "04:00 PM",
+              visit: "Gaumukh Reservoir & Sunset at Kirti Stambh",
+              stay: "Dinner at RR Hotel (Dal Batti Special)"
+            }
           ],
         },
         {
@@ -618,9 +573,21 @@ export const content = {
           title: "Nature & Spirituality",
           desc: "Explore the Fort and surrounding nature and temples.",
           timeline: [
-            "Day 1: Complete Fort Tour (All major points)",
-            "Day 2 Morning: Sanwariaji Temple (40km away)",
-            "Day 2 Afternoon: Bassi Wildlife Sanctuary (25km away)",
+            {
+              time: "Day 1",
+              visit: "Complete Fort Tour (All major Pols & Towers)",
+              stay: "Heritage Stay at Bassi Fort Palace"
+            },
+            {
+              time: "Day 2 AM",
+              visit: "Sanwariaji Temple Visit (Devotional Morning)",
+              stay: "Breakfast at local vendors near Temple"
+            },
+            {
+              time: "Day 2 PM",
+              visit: "Bassi Wildlife Sanctuary Safari",
+              stay: "Relax at Kukda Resort (Poolside Dinner)"
+            }
           ],
         },
         {
@@ -629,12 +596,27 @@ export const content = {
           title: "The Complete Mewar",
           desc: "Deep dive into history, nature, and culture.",
           timeline: [
-            "Day 1: Historical Fort Tour",
-            "Day 2: Spiritual & Nature (Sanwariaji & Bassi)",
-            "Day 3: Menal Waterfall & Local Markets for Shopping",
+            {
+              time: "Day 1",
+              visit: "Historical Fort Tour & Light & Sound Show",
+              stay: "Stay at Hotel Kumbha Retreat & SPA"
+            },
+            {
+              time: "Day 2",
+              visit: "Spiritual Journey to Sanwariaji & Bassi Dam",
+              stay: "Luxury Stay at jüSTa Lake Nahargarh Palace"
+            },
+            {
+              time: "Day 3",
+              visit: "Menal Waterfall & Local Handicraft Shopping",
+              stay: "Farewell Dinner at The Rawal Kothi (Rooftop View)"
+            }
           ],
         },
       ],
+      bookTicket: "Book Ticket Online",
+      bookTicketLink: "https://asi.payumoney.com/quick/chf",
+      chooseRoute: "Choose Your Route",
     },
     dishes: {
       items: [
@@ -677,7 +659,6 @@ export const content = {
         {
           id: 1,
           name: "Raj Kumar Crafts",
-          rating: "4.8/5",
           specialty: "Handcrafted Pottery",
           location: "Fort Road",
           desc: "Traditional clay pottery and decorative items made with local techniques passed down through generations.",
@@ -689,7 +670,6 @@ export const content = {
         {
           id: 2,
           name: "Mewari Textiles",
-          rating: "4.7/5",
           specialty: "Traditional Wear",
           location: "Kumbha Nagar",
           desc: "Authentic Bandhani and Leheriya textiles. Support the local weavers of Chittorgarh.",
@@ -701,7 +681,6 @@ export const content = {
         {
           id: 3,
           name: "Heritage Woodwork",
-          rating: "4.9/5",
           specialty: "Wooden Artifacts",
           location: "Bassi Village",
           desc: "Exquisite hand-carved wooden toys and furniture from the famous craft village of Bassi.",
@@ -755,11 +734,7 @@ export const content = {
           desc: "यूनेस्को विश्व धरोहर स्थल और भारत का सबसे बड़ा किला। यह राजसी वास्तुकला और लचीलेपन का प्रतीक है।",
           wiki: "https://hi.wikipedia.org/wiki/%E0%A4%9A%E0%A4%BF%E0%A4%A4%E0%A5%8D%E0%A4%A4%E0%A5%8C%E0%A4%A1%E0%A4%BC_%E0%A4%A6%E0%A5%81%E0%A4%B0%E0%A5%8D%E0%A4%97",
           bestTime: "अक्टूबर - मार्च (सर्दी)",
-          images: [
-            "/assets/images/Chittorgarh Fort.webp",
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Chittorgarh_Fort_Gaumukh.jpg/1200px-Chittorgarh_Fort_Gaumukh.jpg",
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Chittorgarh_fort.JPG/1280px-Chittorgarh_fort.JPG",
-          ],
+          image: "/assets/images/Chittorgarh Fort.webp",
           coordinates: [24.8879, 74.6454],
           distances: {
             railway: "6 किमी",
@@ -955,7 +930,7 @@ export const content = {
           desc: "'मिनी खजुराहो' के रूप में जाना जाने वाला, यह स्थल एक विशाल जलप्रपात और 11वीं सदी के मंदिरों के लिए प्रसिद्ध है।",
           wiki: "https://hi.wikipedia.org/wiki/मेनाल",
           bestTime: "जुलाई - सितंबर (मानसून)",
-          image: "/assets/images/Menal.jpg",
+          image: "/assets/images/menal-waterfall-new.jpg",
           coordinates: [25.044, 75.148],
           distances: {
             railway: "90 किमी",
@@ -985,7 +960,6 @@ export const content = {
         {
           id: 1,
           name: "आर आर होटल (RR Hotel)",
-          rating: "4.8/5",
           specialty: "राजस्थानी थाली",
           location: "चित्तौड़गढ़",
           desc: "अपने पारंपरिक दाल बाटी चूरमा और देसी माहौल के लिए प्रसिद्ध। राजस्थान का असली स्वाद।",
@@ -1000,7 +974,6 @@ export const content = {
         {
           id: 2,
           name: "अग्रसेन स्वीट्स",
-          rating: "4.7/5",
           specialty: "गुलाब जामुन",
           location: "चित्तौड़गढ़ फोर्ट रोड",
           desc: "अपने मुंह में घुलने वाले गुलाब जामुन के लिए प्रसिद्ध। किले की यात्रा के दौरान मीठा खाने का सही स्थान।",
@@ -1015,7 +988,6 @@ export const content = {
         {
           id: 3,
           name: "सोमानी रेस्टोरेंट",
-          rating: "4.9/5",
           specialty: "प्रसिद्ध गुलाब जामुन",
           location: "बस्सी, चित्तौड़गढ़",
           desc: "बस्सी और पूरे क्षेत्र में अपने स्वादिष्ट गुलाब जामुन के लिए विख्यात। बस्सी में एक अनिवार्य पड़ाव।",
@@ -1030,7 +1002,6 @@ export const content = {
         {
           id: 4,
           name: "मनुहार डाइनिंग हॉल",
-          rating: "4.6/5",
           specialty: "प्रामाणिक दाल बाटी चूरमा",
           location: "कलेक्ट्रेट रोड",
           desc: "शहर में सबसे प्रामाणिक राजस्थानी थाली अनुभव चाहने वाले तीर्थयात्रियों और भोजन प्रेमियों के लिए अंतिम गंतव्य।",
@@ -1045,7 +1016,6 @@ export const content = {
         {
           id: 5,
           name: "बरबरिक रेस्टोरेंट",
-          rating: "4.5/5",
           specialty: "बाजरा रोटी और केर सांगरी",
           location: "किला गांव",
           desc: "किले के गांव के ठीक अंदर स्थित, पारंपरिक लकड़ी के चूल्हे के खाना पकाने के स्वाद के साथ एक देहाती अनुभव प्रदान करता है।",
@@ -1061,7 +1031,6 @@ export const content = {
         {
           id: 6,
           name: "अकबरी रेस्टोरेंट",
-          rating: "4.7/5",
           specialty: "राजस्थानी लाल मास",
           location: "किले के प्रवेश द्वार के पास",
           desc: "मांसाहार प्रेमियों के लिए एक प्रसिद्ध स्थान, जो इस क्षेत्र का सबसे तीखा और स्वादिष्ट लाल मास परोसता है।",
@@ -1081,7 +1050,6 @@ export const content = {
         {
           id: 1,
           name: "द मड्स फॉर बड्स",
-          rating: "4.8/5",
           specialty: "रूफटॉप कैफे",
           location: "चित्तौड़गढ़ फोर्ट रोड",
           desc: "शानदार किले के दृश्यों के साथ एक आरामदायक रूफटॉप कैफे, जो अपने रचनात्मक माहौल और स्वादिष्ट कॉफी के लिए जाना जाता है।",
@@ -1095,7 +1063,6 @@ export const content = {
         {
           id: 2,
           name: "द रावल कोठी",
-          rating: "4.9/5",
           specialty: "हेरिटेज डाइनing",
           location: "सिटी व्यू पॉइंट के पास",
           desc: "चित्तौड़गढ़ किले के मनोरम दृश्यों के साथ 1800 के दशक के बहाल महल में शाही भोजन का अनुभव करें।",
@@ -1109,7 +1076,6 @@ export const content = {
         {
           id: 3,
           name: "जीरो डिग्री (Zero Degree)",
-          rating: "4.4/5",
           specialty: "इटालियन और शेक्स",
           location: "सिटी सेंटर",
           desc: "युवाओं के लिए एक जीवंत हैंगआउट स्थान, जो आधुनिक सेटिंग में सर्वश्रेष्ठ शेक्स, मॉकटेल और पनीर पिज्जा पेश करता है।",
@@ -1123,7 +1089,6 @@ export const content = {
         {
           id: 4,
           name: "अग्रवाल कॉफी हाउस",
-          rating: "4.6/5",
           specialty: "हेरिटेज फिल्टर कॉफी",
           location: "पुरानी सिटी",
           desc: "अपनी क्लासिक फिल्टर कॉफी और गर्मजोशी भरे आतिथ्य के लिए जाना जाने वाला एक महान स्थान जो पीढ़ियों से चला आ रहा है।",
@@ -1138,7 +1103,6 @@ export const content = {
         {
           id: 5,
           name: "360 कैफे और रेस्टो",
-          rating: "4.7/5",
           specialty: "किला दृश्य डाइनिंग",
           location: "राम पोल के पास",
           desc: "वैश्विक और स्थानीय स्वादों का आनंद लेते हुए किले के लुभावने 360-डिग्री दृश्य का आनंद लें।",
@@ -1157,7 +1121,6 @@ export const content = {
         {
           id: 1,
           name: "होटल द ग्रैंड चित्तौड़",
-          rating: "4.0/5",
           desc: "छत पर पूल और शहर के शानदार दृश्यों वाला लग्जरी होटल।",
           bookingLink:
             "https://www.google.com/search?q=Hotel+The+Grand+Chittor+booking",
@@ -1170,7 +1133,6 @@ export const content = {
         {
           id: 2,
           name: "कुकड़ा रिज़ॉर्ट",
-          rating: "4.2/5",
           desc: "सुंदर बगीचे और स्विमिंग पूल के साथ आधुनिक वास्तुकला, परिवारों के लिए आदर्श।",
           bookingLink:
             "https://www.google.com/search?q=Kukda+Resort+Chittorgarh+booking",
@@ -1183,7 +1145,6 @@ export const content = {
         {
           id: 3,
           name: "होटल कुंभा रिट्रीट और स्पा",
-          rating: "4.5/5",
           desc: "साइट पर स्पा के साथ एक शानदार अनुभव, आराम और शान का प्रतीक।",
           bookingLink:
             "https://www.google.com/search?q=Hotel+Kumbha+Retreat+SPA+Chittorgarh+booking",
@@ -1196,7 +1157,6 @@ export const content = {
         {
           id: 4,
           name: "होटल प्रताप पैलेस",
-          rating: "4.3/5",
           desc: "गर्मजोशी भरे आतिथ्य और परिष्कृत माहौल के लिए जाना जाता है।",
           bookingLink:
             "https://www.google.com/search?q=Hotel+Pratap+Palace+Chittorgarh+booking",
@@ -1209,7 +1169,6 @@ export const content = {
         {
           id: 5,
           name: "जुस्टा लेक नाहरगढ़ पैलेस",
-          rating: "4.8/5",
           desc: "अरावली पहाड़ियों से घिरा एक लुभावना लेक पैलेस रिसॉर्ट, जो वास्तव में शाही और एकांत अनुभव प्रदान करता है।",
           bookingLink:
             "https://www.google.com/search?q=justa+lake+nahargarh+palace+booking",
@@ -1222,7 +1181,6 @@ export const content = {
         {
           id: 6,
           name: "बस्सी फोर्ट पैलेस",
-          rating: "4.6/5",
           desc: "16वीं शताब्दी का एक किला जो एक लक्जरी हेरिटेज होटल में परिवर्तित हो गया, आधुनिक सुख-सुविधाओं के साथ पुरानी दुनिया के आकर्षण को जीवित रखता है।",
           bookingLink:
             "https://www.google.com/search?q=bassi+fort+palace+booking",
@@ -1235,7 +1193,6 @@ export const content = {
         {
           id: 7,
           name: "श्री आनंदम रिसॉर्ट",
-          rating: "4.4/5",
           desc: "हरे-भरे बगीचों और पारंपरिक वास्तुकला वाला एक विशाल रिसॉर्ट, जो एक आरामदायक पारिवारिक छुट्टी के लिए उपयुक्त है।",
           bookingLink:
             "https://www.google.com/search?q=shree+anandam+resort+booking",
@@ -1250,7 +1207,6 @@ export const content = {
     itineraries: {
       title: "यात्रा कार्यक्रम",
       subtitle: "अपनी सही यात्रा की योजना बनाएं",
-      emailTitle: "मेरा यात्रा कार्यक्रम ईमेल करें",
       plans: [
         {
           id: "oneDay",
@@ -1258,9 +1214,21 @@ export const content = {
           title: "किले की विरासत",
           desc: "एक ही दिन में चित्तौड़गढ़ किले के प्रमुख आकर्षणों को कवर करें।",
           timeline: [
-            "सुबह: चित्तौड़गढ़ किला प्रवेश और कुम्भा महल",
-            "दोपहर: विजय स्तंभ, कीर्ति स्तंभ और पद्मिनी महल",
-            "शाम: गौमुख कुंड और किले पर सूर्यास्त",
+            {
+              time: "09:00 AM",
+              visit: "कुम्भा महल और फतेह प्रकाश महल",
+              stay: "होटल द ग्रैंड चित्तौड़ से जल्दी निकलने की सलाह"
+            },
+            {
+              time: "12:00 PM",
+              visit: "विजय स्तंभ, मीरा मंदिर और पद्मिनी महल",
+              stay: "मनुहार डाइनिंग हॉल में दोपहर का भोजन (पारंपरिक थाली)"
+            },
+            {
+              time: "04:00 PM",
+              visit: "गौमुख कुंड और कीर्ति स्तंभ पर सूर्या尽",
+              stay: "आरआर होटल में रात का खाना (दाल बाटी स्पेशल)"
+            }
           ],
         },
         {
@@ -1269,9 +1237,21 @@ export const content = {
           title: "प्रकृति और आध्यात्मिकता",
           desc: "किले और आसपास की प्रकृति और मंदिरों का अन्वेषण करें।",
           timeline: [
-            "दिन 1: पूरा किला दौरा",
-            "दिन 2 सुबह: सांवलिया जी मंदिर (40 किमी दूर)",
-            "दिन 2 दोपहर: बस्सी वन्यजीव अभयारण्य (25 किमी दूर)",
+            {
+              time: "पहला दिन",
+              visit: "पूरा किला दौरा (सभी प्रमुख पोल और मीनारें)",
+              stay: "बस्सी फोर्ट पैलेस में हेरिटेज स्टे"
+            },
+            {
+              time: "दूसरा दिन सुबह",
+              visit: "सांवलिया जी मंदिर दर्शन (आध्यात्मिक सुबह)",
+              stay: "मंदिर के पास स्थानीय विक्रेताओं के साथ नाश्ता"
+            },
+            {
+              time: "दूसरा दिन दोपहर",
+              visit: "बस्सी वन्यजीव अभयारण्य सफारी",
+              stay: "कुकड़ा रिसॉर्ट में आराम (पूलसाइड डिनर)"
+            }
           ],
         },
         {
@@ -1280,12 +1260,27 @@ export const content = {
           title: "सम्पूर्ण मेवाड़",
           desc: "इतिहास, प्रकृति और संस्कृति में गहरा गोता लगाएँ।",
           timeline: [
-            "दिन 1: ऐतिहासिक किला दौरा",
-            "दिन 2: आध्यात्मिक और प्रकृति (सांवलिया जी और बस्सी)",
-            "दिन 3: मेनाल जलप्रपात और खरीदारी के लिए स्थानीय बाजार",
+            {
+              time: "पहला दिन",
+              visit: "ऐतिहासिक किला दौरा और लाइट एंड साउंड शो",
+              stay: "होटल कुम्भा रिट्रीट और स्पा में रुकें"
+            },
+            {
+              time: "दूसरा दिन",
+              visit: "सांवलia जी और बस्सी बांध की आध्यात्मिक यात्रा",
+              stay: "जुस्टा लेक नाहरगढ़ पैलेस में लग्जरी स्टे"
+            },
+            {
+              time: "तीसरा दिन",
+              visit: "मेनाल जलप्रपात और स्थानीय हस्तशिल्प खरीदारी",
+              stay: "द रावल कोठी में विदाई भोज (रूफटॉप व्यू)"
+            }
           ],
         },
       ],
+      bookTicket: "टिकट ऑनलाइन बुक करें",
+      bookTicketLink: "https://asi.payumoney.com/quick/chf",
+      chooseRoute: "अपना रास्ता चुनें",
     },
     footer: {
       copyright: "© 2026 चित्तौड़गढ़ विरासत पर्यटन। सर्वाधिकार सुरक्षित।",
@@ -1316,7 +1311,6 @@ export const content = {
         {
           id: 1,
           name: "राज कुमार क्राफ्ट्स",
-          rating: "4.8/5",
           specialty: "हस्तशिल्प मिट्टी के बर्तन",
           location: "फोर्ट रोड",
           desc: "पीढ़ियों से चली आ रही स्थानीय तकनीकों से बने पारंपरिक मिट्टी के बर्तन और सजावटी सामान।",
@@ -1327,7 +1321,6 @@ export const content = {
         {
           id: 2,
           name: "मेवाड़ी टेक्सटाइल्स",
-          rating: "4.7/5",
           specialty: "पारंपरिक पहनावा",
           location: "कुंभा नगर",
           desc: "प्रामाणिक बांधनी और लहरिया वस्त्र। चित्तौड़गढ़ के स्थानीय बुनकरों का समर्थन करें।",
@@ -1338,7 +1331,6 @@ export const content = {
         {
           id: 3,
           name: "हेरिटेज वुडवर्क",
-          rating: "4.9/5",
           specialty: "लकड़ी की कलाकृतियाँ",
           location: "बस्सी गाँव",
           desc: "बस्सी के प्रसिद्ध शिल्प गाँव से उत्कृष्ट नक्काशीदार लकड़ी के खिलौने और फर्नीचर।",
@@ -1391,11 +1383,7 @@ export const content = {
           desc: "Patrimonio de la Humanidad por la UNESCO y el fuerte más grande de la India. Un símbolo de resistencia y brillantez arquitectónica.",
           wiki: "https://es.wikipedia.org/wiki/Fuerte_de_Chittor",
           bestTime: "Oct - Mar (Invierno)",
-          images: [
-            "/assets/images/Chittorgarh Fort.webp",
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Chittorgarh_Fort_Gaumukh.jpg/1200px-Chittorgarh_Fort_Gaumukh.jpg",
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Chittorgarh_fort.JPG/1280px-Chittorgarh_fort.JPG",
-          ],
+          image: "/assets/images/Chittorgarh Fort.webp",
           coordinates: [24.8879, 74.6454],
           distances: {
             railway: "6 km",
@@ -1589,7 +1577,7 @@ export const content = {
           desc: "Conocido como el 'Mini Khajuraho', este sitio cuenta con una cascada masiva y templos del siglo XI.",
           wiki: "https://en.wikipedia.org/wiki/Menal",
           bestTime: "Jul - Sep (Monzón)",
-          image: "/assets/images/Menal.jpg",
+          image: "/assets/images/menal-waterfall-new.jpg",
           distances: {
             railway: "85 km",
             bus: "87 km",
@@ -1618,7 +1606,6 @@ export const content = {
         {
           id: 1,
           name: "Hotel RR (RR Hotel)",
-          rating: "4.8/5",
           specialty: "Thali Rajasthani Auténtico",
           location: "Chittorgarh",
           desc: "Famoso por su tradicional Daal Baati Churma y ambiente rústico. Un verdadero sabor de Rajastán.",
@@ -1633,7 +1620,6 @@ export const content = {
         {
           id: 2,
           name: "Dulces Agarsen",
-          rating: "4.7/5",
           specialty: "Gulab Jamun",
           location: "Carretera del Fuerte Chittorgarh",
           desc: "Famoso por sus Gulab Jamuns que se derriten en la boca, un placer para todos los golosos que visitan el Fuerte.",
@@ -1648,7 +1634,6 @@ export const content = {
         {
           id: 3,
           name: "Restaurante Somani",
-          rating: "4.6/5",
           specialty: "Famoso Gulab Jamun",
           location: "Bassi, Chittorgarh",
           desc: "Reconocido en toda la región por sus ricos y deliciosos Gulab Jamuns. Una parada obligada en Bassi.",
@@ -1668,7 +1653,6 @@ export const content = {
         {
           id: 1,
           name: "The Muds For Buds",
-          rating: "4.6/5",
           specialty: "Café en la Azotea",
           location: "Carretera del Fuerte Chittorgarh",
           desc: "Un acogedor café en la azotea con impresionantes vistas al fuerte, conocido por su ambiente creativo y delicioso café.",
@@ -1682,7 +1666,6 @@ export const content = {
         {
           id: 2,
           name: "The Rawal Kothi",
-          rating: "4.9/5",
           specialty: "Cena Patrimonial",
           location: "Cerca del Mirador de la Ciudad",
           desc: "Experimente una cena real en un palacio restaurado del siglo XIX con vistas panorámicas del Fuerte de Chittorgarh.",
@@ -1701,7 +1684,6 @@ export const content = {
         {
           id: 1,
           name: "Hotel The Grand Chittor",
-          rating: "4.0/5",
           desc: "Hotel de lujo con piscina en la azotea e impresionantes vistas de la ciudad y el fuerte.",
           bookingLink:
             "https://www.google.com/search?q=Hotel+The+Grand+Chittor+booking",
@@ -1714,7 +1696,6 @@ export const content = {
         {
           id: 2,
           name: "Kukda Resort",
-          rating: "4.2/5",
           desc: "Arquitectura moderna con un hermoso jardín y piscina, perfecto para familias.",
           bookingLink:
             "https://www.google.com/search?q=Kukda+Resort+Chittorgarh+booking",
@@ -1727,7 +1708,6 @@ export const content = {
         {
           id: 3,
           name: "Hotel Kumbha Retreat & SPA",
-          rating: "4.5/5",
           desc: "Una experiencia de lujo con spa, que ofrece comodidad y elegancia.",
           bookingLink:
             "https://www.google.com/search?q=Hotel+Kumbha+Retreat+SPA+Chittorgarh+booking",
@@ -1740,7 +1720,6 @@ export const content = {
         {
           id: 4,
           name: "Hotel Pratap Palace",
-          rating: "4.3/5",
           desc: "Conocido por su cálida hospitalidad y ambiente refinado, una gran mezcla de lujo y tradición.",
           bookingLink:
             "https://www.google.com/search?q=Hotel+Pratap+Palace+Chittorgarh+booking",
@@ -1755,7 +1734,6 @@ export const content = {
     itineraries: {
       title: "Itinerarios de Viaje",
       subtitle: "Planifica Tu Viaje Perfecto",
-      emailTitle: "Enviar Mi Itinerario",
       plans: [
         {
           id: "oneDay",
@@ -1763,9 +1741,21 @@ export const content = {
           title: "El Legado del Fuerte",
           desc: "Cubre los aspectos más destacados del Fuerte de Chittorgarh en un solo día.",
           timeline: [
-            "Mañana: Entrada al Fuerte y Palacio Kumbha",
-            "Tarde: Vijay Stambh, Kirti Stambh y Palacio Padmini",
-            "Noche: Embalse Gaumukh y Atardecer en el Fuerte",
+            {
+              time: "09:00 AM",
+              visit: "Palacio Kumbha y Palacio Fateh Prakash",
+              stay: "Se recomienda salir temprano desde el Hotel The Grand Chittor"
+            },
+            {
+              time: "12:00 PM",
+              visit: "Vijay Stambh, Templo Meera y Palacio Padmini",
+              stay: "Almuerzo en Manuhar Dining Hall (Thali Tradicional)"
+            },
+            {
+              time: "04:00 PM",
+              visit: "Embalse Gaumukh y Atardecer en Kirti Stambh",
+              stay: "Cena en RR Hotel (Especial Daal Baati)"
+            }
           ],
         },
         {
@@ -1774,23 +1764,50 @@ export const content = {
           title: "Naturaleza y Espiritualidad",
           desc: "Explora el Fuerte y la naturaleza y templos circundantes.",
           timeline: [
-            "Día 1: Tour Completo del Fuerte",
-            "Día 2 Mañana: Templo Sanwariaji (a 40 km)",
-            "Día 2 Tarde: Santuario de Vida Silvestre Bassi (a 25 km)",
+            {
+              time: "Día 1",
+              visit: "Tour Completo del Fuerte (Todos los Pols y Torres)",
+              stay: "Estancia en el Heritage de Bassi Fort Palace"
+            },
+            {
+              time: "Día 2 AM",
+              visit: "Visita al Templo Sanwariaji (Mañana Devocional)",
+              stay: "Desayuno con vendedores locales cerca del Templo"
+            },
+            {
+              time: "Día 2 PM",
+              visit: "Safari en el Santuario de Vida Silvestre Bassi",
+              stay: "Relájese en Kukda Resort (Cena junto a la piscina)"
+            }
           ],
         },
         {
           id: "threeDays",
           duration: "3 Días",
           title: "El Mewar Completo",
-          desc: "Sumérgete en la historia, la naturaleza y la cultura.",
+          desc: "Sumérjete en la historia, la naturaleza y la cultura.",
           timeline: [
-            "Día 1: Tour Histórico del Fuerte",
-            "Día 2: Espiritual y Naturaleza (Sanwariaji y Bassi)",
-            "Día 3: Cascada Menal y Mercados Locales",
+            {
+              time: "Día 1",
+              visit: "Tour Histórico del Fuerte y Espectáculo de Luz y Sonido",
+              stay: "Estancia en Hotel Kumbha Retreat & SPA"
+            },
+            {
+              time: "Día 2",
+              visit: "Viaje Espiritual a Sanwariaji y Embalse Bassi",
+              stay: "Estancia de Lujo en jüSTa Lake Nahargarh Palace"
+            },
+            {
+              time: "Día 3",
+              visit: "Cascada Menal y Compras de Artesanías Locales",
+              stay: "Cena de Despedida en The Rawal Kothi (Vista panorámica)"
+            }
           ],
         },
       ],
+      bookTicket: "Reservar entrada en línea",
+      bookTicketLink: "https://asi.payumoney.com/quick/chf",
+      chooseRoute: "Elija su ruta",
     },
     discover: {
       title: "Explorar Chittorgarh",
@@ -1817,7 +1834,6 @@ export const content = {
           id: 1,
           name: "Raj Kumar Crafts",
           type: "artisan",
-          rating: "4.8/5",
           desc: "Cerámica artesanal tradicional y artefactos locales.",
           location: "Cerca de la Puerta Padan Pol",
           distances: { railway: "4 km", bus: "5 km", airport: "93 km" },
@@ -1826,7 +1842,6 @@ export const content = {
           id: 2,
           name: "Mewari Textiles",
           type: "artisan",
-          rating: "4.9/5",
           desc: "Ropa tradicional de Rajastán y bordados a mano.",
           location: "Mercado Principal, Chittorgarh",
           distances: { railway: "2 km", bus: "3 km", airport: "92 km" },
@@ -1835,7 +1850,6 @@ export const content = {
           id: 3,
           name: "Heritage Woodwork",
           type: "artisan",
-          rating: "4.7/5",
           desc: "Objetos decorativos de madera tallados a mano con diseños de Mewar.",
           location: "Carretera del Fuerte",
           distances: { railway: "5 km", bus: "6 km", airport: "94 km" },
@@ -1891,11 +1905,7 @@ export const content = {
           desc: "Un site du patrimoine mondial de l'UNESCO et le plus grand fort de l'Inde. Un symbole de résilience.",
           wiki: "https://fr.wikipedia.org/wiki/Fort_de_Chittorgarh",
           bestTime: "Oct - Mars (Hiver)",
-          images: [
-            "/assets/images/Chittorgarh Fort.webp",
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Chittorgarh_Fort_Gaumukh.jpg/1200px-Chittorgarh_Fort_Gaumukh.jpg",
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Chittorgarh_fort.JPG/1280px-Chittorgarh_fort.JPG",
-          ],
+          image: "/assets/images/Chittorgarh Fort.webp",
           coordinates: [24.8879, 74.6454],
           distances: {
             railway: "6 km",
@@ -2091,7 +2101,7 @@ export const content = {
           desc: "Connu sous le nom de 'Mini Khajuraho', ce site présente une cascade massive et des temples du 11ème siècle.",
           wiki: "https://en.wikipedia.org/wiki/Menal",
           bestTime: "Juil - Sept (Mousson)",
-          image: "/assets/images/Menal.jpg",
+          image: "/assets/images/menal-waterfall-new.jpg",
           coordinates: [25.044, 75.148],
           distances: {
             railway: "85 km",
@@ -2120,7 +2130,6 @@ export const content = {
         {
           id: 1,
           name: "Hôtel RR",
-          rating: "4.8/5",
           specialty: "Thali Rajasthani Authentique",
           location: "Chittorgarh",
           desc: "Célèbre pour son Daal Baati Churma traditionnel.",
@@ -2136,7 +2145,6 @@ export const content = {
         {
           id: 2,
           name: "Agarsen Sweets",
-          rating: "4.7/5",
           specialty: "Gulab Jamun",
           location: "Route du Fort de Chittorgarh",
           desc: "Célèbre pour ses Gulab Jamuns fondants.",
@@ -2152,7 +2160,6 @@ export const content = {
         {
           id: 3,
           name: "Restaurant Somani",
-          rating: "4.6/5",
           specialty: "Gulab Jamun Célèbre",
           location: "Bassi, Chittorgarh",
           desc: "Renommé pour ses délicieux Gulab Jamuns.",
@@ -2173,7 +2180,6 @@ export const content = {
         {
           id: 1,
           name: "The Muds For Buds",
-          rating: "4.6/5",
           specialty: "Café sur le Toit",
           location: "Route du Fort de Chittorgarh",
           desc: "Un café confortable sur le toit avec une vue imprenable sur le fort.",
@@ -2187,7 +2193,6 @@ export const content = {
         {
           id: 2,
           name: "The Rawal Kothi",
-          rating: "4.9/5",
           specialty: "Dîner Patrimonial",
           location: "Près du Point de Vue",
           desc: "Vivez un dîner royal dans un palais restauré du 19ème siècle.",
@@ -2206,7 +2211,6 @@ export const content = {
         {
           id: 1,
           name: "Hotel The Grand Chittor",
-          rating: "4.0/5",
           desc: "Hôtel de luxe avec piscine sur le toit.",
           bookingLink:
             "https://www.google.com/search?q=Hotel+The+Grand+Chittor+booking",
@@ -2219,7 +2223,6 @@ export const content = {
         {
           id: 2,
           name: "Kukda Resort",
-          rating: "4.2/5",
           desc: "Architecture moderne avec un beau jardin et piscine.",
           bookingLink:
             "https://www.google.com/search?q=Kukda+Resort+Chittorgarh+booking",
@@ -2232,7 +2235,6 @@ export const content = {
         {
           id: 3,
           name: "Hotel Kumbha Retreat & SPA",
-          rating: "4.5/5",
           desc: "Une expérience luxueuse avec spa sur place.",
           bookingLink:
             "https://www.google.com/search?q=Hotel+Kumbha+Retreat+SPA+Chittorgarh+booking",
@@ -2245,7 +2247,6 @@ export const content = {
         {
           id: 4,
           name: "Hotel Pratap Palace",
-          rating: "4.3/5",
           desc: "Connu pour son hospitalité chaleureuse.",
           bookingLink:
             "https://www.google.com/search?q=Hotel+Pratap+Palace+Chittorgarh+booking",
@@ -2260,7 +2261,6 @@ export const content = {
     itineraries: {
       title: "Itinéraires de Voyage",
       subtitle: "Planifiez Votre Voyage Parfait",
-      emailTitle: "Envoyer Mon Itinéraire",
       plans: [
         {
           id: "oneDay",
@@ -2268,9 +2268,21 @@ export const content = {
           title: "L'Héritage du Fort",
           desc: "Couvrez les points forts du Fort de Chittorgarh en une seule journée.",
           timeline: [
-            "Matin : Entrée du Fort & Palais Kumbha",
-            "Après-midi : Vijay Stambh, Kirti Stambh & Palais Padmini",
-            "Soir : Réservoir Gaumukh & Coucher de soleil au Fort",
+            {
+              time: "09:00 AM",
+              visit: "Palais Kumbha & Palais Fateh Prakash",
+              stay: "Conseillé de partir tôt de l'Hôtel The Grand Chittor"
+            },
+            {
+              time: "12:00 PM",
+              visit: "Vijay Stambh, Temple Meera & Palais Padmini",
+              stay: "Déjeuner au Manuhar Dining Hall (Thali Traditionnel)"
+            },
+            {
+              time: "04:00 PM",
+              visit: "Réservoir Gaumukh & Coucher de soleil à Kirti Stambh",
+              stay: "Dîner au RR Hotel (Spécialité Daal Baati)"
+            }
           ],
         },
         {
@@ -2279,9 +2291,21 @@ export const content = {
           title: "Nature & Spiritualité",
           desc: "Explorez le Fort et la nature et les temples environnants.",
           timeline: [
-            "Jour 1 : Visite Complète du Fort",
-            "Jour 2 Matin : Temple Sanwariaji (à 40 km)",
-            "Jour 2 Après-midi : Sanctuaire de Faune de Bassi (à 25 km)",
+            {
+              time: "Jour 1",
+              visit: "Visite Complète du Fort (Tous les Pols & Tours)",
+              stay: "Séjour Historique au Bassi Fort Palace"
+            },
+            {
+              time: "Jour 2 Matin",
+              visit: "Visite du Temple Sanwariaji (Matinée Dévotionnelle)",
+              stay: "Petit déjeuner chez les vendeurs locaux près du Temple"
+            },
+            {
+              time: "Jour 2 Après-midi",
+              visit: "Safari Sanctuaire de Faune de Bassi",
+              stay: "Détente au Kukda Resort (Dîner au bord de la piscine)"
+            }
           ],
         },
         {
@@ -2290,12 +2314,27 @@ export const content = {
           title: "Le Mewar Complet",
           desc: "Plongez dans l'histoire, la nature et la culture.",
           timeline: [
-            "Jour 1 : Visite Historique du Fort",
-            "Jour 2 : Spirituel & Nature (Sanwariaji & Bassi)",
-            "Jour 3 : Cascade Menal & Marchés Locaux",
+            {
+              time: "Jour 1",
+              visit: "Visite Historique du Fort & Spectacle Son et Lumière",
+              stay: "Séjour à l'Hôtel Kumbha Retreat & SPA"
+            },
+            {
+              time: "Jour 2",
+              visit: "Voyage Spirituel à Sanwariaji & Barrage de Bassi",
+              stay: "Séjour de Luxe au jüSTa Lake Nahargarh Palace"
+            },
+            {
+              time: "Jour 3",
+              visit: "Cascade Menal & Shopping d'Artisanat Local",
+              stay: "Dîner d'adieu à The Rawal Kothi (Vue panoramique)"
+            }
           ],
         },
       ],
+      bookTicket: "Réserver un billet en ligne",
+      bookTicketLink: "https://asi.payumoney.com/quick/chf",
+      chooseRoute: "Choisissez votre itinéraire",
     },
     discover: {
       title: "Explorez Chittorgarh",
@@ -2322,7 +2361,6 @@ export const content = {
           id: 1,
           name: "Raj Kumar Crafts",
           type: "artisan",
-          rating: "4.8/5",
           desc: "Poterie artisanale traditionnelle et objets d'art locaux.",
           location: "Près de Padan Pol Gate",
           distances: { railway: "4 km", bus: "5 km", airport: "93 km" },
@@ -2331,7 +2369,6 @@ export const content = {
           id: 2,
           name: "Mewari Textiles",
           type: "artisan",
-          rating: "4.9/5",
           desc: "Vêtements traditionnels du Rajasthan et travaux de broderie à la main.",
           location: "Marché Principal, Chittorgarh",
           distances: { railway: "2 km", bus: "3 km", airport: "92 km" },
@@ -2340,7 +2377,6 @@ export const content = {
           id: 3,
           name: "Heritage Woodwork",
           type: "artisan",
-          rating: "4.7/5",
           desc: "Objets de décoration en bois sculptés à la main avec des motifs Mewari.",
           location: "Route du Fort",
           distances: { railway: "5 km", bus: "6 km", airport: "94 km" },
@@ -2396,11 +2432,7 @@ export const content = {
           desc: "联合国教科文组织世界遗产，印度最大的堡垒。韧性和建筑辉煌的象征。",
           wiki: "https://zh.wikipedia.org/wiki/%E6%9F%B4%E5%A4%9A%E5%B0%94%E5%A0%A1",
           bestTime: "10月 - 3月 (冬季)",
-          images: [
-            "/assets/images/Chittorgarh Fort.webp",
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Chittorgarh_Fort_Gaumukh.jpg/1200px-Chittorgarh_Fort_Gaumukh.jpg",
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Chittorgarh_fort.JPG/1280px-Chittorgarh_fort.JPG",
-          ],
+          image: "/assets/images/Chittorgarh Fort.webp",
           coordinates: [24.8879, 74.6454],
           distances: {
             railway: "6 公里",
@@ -2596,7 +2628,7 @@ export const content = {
           desc: "被称为“迷你克久拉霍”，该地点拥有巨大的瀑布和11世纪的寺庙。",
           wiki: "https://en.wikipedia.org/wiki/Menal",
           bestTime: "7月 - 9月 (季风)",
-          image: "/assets/images/Menal.jpg",
+          image: "/assets/images/menal-waterfall-new.jpg",
           coordinates: [25.044, 75.148],
           distances: {
             railway: "85 公里",
@@ -2626,7 +2658,6 @@ export const content = {
         {
           id: 1,
           name: "RR 酒店",
-          rating: "4.8/5",
           specialty: "正宗拉贾斯坦塔利",
           location: "吉多尔加尔",
           desc: "以其传统的 Daal Baati Churma 闻名。",
@@ -2642,7 +2673,6 @@ export const content = {
         {
           id: 2,
           name: "Agarsen 甜点",
-          rating: "4.7/5",
           specialty: "古拉布贾蒙 (Gulab Jamun)",
           location: "吉多尔加尔堡路",
           desc: "以其入口即化的古拉布贾蒙闻名。",
@@ -2658,7 +2688,6 @@ export const content = {
         {
           id: 3,
           name: "索马尼餐厅 (Somani Restaurant)",
-          rating: "4.6/5",
           specialty: "著名古拉布贾蒙",
           location: "巴西, 吉多尔加尔",
           desc: "以其美味的古拉布贾蒙在整个地区闻名。",
@@ -2679,7 +2708,6 @@ export const content = {
         {
           id: 1,
           name: "The Muds For Buds",
-          rating: "4.6/5",
           specialty: "屋顶咖啡馆",
           location: "吉多尔加尔堡路",
           desc: "舒适的屋顶咖啡馆，享有迷人的堡垒景观。",
@@ -2693,7 +2721,6 @@ export const content = {
         {
           id: 2,
           name: "The Rawal Kothi",
-          rating: "4.9/5",
           specialty: "遗产餐饮",
           location: "靠近城市观景点",
           desc: "在修复的1800年代宫殿中体验皇家餐饮。",
@@ -2712,7 +2739,6 @@ export const content = {
         {
           id: 1,
           name: "Hotel The Grand Chittor",
-          rating: "4.0/5",
           desc: "拥有屋顶游泳池的豪华酒店。",
           bookingLink:
             "https://www.google.com/search?q=Hotel+The+Grand+Chittor+booking",
@@ -2725,7 +2751,6 @@ export const content = {
         {
           id: 2,
           name: "Kukda Resort",
-          rating: "4.2/5",
           desc: "现代建筑，拥有美丽的花园和游泳池。",
           bookingLink:
             "https://www.google.com/search?q=Kukda+Resort+Chittorgarh+booking",
@@ -2738,7 +2763,6 @@ export const content = {
         {
           id: 3,
           name: "Hotel Kumbha Retreat & SPA",
-          rating: "4.5/5",
           desc: "带现场水疗中心的豪华体验。",
           bookingLink:
             "https://www.google.com/search?q=Hotel+Kumbha+Retreat+SPA+Chittorgarh+booking",
@@ -2751,7 +2775,6 @@ export const content = {
         {
           id: 4,
           name: "Hotel Pratap Palace",
-          rating: "4.3/5",
           desc: "以热情好客和精致的氛围而闻名。",
           bookingLink:
             "https://www.google.com/search?q=Hotel+Pratap+Palace+Chittorgarh+booking",
@@ -2766,7 +2789,6 @@ export const content = {
     itineraries: {
       title: "旅游行程",
       subtitle: "规划您的完美旅行",
-      emailTitle: "通过电子邮件发送我的行程",
       plans: [
         {
           id: "oneDay",
@@ -2774,9 +2796,21 @@ export const content = {
           title: "堡垒遗产",
           desc: "在一天内涵盖吉多尔加尔堡的主要亮点。",
           timeline: [
-            "上午：吉多尔加尔堡入口和库姆哈宫",
-            "下午：胜利塔、名誉塔和帕德米尼宫",
-            "晚上：高穆赫水库和堡垒日落",
+            {
+              time: "09:00 AM",
+              visit: "库姆哈宫和法塔赫普拉卡什宫",
+              stay: "建议从 The Grand Chittor 酒店尽早出发"
+            },
+            {
+              time: "12:00 PM",
+              visit: "胜利塔、米拉寺和帕德米尼宫",
+              stay: "在 Manuhar Dining Hall 享用午餐（传统塔利）"
+            },
+            {
+              time: "04:00 PM",
+              visit: "高穆赫水库和名誉塔日落",
+              stay: "在 RR 酒店享用晚餐（Daal Baati 特色菜）"
+            }
           ],
         },
         {
@@ -2785,9 +2819,21 @@ export const content = {
           title: "自然与灵性",
           desc: "探索堡垒及周边的自然和寺庙。",
           timeline: [
-            "第一天：完整的堡垒之旅",
-            "第二天上午：Sanwariaji 寺庙（40公里外）",
-            "第二天下午：巴西野生动物保护区（25公里外）",
+            {
+              time: "第 1 天",
+              visit: "完整的堡垒之旅（参观所有大门和塔楼）",
+              stay: "入住巴斯城堡宫殿遗产酒店 (Bassi Fort Palace)"
+            },
+            {
+              time: "第 2 天上午",
+              visit: "参观 Sanwariaji 寺庙（虔诚的早晨）",
+              stay: "在寺庙附近的当地摊贩处享用早餐"
+            },
+            {
+              time: "第 2 天下午",
+              visit: "巴西野生动物保护区游猎",
+              stay: "在 Kukda 度假村放松（泳池边晚餐）"
+            }
           ],
         },
         {
@@ -2796,12 +2842,27 @@ export const content = {
           title: "完整的梅瓦尔",
           desc: "深入了解历史、自然和文化。",
           timeline: [
-            "第一天：历史堡垒之旅",
-            "第二天：灵性与自然（Sanwariaji 和 巴西）",
-            "第三天：梅纳尔瀑布和当地市场购物",
+            {
+              time: "第 1 天",
+              visit: "历史堡垒之旅和声光秀",
+              stay: "入住 Hotel Kumbha Retreat & SPA"
+            },
+            {
+              time: "第 2 天",
+              visit: "前往 Sanwariaji 和巴西大坝的灵性之旅",
+              stay: "入住 jüSTa Lake Nahargarh Palace 豪华酒店"
+            },
+            {
+              time: "第 3 天",
+              visit: "梅纳尔瀑布和当地手工艺品购物",
+              stay: "在 The Rawal Kothi 享用告别晚餐（顶层露台景观）"
+            }
           ],
         },
       ],
+      bookTicket: "在线预订门票",
+      bookTicketLink: "https://asi.payumoney.com/quick/chf",
+      chooseRoute: "选择您的路线",
     },
     discover: {
       title: "探索吉多尔加尔",
@@ -2827,7 +2888,6 @@ export const content = {
           id: 1,
           name: "Raj Kumar Crafts",
           type: "artisan",
-          rating: "4.8/5",
           desc: "传统手工陶艺和当地工艺品。",
           location: "帕丹波尔门附近",
           distances: { railway: "4 公里", bus: "5 公里", airport: "93 公里" },
@@ -2836,7 +2896,6 @@ export const content = {
           id: 2,
           name: "Mewari Textiles",
           type: "artisan",
-          rating: "4.9/5",
           desc: "拉贾斯坦传统服饰及手工刺绣。",
           location: "吉多尔加尔主市场",
           distances: { railway: "2 公里", bus: "3 公里", airport: "92 公里" },
@@ -2845,7 +2904,6 @@ export const content = {
           id: 3,
           name: "Heritage Woodwork",
           type: "artisan",
-          rating: "4.7/5",
           desc: "手工雕刻的梅瓦里图案木制装饰品。",
           location: "堡垒路",
           distances: { railway: "5 公里", bus: "6 公里", airport: "94 公里" },
@@ -2859,3 +2917,5 @@ export const content = {
     },
   },
 };
+
+

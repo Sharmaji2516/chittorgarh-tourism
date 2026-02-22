@@ -29,8 +29,10 @@ const Hero = () => {
                         }
                     }
                 `}</style>
-                <div className="absolute inset-0 bg-black/40"></div>
-                <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-transparent to-royal-black"></div>
+                <div className="absolute inset-0 bg-heritage-charcoal/40"></div>
+                <div className="absolute inset-0 bg-gradient-to-b from-heritage-charcoal/90 via-transparent to-royal-black"></div>
+                {/* Texture Overlay */}
+                <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/natural-paper.png")' }}></div>
             </motion.div>
 
             {/* Content */}

@@ -29,14 +29,17 @@ const HomePage = ({ t, filteredAttractions, setSelectedAttraction, searchQuery }
             <Hero />
             {!searchQuery && (
                 <>
-                    <Section id="history" title={t.history.title} className="bg-transparent">
+                    <Section id="history" title={t.history.title} className="bg-transparent relative overflow-hidden">
+                        {/* Subtle Ornate Background Element */}
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-heritage-gold/5 rounded-full blur-3xl -mr-32 -mt-32"></div>
+
                         <motion.div
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            className="max-w-4xl mx-auto text-center"
+                            className="max-w-4xl mx-auto text-center relative z-10"
                         >
-                            <p className="text-lg md:text-xl text-white leading-relaxed font-light mb-8 font-serif">
+                            <p className="text-lg md:text-xl text-heritage-stone leading-relaxed font-light mb-8 font-serif italic">
                                 {t.history.text}
                             </p>
                             <div className="flex items-center justify-center gap-6">
@@ -44,13 +47,13 @@ const HomePage = ({ t, filteredAttractions, setSelectedAttraction, searchQuery }
                                     href={t.history.wikiLink}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="inline-block border-b border-royal-gold text-royal-gold pb-1 hover:text-royal-white hover:border-royal-white transition-all text-sm tracking-widest uppercase"
+                                    className="inline-block border-b border-heritage-gold text-heritage-gold pb-1 hover:text-white hover:border-white transition-all text-sm tracking-widest uppercase font-bold"
                                 >
                                     {t.history.readMore}
                                 </a>
                                 <NavLink
                                     to="/gallery"
-                                    className="inline-block border border-royal-gold/20 px-4 py-2 text-royal-gold/80 hover:text-royal-gold hover:border-royal-gold transition-all text-[10px] tracking-widest uppercase rounded-full bg-royal-gold/5"
+                                    className="inline-block border border-heritage-gold/30 px-6 py-2 text-heritage-gold/80 hover:text-heritage-gold hover:border-heritage-gold transition-all text-[10px] tracking-widest uppercase rounded-full bg-heritage-gold/5 font-bold"
                                 >
                                     Photo Gallery
                                 </NavLink>
@@ -62,7 +65,8 @@ const HomePage = ({ t, filteredAttractions, setSelectedAttraction, searchQuery }
             )}
 
             {filteredAttractions.length > 0 && (
-                <Section id="attractions" title={t.attractions.title} className="bg-black/40 md:bg-black/20 md:backdrop-blur-md border-y border-royal-gold/10">
+                <Section id="attractions" title={t.attractions.title} className="bg-heritage-charcoal/60 md:bg-heritage-charcoal/40 md:backdrop-blur-md border-y border-heritage-gold/20 relative shadow-inner">
+                    <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/sandpaper.png")' }}></div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                         <AnimatePresence>
                             {filteredAttractions.map(item => (

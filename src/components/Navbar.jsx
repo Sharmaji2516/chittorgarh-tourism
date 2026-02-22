@@ -41,7 +41,7 @@ const Navbar = () => {
     return (
         <nav className={cn(
             "fixed w-full z-50 transition-all duration-300 border-b border-transparent",
-            (scrolled || !isHome) ? "bg-black/80 backdrop-blur-xl border-white/10 py-2" : "bg-transparent py-4"
+            (scrolled || !isHome) ? "bg-heritage-charcoal/95 backdrop-blur-xl border-heritage-gold/20 py-2 shadow-2xl" : "bg-transparent py-4"
         )}>
             {/* Scroll Progress Bar */}
             <div

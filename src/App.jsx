@@ -26,19 +26,21 @@ const MainContent = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-
-  // Auto-navigate if searching and results are on different pages? 
-  // For now, let's just show results on the current page if they exist.
+  // One-time cleanup of legacy local storage data
+  React.useEffect(() => {
+    const legacyKeys = ['ctt_reviews', 'ctt_ratings'];
+    legacyKeys.forEach(key => localStorage.removeItem(key));
+  }, []);
 
   return (
-    <div className="min-h-screen flex flex-col relative text-royal-white font-sans selection:bg-royal-gold selection:text-royal-black bg-royal-black">
+    <div className="min-h-screen flex flex-col relative text-heritage-parchment font-sans selection:bg-heritage-gold selection:text-heritage-charcoal bg-heritage-charcoal">
       {/* Global Background Image */}
       <div className="fixed inset-0 z-0 overflow-hidden">
         <div
-          className="absolute inset-0 bg-image bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0 bg-image bg-cover bg-center bg-no-repeat opacity-40"
           style={{ backgroundImage: "url('https://www.tourism.rajasthan.gov.in/content/dam/rajasthan-tourism/english/city/banners/desk/Chittorgarh-Fort-banner.png')" }}
         ></div>
-        <div className="absolute inset-0 bg-black/50 md:backdrop-blur-[2px]"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-heritage-charcoal via-royal-black to-heritage-charcoal/95"></div>
       </div>
 
       {/* Main Content Wrapper */}

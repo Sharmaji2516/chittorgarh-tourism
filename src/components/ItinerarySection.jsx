@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Mail, Clock, MapPin, Calendar } from 'lucide-react';
+import { Mail, Clock, MapPin, Calendar, Ticket, Navigation } from 'lucide-react';
+import { NavLink } from 'react-router-dom';
 
 const ItinerarySection = ({ content }) => {
     const [activeTab, setActiveTab] = useState('oneDay');
@@ -17,15 +18,40 @@ const ItinerarySection = ({ content }) => {
     };
 
     return (
-        <section className="py-20 bg-stone-50 dark:bg-stone-900 transition-colors duration-300" id="itineraries">
-            <div className="container mx-auto px-4">
+        <section className="py-20 bg-heritage-charcoal dark:bg-heritage-charcoal transition-colors duration-300 relative overflow-hidden" id="itineraries">
+            {/* Sandstone Texture Overlay */}
+            <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/sandpaper.png")' }}></div>
+
+            <div className="container mx-auto px-4 relative z-10">
                 <div className="text-center mb-16">
-                    <h2 className="text-4xl md:text-5xl font-bold text-amber-900 dark:text-amber-500 mb-4 font-serif">
+                    <h2 className="text-4xl md:text-5xl font-bold text-heritage-gold mb-4 font-serif uppercase tracking-widest drop-shadow-lg">
                         {itineraries.title}
                     </h2>
-                    <p className="text-xl text-stone-600 dark:text-stone-300 max-w-2xl mx-auto font-light">
+                    <p className="text-xl text-heritage-stone/80 max-w-2xl mx-auto font-light mb-8 italic">
                         {itineraries.subtitle}
                     </p>
+                    <div className="flex flex-wrap justify-center gap-4">
+                        {itineraries.bookTicket && (
+                            <a
+                                href={itineraries.bookTicketLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="heritage-btn-primary"
+                            >
+                                <Ticket className="w-5 h-5 mr-3 inline" />
+                                {itineraries.bookTicket}
+                            </a>
+                        )}
+                        {itineraries.chooseRoute && (
+                            <NavLink
+                                to="/how-to-reach"
+                                className="px-8 py-3 bg-heritage-gold text-heritage-charcoal rounded-full font-bold uppercase tracking-widest hover:bg-heritage-gold-light transition-all transform hover:-translate-y-1 shadow-lg border border-heritage-gold/20"
+                            >
+                                <Navigation className="w-5 h-5 mr-3 inline" />
+                                {itineraries.chooseRoute}
+                            </NavLink>
+                        )}
+                    </div>
                 </div>
 
                 <div className="max-w-5xl mx-auto">
@@ -35,9 +61,9 @@ const ItinerarySection = ({ content }) => {
                             <button
                                 key={plan.id}
                                 onClick={() => setActiveTab(plan.id)}
-                                className={`px-8 py-3 rounded-full text-lg font-medium transition-all duration-300 transform hover:scale-105 ${activeTab === plan.id
-                                    ? 'bg-amber-700 text-white shadow-lg scale-105'
-                                    : 'bg-white dark:bg-stone-800 text-stone-600 dark:text-stone-300 hover:bg-amber-50 dark:hover:bg-stone-700 shadow-sm border border-stone-200 dark:border-stone-700'
+                                className={`px-8 py-3 rounded-full text-lg font-bold transition-all duration-300 transform hover:scale-105 border-2 ${activeTab === plan.id
+                                    ? 'bg-heritage-gold text-heritage-charcoal border-heritage-gold shadow-xl scale-105'
+                                    : 'bg-heritage-charcoal/50 text-heritage-gold/60 border-heritage-gold/20 hover:border-heritage-gold shadow-sm'
                                     }`}
                             >
                                 {plan.duration}
@@ -46,43 +72,55 @@ const ItinerarySection = ({ content }) => {
                     </div>
 
                     {/* Content Card */}
-                    <div className="bg-white dark:bg-stone-800 rounded-2xl shadow-xl overflow-hidden border border-stone-200 dark:border-stone-700 p-8 md:p-12 transition-all duration-300">
-                        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
-                            <div>
-                                <h3 className="text-3xl font-bold text-stone-800 dark:text-amber-500 mb-2 font-serif">
-                                    {activePlan.title}
-                                </h3>
-                                <p className="text-stone-600 dark:text-stone-300 text-lg">
-                                    {activePlan.desc}
-                                </p>
-                            </div>
-                            <a
-                                href={`mailto:?subject=${encodeURIComponent(`${itineraries.emailTitle}: ${activePlan.title}`)}&body=${encodeURIComponent(`${activePlan.title} (${activePlan.duration})\n\n${activePlan.desc}\n\n${activePlan.timeline.join('\n')}\n\nSent from Chittorgarh Tourism via Web.`)}`}
-                                className="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-lg font-medium transition-colors shadow-md hover:shadow-lg"
-                            >
-                                <Mail size={20} />
-                                {itineraries.emailTitle}
-                            </a>
+                    <div className="parchment-card p-8 md:p-12 transition-all duration-300 ornate-border">
+                        <div className="mb-10 text-center border-b border-amber-900/10 pb-8">
+                            <h3 className="text-3xl font-bold text-amber-950 mb-2 font-serif uppercase tracking-wider">
+                                {activePlan.title}
+                            </h3>
+                            <p className="text-amber-900/80 text-lg italic">
+                                {activePlan.desc}
+                            </p>
                         </div>
 
-                        <div className="space-y-6">
+                        <div className="space-y-12">
                             {activePlan.timeline.map((item, index) => (
-                                <div key={index} className="flex gap-4 group">
+                                <div key={index} className="flex gap-8 group">
                                     <div className="flex flex-col items-center">
-                                        <div className="w-8 h-8 rounded-full bg-amber-100 dark:bg-amber-900/50 flex items-center justify-center text-amber-700 dark:text-amber-500 font-bold text-sm border border-amber-200 dark:border-amber-700 shrink-0">
+                                        <div className="w-12 h-12 rounded-full bg-heritage-charcoal flex items-center justify-center text-heritage-gold font-serif font-bold text-xl border-2 border-heritage-gold shadow-lg shrink-0">
                                             {index + 1}
                                         </div>
                                         {index !== activePlan.timeline.length - 1 && (
-                                            <div className="w-0.5 h-full bg-stone-200 dark:bg-stone-700 my-2 group-hover:bg-amber-200 dark:group-hover:bg-amber-800 transition-colors"></div>
+                                            <div className="w-1 h-full bg-heritage-gold/20 my-2 group-hover:bg-heritage-gold/40 transition-colors rounded-full"></div>
                                         )}
                                     </div>
-                                    <div className="pb-8">
-                                        <div className="bg-stone-50 dark:bg-stone-900/50 p-4 rounded-xl border border-stone-100 dark:border-stone-700/50 hover:border-amber-200 dark:hover:border-amber-700/50 transition-colors">
-                                            <div className="flex items-start gap-3">
-                                                <Clock size={18} className="text-amber-600 dark:text-amber-500 mt-1 shrink-0" />
-                                                <p className="text-lg text-stone-700 dark:text-stone-200 font-medium">
-                                                    {item}
-                                                </p>
+                                    <div className="pb-12 w-full">
+                                        <div className="bg-amber-900/5 p-8 rounded-2xl border border-amber-900/10 hover:border-heritage-charcoal/30 transition-all hover:shadow-xl group-hover:bg-amber-900/[0.08]">
+                                            <div className="flex items-center gap-3 mb-6">
+                                                <Clock size={20} className="text-heritage-charcoal" />
+                                                <span className="text-base font-bold uppercase tracking-widest text-heritage-charcoal">
+                                                    {item.time}
+                                                </span>
+                                            </div>
+
+                                            <div className="grid md:grid-cols-2 gap-10">
+                                                <div>
+                                                    <h4 className="text-xs font-bold text-amber-900/50 uppercase tracking-[0.2em] mb-3 flex items-center gap-2">
+                                                        <MapPin size={14} />
+                                                        Where to Visit
+                                                    </h4>
+                                                    <p className="text-xl text-amber-950 font-serif font-bold leading-relaxed">
+                                                        {item.visit}
+                                                    </p>
+                                                </div>
+                                                <div className="border-t md:border-t-0 md:border-l border-amber-900/10 pt-6 md:pt-0 md:pl-10">
+                                                    <h4 className="text-xs font-bold text-amber-900/50 uppercase tracking-[0.2em] mb-3 flex items-center gap-2">
+                                                        <Calendar size={14} />
+                                                        Recommended Stay/Food
+                                                    </h4>
+                                                    <p className="text-amber-900 text-base leading-relaxed italic">
+                                                        {item.stay}
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

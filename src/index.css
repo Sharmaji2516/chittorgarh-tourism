@@ -28,4 +28,26 @@
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-royal-gold to-orange-400;
   }
+
+  .heritage-gradient {
+    @apply bg-gradient-to-br from-heritage-charcoal via-royal-black to-heritage-charcoal-light;
+  }
+
+  .ornate-border {
+    @apply border border-heritage-gold/30 rounded-2xl relative;
+  }
+
+  .ornate-border::before {
+    content: '';
+    @apply absolute inset-0 border border-heritage-gold/10 rounded-2xl -m-1 pointer-events-none;
+  }
+
+  .parchment-card {
+    @apply bg-heritage-parchment text-amber-950 shadow-inner border border-amber-900/10 rounded-xl relative overflow-hidden;
+    background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+  }
+
+  .heritage-btn-primary {
+    @apply px-8 py-3 bg-heritage-charcoal text-heritage-parchment rounded-full font-bold uppercase tracking-widest hover:bg-heritage-charcoal-light transition-all transform hover:-translate-y-1 shadow-lg border border-heritage-gold/20;
+  }
 }

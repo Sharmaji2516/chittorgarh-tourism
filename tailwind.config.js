@@ -11,9 +11,18 @@ export default {
                 sans: ['Inter', 'system-ui', 'sans-serif'],
             },
             colors: {
-                'royal-gold': '#d4af37', // Existing custom color
-                'royal-black': '#1a1a1a', // Existing custom color
-                'royal-white': '#f5f5f5', // Existing custom color
+                'royal-gold': '#d4af37',
+                'royal-black': '#1a1a1a',
+                'royal-white': '#f5f5f5',
+                'heritage': {
+                    'gold': '#D4AF37',
+                    'gold-light': '#F1D98F',
+                    'charcoal': '#121212',
+                    'charcoal-light': '#1E1E1E',
+                    'stone': '#E5E4E2',
+                    'sand': '#F4A460',
+                    'parchment': '#FCF5E5',
+                },
                 primary: {
                     50: '#f5f3ff',
                     100: '#ede9fe',

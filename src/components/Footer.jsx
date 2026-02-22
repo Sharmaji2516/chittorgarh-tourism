@@ -49,7 +49,7 @@ const Footer = () => {
                 <div className="border-t border-royal-gold/10 pt-6 flex flex-col items-center gap-6">
                     <p className="text-sm font-serif italic text-royal-gold/80 flex items-center gap-2">
                         <span>Developed & Maintained by</span>
-                        <span className="font-bold not-italic bg-gradient-to-r from-royal-gold to-orange-400 bg-clip-text text-transparent">Lav & Kush Sharma</span>
+                        <span className="font-bold not-italic bg-gradient-to-r from-royal-gold to-orange-400 bg-clip-text text-transparent">Lav Sharma</span>
                     </p>
                     <button
                         onClick={() => {
