@@ -1,6 +1,7 @@
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { NavLink } from 'react-router-dom';
+import FeedbackForm from './FeedbackForm';
 
 const Footer = () => {
     const { t } = useLanguage();
@@ -22,35 +23,40 @@ const Footer = () => {
                         <h4 className="text-royal-gold uppercase tracking-widest mb-4 text-xs font-bold">Explore</h4>
                         <ul className="space-y-2">
                             <li><a href="/#history" className="hover:text-royal-gold transition-colors">{t.nav.history}</a></li>
-                            <li><a href="/#attractions" className="hover:text-royal-gold transition-colors">{t.nav.attractions}</a></li>
+                            <li><NavLink to="/attractions" className="hover:text-royal-gold transition-colors">{t.nav.attractions}</NavLink></li>
                             <li><NavLink to="/gallery" className="hover:text-royal-gold transition-colors">{t.nav.gallery}</NavLink></li>
                             <li><NavLink to="/flavors" className="hover:text-royal-gold transition-colors">{t.nav.vendors}</NavLink></li>
+                            <li><NavLink to="/stays" className="hover:text-royal-gold transition-colors">{t.nav.hotels}</NavLink></li>
                             <li><NavLink to="/local-for-vocal" className="hover:text-royal-gold transition-colors">{t.nav.localVocal}</NavLink></li>
+                            <li><NavLink to="/itineraries" className="hover:text-royal-gold transition-colors">{t.nav.itineraries}</NavLink></li>
                         </ul>
                     </div>
                     <div>
                         <h4 className="text-royal-gold uppercase tracking-widest mb-4 text-xs font-bold">Contact</h4>
-                        <p className="mb-2">Chittorgarh Tourism Board</p>
-                        <p>info@visit-chittorgarh.com</p>
+                        <p className="mb-2">+91 7597901057</p>
+                        <p>chittortech@gmail.com</p>
                     </div>
                     <div>
                         <h4 className="text-royal-gold uppercase tracking-widest mb-4 text-xs font-bold">Connect</h4>
                         <div className="flex justify-center gap-6">
                             <a href="https://www.linkedin.com/in/lav-sharma-a9919b2ab/" target="_blank" rel="noopener noreferrer" className="hover:text-royal-gold transition-colors text-xs">LinkedIn</a>
-                            <a href="mailto:Lavsharma.it25@gmail.com" className="hover:text-royal-gold transition-colors text-xs">Gmail</a>
+                            <a href="mailto:chittortech@gmail.com" className="hover:text-royal-gold transition-colors text-xs">Gmail</a>
                         </div>
                     </div>
                 </div>
 
-                <p className="text-xs tracking-wider uppercase opacity-50 mb-4">
-                    {t.footer.copyright}
-                </p>
+                {window.location.hostname === 'localhost' && <FeedbackForm />}
+
+
 
                 <div className="border-t border-royal-gold/10 pt-6 flex flex-col items-center gap-6">
-                    <p className="text-sm font-serif italic text-royal-gold/80 flex items-center gap-2">
-                        <span>Developed & Maintained by</span>
-                        <span className="font-bold not-italic bg-gradient-to-r from-royal-gold to-orange-400 bg-clip-text text-transparent">Lav Sharma</span>
-                    </p>
+                    <div className="flex flex-col items-center gap-1">
+                        <p className="text-sm font-serif italic text-royal-gold/80 flex items-center gap-2">
+                            <span>Developed & Maintained by</span>
+                            <a href="https://www.chittortech.online/" target="_blank" rel="noopener noreferrer" className="font-bold not-italic bg-gradient-to-r from-royal-gold to-orange-400 bg-clip-text text-transparent hover:opacity-80 transition-opacity">Chittortech</a>
+                        </p>
+                        <p className="text-xs text-royal-gold/60 uppercase tracking-widest mt-1">All Rights Reserved</p>
+                    </div>
                     <button
                         onClick={() => {
                             localStorage.removeItem('ctt_visited');

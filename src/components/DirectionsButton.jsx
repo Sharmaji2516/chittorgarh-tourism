@@ -2,36 +2,39 @@ import React, { useState } from 'react';
 import { MapPin, Navigation, Loader2 } from 'lucide-react';
 import { motion } from 'framer-motion';
 
-const DirectionsButton = ({ className = "" }) => {
+const DirectionsButton = ({ className = "", destination = "Chittorgarh+Fort,Rajasthan,India", destinationName = "Chittorgarh Fort" }) => {
     const [loading, setLoading] = useState(false);
 
     const getDirections = () => {
         setLoading(true);
-        const destination = "Chittorgarh+Fort,Rajasthan,India";
 
         if ("geolocation" in navigator) {
+            // Options for high accuracy and timeout
+            const options = {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 0
+            };
+
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     const { latitude, longitude } = position.coords;
+                    // Use 'dir' api with specified origin and destination
                     const url = `https://www.google.com/maps/dir/?api=1&origin=${latitude},${longitude}&destination=${destination}&travelmode=driving`;
                     window.open(url, '_blank');
                     setLoading(false);
                 },
                 (error) => {
-                    console.error("Error getting location:", error);
-                    // Fallback to directions without origin (Google Maps will ask for location)
+                    console.error("Location error:", error);
+                    // Fallback: Use 'dir' without origin. Google Maps will ask or use IP-based location
                     const url = `https://www.google.com/maps/dir/?api=1&destination=${destination}&travelmode=driving`;
                     window.open(url, '_blank');
                     setLoading(false);
                 },
-                {
-                    enableHighAccuracy: true,
-                    timeout: 5000,
-                    maximumAge: 0
-                }
+                options
             );
         } else {
-            // Geolocation not supported
+            // Fallback for browsers without geolocation
             const url = `https://www.google.com/maps/dir/?api=1&destination=${destination}&travelmode=driving`;
             window.open(url, '_blank');
             setLoading(false);

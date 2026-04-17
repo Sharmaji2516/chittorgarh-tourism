@@ -3,6 +3,7 @@ import { useLanguage } from '../context/LanguageContext';
 import { motion } from 'framer-motion';
 import { Hotel, Star, MapPin, ExternalLink, Train, Bus, Plane } from 'lucide-react';
 import ReviewModal from './ReviewModal';
+import DirectionsButton from './DirectionsButton';
 import { getAverageRating, getReviewCount } from '../utils/ReviewSystem';
 
 const HotelCard = ({ hotel }) => {
@@ -90,6 +91,17 @@ const HotelCard = ({ hotel }) => {
                         </div>
                     </div>
                 )}
+                <div className="mb-6 flex justify-between items-center bg-royal-gold/5 p-3 rounded-xl border border-royal-gold/10">
+                    <div className="flex items-center gap-2 text-royal-gold">
+                        <MapPin className="w-4 h-4" />
+                        <span className="text-[10px] uppercase font-bold tracking-tighter">Location: Chittorgarh</span>
+                    </div>
+                    <DirectionsButton 
+                        destination={`${hotel.name}, Chittorgarh, Rajasthan, India`}
+                        destinationName={hotel.name}
+                        className="p-0 hover:text-royal-white"
+                    />
+                </div>
 
                 <motion.a
                     href={hotel.bookingLink}

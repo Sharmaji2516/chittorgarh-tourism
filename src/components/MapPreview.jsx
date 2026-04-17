@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
-import { MapPin, ExternalLink } from 'lucide-react';
+import { MapPin, ExternalLink, Loader2 } from 'lucide-react';
 
 // Fix for default marker icons in Leaflet with Webpack/Vite
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
@@ -17,9 +17,36 @@ let DefaultIcon = L.icon({
 L.Marker.prototype.options.icon = DefaultIcon;
 
 const MapPreview = ({ coordinates, name, zoom = 15 }) => {
+    const [loading, setLoading] = useState(false);
+
     if (!coordinates || !coordinates[0]) return null;
 
-    const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${coordinates[0]},${coordinates[1]}`;
+    const getDirections = () => {
+        setLoading(true);
+        const dest = `${coordinates[0]},${coordinates[1]}`;
+
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const { latitude, longitude } = position.coords;
+                    const url = `https://www.google.com/maps/dir/?api=1&origin=${latitude},${longitude}&destination=${dest}&travelmode=driving`;
+                    window.open(url, '_blank');
+                    setLoading(false);
+                },
+                (error) => {
+                    console.error("Location error:", error);
+                    const url = `https://www.google.com/maps/dir/?api=1&destination=${dest}&travelmode=driving`;
+                    window.open(url, '_blank');
+                    setLoading(false);
+                },
+                { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+            );
+        } else {
+            const url = `https://www.google.com/maps/dir/?api=1&destination=${dest}&travelmode=driving`;
+            window.open(url, '_blank');
+            setLoading(false);
+        }
+    };
 
     return (
         <div className="space-y-3">
@@ -48,15 +75,18 @@ const MapPreview = ({ coordinates, name, zoom = 15 }) => {
                 </MapContainer>
             </div>
 
-            <a
-                href={googleMapsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm text-royal-gold hover:text-white transition-colors py-2 px-3 bg-royal-gold/10 rounded-lg border border-royal-gold/20 group"
+            <button
+                onClick={getDirections}
+                disabled={loading}
+                className="w-full inline-flex items-center justify-center gap-2 text-sm text-royal-gold hover:text-white transition-colors py-3 px-3 bg-royal-gold/10 rounded-lg border border-royal-gold/20 group disabled:opacity-50"
             >
-                <ExternalLink className="w-4 h-4" />
-                <span>Open in Google Maps for Navigation</span>
-            </a>
+                {loading ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                ) : (
+                    <ExternalLink className="w-4 h-4" />
+                )}
+                <span>{loading ? "Detecting Your Location..." : "Open Navigating in Google Maps"}</span>
+            </button>
         </div>
     );
 };

@@ -3,6 +3,7 @@ import { useLanguage } from '../context/LanguageContext';
 import { motion } from 'framer-motion';
 import { Utensils, MapPin, ExternalLink, Train, Bus, Palette, ShoppingBag, Star, MessageSquare } from 'lucide-react';
 import ReviewModal from './ReviewModal';
+import DirectionsButton from './DirectionsButton';
 import { getAverageRating, getReviewCount } from '../utils/ReviewSystem';
 
 const VendorCard = ({ vendor }) => {
@@ -106,16 +107,11 @@ const VendorCard = ({ vendor }) => {
                         <span className="truncate">{vendor.location}</span>
                     </div>
 
-                    <motion.a
-                        href={vendor.mapLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ x: 3 }}
-                        className="flex items-center gap-1.5 text-royal-gold text-[10px] font-bold uppercase tracking-widest hover:text-royal-gold-light transition-colors"
-                    >
-                        <span>{t.common.viewMap}</span>
-                        <ExternalLink className="w-3 h-3" />
-                    </motion.a>
+                    <DirectionsButton 
+                        destination={`${vendor.name}, ${vendor.location}, Rajasthan, India`}
+                        destinationName={vendor.name}
+                        className="text-royal-gold hover:text-royal-white"
+                    />
                 </div>
             </motion.div>
 

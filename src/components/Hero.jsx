@@ -6,31 +6,31 @@ import { useLanguage } from '../context/LanguageContext';
 const Hero = () => {
     const { t } = useLanguage();
 
-    const bgImageDesktop = "https://www.tourism.rajasthan.gov.in/content/dam/rajasthan-tourism/english/city/banners/desk/Chittorgarh-Fort-banner.png";
-    const bgImageMobile = "https://images.unsplash.com/photo-1590666066228-5d259508544e?q=80&w=800&h=1200&fit=crop"; // Vertical crop of Vijay Stambh
+    const bgImageDesktop = "/assets/images/Fort.jpg";
+    const bgImageMobile = "/assets/images/Fort.jpg";
 
     return (
-        <div className="relative h-screen flex items-center justify-center text-center px-4 overflow-hidden">
-            {/* Background Image with Overlay */}
+        <div className="relative h-screen min-h-[100dvh] flex items-center justify-center text-center px-4 overflow-hidden">
+            {/* Background Layer */}
             <motion.div
                 initial={{ scale: 1.15 }}
                 animate={{ scale: 1.05 }}
                 transition={{ duration: 20, repeat: Infinity, repeatType: "reverse", ease: "linear" }}
-                className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0 transform scale-105 transition-all duration-1000"
+                className="hero-main-bg absolute inset-0 bg-cover bg-center bg-no-repeat z-0 transform scale-105"
                 style={{
-                    backgroundImage: `url('${bgImageMobile}')`, // Default (Mobile)
+                    backgroundImage: `url('${bgImageMobile}')`,
                 }}
             >
-                {/* Desktop Override via CSS (cleaner than JS resize listener) */}
+                {/* Desktop Override */}
                 <style>{`
                     @media (min-width: 768px) {
-                        .bg-cover {
+                        .hero-main-bg {
                             background-image: url('${bgImageDesktop}') !important;
                         }
                     }
                 `}</style>
-                <div className="absolute inset-0 bg-heritage-charcoal/40"></div>
-                <div className="absolute inset-0 bg-gradient-to-b from-heritage-charcoal/90 via-transparent to-royal-black"></div>
+                <div className="absolute inset-0 bg-heritage-charcoal/30"></div>
+                <div className="absolute inset-0 bg-gradient-to-b from-heritage-charcoal/80 via-transparent to-royal-black"></div>
                 {/* Texture Overlay */}
                 <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/natural-paper.png")' }}></div>
             </motion.div>

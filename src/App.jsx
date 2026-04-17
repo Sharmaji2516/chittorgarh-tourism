@@ -19,6 +19,8 @@ import LocalVocalPage from './pages/LocalVocalPage';
 import VisitModal from './components/VisitModal';
 import HowToReach from './pages/HowToReach';
 import GalleryPage from './pages/GalleryPage';
+import AttractionsPage from './pages/AttractionsPage';
+import ItinerariesPage from './pages/ItinerariesPage';
 
 const MainContent = () => {
   const { t } = useLanguage();
@@ -34,11 +36,10 @@ const MainContent = () => {
 
   return (
     <div className="min-h-screen flex flex-col relative text-heritage-parchment font-sans selection:bg-heritage-gold selection:text-heritage-charcoal bg-heritage-charcoal">
-      {/* Global Background Image */}
-      <div className="fixed inset-0 z-0 overflow-hidden">
+      <div className="fixed inset-0 z-0 overflow-hidden bg-heritage-charcoal">
         <div
           className="absolute inset-0 bg-image bg-cover bg-center bg-no-repeat opacity-40"
-          style={{ backgroundImage: "url('https://www.tourism.rajasthan.gov.in/content/dam/rajasthan-tourism/english/city/banners/desk/Chittorgarh-Fort-banner.png')" }}
+          style={{ backgroundImage: "url('/assets/images/fateh-prakash-new.jpg')" }}
         ></div>
         <div className="absolute inset-0 bg-gradient-to-br from-heritage-charcoal via-royal-black to-heritage-charcoal/95"></div>
       </div>
@@ -81,6 +82,21 @@ const MainContent = () => {
             } />
             <Route path="/how-to-reach" element={<HowToReach />} />
             <Route path="/gallery" element={<GalleryPage t={t} />} />
+            <Route path="/attractions/:category" element={
+              <AttractionsPage
+                t={t}
+                filteredAttractions={t.attractions.items}
+                setSelectedAttraction={setSelectedAttraction}
+              />
+            } />
+            <Route path="/attractions" element={
+              <AttractionsPage
+                t={t}
+                filteredAttractions={t.attractions.items}
+                setSelectedAttraction={setSelectedAttraction}
+              />
+            } />
+            <Route path="/itineraries" element={<ItinerariesPage t={t} />} />
           </Routes>
 
         </div>
@@ -95,13 +111,17 @@ const MainContent = () => {
   );
 };
 
+import { BookingProvider } from './context/BookingContext';
+
 function App() {
   return (
     <LanguageProvider>
-      <Router>
-        <ScrollToTop />
-        <MainContent />
-      </Router>
+      <BookingProvider>
+        <Router>
+          <ScrollToTop />
+          <MainContent />
+        </Router>
+      </BookingProvider>
     </LanguageProvider>
   );
 }

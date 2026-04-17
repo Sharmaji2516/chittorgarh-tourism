@@ -63,7 +63,12 @@ const InteractiveMap = () => {
                                         {item.image && (
                                             <img src={item.image} alt={item.name} className="w-full h-24 object-cover rounded mb-2" />
                                         )}
-                                        <p className="text-gray-700">{item.desc.substring(0, 60)}...</p>
+                                        <p className="text-gray-700 mb-3">{item.desc.substring(0, 60)}...</p>
+                                        <DirectionsButton 
+                                            destination={`${item.coordinates[0]},${item.coordinates[1]}`}
+                                            destinationName={item.name}
+                                            className="w-full bg-royal-gold/10 py-2 rounded-lg border border-royal-gold/20"
+                                        />
                                     </div>
                                 </Popup>
                             </Marker>

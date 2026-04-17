@@ -1,256 +1,106 @@
 import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { UtensilsCrossed, Hotel, ArrowRight } from 'lucide-react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { NavLink } from 'react-router-dom';
+import { Wind, Shield, Sunrise, Mountain, ArrowRight } from 'lucide-react';
 import Hero from '../components/Hero';
 import Section from '../components/Section';
-import AttractionCard from '../components/AttractionCard';
-import Timeline from '../components/Timeline';
-import InteractiveMap from '../components/InteractiveMap';
-import ItinerarySection from '../components/ItinerarySection';
 
-const HomePage = ({ t, filteredAttractions, setSelectedAttraction, searchQuery }) => {
-    const location = useLocation();
-
-    React.useEffect(() => {
-        if (location.hash) {
-            const id = location.hash.substring(1);
-            const element = document.getElementById(id);
-            if (element) {
-                setTimeout(() => {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                }, 100);
-            }
+const HomePage = ({ t, searchQuery }) => {
+    // Data for the 4 major categories
+    const categories = [
+        {
+            id: 1,
+            title: "The Grand Citadel",
+            subtitle: "Chittorgarh Fort",
+            desc: "The largest fort in India, standing as a testament to Rajputana valor and sacrifice.",
+            image: "/assets/images/Chittorgarh Fort.webp",
+            icon: Shield,
+            link: "/attractions/fort",
+            color: "from-royal-gold to-orange-500"
+        },
+        {
+            id: 2,
+            title: "Nature & Wilderness",
+            subtitle: "Bassi Wildlife Sanctuary",
+            desc: "A serene haven for nature lovers and wildlife enthusiasts amidst the Aravalli hills.",
+            image: "/assets/images/Bassi Wildlife.jpg",
+            icon: Wind,
+            link: "/attractions/nature",
+            color: "from-green-600 to-teal-500"
+        },
+        {
+            id: 3,
+            title: "Spiritual Serenity",
+            subtitle: "Sanwariaji Temple",
+            desc: "Experience divine peace at this magnificent temple dedicated to Lord Krishna.",
+            image: "/assets/images/Sanvliya-ji-Temple.jpg",
+            icon: Sunrise,
+            link: "/attractions/spiritual",
+            color: "from-blue-600 to-purple-500"
+        },
+        {
+            id: 15,
+            title: "Scenic Landscapes",
+            subtitle: "Menal Waterfall & Temple",
+            desc: "Known as the Mini Khajuraho, featuring a breathtaking waterfall and ancient temples.",
+            image: "/assets/images/menal-waterfall-new.jpg",
+            icon: Mountain,
+            link: "/attractions/scenic",
+            color: "from-amber-600 to-red-500"
         }
-    }, [location.hash]);
+    ];
 
     return (
-        <>
+        <div className="overflow-x-hidden min-h-screen bg-heritage-charcoal">
             <Hero />
+            
             {!searchQuery && (
-                <>
-                    <Section id="history" title={t.history.title} className="bg-transparent relative overflow-hidden">
-                        {/* Subtle Ornate Background Element */}
-                        <div className="absolute top-0 right-0 w-64 h-64 bg-heritage-gold/5 rounded-full blur-3xl -mr-32 -mt-32"></div>
-
-                        <motion.div
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            className="max-w-4xl mx-auto text-center relative z-10"
-                        >
-                            <p className="text-lg md:text-xl text-heritage-stone leading-relaxed font-light mb-8 font-serif italic">
-                                {t.history.text}
-                            </p>
-                            <div className="flex items-center justify-center gap-6">
-                                <a
-                                    href={t.history.wikiLink}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="inline-block border-b border-heritage-gold text-heritage-gold pb-1 hover:text-white hover:border-white transition-all text-sm tracking-widest uppercase font-bold"
-                                >
-                                    {t.history.readMore}
-                                </a>
-                                <NavLink
-                                    to="/gallery"
-                                    className="inline-block border border-heritage-gold/30 px-6 py-2 text-heritage-gold/80 hover:text-heritage-gold hover:border-heritage-gold transition-all text-[10px] tracking-widest uppercase rounded-full bg-heritage-gold/5 font-bold"
-                                >
-                                    Photo Gallery
-                                </NavLink>
-                            </div>
-                        </motion.div>
-                    </Section>
-                    <Timeline />
-                </>
-            )}
-
-            {filteredAttractions.length > 0 && (
-                <Section id="attractions" title={t.attractions.title} className="bg-heritage-charcoal/60 md:bg-heritage-charcoal/40 md:backdrop-blur-md border-y border-heritage-gold/20 relative shadow-inner">
-                    <div className="absolute inset-0 opacity-5 pointer-events-none" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/sandpaper.png")' }}></div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                        <AnimatePresence>
-                            {filteredAttractions.map(item => (
-                                <AttractionCard
-                                    key={`attr-${item.id}`}
-                                    attraction={item}
-                                    onExplore={setSelectedAttraction}
-                                />
-                            ))}
-                        </AnimatePresence>
-                    </div>
-                    <div className="mt-12 text-center">
-                        <NavLink
-                            to="/gallery"
-                            className="inline-flex items-center gap-2 px-8 py-3 rounded-full border border-royal-gold/30 text-royal-gold hover:bg-royal-gold hover:text-royal-black transition-all font-bold uppercase tracking-[0.2em] text-sm"
-                        >
-                            View Comprehensive Gallery
-                            <ArrowRight className="w-4 h-4" />
-                        </NavLink>
-                    </div>
-                </Section>
-            )}
-
-            {!searchQuery && (
-                <Section id="gallery-preview" title={t.nav.gallery} className="bg-transparent pb-0">
-                    <div className="max-w-6xl mx-auto">
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-                            {[
-                                "/assets/images/chittorgarh-fort-new.jpg",
-                                "/assets/images/vijay-stambh-new.jpg",
-                                "/assets/images/padmini-palace-new.jpg",
-                                "/assets/images/sanwariya-temple-new.jpg"
-                            ].map((img, i) => (
-                                <motion.div
-                                    key={i}
-                                    initial={{ opacity: 0, scale: 0.9 }}
-                                    whileInView={{ opacity: 1, scale: 1 }}
-                                    viewport={{ once: true }}
-                                    transition={{ delay: i * 0.1 }}
-                                    className="aspect-square rounded-xl overflow-hidden glass-card border-royal-gold/10"
-                                >
-                                    <img src={img} alt="" className="w-full h-full object-cover" />
-                                </motion.div>
-                            ))}
-                        </div>
-                        <div className="text-center">
-                            <NavLink
-                                to="/gallery"
-                                className="group inline-flex items-center gap-3 text-royal-gold font-serif text-xl md:text-2xl hover:text-white transition-colors"
-                            >
-                                <span className="border-b border-royal-gold/30 group-hover:border-white transition-colors pb-1">
-                                    {t.nav.gallery} - {t.history.readMore}
-                                </span>
-                                <ArrowRight className="w-6 h-6 transition-transform group-hover:translate-x-2" />
-                            </NavLink>
-                        </div>
-                    </div>
-                </Section>
-            )}
-
-            {!searchQuery && (
-                <>
-                    <InteractiveMap />
-                    <ItinerarySection content={t} />
-
-                    {/* Discovery CTAs */}
-                    <Section id="discover" title={t.discover?.title || "Explore Chittorgarh"} className="bg-transparent pb-24">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-                            {/* Cuisine CTA */}
+                <Section id="explore-categories" title="Explore Chittorgarh" subtitle="Four Pillars of Mewar Tourism" className="bg-transparent py-20">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-7xl mx-auto px-4">
+                        {categories.map((cat, idx) => (
                             <motion.div
-                                initial={{ opacity: 0, x: -30 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                            >
-                                <NavLink
-                                    to="/flavors"
-                                    className="group block overflow-hidden rounded-2xl glass-card border-royal-gold/20 hover:border-royal-gold/50 transition-all duration-500"
-                                >
-                                    {/* Image */}
-                                    <div className="relative aspect-[16/9] overflow-hidden">
-                                        <img
-                                            src={t.discover?.cuisine?.image || "https://images.unsplash.com/photo-1589187151003-0dd55769239b?q=80&w=800&auto=format&fit=crop"}
-                                            alt="Cuisine"
-                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                        />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                                        <div className="absolute top-4 left-4 w-10 h-10 rounded-full bg-royal-gold/20 flex items-center justify-center border border-royal-gold/30 group-hover:bg-royal-gold/40 transition-colors">
-                                            <UtensilsCrossed className="w-5 h-5 text-royal-gold" />
-                                        </div>
-                                    </div>
-                                    {/* Text panel below image */}
-                                    <div className="p-5 bg-black/60">
-                                        <h3 className="text-xl md:text-2xl font-serif text-white font-bold mb-2 group-hover:text-royal-gold transition-colors">
-                                            {t.discover?.cuisine?.title}
-                                        </h3>
-                                        <p className="text-white/90 text-sm mb-4 leading-relaxed">
-                                            {t.discover?.cuisine?.desc}
-                                        </p>
-                                        <div className="flex items-center gap-4">
-                                            <span className="inline-flex items-center gap-2 text-royal-gold font-bold uppercase tracking-widest text-xs">
-                                                {t.discover?.cuisine?.link}
-                                                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-2" />
-                                            </span>
-                                        </div>
-                                    </div>
-                                </NavLink>
-                            </motion.div>
-
-                            {/* Stays CTA */}
-                            <motion.div
-                                initial={{ opacity: 0, x: 30 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                            >
-                                <NavLink
-                                    to="/stays"
-                                    className="group relative block overflow-hidden rounded-2xl glass-card border-royal-gold/20 hover:border-royal-gold/50 transition-all duration-500"
-                                >
-                                    <div className="aspect-[16/9] overflow-hidden">
-                                        <img
-                                            src={t.discover?.stays?.image || "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=800&auto=format&fit=crop"}
-                                            alt="Stays"
-                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                        />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
-                                    </div>
-                                    <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                                        <div className="mb-4 w-12 h-12 rounded-full bg-royal-gold/20 flex items-center justify-center border border-royal-gold/30 group-hover:bg-royal-gold/40 transition-colors">
-                                            <Hotel className="w-6 h-6 text-royal-gold" />
-                                        </div>
-                                        <h3 className="text-2xl md:text-3xl font-serif text-white font-bold mb-2 group-hover:text-royal-gold transition-colors">
-                                            {t.discover?.stays?.title}
-                                        </h3>
-                                        <p className="text-white mb-6 line-clamp-2">
-                                            {t.discover?.stays?.desc}
-                                        </p>
-                                        <span className="inline-flex items-center gap-2 text-royal-gold font-bold uppercase tracking-widest text-sm">
-                                            {t.discover?.stays?.link}
-                                            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-2" />
-                                        </span>
-                                    </div>
-                                </NavLink>
-                            </motion.div>
-                            {/* Gallery CTA */}
-                            <motion.div
+                                key={cat.id}
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
-                                className="md:col-span-2"
+                                transition={{ delay: idx * 0.1 }}
+                                className="group relative h-[450px] md:h-[550px] rounded-[3rem] overflow-hidden shadow-2xl border border-white/5"
                             >
-                                <NavLink
-                                    to="/gallery"
-                                    className="group relative block overflow-hidden rounded-2xl glass-card border-royal-gold/20 hover:border-royal-gold/50 transition-all duration-500"
-                                >
-                                    <div className="aspect-[16/9] overflow-hidden">
-                                        <img
-                                            src="/assets/images/chittorgarh-fort-new.jpg"
-                                            alt="Gallery"
-                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                        />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+                                {/* Image Background */}
+                                <div className="absolute inset-0">
+                                    <img src={cat.image} alt={cat.title} className="w-full h-full object-cover transition-transform duration-[4s] group-hover:scale-110" />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-royal-black via-royal-black/40 to-transparent opacity-90"></div>
+                                </div>
+                                
+                                {/* Content Overlay */}
+                                <div className="absolute inset-0 p-10 flex flex-col justify-end">
+                                    <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${cat.color} flex items-center justify-center shadow-2xl mb-6 transform group-hover:-translate-y-3 transition-transform duration-500`}>
+                                        <cat.icon className="w-8 h-8 text-white" />
                                     </div>
-                                    <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                                        <div className="mb-4 w-12 h-12 rounded-full bg-royal-gold/20 flex items-center justify-center border border-royal-gold/30 group-hover:bg-royal-gold/40 transition-colors">
-                                            <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-royal-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-                                        </div>
-                                        <h3 className="text-2xl md:text-3xl font-serif text-white font-bold mb-2 group-hover:text-royal-gold transition-colors">
-                                            {t.nav.gallery}
-                                        </h3>
-                                        <p className="text-white mb-6 line-clamp-2">
-                                            Explore the visual majesty of Chittorgarh.
-                                        </p>
-                                        <span className="inline-flex items-center gap-2 text-royal-gold font-bold uppercase tracking-widest text-sm">
-                                            View All Photos
-                                            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-2" />
-                                        </span>
-                                    </div>
-                                </NavLink>
+                                    <h4 className="text-royal-gold font-bold tracking-[0.4em] uppercase text-xs mb-3 opacity-80">
+                                        {cat.subtitle}
+                                    </h4>
+                                    <h3 className="text-4xl md:text-5xl font-serif text-white mb-6 group-hover:text-royal-gold transition-colors duration-500">
+                                        {cat.title}
+                                    </h3>
+                                    <p className="text-white/70 text-base max-w-md leading-relaxed mb-10 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-6 group-hover:translate-y-0">
+                                        {cat.desc}
+                                    </p>
+                                    
+                                    <NavLink
+                                        to={cat.link}
+                                        className="w-fit flex items-center gap-4 px-10 py-4 bg-white/5 backdrop-blur-xl border border-white/10 text-white rounded-full font-bold uppercase tracking-widest text-xs hover:bg-royal-gold hover:text-royal-black hover:border-royal-gold transition-all duration-300 shadow-xl"
+                                    >
+                                        Explore This Pillar
+                                        <ArrowRight className="w-4 h-4" />
+                                    </NavLink>
+                                </div>
                             </motion.div>
-                        </div>
-                    </Section>
-                </>
+                        ))}
+                    </div>
+                </Section>
             )}
-        </>
+        </div>
     );
 };
 

@@ -7,6 +7,7 @@ export const content = {
       vendors: "Royal Cuisine",
       hotels: "Stays",
       localVocal: "Local For Vocal",
+      itineraries: "Itineraries",
       gallery: "Gallery",
       langBtn: "हिंदी",
     },
@@ -634,6 +635,15 @@ export const content = {
       copyright: "© 2026 Chittorgarh Heritage Tourism. All Rights Reserved.",
       dedication: "Dedicated to the brave souls of Mewar.",
       contact: "Contact",
+      feedback: {
+        title: "Suggestions & Feedback",
+        name: "Your Name",
+        email: "Your Email",
+        message: "Your Suggestion/Feedback",
+        submit: "Send Feedback",
+        success: "Thank you for your feedback! It helps us improve.",
+        error: "Oops! Something went wrong. Please try again."
+      }
     },
     discover: {
       title: "Explore Chittorgarh",
@@ -699,6 +709,7 @@ export const content = {
       vendors: "शाही व्यंजन",
       hotels: "रुकने की जगह",
       localVocal: "लोकल फॉर वोकल",
+      itineraries: "यात्रा कार्यक्रम",
       gallery: "गैलरी",
       langBtn: "English",
     },
@@ -1286,6 +1297,15 @@ export const content = {
       copyright: "© 2026 चित्तौड़गढ़ विरासत पर्यटन। सर्वाधिकार सुरक्षित।",
       dedication: "मेवाड़ के वीर सपूतों को समर्पित।",
       contact: "संपर्क करें",
+      feedback: {
+        title: "सुझाव और फीडबैक",
+        name: "आपका नाम",
+        email: "आपका ईमेल",
+        message: "आपका सुझाव/फीडबैक",
+        submit: "फीडबैक भेजें",
+        success: "आपकी प्रतिक्रिया के लिए धन्यवाद! यह हमें सुधारने में मदद करता है।",
+        error: "ओह! कुछ गलत हो गया। कृपया पुन: प्रयास करें।"
+      }
     },
     discover: {
       title: "चित्तौड़गढ़ एक्सप्लोर करें",
@@ -1861,6 +1881,14 @@ export const content = {
         "© 2026 Turismo Patrimonial de Chittorgarh. Todos los derechos reservados.",
       dedication: "Dedicado a las almas valientes de Mewar.",
       contact: "Contacto",
+      feedback: {
+        title: "Sugerencias y Comentarios",
+        name: "Su Nombre",
+        email: "Su Correo Electrónico",
+        message: "Su Sugerencia/Comentario",
+        submit: "Enviar Comentarios",
+        success: "¡Gracias por sus comentarios! Nos ayuda a mejorar.",
+      }
     },
   },
   fr: {
@@ -2387,7 +2415,16 @@ export const content = {
       copyright: "© 2026 Tourisme Patrimonial de Chittorgarh.",
       dedication: "Dédié aux âmes courageuses de Mewar.",
       contact: "Contact",
-    },
+      feedback: {
+        title: "Suggestions et Commentaires",
+        name: "Votre Nom",
+        email: "Votre Email",
+        message: "Votre Suggestion/Commentaire",
+        submit: "Envoyer le Commentaire",
+        success: "Merci pour votre commentaire ! Cela nous aide à nous améliorer.",
+        error: "Oups ! Quelque chose s'est mal passé. Veuillez réessayer."
+      }
+    }
   },
   zh: {
     nav: {
@@ -2914,8 +2951,15 @@ export const content = {
       copyright: "© 2026 吉多尔加尔遗产旅游。保留所有权利。",
       dedication: "献给梅瓦尔的勇敢灵魂。",
       contact: "联系我们",
+      feedback: {
+        title: "建议与反馈",
+        name: "您的姓名",
+        email: "您的电子邮件",
+        message: "您的建议/反馈",
+        submit: "发送反馈",
+        success: "感谢您的反馈！这有助于我们改进。",
+        error: "哎呀！出错了。请稍后再试。"
+      },
     },
   },
 };
-
-
