@@ -64,10 +64,10 @@ const Navbar = () => {
                         </motion.div>
                         <div className="flex flex-col">
                             <span className="text-white text-base md:text-xl font-bold font-serif tracking-[0.15em] leading-tight">
-                                CHITTORGARH
+                                {t.nav.brandTitle}
                             </span>
                             <span className="text-royal-gold text-[10px] md:text-xs font-bold tracking-[0.4em] uppercase opacity-80 decoration-royal-gold/30">
-                                TOURISM
+                                {t.nav.brandTagline}
                             </span>
                         </div>
                     </NavLink>
@@ -162,7 +162,7 @@ const Navbar = () => {
                                     className="flex items-center gap-3 text-gray-300 hover:text-royal-gold transition-colors w-fit"
                                 >
                                     <Globe className="w-5 h-5" />
-                                    <span className="text-sm font-medium uppercase tracking-wider">Change Language</span>
+                                    <span className="text-sm font-medium uppercase tracking-wider">{t.nav.changeLang}</span>
                                 </button>
                                 <a
                                     href="https://www.chittortech.online/"

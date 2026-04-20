@@ -106,7 +106,7 @@ const ItinerarySection = ({ content }) => {
                                                 <div>
                                                     <h4 className="text-xs font-bold text-amber-900/50 uppercase tracking-[0.2em] mb-3 flex items-center gap-2">
                                                         <MapPin size={14} />
-                                                        Where to Visit
+                                                        {itineraries.whereToVisit}
                                                     </h4>
                                                     <p className="text-xl text-amber-950 font-serif font-bold leading-relaxed">
                                                         {item.visit}
@@ -115,7 +115,7 @@ const ItinerarySection = ({ content }) => {
                                                 <div className="border-t md:border-t-0 md:border-l border-amber-900/10 pt-6 md:pt-0 md:pl-10">
                                                     <h4 className="text-xs font-bold text-amber-900/50 uppercase tracking-[0.2em] mb-3 flex items-center gap-2">
                                                         <Calendar size={14} />
-                                                        Recommended Stay/Food
+                                                        {itineraries.recommendedStay}
                                                     </h4>
                                                     <p className="text-amber-900 text-base leading-relaxed italic">
                                                         {item.stay}

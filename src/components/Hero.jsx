@@ -84,7 +84,7 @@ const Hero = () => {
                     }}
                 >
                     <div className="flex flex-col items-center gap-2">
-                        <span className="text-[10px] tracking-[0.2em] uppercase font-bold text-royal-gold">Explore the Legend</span>
+                        <span className="text-[10px] tracking-[0.2em] uppercase font-bold text-royal-gold">{t.hero.exploreLegend}</span>
                         <div className="w-6 h-10 border-2 border-royal-gold/30 rounded-full flex justify-center p-1 shadow-[0_0_15px_rgba(212,175,55,0.2)]">
                             <motion.div
                                 animate={{ y: [0, 16, 0] }}

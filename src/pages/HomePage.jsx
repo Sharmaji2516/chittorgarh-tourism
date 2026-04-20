@@ -10,9 +10,9 @@ const HomePage = ({ t, searchQuery }) => {
     const categories = [
         {
             id: 1,
-            title: "The Grand Citadel",
-            subtitle: "Chittorgarh Fort",
-            desc: "The largest fort in India, standing as a testament to Rajputana valor and sacrifice.",
+            title: t.pillars.fort.title,
+            subtitle: t.pillars.fort.subtitle,
+            desc: t.pillars.fort.desc,
             image: "/assets/images/Chittorgarh Fort.webp",
             icon: Shield,
             link: "/attractions/fort",
@@ -20,9 +20,9 @@ const HomePage = ({ t, searchQuery }) => {
         },
         {
             id: 2,
-            title: "Nature & Wilderness",
-            subtitle: "Bassi Wildlife Sanctuary",
-            desc: "A serene haven for nature lovers and wildlife enthusiasts amidst the Aravalli hills.",
+            title: t.pillars.nature.title,
+            subtitle: t.pillars.nature.subtitle,
+            desc: t.pillars.nature.desc,
             image: "/assets/images/Bassi Wildlife.jpg",
             icon: Wind,
             link: "/attractions/nature",
@@ -30,9 +30,9 @@ const HomePage = ({ t, searchQuery }) => {
         },
         {
             id: 3,
-            title: "Spiritual Serenity",
-            subtitle: "Sanwariaji Temple",
-            desc: "Experience divine peace at this magnificent temple dedicated to Lord Krishna.",
+            title: t.pillars.spiritual.title,
+            subtitle: t.pillars.spiritual.subtitle,
+            desc: t.pillars.spiritual.desc,
             image: "/assets/images/Sanvliya-ji-Temple.jpg",
             icon: Sunrise,
             link: "/attractions/spiritual",
@@ -40,9 +40,9 @@ const HomePage = ({ t, searchQuery }) => {
         },
         {
             id: 15,
-            title: "Scenic Landscapes",
-            subtitle: "Menal Waterfall & Temple",
-            desc: "Known as the Mini Khajuraho, featuring a breathtaking waterfall and ancient temples.",
+            title: t.pillars.scenic.title,
+            subtitle: t.pillars.scenic.subtitle,
+            desc: t.pillars.scenic.desc,
             image: "/assets/images/menal-waterfall-new.jpg",
             icon: Mountain,
             link: "/attractions/scenic",
@@ -55,7 +55,7 @@ const HomePage = ({ t, searchQuery }) => {
             <Hero />
             
             {!searchQuery && (
-                <Section id="explore-categories" title="Explore Chittorgarh" subtitle="Four Pillars of Mewar Tourism" className="bg-transparent py-20">
+                <Section id="explore-categories" title={t.pillars.title} subtitle={t.pillars.subtitle} className="bg-transparent py-20">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-7xl mx-auto px-4">
                         {categories.map((cat, idx) => (
                             <motion.div
@@ -91,7 +91,7 @@ const HomePage = ({ t, searchQuery }) => {
                                         to={cat.link}
                                         className="w-fit flex items-center gap-4 px-10 py-4 bg-white/5 backdrop-blur-xl border border-white/10 text-white rounded-full font-bold uppercase tracking-widest text-xs hover:bg-royal-gold hover:text-royal-black hover:border-royal-gold transition-all duration-300 shadow-xl"
                                     >
-                                        Explore This Pillar
+                                        {t.pillars.button}
                                         <ArrowRight className="w-4 h-4" />
                                     </NavLink>
                                 </div>

@@ -7,7 +7,7 @@ import { content } from '../data/content';
 const GalleryPage = ({ t }) => {
     const [activeTab, setActiveTab] = useState('All');
 
-    // Aggregate images from all languages for attractions, and from the English dishes section for food
+    // Aggregate images from all languages for attractions, and from the current language for food to get translated names
     const allGalleryData = useMemo(() => {
         const seenNormalized = new Set();
         const images = [];
@@ -24,33 +24,29 @@ const GalleryPage = ({ t }) => {
             }
         };
 
-        // Attractions — aggregate from all languages for full coverage
-        Object.values(content).forEach(langContent => {
-            if (langContent.attractions && langContent.attractions.items) {
-                langContent.attractions.items.forEach(item => {
-                    const imgs = item.images || (item.image ? [item.image] : []);
-                    imgs.forEach(img => addImage(img, 'attractions', t.attractions.title, item.name));
-                });
-            }
-        });
-
-        // Food dishes — only from English (canonical source, no hotel/cafe names)
-        if (content.en.dishes && content.en.dishes.items) {
-            content.en.dishes.items.forEach(dish => {
-                const imgs = dish.images || (dish.image ? [dish.image] : []);
-                imgs.forEach(img => addImage(img, 'dishes', 'Royal Cuisine', dish.name));
+        // Attractions
+        if (t.attractions && t.attractions.items) {
+            t.attractions.items.forEach(item => {
+                const imgs = item.images || (item.image ? [item.image] : []);
+                imgs.forEach(img => addImage(img, 'attractions', t.attractions.title, item.name));
             });
         }
 
-        // Artisans section removed from Gallery per user request
+        // Food dishes
+        if (t.dishes && t.dishes.items) {
+            t.dishes.items.forEach(dish => {
+                const imgs = dish.images || (dish.image ? [dish.image] : []);
+                imgs.forEach(img => addImage(img, 'dishes', t.gallery.royalCuisine, dish.name));
+            });
+        }
 
         return images;
     }, [t]);
 
     const categories = [
-        { key: 'All', label: 'All' },
+        { key: 'All', label: t.gallery.all },
         { key: 'attractions', label: t.attractions.title },
-        { key: 'dishes', label: 'Royal Cuisine' },
+        { key: 'dishes', label: t.gallery.royalCuisine },
     ];
 
     const filteredImages = useMemo(() => {
@@ -127,7 +123,7 @@ const GalleryPage = ({ t }) => {
 
                 {filteredImages.length === 0 && (
                     <div className="text-center py-20">
-                        <p className="text-royal-white/40 font-serif italic">No pictures found in this category.</p>
+                        <p className="text-royal-white/40 font-serif italic">{t.gallery.noPhotos}</p>
                     </div>
                 )}
             </Section>

@@ -10,6 +10,9 @@ export const content = {
       itineraries: "Itineraries",
       gallery: "Gallery",
       langBtn: "हिंदी",
+      brandTitle: "CHITTORGARH",
+      brandTagline: "TOURISM",
+      changeLang: "Change Language",
     },
     common: {
       bestTime: "Best Time",
@@ -24,8 +27,35 @@ export const content = {
     hero: {
       title: "Chittorgarh",
       subtitle: "The Citadel of Valor & Sacrifice",
+      desc: "Where every stone tells a story of unmatched bravery and eternal glory.",
       cta: "Experience the Legacy",
       scroll: "Scroll to Explore",
+      exploreLegend: "Explore the Legend",
+    },
+    pillars: {
+      title: "Explore Chittorgarh",
+      subtitle: "Four Pillars of Mewar Tourism",
+      button: "Explore This Pillar",
+      fort: {
+        title: "The Grand Citadel",
+        subtitle: "Chittorgarh Fort",
+        desc: "The largest fort in India, standing as a testament to Rajputana valor and sacrifice."
+      },
+      nature: {
+        title: "Nature & Wilderness",
+        subtitle: "Bassi Wildlife Sanctuary",
+        desc: "A serene haven for nature lovers and wildlife enthusiasts amidst the Aravalli hills."
+      },
+      spiritual: {
+        title: "Spiritual Serenity",
+        subtitle: "Sanwariaji Temple",
+        desc: "Experience divine peace at this magnificent temple dedicated to Lord Krishna."
+      },
+      scenic: {
+        title: "Scenic Landscapes",
+        subtitle: "Menal Waterfall & Temple",
+        desc: "Known as the Mini Khajuraho, featuring a breathtaking waterfall and ancient temples."
+      }
     },
     history: {
       title: "Historical Significance",
@@ -61,6 +91,26 @@ export const content = {
       "The fort has 7 massive gates (Pols).",
       "It is shaped like a fish when viewed from above.",
     ],
+    attractionsPage: {
+      location: "Location",
+      bestTime: "Best Time",
+      bookPackage: "Book This Package",
+      treasureTitle: "The Citadel Treasures",
+      exploreAnother: "Explore Another Pillar",
+      chittorgarh: "Chittorgarh",
+      features: {
+        luxuryStays: "Luxury Stays",
+        pickupDrop: "Pickup & Drop",
+        expertGuide: "Expert Guide",
+        fullDayTour: "Full Day Tour"
+      },
+      categories: {
+        fort: { subtitle: "Heritage & History" },
+        nature: { subtitle: "Ecological Haven" },
+        spiritual: { subtitle: "Divine Mewar" },
+        scenic: { subtitle: "Nature's Architecture" }
+      }
+    },
     attractions: {
       title: "Major Tourist Attractions",
       items: [
@@ -618,6 +668,8 @@ export const content = {
       bookTicket: "Book Ticket Online",
       bookTicketLink: "https://asi.payumoney.com/quick/chf",
       chooseRoute: "Choose Your Route",
+      whereToVisit: "Where to Visit",
+      recommendedStay: "Recommended Stay/Food"
     },
     dishes: {
       items: [
@@ -635,6 +687,11 @@ export const content = {
       copyright: "© 2026 Chittorgarh Heritage Tourism. All Rights Reserved.",
       dedication: "Dedicated to the brave souls of Mewar.",
       contact: "Contact",
+      explore: "Explore",
+      connect: "Connect",
+      builtBy: "Developed & Maintained by",
+      rights: "All Rights Reserved",
+      resetStatus: "Reset Visit Status",
       feedback: {
         title: "Suggestions & Feedback",
         name: "Your Name",
@@ -644,6 +701,37 @@ export const content = {
         success: "Thank you for your feedback! It helps us improve.",
         error: "Oops! Something went wrong. Please try again."
       }
+    },
+    gallery: {
+      all: "All",
+      royalCuisine: "Royal Cuisine",
+      noPhotos: "No pictures found in this category."
+    },
+    admin: {
+      loginTitle: "Royal Admin Access",
+      pinPlaceholder: "Enter Security PIN",
+      loginBtn: "Enter Dashboard",
+      dashboardTitle: "Chittorgarh Booking Dashboard",
+      noBookings: "The royal registries are currently empty.",
+      customer: "Traveler",
+      phone: "Phone / WhatsApp",
+      date: "Arrival Date",
+      package: "Package",
+      amount: "Estimate",
+      status: "Status",
+      actions: "Actions",
+      new: "New Inquiry",
+      contacted: "Contacted",
+      delete: "Archive",
+      invalidPin: "Access Denied: Invalid Security PIN",
+      logout: "Exit Dashboard",
+      lastInquiry: "Last Inquiry",
+      totalInquiries: "Total Inquiries",
+      searchPlaceholder: "Search by name, phone or package...",
+      sync: "Sync",
+      loadingData: "Summoning data...",
+      securingMsg: "Secured by Chittortech Systems",
+      royalRegistry: "Royal Registry • Live Data"
     },
     discover: {
       title: "Explore Chittorgarh",
@@ -771,6 +859,9 @@ export const content = {
       itineraries: "यात्रा कार्यक्रम",
       gallery: "गैलरी",
       langBtn: "English",
+      brandTitle: "चित्तौड़गढ़",
+      brandTagline: "पर्यटन",
+      changeLang: "भाषा बदलें",
     },
     common: {
       bestTime: "सबसे अच्छा समय",
@@ -785,15 +876,62 @@ export const content = {
     hero: {
       title: "चित्तौड़गढ़",
       subtitle: "शौर्य और बलिदान की पावन धरा",
+      desc: "जहाँ हर पत्थर अटूट वीरता और शाश्वत गौरव की कहानी कहता है।",
       cta: "विरासत का अनुभव करें",
       scroll: "अन्वेषण करें",
+      exploreLegend: "किंवदंती को एक्सप्लोर करें",
+    },
+    pillars: {
+      title: "चित्तौड़गढ़ एक्सप्लोर करें",
+      subtitle: "मेवाड़ पर्यटन के चार आधार स्तंभ",
+      button: "इस स्तंभ को देखें",
+      fort: {
+        title: "विशाल किला",
+        subtitle: "चित्तौड़गढ़ दुर्ग",
+        desc: "भारत का सबसे बड़ा किला, जो राजपुताना वीरता और बलिदान का प्रमाण है।"
+      },
+      nature: {
+        title: "प्रकृति और वन्यजीव",
+        subtitle: "बस्सी वन्यजीव अभयारण्य",
+        desc: "अरावली की पहाड़ियों के बीच प्रकृति प्रेमियों और वन्यजीवों के लिए एक शांत स्वर्ग।"
+      },
+      spiritual: {
+        title: "आध्यात्मिक शांति",
+        subtitle: "सांवलिया जी मंदिर",
+        desc: "भगवान कृष्ण को समर्पित इस भव्य मंदिर में दिव्य शांति का अनुभव करें।"
+      },
+      scenic: {
+        title: "मनोरम दृश्य",
+        subtitle: "मेनाल जलप्रपात और मंदिर",
+        desc: "मिनी खजुराहो के रूप में जाना जाता है, जिसमें एक लुभावना जलप्रपात और प्राचीन मंदिर हैं।"
+      }
     },
     history: {
       title: "ऐतिहासिक महत्व",
       text: "चित्तौड़गढ़ राजपुताना शौर्य, स्वाभिमान और जुनून की कहानियों से गूंजता है। राजस्थान के चारण और भाट यहाँ के शासकों और महान रानी पद्मिनी के बलिदान की गाथाएं गाते हैं। 180 मीटर ऊंची पहाड़ी पर स्थित यह भव्य किला राजपूतों की अदम्य भावना का प्रमाण है। इसने अपनी गरिमा की रक्षा के लिए महिलाओं द्वारा तीन जौहर (सामूहिक आत्मदाह) देखे हैं।",
       readMore: "पूरा इतिहास विकिपीडिया पर पढ़ें",
-      wikiLink:
+       wikiLink:
         "https://hi.wikipedia.org/wiki/%E0%A4%9A%E0%A4%BF%E0%A4%A4%E0%A5%8D%E0%A4%A4%E0%A5%8C%E0%A4%A1%E0%A4%BC%E0%A4%97%E0%A4%A2%E0%A4%BC",
+    },
+    attractionsPage: {
+      location: "स्थान",
+      bestTime: "सबसे अच्छा समय",
+      bookPackage: "इस पैकेज को बुक करें",
+      treasureTitle: "किले के खजाने",
+      exploreAnother: "दूसरा स्तंभ देखें",
+      chittorgarh: "चित्तौड़गढ़",
+      features: {
+        luxuryStays: "शाही निवास",
+        pickupDrop: "पिकअप और ड्रॉप",
+        expertGuide: "विशेषज्ञ गाइड",
+        fullDayTour: "पूरे दिन का दौरा"
+      },
+      categories: {
+        fort: { subtitle: "विरासत और इतिहास" },
+        nature: { subtitle: "पारिस्थितिक स्वर्ग" },
+        spiritual: { subtitle: "दिव्य मेवाड़" },
+        scenic: { subtitle: "प्रकृति की वास्तुकला" }
+      }
     },
     attractions: {
       title: "प्रमुख पर्यटन स्थल",
@@ -1351,11 +1489,18 @@ export const content = {
       bookTicket: "टिकट ऑनलाइन बुक करें",
       bookTicketLink: "https://asi.payumoney.com/quick/chf",
       chooseRoute: "अपना रास्ता चुनें",
+      whereToVisit: "कहाँ घूमें",
+      recommendedStay: "रुकने/खाने की सलाह"
     },
     footer: {
       copyright: "© 2026 चित्तौड़गढ़ विरासत पर्यटन। सर्वाधिकार सुरक्षित।",
       dedication: "मेवाड़ के वीर सपूतों को समर्पित।",
       contact: "संपर्क करें",
+      explore: "एक्सप्लोर करें",
+      connect: "जुड़ें",
+      builtBy: "विकसित और अनुरक्षित",
+      rights: "सर्वाधिकार सुरक्षित",
+      resetStatus: "विजिट स्टेटस रीसेट करें",
       feedback: {
         title: "सुझाव और फीडबैक",
         name: "आपका नाम",
@@ -1365,6 +1510,37 @@ export const content = {
         success: "आपकी प्रतिक्रिया के लिए धन्यवाद! यह हमें सुधारने में मदद करता है।",
         error: "ओह! कुछ गलत हो गया। कृपया पुन: प्रयास करें।"
       }
+    },
+    gallery: {
+      all: "सब",
+      royalCuisine: "शाही व्यंजन",
+      noPhotos: "इस श्रेणी में कोई चित्र नहीं मिला।"
+    },
+    admin: {
+      loginTitle: "शाही एडमिन एक्सेस",
+      pinPlaceholder: "सुरक्षा पिन दर्ज करें",
+      loginBtn: "डैशबोर्ड में प्रवेश करें",
+      dashboardTitle: "चित्तौड़गढ़ बुकिंग डैशबोर्ड",
+      noBookings: "शाही रजिस्टर वर्तमान में खाली हैं।",
+      customer: "यात्री",
+      phone: "फ़ोन / व्हाट्सएप",
+      date: "आगमन तिथि",
+      package: "पैकेज",
+      amount: "अनुमानित राशि",
+      status: "स्थिति",
+      actions: "कार्रवाई",
+      new: "नई पूछताछ",
+      contacted: "संपर्क किया गया",
+      delete: "हटाएं",
+      invalidPin: "पहुंच अस्वीकृत: अमान्य सुरक्षा पिन",
+      logout: "डैशबोर्ड से बाहर निकलें",
+      lastInquiry: "आखरी पूछताछ",
+      totalInquiries: "कुल पूछताछ",
+      searchPlaceholder: "नाम, फोन या पैकेज द्वारा खोजें...",
+      sync: "सिंक",
+      loadingData: "डेटा बुला रहे हैं...",
+      securingMsg: "चित्तौड़टेक सिस्टम्स द्वारा सुरक्षित",
+      royalRegistry: "शाही रजिस्ट्री • लाइव डेटा"
     },
     discover: {
       title: "चित्तौड़गढ़ एक्सप्लोर करें",

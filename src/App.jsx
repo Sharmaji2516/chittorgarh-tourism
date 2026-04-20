@@ -21,6 +21,7 @@ import HowToReach from './pages/HowToReach';
 import GalleryPage from './pages/GalleryPage';
 import AttractionsPage from './pages/AttractionsPage';
 import ItinerariesPage from './pages/ItinerariesPage';
+import AdminPage from './pages/AdminPage';
 
 const MainContent = () => {
   const { t } = useLanguage();
@@ -34,6 +35,8 @@ const MainContent = () => {
     legacyKeys.forEach(key => localStorage.removeItem(key));
   }, []);
 
+  const isAdmin = location.pathname === '/admin';
+
   return (
     <div className="min-h-screen flex flex-col relative text-heritage-parchment font-sans selection:bg-heritage-gold selection:text-heritage-charcoal bg-heritage-charcoal">
       <div className="fixed inset-0 z-0 overflow-hidden bg-heritage-charcoal">
@@ -46,13 +49,13 @@ const MainContent = () => {
 
       {/* Main Content Wrapper */}
       <div className="relative z-10 flex flex-col w-full">
-        <VisitModal />
-        <CountrySelector />
-        <Navbar />
-        <FactCards />
+        {!isAdmin && <VisitModal />}
+        {!isAdmin && <CountrySelector />}
+        {!isAdmin && <Navbar />}
+        {!isAdmin && <FactCards />}
 
         {/* Routes Section */}
-        <div className={cn("space-y-0", location.pathname !== '/' ? "pt-20" : "")}>
+        <div className={cn("space-y-0", !isAdmin && location.pathname !== '/' ? "pt-20" : "")}>
           <Routes>
             <Route path="/" element={
               <HomePage
@@ -97,11 +100,12 @@ const MainContent = () => {
               />
             } />
             <Route path="/itineraries" element={<ItinerariesPage t={t} />} />
+            <Route path="/admin" element={<AdminPage />} />
           </Routes>
 
         </div>
 
-        <Footer />
+        {!isAdmin && <Footer />}
         <AttractionModal
           attraction={selectedAttraction}
           onClose={() => setSelectedAttraction(null)}
