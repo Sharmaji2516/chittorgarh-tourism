@@ -83,10 +83,7 @@ const CountrySelector = () => {
                         <div className="grid grid-cols-1 gap-2">
                             {[
                                 { val: 'en', label: 'English', sub: 'International' },
-                                { val: 'hi', label: 'हिंदी', sub: 'India' },
-                                { val: 'es', label: 'Español', sub: 'Spain' },
-                                { val: 'fr', label: 'Français', sub: 'France' },
-                                { val: 'zh', label: '中文', sub: 'China' }
+                                { val: 'hi', label: 'हिंदी', sub: 'India' }
                             ].map((lang) => (
                                 <button
                                     key={lang.val}
