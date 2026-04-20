@@ -60,8 +60,7 @@ const Navbar = () => {
                             whileTap={{ scale: 0.95 }}
                             className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br from-royal-gold via-orange-400 to-royal-gold flex items-center justify-center shadow-[0_0_20px_rgba(212,175,55,0.3)] group-hover:shadow-[0_0_30px_rgba(212,175,55,0.5)] transition-shadow duration-500 overflow-hidden"
                         >
-                            <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/gplay.png')] opacity-20"></div>
-                            <span className="text-white font-serif font-bold text-xl md:text-2xl relative z-10 drop-shadow-md">C</span>
+                            <img src="/logo.jpg" alt="Logo" className="w-full h-full object-cover" />
                         </motion.div>
                         <div className="flex flex-col">
                             <span className="text-white text-base md:text-xl font-bold font-serif tracking-[0.15em] leading-tight">
