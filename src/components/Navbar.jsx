@@ -138,7 +138,7 @@ const Navbar = () => {
                         animate={{ opacity: 1, height: '100vh' }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.4, ease: "easeInOut" }}
-                        className="lg:hidden fixed inset-0 top-20 bg-heritage-charcoal/98 backdrop-blur-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-40 border-t border-royal-gold/10"
+                        className="lg:hidden fixed inset-0 top-20 bg-heritage-charcoal/95 backdrop-blur-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-40 border-t border-royal-gold/10"
                     >
                         {/* Ambient Glows */}
                         <div className="absolute top-0 right-0 w-64 h-64 bg-royal-gold/5 blur-[100px] rounded-full pointer-events-none"></div>
