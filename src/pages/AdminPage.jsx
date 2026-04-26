@@ -536,112 +536,107 @@ const AdminPage = () => {
     }
 
     return (
-        <div className="min-h-screen bg-slate-50 text-black pt-24 pb-20 px-4 md:px-12 lg:px-20 no-print selection:bg-royal-gold selection:text-royal-black">
-            <div className="max-w-7xl mx-auto">
-                <div className="flex flex-col md:flex-row justify-between items-center gap-10 mb-16">
-                    <div className="flex items-center gap-6">
-                        <div className="p-4 bg-royal-gold/10 rounded-2xl"><LayoutDashboard className="w-8 h-8 text-royal-gold" /></div>
-                        <h1 className="text-3xl md:text-5xl font-serif text-black tracking-tight">{t.admin.dashboardTitle}</h1>
-                    </div>
-                    <div className="flex items-center gap-4">
-                        <button onClick={exportToCSV} className="flex items-center gap-4 px-8 py-4 bg-white border border-slate-200 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-slate-50 text-royal-gold shadow-sm">
-                            <FileText className="w-4 h-4" />
-                            Export Data
-                        </button>
-                        <Link to="/" className="p-4 bg-white border border-slate-200 rounded-full text-black/60 hover:text-black transition-all shadow-sm"><Home className="w-6 h-6" /></Link>
-                        <button onClick={() => setIsLoggedIn(false)} className="flex items-center gap-4 px-8 py-4 bg-white border border-slate-200 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-slate-50 text-black/80 shadow-sm">{t.admin.logout} <LogOut className="w-4 h-4" /></button>
+        <div className="min-h-screen bg-slate-50 text-black no-print selection:bg-royal-gold selection:text-royal-black">
+            {/* STICKY BLACK HEADER */}
+            <header className="sticky top-0 z-[100] bg-slate-950 border-b border-white/5 px-8 md:px-16 py-6 flex flex-col md:flex-row justify-between items-center gap-6 shadow-2xl">
+                <div className="flex items-center gap-6">
+                    <div className="p-3 bg-royal-gold/10 rounded-2xl border border-royal-gold/20"><LayoutDashboard className="w-6 h-6 text-royal-gold" /></div>
+                    <h1 className="text-xl md:text-2xl font-serif text-white tracking-tight">Chittorgarh Booking Dashboard</h1>
+                </div>
+                <div className="flex items-center gap-4">
+                    <button onClick={exportToCSV} className="flex items-center gap-3 px-6 py-3 bg-white/5 border border-white/10 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-royal-gold hover:text-royal-black transition-all text-royal-gold shadow-lg">
+                        <FileText className="w-4 h-4" />
+                        Export Data
+                    </button>
+                    <Link to="/" className="flex items-center gap-3 px-6 py-3 bg-red-500/10 border border-red-500/20 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-red-500 hover:text-white transition-all text-red-400 shadow-lg">
+                        <LogOut className="w-4 h-4" />
+                        Exit Dashboard
+                    </Link>
+                </div>
+            </header>
+
+            <div className="max-w-7xl mx-auto pt-16 pb-20 px-4 md:px-12 lg:px-20">
+
+
+                <div className="mb-12">
+                    <div className="relative group">
+                        <Search className="absolute left-8 top-1/2 -translate-y-1/2 w-6 h-6 text-black/40 group-focus-within:text-royal-gold transition-colors" />
+                        <input type="text" placeholder="Search travelers by name, phone or package..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="w-full bg-white border border-slate-200 rounded-[2.5rem] py-8 pl-20 pr-8 focus:outline-none focus:border-royal-gold/50 text-black text-xl font-medium transition-all shadow-xl" />
                     </div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
                     <div className="bg-white border border-slate-200 p-10 rounded-[3rem] flex items-center gap-8 shadow-xl">
                         <div className="w-16 h-16 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-400 shrink-0"><TrendingUp className="w-8 h-8" /></div>
-                        <div><p className="text-[10px] text-black/60 uppercase tracking-[0.2em] mb-1 font-black">Total</p><p className="text-4xl font-serif text-black">{bookings.length}</p></div>
+                        <div><p className="text-[10px] text-black/60 uppercase tracking-[0.2em] mb-1 font-black">Total Queries</p><p className="text-4xl font-serif text-black">{bookings.length}</p></div>
                     </div>
                     <div className="bg-white border border-slate-200 p-10 rounded-[3rem] flex items-center gap-8 shadow-xl">
                         <div className="w-16 h-16 rounded-2xl bg-royal-gold/10 flex items-center justify-center text-royal-gold shrink-0"><Clock className="w-8 h-8" /></div>
-                        <div><p className="text-[10px] text-black/60 uppercase tracking-[0.2em] mb-1 font-black">New</p><p className="text-4xl font-serif text-black">{bookings.filter(b => b.status !== 'contacted').length}</p></div>
+                        <div><p className="text-[10px] text-black/60 uppercase tracking-[0.2em] mb-1 font-black">Active Queries</p><p className="text-4xl font-serif text-black">{bookings.filter(b => b.status !== 'contacted').length}</p></div>
                     </div>
                     <div className="bg-white border border-slate-200 p-10 rounded-[3rem] flex items-center gap-8 shadow-xl">
                         <div className="w-16 h-16 rounded-2xl bg-green-500/10 flex items-center justify-center text-green-400 shrink-0"><CheckCircle2 className="w-8 h-8" /></div>
-                        <div><p className="text-[10px] text-black/60 uppercase tracking-[0.2em] mb-1 font-black">Success</p><p className="text-4xl font-serif text-black">{bookings.filter(b => b.status === 'contacted').length}</p></div>
+                        <div><p className="text-[10px] text-black/60 uppercase tracking-[0.2em] mb-1 font-black">Success Stories</p><p className="text-4xl font-serif text-black">{bookings.filter(b => b.status === 'contacted').length}</p></div>
                     </div>
                 </div>
 
-                <div className="mb-10">
-                    <div className="relative group">
-                        <Search className="absolute left-8 top-1/2 -translate-y-1/2 w-6 h-6 text-black/40 group-focus-within:text-royal-gold transition-colors" />
-                        <input type="text" placeholder="Search travelers..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="w-full bg-white border border-slate-200 rounded-[2.5rem] py-7 pl-20 pr-8 focus:outline-none focus:border-royal-gold/50 text-black text-lg font-medium transition-all shadow-sm" />
-                    </div>
-                </div>
-
-                <div className="bg-white border border-slate-200 rounded-[3.5rem] overflow-hidden shadow-xl">
+                <div className="bg-white border-2 border-slate-950 rounded-[3.5rem] overflow-hidden shadow-2xl">
                     <div className="overflow-x-auto custom-scrollbar">
-                        <table className="w-full text-left">
-                            <thead className="bg-slate-50 border-b border-slate-100">
+                        <table className="min-w-[1500px] w-full text-left border-collapse">
+                            <thead className="bg-slate-950 border-b-2 border-slate-950">
                                 <tr>
-                                    <th className="px-10 py-10 text-[9px] uppercase font-black tracking-[0.5em] text-royal-gold/50">Traveler</th>
-                                    <th className="px-10 py-10 text-[9px] uppercase font-black tracking-[0.5em] text-royal-gold/50">Category</th>
-                                    <th className="px-10 py-10 text-[9px] uppercase font-black tracking-[0.5em] text-royal-gold/50">Date</th>
-                                    <th className="px-10 py-10 text-[9px] uppercase font-black tracking-[0.5em] text-royal-gold/50">Estimate</th>
-                                    <th className="px-10 py-10 text-[9px] uppercase font-black tracking-[0.5em] text-royal-gold/50">Status</th>
-                                    <th className="px-14 py-10 text-right text-[9px] uppercase font-black tracking-[0.5em] text-royal-gold/50">Actions</th>
+                                    <th className="px-10 py-8 text-[9px] uppercase font-black tracking-[0.5em] text-royal-gold border-r-2 border-slate-900">Traveler</th>
+                                    <th className="px-10 py-8 text-[9px] uppercase font-black tracking-[0.5em] text-royal-gold border-r-2 border-slate-900">Category</th>
+                                    <th className="px-10 py-8 text-[9px] uppercase font-black tracking-[0.5em] text-royal-gold border-r-2 border-slate-900">Date</th>
+                                    <th className="px-10 py-8 text-[9px] uppercase font-black tracking-[0.5em] text-royal-gold border-r-2 border-slate-900">Estimate</th>
+                                    <th className="px-10 py-8 text-[9px] uppercase font-black tracking-[0.5em] text-royal-gold border-r-2 border-slate-900">Status</th>
+                                    <th className="px-8 py-8 text-right text-[9px] uppercase font-black tracking-[0.5em] text-royal-gold min-w-[500px]">Actions</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-slate-50">
+                            <tbody className="divide-y-2 divide-slate-950">
                                 {loading ? (
                                     <tr><td colSpan="6" className="px-10 py-32 text-center text-royal-gold"><Loader2 className="w-12 h-12 animate-spin mx-auto mb-6" /><p className="uppercase tracking-[0.2em] font-black text-black/60">Syncing Regisrty...</p></td></tr>
                                 ) : filteredBookings.map((booking) => (
                                     <motion.tr key={booking.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} onClick={() => setSelectedBooking(booking)} className="hover:bg-slate-50 transition-all group cursor-pointer">
-                                        <td className="px-10 py-12">
+                                        <td className="px-10 py-10 border-r-2 border-slate-950">
                                             <div className="flex items-center gap-6">
-                                                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-royal-gold/20 to-orange-500/20 border border-slate-200 flex items-center justify-center font-black text-royal-gold text-lg shrink-0">{booking.name?.charAt(0)}</div>
+                                                <div className="w-14 h-14 rounded-2xl bg-royal-gold text-royal-black flex items-center justify-center font-black text-lg shrink-0">{booking.name?.charAt(0)}</div>
                                                 <div className="min-w-0">
-                                                    <p className="font-bold text-black text-lg mb-1 truncate">{booking.name}</p>
+                                                    <p className="font-black text-black text-lg mb-1 truncate">{booking.name}</p>
                                                     <p className="text-[11px] text-black/60 tracking-widest font-black uppercase">{booking.phone}</p>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td className="px-10 py-12">
+                                        <td className="px-10 py-10 border-r-2 border-slate-950">
                                             <div className="flex flex-col gap-1 items-start">
-                                                <span className="px-4 py-1.5 bg-slate-100 rounded-full border border-slate-100 text-[9px] font-black uppercase text-black/70 tracking-widest whitespace-nowrap overflow-hidden text-ellipsis max-w-[150px]">
+                                                <span className="px-4 py-2 bg-slate-900 rounded-full text-[9px] font-black uppercase text-white tracking-widest whitespace-nowrap overflow-hidden text-ellipsis max-w-[150px]">
                                                     {booking.pillarTitle || "Custom"}
                                                 </span>
                                             </div>
                                         </td>
-                                        <td className="px-10 py-12 text-sm font-black text-black/60 tracking-wider">
+                                        <td className="px-10 py-10 text-sm font-black text-black tracking-wider border-r-2 border-slate-950">
                                             <div className="whitespace-nowrap">{formatDateReadable(booking.date)}</div>
                                         </td>
-                                        <td className="px-10 py-12">
+                                        <td className="px-10 py-10 border-r-2 border-slate-950">
                                             <div className="flex items-baseline gap-1">
                                                 <span className="text-xl font-serif text-royal-gold font-bold">₹</span>
                                                 <span className="text-3xl font-serif text-black font-bold">{getRowTotal(booking)}</span>
                                             </div>
                                         </td>
-                                        <td className="px-10 py-12">
+                                        <td className="px-10 py-10 border-r-2 border-slate-950">
                                             <div className="flex">
                                                 {booking.status === 'contacted' ? (
-                                                    <span className="text-green-400 text-[9px] font-black uppercase bg-green-400/10 px-5 py-2.5 rounded-xl border border-green-400/20 whitespace-nowrap">Contacted</span>
+                                                    <span className="text-white text-[9px] font-black uppercase bg-green-500 px-5 py-2.5 rounded-xl border border-green-600 whitespace-nowrap">Contacted</span>
                                                 ) : (
-                                                    <span className="text-amber-400 text-[9px] font-black uppercase bg-amber-400/10 px-5 py-2.5 rounded-xl border border-amber-400/20 whitespace-nowrap animate-pulse">New Inquiry</span>
-                                                )}
-                                                {booking.visitStatus && (
-                                                    <span className={cn(
-                                                        "text-[9px] font-black uppercase px-5 py-2.5 rounded-xl border whitespace-nowrap ml-2",
-                                                        booking.visitStatus === 'in_city' ? "bg-green-500/10 text-green-500 border-green-500/20" :
-                                                        booking.visitStatus === 'scheduled' ? "bg-blue-500/10 text-blue-500 border-blue-500/20" :
-                                                        "bg-slate-500/10 text-slate-500 border-slate-500/20"
-                                                    )}>
-                                                        {booking.visitStatus.replace('_', ' ')}
-                                                    </span>
+                                                    <span className="text-black text-[9px] font-black uppercase bg-amber-400 px-5 py-2.5 rounded-xl border border-amber-500 whitespace-nowrap">New Inquiry</span>
                                                 )}
                                             </div>
                                         </td>
-                                        <td className="px-14 py-12 text-right">
-                                            <div className="flex justify-end gap-4 opacity-100 lg:opacity-40 lg:group-hover:opacity-100 transition-all duration-500">
-                                                <a href={`https://wa.me/${booking.phone?.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="p-4 bg-green-500/10 text-green-400 rounded-2xl hover:bg-green-500 hover:text-white transition-all shadow-xl"><MessageSquare className="w-5 h-5" /></a>
-                                                <button onClick={(e) => toggleStatus(booking, e)} className="p-4 bg-royal-gold/10 text-royal-gold rounded-2xl hover:bg-royal-gold hover:text-royal-black transition-all shadow-xl"><CheckCircle2 className="w-5 h-5" /></button>
-                                                <button onClick={(e) => deleteBooking(booking.id, e)} className="p-4 bg-red-400/10 text-red-400 rounded-2xl hover:bg-red-400 hover:text-white transition-all shadow-xl"><Trash2 className="w-5 h-5" /></button>
+                                        <td className="px-8 py-10 text-right min-w-[500px]">
+                                            <div className="flex justify-end gap-5">
+                                                <a href={`https://wa.me/${booking.phone?.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="p-4 bg-green-500 text-white rounded-2xl hover:bg-green-600 transition-all shadow-xl flex items-center justify-center shrink-0"><MessageSquare className="w-5 h-5" /></a>
+                                                <button onClick={(e) => toggleStatus(booking, e)} className="p-4 bg-royal-gold text-royal-black rounded-2xl hover:bg-black hover:text-royal-gold transition-all shadow-xl flex items-center justify-center shrink-0"><CheckCircle2 className="w-5 h-5" /></button>
+                                                <button onClick={(e) => deleteBooking(booking.id, e)} className="p-4 bg-red-500 text-white rounded-2xl hover:bg-red-600 transition-all shadow-xl flex items-center justify-center shrink-0"><Trash2 className="w-5 h-5" /></button>
                                             </div>
                                         </td>
                                     </motion.tr>
@@ -651,6 +646,22 @@ const AdminPage = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Admin Footer - ChittorTech Branding */}
+            <footer className="mt-20 bg-slate-950 border-t border-white/5 py-16 flex flex-col items-center gap-10 no-print">
+                <div className="px-8 py-4 bg-white rounded-2xl flex items-center gap-4 group transition-all hover:scale-105 shadow-[0_20px_50px_rgba(255,255,255,0.05)] border border-white/20">
+                    <img src="/assets/images/chittortech_logo.png" alt="ChittorTech" className="w-8 h-8 object-contain" />
+                    <p className="text-[11px] font-black uppercase tracking-widest text-slate-900">
+                        Developed & Maintained by <span className="text-[#00df9a] ml-1">ChittorTech</span>
+                    </p>
+                </div>
+                
+                <div className="flex flex-col items-center gap-3">
+                    <p className="text-xs text-white/60 font-bold tracking-tight">© 2026 ChittorTech Solutions Pvt Ltd. All rights reserved.</p>
+                    <p className="text-[10px] text-white/30 font-black uppercase tracking-[0.2em]">Approved by iStart Rajasthan | Approved by MSME India</p>
+                </div>
+            </footer>
+
             <AnimatePresence>{selectedBooking && <BookingDetailModal booking={selectedBooking} onClose={() => setSelectedBooking(null)} />}</AnimatePresence>
             <style>{`
                 .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
