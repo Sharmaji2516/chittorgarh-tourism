@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Search, Globe } from 'lucide-react';
+import { Menu, X, Search, Globe, ChevronRight } from 'lucide-react';
 import { cn } from '../utils/cn';
 import { NavLink, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
-    const { language, changeLanguage, t, showLangModal } = useLanguage();
+    const { lang, changeLanguage, t, showLangModal } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const location = useLocation();
@@ -114,7 +114,7 @@ const Navbar = () => {
                             className="flex items-center gap-3 px-5 py-2.5 rounded-full border border-royal-gold/30 bg-royal-gold/5 text-royal-gold hover:bg-royal-gold hover:text-royal-black transition-all duration-300 shadow-lg shadow-black/20 group"
                         >
                             <Globe className="w-4 h-4 group-hover:rotate-12 transition-transform" />
-                            <span className="text-[10px] font-bold uppercase tracking-widest">{language === 'en' ? 'हिन्दी' : 'English'}</span>
+                            <span className="text-[10px] font-bold uppercase tracking-widest">{lang === 'en' ? 'हिन्दी' : 'English'}</span>
                         </motion.button>
                     </div>
 
@@ -134,46 +134,57 @@ const Navbar = () => {
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden bg-black/95 backdrop-blur-xl border-b border-white/10 overflow-hidden"
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                        className="lg:hidden fixed inset-x-0 top-20 bg-heritage-charcoal/95 backdrop-blur-2xl border-b border-royal-gold/10 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-40"
                     >
-                        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                            {navLinks.map((link) => (
-                                <NavLink
-                                    key={link.name}
-                                    to={link.href}
-                                    onClick={() => setIsOpen(false)}
-                                    className={({ isActive }) => cn(
-                                        "block px-3 py-2 rounded-md text-base font-medium",
-                                        isActive ? "text-royal-gold bg-white/5" : "text-gray-300 hover:text-royal-gold hover:bg-white/5"
-                                    )}
-                                >
-                                    {link.name}
-                                </NavLink>
-                            ))}
-                            <div className="px-3 py-2 flex flex-col gap-4 border-t border-white/5 mt-2 pt-4">
+                        <div className="px-6 py-10 space-y-8 max-h-[80vh] overflow-y-auto">
+                            <div className="flex flex-col gap-1">
+                                {navLinks.map((link, i) => (
+                                    <motion.div
+                                        initial={{ opacity: 0, x: -20 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ delay: i * 0.05 }}
+                                        key={link.name}
+                                    >
+                                        <NavLink
+                                            to={link.href}
+                                            onClick={() => setIsOpen(false)}
+                                            className={({ isActive }) => cn(
+                                                "group flex items-center justify-between py-4 border-b border-white/5 transition-all",
+                                                isActive ? "text-royal-gold" : "text-white/60"
+                                            )}
+                                        >
+                                            <span className="text-lg font-serif italic tracking-wide">{link.name}</span>
+                                            <ChevronRight className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                                        </NavLink>
+                                    </motion.div>
+                                ))}
+                            </div>
+
+                            <motion.div 
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 0.4 }}
+                                className="flex flex-col gap-6 pt-6"
+                            >
                                 <button
                                     onClick={() => {
                                         setIsOpen(false);
                                         showLangModal();
                                     }}
-                                    className="flex items-center gap-3 text-gray-300 hover:text-royal-gold transition-colors w-fit"
+                                    className="flex items-center justify-between w-full px-6 py-4 rounded-2xl bg-royal-gold/5 border border-royal-gold/10 text-royal-gold active:scale-95 transition-all"
                                 >
-                                    <Globe className="w-5 h-5" />
-                                    <span className="text-sm font-medium uppercase tracking-wider">{t.nav.changeLang}</span>
+                                    <div className="flex items-center gap-3">
+                                        <Globe className="w-5 h-5" />
+                                        <span className="text-sm font-bold uppercase tracking-[0.2em]">{lang === 'en' ? 'हिन्दी' : 'English'}</span>
+                                    </div>
+                                    <span className="text-[10px] uppercase tracking-widest opacity-60">{t.nav.changeLang}</span>
                                 </button>
-                                <a
-                                    href="https://www.chittortech.online/"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="flex items-center gap-2 text-xs text-royal-gold/80 hover:text-royal-gold transition-colors uppercase tracking-widest mt-2"
-                                >
-                                    <span>Built by</span>
-                                    <span className="font-bold bg-gradient-to-r from-royal-gold to-orange-400 bg-clip-text text-transparent normal-case text-sm">Chittortech</span>
-                                </a>
-                            </div>
+
+                            </motion.div>
                         </div>
                     </motion.div>
                 )}

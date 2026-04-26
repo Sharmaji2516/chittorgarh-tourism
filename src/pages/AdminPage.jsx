@@ -351,7 +351,7 @@ const BookingDetailModal = ({ booking, onClose }) => {
 
                 <div className="absolute bottom-16 left-0 w-full text-center px-12">
                     <div className="h-px bg-gray-100 w-full mb-8"></div>
-                    <p className="text-[10px] uppercase font-black text-gray-300 tracking-[0.6em]">Authorized Quote by Chittortech Systems</p>
+                    <p className="text-[10px] uppercase font-black text-gray-300 tracking-[0.6em]">Authorized Quote by Chittorgarh Tourism Department</p>
                 </div>
             </div>
 

@@ -13,7 +13,8 @@ const ItinerarySection = ({ content }) => {
 
     const handleEmail = () => {
         const subject = `${itineraries.emailTitle}: ${activePlan.title}`;
-        const body = `${activePlan.title} (${activePlan.duration})\n\n${activePlan.desc}\n\n${activePlan.timeline.join('\n')}\n\nSent from Chittorgarh Tourism via Web.`;
+        const timelineString = activePlan.timeline.map(item => `${item.time}: ${item.visit} (${item.stay})`).join('\n');
+        const body = `${activePlan.title} (${activePlan.duration})\n\n${activePlan.desc}\n\n${timelineString}\n\nSent from Chittorgarh Tourism via Web.`;
         window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     };
 
@@ -51,6 +52,13 @@ const ItinerarySection = ({ content }) => {
                                 {itineraries.chooseRoute}
                             </NavLink>
                         )}
+                        <button
+                            onClick={handleEmail}
+                            className="px-8 py-3 bg-white/5 backdrop-blur-md text-heritage-gold rounded-full font-bold uppercase tracking-widest hover:bg-white/10 transition-all border border-heritage-gold/30 shadow-lg"
+                        >
+                            <Mail className="w-5 h-5 mr-3 inline" />
+                            Share via Email
+                        </button>
                     </div>
                 </div>
 

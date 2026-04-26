@@ -684,7 +684,7 @@ export const content = {
       ],
     },
     footer: {
-      copyright: "© 2026 Chittorgarh Heritage Tourism. All Rights Reserved.",
+      copyright: "© 2026 Chittortech. All Rights Reserved.",
       dedication: "Dedicated to the brave souls of Mewar.",
       contact: "Contact",
       explore: "Explore",
@@ -730,7 +730,7 @@ export const content = {
       searchPlaceholder: "Search by name, phone or package...",
       sync: "Sync",
       loadingData: "Summoning data...",
-      securingMsg: "Secured by Chittortech Systems",
+      securingMsg: "Official Booking Portal",
       royalRegistry: "Royal Registry • Live Data"
     },
     discover: {
@@ -845,6 +845,23 @@ export const content = {
         photographyExpert: "Photography Expert",
         storyteller: "Storyteller",
         notNeeded: "Not Needed"
+      }
+    },
+    footer: {
+      explore: "Explore",
+      contact: "Contact Us",
+      connect: "Connect",
+      builtBy: "Built by",
+      copyright: "© 2026 Chittortech. All Rights Reserved.",
+      resetStatus: "Reset Visit Status",
+      feedback: {
+        title: "Suggestions & Feedback",
+        name: "Your Name",
+        email: "Your Email",
+        message: "Your Suggestion/Feedback",
+        submit: "Send Feedback",
+        success: "Thank you for your feedback! It helps us improve.",
+        error: "Oops! Something went wrong. Please try again."
       }
     }
   },
@@ -1651,10 +1668,25 @@ export const content = {
         historyScholar: "इतिहास विद्वान",
         photographyExpert: "फोटोग्राफी विशेषज्ञ",
         storyteller: "कहानीकार",
-        notNeeded: "जरूरत नहीं है"
+        notNeeded: "आवश्यक नहीं"
+      }
+    },
+    footer: {
+      explore: "खोजें",
+      contact: "संपर्क करें",
+      connect: "जुड़ें",
+      builtBy: "द्वारा निर्मित",
+      copyright: "© 2026 चित्तौरटेक। सर्वाधिकार सुरक्षित।",
+      resetStatus: "विजिट स्टेटस रीसेट करें",
+      feedback: {
+        title: "सुझाव और प्रतिक्रिया",
+        name: "आपका नाम",
+        email: "आपका ईमेल",
+        message: "आपका सुझाव/प्रतिक्रिया",
+        submit: "प्रतिक्रिया भेजें",
+        success: "आपकी प्रतिक्रिया के लिए धन्यवाद! इससे हमें सुधार करने में मदद मिलती है।",
+        error: "उफ़! कुछ गलत हो गया। कृपया पुनः प्रयास करें।"
       }
     }
   },
 };
-
-export default content;
