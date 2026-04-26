@@ -22,6 +22,7 @@ import GalleryPage from './pages/GalleryPage';
 import AttractionsPage from './pages/AttractionsPage';
 import ItinerariesPage from './pages/ItinerariesPage';
 import MissionPage from './pages/MissionPage';
+import ServicesPage from './pages/ServicesPage';
 import AdminPage from './pages/AdminPage';
 
 const MainContent = () => {
@@ -102,6 +103,7 @@ const MainContent = () => {
             } />
             <Route path="/itineraries" element={<ItinerariesPage t={t} />} />
             <Route path="/mission" element={<MissionPage t={t} />} />
+            <Route path="/services" element={<ServicesPage t={t} />} />
             <Route path="/admin" element={<AdminPage />} />
           </Routes>
 

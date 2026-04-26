@@ -10,6 +10,7 @@ export const content = {
       itineraries: "Itineraries",
       gallery: "Gallery",
       mission: "Our Mission",
+      services: "Our Services",
       langBtn: "हिंदी",
       brandTitle: "CHITTORGARH",
       brandTagline: "TOURISM",
@@ -709,6 +710,33 @@ export const content = {
       desc1: "We are deeply committed to promoting local businesses and artisans. By directly connecting tourists with the hidden gems of our city, we aim to ensure that our community thrives and our rich heritage is preserved.",
       desc2: "We also strive to make your Chittorgarh tour as smooth and delightful as possible. From providing reliable guides, taxis, hotels, and restaurant facilities to offering 24/7 support throughout your journey, we are always here for you."
     },
+    servicesPage: {
+      title: "Our Services",
+      subtitle: "Experience Chittorgarh with Ease & Comfort",
+      desc: "We offer a wide range of premium services to ensure your visit to Chittorgarh is unforgettable. From luxury transport to expert local insights, we take care of everything so you can focus on the beauty of our heritage.",
+      items: [
+        {
+          title: "Private Taxi",
+          desc: "Travel in comfort with our premium fleet of sedans and SUVs, driven by experienced chauffeurs who know every corner of the city.",
+          icon: "taxi"
+        },
+        {
+          title: "Private Guide",
+          desc: "Unlock the secrets of Chittorgarh with our certified heritage historians who bring every stone and sculpture to life with their stories.",
+          icon: "guide"
+        },
+        {
+          title: "Hotel Booking",
+          desc: "From 16th-century fort palaces to modern luxury resorts, we help you find the perfect stay that fits your style and budget.",
+          icon: "hotel"
+        },
+        {
+          title: "Restaurant Reservations",
+          desc: "Savor the best of Mewari cuisine. We provide exclusive access and reservations to the city's most renowned dining establishments.",
+          icon: "restaurant"
+        }
+      ]
+    },
     gallery: {
       all: "All",
       royalCuisine: "Royal Cuisine",
@@ -884,6 +912,7 @@ export const content = {
       itineraries: "यात्रा कार्यक्रम",
       gallery: "गैलरी",
       mission: "हमारा लक्ष्य",
+      services: "हमारी सेवाएँ",
       langBtn: "English",
       brandTitle: "चित्तौड़गढ़",
       brandTagline: "पर्यटन",
@@ -1542,6 +1571,33 @@ export const content = {
       subtitle: "स्थानीय व्यवसायों को सशक्त बनाना और आपके अनुभव को बेहतर बनाना",
       desc1: "हम स्थानीय व्यवसायों और कारीगरों को बढ़ावा देने के लिए गहराई से प्रतिबद्ध हैं। पर्यटकों को सीधे हमारे शहर के छिपे हुए खजानों से जोड़कर, हमारा उद्देश्य यह सुनिश्चित करना है कि हमारा समुदाय समृद्ध हो और हमारी समृद्ध विरासत संरक्षित रहे।",
       desc2: "हम आपके चित्तौड़गढ़ दौरे को यथासंभव सहज और आनंददायक बनाने का भी प्रयास करते हैं। विश्वसनीय गाइड, टैक्सी, होटल और रेस्तरां सुविधाओं से लेकर आपकी पूरी यात्रा के दौरान 24 घंटे सहायता प्रदान करने तक, हम आपके लिए हमेशा यहां हैं।"
+    },
+    servicesPage: {
+      title: "हमारी सेवाएँ",
+      subtitle: "सहजता और आराम के साथ चित्तौड़गढ़ का अनुभव करें",
+      desc: "हम यह सुनिश्चित करने के लिए प्रीमियम सेवाओं की एक विस्तृत श्रृंखला प्रदान करते हैं कि आपकी चित्तौड़गढ़ यात्रा अविस्मरणीय हो। लक्जरी परिवहन से लेकर विशेषज्ञ स्थानीय जानकारी तक, हम हर चीज़ का ख्याल रखते हैं ताकि आप हमारी विरासत की सुंदरता पर ध्यान केंद्रित कर सकें।",
+      items: [
+        {
+          title: "प्राइवेट टैक्सी",
+          desc: "हमारे सेडान और एसयूवी के प्रीमियम बेड़े के साथ आराम से यात्रा करें, जिन्हें अनुभवी ड्राइवरों द्वारा चलाया जाता है जो शहर के हर कोने को जानते हैं।",
+          icon: "taxi"
+        },
+        {
+          title: "प्राइवेट गाइड",
+          desc: "हमारे प्रमाणित विरासत इतिहासकारों के साथ चित्तौड़गढ़ के रहस्यों को जानें, जो अपनी कहानियों के साथ हर पत्थर और मूर्ति को जीवंत कर देते हैं।",
+          icon: "guide"
+        },
+        {
+          title: "होटल बुकिंग",
+          desc: "16वीं शताब्दी के किला महलों से लेकर आधुनिक लक्जरी रिसॉर्ट्स तक, हम आपको आपके स्टाइल और बजट के अनुसार ठहरने की सही जगह खोजने में मदद करते हैं।",
+          icon: "hotel"
+        },
+        {
+          title: "रेस्तरां आरक्षण",
+          desc: "मेवाड़ी व्यंजनों का सर्वोत्तम स्वाद लें। हम शहर के सबसे प्रसिद्ध डाइनिंग संस्थानों के लिए विशेष पहुंच और आरक्षण प्रदान करते हैं।",
+          icon: "restaurant"
+        }
+      ]
     },
     gallery: {
       all: "सब",

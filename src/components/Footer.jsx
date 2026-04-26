@@ -38,7 +38,9 @@ const Footer = () => {
                                 { name: t.nav.vendors, path: '/flavors' },
                                 { name: t.nav.hotels, path: '/stays' },
                                 { name: t.nav.localVocal, path: '/local-for-vocal' },
-                                { name: t.nav.itineraries, path: '/itineraries' }
+                                { name: t.nav.itineraries, path: '/itineraries' },
+                                { name: t.nav.mission, path: '/mission' },
+                                { name: t.nav.services, path: '/services' }
                             ].map((item) => (
                                 <li key={item.name}>
                                     <NavLink 
