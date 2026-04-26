@@ -134,56 +134,78 @@ const Navbar = () => {
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        transition={{ type: "spring", damping: 25, stiffness: 200 }}
-                        className="lg:hidden fixed inset-x-0 top-20 bg-heritage-charcoal/95 backdrop-blur-2xl border-b border-royal-gold/10 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-40"
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: '100vh' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.4, ease: "easeInOut" }}
+                        className="lg:hidden fixed inset-0 top-20 bg-heritage-charcoal/98 backdrop-blur-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-40 border-t border-royal-gold/10"
                     >
-                        <div className="px-6 py-10 space-y-8 max-h-[80vh] overflow-y-auto">
-                            <div className="flex flex-col gap-1">
+                        {/* Ambient Glows */}
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-royal-gold/5 blur-[100px] rounded-full pointer-events-none"></div>
+                        <div className="absolute bottom-0 left-0 w-64 h-64 bg-orange-500/5 blur-[100px] rounded-full pointer-events-none"></div>
+
+                        <div className="px-6 py-8 flex flex-col h-[calc(100vh-5rem)] overflow-y-auto">
+                            <div className="flex flex-col gap-3">
                                 {navLinks.map((link, i) => (
                                     <motion.div
-                                        initial={{ opacity: 0, x: -20 }}
+                                        initial={{ opacity: 0, x: -30 }}
                                         animate={{ opacity: 1, x: 0 }}
-                                        transition={{ delay: i * 0.05 }}
+                                        transition={{ delay: i * 0.08, ease: "easeOut" }}
                                         key={link.name}
                                     >
                                         <NavLink
                                             to={link.href}
                                             onClick={() => setIsOpen(false)}
                                             className={({ isActive }) => cn(
-                                                "group flex items-center justify-between py-4 border-b border-white/5 transition-all",
-                                                isActive ? "text-royal-gold" : "text-white/60"
+                                                "group flex items-center justify-between p-4 rounded-2xl transition-all duration-300",
+                                                isActive 
+                                                    ? "bg-royal-gold/10 border border-royal-gold/20 shadow-[inset_0_0_20px_rgba(212,175,55,0.05)]" 
+                                                    : "hover:bg-white/5 border border-transparent"
                                             )}
                                         >
-                                            <span className="text-lg font-serif italic tracking-wide">{link.name}</span>
-                                            <ChevronRight className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                                            <div className="flex items-center gap-4">
+                                                <span className={cn(
+                                                    "text-2xl font-serif tracking-wide transition-colors duration-300",
+                                                    isActive ? "text-royal-gold" : "text-white/80 group-hover:text-white"
+                                                )}>
+                                                    {link.name}
+                                                </span>
+                                            </div>
+                                            <div className={cn(
+                                                "w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300",
+                                                isActive ? "bg-royal-gold/20" : "bg-white/5 group-hover:bg-white/10 group-hover:translate-x-1"
+                                            )}>
+                                                <ChevronRight className={cn(
+                                                    "w-4 h-4",
+                                                    isActive ? "text-royal-gold" : "text-white/50 group-hover:text-white"
+                                                )} />
+                                            </div>
                                         </NavLink>
                                     </motion.div>
                                 ))}
                             </div>
 
                             <motion.div 
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                transition={{ delay: 0.4 }}
-                                className="flex flex-col gap-6 pt-6"
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.5 }}
+                                className="mt-auto pt-8 pb-12"
                             >
                                 <button
                                     onClick={() => {
                                         setIsOpen(false);
                                         showLangModal();
                                     }}
-                                    className="flex items-center justify-between w-full px-6 py-4 rounded-2xl bg-royal-gold/5 border border-royal-gold/10 text-royal-gold active:scale-95 transition-all"
+                                    className="flex items-center justify-between w-full px-6 py-5 rounded-2xl bg-gradient-to-r from-royal-gold/10 to-transparent border border-royal-gold/20 text-royal-gold active:scale-95 transition-all group shadow-lg"
                                 >
-                                    <div className="flex items-center gap-3">
-                                        <Globe className="w-5 h-5" />
+                                    <div className="flex items-center gap-4">
+                                        <div className="p-2 bg-royal-gold/20 rounded-xl group-hover:rotate-12 transition-transform shadow-inner">
+                                            <Globe className="w-5 h-5" />
+                                        </div>
                                         <span className="text-sm font-bold uppercase tracking-[0.2em]">{lang === 'en' ? 'हिन्दी' : 'English'}</span>
                                     </div>
-                                    <span className="text-[10px] uppercase tracking-widest opacity-60">{t.nav.changeLang}</span>
+                                    <span className="text-[9px] font-bold uppercase tracking-[0.2em] opacity-80 bg-royal-gold/20 px-3 py-1.5 rounded-full border border-royal-gold/20">{t.nav.changeLang}</span>
                                 </button>
-
                             </motion.div>
                         </div>
                     </motion.div>
