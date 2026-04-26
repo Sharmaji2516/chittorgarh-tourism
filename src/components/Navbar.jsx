@@ -25,6 +25,7 @@ const Navbar = () => {
         { name: t.nav.stays || 'Stays', href: '/stays' },
         { name: t.nav.localVocal || 'Local For Vocal', href: '/local-for-vocal' },
         { name: t.nav.itineraries || 'Itineraries', href: '/itineraries' },
+        { name: t.nav.mission || 'Our Mission', href: '/mission' },
     ];
 
     const isHome = location.pathname === '/';

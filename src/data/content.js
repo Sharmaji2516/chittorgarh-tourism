@@ -9,6 +9,7 @@ export const content = {
       localVocal: "Local For Vocal",
       itineraries: "Itineraries",
       gallery: "Gallery",
+      mission: "Our Mission",
       langBtn: "हिंदी",
       brandTitle: "CHITTORGARH",
       brandTagline: "TOURISM",
@@ -702,6 +703,12 @@ export const content = {
         error: "Oops! Something went wrong. Please try again."
       }
     },
+    missionPage: {
+      title: "Our Mission",
+      subtitle: "Empowering Locals & Enhancing Your Experience",
+      desc1: "We are deeply committed to promoting local businesses and artisans. By directly connecting tourists with the hidden gems of our city, we aim to ensure that our community thrives and our rich heritage is preserved.",
+      desc2: "We also strive to make your Chittorgarh tour as smooth and delightful as possible. From providing reliable guides, taxis, hotels, and restaurant facilities to offering 24/7 support throughout your journey, we are always here for you."
+    },
     gallery: {
       all: "All",
       royalCuisine: "Royal Cuisine",
@@ -753,6 +760,7 @@ export const content = {
       title: "Local For Vocal",
       subtitle:
         "Support our local artisans and vendors who keep the heritage alive.",
+      desc: "We proudly support the 'Local for Vocal' movement. Our initiative is to bridge the gap between tourists and our local artisans and small shops. Too often, visitors come and go without discovering the hidden gems of our city. By connecting you directly with them, we aim to preserve our rich heritage and empower the local community.",
       items: [
         {
           id: 1,
@@ -875,6 +883,7 @@ export const content = {
       localVocal: "लोकल फॉर वोकल",
       itineraries: "यात्रा कार्यक्रम",
       gallery: "गैलरी",
+      mission: "हमारा लक्ष्य",
       langBtn: "English",
       brandTitle: "चित्तौड़गढ़",
       brandTagline: "पर्यटन",
@@ -1528,6 +1537,12 @@ export const content = {
         error: "ओह! कुछ गलत हो गया। कृपया पुन: प्रयास करें।"
       }
     },
+    missionPage: {
+      title: "हमारा लक्ष्य",
+      subtitle: "स्थानीय व्यवसायों को सशक्त बनाना और आपके अनुभव को बेहतर बनाना",
+      desc1: "हम स्थानीय व्यवसायों और कारीगरों को बढ़ावा देने के लिए गहराई से प्रतिबद्ध हैं। पर्यटकों को सीधे हमारे शहर के छिपे हुए खजानों से जोड़कर, हमारा उद्देश्य यह सुनिश्चित करना है कि हमारा समुदाय समृद्ध हो और हमारी समृद्ध विरासत संरक्षित रहे।",
+      desc2: "हम आपके चित्तौड़गढ़ दौरे को यथासंभव सहज और आनंददायक बनाने का भी प्रयास करते हैं। विश्वसनीय गाइड, टैक्सी, होटल और रेस्तरां सुविधाओं से लेकर आपकी पूरी यात्रा के दौरान 24 घंटे सहायता प्रदान करने तक, हम आपके लिए हमेशा यहां हैं।"
+    },
     gallery: {
       all: "सब",
       royalCuisine: "शाही व्यंजन",
@@ -1579,6 +1594,7 @@ export const content = {
       title: "लोकल फॉर वोकल",
       subtitle:
         "हमारे स्थानीय कारीगरों और विक्रेताओं का समर्थन करें जो विरासत को जीवित रखते हैं।",
+      desc: "हम 'लोकल फॉर वोकल' पहल का गर्व से समर्थन करते हैं। हमारा उद्देश्य पर्यटकों को सीधे छोटी दुकानों और स्थानीय कारीगरों से जोड़ना है। अक्सर पर्यटक आते हैं और इन छिपे हुए खजानों को जाने बिना ही चले जाते हैं। आपको सीधे उनसे जोड़कर, हम अपनी समृद्ध विरासत को सहेजने और स्थानीय समुदाय को सशक्त बनाने का प्रयास कर रहे हैं।",
       items: [
         {
           id: 1,

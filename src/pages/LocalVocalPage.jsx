@@ -9,10 +9,14 @@ const LocalVocalPage = ({ t, filteredLocalVocal, searchQuery }) => {
         <Section id="local-vocal" title={t.localVocal.title} className="bg-transparent text-center min-h-[60vh] flex flex-col justify-center">
             {!searchQuery && (
                 <>
-                    <p className="max-w-2xl mx-auto text-gray-400 mb-4 font-light italic">
+                    <p className="max-w-2xl mx-auto text-gray-400 mb-2 font-light italic text-lg">
                         "{t.localVocal.subtitle}"
                     </p>
-
+                    {t.localVocal.desc && (
+                        <p className="max-w-3xl mx-auto text-royal-white/80 mb-12 text-sm leading-relaxed text-justify md:text-center">
+                            {t.localVocal.desc}
+                        </p>
+                    )}
                 </>
             )}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
