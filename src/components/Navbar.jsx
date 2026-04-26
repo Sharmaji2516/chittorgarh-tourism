@@ -163,23 +163,27 @@ const Navbar = () => {
                                                     : "hover:bg-white/5 border border-transparent"
                                             )}
                                         >
-                                            <div className="flex items-center gap-4">
-                                                <span className={cn(
-                                                    "text-2xl font-serif tracking-wide transition-colors duration-300",
-                                                    isActive ? "text-royal-gold" : "text-white/80 group-hover:text-white"
-                                                )}>
-                                                    {link.name}
-                                                </span>
-                                            </div>
-                                            <div className={cn(
-                                                "w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300",
-                                                isActive ? "bg-royal-gold/20" : "bg-white/5 group-hover:bg-white/10 group-hover:translate-x-1"
-                                            )}>
-                                                <ChevronRight className={cn(
-                                                    "w-4 h-4",
-                                                    isActive ? "text-royal-gold" : "text-white/50 group-hover:text-white"
-                                                )} />
-                                            </div>
+                                            {({ isActive }) => (
+                                                <>
+                                                    <div className="flex items-center gap-4">
+                                                        <span className={cn(
+                                                            "text-2xl font-serif tracking-wide transition-colors duration-300",
+                                                            isActive ? "text-royal-gold" : "text-white/80 group-hover:text-white"
+                                                        )}>
+                                                            {link.name}
+                                                        </span>
+                                                    </div>
+                                                    <div className={cn(
+                                                        "w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300",
+                                                        isActive ? "bg-royal-gold/20" : "bg-white/5 group-hover:bg-white/10 group-hover:translate-x-1"
+                                                    )}>
+                                                        <ChevronRight className={cn(
+                                                            "w-4 h-4",
+                                                            isActive ? "text-royal-gold" : "text-white/50 group-hover:text-white"
+                                                        )} />
+                                                    </div>
+                                                </>
+                                            )}
                                         </NavLink>
                                     </motion.div>
                                 ))}
