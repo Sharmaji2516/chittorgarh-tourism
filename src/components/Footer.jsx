@@ -23,7 +23,7 @@ const Footer = () => {
                     <div className="h-px w-12 md:w-24 bg-gradient-to-l from-transparent to-royal-gold/40"></div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left mb-16">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-center md:text-left mb-16">
                     {/* Explore Section */}
                     <div className="flex flex-col items-center md:items-start group">
                         <h4 className="text-royal-gold uppercase tracking-[0.3em] mb-6 text-xs font-black flex items-center gap-2">
@@ -48,6 +48,22 @@ const Footer = () => {
                                     >
                                         {item.name}
                                     </NavLink>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    {/* Benefits Section */}
+                    <div className="flex flex-col items-center md:items-start group">
+                        <h4 className="text-royal-gold uppercase tracking-[0.3em] mb-6 text-xs font-black flex items-center gap-2">
+                            <span className="w-1.5 h-1.5 rounded-full bg-royal-gold"></span>
+                            {t.footer.benefitsTitle}
+                        </h4>
+                        <ul className="space-y-4">
+                            {t.footer.benefitPoints.map((point, index) => (
+                                <li key={index} className="flex gap-3 text-xs leading-relaxed group/item">
+                                    <span className="text-royal-gold shrink-0 mt-0.5 opacity-40 group-hover/item:opacity-100 transition-opacity">✦</span>
+                                    <span className="text-royal-white/50 group-hover/item:text-royal-white/80 transition-colors">{point}</span>
                                 </li>
                             ))}
                         </ul>

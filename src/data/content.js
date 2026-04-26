@@ -702,7 +702,15 @@ export const content = {
         submit: "Send Feedback",
         success: "Thank you for your feedback! It helps us improve.",
         error: "Oops! Something went wrong. Please try again."
-      }
+      },
+      benefitsTitle: "Why Connect With Us?",
+      benefitPoints: [
+        "Empowering local artisans & small businesses through direct tourist interaction.",
+        "Significant sales growth & market expansion for local hidden gems.",
+        "Tourists get authentic Mewari products directly from the source.",
+        "Enhanced travel experience with genuine local stories & hospitality.",
+        "Bridging the gap to create a sustainable & thriving local ecosystem."
+      ]
     },
     missionPage: {
       title: "Our Mission",
@@ -883,23 +891,7 @@ export const content = {
         notNeeded: "Not Needed"
       }
     },
-    footer: {
-      explore: "Explore",
-      contact: "Contact Us",
-      connect: "Connect",
-      builtBy: "Built by",
-      copyright: "© 2026 Chittortech. All Rights Reserved.",
-      resetStatus: "Reset Visit Status",
-      feedback: {
-        title: "Suggestions & Feedback",
-        name: "Your Name",
-        email: "Your Email",
-        message: "Your Suggestion/Feedback",
-        submit: "Send Feedback",
-        success: "Thank you for your feedback! It helps us improve.",
-        error: "Oops! Something went wrong. Please try again."
-      }
-    }
+
   },
   hi: {
     nav: {
@@ -1547,25 +1539,7 @@ export const content = {
       whereToVisit: "कहाँ घूमें",
       recommendedStay: "रुकने/खाने की सलाह"
     },
-    footer: {
-      copyright: "© 2026 चित्तौड़गढ़ विरासत पर्यटन। सर्वाधिकार सुरक्षित।",
-      dedication: "मेवाड़ के वीर सपूतों को समर्पित।",
-      contact: "संपर्क करें",
-      explore: "एक्सप्लोर करें",
-      connect: "जुड़ें",
-      builtBy: "विकसित और अनुरक्षित",
-      rights: "सर्वाधिकार सुरक्षित",
-      resetStatus: "विजिट स्टेटस रीसेट करें",
-      feedback: {
-        title: "सुझाव और फीडबैक",
-        name: "आपका नाम",
-        email: "आपका ईमेल",
-        message: "आपका सुझाव/फीडबैक",
-        submit: "फीडबैक भेजें",
-        success: "आपकी प्रतिक्रिया के लिए धन्यवाद! यह हमें सुधारने में मदद करता है।",
-        error: "ओह! कुछ गलत हो गया। कृपया पुन: प्रयास करें।"
-      }
-    },
+
     missionPage: {
       title: "हमारा लक्ष्य",
       subtitle: "स्थानीय व्यवसायों को सशक्त बनाना और आपके अनुभव को बेहतर बनाना",
@@ -1749,6 +1723,8 @@ export const content = {
       connect: "जुड़ें",
       builtBy: "द्वारा निर्मित",
       copyright: "© 2026 चित्तौरटेक। सर्वाधिकार सुरक्षित।",
+      dedication: "मेवाड़ के वीर सपूतों को समर्पित।",
+      rights: "सर्वाधिकार सुरक्षित",
       resetStatus: "विजिट स्टेटस रीसेट करें",
       feedback: {
         title: "सुझाव और प्रतिक्रिया",
@@ -1758,7 +1734,15 @@ export const content = {
         submit: "प्रतिक्रिया भेजें",
         success: "आपकी प्रतिक्रिया के लिए धन्यवाद! इससे हमें सुधार करने में मदद मिलती है।",
         error: "उफ़! कुछ गलत हो गया। कृपया पुनः प्रयास करें।"
-      }
+      },
+      benefitsTitle: "हमारे साथ क्यों जुड़ें?",
+      benefitPoints: [
+        "पर्यटकों के सीधे संपर्क के माध्यम से स्थानीय कारीगरों और छोटे व्यवसायों को सशक्त बनाना।",
+        "स्थानीय छिपे हुए खजानों के लिए महत्वपूर्ण बिक्री वृद्धि और बाजार विस्तार।",
+        "पर्यटकों को सीधे स्रोत से प्रामाणिक मेवाड़ी उत्पाद मिलते हैं।",
+        "सच्ची स्थानीय कहानियों और आतिथ्य के साथ बेहतर यात्रा अनुभव।",
+        "एक टिकाऊ और समृद्ध स्थानीय पारिस्थितिकी तंत्र बनाने के लिए बीच की दूरी को कम करना।"
+      ]
     }
   },
 };
