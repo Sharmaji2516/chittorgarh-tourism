@@ -23,6 +23,8 @@ import AttractionsPage from './pages/AttractionsPage';
 import MissionPage from './pages/MissionPage';
 import ServicesPage from './pages/ServicesPage';
 import AdminPage from './pages/AdminPage';
+import VerificationPage from './pages/VerificationPage';
+import StaffVerificationPage from './pages/StaffVerificationPage';
 
 const MainContent = () => {
   const { t } = useLanguage();
@@ -103,6 +105,8 @@ const MainContent = () => {
             <Route path="/mission" element={<MissionPage t={t} />} />
             <Route path="/services" element={<ServicesPage t={t} />} />
             <Route path="/admin" element={<AdminPage />} />
+            <Route path="/verify/:id" element={<VerificationPage />} />
+            <Route path="/staff-verify" element={<StaffVerificationPage />} />
           </Routes>
 
         </div>

@@ -15,6 +15,7 @@ export const BookingProvider = ({ children }) => {
             guide: 'Not Selected',
             name: '',
             phone: '',
+            email: '',
             status: 'draft' // draft, submitted
         };
     });
@@ -38,6 +39,7 @@ export const BookingProvider = ({ children }) => {
             guide: 'Not Selected',
             name: '',
             phone: '',
+            email: '',
             status: 'draft'
         };
         setBookingData(reset);

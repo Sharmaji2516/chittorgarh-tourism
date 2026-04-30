@@ -1,6 +1,6 @@
 import React from 'react';
 import Section from '../components/Section';
-import { Car, Map, Hotel, UtensilsCrossed, ChevronRight } from 'lucide-react';
+import { Car, Map, Hotel, UtensilsCrossed, ChevronRight, Coffee } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const ServicesPage = ({ t }) => {
@@ -12,6 +12,7 @@ const ServicesPage = ({ t }) => {
             case 'guide': return <Map className="w-8 h-8" />;
             case 'hotel': return <Hotel className="w-8 h-8" />;
             case 'restaurant': return <UtensilsCrossed className="w-8 h-8" />;
+            case 'coffee': return <Coffee className="w-8 h-8" />;
             default: return <ChevronRight className="w-8 h-8" />;
         }
     };

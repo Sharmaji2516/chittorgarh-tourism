@@ -742,6 +742,11 @@ export const content = {
           title: "Restaurant Reservations",
           desc: "Savor the best of Mewari cuisine. We provide exclusive access and reservations to the city's most renowned dining establishments.",
           icon: "restaurant"
+        },
+        {
+          title: "Cafe & Hangouts",
+          desc: "Relax at the city's most vibrant cafes with stunning views. We help you discover the perfect spots for coffee and leisure.",
+          icon: "coffee"
         }
       ]
     },
@@ -1570,6 +1575,11 @@ export const content = {
           title: "रेस्तरां आरक्षण",
           desc: "मेवाड़ी व्यंजनों का सर्वोत्तम स्वाद लें। हम शहर के सबसे प्रसिद्ध डाइनिंग संस्थानों के लिए विशेष पहुंच और आरक्षण प्रदान करते हैं।",
           icon: "restaurant"
+        },
+        {
+          title: "कैफे और हैंगआउट",
+          desc: "शानदार दृश्यों के साथ शहर के सबसे जीवंत कैफे में आराम करें। हम आपको कॉफी और फुरसत के लिए सही स्थान खोजने में मदद करते हैं।",
+          icon: "coffee"
         }
       ]
     },

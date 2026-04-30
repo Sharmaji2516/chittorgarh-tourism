@@ -1,86 +1,61 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Calendar, Users, Phone, User, CheckCircle2, ArrowRight, Loader2, Star, ShieldCheck, MapPin, Car, Hotel, UserCheck } from 'lucide-react';
+import { X, Calendar, Users, Phone, User, CheckCircle2, ArrowRight, Loader2, Star, ShieldCheck, MapPin, Car, Hotel, UserCheck, Mail, UtensilsCrossed, Coffee } from 'lucide-react';
 import { useBooking } from '../context/BookingContext';
 import { saveBookingToFirebase } from '../lib/firebase';
-
-const PRICE_LIST = {
-    transport: {
-        'Luxury Sedan': 1500,
-        'Royal SUV': 2500,
-        'Mini Bus': 5000,
-        'Not Needed': 0
-    },
-    hotel: {
-        'Heritage Palace': 6000,
-        'Boutique Hotel': 3500,
-        'Eco Resort': 2500,
-            'Not Needed': 0
-    },
-    guide: {
-        'History Scholar': 1200,
-        'Photography Expert': 2000,
-        'Storyteller': 1000,
-        'Not Needed': 0
-    }
-};
 
 const BookingModal = ({ isOpen, onClose, pillarTitle }) => {
     const { bookingData, updateBooking } = useBooking();
     const [step, setStep] = useState(1);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitted, setSubmitted] = useState(false);
 
     if (!isOpen) return null;
 
     const handleNext = () => setStep(prev => prev + 1);
     const handleBack = () => setStep(prev => prev - 1);
 
-    const calculateTotal = () => {
-        const tPrice = PRICE_LIST.transport[bookingData.transport] || 0;
-        const hPrice = PRICE_LIST.hotel[bookingData.hotel] || 0;
-        const gPrice = PRICE_LIST.guide[bookingData.guide] || 0;
-        return tPrice + hPrice + gPrice;
-    };
-
-    const totalAmount = calculateTotal();
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         setIsSubmitting(true);
 
-        const finalData = {
-            ...bookingData,
-            pillarTitle: pillarTitle,
-            totalAmount: totalAmount,
-            status: 'submitted'
-        };
+        try {
+            const finalData = {
+                ...bookingData,
+                pillarTitle: pillarTitle || 'Custom Package',
+                totalAmount: 0,
+                status: 'submitted',
+                createdAt: new Date().toISOString()
+            };
 
-        await saveBookingToFirebase(finalData);
+            await saveBookingToFirebase(finalData);
 
-        const phoneNumber = "917597901057";
-        const message = `*👑 Royal Booking Request*%0A%0A` +
-            `*🛡️ Package:* ${pillarTitle}%0A` +
-            `*📅 Date:* ${bookingData.date}%0A` +
-            `*👥 Travelers:* ${bookingData.travelers}%0A%0A` +
-            `*-- Custom Choices --*%0A` +
-            `*🚗 Transport:* ${bookingData.transport} (₹${PRICE_LIST.transport[bookingData.transport]})%0A` +
-            `*🏨 Hotel:* ${bookingData.hotel} (₹${PRICE_LIST.hotel[bookingData.hotel]})%0A` +
-            `*🚩 Guide:* ${bookingData.guide} (₹${PRICE_LIST.guide[bookingData.guide]})%0A%0A` +
-            `*💰 Total Estimate: ₹${totalAmount}*%0A%0A` +
-            `*-- Contact --*%0A` +
-            `*👤 Name:* ${bookingData.name}%0A` +
-            `*📱 Phone:* ${bookingData.phone}%0A%0A` +
-            `I am ready to confirm this booking.`;
+            const phoneNumber = "917597901057";
+            const message = `*👑 Royal Booking Request*%0A%0A` +
+                `*🛡️ Package:* ${pillarTitle || 'Custom'}%0A` +
+                `*📅 Date:* ${bookingData.date}%0A` +
+                `*👥 Travelers:* ${bookingData.travelers}%0A%0A` +
+                `*-- Custom Choices --*%0A` +
+                `*🚗 Transport:* ${bookingData.transport}%0A` +
+                `*🏨 Hotel:* ${bookingData.hotel}%0A` +
+                `*🚩 Guide:* ${bookingData.guide}%0A%0A` +
+                `*-- Contact --*%0A` +
+                `*👤 Name:* ${bookingData.name}%0A` +
+                `*📱 Phone:* ${bookingData.phone}%0A` +
+                `*📧 Email:* ${bookingData.email || 'Not Provided'}%0A%0A` +
+                `I am ready to confirm this booking.`;
 
-        setTimeout(() => {
             window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+            setSubmitted(true);
+        } catch (error) {
+            console.error("Submission Error:", error);
+            alert("Something went wrong. Please try again.");
+        } finally {
             setIsSubmitting(false);
-            onClose();
-            setStep(1);
-        }, 1500);
+        }
     };
 
-    const progress = step === 1 ? '33%' : step === 2 ? '66%' : '100%';
+    const progress = submitted ? '100%' : step === 1 ? '33%' : step === 2 ? '66%' : '100%';
 
     const PreferenceCard = ({ type, label, icon: Icon, value, options }) => (
         <div className="space-y-4">
@@ -92,7 +67,7 @@ const BookingModal = ({ isOpen, onClose, pillarTitle }) => {
                 <span className="text-[10px] text-white/30 font-medium italic">Select one</span>
             </div>
             <div className="grid grid-cols-2 gap-3">
-                {Object.keys(options).map(opt => (
+                {options && options.map(opt => (
                     <button 
                         key={opt} 
                         type="button" 
@@ -104,11 +79,10 @@ const BookingModal = ({ isOpen, onClose, pillarTitle }) => {
                         }`}
                     >
                         <span className={`text-[11px] font-bold uppercase tracking-widest mb-1 transition-colors ${value === opt ? 'text-white' : 'text-white/60'}`}>{opt}</span>
-                        <span className={`text-[10px] font-serif ${value === opt ? 'text-royal-gold' : 'text-white/30'}`}>₹{options[opt]}</span>
                         {value === opt && (
-                            <motion.div layoutId={`${type}-active`} className="absolute top-3 right-3">
+                            <div className="absolute top-3 right-3">
                                 <CheckCircle2 className="w-4 h-4 text-royal-gold" />
-                            </motion.div>
+                            </div>
                         )}
                     </button>
                 ))}
@@ -146,12 +120,12 @@ const BookingModal = ({ isOpen, onClose, pillarTitle }) => {
                     </div>
 
                     {/* Right Panel - Form Content */}
-                    <form onSubmit={handleSubmit} className="flex-1 flex flex-col h-full overflow-hidden">
+                    <div className="flex-1 flex flex-col min-h-0 overflow-hidden">
                         {/* Header */}
                         <div className="p-6 md:p-8 border-b border-white/5 bg-white/[0.02] flex justify-between items-center relative">
                             <div>
-                                <h3 className="text-lg md:text-2xl font-serif text-white">Experience Mewar</h3>
-                                <p className="text-[8px] md:text-[9px] text-royal-gold uppercase tracking-[0.5em] mt-1 font-black">Stage {step} of 3</p>
+                                <h3 className="text-lg md:text-2xl font-serif text-white">{submitted ? "Inquiry Sent" : "Experience Mewar"}</h3>
+                                <p className="text-[8px] md:text-[9px] text-royal-gold uppercase tracking-[0.5em] mt-1 font-black">{submitted ? "Submission Successful" : `Stage ${step} of 3`}</p>
                             </div>
                             <button type="button" onClick={onClose} className="p-2 md:p-3 bg-white/5 hover:bg-white/10 rounded-full transition-all text-white/30 hover:text-white">
                                 <X className="w-5 h-5" />
@@ -165,69 +139,144 @@ const BookingModal = ({ isOpen, onClose, pillarTitle }) => {
                         {/* Scrollable Form Body */}
                         <div className="flex-1 overflow-y-auto custom-scrollbar p-6 md:p-12">
                             <AnimatePresence mode="wait">
-                                {step === 1 && (
-                                    <motion.div key="s1" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-10">
-                                        <div className="text-center md:text-left mb-4">
-                                            <p className="text-white/40 text-xs font-medium italic underline underline-offset-8 decoration-royal-gold/20">When shall we prepare for your arrival?</p>
+                                {submitted ? (
+                                    <motion.div 
+                                        key="success"
+                                        initial={{ opacity: 0, scale: 0.9 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        className="h-full flex flex-col items-center justify-center text-center space-y-8"
+                                    >
+                                        <div className="w-24 h-24 bg-royal-gold rounded-full flex items-center justify-center shadow-2xl shadow-royal-gold/20">
+                                            <CheckCircle2 className="w-12 h-12 text-royal-black" />
                                         </div>
-                                        <div className="space-y-8">
-                                            <div className="relative group">
-                                                <Calendar className="absolute left-6 top-1/2 -translate-y-1/2 w-6 h-6 text-royal-gold group-focus-within:scale-110 transition-transform" />
-                                                <input required type="date" value={bookingData.date} onChange={(e) => updateBooking({ date: e.target.value })} className="w-full bg-white/[0.03] border border-white/10 rounded-[1.5rem] py-6 pl-16 pr-6 text-white text-lg focus:outline-none focus:border-royal-gold focus:bg-white/5 transition-all" />
-                                            </div>
-                                            <div className="space-y-4">
-                                                <p className="text-[10px] text-royal-gold font-black uppercase tracking-[0.3em] px-2">Guests in your party</p>
-                                                <div className="grid grid-cols-5 gap-3">
-                                                    {[1,2,3,4,5].map(n => (
-                                                        <button key={n} type="button" onClick={() => updateBooking({ travelers: n })} className={`py-5 rounded-2xl font-bold border transition-all duration-300 ${Number(bookingData.travelers) === n ? 'bg-royal-gold border-royal-gold text-royal-black shadow-xl scale-110' : 'bg-white/[0.03] border-white/10 text-white/50 hover:border-royal-gold/40'}`}>{n}</button>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <button type="button" onClick={handleNext} disabled={!bookingData.date} className="w-full py-6 bg-royal-gold text-royal-black font-black uppercase tracking-[0.2em] text-xs rounded-2xl hover:brightness-110 active:scale-[0.98] transition-all shadow-2xl shadow-royal-gold/20">Continue Journey</button>
-                                    </motion.div>
-                                )}
-
-                                {step === 2 && (
-                                    <motion.div key="s2" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-10 pb-4">
-                                        <PreferenceCard type="transport" label="The Royal Chauffeur" icon={Car} value={bookingData.transport} options={PRICE_LIST.transport} />
-                                        <PreferenceCard type="hotel" label="Grand Accommodations" icon={Hotel} value={bookingData.hotel} options={PRICE_LIST.hotel} />
-                                        <PreferenceCard type="guide" label="Heritage Historian" icon={UserCheck} value={bookingData.guide} options={PRICE_LIST.guide} />
-                                        
-                                        <div className="p-6 rounded-[2rem] bg-gradient-to-br from-royal-gold/20 to-transparent border border-royal-gold/20 flex justify-between items-center group">
-                                            <div className="text-left font-serif"><p className="text-[10px] text-royal-gold uppercase tracking-[0.2em] font-black group-hover:tracking-[0.3em] transition-all duration-500">Total Estimate</p><p className="text-3xl text-white">₹{totalAmount}</p></div>
-                                            <button type="button" onClick={handleNext} className="h-14 w-14 rounded-full bg-royal-gold text-royal-black flex items-center justify-center shadow-2xl hover:scale-110 transition-transform"><ArrowRight className="w-6 h-6" /></button>
-                                        </div>
-                                        <div className="flex justify-center"><button type="button" onClick={handleBack} className="text-[10px] text-white/30 hover:text-royal-gold uppercase font-black tracking-widest transition-colors mb-4">Go Back</button></div>
-                                    </motion.div>
-                                )}
-
-                                {step === 3 && (
-                                    <motion.div key="s3" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-10">
-                                        <div className="p-8 rounded-[2.5rem] bg-white/[0.02] border border-white/5 space-y-5">
-                                            <p className="text-[10px] text-royal-gold font-black uppercase tracking-[0.4em] mb-4 text-center">Your Royal Summary</p>
-                                            <div className="flex justify-between items-center"><span className="text-[9px] text-white/30 uppercase tracking-widest">Transport</span><span className="text-xs text-white font-bold">{bookingData.transport}</span></div>
-                                            <div className="flex justify-between items-center"><span className="text-[9px] text-white/30 uppercase tracking-widest">Stays</span><span className="text-xs text-white font-bold">{bookingData.hotel}</span></div>
-                                            <div className="flex justify-between items-center"><span className="text-[9px] text-white/30 uppercase tracking-widest">Guide</span><span className="text-xs text-white font-bold">{bookingData.guide}</span></div>
-                                            <div className="pt-6 border-t border-white/5 flex justify-between items-center"><span className="text-xs font-black text-royal-gold uppercase tracking-[0.3em]">Pay on Arrival</span><span className="text-4xl font-serif text-white">₹{totalAmount}</span></div>
-                                        </div>
-
                                         <div className="space-y-4">
-                                            <input required type="text" placeholder="Full Name" value={bookingData.name} onChange={(e) => updateBooking({ name: e.target.value })} className="w-full bg-white/[0.03] border border-white/10 rounded-2xl py-6 px-8 text-white text-lg focus:outline-none focus:border-royal-gold" />
-                                            <input required type="tel" placeholder="WhatsApp Number" value={bookingData.phone} onChange={(e) => updateBooking({ phone: e.target.value })} className="w-full bg-white/[0.03] border border-white/10 rounded-2xl py-6 px-8 text-white text-lg focus:outline-none focus:border-royal-gold" />
+                                            <h4 className="text-2xl font-serif text-white">Shukriya!</h4>
+                                            <p className="text-royal-gold/80 text-[11px] font-black uppercase tracking-[0.2em] leading-relaxed max-w-sm mx-auto">
+                                                Your confirmation and other details will be shared and quotation will be shared on your WhatsApp and this number.
+                                            </p>
                                         </div>
-
-                                        <div className="flex gap-4">
-                                            <button type="button" onClick={handleBack} className="w-20 rounded-2xl bg-white/5 text-white/30 flex items-center justify-center hover:bg-white/10 transition-colors"><X className="w-5 h-5" /></button>
-                                            <button type="submit" disabled={isSubmitting || !bookingData.name || !bookingData.phone} className="flex-1 py-6 bg-gradient-to-r from-royal-gold to-amber-500 text-royal-black font-black uppercase tracking-[0.2em] text-xs rounded-2xl hover:brightness-110 shadow-2xl">
-                                                {isSubmitting ? <Loader2 className="w-6 h-6 animate-spin mx-auto" /> : "Finalize Booking"}
-                                            </button>
-                                        </div>
+                                        <button 
+                                            onClick={onClose}
+                                            className="px-12 py-5 bg-white/5 border border-white/10 text-white font-black uppercase tracking-widest text-[10px] rounded-2xl hover:bg-white hover:text-black transition-all"
+                                        >
+                                            Return to Site
+                                        </button>
                                     </motion.div>
+                                ) : (
+                                    <>
+                                        {step === 1 && (
+                                            <motion.div key="step1" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-10">
+                                                <div className="text-center md:text-left mb-4">
+                                                    <p className="text-white/40 text-xs font-medium italic underline underline-offset-8 decoration-royal-gold/20">When shall we prepare for your arrival?</p>
+                                                </div>
+                                                <div className="space-y-8">
+                                                    <div className="relative group">
+                                                        <Calendar className="absolute left-6 top-1/2 -translate-y-1/2 w-6 h-6 text-royal-gold group-focus-within:scale-110 transition-transform" />
+                                                        <input required type="date" value={bookingData.date || ''} onChange={(e) => updateBooking({ date: e.target.value })} className="w-full bg-white/[0.03] border border-white/10 rounded-[1.5rem] py-6 pl-16 pr-6 text-white text-lg focus:outline-none focus:border-royal-gold focus:bg-white/5 transition-all" />
+                                                    </div>
+                                                    <div className="space-y-4">
+                                                        <p className="text-[10px] text-royal-gold font-black uppercase tracking-[0.3em] px-2">Guests in your party</p>
+                                                        <div className="grid grid-cols-5 gap-3">
+                                                            {[1,2,3,4,5].map(n => (
+                                                                <button key={n} type="button" onClick={() => updateBooking({ travelers: n })} className={`py-5 rounded-2xl font-bold border transition-all duration-300 ${Number(bookingData.travelers) === n ? 'bg-royal-gold border-royal-gold text-royal-black shadow-xl scale-110' : 'bg-white/[0.03] border-white/10 text-white/50 hover:border-royal-gold/40'}`}>{n}</button>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <button 
+                                                    type="button" 
+                                                    onClick={handleNext} 
+                                                    disabled={!bookingData.date} 
+                                                    className="w-full py-6 bg-royal-gold text-royal-black font-black uppercase tracking-[0.2em] text-[10px] rounded-2xl flex items-center justify-center gap-3 shadow-2xl shadow-royal-gold/20 hover:brightness-110 active:scale-95 transition-all"
+                                                >
+                                                    Next Step
+                                                    <ArrowRight className="w-4 h-4" />
+                                                </button>
+                                            </motion.div>
+                                        )}
+
+                                        {step === 2 && (
+                                            <motion.div key="step2" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-10 pb-20">
+                                                <PreferenceCard type="transport" label="The Royal Chauffeur" icon={Car} value={bookingData.transport} options={['Luxury Sedan', 'Royal SUV', 'Mini Bus', 'Not Needed']} />
+                                                <PreferenceCard type="hotel" label="Grand Accommodations" icon={Hotel} value={bookingData.hotel} options={['Heritage Palace', 'Boutique Hotel', 'Eco Resort', 'Not Needed']} />
+                                                <PreferenceCard type="guide" label="Heritage Historian" icon={UserCheck} value={bookingData.guide} options={['History Scholar', 'Photography Expert', 'Storyteller', 'Not Needed']} />
+                                                
+                                                <div className="space-y-4">
+                                                    <p className="text-[10px] text-royal-gold font-black uppercase tracking-[0.3em] px-2">Royal Amenities (Optional)</p>
+                                                    <div className="grid grid-cols-2 gap-3">
+                                                        <button 
+                                                            type="button" 
+                                                            onClick={() => updateBooking({ restaurantRequested: !bookingData.restaurantRequested })}
+                                                            className={`py-4 px-4 rounded-2xl border transition-all flex items-center gap-3 ${bookingData.restaurantRequested ? 'bg-royal-gold/15 border-royal-gold text-white' : 'bg-white/[0.03] border-white/5 text-white/50'}`}
+                                                        >
+                                                            <UtensilsCrossed className="w-4 h-4" />
+                                                            <span className="text-[11px] font-bold uppercase tracking-widest">Restaurant</span>
+                                                        </button>
+                                                        <button 
+                                                            type="button" 
+                                                            onClick={() => updateBooking({ cafeRequested: !bookingData.cafeRequested })}
+                                                            className={`py-4 px-4 rounded-2xl border transition-all flex items-center gap-3 ${bookingData.cafeRequested ? 'bg-royal-gold/15 border-royal-gold text-white' : 'bg-white/[0.03] border-white/5 text-white/50'}`}
+                                                        >
+                                                            <Coffee className="w-4 h-4" />
+                                                            <span className="text-[11px] font-bold uppercase tracking-widest">Cafe</span>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                
+                                                <button 
+                                                    type="button" 
+                                                    onClick={handleNext} 
+                                                    className="w-full py-6 bg-royal-gold text-royal-black font-black uppercase tracking-[0.2em] text-[10px] rounded-2xl flex items-center justify-center gap-3 shadow-2xl shadow-royal-gold/20 hover:brightness-110 active:scale-95 transition-all"
+                                                >
+                                                    Next Step
+                                                    <ArrowRight className="w-4 h-4" />
+                                                </button>
+                                                <div className="flex justify-center"><button type="button" onClick={handleBack} className="text-[10px] text-white/30 hover:text-royal-gold uppercase font-black tracking-widest transition-colors mb-4">Go Back</button></div>
+                                            </motion.div>
+                                        )}
+
+                                        {step === 3 && (
+                                            <motion.div key="step3" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-10">
+                                                <div className="p-8 rounded-[2.5rem] bg-white/[0.02] border border-white/5 space-y-5">
+                                                    <p className="text-[10px] text-royal-gold font-black uppercase tracking-[0.4em] mb-4 text-center">Your Royal Summary</p>
+                                                    <div className="flex justify-between items-center"><span className="text-[9px] text-white/30 uppercase tracking-widest">Transport</span><span className="text-xs text-white font-bold">{bookingData.transport}</span></div>
+                                                    <div className="flex justify-between items-center"><span className="text-[9px] text-white/30 uppercase tracking-widest">Stays</span><span className="text-xs text-white font-bold">{bookingData.hotel}</span></div>
+                                                    <div className="flex justify-between items-center"><span className="text-[9px] text-white/30 uppercase tracking-widest">Guide</span><span className="text-xs text-white font-bold">{bookingData.guide}</span></div>
+                                                    <div className="pt-6 border-t border-white/5 flex justify-center items-center text-center px-4">
+                                                        <span className="text-[10px] font-black text-royal-gold uppercase tracking-[0.2em] leading-relaxed">
+                                                            You will get the quotation on your email and on your WhatsApp number
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                                <div className="space-y-4">
+                                                    <div className="relative group">
+                                                        <User className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-royal-gold/50 group-focus-within:text-royal-gold transition-colors" />
+                                                        <input required type="text" placeholder="Full Name" value={bookingData.name || ''} onChange={(e) => updateBooking({ name: e.target.value })} className="w-full bg-white/[0.03] border border-white/10 rounded-2xl py-6 pl-16 pr-8 text-white text-lg focus:outline-none focus:border-royal-gold" />
+                                                    </div>
+                                                    <div className="relative group">
+                                                        <Mail className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-royal-gold/50 group-focus-within:text-royal-gold transition-colors" />
+                                                        <input required type="email" placeholder="Email Address" value={bookingData.email || ''} onChange={(e) => updateBooking({ email: e.target.value })} className="w-full bg-white/[0.03] border border-white/10 rounded-2xl py-6 pl-16 pr-8 text-white text-lg focus:outline-none focus:border-royal-gold" />
+                                                    </div>
+                                                    <div className="relative group">
+                                                        <Phone className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-royal-gold/50 group-focus-within:text-royal-gold transition-colors" />
+                                                        <input required type="tel" placeholder="WhatsApp Number" value={bookingData.phone || ''} onChange={(e) => updateBooking({ phone: e.target.value })} className="w-full bg-white/[0.03] border border-white/10 rounded-2xl py-6 pl-16 pr-8 text-white text-lg focus:outline-none focus:border-royal-gold" />
+                                                    </div>
+                                                </div>
+
+                                                <div className="flex gap-4">
+                                                    <button type="button" onClick={handleBack} className="w-20 rounded-2xl bg-white/5 text-white/30 flex items-center justify-center hover:bg-white/10 transition-colors"><X className="w-5 h-5" /></button>
+                                                    <button type="button" onClick={handleSubmit} disabled={isSubmitting || !bookingData.name || !bookingData.phone || !bookingData.email} className="flex-1 py-6 bg-gradient-to-r from-royal-gold to-amber-500 text-royal-black font-black uppercase tracking-[0.2em] text-xs rounded-2xl hover:brightness-110 shadow-2xl">
+                                                        {isSubmitting ? <Loader2 className="w-6 h-6 animate-spin mx-auto" /> : "Finalize Booking"}
+                                                    </button>
+                                                </div>
+                                            </motion.div>
+                                        )}
+                                    </>
                                 )}
                             </AnimatePresence>
                         </div>
-                    </form>
+                    </div>
                 </motion.div>
             </div>
         </AnimatePresence>
