@@ -54,6 +54,51 @@ const HomePage = ({ t, searchQuery }) => {
         <div className="overflow-x-hidden min-h-screen bg-heritage-charcoal">
             <Hero />
             
+            {/* Strategy Selection: Dual Path */}
+            <Section id="strategy" className="bg-transparent py-12 md:py-20 -mt-20 relative z-20">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-7xl mx-auto px-4">
+                    {/* Path 1: Packages */}
+                    <motion.div 
+                        initial={{ opacity: 0, x: -50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        className="group bg-royal-gold/10 backdrop-blur-2xl p-10 rounded-[3rem] border border-royal-gold/20 hover:border-royal-gold transition-all duration-500 shadow-2xl flex flex-col justify-between"
+                    >
+                        <div>
+                            <div className="w-16 h-16 bg-royal-gold rounded-2xl flex items-center justify-center mb-8 shadow-xl">
+                                <Shield className="w-8 h-8 text-royal-black" />
+                            </div>
+                            <h2 className="text-3xl font-serif text-white mb-4">The Royal Expedition</h2>
+                            <p className="text-gray-400 mb-8 leading-relaxed">Planning from outside Chittorgarh? Let us curate your entire journey from Arrival to Departure. Includes Stay, Transport, Guide & Dining.</p>
+                        </div>
+                        <NavLink to="/itineraries" className="w-full py-5 bg-royal-gold text-royal-black font-black uppercase tracking-widest text-xs rounded-2xl flex items-center justify-center gap-3 hover:scale-105 active:scale-95 transition-all">
+                            Explore Packages
+                            <ArrowRight className="w-4 h-4" />
+                        </NavLink>
+                    </motion.div>
+
+                    {/* Path 2: On-Demand */}
+                    <motion.div 
+                        initial={{ opacity: 0, x: 50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        className="group bg-white/5 backdrop-blur-2xl p-10 rounded-[3rem] border border-white/10 hover:border-royal-gold/40 transition-all duration-500 shadow-2xl flex flex-col justify-between"
+                    >
+                        <div>
+                            <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mb-8 shadow-xl">
+                                <Wind className="w-8 h-8 text-royal-gold" />
+                            </div>
+                            <h2 className="text-3xl font-serif text-white mb-4">Instant On-Demand</h2>
+                            <p className="text-gray-400 mb-8 leading-relaxed">Already in Chittorgarh? Book individual services like a private taxi for fort visit, a professional guide, or a heritage hotel room.</p>
+                        </div>
+                        <div className="grid grid-cols-2 gap-4">
+                            <NavLink to="/stays" className="py-4 bg-white/5 border border-white/10 rounded-xl text-[10px] font-black uppercase tracking-widest text-center hover:bg-royal-gold hover:text-royal-black transition-all">Stays</NavLink>
+                            <NavLink to="/how-to-reach" className="py-4 bg-white/5 border border-white/10 rounded-xl text-[10px] font-black uppercase tracking-widest text-center hover:bg-royal-gold hover:text-royal-black transition-all">Transport</NavLink>
+                        </div>
+                    </motion.div>
+                </div>
+            </Section>
+            
             {!searchQuery && (
                 <Section id="explore-categories" title={t.pillars.title} subtitle={t.pillars.subtitle} className="bg-transparent py-20">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 max-w-7xl mx-auto px-4">

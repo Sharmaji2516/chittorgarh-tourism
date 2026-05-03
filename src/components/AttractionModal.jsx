@@ -141,13 +141,7 @@ const AttractionModal = ({ attraction, onClose }) => {
                                 </a>
                             )}
 
-                            <NavLink
-                                to="/gallery"
-                                onClick={onClose}
-                                className="block w-full text-center py-2 text-royal-gold/60 hover:text-royal-gold transition-colors text-xs uppercase tracking-[0.2em] mt-4"
-                            >
-                                View Comprehensive Gallery
-                            </NavLink>
+
                         </div>
                     </div>
                 </motion.div>

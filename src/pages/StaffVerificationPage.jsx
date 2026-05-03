@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom';
 const StaffVerificationPage = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [staffRole, setStaffRole] = useState('');
+    const [providerId, setProviderId] = useState('');
+    const [providerData, setProviderData] = useState(null);
     const [pin, setPin] = useState('');
     const [code, setCode] = useState('');
     const [loading, setLoading] = useState(false);
@@ -28,19 +30,45 @@ const StaffVerificationPage = () => {
         { id: 'cafe', label: 'Cafe Staff', serviceName: 'Cafe & Hangouts', icon: Coffee }
     ];
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
-        if (!staffRole) {
-            setError("Please select your service category");
-            return;
-        }
-        if (pin === STAFF_PIN) {
+        setError('');
+        setLoading(true);
+
+        try {
+            if (pin !== STAFF_PIN) {
+                setError("Invalid Verifier PIN");
+                setPin('');
+                setLoading(false);
+                return;
+            }
+
+            if (!providerId) {
+                setError("Please enter your Unique Provider ID");
+                setLoading(false);
+                return;
+            }
+
+            // Verify Provider ID in Firestore
+            const q = query(collection(db, "providers"), where("providerCode", "==", providerId.toUpperCase()));
+            const snapshot = await getDocs(q);
+
+            if (snapshot.empty) {
+                setError("Invalid Provider ID. Please check your Welcome Mail.");
+                setLoading(false);
+                return;
+            }
+
+            const pData = { id: snapshot.docs[0].id, ...snapshot.docs[0].data() };
+            setProviderData(pData);
+            setStaffRole(pData.type);
             setIsLoggedIn(true);
-            setError('');
-            fetchTodaySchedule(staffRole);
-        } else {
-            setError("Invalid Verifier PIN");
-            setPin('');
+            fetchTodaySchedule(pData.type, pData.name);
+        } catch (err) {
+            console.error("Login Error:", err);
+            setError("Authentication failed. Please try again.");
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -60,12 +88,23 @@ const StaffVerificationPage = () => {
                 const docSnap = querySnapshot.docs[0];
                 const data = docSnap.id ? { id: docSnap.id, ...docSnap.data() } : null;
                 
-                // Check if the guest has the specific service authorized
+                // Check if the guest has the specific service authorized AND is assigned to THIS provider
                 const roleObj = roles.find(r => r.id === staffRole);
-                if (data && (data.includedServices || []).includes(roleObj.serviceName)) {
+                const isAuthorized = (data.includedServices || []).includes(roleObj.serviceName);
+                
+                // Check provider assignment
+                let isAssigned = false;
+                if (staffRole === 'taxi') isAssigned = data.taxiName === providerData.name;
+                else if (staffRole === 'hotel') isAssigned = data.hotelName === providerData.name;
+                else if (staffRole === 'guide') isAssigned = data.guideName === providerData.name;
+                else isAssigned = isAuthorized; // For others, just check if authorized for now or add more logic
+
+                if (data && isAuthorized && isAssigned) {
                     setBooking(data);
-                } else {
-                    setError(`Access Denied: This guest does not have '${roleObj.serviceName}' authorized in their pass.`);
+                } else if (!isAuthorized) {
+                    setError(`Access Denied: Guest pass does not include '${roleObj.serviceName}'.`);
+                } else if (!isAssigned) {
+                    setError(`Restricted: This guest is assigned to a different ${roleObj.label}. You are not authorized to verify this pass.`);
                 }
             } else {
                 setError("Invalid Pass: No such token exists in our records.");
@@ -96,16 +135,24 @@ const StaffVerificationPage = () => {
         }
     };
 
-    const fetchTodaySchedule = async (roleId) => {
+    const fetchTodaySchedule = async (roleId, providerName) => {
         setScheduleLoading(true);
         try {
             const today = new Date().toISOString().split('T')[0];
             const roleObj = roles.find(r => r.id === roleId);
-            const q = query(
-                collection(db, "bookings"), 
-                where("date", "==", today),
-                where("includedServices", "array-contains", roleObj.serviceName)
-            );
+            
+            // Filter by date, service type, and provider name
+            let q;
+            if (roleId === 'taxi') {
+                q = query(collection(db, "bookings"), where("date", "==", today), where("taxiName", "==", providerName));
+            } else if (roleId === 'hotel') {
+                q = query(collection(db, "bookings"), where("date", "==", today), where("hotelName", "==", providerName));
+            } else if (roleId === 'guide') {
+                q = query(collection(db, "bookings"), where("date", "==", today), where("guideName", "==", providerName));
+            } else {
+                q = query(collection(db, "bookings"), where("date", "==", today), where("includedServices", "array-contains", roleObj.serviceName));
+            }
+
             const snapshot = await getDocs(q);
             setTodayBookings(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
         } catch (err) {
@@ -139,43 +186,30 @@ const StaffVerificationPage = () => {
                     
                     <form onSubmit={handleLogin} className="space-y-8">
                         <div className="space-y-4">
-                            <p className="text-[10px] text-white/30 font-black uppercase tracking-widest text-center">Select Your Service Category</p>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                {roles.map((role) => (
-                                    <button 
-                                        key={role.id}
-                                        type="button"
-                                        onClick={() => setStaffRole(role.id)}
-                                        className={cn(
-                                            "p-4 rounded-2xl border-2 transition-all flex items-center gap-4 text-left",
-                                            staffRole === role.id 
-                                                ? "bg-royal-gold border-royal-gold text-royal-black" 
-                                                : "bg-white/5 border-white/10 text-white hover:border-white/20"
-                                        )}
-                                    >
-                                        <role.icon className="w-5 h-5" />
-                                        <span className="text-[10px] font-black uppercase tracking-widest">{role.label}</span>
-                                    </button>
-                                ))}
+                            <p className="text-[10px] text-white/30 font-black uppercase tracking-widest text-center">Identity Verification</p>
+                            <div className="space-y-4">
+                                <input 
+                                    type="text" 
+                                    value={providerId} 
+                                    onChange={(e) => setProviderId(e.target.value)} 
+                                    className="w-full bg-white/5 border border-white/10 rounded-2xl py-5 px-8 text-center text-xl font-black tracking-widest text-royal-gold focus:outline-none focus:border-royal-gold/50" 
+                                    placeholder="ENTER PROVIDER ID (e.g. TX-1234)" 
+                                />
+                                <input 
+                                    type="password" 
+                                    maxLength={4} 
+                                    value={pin} 
+                                    onChange={(e) => setPin(e.target.value.replace(/[^0-9]/g, ''))} 
+                                    className="w-full bg-white/5 border border-white/10 rounded-2xl py-5 px-8 text-center text-2xl tracking-[1em] text-royal-gold focus:outline-none focus:border-royal-gold/50" 
+                                    placeholder="****" 
+                                />
                             </div>
-                        </div>
-
-                        <div className="space-y-3">
-                            <p className="text-[10px] text-white/30 font-black uppercase tracking-widest text-center">Security Verification</p>
-                            <input 
-                                type="password" 
-                                maxLength={4} 
-                                value={pin} 
-                                onChange={(e) => setPin(e.target.value.replace(/[^0-9]/g, ''))} 
-                                className="w-full bg-white/5 border border-white/10 rounded-2xl py-6 px-10 text-center text-3xl tracking-[1em] text-royal-gold focus:outline-none focus:border-royal-gold/50" 
-                                placeholder="****" 
-                            />
                         </div>
 
                         {error && <p className="text-red-400 text-[10px] font-black uppercase tracking-wider text-center bg-red-500/10 p-4 rounded-xl border border-red-500/20">{error}</p>}
                         
-                        <button type="submit" className="w-full py-6 bg-royal-gold text-royal-black font-black uppercase tracking-widest text-xs rounded-3xl shadow-2xl hover:scale-[1.02] active:scale-95 transition-all">
-                            Initialize Registry
+                        <button type="submit" disabled={loading} className="w-full py-6 bg-royal-gold text-royal-black font-black uppercase tracking-widest text-xs rounded-3xl shadow-2xl hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center">
+                            {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : "Verify Provider Identity"}
                         </button>
                     </form>
                 </motion.div>
@@ -196,12 +230,12 @@ const StaffVerificationPage = () => {
                             {getServiceIcon(staffRole)}
                         </div>
                         <div>
-                            <h1 className="text-xl font-serif font-black italic tracking-tight">{currentRoleLabel}</h1>
-                            <p className="text-[8px] text-royal-gold uppercase tracking-[0.3em] font-black">Active Service Session</p>
+                            <h1 className="text-xl font-serif font-black italic tracking-tight">{providerData?.name}</h1>
+                            <p className="text-[8px] text-royal-gold uppercase tracking-[0.3em] font-black">{currentRoleLabel} | ID: {providerData?.providerCode}</p>
                         </div>
                     </div>
-                    <button onClick={() => { setIsLoggedIn(false); setBooking(null); setStaffRole(''); }} className="p-3 bg-white/5 hover:bg-red-500/10 hover:text-red-500 rounded-xl transition-all flex items-center gap-2 group">
-                        <span className="text-[9px] font-black uppercase tracking-widest hidden group-hover:block">Switch Role</span>
+                    <button onClick={() => { setIsLoggedIn(false); setBooking(null); setStaffRole(''); setProviderData(null); setProviderId(''); }} className="p-3 bg-white/5 hover:bg-red-500/10 hover:text-red-500 rounded-xl transition-all flex items-center gap-2 group">
+                        <span className="text-[9px] font-black uppercase tracking-widest hidden group-hover:block">Logout Partner</span>
                         <LogOut className="w-5 h-5" />
                     </button>
                 </div>
@@ -291,8 +325,8 @@ const StaffVerificationPage = () => {
                 {!booking && (
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="mt-12 space-y-6">
                         <div className="flex items-center justify-between px-6">
-                            <h2 className="text-xs font-black uppercase tracking-[0.3em] text-white/40">Today's Expected Guests</h2>
-                            <button onClick={() => fetchTodaySchedule(staffRole)} className="p-2 bg-white/5 rounded-lg hover:bg-white/10 transition-all">
+                            <h2 className="text-xs font-black uppercase tracking-[0.3em] text-white/40">Your Assigned Guests (Today)</h2>
+                            <button onClick={() => fetchTodaySchedule(staffRole, providerData.name)} className="p-2 bg-white/5 rounded-lg hover:bg-white/10 transition-all">
                                 <RefreshCw className={cn("w-4 h-4 text-royal-gold", scheduleLoading && "animate-spin")} />
                             </button>
                         </div>

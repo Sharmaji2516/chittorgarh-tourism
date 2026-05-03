@@ -20,12 +20,10 @@ const Navbar = () => {
     const navLinks = [
         { name: t.nav.home || 'Home', href: '/' },
         { name: t.nav.attractions || 'Attractions', href: '/attractions' },
-        { name: t.nav.gallery || 'Gallery', href: '/gallery' },
-        { name: t.nav.vendors, href: '/flavors' },
-        { name: t.nav.stays || 'Stays', href: '/stays' },
+        { name: t.nav.localRoyalCuisine, href: '/flavors' },
+        { name: t.nav.royalJourneys, href: '/royal-journeys' },
         { name: t.nav.localVocal || 'Local For Vocal', href: '/local-for-vocal' },
-        { name: t.nav.mission || 'Our Mission', href: '/mission' },
-        { name: t.nav.services || 'Our Services', href: '/services' },
+        { name: t.nav.missionServices, href: '/mission-services' },
     ];
 
     const isHome = location.pathname === '/';

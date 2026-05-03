@@ -1,33 +1,145 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Section from '../components/Section';
 import VendorCard from '../components/VendorCard';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Utensils, Coffee, LayoutGrid, Star, ArrowRight } from 'lucide-react';
+import { cn } from '../utils/cn';
+import BookingModal from '../components/BookingModal';
 
 const FlavorsPage = ({ t, filteredVendors, filteredCafes, searchQuery }) => {
+    const [activeCategory, setActiveCategory] = useState('all'); // 'all', 'vendors', 'cafes', 'dishes'
+    const [isBookingOpen, setIsBookingOpen] = useState(false);
+    const [bookingTitle, setBookingTitle] = useState('');
+
+    const filterOptions = [
+        { id: 'all', label: t.common.filterAll, icon: LayoutGrid },
+        { id: 'dishes', label: "Famous Dishes", icon: Utensils },
+        { id: 'vendors', label: t.common.filterRestaurants, icon: Star },
+        { id: 'cafes', label: t.common.filterCafes, icon: Coffee },
+    ];
+
+    const openBooking = (title) => {
+        setBookingTitle(title);
+        setIsBookingOpen(true);
+    };
+
     return (
         <div className="space-y-0">
-            <Section id="vendors" title={t.vendors.title} className="bg-transparent text-center">
+            {/* Page Header & Filter Bar */}
+            <div className="pt-12 pb-8 text-center px-4">
                 {!searchQuery && (
-                    <p className="max-w-2xl mx-auto text-gray-400 mb-12 font-light italic">
-                        "Discover the culinary heritage of Chittorgarh. From the spicy Dal Baati to the sweet Gulab Jamun, every bite is a royal treat."
-                    </p>
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                    >
+                        <h1 className="text-4xl md:text-5xl font-serif text-white mb-6 tracking-wider">
+                            {t.localRoyalCuisine}
+                        </h1>
+                        <p className="max-w-2xl mx-auto text-gray-400 mb-12 font-light italic">
+                            "Savor the authentic flavors of Mewar. From traditional royal recipes to local street favorites, experience the culinary soul of Chittorgarh."
+                        </p>
+                    </motion.div>
                 )}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    {filteredVendors.map(item => (
-                        <VendorCard key={`vendor-${item.id}`} vendor={item} />
+
+                {/* Filter Buttons */}
+                <div className="flex flex-wrap justify-center gap-3 md:gap-4 mb-12">
+                    {filterOptions.map((option) => (
+                        <button
+                            key={option.id}
+                            onClick={() => setActiveCategory(option.id)}
+                            className={cn(
+                                "flex items-center gap-2 px-6 py-3 rounded-full border transition-all duration-300 text-sm font-bold tracking-widest uppercase",
+                                activeCategory === option.id
+                                    ? "bg-royal-gold text-royal-black border-royal-gold shadow-[0_0_20px_rgba(212,175,55,0.3)]"
+                                    : "bg-white/5 text-gray-400 border-white/10 hover:border-royal-gold/30 hover:text-white"
+                            )}
+                        >
+                            <option.icon className="w-4 h-4" />
+                            {option.label}
+                        </button>
                     ))}
                 </div>
-            </Section>
+            </div>
 
-            {/* Cafes Section Moved from Stays */}
-            {filteredCafes.length > 0 && (
-                <Section id="cafes" title={t.cafes.title} className="bg-black/20 backdrop-blur-sm border-t border-royal-gold/10 text-center">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {filteredCafes.map(item => (
-                            <VendorCard key={`cafe-${item.id}`} vendor={item} />
-                        ))}
-                    </div>
-                </Section>
-            )}
+            <AnimatePresence mode="wait">
+                <motion.div
+                    key={activeCategory}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.3 }}
+                >
+                    {/* Famous Dishes Section */}
+                    {(activeCategory === 'all' || activeCategory === 'dishes') && (
+                        <Section id="dishes" title="Famous Royal Dishes" className="bg-transparent text-center !pt-0">
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                                {t.dishes.items.map(dish => (
+                                    <motion.div
+                                        key={dish.id}
+                                        whileHover={{ y: -5 }}
+                                        className="group relative bg-heritage-charcoal/40 rounded-3xl overflow-hidden border border-white/5 hover:border-royal-gold/30 transition-all duration-500 shadow-2xl cursor-pointer"
+                                        onClick={() => openBooking(`Experience ${dish.name}`)}
+                                    >
+                                        <div className="aspect-square overflow-hidden">
+                                            <img src={dish.image} alt={dish.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
+                                        </div>
+                                        <div className="p-4 bg-gradient-to-t from-black/80 to-transparent absolute bottom-0 left-0 w-full text-left">
+                                            <h4 className="text-white font-serif text-lg">{dish.name}</h4>
+                                            <div className="flex items-center gap-2 text-royal-gold text-[10px] uppercase font-bold tracking-widest mt-1">
+                                                <span>Inquire Now</span>
+                                                <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                ))}
+                            </div>
+                        </Section>
+                    )}
+
+                    {/* Vendors/Restaurants Section */}
+                    {(activeCategory === 'all' || activeCategory === 'vendors') && (
+                        <Section id="vendors" title={activeCategory === 'all' ? "Premium Food Destinations" : ""} className="bg-transparent text-center">
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                                {filteredVendors.map(item => (
+                                    <VendorCard 
+                                        key={`vendor-${item.id}`} 
+                                        vendor={item} 
+                                        onClick={() => openBooking(`Dine at ${item.name}`)}
+                                    />
+                                ))}
+                            </div>
+                        </Section>
+                    )}
+
+                    {/* Cafes Section */}
+                    {(activeCategory === 'all' || activeCategory === 'cafes') && filteredCafes.length > 0 && (
+                        <Section 
+                            id="cafes" 
+                            title={activeCategory === 'all' ? t.cafes.title : ""} 
+                            className={cn(
+                                "text-center",
+                                activeCategory === 'all' ? "bg-black/20 backdrop-blur-sm border-t border-royal-gold/10" : "bg-transparent"
+                            )}
+                        >
+                            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                                {filteredCafes.map(item => (
+                                    <VendorCard 
+                                        key={`cafe-${item.id}`} 
+                                        vendor={item} 
+                                        onClick={() => openBooking(`Visit ${item.name}`)}
+                                    />
+                                ))}
+                            </div>
+                        </Section>
+                    )}
+                </motion.div>
+            </AnimatePresence>
+
+            <BookingModal 
+                isOpen={isBookingOpen}
+                onClose={() => setIsBookingOpen(false)}
+                pillarTitle={bookingTitle}
+            />
 
             {(filteredVendors.length > 0 || filteredCafes.length > 0) && (
                 <div className="pb-16 text-center">
@@ -41,3 +153,4 @@ const FlavorsPage = ({ t, filteredVendors, filteredCafes, searchQuery }) => {
 };
 
 export default FlavorsPage;
+

@@ -14,14 +14,13 @@ import HomePage from './pages/HomePage';
 import FlavorsPage from './pages/FlavorsPage';
 import StaysPage from './pages/StaysPage';
 import LocalVocalPage from './pages/LocalVocalPage';
+import RoyalJourneysPage from './pages/RoyalJourneysPage';
 
 
 import VisitModal from './components/VisitModal';
 import HowToReach from './pages/HowToReach';
-import GalleryPage from './pages/GalleryPage';
 import AttractionsPage from './pages/AttractionsPage';
-import MissionPage from './pages/MissionPage';
-import ServicesPage from './pages/ServicesPage';
+import MissionServicesPage from './pages/MissionServicesPage';
 import AdminPage from './pages/AdminPage';
 import VerificationPage from './pages/VerificationPage';
 import StaffVerificationPage from './pages/StaffVerificationPage';
@@ -80,6 +79,7 @@ const MainContent = () => {
                 filteredHotels={t.hotels.items}
               />
             } />
+            <Route path="/royal-journeys" element={<RoyalJourneysPage t={t} />} />
             <Route path="/local-for-vocal" element={
               <LocalVocalPage
                 t={t}
@@ -87,7 +87,6 @@ const MainContent = () => {
               />
             } />
             <Route path="/how-to-reach" element={<HowToReach />} />
-            <Route path="/gallery" element={<GalleryPage t={t} />} />
             <Route path="/attractions/:category" element={
               <AttractionsPage
                 t={t}
@@ -102,8 +101,7 @@ const MainContent = () => {
                 setSelectedAttraction={setSelectedAttraction}
               />
             } />
-            <Route path="/mission" element={<MissionPage t={t} />} />
-            <Route path="/services" element={<ServicesPage t={t} />} />
+            <Route path="/mission-services" element={<MissionServicesPage t={t} />} />
             <Route path="/admin" element={<AdminPage />} />
             <Route path="/verify/:id" element={<VerificationPage />} />
             <Route path="/staff-verify" element={<StaffVerificationPage />} />

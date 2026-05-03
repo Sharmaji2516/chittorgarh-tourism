@@ -4,13 +4,11 @@ export const content = {
       home: "Home",
       history: "History",
       attractions: "Attractions",
-      vendors: "Royal Cuisine",
-      hotels: "Stays",
+      localRoyalCuisine: "Famous Local Flavors",
+      royalJourneys: "Royal Journeys",
       localVocal: "Local For Vocal",
       itineraries: "Itineraries",
-      gallery: "Gallery",
-      mission: "Our Mission",
-      services: "Our Services",
+      missionServices: "Mission & Services",
       langBtn: "हिंदी",
       brandTitle: "CHITTORGARH",
       brandTagline: "TOURISM",
@@ -25,6 +23,17 @@ export const content = {
       readMore: "Read More",
       viewMap: "View Map",
       disclaimer: "Ratings and Reviews are from Tourists only",
+      filterAll: "All",
+      filterRestaurants: "Hotels/Food",
+      filterCafes: "Cafes",
+      bestPrice: "Best Price Guaranteed",
+      verified: "Verified Partner",
+      conciergeBenefits: [
+        "Special Discounted Rates",
+        "24/7 Local Ground Support",
+        "Handpicked & Verified Quality",
+        "One-Point Contact for Everything"
+      ]
     },
     hero: {
       title: "Chittorgarh",
@@ -503,92 +512,39 @@ export const content = {
         },
       ],
     },
+    stayTypes: [
+      {
+        id: "heritage",
+        name: "Heritage Fort Palace",
+        desc: "Experience 16th-century royal living in a restored fort palace with authentic Mewari architecture.",
+        image: "/assets/images/fateh-prakash-new.jpg"
+      },
+      {
+        id: "luxury",
+        name: "Luxury Lake Resort",
+        desc: "Modern luxury combined with traditional hospitality, featuring stunning lake views and premium amenities.",
+        image: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=800&auto=format&fit=crop"
+      },
+      {
+        id: "boutique",
+        name: "Boutique Heritage Haveli",
+        desc: "Cozy and personalized stay in a traditional haveli, offering a glimpse into the local lifestyle.",
+        image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&auto=format&fit=crop"
+      }
+    ],
     hotels: {
       title: "Royal Stays & Comfort",
       disclaimer: "Ratings and Reviews are from Tourists only",
       items: [
         {
           id: 1,
-          name: "Hotel The Grand Chittor",
+          name: "Heritage Category",
           desc: "Luxury hotel featuring a rooftop pool with stunning city and fort views.",
-          bookingLink:
-            "https://www.google.com/search?q=Hotel+The+Grand+Chittor+booking",
+          bookingLink: "#",
           distances: {
             railway: "1.5 km",
             bus: "2.5 km",
             airport: "91 km (Udaipur)",
-          },
-        },
-        {
-          id: 2,
-          name: "Kukda Resort",
-          desc: "Modern architecture with a beautiful garden and swimming pool, perfect for families.",
-          bookingLink:
-            "https://www.google.com/search?q=Kukda+Resort+Chittorgarh+booking",
-          distances: {
-            railway: "4 km",
-            bus: "6 km",
-            airport: "93 km (Udaipur)",
-          },
-        },
-        {
-          id: 3,
-          name: "Hotel Kumbha Retreat & SPA",
-          desc: "A luxurious experience with an on-site spa, offering comfort and elegance.",
-          bookingLink:
-            "https://www.google.com/search?q=Hotel+Kumbha+Retreat+SPA+Chittorgarh+booking",
-          distances: {
-            railway: "3 km",
-            bus: "5 km",
-            airport: "92.5 km (Udaipur)",
-          },
-        },
-        {
-          id: 4,
-          name: "Hotel Pratap Palace",
-          desc: "Known for warm hospitality and refined ambiance, a great blend of luxury and tradition.",
-          bookingLink:
-            "https://www.google.com/search?q=Hotel+Pratap+Palace+Chittorgarh+booking",
-          distances: {
-            railway: "2.5 km",
-            bus: "4.5 km",
-            airport: "91.5 km (Udaipur)",
-          },
-        },
-        {
-          id: 5,
-          name: "jüSTa Lake Nahargarh Palace",
-          desc: "A breathtaking lake palace resort surrounded by the Aravalli Hills, offering a truly royal and secluded experience.",
-          bookingLink:
-            "https://www.google.com/search?q=justa+lake+nahargarh+palace+booking",
-          distances: {
-            railway: "35 km",
-            bus: "37 km",
-            airport: "120 km (Udaipur)",
-          },
-        },
-        {
-          id: 6,
-          name: "Bassi Fort Palace",
-          desc: "A 16th-century fort converted into a luxury heritage hotel, keeping the old-world charm alive with modern comforts.",
-          bookingLink:
-            "https://www.google.com/search?q=bassi+fort+palace+booking",
-          distances: {
-            railway: "25 km",
-            bus: "27 km",
-            airport: "115 km (Udaipur)",
-          },
-        },
-        {
-          id: 7,
-          name: "Shree Anandam Resort",
-          desc: "A sprawling resort with lush green gardens and traditional architecture, perfect for a relaxing family getaway.",
-          bookingLink:
-            "https://www.google.com/search?q=shree+anandam+resort+booking",
-          distances: {
-            railway: "5 km",
-            bus: "7 km",
-            airport: "94.5 km (Udaipur)",
           },
         },
       ],
@@ -673,6 +629,33 @@ export const content = {
       whereToVisit: "Where to Visit",
       recommendedStay: "Recommended Stay/Food"
     },
+    packages: {
+      title: "Royal Expeditions",
+      subtitle: "All-Inclusive Heritage Packages",
+      items: [
+        {
+          id: "oneDay",
+          name: "The Fort Legacy",
+          duration: "1 Day",
+          includes: ["Private SUV", "Certified Guide", "Traditional Lunch"],
+          desc: "The ultimate 1-day journey covering every secret of the Chittorgarh Fort."
+        },
+        {
+          id: "twoDays",
+          name: "Mewar Heritage",
+          duration: "2 Days",
+          includes: ["Luxury Stay", "Full Transport", "Wildlife Safari"],
+          desc: "A deep dive into history followed by a serene exploration of Bassi and the historic city."
+        },
+        {
+          id: "threeDays",
+          name: "Spiritual & Scenic",
+          duration: "3 Days",
+          includes: ["Temple Tour", "Waterfall Visit", "Premium Stay"],
+          desc: "A grand journey featuring the divine Sanwaliya Ji Temple and the breathtaking Menal Waterfall."
+        }
+      ]
+    },
     dishes: {
       items: [
         { id: 1, name: "Dal Batti Churma", image: "/assets/images/dal-batti-churma-new.jpg" },
@@ -750,11 +733,7 @@ export const content = {
         }
       ]
     },
-    gallery: {
-      all: "All",
-      royalCuisine: "Royal Cuisine",
-      noPhotos: "No pictures found in this category."
-    },
+
     admin: {
       loginTitle: "Royal Admin Access",
       pinPlaceholder: "Enter Security PIN",
@@ -887,6 +866,8 @@ export const content = {
         luxurySedan: "Luxury Sedan",
         royalSUV: "Royal SUV",
         miniBus: "Mini Bus",
+        autoRickshaw: "Auto Rickshaw",
+        tempoTraveller: "Tempo Traveller",
         heritagePalace: "Heritage Palace",
         boutiqueHotel: "Boutique Hotel",
         ecoResort: "Eco Resort",
@@ -903,13 +884,11 @@ export const content = {
       home: "मुख पृष्ठ",
       history: "इतिहास",
       attractions: "पर्यटन स्थल",
-      vendors: "शाही व्यंजन",
-      hotels: "रुकने की जगह",
+      localRoyalCuisine: "प्रसिद्ध स्थानीय स्वाद",
+      royalJourneys: "शाही यात्राएं",
       localVocal: "लोकल फॉर वोकल",
       itineraries: "यात्रा कार्यक्रम",
-      gallery: "गैलरी",
-      mission: "हमारा लक्ष्य",
-      services: "हमारी सेवाएँ",
+      missionServices: "मिशन और सेवाएँ",
       langBtn: "English",
       brandTitle: "चित्तौड़गढ़",
       brandTagline: "पर्यटन",
@@ -924,6 +903,17 @@ export const content = {
       readMore: "और पढ़ें",
       viewMap: "नक्शा देखें",
       disclaimer: "रेटिंग और समीक्षाएं केवल पर्यटकों की ओर से हैं",
+      filterAll: "सब",
+      filterRestaurants: "होटल/भोजन",
+      filterCafes: "कैफे",
+      bestPrice: "सर्वोत्तम मूल्य की गारंटी",
+      verified: "सत्यापित पार्टनर",
+      conciergeBenefits: [
+        "विशेष रियायती दरें",
+        "24/7 लोकल ग्राउंड सपोर्ट",
+        "चुनिंदा और सत्यापित गुणवत्ता",
+        "हर चीज़ के लिए वन-पॉइंट संपर्क"
+      ]
     },
     hero: {
       title: "चित्तौड़गढ़",
@@ -1375,91 +1365,38 @@ export const content = {
         },
       ],
     },
+    stayTypes: [
+      {
+        id: "heritage",
+        name: "हेरिटेज फोर्ट पैलेस",
+        desc: "प्रामाणिक मेवाड़ी वास्तुकला के साथ एक बहाल किले के महल में 16 वीं शताब्दी के शाही जीवन का अनुभव करें।",
+        image: "/assets/images/fateh-prakash-new.jpg"
+      },
+      {
+        id: "luxury",
+        name: "लक्जरी लेक रिसॉर्ट",
+        desc: "शानदार झील के दृश्यों और प्रीमियम सुविधाओं के साथ आधुनिक विलासिता और पारंपरिक आतिथ्य का मिश्रण।",
+        image: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=800&auto=format&fit=crop"
+      },
+      {
+        id: "boutique",
+        name: "बुटीक हेरिटेज हवेली",
+        desc: "एक पारंपरिक हवेली में आरामदायक और व्यक्तिगत प्रवास, स्थानीय जीवन शैली की एक झलक पेश करता है।",
+        image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&auto=format&fit=crop"
+      }
+    ],
     hotels: {
       title: "शाही निवास और आराम",
       items: [
         {
           id: 1,
-          name: "होटल द ग्रैंड चित्तौड़",
+          name: "हेरिटेज श्रेणी",
           desc: "छत पर पूल और शहर के शानदार दृश्यों वाला लग्जरी होटल।",
-          bookingLink:
-            "https://www.google.com/search?q=Hotel+The+Grand+Chittor+booking",
+          bookingLink: "#",
           distances: {
             railway: "1.5 किमी",
             bus: "2.5 किमी",
             airport: "91 किमी (उदयपुर)",
-          },
-        },
-        {
-          id: 2,
-          name: "कुकड़ा रिज़ॉर्ट",
-          desc: "सुंदर बगीचे और स्विमिंग पूल के साथ आधुनिक वास्तुकला, परिवारों के लिए आदर्श।",
-          bookingLink:
-            "https://www.google.com/search?q=Kukda+Resort+Chittorgarh+booking",
-          distances: {
-            railway: "4 किमी",
-            bus: "6 किमी",
-            airport: "93 किमी (उदयपुर)",
-          },
-        },
-        {
-          id: 3,
-          name: "होटल कुंभा रिट्रीट और स्पा",
-          desc: "साइट पर स्पा के साथ एक शानदार अनुभव, आराम और शान का प्रतीक।",
-          bookingLink:
-            "https://www.google.com/search?q=Hotel+Kumbha+Retreat+SPA+Chittorgarh+booking",
-          distances: {
-            railway: "3 किमी",
-            bus: "5 किमी",
-            airport: "92.5 किमी (उदयपुर)",
-          },
-        },
-        {
-          id: 4,
-          name: "होटल प्रताप पैलेस",
-          desc: "गर्मजोशी भरे आतिथ्य और परिष्कृत माहौल के लिए जाना जाता है।",
-          bookingLink:
-            "https://www.google.com/search?q=Hotel+Pratap+Palace+Chittorgarh+booking",
-          distances: {
-            railway: "2.5 किमी",
-            bus: "4.5 किमी",
-            airport: "91.5 किमी (उदयपुर)",
-          },
-        },
-        {
-          id: 5,
-          name: "जुस्टा लेक नाहरगढ़ पैलेस",
-          desc: "अरावली पहाड़ियों से घिरा एक लुभावना लेक पैलेस रिसॉर्ट, जो वास्तव में शाही और एकांत अनुभव प्रदान करता है।",
-          bookingLink:
-            "https://www.google.com/search?q=justa+lake+nahargarh+palace+booking",
-          distances: {
-            railway: "35 किमी",
-            bus: "37 किमी",
-            airport: "120 किमी (उदयपुर)",
-          },
-        },
-        {
-          id: 6,
-          name: "बस्सी फोर्ट पैलेस",
-          desc: "16वीं शताब्दी का एक किला जो एक लक्जरी हेरिटेज होटल में परिवर्तित हो गया, आधुनिक सुख-सुविधाओं के साथ पुरानी दुनिया के आकर्षण को जीवित रखता है।",
-          bookingLink:
-            "https://www.google.com/search?q=bassi+fort+palace+booking",
-          distances: {
-            railway: "25 किमी",
-            bus: "27 किमी",
-            airport: "115 किमी (उदयपुर)",
-          },
-        },
-        {
-          id: 7,
-          name: "श्री आनंदम रिसॉर्ट",
-          desc: "हरे-भरे बगीचों और पारंपरिक वास्तुकला वाला एक विशाल रिसॉर्ट, जो एक आरामदायक पारिवारिक छुट्टी के लिए उपयुक्त है।",
-          bookingLink:
-            "https://www.google.com/search?q=shree+anandam+resort+booking",
-          distances: {
-            railway: "5 किमी",
-            bus: "7 किमी",
-            airport: "94.5 किमी (उदयपुर)",
           },
         },
       ],
@@ -1583,11 +1520,7 @@ export const content = {
         }
       ]
     },
-    gallery: {
-      all: "सब",
-      royalCuisine: "शाही व्यंजन",
-      noPhotos: "इस श्रेणी में कोई चित्र नहीं मिला।"
-    },
+
     admin: {
       loginTitle: "शाही एडमिन एक्सेस",
       pinPlaceholder: "सुरक्षा पिन दर्ज करें",
@@ -1718,6 +1651,8 @@ export const content = {
         luxurySedan: "लक्जरी सेडान",
         royalSUV: "रॉयल एसयूवी",
         miniBus: "मिनी बस",
+        autoRickshaw: "ऑटो रिक्शा",
+        tempoTraveller: "टेम्पो ट्रैवलर",
         heritagePalace: "हेरिटेज पैलेस",
         boutiqueHotel: "बुटीक होटल",
         ecoResort: "इको रिसॉर्ट",
@@ -1726,6 +1661,45 @@ export const content = {
         storyteller: "कहानीकार",
         notNeeded: "आवश्यक नहीं"
       }
+    },
+    packages: {
+      title: "शाही यात्रा कार्यक्रम",
+      subtitle: "सब कुछ शामिल हेरिटेज पैकेज",
+      items: [
+        {
+          id: "oneDay",
+          name: "किला विरासत",
+          duration: "1 दिन",
+          includes: ["प्राइवेट एसयूवी", "प्रमाणित गाइड", "पारंपरिक भोजन"],
+          desc: "चित्तौड़गढ़ किले के हर रहस्य को कवर करने वाली अंतिम 1-दिवसीय यात्रा।"
+        },
+        {
+          id: "twoDays",
+          name: "मेवाड़ विरासत",
+          duration: "2 दिन",
+          includes: ["लक्जरी स्टे", "पूर्ण परिवहन", "वन्यजीव सफारी"],
+          desc: "इतिहास में गहराई से उतरने के बाद बस्सी और ऐतिहासिक शहर का शांत अन्वेषण।"
+        },
+        {
+          id: "threeDays",
+          name: "आध्यात्मिक और मनोरम",
+          duration: "3 दिन",
+          includes: ["मंदिर दर्शन", "जलप्रपात यात्रा", "प्रीमियम स्टे"],
+          desc: "दिव्य सांवलिया जी मंदिर और लुभावने मेनाल जलप्रपात वाली एक भव्य यात्रा।"
+        }
+      ]
+    },
+    dishes: {
+      items: [
+        { id: 1, name: "दाल बाटी चूरमा", image: "/assets/images/dal-batti-churma-new.jpg" },
+        { id: 2, name: "गुलाब जामुन", image: "/assets/images/gulab-jamun-new.jpg" },
+        { id: 3, name: "गट्टे की सब्जी", image: "/assets/images/gatte-ki-sabzi.jpg" },
+        { id: 4, name: "कढ़ी कचोरी", image: "/assets/images/kadi-kachori.jpg" },
+        { id: 5, name: "गुंजिया", image: "/assets/images/gunjiya.jpg" },
+        { id: 6, name: "समोसा", image: "/assets/images/samosa.jpg" },
+        { id: 7, name: "मिर्ची बड़ा", image: "/assets/images/mirchi-bada.jpg" },
+        { id: 8, name: "भरवां भिंडी", image: "/assets/images/stuffed-bhindi.jpg" },
+      ],
     },
     footer: {
       explore: "खोजें",

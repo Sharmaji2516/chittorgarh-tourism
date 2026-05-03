@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { db } from '../lib/firebase';
-import { collection, query, orderBy, onSnapshot, doc, updateDoc, deleteDoc, where, getDocs } from 'firebase/firestore';
+import { collection, query, orderBy, onSnapshot, doc, addDoc, updateDoc, deleteDoc, where, getDocs } from 'firebase/firestore';
 import { useLanguage } from '../context/LanguageContext';
 import { content } from '../data/content';
 import { Link } from 'react-router-dom';
@@ -40,8 +40,10 @@ import {
     Mail,
     QrCode,
     UtensilsCrossed,
-    Coffee
+    Coffee,
+    Plus
 } from 'lucide-react';
+
 import { cn } from '../utils/cn';
 
 const BREVO_API_KEY = import.meta.env.VITE_BREVO_API_KEY;
@@ -76,7 +78,8 @@ const formatDateReadable = (dateStr) => {
     }
 };
 
-const BookingDetailModal = ({ booking, onClose }) => {
+const BookingDetailModal = ({ booking, providers = [], onClose }) => {
+
     const [editMode, setEditMode] = useState(false);
     const [localData, setLocalData] = useState(booking);
     const [isSaving, setIsSaving] = useState(false);
@@ -397,26 +400,26 @@ const BookingDetailModal = ({ booking, onClose }) => {
     const sendUpdateWhatsApp = () => {
         const total = calculateLiveTotal(localData);
         const phoneNumber = "91" + localData.phone?.replace(/[^0-9]/g, '');
-        const message = `*👑 Updated Royal Inquiry*%0A%0A` +
-            `Dear ${localData.name}, we have updated your itinerary details based on current availability:%0A%0A` +
-            `*🛡️ Package:* ${localData.pillarTitle || "Custom"}%0A` +
-            `*📅 Date:* ${formatDateReadable(localData.date)}%0A%0A` +
-            `*-- Revised Choices --*%0A` +
-            `*🚗 Transport:* ${localData.transport}%0A` +
-            `*🏨 Hotel:* ${localData.hotel}%0A` +
-            `*🚩 Guide:* ${localData.guide}%0A%0A` +
-            `*💰 New Total Estimate: ₹${total}*%0A%0A` +
-            `Please let us know if this works for you.`;
+        const message = `*👑 अपडेटेड रॉयल इंक्वायरी*%0A%0A` +
+            `नमस्ते ${localData.name}, हमने वर्तमान उपलब्धता के आधार पर आपके यात्रा विवरण को अपडेट किया है:%0A%0A` +
+            `*🛡️ पैकेज:* ${localData.pillarTitle || "कस्टम"}%0A` +
+            `*📅 तिथि:* ${formatDateReadable(localData.date)}%0A%0A` +
+            `*-- संशोधित विकल्प --*%0A` +
+            `*🚗 परिवहन:* ${localData.transport}%0A` +
+            `*🏨 होटल:* ${localData.hotel}%0A` +
+            `*🚩 गाइड:* ${localData.guide}%0A%0A` +
+            `*💰 नया कुल अनुमान: ₹${total}*%0A%0A` +
+            `कृपया हमें बताएं कि क्या यह आपके लिए सही है।`;
         
         window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
     };
 
     const sendWelcomeMessage = () => {
         const phoneNumber = "91" + localData.phone?.replace(/[^0-9]/g, '');
-        const message = `*👑 Welcome to Chittorgarh!*%0A%0A` +
-            `Dear ${localData.name}, thank you for choosing us for your heritage journey. We are excited to host you!%0A%0A` +
-            `Our team is preparing your custom itinerary for the *${localData.pillarTitle || "Expedition"}*.%0A%0A` +
-            `Is there anything specific you would like to see?`;
+        const message = `*👑 चित्तौड़गढ़ में आपका स्वागत है!*%0A%0A` +
+            `नमस्ते ${localData.name}, अपनी विरासत यात्रा के लिए हमें चुनने के लिए धन्यवाद। हम आपकी मेजबानी करने के लिए उत्साहित हैं!%0A%0A` +
+            `हमारी टीम *${localData.pillarTitle || "एक्सपीडिशन"}* के लिए आपका कस्टम यात्रा कार्यक्रम तैयार कर रही है।%0A%0A` +
+            `क्या कुछ खास है जो आप देखना चाहेंगे?`;
         window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
     };
 
@@ -656,14 +659,29 @@ const BookingDetailModal = ({ booking, onClose }) => {
                                                     onChange={(e) => setLocalData({...localData, transportPrice: e.target.value})}
                                                     className="bg-slate-50 text-black border border-slate-200 rounded-xl py-3 px-4 w-full focus:outline-none focus:border-royal-gold text-sm shadow-inner"
                                                 />
-                                                <input 
-                                                    type="text" 
-                                                    placeholder="Taxi/Driver Name" 
-                                                    value={localData.taxiName || ''} 
-                                                    onChange={(e) => setLocalData({...localData, taxiName: e.target.value})}
-                                                    className="bg-slate-50 text-black border border-slate-200 rounded-xl py-3 px-4 w-full focus:outline-none focus:border-royal-gold text-sm shadow-inner"
-                                                />
+                                                <div className="space-y-2">
+                                                    <p className="text-[8px] font-black uppercase text-slate-400 px-1">Assign Driver</p>
+                                                    <select 
+                                                        value={localData.taxiName || ''} 
+                                                        onChange={(e) => {
+                                                            const provider = providers.find(p => p.name === e.target.value);
+                                                            setLocalData({
+                                                                ...localData, 
+                                                                taxiName: e.target.value,
+                                                                driverPhone: provider?.phone || '',
+                                                                vehicleNumber: provider?.vehicleNumber || ''
+                                                            });
+                                                        }} 
+                                                        className="bg-slate-50 text-black border border-slate-200 rounded-xl py-3 px-4 w-full focus:outline-none focus:border-royal-gold text-sm shadow-inner"
+                                                    >
+                                                        <option value="">Select a Driver</option>
+                                                        {providers.filter(p => p.type === 'taxi').map(p => (
+                                                            <option key={p.id} value={p.name}>{p.name} ({p.vehicleType})</option>
+                                                        ))}
+                                                    </select>
+                                                </div>
                                             </div>
+
                                         ) : (
                                             <div>
                                                 <p className="text-black font-bold uppercase tracking-wider text-sm">{localData.transport}</p>
@@ -706,14 +724,21 @@ const BookingDetailModal = ({ booking, onClose }) => {
                                                     onChange={(e) => setLocalData({...localData, hotelPrice: e.target.value})}
                                                     className="bg-slate-50 text-black border border-slate-200 rounded-xl py-3 px-4 w-full focus:outline-none focus:border-royal-gold text-sm shadow-inner"
                                                 />
-                                                <input 
-                                                    type="text" 
-                                                    placeholder="Hotel Name" 
-                                                    value={localData.hotelName || ''} 
-                                                    onChange={(e) => setLocalData({...localData, hotelName: e.target.value})}
-                                                    className="bg-slate-50 text-black border border-slate-200 rounded-xl py-3 px-4 w-full focus:outline-none focus:border-royal-gold text-sm shadow-inner"
-                                                />
+                                                <div className="space-y-2">
+                                                    <p className="text-[8px] font-black uppercase text-slate-400 px-1">Assign Hotel</p>
+                                                    <select 
+                                                        value={localData.hotelName || ''} 
+                                                        onChange={(e) => setLocalData({...localData, hotelName: e.target.value})} 
+                                                        className="bg-slate-50 text-black border border-slate-200 rounded-xl py-3 px-4 w-full focus:outline-none focus:border-royal-gold text-sm shadow-inner"
+                                                    >
+                                                        <option value="">Select a Hotel</option>
+                                                        {providers.filter(p => p.type === 'hotel').map(p => (
+                                                            <option key={p.id} value={p.name}>{p.name}</option>
+                                                        ))}
+                                                    </select>
+                                                </div>
                                             </div>
+
                                         ) : (
                                             <div>
                                                 <p className="text-black font-bold uppercase tracking-wider text-sm">{localData.hotel}</p>
@@ -756,14 +781,21 @@ const BookingDetailModal = ({ booking, onClose }) => {
                                                     onChange={(e) => setLocalData({...localData, guidePrice: e.target.value})}
                                                     className="bg-slate-50 text-black border border-slate-200 rounded-xl py-3 px-4 w-full focus:outline-none focus:border-royal-gold text-sm shadow-inner"
                                                 />
-                                                <input 
-                                                    type="text" 
-                                                    placeholder="Guide Name" 
-                                                    value={localData.guideName || ''} 
-                                                    onChange={(e) => setLocalData({...localData, guideName: e.target.value})}
-                                                    className="bg-slate-50 text-black border border-slate-200 rounded-xl py-3 px-4 w-full focus:outline-none focus:border-royal-gold text-sm shadow-inner"
-                                                />
+                                                <div className="space-y-2">
+                                                    <p className="text-[8px] font-black uppercase text-slate-400 px-1">Assign Guide</p>
+                                                    <select 
+                                                        value={localData.guideName || ''} 
+                                                        onChange={(e) => setLocalData({...localData, guideName: e.target.value})} 
+                                                        className="bg-slate-50 text-black border border-slate-200 rounded-xl py-3 px-4 w-full focus:outline-none focus:border-royal-gold text-sm shadow-inner"
+                                                    >
+                                                        <option value="">Select a Guide</option>
+                                                        {providers.filter(p => p.type === 'guide').map(p => (
+                                                            <option key={p.id} value={p.name}>{p.name}</option>
+                                                        ))}
+                                                    </select>
+                                                </div>
                                             </div>
+
                                         ) : (
                                             <div>
                                                 <p className="text-black font-bold uppercase tracking-wider text-sm">{localData.guide}</p>
@@ -874,7 +906,7 @@ const BookingDetailModal = ({ booking, onClose }) => {
                                         onClick={() => {
                                             const servicesList = Object.entries(selectedServices).filter(([_, v]) => v).map(([k, _]) => k.toUpperCase()).join(", ");
                                             const phoneNumber = "91" + localData.phone?.replace(/[^0-9]/g, '');
-                                            const message = `*👑 Your Royal Tourism Pass is Ready!*%0A%0ADear ${localData.name}, your payment of ₹${calculateLiveTotal(localData)} has been received.%0A%0A*🛡️ YOUR UNIQUE PASS CODE:* ${localData.passCode}%0A*✅ INCLUDED SERVICES:* ${servicesList}%0A%0A*⚠️ IMPORTANT:* Do not share this 6-digit code with anyone except your assigned driver. Please keep this code safe for verification.`;
+                                            const message = `*👑 आपका रॉयल टूरिज्म पास तैयार है!*%0A%0Aनमस्ते ${localData.name}, आपका ₹${calculateLiveTotal(localData)} का भुगतान प्राप्त हो गया है।%0A%0A*🛡️ आपका यूनिक पास कोड:* ${localData.passCode}%0A*✅ शामिल सेवाएँ:* ${servicesList}%0A%0A*⚠️ महत्वपूर्ण:* इस 6-अंकीय कोड को अपने आवंटित ड्राइवर के अलावा किसी के साथ साझा न करें। कृपया सत्यापन के लिए इस कोड को सुरक्षित रखें।`;
                                             window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
                                         }}
                                         className="w-full py-4 bg-green-500 text-white rounded-2xl font-black uppercase tracking-widest text-[10px] flex items-center justify-center gap-2 hover:bg-green-600 transition-all shadow-lg"
@@ -1084,6 +1116,109 @@ const BookingDetailModal = ({ booking, onClose }) => {
     );
 };
 
+const ProviderModal = ({ provider, defaultType, onClose, onSave, isSaving }) => {
+    const [localData, setLocalData] = useState(provider || {
+        name: '',
+        phone: '',
+        whatsapp: '',
+        email: '',
+        type: defaultType || 'taxi', // taxi, hotel, guide, restaurant, cafe
+        vehicleNumber: '', // for taxi
+        vehicleType: 'Royal SUV', // for taxi
+        address: '',
+        location: ''
+    });
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        onSave(localData);
+    };
+
+    return (
+        <div className="fixed inset-0 z-[150] flex items-center justify-center p-4">
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose} className="absolute inset-0 bg-slate-950/80 backdrop-blur-md" />
+            <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="relative bg-white rounded-[3rem] p-10 max-w-xl w-full shadow-2xl overflow-hidden">
+                <div className="flex justify-between items-center mb-8">
+                    <div className="flex flex-col">
+                        <h2 className="text-2xl font-serif font-black uppercase tracking-tight">{provider ? 'Edit Partner' : 'Add New Partner'}</h2>
+                        {localData.providerCode && (
+                            <span className="text-[10px] text-royal-gold font-black uppercase tracking-widest mt-1">Provider ID: {localData.providerCode}</span>
+                        )}
+                    </div>
+                    <button onClick={onClose} className="p-2 bg-slate-100 rounded-full hover:bg-slate-200 transition-all"><X className="w-5 h-5" /></button>
+                </div>
+                <form onSubmit={handleSubmit} className="space-y-6 max-h-[70vh] overflow-y-auto px-2 custom-scrollbar">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="md:col-span-2">
+                            <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 block">Provider Name / Business Name</label>
+                            <input required value={localData.name} onChange={e => setLocalData({...localData, name: e.target.value})} placeholder="e.g. Maharana Travels or Hotel Royal" className="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-sm focus:border-royal-gold outline-none" />
+                        </div>
+                        
+                        <div>
+                            <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 block">Phone Number (Calling)</label>
+                            <input required value={localData.phone} onChange={e => setLocalData({...localData, phone: e.target.value})} placeholder="+91 00000 00000" className="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-sm focus:border-royal-gold outline-none" />
+                        </div>
+                        
+                        <div>
+                            <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 block">WhatsApp Number</label>
+                            <input value={localData.whatsapp} onChange={e => setLocalData({...localData, whatsapp: e.target.value})} placeholder="+91 00000 00000" className="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-sm focus:border-royal-gold outline-none" />
+                        </div>
+
+                        <div className="md:col-span-2">
+                            <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 block">Provider Email ID</label>
+                            <input type="email" value={localData.email} onChange={e => setLocalData({...localData, email: e.target.value})} placeholder="contact@provider.com" className="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-sm focus:border-royal-gold outline-none" />
+                        </div>
+
+                        <div className="md:col-span-2">
+                            <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 block">Provider Category / Type</label>
+                            <select value={localData.type} onChange={e => setLocalData({...localData, type: e.target.value})} className="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-sm focus:border-royal-gold outline-none">
+                                <option value="taxi">Private Taxi Service</option>
+                                <option value="hotel">Hotel / Heritage Stay</option>
+                                <option value="guide">Professional Tour Guide</option>
+                                <option value="restaurant">Fine Dining Restaurant</option>
+                                <option value="cafe">Cafe & Hangouts</option>
+                            </select>
+                        </div>
+
+                        {localData.type === 'taxi' && (
+                            <>
+                                <div>
+                                    <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 block">Vehicle Number (Plate)</label>
+                                    <input value={localData.vehicleNumber} onChange={e => setLocalData({...localData, vehicleNumber: e.target.value})} placeholder="RJ 09 XX 0000" className="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-sm focus:border-royal-gold outline-none" />
+                                </div>
+                                <div>
+                                    <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 block">Vehicle Type / Category</label>
+                                    <select value={localData.vehicleType} onChange={e => setLocalData({...localData, vehicleType: e.target.value})} className="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-sm focus:border-royal-gold outline-none">
+                                        <option value="Royal SUV">Royal SUV (Fortuner/Innova)</option>
+                                        <option value="Luxury Sedan">Luxury Sedan (Dzire/Etios)</option>
+                                        <option value="Mini Bus">Mini Bus (Tempo Traveller)</option>
+                                        <option value="Vintage Car">Vintage Car Experience</option>
+                                    </select>
+                                </div>
+                            </>
+                        )}
+
+                        <div className="md:col-span-2">
+                            <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 block">Physical Address</label>
+                            <input value={localData.address} onChange={e => setLocalData({...localData, address: e.target.value})} placeholder="Full address of the provider..." className="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-sm focus:border-royal-gold outline-none" />
+                        </div>
+
+                        <div className="md:col-span-2">
+                            <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 block">Google Maps / Location Link</label>
+                            <input value={localData.location} onChange={e => setLocalData({...localData, location: e.target.value})} placeholder="Paste Google Maps URL here..." className="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-sm focus:border-royal-gold outline-none" />
+                        </div>
+                    </div>
+                    <button type="submit" disabled={isSaving} className="w-full py-5 bg-royal-gold text-royal-black font-black uppercase tracking-widest text-xs rounded-2xl shadow-xl hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-3">
+                        {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+                        {provider ? 'Update Provider' : 'Save Provider'}
+                    </button>
+                </form>
+            </motion.div>
+        </div>
+    );
+};
+
+
 const AdminPage = () => {
     const { language } = useLanguage();
     const t = content.en;
@@ -1099,6 +1234,12 @@ const AdminPage = () => {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [statusFilter, setStatusFilter] = useState('all');
+    const [activeTab, setActiveTab] = useState('bookings'); // 'bookings' or 'providers'
+    const [providers, setProviders] = useState([]);
+    const [providerTypeFilter, setProviderTypeFilter] = useState('all');
+    const [showProviderModal, setShowProviderModal] = useState(false);
+    const [editingProvider, setEditingProvider] = useState(null);
+
     const prevBookingsRef = React.useRef([]);
     const initialLoadRef = React.useRef(false);
 
@@ -1161,6 +1302,18 @@ const AdminPage = () => {
         return () => unsubscribe();
     }, [isLoggedIn]);
 
+    useEffect(() => {
+        if (!isLoggedIn) return;
+        console.log("Initializing Providers Listener...");
+        const q = query(collection(db, "providers"), orderBy("name", "asc"));
+        const unsubscribe = onSnapshot(q, (snapshot) => {
+            const providersList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            setProviders(providersList);
+        });
+        return () => unsubscribe();
+    }, [isLoggedIn]);
+
+
     const handleLogin = (e) => {
         e.preventDefault();
         if (pin === ADMIN_PIN) { setIsLoggedIn(true); setError(''); } 
@@ -1178,6 +1331,121 @@ const AdminPage = () => {
         addNotification("Archived", "Lead moved to archives.", "error");
         setConfirmDelete(null);
     };
+
+    const saveProvider = async (providerData) => {
+        setLoading(true);
+        try {
+            if (editingProvider) {
+                await updateDoc(doc(db, "providers", editingProvider.id), providerData);
+                addNotification("Success", "Partner updated successfully", "success");
+            } else {
+                // Generate Unique Provider Code
+                const prefixes = { taxi: 'TX', hotel: 'HT', guide: 'GD', restaurant: 'RT', cafe: 'CF' };
+                const prefix = prefixes[providerData.type] || 'PR';
+                const randomId = Math.floor(1000 + Math.random() * 9000);
+                const providerCode = `${prefix}-${randomId}`;
+
+                await addDoc(collection(db, "providers"), {
+                    ...providerData,
+                    providerCode,
+                    createdAt: new Date().toISOString()
+                });
+
+                // Trigger Welcome Email via Brevo API
+                if (providerData.email) {
+                    try {
+                        const emailContent = `
+                            <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 4px solid #D4AF37; border-radius: 30px; overflow: hidden; background: #1a2634; color: #ffffff; box-shadow: 0 20px 50px rgba(0,0,0,0.3);">
+                                <div style="width: 100%; overflow: hidden; background: #1a2634;">
+                                    <img src="https://i.postimg.cc/Dz8VMpnc/Fort.jpg" alt="Chittorgarh Fort" style="width: 100%; height: auto; display: block; opacity: 0.9;">
+                                </div>
+                                <div style="padding: 30px 20px; text-align: center; border-bottom: 1px solid rgba(212, 175, 55, 0.2);">
+                                    <h1 style="color: #D4AF37; margin: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 3px; font-weight: 900;">Welcome to Chittorgarh Tourism Team</h1>
+                                    <p style="color: rgba(255,255,255,0.5); margin: 5px 0 0; font-size: 10px; text-transform: uppercase; letter-spacing: 4px;">Official Partner Portfolio</p>
+                                </div>
+                                <div style="padding: 40px 30px;">
+                                    <p style="font-size: 18px; margin-bottom: 10px;">नमस्ते <b>${providerData.name}</b> 🙏 ,</p>
+                                    <p style="font-size: 14px; line-height: 1.8; color: rgba(255,255,255,0.8); margin-bottom: 30px;">
+                                        हमें आपको चित्तौड़गढ़ पर्यटन के आधिकारिक सेवा प्रदाता नेटवर्क में शामिल करते हुए बहुत खुशी हो रही है। वीरता की इस भूमि में मेहमानों को सर्वोत्तम अनुभव प्रदान करने की हमारी यात्रा में आपकी भूमिका अत्यंत महत्वपूर्ण है।
+                                    </p>
+                                    
+                                    <div style="background: linear-gradient(135deg, #D4AF37, #FFD700); padding: 25px 10px; text-align: center; margin: 20px 0; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.2);">
+                                        <p style="margin: 0 0 5px; font-size: 9px; color: #1a2634; text-transform: uppercase; font-weight: 900; letter-spacing: 1px;">Your Official ID Card Number</p>
+                                        <h2 style="margin: 0; font-size: 42px; color: #1a2634; letter-spacing: 6px; font-family: 'Courier New', Courier, monospace; font-weight: 900; white-space: nowrap;">${providerCode}</h2>
+                                        <p style="margin: 10px 0 0; font-size: 9px; color: #1a2634; font-weight: bold; opacity: 0.7;">(कृपया इस नंबर को सुरक्षित रखें)</p>
+                                    </div>
+
+                                    <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 20px; margin-top: 30px; border: 1px solid rgba(255,255,255,0.1);">
+                                        <p style="margin: 0 0 15px; font-size: 11px; color: #D4AF37; text-transform: uppercase; font-weight: 900; letter-spacing: 2px;">🛡️ Account Details</p>
+                                        <p style="margin: 0; font-size: 13px; color: #ffffff; line-height: 2;">
+                                            <b>Partner Category:</b> ${providerData.type === 'taxi' ? 'Driver' : providerData.type.toUpperCase()}<br/>
+                                            <b>Registered Phone:</b> ${providerData.phone}<br/>
+                                            <b>WhatsApp Number:</b> ${providerData.whatsapp || '---'}<br/>
+                                            <b>Official Address:</b> ${providerData.address || 'Chittorgarh'}
+                                        </p>
+                                    </div>
+
+                                    <p style="font-size: 13px; line-height: 1.6; color: #D4AF37; margin-top: 40px; font-weight: bold; text-align: center;">
+                                        हम एक साथ मिलकर पर्यटन को नई ऊंचाइयों पर ले जाएंगे। "पधारो म्हारे देस" ❤️
+                                    </p>
+                                </div>
+                                <div style="background: #121b25; padding: 40px 20px; text-align: center; border-top: 1px solid rgba(212, 175, 55, 0.1);">
+                                    <p style="margin: 0; font-size: 15px; font-weight: 900; color: #ffffff; letter-spacing: 1px;">Chittorgarh Tourism | राजस्थान 🚩</p>
+                                    <div style="margin-top: 30px; padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; background: rgba(255,255,255,0.02); border-radius: 20px;">
+                                        <p style="margin: 0; font-size: 11px; color: #D4AF37; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;">Partner Support</p>
+                                        <p style="margin: 8px 0 0; font-size: 11px; color: rgba(255,255,255,0.8);">If you need any assistance, please contact our official office at 7597901057.</p>
+                                    </div>
+                                    <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05);">
+                                        <p style="margin: 0; font-size: 10px; color: rgba(255,255,255,0.4); font-weight: bold; letter-spacing: 1px;">Powered by <b>Chittor Tech</b></p>
+                                        <img src="https://i.postimg.cc/B6rmNMnB/chittortech-logo-1775884354186.jpg" alt="Chittor Tech" style="height: 30px; opacity: 0.8; margin-top: 10px; margin-bottom: 10px;">
+                                        <p style="margin: 5px 0 0; font-size: 8px; color: rgba(255,255,255,0.2); text-transform: uppercase; letter-spacing: 2px;">Rajasthan's Upcoming Leading Tourism IT Partner</p>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+
+                        await fetch('https://api.brevo.com/v3/smtp/email', {
+                            method: 'POST',
+                            headers: {
+                                'accept': 'application/json',
+                                'api-key': BREVO_API_KEY,
+                                'content-type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                sender: { name: SENDER_NAME, email: SENDER_EMAIL },
+                                to: [{ email: providerData.email, name: providerData.name }],
+                                subject: `👑 Welcome to Chittorgarh Tourism Network | ID: ${providerCode}`,
+                                htmlContent: emailContent
+                            })
+                        });
+                        console.log(`Welcome email sent to: ${providerData.email}`);
+                    } catch (e) {
+                        console.error("Welcome Email Error:", e);
+                    }
+                }
+                addNotification("Success", "Partner added & Welcome Mail sent!", "success");
+            }
+            setShowProviderModal(false);
+            setEditingProvider(null);
+        } catch (err) {
+            console.error("Save Provider Error:", err);
+            addNotification("Error", "Failed to save provider", "error");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const deleteProvider = async (id) => {
+        if (!window.confirm("Are you sure you want to delete this provider?")) return;
+        try {
+            await deleteDoc(doc(db, "providers", id));
+            addNotification("Deleted", "Provider removed from system", "info");
+        } catch (err) {
+            console.error("Delete Provider Error:", err);
+            addNotification("Error", "Failed to delete provider", "error");
+        }
+    };
+
 
     const getRowTotal = (b) => {
         return (Number(b.transportPrice || 0) + Number(b.hotelPrice || 0) + Number(b.guidePrice || 0));
@@ -1247,24 +1515,9 @@ const AdminPage = () => {
                         <div className="p-3 bg-royal-gold/10 rounded-2xl border border-royal-gold/20"><LayoutDashboard className="w-6 h-6 text-royal-gold" /></div>
                         <h1 className="text-xl md:text-2xl font-serif text-white tracking-tight">Chittorgarh Booking Dashboard</h1>
                     </div>
-                    
-                    <div className="hidden lg:flex items-center gap-4 border-l border-white/10 pl-8">
-                        <div className="flex flex-col items-start">
-                            <span className="text-[7px] text-royal-gold/40 uppercase font-black tracking-widest leading-none mb-1">Approved by</span>
-                            <span className="text-[9px] text-white/60 font-black uppercase tracking-widest">Government of Rajasthan</span>
-                        </div>
-                        <div className="w-px h-4 bg-white/10 mx-2" />
-                        <div className="flex flex-col items-start">
-                            <span className="text-[7px] text-royal-gold/40 uppercase font-black tracking-widest leading-none mb-1">Regulated by</span>
-                            <span className="text-[9px] text-white/60 font-black uppercase tracking-widest">Department of Tourism</span>
-                        </div>
-                    </div>
                 </div>
                 <div className="flex items-center gap-4">
-                    <Link to="/staff-verify" target="_blank" className="flex items-center gap-3 px-6 py-3 bg-royal-gold text-royal-black border border-royal-gold/20 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-black transition-all shadow-lg">
-                        <QrCode className="w-4 h-4" />
-                        Staff Portal
-                    </Link>
+
                     <button onClick={exportToCSV} className="flex items-center gap-3 px-6 py-3 bg-white/5 border border-white/10 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-royal-gold hover:text-royal-black transition-all text-royal-gold shadow-lg">
                         <FileText className="w-4 h-4" />
                         Export Data
@@ -1277,6 +1530,37 @@ const AdminPage = () => {
             </header>
 
             <div className="w-full pt-16 pb-20 px-4 md:px-8 lg:px-12">
+                {/* Dashboard Tabs */}
+                <div className="flex gap-4 mb-12 bg-white p-3 rounded-[2.5rem] border border-slate-200 w-full">
+                    <button 
+                        onClick={() => setActiveTab('bookings')}
+                        className={cn(
+                            "flex-1 px-10 py-5 rounded-3xl text-[10px] font-black uppercase tracking-widest transition-all",
+                            activeTab === 'bookings' ? "bg-slate-950 text-royal-gold shadow-xl" : "text-black/40 hover:text-black"
+                        )}
+                    >
+                        <div className="flex items-center justify-center gap-3">
+                            <Users className="w-4 h-4" />
+                            Guest Inquiries
+                        </div>
+                    </button>
+                    <button 
+                        onClick={() => setActiveTab('providers')}
+                        className={cn(
+                            "flex-1 px-10 py-5 rounded-3xl text-[10px] font-black uppercase tracking-widest transition-all",
+                            activeTab === 'providers' ? "bg-slate-950 text-royal-gold shadow-xl" : "text-black/40 hover:text-black"
+                        )}
+                    >
+                        <div className="flex items-center justify-center gap-3">
+                            <UtensilsCrossed className="w-4 h-4" />
+                            Service Providers
+                        </div>
+                    </button>
+                </div>
+
+                {activeTab === 'bookings' ? (
+                    <>
+
 
 
                 <div className="space-y-10 mb-16">
@@ -1462,24 +1746,195 @@ const AdminPage = () => {
                         </table>
                     </div>
                 </div>
+                </>
+            ) : (
+                    /* SERVICE PROVIDERS VIEW */
+                    <div className="space-y-12">
+                        <div className="bg-slate-950 p-12 rounded-[4rem] border-2 border-slate-900 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] relative overflow-hidden group">
+                            <div className="absolute top-0 right-0 w-96 h-96 bg-royal-gold/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
+                            <div className="absolute bottom-0 left-0 w-64 h-64 bg-royal-gold/5 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2" />
+                            
+                            <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-12 relative z-10">
+                                <div className="shrink-0">
+                                    <p className="text-[10px] text-royal-gold font-black uppercase tracking-[0.5em] mb-4">Partner Management</p>
+                                    <h2 className="text-5xl font-serif text-white font-black uppercase tracking-tight">Service Directory</h2>
+                                    <p className="text-xs text-white/40 uppercase tracking-[0.3em] mt-4 font-black flex items-center gap-2">
+                                        <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                                        {providers.length} Verified Partners Active
+                                    </p>
+                                </div>
+                                
+                                <div className="flex-1 flex justify-center">
+                                    <div className="flex flex-wrap justify-center gap-2 bg-white/5 p-2 rounded-[2rem] border border-white/10 backdrop-blur-xl w-fit">
+                                        {['all', 'taxi', 'hotel', 'guide', 'restaurant', 'cafe'].map(type => (
+                                            <button 
+                                                key={type}
+                                                onClick={() => setProviderTypeFilter(type)}
+                                                className={cn(
+                                                    "px-6 py-3 rounded-2xl text-[9px] font-black uppercase tracking-widest transition-all",
+                                                    providerTypeFilter === type 
+                                                        ? "bg-royal-gold text-royal-black shadow-xl" 
+                                                        : "text-white/40 hover:text-white hover:bg-white/5"
+                                                )}
+                                            >
+                                                {type}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <button 
+                                    onClick={() => { setEditingProvider(null); setShowProviderModal(true); }}
+                                    className="px-10 py-5 bg-white text-black font-black uppercase tracking-widest text-xs rounded-2xl flex items-center gap-4 shadow-2xl hover:bg-royal-gold transition-all group shrink-0"
+                                >
+                                    <Plus className="w-5 h-5 group-hover:rotate-90 transition-all" />
+                                    Add Partner
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                            {providers.filter(p => providerTypeFilter === 'all' || p.type === providerTypeFilter).map(p => (
+                                <motion.div 
+                                    key={p.id}
+                                    layout
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    className="bg-white border-2 border-slate-100 rounded-[4rem] p-12 hover:border-royal-gold/30 hover:shadow-[0_60px_100px_-20px_rgba(0,0,0,0.08)] transition-all group relative overflow-hidden"
+                                >
+                                    {/* Action Hover */}
+                                    <div className="absolute top-10 right-10 flex gap-3 opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0">
+                                        <button onClick={() => { setEditingProvider(p); setShowProviderModal(true); }} className="p-4 bg-slate-100 text-slate-600 rounded-2xl hover:bg-black hover:text-royal-gold transition-all shadow-sm"><Edit2 className="w-4 h-4" /></button>
+                                        <button onClick={() => deleteProvider(p.id)} className="p-4 bg-red-50 text-red-500 rounded-2xl hover:bg-red-500 hover:text-white transition-all shadow-sm"><Trash2 className="w-4 h-4" /></button>
+                                    </div>
+
+                                    <div className="flex flex-col items-start mb-10">
+                                        <div className={cn(
+                                            "w-20 h-20 rounded-[2rem] flex items-center justify-center mb-8 shadow-xl relative group-hover:rotate-6 transition-all duration-500",
+                                            p.type === 'taxi' ? "bg-slate-950 text-royal-gold" : 
+                                            p.type === 'hotel' ? "bg-amber-500 text-white" :
+                                            p.type === 'guide' ? "bg-emerald-500 text-white" :
+                                            "bg-rose-500 text-white"
+                                        )}>
+                                            {p.type === 'taxi' ? <Car className="w-10 h-10" /> : 
+                                             p.type === 'hotel' ? <Hotel className="w-10 h-10" /> :
+                                             p.type === 'guide' ? <UserCheck className="w-10 h-10" /> :
+                                             p.type === 'restaurant' ? <UtensilsCrossed className="w-10 h-10" /> :
+                                             <Coffee className="w-10 h-10" />}
+                                        </div>
+                                        <div className="space-y-2">
+                                            <div className="flex items-center gap-3">
+                                                <p className="text-[11px] text-royal-gold font-black uppercase tracking-[0.5em]">{p.type}</p>
+                                                {p.providerCode && (
+                                                    <span className="text-[8px] bg-royal-gold/10 text-royal-gold px-2 py-0.5 rounded-md font-black tracking-widest border border-royal-gold/20">
+                                                        ID: {p.providerCode}
+                                                    </span>
+                                                )}
+                                            </div>
+                                            <h3 className="text-4xl font-serif text-black font-black tracking-tighter leading-none">{p.name}</h3>
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-4 pt-10 border-t border-slate-100">
+                                        <div className="flex items-center justify-between p-6 bg-slate-50 rounded-3xl group/item hover:bg-black hover:text-white transition-all duration-300">
+                                            <div className="flex items-center gap-5">
+                                                <div className="p-3 bg-white rounded-xl shadow-sm text-slate-400 group-hover/item:bg-white/10 group-hover/item:text-royal-gold"><Phone className="w-5 h-5" /></div>
+                                                <span className="text-sm font-black tracking-widest">{p.phone}</span>
+                                            </div>
+                                            <a href={`tel:${p.phone}`} className="p-3 bg-white text-slate-400 rounded-xl shadow-sm hover:text-green-500 transition-all group-hover/item:bg-white/10"><ExternalLink className="w-5 h-5" /></a>
+                                        </div>
+
+                                        {p.type === 'taxi' && (
+                                            <div className="grid grid-cols-2 gap-4">
+                                                <div className="p-6 bg-slate-50 rounded-3xl flex flex-col gap-2">
+                                                    <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest">Plate No.</p>
+                                                    <p className="text-[11px] font-black text-slate-900 uppercase tracking-wider">{p.vehicleNumber || '---'}</p>
+                                                </div>
+                                                <div className="p-6 bg-slate-50 rounded-3xl flex flex-col gap-2">
+                                                    <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest">Category</p>
+                                                    <p className="text-[11px] font-black text-slate-900 uppercase tracking-wider">{p.vehicleType}</p>
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        {p.type === 'hotel' && (
+                                            <div className="p-6 bg-slate-50 rounded-3xl flex flex-col gap-2">
+                                                <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest">Accommodations</p>
+                                                <p className="text-[11px] font-black text-slate-900 uppercase tracking-wider">{p.roomTypes || 'Standard Heritage'}</p>
+                                            </div>
+                                        )}
+
+                                        <div className="p-6 bg-slate-50 rounded-3xl flex items-center gap-4">
+                                            <MapPin className="w-5 h-5 text-slate-300" />
+                                            <p className="text-xs font-bold text-slate-500 italic truncate">{p.address || 'Chittorgarh'}</p>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+                )}
             </div>
+            <AnimatePresence>
+                {showProviderModal && (
+                    <ProviderModal 
+                        provider={editingProvider} 
+                        defaultType={providerTypeFilter !== 'all' ? providerTypeFilter : 'taxi'}
+                        onClose={() => setShowProviderModal(false)} 
+                        onSave={saveProvider}
+                        isSaving={loading}
+                    />
+                )}
+            </AnimatePresence>
+
 
             {/* Admin Footer - ChittorTech Branding */}
-            <footer className="mt-20 bg-slate-950 border-t border-white/5 py-16 flex flex-col items-center gap-10 no-print">
-                <div className="px-8 py-4 bg-white rounded-2xl flex items-center gap-4 group transition-all hover:scale-105 shadow-[0_20px_50px_rgba(255,255,255,0.05)] border border-white/20">
-                    <img src="/assets/images/chittortech_logo.png" alt="ChittorTech" className="w-8 h-8 object-contain" />
-                    <p className="text-[11px] font-black uppercase tracking-widest text-slate-900">
-                        Developed & Maintained by <span className="text-[#00df9a] ml-1">ChittorTech</span>
-                    </p>
-                </div>
-                
-                <div className="flex flex-col items-center gap-3">
-                    <p className="text-xs text-white/60 font-bold tracking-tight">© 2026 ChittorTech Solutions Pvt Ltd. All rights reserved.</p>
-                    <p className="text-[10px] text-white/30 font-black uppercase tracking-[0.2em]">Approved by iStart Rajasthan | Approved by MSME India</p>
+            <footer className="mt-20 py-16 border-t border-slate-200/10 flex flex-col items-center gap-10 no-print">
+                <div className="flex flex-col items-center gap-8 bg-[#2d333f] p-8 rounded-[2rem] border border-white/5 max-w-sm w-full mx-auto shadow-2xl">
+                    {/* Product Badge */}
+                    <div className="flex items-center gap-4 bg-black/40 px-6 py-4 rounded-full border border-white/10 shadow-inner group transition-all duration-500 hover:border-royal-gold/50">
+                        <div className="w-14 h-14 bg-white rounded-2xl p-2 shadow-lg transform group-hover:scale-105 transition-transform">
+                            <img src="/assets/images/chittortech_logo.png" alt="ChittorTech" className="w-full h-full object-contain" />
+                        </div>
+                        <div className="flex flex-col">
+                            <span className="text-[10px] text-white/40 uppercase tracking-[0.2em] font-bold">A Product Of</span>
+                            <span className="text-2xl text-white font-black tracking-tight -mt-1 italic">ChittorTech</span>
+                        </div>
+                    </div>
+
+                    {/* Recognition Badges */}
+                    <div className="flex flex-col gap-3">
+                        <div className="flex items-center gap-3 group">
+                            <div className="w-1.5 h-1.5 rounded-full bg-[#00e676] shadow-[0_0_8px_rgba(0,230,118,0.5)]"></div>
+                            <span className="text-xs font-bold text-[#00e676] uppercase tracking-wider group-hover:text-emerald-300 transition-colors">Recognized by iStart Rajasthan</span>
+                        </div>
+                        <div className="flex items-center gap-3 group">
+                            <div className="w-1.5 h-1.5 rounded-full bg-[#00e676] shadow-[0_0_8px_rgba(0,230,118,0.5)]"></div>
+                            <span className="text-xs font-bold text-[#00e676] uppercase tracking-wider group-hover:text-emerald-300 transition-colors">Registered MSME | Startup India</span>
+                        </div>
+                    </div>
+
+                    {/* Divider */}
+                    <div className="w-full border-t border-dashed border-white/10"></div>
+
+                    {/* Contact & Copyright */}
+                    <div className="flex flex-col items-center gap-6 w-full">
+                        <a href="mailto:chittortech@gmail.com" className="group flex items-center gap-4 hover:text-royal-gold transition-all duration-300">
+                            <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:border-royal-gold/40 transition-all">
+                                <span className="text-lg">✉️</span>
+                            </div>
+                            <span className="text-sm font-bold tracking-widest text-white/70 group-hover:text-white lowercase">chittortech@gmail.com</span>
+                        </a>
+
+                        <p className="text-[10px] text-white/40 uppercase tracking-[0.2em] font-bold text-center">
+                            © 2026 CHITTORTECH ALL RIGHTS RESERVED
+                        </p>
+                    </div>
                 </div>
             </footer>
 
-            <AnimatePresence>{selectedBooking && <BookingDetailModal booking={selectedBooking} onClose={() => setSelectedBooking(null)} />}</AnimatePresence>
+            <AnimatePresence>{selectedBooking && <BookingDetailModal booking={selectedBooking} providers={providers} onClose={() => setSelectedBooking(null)} />}</AnimatePresence>
+
             
             {/* Real-time Notifications */}
             <div className="fixed top-24 right-10 z-[200] flex flex-col gap-4 max-w-sm w-full pointer-events-none">

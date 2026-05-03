@@ -34,12 +34,10 @@ const Footer = () => {
                             {[
                                 { name: t.nav.history, path: '/#history' },
                                 { name: t.nav.attractions, path: '/attractions' },
-                                { name: t.nav.gallery, path: '/gallery' },
-                                { name: t.nav.vendors, path: '/flavors' },
+                                { name: t.nav.localRoyalCuisine, path: '/flavors' },
                                 { name: t.nav.hotels, path: '/stays' },
                                 { name: t.nav.localVocal, path: '/local-for-vocal' },
-                                { name: t.nav.mission, path: '/mission' },
-                                { name: t.nav.services, path: '/services' }
+                                { name: t.nav.missionServices, path: '/mission-services' }
                             ].map((item) => (
                                 <li key={item.name}>
                                     <NavLink 
@@ -119,33 +117,64 @@ const Footer = () => {
                 {window.location.hostname === 'localhost' && <div className="mb-16"><FeedbackForm /></div>}
 
                 {/* Bottom Bar */}
-                <div className="border-t border-royal-gold/10 pt-16 flex flex-col items-center gap-12">
-                    
+                {/* Bottom Bar - ChittorTech Branding */}
+                <div className="border-t border-royal-gold/10 pt-16 flex flex-col items-center gap-10">
+                    <div className="flex flex-col items-center gap-8 bg-royal-black/20 p-8 rounded-[2rem] border border-royal-gold/5 backdrop-blur-md max-w-sm w-full mx-auto shadow-2xl">
+                        {/* Product Badge */}
+                        <div className="flex items-center gap-4 bg-royal-black/40 px-6 py-4 rounded-full border border-royal-gold/20 shadow-inner group transition-all duration-500 hover:border-royal-gold/50">
+                            <div className="w-14 h-14 bg-white rounded-2xl p-2 shadow-lg transform group-hover:scale-105 transition-transform">
+                                <img src="/chittortech_logo.png" alt="ChittorTech" className="w-full h-full object-contain" />
+                            </div>
+                            <div className="flex flex-col">
+                                <span className="text-[10px] text-royal-white/40 uppercase tracking-[0.2em] font-bold">A Product Of</span>
+                                <span className="text-2xl text-royal-white font-black tracking-tight -mt-1 italic">ChittorTech</span>
+                            </div>
+                        </div>
 
-                    <div className="flex flex-col items-center gap-6">
-                        <div className="flex flex-col items-center gap-2">
-                            <p className="text-[10px] md:text-xs text-royal-gold/50 uppercase tracking-[0.4em] font-bold text-center leading-relaxed">
-                                {t.footer.copyright}
-                            </p>
-                            <p className="text-[9px] text-royal-gold/30 uppercase tracking-[0.2em] font-medium">
-                                Chittaurgarh, Rajasthan, India • Since 2026
+                        {/* Recognition Badges */}
+                        <div className="flex flex-col gap-3">
+                            <div className="flex items-center gap-3 group">
+                                <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.5)]"></div>
+                                <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider group-hover:text-emerald-300 transition-colors">Recognized by iStart Rajasthan</span>
+                            </div>
+                            <div className="flex items-center gap-3 group">
+                                <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.5)]"></div>
+                                <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider group-hover:text-emerald-300 transition-colors">Registered MSME | Startup India</span>
+                            </div>
+                        </div>
+
+                        {/* Divider */}
+                        <div className="w-full border-t border-dashed border-royal-white/10"></div>
+
+                        {/* Contact & Copyright */}
+                        <div className="flex flex-col items-center gap-6 w-full">
+                            <a href="mailto:chittortech@gmail.com" className="group flex items-center gap-4 hover:text-royal-gold transition-all duration-300">
+                                <div className="w-10 h-10 rounded-xl bg-royal-gold/5 border border-royal-gold/10 flex items-center justify-center group-hover:border-royal-gold/40 transition-all">
+                                    <span className="text-lg">✉️</span>
+                                </div>
+                                <span className="text-sm font-bold tracking-widest text-royal-white/70 group-hover:text-royal-white lowercase">chittortech@gmail.com</span>
+                            </a>
+
+                            <p className="text-[10px] text-royal-white/40 uppercase tracking-[0.2em] font-bold text-center">
+                                © 2026 CHITTORTECH ALL RIGHTS RESERVED
                             </p>
                         </div>
-                        
-                        <button
-                            onClick={() => {
-                                localStorage.removeItem('ctt_visited');
-                                window.dispatchEvent(new Event('resetVisitStatus'));
-                                window.scrollTo({ top: 0, behavior: 'smooth' });
-                            }}
-                            className="group relative px-6 py-2 overflow-hidden rounded-full border border-royal-gold/10 hover:border-royal-gold/30 transition-all duration-500"
-                        >
-                            <span className="relative z-10 text-[9px] uppercase tracking-[0.5em] text-royal-gold/40 group-hover:text-royal-gold transition-colors">
-                                {t.footer.resetStatus}
-                            </span>
-                            <div className="absolute inset-0 bg-royal-gold/5 -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></div>
-                        </button>
                     </div>
+
+                    {/* Reset Status Button */}
+                    <button
+                        onClick={() => {
+                            localStorage.removeItem('ctt_visited');
+                            window.dispatchEvent(new Event('resetVisitStatus'));
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                        }}
+                        className="group relative px-8 py-2.5 overflow-hidden rounded-full border border-royal-gold/5 hover:border-royal-gold/20 transition-all duration-700"
+                    >
+                        <span className="relative z-10 text-[9px] uppercase tracking-[0.5em] text-royal-gold/20 group-hover:text-royal-gold/60 transition-colors">
+                            {t.footer.resetStatus}
+                        </span>
+                        <div className="absolute inset-0 bg-royal-gold/2 -translate-x-full group-hover:translate-x-0 transition-transform duration-700"></div>
+                    </button>
                 </div>
             </div>
         </footer>

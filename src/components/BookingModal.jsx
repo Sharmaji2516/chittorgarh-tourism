@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Calendar, Users, Phone, User, CheckCircle2, ArrowRight, Loader2, Star, ShieldCheck, MapPin, Car, Hotel, UserCheck, Mail, UtensilsCrossed, Coffee } from 'lucide-react';
+import { X, Calendar, User, Phone, CheckCircle2, ArrowRight, Loader2, Star, ShieldCheck, MapPin, Car, Hotel, Mail, UtensilsCrossed } from 'lucide-react';
 import { useBooking } from '../context/BookingContext';
 import { saveBookingToFirebase } from '../lib/firebase';
 
@@ -23,7 +23,6 @@ const BookingModal = ({ isOpen, onClose, pillarTitle }) => {
             const finalData = {
                 ...bookingData,
                 pillarTitle: pillarTitle || 'Custom Package',
-                totalAmount: 0,
                 status: 'submitted',
                 createdAt: new Date().toISOString()
             };
@@ -31,19 +30,19 @@ const BookingModal = ({ isOpen, onClose, pillarTitle }) => {
             await saveBookingToFirebase(finalData);
 
             const phoneNumber = "917597901057";
-            const message = `*👑 Royal Booking Request*%0A%0A` +
-                `*🛡️ Package:* ${pillarTitle || 'Custom'}%0A` +
+            const message = `*👑 Royal Expedition Inquiry*%0A%0A` +
+                `*🛡️ Expedition:* ${pillarTitle || 'Custom'}%0A` +
                 `*📅 Date:* ${bookingData.date}%0A` +
                 `*👥 Travelers:* ${bookingData.travelers}%0A%0A` +
-                `*-- Custom Choices --*%0A` +
-                `*🚗 Transport:* ${bookingData.transport}%0A` +
-                `*🏨 Hotel:* ${bookingData.hotel}%0A` +
-                `*🚩 Guide:* ${bookingData.guide}%0A%0A` +
+                `*-- Preferences --*%0A` +
+                `*🚗 Vehicle:* ${bookingData.transport}%0A` +
+                `*🏨 Room:* ${bookingData.hotel}%0A` +
+                `*🍽️ Cuisine:* ${bookingData.cuisine || 'Not Specified'}%0A%0A` +
+                `*📜 Special Needs:* ${bookingData.requirements || 'None'}%0A%0A` +
                 `*-- Contact --*%0A` +
                 `*👤 Name:* ${bookingData.name}%0A` +
-                `*📱 Phone:* ${bookingData.phone}%0A` +
-                `*📧 Email:* ${bookingData.email || 'Not Provided'}%0A%0A` +
-                `I am ready to confirm this booking.`;
+                `*📱 Phone:* ${bookingData.phone}%0A%0A` +
+                `I am interested in this Royal Expedition. Please contact me with availability and a custom quote.`;
 
             window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
             setSubmitted(true);
@@ -64,23 +63,23 @@ const BookingModal = ({ isOpen, onClose, pillarTitle }) => {
                     <Icon className="w-3.5 h-3.5" />
                     {label}
                 </p>
-                <span className="text-[10px] text-white/30 font-medium italic">Select one</span>
+                <span className="text-[10px] text-white/30 font-medium italic">Choose preference</span>
             </div>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-2 md:gap-3">
                 {options && options.map(opt => (
                     <button 
                         key={opt} 
                         type="button" 
                         onClick={() => updateBooking({ [type]: opt })} 
-                        className={`group relative py-4 px-4 rounded-2xl border transition-all duration-300 flex flex-col items-start ${
+                        className={`group relative py-3 md:py-4 px-3 md:px-4 rounded-2xl border transition-all duration-300 flex flex-col items-start ${
                             value === opt 
                             ? 'bg-royal-gold/15 border-royal-gold shadow-[0_0_25px_-5px_rgba(212,175,55,0.3)]' 
                             : 'bg-white/[0.03] border-white/5 hover:border-royal-gold/30 hover:bg-white/[0.06]'
                         }`}
                     >
-                        <span className={`text-[11px] font-bold uppercase tracking-widest mb-1 transition-colors ${value === opt ? 'text-white' : 'text-white/60'}`}>{opt}</span>
+                        <span className={`text-[9px] md:text-[11px] font-bold uppercase tracking-widest mb-1 transition-colors ${value === opt ? 'text-white' : 'text-white/60'}`}>{opt}</span>
                         {value === opt && (
-                            <div className="absolute top-3 right-3">
+                            <div className="absolute top-2 right-2 md:top-3 md:right-3">
                                 <CheckCircle2 className="w-4 h-4 text-royal-gold" />
                             </div>
                         )}
@@ -152,7 +151,7 @@ const BookingModal = ({ isOpen, onClose, pillarTitle }) => {
                                         <div className="space-y-4">
                                             <h4 className="text-2xl font-serif text-white">Shukriya!</h4>
                                             <p className="text-royal-gold/80 text-[11px] font-black uppercase tracking-[0.2em] leading-relaxed max-w-sm mx-auto">
-                                                Your confirmation and other details will be shared and quotation will be shared on your WhatsApp and this number.
+                                                We have received your request. Our team is **checking the real-time availability** and we will get back to you on your WhatsApp and email with the confirmation and quotation shortly.
                                             </p>
                                         </div>
                                         <button 
@@ -196,55 +195,69 @@ const BookingModal = ({ isOpen, onClose, pillarTitle }) => {
                                         )}
 
                                         {step === 2 && (
-                                            <motion.div key="step2" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-10 pb-20">
-                                                <PreferenceCard type="transport" label="The Royal Chauffeur" icon={Car} value={bookingData.transport} options={['Luxury Sedan', 'Royal SUV', 'Mini Bus', 'Not Needed']} />
-                                                <PreferenceCard type="hotel" label="Grand Accommodations" icon={Hotel} value={bookingData.hotel} options={['Heritage Palace', 'Boutique Hotel', 'Eco Resort', 'Not Needed']} />
-                                                <PreferenceCard type="guide" label="Heritage Historian" icon={UserCheck} value={bookingData.guide} options={['History Scholar', 'Photography Expert', 'Storyteller', 'Not Needed']} />
-                                                
-                                                <div className="space-y-4">
-                                                    <p className="text-[10px] text-royal-gold font-black uppercase tracking-[0.3em] px-2">Royal Amenities (Optional)</p>
-                                                    <div className="grid grid-cols-2 gap-3">
-                                                        <button 
-                                                            type="button" 
-                                                            onClick={() => updateBooking({ restaurantRequested: !bookingData.restaurantRequested })}
-                                                            className={`py-4 px-4 rounded-2xl border transition-all flex items-center gap-3 ${bookingData.restaurantRequested ? 'bg-royal-gold/15 border-royal-gold text-white' : 'bg-white/[0.03] border-white/5 text-white/50'}`}
-                                                        >
-                                                            <UtensilsCrossed className="w-4 h-4" />
-                                                            <span className="text-[11px] font-bold uppercase tracking-widest">Restaurant</span>
-                                                        </button>
-                                                        <button 
-                                                            type="button" 
-                                                            onClick={() => updateBooking({ cafeRequested: !bookingData.cafeRequested })}
-                                                            className={`py-4 px-4 rounded-2xl border transition-all flex items-center gap-3 ${bookingData.cafeRequested ? 'bg-royal-gold/15 border-royal-gold text-white' : 'bg-white/[0.03] border-white/5 text-white/50'}`}
-                                                        >
-                                                            <Coffee className="w-4 h-4" />
-                                                            <span className="text-[11px] font-bold uppercase tracking-widest">Cafe</span>
-                                                        </button>
-                                                    </div>
+                                            <motion.div key="step2" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-8 pb-10">
+                                                <div className="text-center mb-6">
+                                                    <p className="text-royal-gold/60 text-[10px] font-black uppercase tracking-widest">Customize Your Experience</p>
                                                 </div>
                                                 
-                                                <button 
-                                                    type="button" 
-                                                    onClick={handleNext} 
-                                                    className="w-full py-6 bg-royal-gold text-royal-black font-black uppercase tracking-[0.2em] text-[10px] rounded-2xl flex items-center justify-center gap-3 shadow-2xl shadow-royal-gold/20 hover:brightness-110 active:scale-95 transition-all"
-                                                >
-                                                    Next Step
-                                                    <ArrowRight className="w-4 h-4" />
-                                                </button>
-                                                <div className="flex justify-center"><button type="button" onClick={handleBack} className="text-[10px] text-white/30 hover:text-royal-gold uppercase font-black tracking-widest transition-colors mb-4">Go Back</button></div>
+                                                <PreferenceCard 
+                                                    type="transport" 
+                                                    label="Royal Chauffeur" 
+                                                    icon={Car} 
+                                                    value={bookingData.transport} 
+                                                    options={['Luxury Sedan', 'Royal SUV', 'Mini Bus']} 
+                                                />
+                                                
+                                                <PreferenceCard 
+                                                    type="hotel" 
+                                                    label="Grand Accommodations" 
+                                                    icon={Hotel} 
+                                                    value={bookingData.hotel} 
+                                                    options={['Heritage Suite', 'Luxury Room', 'Standard Room']} 
+                                                />
+                                                
+                                                <PreferenceCard 
+                                                    type="cuisine" 
+                                                    label="Culinary Soul" 
+                                                    icon={UtensilsCrossed} 
+                                                    value={bookingData.cuisine} 
+                                                    options={['Rajasthani', 'Indian', 'Global/Continental']} 
+                                                />
+
+                                                <div className="space-y-4">
+                                                    <p className="text-[10px] text-royal-gold font-black uppercase tracking-[0.3em] px-2">Any Special Requirements?</p>
+                                                    <textarea 
+                                                        placeholder="Dietary needs, special occasions, or specific preferences..."
+                                                        value={bookingData.requirements || ''}
+                                                        onChange={(e) => updateBooking({ requirements: e.target.value })}
+                                                        className="w-full bg-white/[0.03] border border-white/10 rounded-[1.5rem] py-4 px-6 text-white text-xs focus:outline-none focus:border-royal-gold min-h-[80px] resize-none"
+                                                    />
+                                                </div>
+                                                
+                                                <div className="flex flex-col gap-4">
+                                                    <button 
+                                                        type="button" 
+                                                        onClick={handleNext} 
+                                                        className="w-full py-5 bg-royal-gold text-royal-black font-black uppercase tracking-[0.2em] text-[10px] rounded-2xl flex items-center justify-center gap-3 shadow-2xl shadow-royal-gold/20 hover:brightness-110 active:scale-95 transition-all"
+                                                    >
+                                                        Review Inquiry
+                                                        <ArrowRight className="w-4 h-4" />
+                                                    </button>
+                                                    <button type="button" onClick={handleBack} className="text-[10px] text-white/30 hover:text-royal-gold uppercase font-black tracking-widest transition-colors">Go Back</button>
+                                                </div>
                                             </motion.div>
                                         )}
 
                                         {step === 3 && (
                                             <motion.div key="step3" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-10">
                                                 <div className="p-8 rounded-[2.5rem] bg-white/[0.02] border border-white/5 space-y-5">
-                                                    <p className="text-[10px] text-royal-gold font-black uppercase tracking-[0.4em] mb-4 text-center">Your Royal Summary</p>
-                                                    <div className="flex justify-between items-center"><span className="text-[9px] text-white/30 uppercase tracking-widest">Transport</span><span className="text-xs text-white font-bold">{bookingData.transport}</span></div>
-                                                    <div className="flex justify-between items-center"><span className="text-[9px] text-white/30 uppercase tracking-widest">Stays</span><span className="text-xs text-white font-bold">{bookingData.hotel}</span></div>
-                                                    <div className="flex justify-between items-center"><span className="text-[9px] text-white/30 uppercase tracking-widest">Guide</span><span className="text-xs text-white font-bold">{bookingData.guide}</span></div>
+                                                    <p className="text-[10px] text-royal-gold font-black uppercase tracking-[0.4em] mb-4 text-center">Inquiry Summary</p>
+                                                    <div className="flex justify-between items-center"><span className="text-[9px] text-white/30 uppercase tracking-widest">Vehicle</span><span className="text-xs text-white font-bold">{bookingData.transport}</span></div>
+                                                    <div className="flex justify-between items-center"><span className="text-[9px] text-white/30 uppercase tracking-widest">Room</span><span className="text-xs text-white font-bold">{bookingData.hotel}</span></div>
+                                                    <div className="flex justify-between items-center"><span className="text-[9px] text-white/30 uppercase tracking-widest">Cuisine</span><span className="text-xs text-white font-bold">{bookingData.cuisine}</span></div>
                                                     <div className="pt-6 border-t border-white/5 flex justify-center items-center text-center px-4">
                                                         <span className="text-[10px] font-black text-royal-gold uppercase tracking-[0.2em] leading-relaxed">
-                                                            You will get the quotation on your email and on your WhatsApp number
+                                                            Check real-time availability and get custom quote on WhatsApp
                                                         </span>
                                                     </div>
                                                 </div>
@@ -284,4 +297,3 @@ const BookingModal = ({ isOpen, onClose, pillarTitle }) => {
 };
 
 export default BookingModal;
-
