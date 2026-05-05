@@ -41,7 +41,7 @@ const MissionServicesPage = ({ t }) => {
                             className="bg-heritage-charcoal/80 backdrop-blur-md p-8 rounded-2xl border border-royal-gold/20 hover:border-royal-gold/40 transition-all shadow-lg"
                         >
                             <HeartHandshake className="w-12 h-12 text-royal-gold mb-6" />
-                            <h3 className="text-2xl font-serif text-white mb-4">Local For Vocal</h3>
+                            <h3 className="text-2xl font-serif text-white mb-4">Vocal For Local</h3>
                             <p className="text-gray-300 leading-relaxed text-sm md:text-base">
                                 {mission.desc1}
                             </p>

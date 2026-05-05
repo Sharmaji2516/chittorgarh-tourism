@@ -22,7 +22,7 @@ const Navbar = () => {
         { name: t.nav.attractions || 'Attractions', href: '/attractions' },
         { name: t.nav.localRoyalCuisine, href: '/flavors' },
         { name: t.nav.royalJourneys, href: '/royal-journeys' },
-        { name: t.nav.localVocal || 'Local For Vocal', href: '/local-for-vocal' },
+        { name: t.nav.localVocal || 'Vocal For Local', href: '/vocal-for-local' },
         { name: t.nav.missionServices, href: '/mission-services' },
     ];
 

@@ -80,7 +80,7 @@ const MainContent = () => {
               />
             } />
             <Route path="/royal-journeys" element={<RoyalJourneysPage t={t} />} />
-            <Route path="/local-for-vocal" element={
+            <Route path="/vocal-for-local" element={
               <LocalVocalPage
                 t={t}
                 filteredLocalVocal={t.localVocal.items}

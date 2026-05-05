@@ -36,7 +36,7 @@ const Footer = () => {
                                 { name: t.nav.attractions, path: '/attractions' },
                                 { name: t.nav.localRoyalCuisine, path: '/flavors' },
                                 { name: t.nav.hotels, path: '/stays' },
-                                { name: t.nav.localVocal, path: '/local-for-vocal' },
+                                { name: t.nav.localVocal, path: '/vocal-for-local' },
                                 { name: t.nav.missionServices, path: '/mission-services' }
                             ].map((item) => (
                                 <li key={item.name}>

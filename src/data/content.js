@@ -6,7 +6,7 @@ export const content = {
       attractions: "Attractions",
       localRoyalCuisine: "Famous Local Flavors",
       royalJourneys: "Royal Journeys",
-      localVocal: "Local For Vocal",
+      localVocal: "Vocal For Local",
       itineraries: "Itineraries",
       missionServices: "Mission & Services",
       langBtn: "हिंदी",
@@ -777,10 +777,10 @@ export const content = {
       },
     },
     localVocal: {
-      title: "Local For Vocal",
+      title: "Vocal For Local",
       subtitle:
         "Support our local artisans and vendors who keep the heritage alive.",
-      desc: "We proudly support the 'Local for Vocal' movement. Our initiative is to bridge the gap between tourists and our local artisans and small shops. Too often, visitors come and go without discovering the hidden gems of our city. By connecting you directly with them, we aim to preserve our rich heritage and empower the local community.",
+      desc: "We proudly support the 'Vocal for Local' movement. Our initiative is to bridge the gap between tourists and our local artisans and small shops. Too often, visitors come and go without discovering the hidden gems of our city. By connecting you directly with them, we aim to preserve our rich heritage and empower the local community.",
       items: [
         {
           id: 1,
@@ -886,7 +886,7 @@ export const content = {
       attractions: "पर्यटन स्थल",
       localRoyalCuisine: "प्रसिद्ध स्थानीय स्वाद",
       royalJourneys: "शाही यात्राएं",
-      localVocal: "लोकल फॉर वोकल",
+      localVocal: "वोकल फॉर लोकल",
       itineraries: "यात्रा कार्यक्रम",
       missionServices: "मिशन और सेवाएँ",
       langBtn: "English",
@@ -1564,10 +1564,10 @@ export const content = {
       },
     },
     localVocal: {
-      title: "लोकल फॉर वोकल",
+      title: "वोकल फॉर लोकल",
       subtitle:
         "हमारे स्थानीय कारीगरों और विक्रेताओं का समर्थन करें जो विरासत को जीवित रखते हैं।",
-      desc: "हम 'लोकल फॉर वोकल' पहल का गर्व से समर्थन करते हैं। हमारा उद्देश्य पर्यटकों को सीधे छोटी दुकानों और स्थानीय कारीगरों से जोड़ना है। अक्सर पर्यटक आते हैं और इन छिपे हुए खजानों को जाने बिना ही चले जाते हैं। आपको सीधे उनसे जोड़कर, हम अपनी समृद्ध विरासत को सहेजने और स्थानीय समुदाय को सशक्त बनाने का प्रयास कर रहे हैं।",
+      desc: "हम 'वोकल फॉर लोकल' पहल का गर्व से समर्थन करते हैं। हमारा उद्देश्य पर्यटकों को सीधे छोटी दुकानों और स्थानीय कारीगरों से जोड़ना है। अक्सर पर्यटक आते हैं और इन छिपे हुए खजानों को जाने बिना ही चले जाते हैं। आपको सीधे उनसे जोड़कर, हम अपनी समृद्ध विरासत को सहेजने और स्थानीय समुदाय को सशक्त बनाने का प्रयास कर रहे हैं।",
       items: [
         {
           id: 1,
