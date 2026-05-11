@@ -349,6 +349,48 @@ export const content = {
             airport: "95 km (Udaipur)",
           },
         },
+        {
+          id: 17,
+          name: "Matrikundia Temple",
+          desc: "Known as the 'Haridwar of Rajasthan', this sacred temple on the banks of the Banas river is a place of high religious significance.",
+          wiki: "https://en.wikipedia.org/wiki/Matrikundia",
+          bestTime: "Year-round",
+          image: "/assets/images/matrikundia.jpg",
+          coordinates: [25.044, 74.354],
+          distances: {
+            railway: "45 km",
+            bus: "47 km",
+            airport: "130 km (Udaipur)",
+          },
+        },
+        {
+          id: 18,
+          name: "Sita Mata Wildlife Sanctuary",
+          desc: "Famous for the rare flying squirrel, teak forest, and rich biodiversity, this sanctuary is a paradise for nature lovers.",
+          wiki: "https://en.wikipedia.org/wiki/Sita_Mata_Wildlife_Sanctuary",
+          bestTime: "Oct - Feb",
+          image: "/assets/images/sitamata.jpg",
+          coordinates: [24.28, 74.33],
+          distances: {
+            railway: "75 km",
+            bus: "77 km",
+            airport: "110 km (Udaipur)",
+          },
+        },
+        {
+          id: 19,
+          name: "Nagari Ancient Ruins",
+          desc: "One of the oldest towns in Rajasthan, featuring ruins of ancient temples and stupas. Located on the banks of the Berach River.",
+          wiki: "https://en.wikipedia.org/wiki/Nagari,_Rajasthan",
+          bestTime: "Oct - March",
+          image: "/assets/images/nagari.jpg",
+          coordinates: [24.96, 74.68],
+          distances: {
+            railway: "20 km",
+            bus: "22 km",
+            airport: "110 km (Udaipur)",
+          },
+        },
       ],
     },
     vendors: {
@@ -556,7 +598,7 @@ export const content = {
         {
           id: "oneDay",
           duration: "1 Day",
-          title: "The Fort Legacy",
+          title: "Fort Legacy",
           desc: "Cover the major highlights of Chittorgarh Fort in a single day.",
           timeline: [
             {
@@ -579,7 +621,7 @@ export const content = {
         {
           id: "twoDays",
           duration: "2 Days",
-          title: "Nature & Spirituality",
+          title: "Mewar Heritage",
           desc: "Explore the Fort and surrounding nature and temples.",
           timeline: [
             {
@@ -602,7 +644,7 @@ export const content = {
         {
           id: "threeDays",
           duration: "3 Days",
-          title: "The Complete Mewar",
+          title: "Spiritual & Scenic",
           desc: "Deep dive into history, nature, and culture.",
           timeline: [
             {
@@ -635,7 +677,7 @@ export const content = {
       items: [
         {
           id: "oneDay",
-          name: "The Fort Legacy",
+          name: "Fort Legacy",
           duration: "1 Day",
           includes: ["Private SUV", "Certified Guide", "Traditional Lunch"],
           desc: "The ultimate 1-day journey covering every secret of the Chittorgarh Fort."
@@ -692,7 +734,8 @@ export const content = {
         "Significant sales growth & market expansion for local hidden gems.",
         "Tourists get authentic Mewari products directly from the source.",
         "Enhanced travel experience with genuine local stories & hospitality.",
-        "Bridging the gap to create a sustainable & thriving local ecosystem."
+        "Bridging the gap to create a sustainable & thriving local ecosystem.",
+        "Best rates and services guaranteed as we live locally and have strong direct connections."
       ]
     },
     missionPage: {
@@ -731,6 +774,26 @@ export const content = {
           desc: "Relax at the city's most vibrant cafes with stunning views. We help you discover the perfect spots for coffee and leisure.",
           icon: "coffee"
         }
+      ]
+    },
+    termsPage: {
+      title: "Terms & Conditions",
+      welcome: "Welcome to the Chittorgarh Tourism website.",
+      govern: "These Terms and Conditions govern your use of our website and services. By accessing or using our website, you agree to comply with and be bound by these terms.",
+      lastUpdated: "Last updated: May 10, 2026",
+      items: [
+        { id: 1, title: "1. Acceptance of Terms", content: "By accessing this website, you acknowledge that you have read, understood, and agree to be bound by these Terms and Conditions. If you do not agree to these terms, please do not use the website." },
+        { id: 2, title: "2. Use of the Website", content: "The content provided on this website is for general information and promotional purposes only. You agree to use the website only for lawful purposes and in a manner that does not infringe the rights of others or restrict their use and enjoyment of the website." },
+        { id: 3, title: "3. User Accounts and Content", content: "If you create an account or submit content (such as feedback, reviews, or provider information), you are responsible for maintaining the confidentiality of your account details and for all activities that occur under your account. You grant us a non-exclusive, royalty-free, perpetual, and worldwide license to use, reproduce, modify, and display any content you submit." },
+        { id: 4, title: "4. Our Role as an Intermediary Platform", content: "Intermediary Only: Chittorgarh Tourism operates solely as an intermediary platform that connects customers with independent local service providers (such as taxi operators, tour guides, hotels, and cafes). We do not own, operate, or control any of the vehicles, hotels, or cafes listed on the website. We do not employ the guides or drivers. Our role is limited to providing the platform where both parties can connect, and facilitating payments for convenience. We do not directly interfere in the execution of the services." },
+        { id: 5, title: "5. Service Booking and Centralized Payments", content: "Centralized Payment: All bookings for services listed on our website must be paid for directly to Chittorgarh Tourism. Upon successful payment, you will receive a unique, one-time verification code (or QR code). You must present this code to the respective service provider to avail of the service. You are instructed not to make any direct payments to the service providers for the services booked through our platform. Chittorgarh Tourism is responsible for distributing payments to the providers." },
+        { id: 6, title: "6. Payment Safety and Security", content: "Secure Transactions: We are committed to ensuring that your payment is safe and secure. We use standard encryption and secure payment processing methods to protect your financial details. You can book with complete peace of mind." },
+        { id: 7, title: "7. System-Mediated Communication (\"No-Contact\" Model)", content: "No Direct Contact: To ensure a standardized and secure experience, our platform operates on a system-mediated model. Customers and service providers should not communicate directly regarding bookings or service execution. Both customers and providers must interact with the Chittorgarh Tourism system. The system will handle coordination, updates, and issue resolution." },
+        { id: 8, title: "8. Cancellation and Refund Policy", content: "Strict No-Refund Policy: Once the payment is made, the amount is deducted, and the verification code is generated, no refunds will be issued under any circumstances. If a service provider fails to deliver the service after you present the verification code, you must contact Chittorgarh Tourism immediately. We will take immediate action to arrange an alternative service or facility for you. Even in the event of service failure by a provider, the payment remains non-refundable. Our liability is limited to arranging an alternative service or taking action against the defaulting provider." },
+        { id: 9, title: "9. Provider Behavior, Feedback, and Limitation of Liability", content: "Reporting Misbehavior: If a service provider (e.g., a driver, guide, or hotel staff) misbehaves, provides incorrect service, or acts inappropriately, you should immediately report the issue and provide a rating/review through our system. Feedback for System Improvement: We strongly encourage users to provide feedback for every service consumed. This helps us monitor provider quality and continually improve our system to provide you with the best facilities. No Guarantee for Third-Party Behavior: While we facilitate bookings and act on feedback, we do not guarantee the conduct, quality, or safety of the services provided by third-party vendors. They are independent contractors, and Chittorgarh Tourism is not legally liable for their personal actions, behavior, or any deficiencies in their service." },
+        { id: 10, title: "10. Intellectual Property", content: "All content on this website, including text, graphics, logos, images, and software, is the property of Chittorgarh Tourism or its content suppliers and is protected by copyright laws. You may not reproduce, duplicate, copy, sell, or exploit any portion of the website without express written permission from us." },
+        { id: 11, title: "11. Modifications", content: "We reserve the right to change these Terms and Conditions at any time. Your continued use of the website following any changes indicates your acceptance of the new terms." },
+        { id: 12, title: "12. Governing Law", content: "These terms are governed by and construed in accordance with the laws of India, and any disputes relating to these terms will be subject to the exclusive jurisdiction of the courts of Rajasthan." }
       ]
     },
 
@@ -1520,6 +1583,26 @@ export const content = {
         }
       ]
     },
+    termsPage: {
+      title: "नियम और शर्तें",
+      welcome: "चित्तौड़गढ़ पर्यटन वेबसाइट पर आपका स्वागत है।",
+      govern: "ये नियम और शर्तें आपकी हमारी वेबसाइट और सेवाओं के उपयोग को नियंत्रित करती हैं। हमारी वेबसाइट का उपयोग करके, आप इन शर्तों का पालन करने और उनसे बंधने के लिए सहमत हैं।",
+      lastUpdated: "आखिरी अपडेट: 10 मई, 2026",
+      items: [
+        { id: 1, title: "1. शर्तों की स्वीकृति", content: "इस वेबसाइट का उपयोग करके, आप स्वीकार करते हैं कि आपने इन नियमों और शर्तों को पढ़ और समझ लिया है और आप इनसे बंधने के लिए सहमत हैं। यदि आप इन शर्तों से सहमत नहीं हैं, तो कृपया वेबसाइट का उपयोग न करें।" },
+        { id: 2, title: "2. वेबसाइट का उपयोग", content: "इस वेबसाइट पर प्रदान की गई सामग्री केवल सामान्य जानकारी और प्रचार उद्देश्यों के लिए है। आप वेबसाइट का उपयोग केवल वैध उद्देश्यों के लिए और ऐसे तरीके से करने के लिए सहमत हैं जो दूसरों के अधिकारों का उल्लंघन न करे या उनके वेबसाइट के उपयोग और आनंद को प्रतिबंधित न करे।" },
+        { id: 3, title: "3. उपयोगकर्ता खाते और सामग्री", content: "यदि आप एक खाता बनाते हैं या सामग्री (जैसे प्रतिक्रिया, समीक्षा, या प्रदाता जानकारी) जमा करते हैं, तो आप अपने खाते के विवरण की गोपनीयता बनाए रखने और अपने खाते के तहत होने वाली सभी गतिविधियों के लिए जिम्मेदार हैं। आप हमें आपके द्वारा सबमिट की गई किसी भी सामग्री का उपयोग करने, पुनरुत्पादित करने, संशोधित करने और प्रदर्शित करने के लिए एक गैर-अनन्य, रॉयल्टी-मुक्त, स्थायी और विश्वव्यापी लाइसेंस प्रदान करते हैं।" },
+        { id: 4, title: "4. एक मध्यस्थ मंच के रूप में हमारी भूमिका", content: "केवल मध्यस्थ: चित्तौड़गढ़ पर्यटन पूरी तरह से एक मध्यस्थ मंच के रूप में कार्य करता है जो ग्राहकों को स्वतंत्र स्थानीय सेवा प्रदाताओं (जैसे टैक्सी ऑपरेटर, टूर गाइड, होटल और कैफे) से जोड़ता है। हम वेबसाइट पर सूचीबद्ध किसी भी वाहन, होटल या कैफे के मालिक नहीं हैं, न ही उन्हें संचालित या नियंत्रित करते हैं। हम गाइड या ड्राइवरों को रोजगार नहीं देते हैं। हमारी भूमिका उस मंच को प्रदान करने तक सीमित है जहां दोनों पक्ष जुड़ सकते हैं, और सुविधा के लिए भुगतान की सुविधा प्रदान कर सकते हैं। हम सेवाओं के निष्पादन में सीधे हस्तक्षेप नहीं करते हैं।" },
+        { id: 5, title: "5. सेवा बुकिंग और केंद्रीकृत भुगतान", content: "केंद्रीकृत भुगतान: हमारी वेबसाइट पर सूचीबद्ध सेवाओं के लिए सभी बुकिंग का भुगतान सीधे चित्तौड़गढ़ पर्यटन को किया जाना चाहिए। सफल भुगतान पर, आपको एक अद्वितीय, एक बार का सत्यापन कोड (या क्यूआर कोड) प्राप्त होगा। सेवा प्राप्त करने के लिए आपको यह कोड संबंधित सेवा प्रदाता को प्रस्तुत करना होगा। आपको निर्देश दिया जाता है कि हमारे प्लेटफॉर्म के माध्यम से बुक की गई सेवाओं के लिए सेवा प्रदाताओं को कोई सीधा भुगतान न करें। चित्तौड़गढ़ पर्यटन प्रदाताओं को भुगतान वितरित करने के लिए जिम्मेदार है।" },
+        { id: 6, title: "6. भुगतान सुरक्षा और संरक्षा", content: "सुरक्षित लेनदेन: हम यह सुनिश्चित करने के लिए प्रतिबद्ध हैं कि आपका भुगतान सुरक्षित और संरक्षित है। हम आपके वित्तीय विवरणों की सुरक्षा के लिए मानक एन्क्रिप्शन और सुरक्षित भुगतान प्रसंस्करण विधियों का उपयोग करते हैं। आप पूरी मानसिक शांति के लिए बुक कर सकते हैं।" },
+        { id: 7, title: "7. सिस्टम-मध्यस्थ संचार (\"नो-कॉन्टैक्ट\" मॉडल)", content: "कोई सीधा संपर्क नहीं: एक मानकीकृत और सुरक्षित अनुभव सुनिश्चित करने के लिए, हमारा प्लेटफ़ॉर्म सिस्टम-मध्यस्थ मॉडल पर काम करता है। बुकिंग या सेवा निष्पादन के संबंध में ग्राहकों और सेवा प्रदाताओं को सीधे संवाद नहीं करना चाहिए। दोनों ग्राहकों और प्रदाताओं को चित्तौड़गढ़ पर्यटन प्रणाली के साथ बातचीत करनी चाहिए। सिस्टम समन्वय, अपडेट और समस्या समाधान को संभालेगा।" },
+        { id: 8, title: "8. रद्दीकरण और धनवापसी नीति", content: "सख्त नो-रिफंड नीति: एक बार भुगतान हो जाने के बाद, राशि काट ली जाती है, और सत्यापन कोड उत्पन्न हो जाता है, किसी भी परिस्थिति में कोई धनवापसी जारी नहीं की जाएगी। यदि कोई सेवा प्रदाता आपके द्वारा सत्यापन कोड प्रस्तुत करने के बाद सेवा देने में विफल रहता है, तो आपको तुरंत चित्तौड़गढ़ पर्यटन से संपर्क करना चाहिए। हम आपके लिए वैकल्पिक सेवा या सुविधा की व्यवस्था करने के लिए तत्काल कार्रवाई करेंगे। प्रदाता द्वारा सेवा विफलता की स्थिति में भी, भुगतान गैर-वापसी योग्य रहता है। हमारा दायित्व वैकल्पिक सेवा की व्यवस्था करने या चूक करने वाले प्रदाता के खिलाफ कार्रवाई करने तक सीमित है।" },
+        { id: 9, title: "9. प्रदाता व्यवहार, प्रतिक्रिया और दायित्व की सीमा", content: "दुर्व्यवहार की रिपोर्ट करना: यदि कोई सेवा प्रदाता (जैसे, एक ड्राइवर, गाइड, या होटल कर्मचारी) दुर्व्यवहार करता है, गलत सेवा प्रदान करता है, या अनुचित व्यवहार करता है, तो आपको तुरंत समस्या की रिपोर्ट करनी चाहिए और हमारे सिस्टम के माध्यम से रेटिंग/समीक्षा प्रदान करनी चाहिए। सिस्टम सुधार के लिए फीडबैक: हम उपयोगकर्ताओं को उपभोग की जाने वाली प्रत्येक सेवा के लिए प्रतिक्रिया प्रदान करने के लिए दृढ़ता से प्रोत्साहित करते हैं। यह हमें प्रदाता की गुणवत्ता की निगरानी करने और आपको सर्वोत्तम सुविधाएं प्रदान करने के लिए हमारे सिस्टम में लगातार सुधार करने में मदद करता है। तृतीय-पक्ष व्यवहार के लिए कोई गारंटी नहीं: हालांकि हम बुकिंग की सुविधा प्रदान करते हैं और प्रतिक्रिया पर कार्रवाई करते हैं, हम तीसरे पक्ष के विक्रेताओं द्वारा प्रदान की जाने वाली सेवाओं के आचरण, गुणवत्ता या सुरक्षा की गारंटी नहीं देते हैं। वे स्वतंत्र ठेकेदार हैं, और चित्तौड़गढ़ पर्यटन उनके व्यक्तिगत कार्यों, व्यवहार या उनकी सेवा में किसी भी कमी के लिए कानूनी रूप से उत्तरदायी नहीं है।" },
+        { id: 10, title: "10. बौद्धिक संपदा", content: "इस वेबसाइट पर सभी सामग्री, जिसमें टेक्स्ट, ग्राफिक्स, लोगो, चित्र और सॉफ्टवेयर शामिल हैं, चित्तौड़गढ़ पर्यटन या उसके सामग्री आपूर्तिकर्ताओं की संपत्ति है और कॉपीराइट कानूनों द्वारा संरक्षित है। आप हमारी स्पष्ट लिखित अनुमति के बिना वेबसाइट के किसी भी हिस्से को पुनरुत्पादित, डुप्लिकेट, कॉपी, बेच या शोषण नहीं कर सकते हैं।" },
+        { id: 11, title: "11. संशोधन", content: "हम किसी भी समय इन नियमों और शर्तों को बदलने का अधिकार सुरक्षित रखते हैं। किसी भी बदलाव के बाद वेबसाइट का आपका निरंतर उपयोग नए नियमों की आपकी स्वीकृति का संकेत देता है।" },
+        { id: 12, title: "12. शासी कानून", content: "ये शर्तें भारत के कानूनों के अनुसार शासित और समझी जाती हैं, और इन शर्तों से संबंधित कोई भी विवाद राजस्थान की अदालतों के अनन्य क्षेत्राधिकार के अधीन होगा।" }
+      ]
+    },
 
     admin: {
       loginTitle: "शाही एडमिन एक्सेस",
@@ -1725,7 +1808,8 @@ export const content = {
         "स्थानीय छिपे हुए खजानों के लिए महत्वपूर्ण बिक्री वृद्धि और बाजार विस्तार।",
         "पर्यटकों को सीधे स्रोत से प्रामाणिक मेवाड़ी उत्पाद मिलते हैं।",
         "सच्ची स्थानीय कहानियों और आतिथ्य के साथ बेहतर यात्रा अनुभव।",
-        "एक टिकाऊ और समृद्ध स्थानीय पारिस्थितिकी तंत्र बनाने के लिए बीच की दूरी को कम करना।"
+        "एक टिकाऊ और समृद्ध स्थानीय पारिस्थितिकी तंत्र बनाने के लिए बीच की दूरी को कम करना।",
+        "सर्वोत्तम दरों और सेवाओं की गारंटी क्योंकि हम स्थानीय स्तर पर रहते हैं और हमारे मजबूत सीधे संबंध हैं।"
       ]
     }
   },

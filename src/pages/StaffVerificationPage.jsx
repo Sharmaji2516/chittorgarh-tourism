@@ -19,6 +19,7 @@ const StaffVerificationPage = () => {
     const [redeemLoading, setRedeemLoading] = useState(null);
     const [todayBookings, setTodayBookings] = useState([]);
     const [scheduleLoading, setScheduleLoading] = useState(false);
+    const [showHelp, setShowHelp] = useState(false);
 
     const STAFF_PIN = "1234";
 
@@ -171,11 +172,159 @@ const StaffVerificationPage = () => {
         return <Star className="w-7 h-7" />;
     };
 
+    const MinimalHeader = () => (
+        <header className="w-full py-8 flex justify-center z-50">
+            <h2 className="text-2xl md:text-3xl font-serif font-black italic tracking-tight text-royal-gold uppercase drop-shadow-2xl">
+                Chittorgarh Paryatan
+            </h2>
+        </header>
+    );
+
+    const MinimalFooter = () => (
+        <div className="border-t border-royal-gold/10 pt-16 pb-8 flex flex-col items-center gap-10 relative z-10 w-full mt-20">
+            <div className="flex flex-col items-center gap-8 bg-black/20 p-8 rounded-[2rem] border border-royal-gold/5 backdrop-blur-md max-w-sm w-full mx-auto shadow-2xl">
+                <div className="flex items-center gap-4 bg-black/40 px-6 py-4 rounded-full border border-royal-gold/20 shadow-inner transition-all duration-500 hover:border-royal-gold/50">
+                    <div className="w-14 h-14 bg-white rounded-2xl p-2 shadow-lg">
+                        <img src="/chittortech_logo.png" alt="ChittorTech" className="w-full h-full object-contain" />
+                    </div>
+                    <div className="flex flex-col text-left">
+                        <span className="text-[10px] text-white/40 uppercase tracking-[0.2em] font-bold">A Product Of</span>
+                        <span className="text-2xl text-white font-black tracking-tight -mt-1 italic">ChittorTech</span>
+                    </div>
+                </div>
+
+                <div className="flex flex-col gap-3">
+                    <div className="flex items-center gap-3">
+                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.5)]"></div>
+                        <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider">Recognized by iStart Rajasthan</span>
+                    </div>
+                    <div className="flex items-center gap-3">
+                        <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.5)]"></div>
+                        <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-wider">Registered MSME | Startup India</span>
+                    </div>
+                </div>
+
+                <div className="w-full border-t border-dashed border-white/10"></div>
+
+                <div className="flex flex-col items-center gap-6 w-full">
+                    <p className="text-[10px] text-white/40 uppercase tracking-[0.2em] font-bold text-center">
+                        © 2026 CHITTORTECH ALL RIGHTS RESERVED
+                    </p>
+                </div>
+            </div>
+        </div>
+    );
+
+    const HelpSection = () => (
+        <div className="w-full flex flex-col items-center mt-12 mb-8 z-10 relative">
+            <button onClick={() => setShowHelp(!showHelp)} className="text-[11px] font-black uppercase tracking-widest text-royal-gold hover:text-royal-gold transition-all flex items-center gap-2 bg-royal-gold/10 hover:bg-royal-gold/20 px-6 py-3 rounded-full border border-royal-gold/20 shadow-lg">
+                <span>❓</span> How to use this portal? / उपयोग कैसे करें?
+            </button>
+
+            <AnimatePresence>
+                {showHelp && (
+                    <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="w-full max-w-2xl mt-6 overflow-hidden">
+                        <div className="bg-white/5 border border-white/10 rounded-[2.5rem] p-8 md:p-10 text-left backdrop-blur-xl relative mx-4 md:mx-0 shadow-2xl">
+                            <h3 className="text-xl md:text-2xl font-serif text-royal-gold font-black italic tracking-tight mb-8 text-center">Verification Guide</h3>
+                            
+                            <div className="space-y-6">
+                                {/* Step 1 */}
+                                <div className="bg-gradient-to-br from-black/40 to-black/20 p-8 rounded-3xl border border-royal-gold/10 relative overflow-hidden group hover:border-royal-gold/30 transition-all shadow-inner">
+                                    <div className="absolute -right-4 -top-4 text-[10rem] font-black text-white/[0.02] group-hover:text-royal-gold/[0.05] transition-colors font-serif italic pointer-events-none leading-none">1</div>
+                                    
+                                    <div className="flex flex-col md:flex-row md:items-start gap-6 relative z-10">
+                                        <div className="w-12 h-12 shrink-0 rounded-full bg-royal-gold/10 border border-royal-gold/30 flex items-center justify-center text-royal-gold font-black text-xl shadow-[0_0_15px_rgba(212,175,55,0.2)]">1</div>
+                                        <div className="flex-1 space-y-5">
+                                            <div>
+                                                <h4 className="text-lg font-black text-white uppercase tracking-widest mb-2">Login with ID & PIN</h4>
+                                                <p className="text-white/70 text-base leading-relaxed">
+                                                    Enter your unique Provider ID and your 4-digit verification PIN to log into your dashboard.
+                                                    <span className="block mt-2 text-royal-gold/80 font-bold text-sm bg-royal-gold/5 p-3 rounded-xl border border-royal-gold/10">
+                                                        📧 Note: Both were provided in your welcome email.
+                                                    </span>
+                                                </p>
+                                            </div>
+                                            
+                                            <div className="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+                                            
+                                            <div>
+                                                <h4 className="text-base font-bold text-royal-gold mb-2 font-sans">आईडी और पिन से लॉग इन करें</h4>
+                                                <p className="text-white/60 text-sm leading-relaxed font-sans">
+                                                    लॉग इन करने के लिए अपनी यूनिक प्रोवाइडर आईडी और 4-अंकीय पिन दर्ज करें।
+                                                    <span className="block mt-2 text-royal-gold/80 font-bold text-xs bg-royal-gold/5 p-3 rounded-xl border border-royal-gold/10">
+                                                        📧 नोट: ये दोनों आपके वेलकम ईमेल में भेजे गए थे।
+                                                    </span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Step 2 */}
+                                <div className="bg-gradient-to-br from-black/40 to-black/20 p-8 rounded-3xl border border-royal-gold/10 relative overflow-hidden group hover:border-royal-gold/30 transition-all shadow-inner">
+                                    <div className="absolute -right-4 -top-4 text-[10rem] font-black text-white/[0.02] group-hover:text-royal-gold/[0.05] transition-colors font-serif italic pointer-events-none leading-none">2</div>
+                                    
+                                    <div className="flex flex-col md:flex-row md:items-start gap-6 relative z-10">
+                                        <div className="w-12 h-12 shrink-0 rounded-full bg-royal-gold/10 border border-royal-gold/30 flex items-center justify-center text-royal-gold font-black text-xl shadow-[0_0_15px_rgba(212,175,55,0.2)]">2</div>
+                                        <div className="flex-1 space-y-5">
+                                            <div>
+                                                <h4 className="text-lg font-black text-white uppercase tracking-widest mb-2">Enter Guest Pass Code</h4>
+                                                <p className="text-white/70 text-base leading-relaxed">
+                                                    Ask the guest for their 6-digit Royal Pass Code and enter it in the portal to fetch their details.
+                                                </p>
+                                            </div>
+                                            
+                                            <div className="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+                                            
+                                            <div>
+                                                <h4 className="text-base font-bold text-royal-gold mb-2 font-sans">गेस्ट पास कोड दर्ज करें</h4>
+                                                <p className="text-white/60 text-sm leading-relaxed font-sans">
+                                                    अतिथि से उनका 6-अंकीय रॉयल पास कोड मांगें और उसे पोर्टल में दर्ज करें।
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Step 3 */}
+                                <div className="bg-gradient-to-br from-black/40 to-black/20 p-8 rounded-3xl border border-royal-gold/10 relative overflow-hidden group hover:border-royal-gold/30 transition-all shadow-inner">
+                                    <div className="absolute -right-4 -top-4 text-[10rem] font-black text-white/[0.02] group-hover:text-royal-gold/[0.05] transition-colors font-serif italic pointer-events-none leading-none">3</div>
+                                    
+                                    <div className="flex flex-col md:flex-row md:items-start gap-6 relative z-10">
+                                        <div className="w-12 h-12 shrink-0 rounded-full bg-royal-gold/10 border border-royal-gold/30 flex items-center justify-center text-royal-gold font-black text-xl shadow-[0_0_15px_rgba(212,175,55,0.2)]">3</div>
+                                        <div className="flex-1 space-y-5">
+                                            <div>
+                                                <h4 className="text-lg font-black text-white uppercase tracking-widest mb-2">Verify & Complete</h4>
+                                                <p className="text-white/70 text-base leading-relaxed">
+                                                    Once details are verified, click the "Verify & Use" button to mark the service as completed.
+                                                </p>
+                                            </div>
+                                            
+                                            <div className="h-px w-full bg-gradient-to-r from-transparent via-white/10 to-transparent"></div>
+                                            
+                                            <div>
+                                                <h4 className="text-base font-bold text-royal-gold mb-2 font-sans">सत्यापित करें और पूर्ण करें</h4>
+                                                <p className="text-white/60 text-sm leading-relaxed font-sans">
+                                                    डिटेल्स सत्यापित होने के बाद, सेवा को पूर्ण मार्क करने के लिए "Verify & Use" बटन पर क्लिक करें।
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </div>
+    );
+
     if (!isLoggedIn) {
         return (
-            <div className="min-h-screen bg-[#0a0a0b] flex items-center justify-center p-6 relative overflow-hidden">
+            <div className="min-h-screen bg-[#0a0a0b] flex flex-col items-center justify-between relative overflow-hidden">
+                <MinimalHeader />
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-royal-gold/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 animate-pulse" />
-                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-xl p-10 rounded-[3rem] bg-white/5 border border-white/10 backdrop-blur-xl relative z-10">
+                <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-xl p-6 md:p-10 rounded-[3rem] bg-white/5 border border-white/10 backdrop-blur-xl relative z-10 my-auto">
                     <div className="text-center mb-10">
                         <div className="w-16 h-16 bg-royal-gold/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
                             <ShieldCheck className="w-8 h-8 text-royal-gold" />
@@ -193,7 +342,7 @@ const StaffVerificationPage = () => {
                                     value={providerId} 
                                     onChange={(e) => setProviderId(e.target.value)} 
                                     className="w-full bg-white/5 border border-white/10 rounded-2xl py-5 px-8 text-center text-xl font-black tracking-widest text-royal-gold focus:outline-none focus:border-royal-gold/50" 
-                                    placeholder="ENTER PROVIDER ID (e.g. TX-1234)" 
+                                    placeholder="Enter Provider ID" 
                                 />
                                 <input 
                                     type="password" 
@@ -213,6 +362,8 @@ const StaffVerificationPage = () => {
                         </button>
                     </form>
                 </motion.div>
+                <HelpSection />
+                <MinimalFooter />
             </div>
         );
     }
@@ -220,15 +371,22 @@ const StaffVerificationPage = () => {
     const currentRoleLabel = roles.find(r => r.id === staffRole)?.label;
 
     return (
-        <div className="min-h-screen bg-[#0a0a0b] text-white p-4 md:p-12 relative overflow-hidden font-sans">
+        <div className="min-h-screen bg-[#0a0a0b] text-white relative overflow-hidden font-sans flex flex-col">
+            <MinimalHeader />
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-royal-gold/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 animate-pulse" />
             
-            <div className="max-w-xl mx-auto relative z-10">
+            <div className="max-w-xl mx-auto relative z-10 w-full p-4 md:p-8 flex-1">
                 <div className="flex justify-between items-center mb-12">
                     <div className="flex items-center gap-4">
-                        <div className="w-12 h-12 bg-royal-gold/10 rounded-xl flex items-center justify-center">
-                            {getServiceIcon(staffRole)}
-                        </div>
+                        {providerData?.photoUrl ? (
+                            <div className="w-12 h-12 rounded-xl overflow-hidden border border-royal-gold/30 shrink-0">
+                                <img src={providerData.photoUrl} alt={providerData.name} className="w-full h-full object-cover" />
+                            </div>
+                        ) : (
+                            <div className="w-12 h-12 bg-royal-gold/10 rounded-xl flex items-center justify-center shrink-0">
+                                {getServiceIcon(staffRole)}
+                            </div>
+                        )}
                         <div>
                             <h1 className="text-xl font-serif font-black italic tracking-tight">{providerData?.name}</h1>
                             <p className="text-[8px] text-royal-gold uppercase tracking-[0.3em] font-black">{currentRoleLabel} | ID: {providerData?.providerCode}</p>
@@ -300,6 +458,16 @@ const StaffVerificationPage = () => {
                                             <p className="text-[8px] text-white/30 font-black uppercase tracking-wider">
                                                 {new Date(booking[`redeemed_${staffRole.toLowerCase()}_at`]).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                             </p>
+                                            {/* Share Feedback Button */}
+                                            <a 
+                                                href={`https://wa.me/${booking.phone.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(`Thank you for using our ${staffRole} service! Please rate your experience here: https://www.visitchittorgarh.in/feedback?id=${booking.id}&provider=${providerData?.id}&type=${staffRole}`)}`}
+                                                target="_blank" 
+                                                rel="noopener noreferrer"
+                                                className="mt-2 px-4 py-2 bg-royal-gold text-slate-900 rounded-lg text-[8px] font-black uppercase tracking-widest hover:bg-white transition-all shadow-lg flex items-center gap-1"
+                                                title="Send feedback link to customer on WhatsApp"
+                                            >
+                                                Share Feedback
+                                            </a>
                                         </div>
                                     ) : (
                                         <button 
@@ -367,9 +535,8 @@ const StaffVerificationPage = () => {
                 )}
             </div>
 
-            <footer className="mt-20 text-center opacity-30">
-                <p className="text-[10px] text-white font-black uppercase tracking-[0.5em]">Chittorgarh Tourism Administration</p>
-            </footer>
+            <HelpSection />
+            <MinimalFooter />
         </div>
     );
 };

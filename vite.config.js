@@ -6,5 +6,8 @@ export default defineConfig({
   plugins: [react()],
   server: {
     allowedHosts: true
+  },
+  optimizeDeps: {
+    include: ['html2pdf.js']
   }
 })

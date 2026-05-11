@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Section from '../components/Section';
 import VendorCard from '../components/VendorCard';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Utensils, Coffee, LayoutGrid, Star, ArrowRight } from 'lucide-react';
+import { Utensils, Coffee, LayoutGrid, Star, ArrowRight, X, CheckCircle2 } from 'lucide-react';
 import { cn } from '../utils/cn';
 import BookingModal from '../components/BookingModal';
 
@@ -10,6 +10,12 @@ const FlavorsPage = ({ t, filteredVendors, filteredCafes, searchQuery }) => {
     const [activeCategory, setActiveCategory] = useState('all'); // 'all', 'vendors', 'cafes', 'dishes'
     const [isBookingOpen, setIsBookingOpen] = useState(false);
     const [bookingTitle, setBookingTitle] = useState('');
+    const [isDishModalOpen, setIsDishModalOpen] = useState(false);
+    const [selectedDish, setSelectedDish] = useState(null);
+    const [peopleCount, setPeopleCount] = useState(1);
+    const [inquirySent, setInquirySent] = useState(false);
+    const [userName, setUserName] = useState('');
+    const [userPhone, setUserPhone] = useState('');
 
     const filterOptions = [
         { id: 'all', label: t.common.filterAll, icon: LayoutGrid },
@@ -78,7 +84,10 @@ const FlavorsPage = ({ t, filteredVendors, filteredCafes, searchQuery }) => {
                                         key={dish.id}
                                         whileHover={{ y: -5 }}
                                         className="group relative bg-heritage-charcoal/40 rounded-3xl overflow-hidden border border-white/5 hover:border-royal-gold/30 transition-all duration-500 shadow-2xl cursor-pointer"
-                                        onClick={() => openBooking(`Experience ${dish.name}`)}
+                                        onClick={() => {
+                                            setSelectedDish(dish);
+                                            setIsDishModalOpen(true);
+                                        }}
                                     >
                                         <div className="aspect-square overflow-hidden">
                                             <img src={dish.image} alt={dish.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />
@@ -141,6 +150,113 @@ const FlavorsPage = ({ t, filteredVendors, filteredCafes, searchQuery }) => {
                 pillarTitle={bookingTitle}
             />
 
+            {/* Dish Inquiry Modal */}
+            <AnimatePresence>
+                {isDishModalOpen && selectedDish && (
+                    <div className="fixed inset-0 z-[120] flex items-center justify-center p-4">
+                        <motion.div 
+                            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+                            onClick={() => {
+                                setIsDishModalOpen(false);
+                                setInquirySent(false);
+                            }}
+                            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+                        />
+                        
+                        <motion.div
+                            initial={{ scale: 0.9, opacity: 0 }}
+                            animate={{ scale: 1, opacity: 1 }}
+                            exit={{ scale: 0.9, opacity: 0 }}
+                            className="relative w-full max-w-md bg-heritage-charcoal border border-white/10 rounded-[2rem] p-8 shadow-2xl z-20"
+                        >
+                            <button 
+                                onClick={() => {
+                                    setIsDishModalOpen(false);
+                                    setInquirySent(false);
+                                }} 
+                                className="absolute top-6 right-6 text-white/40 hover:text-white"
+                            >
+                                <X className="w-5 h-5" />
+                            </button>
+                            
+                            <h3 className="text-2xl font-serif text-white mb-2">{selectedDish.name}</h3>
+                            <p className="text-royal-gold text-xs uppercase tracking-widest mb-6">Inquire for this dish</p>
+                            
+                            {!inquirySent ? (
+                                <div className="space-y-6">
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] text-white/60 uppercase tracking-widest font-bold">Your Name</label>
+                                        <input 
+                                            type="text" 
+                                            value={userName} 
+                                            onChange={(e) => setUserName(e.target.value)} 
+                                            className="w-full bg-white/5 border border-white/10 rounded-xl py-4 px-4 text-white focus:outline-none focus:border-royal-gold"
+                                            placeholder="Enter your name"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] text-white/60 uppercase tracking-widest font-bold">Phone Number</label>
+                                        <input 
+                                            type="tel" 
+                                            value={userPhone} 
+                                            onChange={(e) => setUserPhone(e.target.value)} 
+                                            className="w-full bg-white/5 border border-white/10 rounded-xl py-4 px-4 text-white focus:outline-none focus:border-royal-gold"
+                                            placeholder="Enter phone number"
+                                        />
+                                    </div>
+                                    <div className="space-y-2">
+                                        <label className="text-[10px] text-white/60 uppercase tracking-widest font-bold">How many people are there?</label>
+                                        <input 
+                                            type="number" 
+                                            min="1" 
+                                            value={peopleCount} 
+                                            onChange={(e) => setPeopleCount(e.target.value)} 
+                                            className="w-full bg-white/5 border border-white/10 rounded-xl py-4 px-4 text-white focus:outline-none focus:border-royal-gold"
+                                        />
+                                    </div>
+                                    
+                                    <button 
+                                        onClick={() => {
+                                            const phoneNumber = "917597451057"; // Use the one from BookingModal
+                                            const message = `*\uD83C\uDF74\uFE0F Dish Inquiry*\n\n` +
+                                                `*\uD83C\uDF72 Dish:* ${selectedDish.name}\n` +
+                                                `*\uD83D\uDC65 People:* ${peopleCount}\n` +
+                                                `*\uD83D\uDC64 Name:* ${userName}\n` +
+                                                `*\uD83D\uDCDE Phone:* ${userPhone}\n\n` +
+                                                `Please provide details and availability.`;
+                                            window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+                                            setInquirySent(true);
+                                        }}
+                                        className="w-full py-4 bg-royal-gold text-royal-black font-black uppercase tracking-widest text-xs rounded-xl flex items-center justify-center gap-3 hover:scale-[1.02] transition-all"
+                                    >
+                                        Inquire Now via WhatsApp
+                                        <ArrowRight className="w-4 h-4" />
+                                    </button>
+                                </div>
+                            ) : (
+                                <div className="text-center space-y-4">
+                                    <div className="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center text-green-500 mx-auto">
+                                        <CheckCircle2 className="w-8 h-8" />
+                                    </div>
+                                    <p className="text-white font-bold">Inquiry Sent!</p>
+                                    <p className="text-white/60 text-xs">The details will be shared soon. We will contact you shortly within 1 hour.</p>
+                                    <button 
+                                        onClick={() => {
+                                            setIsDishModalOpen(false);
+                                            setInquirySent(false);
+                                            setPeopleCount(1);
+                                        }}
+                                        className="mt-4 px-6 py-2 bg-white/5 rounded-lg text-white text-xs hover:bg-white/10"
+                                    >
+                                        Close
+                                    </button>
+                                </div>
+                            )}
+                        </motion.div>
+                    </div>
+                )}
+            </AnimatePresence>
+
             {(filteredVendors.length > 0 || filteredCafes.length > 0) && (
                 <div className="pb-16 text-center">
                     <p className="text-royal-gold/30 text-[10px] uppercase tracking-[0.3em] font-serif italic">
@@ -153,4 +269,3 @@ const FlavorsPage = ({ t, filteredVendors, filteredCafes, searchQuery }) => {
 };
 
 export default FlavorsPage;
-

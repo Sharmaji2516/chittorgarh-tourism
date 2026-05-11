@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { NavLink } from 'react-router-dom';
 import FeedbackForm from './FeedbackForm';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Footer = () => {
     const { t } = useLanguage();
+    const [isBenefitsOpen, setIsBenefitsOpen] = useState(false);
 
     return (
         <footer className="bg-heritage-charcoal text-royal-white/60 py-16 border-t border-royal-gold/20 relative overflow-hidden">
@@ -37,7 +39,8 @@ const Footer = () => {
                                 { name: t.nav.localRoyalCuisine, path: '/flavors' },
                                 { name: t.nav.hotels, path: '/stays' },
                                 { name: t.nav.localVocal, path: '/vocal-for-local' },
-                                { name: t.nav.missionServices, path: '/mission-services' }
+                                { name: t.nav.missionServices, path: '/mission-services' },
+                                { name: "Terms & Conditions", path: '/terms' }
                             ].map((item) => (
                                 <li key={item.name}>
                                     <NavLink 
@@ -53,18 +56,32 @@ const Footer = () => {
 
                     {/* Benefits Section */}
                     <div className="flex flex-col items-center md:items-start group">
-                        <h4 className="text-royal-gold uppercase tracking-[0.3em] mb-6 text-xs font-black flex items-center gap-2">
+                        <h4 
+                            onClick={() => setIsBenefitsOpen(!isBenefitsOpen)}
+                            className="text-royal-gold uppercase tracking-[0.3em] mb-6 text-xs font-black flex items-center gap-2 cursor-pointer hover:text-white transition-colors"
+                        >
                             <span className="w-1.5 h-1.5 rounded-full bg-royal-gold"></span>
                             {t.footer.benefitsTitle}
+                            <span className={`transform transition-transform duration-300 ${isBenefitsOpen ? 'rotate-180' : 'rotate-0'} text-[10px]`}>▼</span>
                         </h4>
-                        <ul className="space-y-4">
-                            {t.footer.benefitPoints.map((point, index) => (
-                                <li key={index} className="flex gap-3 text-xs leading-relaxed group/item">
-                                    <span className="text-royal-gold shrink-0 mt-0.5 opacity-40 group-hover/item:opacity-100 transition-opacity">✦</span>
-                                    <span className="text-royal-white/50 group-hover/item:text-royal-white/80 transition-colors">{point}</span>
-                                </li>
-                            ))}
-                        </ul>
+                        <AnimatePresence>
+                            {isBenefitsOpen && (
+                                <motion.ul 
+                                    initial={{ opacity: 0, height: 0 }}
+                                    animate={{ opacity: 1, height: 'auto' }}
+                                    exit={{ opacity: 0, height: 0 }}
+                                    transition={{ duration: 0.3 }}
+                                    className="space-y-4 overflow-hidden"
+                                >
+                                    {t.footer.benefitPoints.map((point, index) => (
+                                        <li key={index} className="flex gap-3 text-sm leading-relaxed group/item">
+                                            <span className="text-royal-gold shrink-0 mt-0.5 opacity-40 group-hover/item:opacity-100 transition-opacity">✦</span>
+                                            <span className="text-royal-white/50 group-hover/item:text-royal-white/80 transition-colors">{point}</span>
+                                        </li>
+                                    ))}
+                                </motion.ul>
+                            )}
+                        </AnimatePresence>
                     </div>
 
                     {/* Contact Section */}

@@ -2,12 +2,10 @@ import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useParams, Link } from 'react-router-dom';
 import AttractionCard from '../components/AttractionCard';
-import { MapPin, Info, ArrowRightCircle, Shield, Wind, Sunrise, Mountain, Hotel, Car, UserCheck, Calendar } from 'lucide-react';
-import BookingModal from '../components/BookingModal';
+import { MapPin, Info, Shield, Wind, Sunrise, Mountain } from 'lucide-react';
 
 const AttractionsPage = ({ t, filteredAttractions, setSelectedAttraction }) => {
     const { category } = useParams();
-    const [isBookingOpen, setIsBookingOpen] = React.useState(false);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -28,7 +26,7 @@ const AttractionsPage = ({ t, filteredAttractions, setSelectedAttraction }) => {
         },
         'nature': {
             main: filteredAttractions.find(a => a.id === 2),
-            subs: [],
+            subs: filteredAttractions.filter(a => a.id === 18),
             icon: Wind,
             theme: "from-green-600 to-teal-500",
             title: t.pillars.nature.title,
@@ -36,7 +34,7 @@ const AttractionsPage = ({ t, filteredAttractions, setSelectedAttraction }) => {
         },
         'spiritual': {
             main: filteredAttractions.find(a => a.id === 3),
-            subs: [],
+            subs: filteredAttractions.filter(a => a.id === 17),
             icon: Sunrise,
             theme: "from-blue-600 to-purple-500",
             title: t.pillars.spiritual.title,
@@ -44,7 +42,7 @@ const AttractionsPage = ({ t, filteredAttractions, setSelectedAttraction }) => {
         },
         'scenic': {
             main: filteredAttractions.find(a => a.id === 15),
-            subs: [],
+            subs: filteredAttractions.filter(a => a.id === 19),
             icon: Mountain,
             theme: "from-amber-600 to-red-500",
             title: t.pillars.scenic.title,
@@ -124,41 +122,12 @@ const AttractionsPage = ({ t, filteredAttractions, setSelectedAttraction }) => {
                                 </div>
                             </div>
                         </div>
-
-                        {/* Booking Inclusions for the Package Concept */}
-                        <div className="flex flex-wrap gap-4 mb-12">
-                            {[
-                                { icon: Hotel, label: t.attractionsPage.features.luxuryStays },
-                                { icon: Car, label: t.attractionsPage.features.pickupDrop },
-                                { icon: UserCheck, label: t.attractionsPage.features.expertGuide },
-                                { icon: Calendar, label: t.attractionsPage.features.fullDayTour }
-                            ].map((item, i) => (
-                                <div key={i} className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[10px] text-white/60 uppercase tracking-widest">
-                                    <item.icon className="w-3 h-3 text-royal-gold" />
-                                    {item.label}
-                                </div>
-                            ))}
-                        </div>
-
-                        <button 
-                            onClick={() => setIsBookingOpen(true)}
-                            className="group flex items-center gap-4 px-12 py-5 bg-royal-gold text-royal-black font-bold uppercase tracking-widest text-sm rounded-full hover:bg-white transition-all shadow-2xl shadow-royal-gold/20 cursor-pointer active:scale-95"
-                        >
-                            {t.attractionsPage.bookPackage}
-                            <ArrowRightCircle className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
-                        </button>
                     </div>
                 </div>
             </motion.div>
 
-            <BookingModal 
-                isOpen={isBookingOpen}
-                onClose={() => setIsBookingOpen(false)}
-                pillarTitle={title}
-            />
-
-            {/* Sub-attractions Grid (Only for Fort) */}
-            {category === 'fort' && (
+            {/* Sub-attractions Grid */}
+            {subs.length > 0 && (
                 <div className="mt-12">
                     <div className="flex items-center gap-6 mb-16">
                         <h3 className="text-2xl md:text-3xl font-serif text-white whitespace-nowrap">{t.attractionsPage.treasureTitle}</h3>

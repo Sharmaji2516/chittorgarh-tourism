@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Calendar, User, Phone, CheckCircle2, ArrowRight, Loader2, Star, ShieldCheck, MapPin, Car, Hotel, Mail, UtensilsCrossed } from 'lucide-react';
+import { X, Calendar, User, Phone, CheckCircle2, ArrowRight, Loader2, Star, ShieldCheck, MapPin, Car, Hotel, Mail, UtensilsCrossed, Clock } from 'lucide-react';
 import { useBooking } from '../context/BookingContext';
 import { saveBookingToFirebase } from '../lib/firebase';
+import { content } from '../data/content';
 
 const BookingModal = ({ isOpen, onClose, pillarTitle }) => {
     const { bookingData, updateBooking } = useBooking();
     const [step, setStep] = useState(1);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitted, setSubmitted] = useState(false);
+    const [agreedToTerms, setAgreedToTerms] = useState(false);
 
     if (!isOpen) return null;
+
+    const packageName = pillarTitle ? pillarTitle.replace(" Package", "") : "";
+    const plan = content.en.itineraries.plans.find(p => p.title === packageName);
 
     const handleNext = () => setStep(prev => prev + 1);
     const handleBack = () => setStep(prev => prev - 1);
@@ -24,15 +29,19 @@ const BookingModal = ({ isOpen, onClose, pillarTitle }) => {
                 ...bookingData,
                 pillarTitle: pillarTitle || 'Custom Package',
                 status: 'submitted',
-                createdAt: new Date().toISOString()
+                createdAt: new Date().toISOString(),
+                agreedToTerms: true,
+                termsVersion: '1.0'
             };
 
             await saveBookingToFirebase(finalData);
 
-            const phoneNumber = "917597901057";
+            const phoneNumber = "917597451057";
             const message = `*👑 Royal Expedition Inquiry*%0A%0A` +
                 `*🛡️ Expedition:* ${pillarTitle || 'Custom'}%0A` +
                 `*📅 Date:* ${bookingData.date}%0A` +
+                `*🕒 Arrival Time:* ${bookingData.arrivalTime || 'Not Specified'}%0A` +
+                `*🕒 Departure Time:* ${bookingData.departureTime || 'Not Specified'}%0A` +
                 `*👥 Travelers:* ${bookingData.travelers}%0A%0A` +
                 `*-- Preferences --*%0A` +
                 `*🚗 Vehicle:* ${bookingData.transport}%0A` +
@@ -154,12 +163,34 @@ const BookingModal = ({ isOpen, onClose, pillarTitle }) => {
                                                 We have received your request. Our team is **checking the real-time availability** and we will get back to you on your WhatsApp and email with the confirmation and quotation shortly.
                                             </p>
                                         </div>
-                                        <button 
-                                            onClick={onClose}
-                                            className="px-12 py-5 bg-white/5 border border-white/10 text-white font-black uppercase tracking-widest text-[10px] rounded-2xl hover:bg-white hover:text-black transition-all"
-                                        >
-                                            Return to Site
-                                        </button>
+                                        <div className="flex flex-col md:flex-row gap-4">
+                                            <button 
+                                                onClick={onClose}
+                                                className="px-10 py-4 bg-white/5 border border-white/10 text-white font-black uppercase tracking-widest text-[10px] rounded-2xl hover:bg-white hover:text-black transition-all"
+                                            >
+                                                Return to Site
+                                            </button>
+                                            <button 
+                                                onClick={() => {
+                                                    setSubmitted(false);
+                                                    setStep(1);
+                                                    updateBooking({
+                                                        date: '',
+                                                        travelers: 1,
+                                                        transport: '',
+                                                        hotel: '',
+                                                        cuisine: '',
+                                                        requirements: '',
+                                                        name: '',
+                                                        email: '',
+                                                        phone: ''
+                                                    });
+                                                }}
+                                                className="px-10 py-4 bg-gradient-to-r from-royal-gold to-amber-500 text-royal-black font-black uppercase tracking-widest text-[10px] rounded-2xl hover:brightness-110 shadow-lg transition-all"
+                                            >
+                                                Book another package
+                                            </button>
+                                        </div>
                                     </motion.div>
                                 ) : (
                                     <>
@@ -168,17 +199,58 @@ const BookingModal = ({ isOpen, onClose, pillarTitle }) => {
                                                 <div className="text-center md:text-left mb-4">
                                                     <p className="text-white/40 text-xs font-medium italic underline underline-offset-8 decoration-royal-gold/20">When shall we prepare for your arrival?</p>
                                                 </div>
+                                                
+                                                {plan && (
+                                                    <div className="mb-6 p-6 bg-white/[0.03] border border-white/10 rounded-2xl">
+                                                        <p className="text-[10px] text-royal-gold font-black uppercase tracking-[0.2em] mb-4">Itinerary Overview</p>
+                                                        <div className="space-y-4">
+                                                            {plan.timeline.map((item, idx) => (
+                                                                <div key={idx} className="flex gap-4">
+                                                                    <div className="w-1.5 h-1.5 rounded-full bg-royal-gold mt-1.5 shrink-0" />
+                                                                    <div>
+                                                                        <p className="text-sm text-white font-bold">{item.visit}</p>
+                                                                        <p className="text-xs text-white/50">{item.stay}</p>
+                                                                    </div>
+                                                                </div>
+                                                            ))}
+                                                        </div>
+                                                        <div className="mt-4 p-4 bg-royal-gold/10 border border-royal-gold/20 rounded-xl">
+                                                            <p className="text-xs text-white/70 font-medium leading-relaxed">
+                                                                <span className="text-royal-gold font-black uppercase tracking-widest text-[10px] block mb-1">Important Note</span>
+                                                                Please inform us of your exact arrival and departure times. We will provide your detailed, time-specific itinerary based on that. This is just a general overview.
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                )}
+
                                                 <div className="space-y-8">
                                                     <div className="relative group">
                                                         <Calendar className="absolute left-6 top-1/2 -translate-y-1/2 w-6 h-6 text-royal-gold group-focus-within:scale-110 transition-transform" />
                                                         <input required type="date" value={bookingData.date || ''} onChange={(e) => updateBooking({ date: e.target.value })} className="w-full bg-white/[0.03] border border-white/10 rounded-[1.5rem] py-6 pl-16 pr-6 text-white text-lg focus:outline-none focus:border-royal-gold focus:bg-white/5 transition-all" />
                                                     </div>
+
+                                                    <div className="space-y-4">
+                                                        <div className="space-y-2">
+                                                            <p className="text-[10px] text-royal-gold font-black uppercase tracking-[0.3em] px-2">Expected Arrival Time</p>
+                                                            <div className="relative group">
+                                                                <Clock className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-royal-gold group-focus-within:scale-110 transition-transform" />
+                                                                <input required type="text" placeholder="e.g. 09:00 AM" value={bookingData.arrivalTime || ''} onChange={(e) => updateBooking({ arrivalTime: e.target.value })} className="w-full bg-white/[0.03] border border-white/10 rounded-2xl py-5 pl-14 pr-4 text-white text-base focus:outline-none focus:border-royal-gold focus:bg-white/5 transition-all" />
+                                                            </div>
+                                                        </div>
+                                                        <div className="space-y-2">
+                                                            <p className="text-[10px] text-royal-gold font-black uppercase tracking-[0.3em] px-2">Expected Departure Time</p>
+                                                            <div className="relative group">
+                                                                <Clock className="absolute left-6 top-1/2 -translate-y-1/2 w-5 h-5 text-royal-gold group-focus-within:scale-110 transition-transform" />
+                                                                <input required type="text" placeholder="e.g. 06:00 PM" value={bookingData.departureTime || ''} onChange={(e) => updateBooking({ departureTime: e.target.value })} className="w-full bg-white/[0.03] border border-white/10 rounded-2xl py-5 pl-14 pr-4 text-white text-base focus:outline-none focus:border-royal-gold focus:bg-white/5 transition-all" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
                                                     <div className="space-y-4">
                                                         <p className="text-[10px] text-royal-gold font-black uppercase tracking-[0.3em] px-2">Guests in your party</p>
-                                                        <div className="grid grid-cols-5 gap-3">
-                                                            {[1,2,3,4,5].map(n => (
-                                                                <button key={n} type="button" onClick={() => updateBooking({ travelers: n })} className={`py-5 rounded-2xl font-bold border transition-all duration-300 ${Number(bookingData.travelers) === n ? 'bg-royal-gold border-royal-gold text-royal-black shadow-xl scale-110' : 'bg-white/[0.03] border-white/10 text-white/50 hover:border-royal-gold/40'}`}>{n}</button>
-                                                            ))}
+                                                        <div className="relative group">
+                                                            <User className="absolute left-6 top-1/2 -translate-y-1/2 w-6 h-6 text-royal-gold group-focus-within:scale-110 transition-transform" />
+                                                            <input required type="number" min="1" value={bookingData.travelers || 1} onChange={(e) => updateBooking({ travelers: e.target.value })} className="w-full bg-white/[0.03] border border-white/10 rounded-[1.5rem] py-6 pl-16 pr-6 text-white text-lg focus:outline-none focus:border-royal-gold focus:bg-white/5 transition-all" />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -277,9 +349,22 @@ const BookingModal = ({ isOpen, onClose, pillarTitle }) => {
                                                     </div>
                                                 </div>
 
+                                                <div className="flex items-center gap-3 px-2">
+                                                    <input 
+                                                        type="checkbox" 
+                                                        id="terms" 
+                                                        checked={agreedToTerms} 
+                                                        onChange={(e) => setAgreedToTerms(e.target.checked)} 
+                                                        className="w-4 h-4 accent-amber-500 rounded border-white/10"
+                                                    />
+                                                    <label htmlFor="terms" className="text-[10px] uppercase tracking-wider text-white/50 font-bold">
+                                                        I agree to the <a href="/terms" target="_blank" rel="noopener noreferrer" className="text-royal-gold hover:underline">Terms & Conditions</a>
+                                                    </label>
+                                                </div>
+
                                                 <div className="flex gap-4">
                                                     <button type="button" onClick={handleBack} className="w-20 rounded-2xl bg-white/5 text-white/30 flex items-center justify-center hover:bg-white/10 transition-colors"><X className="w-5 h-5" /></button>
-                                                    <button type="button" onClick={handleSubmit} disabled={isSubmitting || !bookingData.name || !bookingData.phone || !bookingData.email} className="flex-1 py-6 bg-gradient-to-r from-royal-gold to-amber-500 text-royal-black font-black uppercase tracking-[0.2em] text-xs rounded-2xl hover:brightness-110 shadow-2xl">
+                                                    <button type="button" onClick={handleSubmit} disabled={isSubmitting || !bookingData.name || !bookingData.phone || !bookingData.email || !agreedToTerms} className="flex-1 py-6 bg-gradient-to-r from-royal-gold to-amber-500 text-royal-black font-black uppercase tracking-[0.2em] text-xs rounded-2xl hover:brightness-110 shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed">
                                                         {isSubmitting ? <Loader2 className="w-6 h-6 animate-spin mx-auto" /> : "Finalize Booking"}
                                                     </button>
                                                 </div>

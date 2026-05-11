@@ -24,6 +24,8 @@ import MissionServicesPage from './pages/MissionServicesPage';
 import AdminPage from './pages/AdminPage';
 import VerificationPage from './pages/VerificationPage';
 import StaffVerificationPage from './pages/StaffVerificationPage';
+import FeedbackPage from './pages/FeedbackPage';
+import TermsPage from './pages/TermsPage';
 
 const MainContent = () => {
   const { t } = useLanguage();
@@ -37,7 +39,7 @@ const MainContent = () => {
     legacyKeys.forEach(key => localStorage.removeItem(key));
   }, []);
 
-  const isAdmin = location.pathname === '/admin';
+  const isStandalonePage = location.pathname.includes('/admin') || location.pathname.includes('/staff-verify') || location.pathname.includes('/verify/');
 
   return (
     <div className="min-h-screen flex flex-col relative text-heritage-parchment font-sans selection:bg-heritage-gold selection:text-heritage-charcoal bg-heritage-charcoal">
@@ -51,13 +53,13 @@ const MainContent = () => {
 
       {/* Main Content Wrapper */}
       <div className="relative z-10 flex flex-col w-full">
-        {!isAdmin && <VisitModal />}
-        {!isAdmin && <CountrySelector />}
-        {!isAdmin && <Navbar />}
-        {!isAdmin && <FactCards />}
+        {!isStandalonePage && <VisitModal />}
+        {!isStandalonePage && <CountrySelector />}
+        {!isStandalonePage && <Navbar />}
+        {!isStandalonePage && <FactCards />}
 
         {/* Routes Section */}
-        <div className={cn("space-y-0", !isAdmin && location.pathname !== '/' ? "pt-20" : "")}>
+        <div className={cn("space-y-0", !isStandalonePage && location.pathname !== '/' ? "pt-20" : "")}>
           <Routes>
             <Route path="/" element={
               <HomePage
@@ -105,11 +107,13 @@ const MainContent = () => {
             <Route path="/admin" element={<AdminPage />} />
             <Route path="/verify/:id" element={<VerificationPage />} />
             <Route path="/staff-verify" element={<StaffVerificationPage />} />
+            <Route path="/feedback" element={<FeedbackPage />} />
+            <Route path="/terms" element={<TermsPage />} />
           </Routes>
 
         </div>
 
-        {!isAdmin && <Footer />}
+        {!isStandalonePage && <Footer />}
         <AttractionModal
           attraction={selectedAttraction}
           onClose={() => setSelectedAttraction(null)}

@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { db } from '../lib/firebase';
+import html2pdf from 'html2pdf.js';
+import { db, storage } from '../lib/firebase';
 import { collection, query, orderBy, onSnapshot, doc, addDoc, updateDoc, deleteDoc, where, getDocs } from 'firebase/firestore';
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useLanguage } from '../context/LanguageContext';
 import { content } from '../data/content';
 import { Link } from 'react-router-dom';
@@ -41,8 +44,17 @@ import {
     QrCode,
     UtensilsCrossed,
     Coffee,
-    Plus
+    Plus,
+    Star
 } from 'lucide-react';
+
+const formatPillarTitle = (title) => {
+    if (!title) return title;
+    if (title.toUpperCase() === "BOOK THE FORT LEGACY PACKAGE") {
+        return "Fort Legacy Package";
+    }
+    return title;
+};
 
 import { cn } from '../utils/cn';
 
@@ -84,6 +96,7 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
     const [localData, setLocalData] = useState(booking);
     const [isSaving, setIsSaving] = useState(false);
     const [showPass, setShowPass] = useState(false);
+    const [emailLanguage, setEmailLanguage] = useState('hi');
     const [selectedServices, setSelectedServices] = useState({
         'Private Taxi': booking.transport !== 'Not Needed',
         'Hotel Booking': booking.hotel !== 'Not Needed',
@@ -130,110 +143,6 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
                 includedServices: updateData.includedServices
             });
 
-            // 2. Trigger Automated Email via Brevo API
-            if (localData.email) {
-                try {
-                    const emailContent = `
-                        <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 500px; margin: 0 auto; border: 4px solid #D4AF37; border-radius: 30px; overflow: hidden; background: #1a2634; color: #ffffff; box-shadow: 0 20px 50px rgba(0,0,0,0.3);">
-                            <!-- Header Image -->
-                            <div style="width: 100%; overflow: hidden; background: #1a2634;">
-                                <img src="https://i.postimg.cc/Dz8VMpnc/Fort.jpg" alt="Chittorgarh Fort" style="width: 100%; height: auto; display: block; opacity: 0.9;">
-                            </div>
-
-                            <!-- Header -->
-                            <div style="padding: 30px 20px; text-align: center; border-bottom: 1px solid rgba(212, 175, 55, 0.2);">
-                                <h1 style="color: #D4AF37; margin: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 3px; font-weight: 900;">Royal Heritage Pass</h1>
-                                <p style="color: rgba(255,255,255,0.5); margin: 5px 0 0; font-size: 10px; text-transform: uppercase; letter-spacing: 4px;">Heritage • Culture • Hospitality</p>
-                            </div>
-
-                            <div style="padding: 40px 30px;">
-                                <p style="font-size: 18px; margin-bottom: 10px;">Namaste <b>${localData.name}</b> 🙏 ,</p>
-                                <p style="font-size: 14px; line-height: 1.8; color: rgba(255,255,255,0.8); margin-bottom: 30px;">
-                                    वीरता और कालातीत विरासत की इस भूमि में आपका स्वागत है। राजस्थान के शानदार किलों की आपकी यात्रा आधिकारिक रूप से पुष्ट हो गई है!
-                                </p>
-                                
-                                <!-- Passcode Box -->
-                                <div style="background: linear-gradient(135deg, #D4AF37, #FFD700); padding: 25px 10px; text-align: center; margin: 20px 0; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.2);">
-                                    <p style="margin: 0 0 5px; font-size: 9px; color: #1a2634; text-transform: uppercase; font-weight: 900; letter-spacing: 1px;">Your Official Passcode</p>
-                                    <h2 style="margin: 0; font-size: 42px; color: #1a2634; letter-spacing: 6px; font-family: 'Courier New', Courier, monospace; font-weight: 900; white-space: nowrap;">${newCode}</h2>
-                                </div>
-
-                                <!-- Services -->
-                                <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 20px; margin-top: 30px; border: 1px solid rgba(255,255,255,0.1);">
-                                    <p style="margin: 0 0 15px; font-size: 11px; color: #D4AF37; text-transform: uppercase; font-weight: 900; letter-spacing: 2px; text-align: center;">🛡️ Included Services</p>
-                                    <p style="margin: 0; font-size: 13px; font-weight: bold; color: #ffffff; text-align: center; line-height: 1.6; text-transform: uppercase;">
-                                        ${servicesList}
-                                    </p>
-                                </div>
-
-                                <p style="font-size: 13px; line-height: 1.6; text-align: center; color: #D4AF37; margin-top: 40px; font-weight: bold;">
-                                    हम आपकी सुखद यात्रा की कामना करते हैं। हम आपकी यात्रा को सुगम बनाने के लिए 24x7 आपके साथ हैं।
-                                </p>
-
-                                <div style="margin-top: 30px; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 10px; text-align: center;">
-                                    <p style="margin: 0; font-size: 11px; color: rgba(255,255,255,0.4); font-style: italic;">
-                                        ⚠️ Share this passcode only with your assigned driver or guide at the time of service.
-                                    </p>
-                                </div>
-                            </div>
-
-                            <!-- Footer -->
-                            <div style="background: #121b25; padding: 40px 20px; text-align: center; border-top: 1px solid rgba(212, 175, 55, 0.1);">
-                                <p style="margin: 0; font-size: 15px; font-weight: 900; color: #ffffff; letter-spacing: 1px;">Chittorgarh Tourism | राजस्थान 🚩</p>
-                                <p style="margin: 12px 0 0; font-size: 16px; color: #D4AF37; font-weight: 900; letter-spacing: 2px;">"पधारो म्हारे देस" ❤️</p>
-                                
-                                <div style="margin-top: 30px; padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; background: rgba(255,255,255,0.02); border-radius: 20px;">
-                                    <p style="margin: 0; font-size: 10px; color: rgba(255,255,255,0.4); font-style: italic; letter-spacing: 1px;">
-                                        This is a system generated email. Please do not reply on this mail.
-                                    </p>
-                                    <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(212, 175, 55, 0.1);">
-                                        <p style="margin: 0; font-size: 11px; color: #D4AF37; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;">
-                                            Official Support Channels
-                                        </p>
-                                        <p style="margin: 8px 0 0; font-size: 11px; color: rgba(255,255,255,0.8); line-height: 1.6;">
-                                            If you have any queries, please contact on our official phone number and official email ID:
-                                        </p>
-                                        <p style="margin: 12px 0 0; font-size: 13px; color: #ffffff; font-weight: bold; letter-spacing: 0.5px;">
-                                            Phone: 7597901057 &nbsp;|&nbsp; Email: chittortech@gmail.com
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05);">
-                                    <p style="margin: 0; font-size: 10px; color: rgba(255,255,255,0.4); font-weight: bold; letter-spacing: 1px;">Powered by <b>Chittor Tech</b></p>
-                                    <img src="https://i.postimg.cc/B6rmNMnB/chittortech-logo-1775884354186.jpg" alt="Chittor Tech" style="height: 30px; opacity: 0.8; margin-top: 10px; margin-bottom: 10px;">
-                                    <p style="margin: 5px 0 0; font-size: 8px; color: rgba(255,255,255,0.2); text-transform: uppercase; letter-spacing: 2px;">Rajasthan's Upcoming Leading Tourism IT Partner</p>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-
-                    const response = await fetch('https://api.brevo.com/v3/smtp/email', {
-                        method: 'POST',
-                        headers: {
-                            'accept': 'application/json',
-                            'api-key': BREVO_API_KEY,
-                            'content-type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            sender: { name: SENDER_NAME, email: SENDER_EMAIL },
-                            to: [{ email: localData.email, name: localData.name }],
-                            subject: `👑 Your Royal Tourism Pass: ${newCode}`,
-                            htmlContent: emailContent
-                        })
-                    });
-                    
-                    if (response.ok) {
-                        console.log(`Brevo email successfully sent to: ${localData.email}`);
-                    } else {
-                        const errorData = await response.json();
-                        console.error("Brevo API Error:", errorData);
-                        addNotification("Email Failed", `Brevo Error: ${errorData.message}`, "error");
-                    }
-                } catch (e) {
-                    console.error("Brevo Email Error:", e);
-                }
-            }
 
             setLocalData(prev => ({ ...prev, ...updateData }));
             setShowPass(true);
@@ -272,101 +181,184 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
         setIsSaving(true);
         try {
             const total = calculateLiveTotal(localData);
-            const emailContent = `
-                <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 4px solid #D4AF37; border-radius: 30px; overflow: hidden; background: #1a2634; color: #ffffff; box-shadow: 0 20px 50px rgba(0,0,0,0.3);">
+
+            const element = document.getElementById('printable-bill');
+            if (!element) {
+                alert("Bill element not found!");
+                setIsSaving(false);
+                return;
+            }
+
+            // Temporarily make it visible for capture
+            element.classList.remove('hidden');
+
+            const opt = {
+                margin:       0,
+                filename:     'invoice.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2 },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+
+            // Generate PDF and get base64
+            const dataUri = await html2pdf().set(opt).from(element).output('datauristring');
+            const base64Content = dataUri.split(',')[1];
+
+            // Hide it again
+            element.classList.add('hidden');
+
+            const emailContentEn = `
+                <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 4px solid #D4AF37; border-radius: 30px; overflow: hidden; background: #ffffff; color: #1a2634; box-shadow: 0 20px 50px rgba(0,0,0,0.1);">
                     <!-- Header Image -->
-                    <div style="width: 100%; overflow: hidden; background: #1a2634;">
-                        <img src="https://i.postimg.cc/Dz8VMpnc/Fort.jpg" alt="Chittorgarh Fort" style="width: 100%; height: auto; display: block; opacity: 0.9;">
+                    <div style="width: 100%; overflow: hidden; background: #ffffff;">
+                        <img src="https://i.postimg.cc/Dz8VMpnc/Fort.jpg" alt="Chittorgarh Fort" style="width: 100%; height: auto; display: block;">
                     </div>
 
                     <!-- Header -->
                     <div style="padding: 30px 20px; text-align: center; border-bottom: 1px solid rgba(212, 175, 55, 0.2);">
-                        <h1 style="color: #D4AF37; margin: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 3px; font-weight: 900;">शाही अनुभव कोटेशन</h1>
-                        <p style="color: rgba(255,255,255,0.5); margin: 5px 0 0; font-size: 10px; text-transform: uppercase; letter-spacing: 4px;">Heritage • Culture • Hospitality</p>
+                        <h1 style="color: #D4AF37; margin: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 3px; font-weight: 900;">Royal Experience Quotation</h1>
+                        <p style="color: rgba(26, 38, 52, 0.6); margin: 5px 0 0; font-size: 10px; text-transform: uppercase; letter-spacing: 4px;">Heritage • Culture • Hospitality</p>
                     </div>
 
                     <div style="padding: 40px 30px;">
-                        <p style="font-size: 18px; margin-bottom: 10px;">नमस्ते <b>${localData.name}</b> 🙏 ,</p>
-                        <p style="font-size: 14px; line-height: 1.8; color: rgba(255,255,255,0.8); margin-bottom: 30px;">
-                            चित्तौड़गढ़ पर्यटन को चुनने के लिए धन्यवाद। हम वीरता और कालातीत विरासत की इस भूमि में आपकी यात्रा की योजना बनाने में आपकी सहायता करने के लिए प्रसन्न हैं। आपकी पसंद के आधार पर, यहाँ आपका व्यक्तिगत प्रस्ताव है:
+                        <p style="font-size: 18px; margin-bottom: 10px; color: #1a2634;">Namaste <b>${localData.name}</b> 🙏 ,</p>
+                        <p style="font-size: 14px; line-height: 1.8; color: #333333; margin-bottom: 30px;">
+                            Thank you for choosing Chittorgarh Tourism. We are delighted to assist you in planning your visit to this land of valor and timeless heritage. Based on your preferences, here is your personalized proposal:
                         </p>
 
-                        <!-- Quote Details -->
-                        <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 20px; margin-bottom: 30px; border: 1px solid rgba(212, 175, 55, 0.2);">
-                            <h3 style="margin-top: 0; color: #D4AF37; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 2px solid #D4AF37; display: inline-block; padding-bottom: 5px; font-weight: 900; margin-bottom: 20px;">यात्रा का विवरण (Breakdown)</h3>
-                            
-                            <table style="width: 100%; border-collapse: collapse;">
-                                <tr>
-                                    <td style="padding: 12px 0; color: rgba(255,255,255,0.6); font-size: 11px; text-transform: uppercase; font-weight: bold;">अनुभव पैकेज</td>
-                                    <td style="padding: 12px 0; text-align: right; font-weight: bold; color: #ffffff; font-size: 13px;">${localData.pillarTitle || "Custom Discovery"}</td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 12px 0; color: rgba(255,255,255,0.6); font-size: 11px; text-transform: uppercase; font-weight: bold;">आगमन तिथि</td>
-                                    <td style="padding: 12px 0; text-align: right; font-weight: bold; color: #ffffff; font-size: 13px;">${formatDateReadable(localData.date)}</td>
-                                </tr>
-                                <tr style="border-top: 1px dashed rgba(212, 175, 55, 0.2);">
-                                    <td style="padding: 12px 0; color: rgba(255,255,255,0.6); font-size: 11px; text-transform: uppercase; font-weight: bold;">🚗 परिवहन</td>
-                                    <td style="padding: 12px 0; text-align: right; font-weight: bold; color: #ffffff; font-size: 13px;">${localData.transport} (₹${localData.transportPrice || 0})</td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 12px 0; color: rgba(255,255,255,0.6); font-size: 11px; text-transform: uppercase; font-weight: bold;">🏨 आवास</td>
-                                    <td style="padding: 12px 0; text-align: right; font-weight: bold; color: #ffffff; font-size: 13px;">${localData.hotel} (₹${localData.hotelPrice || 0})</td>
-                                </tr>
-                                <tr>
-                                    <td style="padding: 12px 0; color: rgba(255,255,255,0.6); font-size: 11px; text-transform: uppercase; font-weight: bold;">🚩 विरासत गाइड</td>
-                                    <td style="padding: 12px 0; text-align: right; font-weight: bold; color: #ffffff; font-size: 13px;">${localData.guide} (₹${localData.guidePrice || 0})</td>
-                                </tr>
-                                <tr style="border-top: 2px solid #D4AF37;">
-                                    <td style="padding: 25px 0; color: #ffffff; font-weight: 900; font-size: 18px; text-transform: uppercase;">कुल कोटेशन</td>
-                                    <td style="padding: 25px 0; text-align: right; font-weight: 900; font-size: 28px; color: #D4AF37;">₹${total}</td>
-                                </tr>
-                            </table>
+                        <!-- Quote Details Replacement -->
+                        <div style="background: #f8f9fa; padding: 25px; border-radius: 20px; margin-bottom: 30px; border: 1px solid rgba(212, 175, 55, 0.2); text-align: center;">
+                            <p style="margin: 0 0 10px; font-size: 16px; color: #D4AF37; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">📜 Detailed Invoice Attached</p>
+                            <p style="margin: 0; font-size: 13px; color: #333333; line-height: 1.6;">
+                                We have attached a detailed PDF of your official invoice to this email. Please review the attachment for complete breakdown of your package and payment details.
+                            </p>
                         </div>
 
                         <div style="background: rgba(212, 175, 55, 0.1); border-left: 5px solid #D4AF37; padding: 25px; border-radius: 0 15px 15px 0; margin-bottom: 30px;">
                             <p style="margin: 0; font-size: 15px; color: #D4AF37; line-height: 1.6; font-weight: bold;">
-                                अगला कदम: भुगतान आवश्यक है
+                                Next Steps: Payment Required
                             </p>
-                            <p style="margin: 10px 0 0; font-size: 14px; color: rgba(255,255,255,0.8); line-height: 1.6;">
-                                अपनी बुकिंग को अंतिम रूप देने और अपना आधिकारिक <b>शाही विरासत पास</b> प्राप्त करने के लिए, कृपया <b>₹${total}</b> का भुगतान पूरा करें। भुगतान के तुरंत बाद हमारी टीम आपके डिजिटल पास को सत्यापित कर भेज देगी।
+                            <p style="margin: 10px 0 0; font-size: 14px; color: #333333; line-height: 1.6;">
+                                1. Please read the attached PDF deeply.<br/>
+                                2. After that, you need to make the payment for booking.<br/>
+                                3. After making the payment, please share the screenshot on our WhatsApp number <b>7597451057</b>.<br/>
+                                4. After that, our team will inform you about availability and the further process.
                             </p>
                         </div>
 
-                        <p style="font-size: 13px; line-height: 1.6; color: rgba(255,255,255,0.5); text-align: center; font-style: italic;">
-                            "चित्तौड़गढ़ के पत्थर वीरता की कहानियां सुनाते हैं। हम उन्हें सुनने में आपकी मदद करने के लिए उत्सुक हैं।"
+                        <p style="font-size: 13px; line-height: 1.6; color: #666666; text-align: center; font-style: italic;">
+                            "The stones of Chittorgarh speak stories of valor. We look forward to helping you hear them."
                         </p>
                     </div>
 
                     <!-- Footer -->
-                    <div style="background: #121b25; padding: 40px 20px; text-align: center; border-top: 1px solid rgba(212, 175, 55, 0.1);">
-                        <p style="margin: 0; font-size: 15px; font-weight: 900; color: #ffffff; letter-spacing: 1px;">Chittorgarh Tourism | राजस्थान 🚩</p>
+                    <div style="background: #f8f9fa; padding: 40px 20px; text-align: center; border-top: 1px solid rgba(212, 175, 55, 0.1);">
+                        <p style="margin: 0; font-size: 15px; font-weight: 900; color: #1a2634; letter-spacing: 1px;">Chittorgarh Tourism | Rajasthan 🚩</p>
                         <p style="margin: 12px 0 0; font-size: 16px; color: #D4AF37; font-weight: 900; letter-spacing: 2px;">"पधारो म्हारे देस" ❤️</p>
 
-                        <div style="margin-top: 30px; padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; background: rgba(255,255,255,0.02); border-radius: 20px;">
-                            <p style="margin: 0; font-size: 10px; color: rgba(255,255,255,0.4); font-style: italic; letter-spacing: 1px;">
+                        <div style="margin-top: 30px; padding: 20px; border-top: 1px solid rgba(0,0,0,0.1); text-align: center; background: rgba(0,0,0,0.02); border-radius: 20px;">
+                            <p style="margin: 0; font-size: 10px; color: #666666; font-style: italic; letter-spacing: 1px;">
                                 This is a system generated email. Please do not reply on this mail.
                             </p>
                             <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(212, 175, 55, 0.1);">
                                 <p style="margin: 0; font-size: 11px; color: #D4AF37; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;">
                                     Official Support Channels
                                 </p>
-                                <p style="margin: 8px 0 0; font-size: 11px; color: rgba(255,255,255,0.8); line-height: 1.6;">
+                                <p style="margin: 8px 0 0; font-size: 11px; color: #333333; line-height: 1.6;">
                                     If you have any queries, please contact on our official phone number and official email ID:
                                 </p>
-                                <p style="margin: 12px 0 0; font-size: 13px; color: #ffffff; font-weight: bold; letter-spacing: 0.5px;">
-                                    Phone: 7597901057 &nbsp;|&nbsp; Email: chittortech@gmail.com
+                                <p style="margin: 12px 0 0; font-size: 13px; color: #1a2634; font-weight: bold; letter-spacing: 0.5px;">
+                                    Phone: +91 7597451057 &nbsp;|&nbsp; Email: chittortech@gmail.com
                                 </p>
                             </div>
                         </div>
 
-                        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05);">
-                            <p style="margin: 0; font-size: 10px; color: rgba(255,255,255,0.4); font-weight: bold; letter-spacing: 1px;">Powered by <b>Chittor Tech</b></p>
+                        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.05);">
+                            <p style="margin: 0; font-size: 10px; color: #666666; font-weight: bold; letter-spacing: 1px;">Powered by <b>Chittor Tech</b></p>
                             <img src="https://i.postimg.cc/B6rmNMnB/chittortech-logo-1775884354186.jpg" alt="Chittor Tech" style="height: 30px; opacity: 0.8; margin-top: 10px; margin-bottom: 10px;">
-                            <p style="margin: 5px 0 0; font-size: 8px; color: rgba(255,255,255,0.2); text-transform: uppercase; letter-spacing: 2px;">Rajasthan's Upcoming Leading Tourism IT Partner</p>
+                            <p style="margin: 5px 0 0; font-size: 8px; color: #999999; text-transform: uppercase; letter-spacing: 2px;">Rajasthan's Upcoming Leading Tourism IT Partner</p>
                         </div>
                     </div>
                 </div>
             `;
+
+            const emailContentHi = `
+                <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 4px solid #D4AF37; border-radius: 30px; overflow: hidden; background: #ffffff; color: #1a2634; box-shadow: 0 20px 50px rgba(0,0,0,0.1);">
+                    <!-- Header Image -->
+                    <div style="width: 100%; overflow: hidden; background: #ffffff;">
+                        <img src="https://i.postimg.cc/Dz8VMpnc/Fort.jpg" alt="Chittorgarh Fort" style="width: 100%; height: auto; display: block;">
+                    </div>
+
+                    <!-- Header -->
+                    <div style="padding: 30px 20px; text-align: center; border-bottom: 1px solid rgba(212, 175, 55, 0.2);">
+                        <h1 style="color: #D4AF37; margin: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 3px; font-weight: 900;">शाही अनुभव कोटेशन</h1>
+                        <p style="color: rgba(26, 38, 52, 0.6); margin: 5px 0 0; font-size: 10px; text-transform: uppercase; letter-spacing: 4px;">Heritage • Culture • Hospitality</p>
+                    </div>
+
+                    <div style="padding: 40px 30px;">
+                        <p style="font-size: 18px; margin-bottom: 10px; color: #1a2634;">नमस्ते <b>${localData.name}</b> 🙏 ,</p>
+                        <p style="font-size: 14px; line-height: 1.8; color: #333333; margin-bottom: 30px;">
+                            चित्तौड़गढ़ पर्यटन को चुनने के लिए धन्यवाद। हम वीरता और कालातीत विरासत की इस भूमि में आपकी यात्रा की योजना बनाने में आपकी सहायता करने के लिए प्रसन्न हैं। आपकी पसंद के आधार पर, यहाँ आपका व्यक्तिगत प्रस्ताव है:
+                        </p>
+
+                        <!-- Quote Details Replacement -->
+                        <div style="background: #f8f9fa; padding: 25px; border-radius: 20px; margin-bottom: 30px; border: 1px solid rgba(212, 175, 55, 0.2); text-align: center;">
+                            <p style="margin: 0 0 10px; font-size: 16px; color: #D4AF37; font-weight: bold; text-transform: uppercase; letter-spacing: 1px;">📜 विस्तृत इनवॉइस संलग्न है</p>
+                            <p style="margin: 0; font-size: 13px; color: #333333; line-height: 1.6;">
+                                हमने आपके आधिकारिक इनवॉइस की एक विस्तृत PDF इस ईमेल के साथ संलग्न की है। कृपया अपने पैकेज और भुगतान विवरण के पूर्ण विवरण के लिए अनुलग्नक (attachment) की समीक्षा करें।
+                            </p>
+                        </div>
+
+                        <div style="background: rgba(212, 175, 55, 0.1); border-left: 5px solid #D4AF37; padding: 25px; border-radius: 0 15px 15px 0; margin-bottom: 30px;">
+                            <p style="margin: 0; font-size: 15px; color: #D4AF37; line-height: 1.6; font-weight: bold;">
+                                अगला कदम: भुगतान आवश्यक है
+                            </p>
+                            <p style="margin: 10px 0 0; font-size: 14px; color: #333333; line-height: 1.6;">
+                                1. कृपया संलग्न PDF को ध्यान से पढ़ें। <br/>
+                                2. इसके बाद आपको बुकिंग के लिए भुगतान (Payment) करना होगा। <br/>
+                                3. भुगतान करने के बाद, कृपया स्क्रीनशॉट हमारे WhatsApp नंबर <b>7597451057</b> पर शेयर करें। <br/>
+                                4. उसके बाद हमारी टीम आपको उपलब्धता (Availability) और आगे की प्रक्रिया के बारे में बता देगी।
+                            </p>
+                        </div>
+
+                        <p style="font-size: 13px; line-height: 1.6; color: #666666; text-align: center; font-style: italic;">
+                            "चित्तौड़गढ़ के पत्थर वीरता की कहानियां सुनाते हैं। हम उन्हें सुनने में आपकी मदद करने के लिए उत्सुक हैं।"
+                        </p>
+                    </div>
+
+                    <!-- Footer -->
+                    <div style="background: #f8f9fa; padding: 40px 20px; text-align: center; border-top: 1px solid rgba(212, 175, 55, 0.1);">
+                        <p style="margin: 0; font-size: 15px; font-weight: 900; color: #1a2634; letter-spacing: 1px;">Chittorgarh Tourism | राजस्थान 🚩</p>
+                        <p style="margin: 12px 0 0; font-size: 16px; color: #D4AF37; font-weight: 900; letter-spacing: 2px;">"पधारो म्हारे देस" ❤️</p>
+
+                        <div style="margin-top: 30px; padding: 20px; border-top: 1px solid rgba(0,0,0,0.1); text-align: center; background: rgba(0,0,0,0.02); border-radius: 20px;">
+                            <p style="margin: 0; font-size: 10px; color: #666666; font-style: italic; letter-spacing: 1px;">
+                                यह एक सिस्टम जनरेटेड ईमेल है। कृपया इस पर उत्तर न दें।
+                            </p>
+                            <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(212, 175, 55, 0.1);">
+                                <p style="margin: 0; font-size: 11px; color: #D4AF37; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;">
+                                    आधिकारिक सहायता चैनल
+                                </p>
+                                <p style="margin: 8px 0 0; font-size: 11px; color: #333333; line-height: 1.6;">
+                                    यदि आपके कोई प्रश्न हैं, तो कृपया हमारे आधिकारिक फोन नंबर और ईमेल आईडी पर संपर्क करें:
+                                </p>
+                                <p style="margin: 12px 0 0; font-size: 13px; color: #1a2634; font-weight: bold; letter-spacing: 0.5px;">
+                                    Phone: +91 7597451057 &nbsp;|&nbsp; Email: chittortech@gmail.com
+                                </p>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.05);">
+                            <p style="margin: 0; font-size: 10px; color: #666666; font-weight: bold; letter-spacing: 1px;">Powered by <b>Chittor Tech</b></p>
+                            <img src="https://i.postimg.cc/B6rmNMnB/chittortech-logo-1775884354186.jpg" alt="Chittor Tech" style="height: 30px; opacity: 0.8; margin-top: 10px; margin-bottom: 10px;">
+                            <p style="margin: 5px 0 0; font-size: 8px; color: #999999; text-transform: uppercase; letter-spacing: 2px;">Rajasthan's Upcoming Leading Tourism IT Partner</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            const emailContent = emailLanguage === 'en' ? emailContentEn : emailContentHi;
+            const emailSubject = emailLanguage === 'en' ? `👑 Your Chittorgarh Expedition Quote: ₹${total}` : `आपका चित्तौड़गढ़ टूर पैकेज कोटेशन: ₹${total}`;
 
             const response = await fetch('https://api.brevo.com/v3/smtp/email', {
                 method: 'POST',
@@ -379,7 +371,13 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
                     sender: { name: SENDER_NAME, email: SENDER_EMAIL },
                     to: [{ email: localData.email, name: localData.name }],
                     subject: `👑 Your Chittorgarh Expedition Quote: ₹${total}`,
-                    htmlContent: emailContent
+                    htmlContent: emailContent,
+                    attachment: [
+                        {
+                            name: 'Bill.pdf',
+                            content: base64Content
+                        }
+                    ]
                 })
             });
 
@@ -387,7 +385,7 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
                 alert(`Quotation email successfully sent to ${localData.email}`);
             } else {
                 const errorData = await response.json();
-                alert(`Brevo Error: ${errorData.message || 'Failed to send'}. Please ensure ${SENDER_EMAIL} is a verified sender in Brevo.`);
+                alert(`Brevo Error: ${errorData.message || 'Failed to send'}`);
             }
         } catch (e) {
             console.error("Brevo Quote Error:", e);
@@ -395,12 +393,24 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
         } finally {
             setIsSaving(false);
         }
-    };
+    };;
 
     const sendUpdateWhatsApp = () => {
         const total = calculateLiveTotal(localData);
         const phoneNumber = "91" + localData.phone?.replace(/[^0-9]/g, '');
-        const message = `*👑 अपडेटेड रॉयल इंक्वायरी*%0A%0A` +
+        
+        const messageEn = `*👑 Updated Royal Inquiry*%0A%0A` +
+            `Hello ${localData.name}, we have updated your travel details based on current availability:%0A%0A` +
+            `*🛡️ Package:* ${localData.pillarTitle || "Custom"}%0A` +
+            `*📅 Date:* ${formatDateReadable(localData.date)}%0A%0A` +
+            `*-- Revised Options --*%0A` +
+            `*🚗 Transport:* ${localData.transport}%0A` +
+            `*🏨 Hotel:* ${localData.hotel}%0A` +
+            `*🚩 Guide:* ${localData.guide}%0A%0A` +
+            `*💰 New Total Estimate: ₹${total}*%0A%0A` +
+            `Please let us know if this works for you.`;
+            
+        const messageHi = `*👑 अपडेटेड रॉयल इंक्वायरी*%0A%0A` +
             `नमस्ते ${localData.name}, हमने वर्तमान उपलब्धता के आधार पर आपके यात्रा विवरण को अपडेट किया है:%0A%0A` +
             `*🛡️ पैकेज:* ${localData.pillarTitle || "कस्टम"}%0A` +
             `*📅 तिथि:* ${formatDateReadable(localData.date)}%0A%0A` +
@@ -410,16 +420,25 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
             `*🚩 गाइड:* ${localData.guide}%0A%0A` +
             `*💰 नया कुल अनुमान: ₹${total}*%0A%0A` +
             `कृपया हमें बताएं कि क्या यह आपके लिए सही है।`;
-        
+            
+        const message = emailLanguage === 'en' ? messageEn : messageHi;
         window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
     };
 
     const sendWelcomeMessage = () => {
         const phoneNumber = "91" + localData.phone?.replace(/[^0-9]/g, '');
-        const message = `*👑 चित्तौड़गढ़ में आपका स्वागत है!*%0A%0A` +
+        
+        const messageEn = `*👑 Welcome to Chittorgarh!*%0A%0A` +
+            `Hello ${localData.name}, thank you for choosing us for your heritage journey. We are excited to host you!%0A%0A` +
+            `Our team is preparing your custom itinerary for *${localData.pillarTitle || "Expedition"}*.%0A%0A` +
+            `Is there anything specific you would like to see?`;
+            
+        const messageHi = `*👑 चित्तौड़गढ़ में आपका स्वागत है!*%0A%0A` +
             `नमस्ते ${localData.name}, अपनी विरासत यात्रा के लिए हमें चुनने के लिए धन्यवाद। हम आपकी मेजबानी करने के लिए उत्साहित हैं!%0A%0A` +
             `हमारी टीम *${localData.pillarTitle || "एक्सपीडिशन"}* के लिए आपका कस्टम यात्रा कार्यक्रम तैयार कर रही है।%0A%0A` +
             `क्या कुछ खास है जो आप देखना चाहेंगे?`;
+            
+        const message = emailLanguage === 'en' ? messageEn : messageHi;
         window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
     };
 
@@ -508,7 +527,7 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
                             <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-100"><MapPin className="w-4 h-4 text-royal-gold" /></div>
                             <div>
                                 <p className="text-[9px] text-black/40 uppercase tracking-widest font-black mb-0.5">Experience Package</p>
-                                <p className="text-sm font-bold text-black uppercase tracking-wide">{localData.pillarTitle || "Custom Discovery"}</p>
+                                <p className="text-sm font-bold text-black uppercase tracking-wide">{formatPillarTitle(localData.pillarTitle) || "Custom Discovery"}</p>
                             </div>
                         </div>
                         <div className="flex items-center gap-4">
@@ -640,7 +659,7 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
                                     <div className="flex-1">
                                         <div className="flex items-center gap-3 mb-1">
                                             <p className="text-[10px] text-black/60 uppercase tracking-widest">Transport Service</p>
-                                            {localData.redeemed_transport && (
+                                            {localData.redeemed_taxi && (
                                                 <span className="text-[7px] bg-green-500 text-white px-2 py-0.5 rounded-full font-black uppercase tracking-widest flex items-center gap-1">
                                                     <CheckCircle2 className="w-2 h-2" />
                                                     Redeemed
@@ -686,9 +705,9 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
                                             <div>
                                                 <p className="text-black font-bold uppercase tracking-wider text-sm">{localData.transport}</p>
                                                 {localData.taxiName && <p className="text-[11px] text-royal-gold font-bold italic">{localData.taxiName}</p>}
-                                                {localData.redeemed_transport_at && (
+                                                {localData.redeemed_taxi_at && (
                                                     <p className="text-[9px] text-black/30 font-black uppercase mt-1">
-                                                        Verified: {new Date(localData.redeemed_transport_at).toLocaleString()}
+                                                        Verified: {new Date(localData.redeemed_taxi_at).toLocaleString()}
                                                     </p>
                                                 )}
                                             </div>
@@ -814,8 +833,27 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
                         </div>
                     </div>
 
+                    {/* Language Selector */}
+                    <div className="mb-6 no-print">
+                        <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-2">Preferred Email Language</label>
+                        <div className="flex gap-2 max-w-[300px]">
+                            <button 
+                                onClick={() => setEmailLanguage('en')}
+                                className={`flex-1 py-3 rounded-xl text-[10px] font-bold uppercase tracking-wider transition-all ${emailLanguage === 'en' ? 'bg-blue-600 text-white' : 'bg-slate-800/50 text-slate-400 hover:bg-slate-800'}`}
+                            >
+                                English
+                            </button>
+                            <button 
+                                onClick={() => setEmailLanguage('hi')}
+                                className={`flex-1 py-3 rounded-xl text-[10px] font-bold uppercase tracking-wider transition-all ${emailLanguage === 'hi' ? 'bg-blue-600 text-white' : 'bg-slate-800/50 text-slate-400 hover:bg-slate-800'}`}
+                            >
+                                Hindi
+                            </button>
+                        </div>
+                    </div>
+
                     {/* Action Bar */}
-                    <div className="mt-14 flex flex-col md:flex-row gap-5 no-print">
+                    <div className="mt-6 flex flex-col md:flex-row gap-5 no-print">
                         {editMode ? (
                             <button 
                                 onClick={handleUpdate}
@@ -901,12 +939,35 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
                                     </div>
                                 </div>
 
+                                <div className="mb-4">
+                                    <label className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-2">Preferred Language</label>
+                                    <div className="flex gap-2">
+                                        <button 
+                                            onClick={() => setEmailLanguage('en')}
+                                            className={`flex-1 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider transition-all ${emailLanguage === 'en' ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`}
+                                        >
+                                            English
+                                        </button>
+                                        <button 
+                                            onClick={() => setEmailLanguage('hi')}
+                                            className={`flex-1 py-2 rounded-xl text-[10px] font-bold uppercase tracking-wider transition-all ${emailLanguage === 'hi' ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-600 hover:bg-slate-200'}`}
+                                        >
+                                            Hindi
+                                        </button>
+                                    </div>
+                                </div>
+
                                 <div className="flex flex-col gap-3">
                                     <button 
                                         onClick={() => {
                                             const servicesList = Object.entries(selectedServices).filter(([_, v]) => v).map(([k, _]) => k.toUpperCase()).join(", ");
                                             const phoneNumber = "91" + localData.phone?.replace(/[^0-9]/g, '');
-                                            const message = `*👑 आपका रॉयल टूरिज्म पास तैयार है!*%0A%0Aनमस्ते ${localData.name}, आपका ₹${calculateLiveTotal(localData)} का भुगतान प्राप्त हो गया है।%0A%0A*🛡️ आपका यूनिक पास कोड:* ${localData.passCode}%0A*✅ शामिल सेवाएँ:* ${servicesList}%0A%0A*⚠️ महत्वपूर्ण:* इस 6-अंकीय कोड को अपने आवंटित ड्राइवर के अलावा किसी के साथ साझा न करें। कृपया सत्यापन के लिए इस कोड को सुरक्षित रखें।`;
+                                            
+                                            const messageEn = `*👑 Your Royal Tourism Pass is Ready!*%0A%0AHello ${localData.name}, your payment of ₹${calculateLiveTotal(localData)} has been received.%0A%0A*🛡️ Your Unique Pass Code:* ${localData.passCode}%0A*✅ Included Services:* ${servicesList}%0A%0A*⚠️ Important:* Do not share this 6-digit code with anyone except your assigned driver. Please keep this code safe for verification.`;
+                                            
+                                            const messageHi = `*👑 आपका रॉयल टूरिज्म पास तैयार है!*%0A%0Aनमस्ते ${localData.name}, आपका ₹${calculateLiveTotal(localData)} का भुगतान प्राप्त हो गया है।%0A%0A*🛡️ आपका यूनिक पास कोड:* ${localData.passCode}%0A*✅ शामिल सेवाएँ:* ${servicesList}%0A%0A*⚠️ महत्वपूर्ण:* इस 6-अंकीय कोड को अपने आवंटित ड्राइवर के अलावा किसी के साथ साझा न करें। कृपया सत्यापन के लिए इस कोड को सुरक्षित रखें।`;
+                                            
+                                            const message = emailLanguage === 'en' ? messageEn : messageHi;
                                             window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
                                         }}
                                         className="w-full py-4 bg-green-500 text-white rounded-2xl font-black uppercase tracking-widest text-[10px] flex items-center justify-center gap-2 hover:bg-green-600 transition-all shadow-lg"
@@ -916,26 +977,27 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
                                     </button>
                                     <button 
                                         onClick={async () => {
-                                            const servicesList = Object.entries(selectedServices).filter(([_, v]) => v).map(([k, _]) => k.toUpperCase()).join(", ");
                                             setIsSaving(true);
                                             try {
-                                                const emailContent = `
-                                                    <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 500px; margin: 0 auto; border: 4px solid #D4AF37; border-radius: 30px; overflow: hidden; background: #1a2634; color: #ffffff; box-shadow: 0 20px 50px rgba(0,0,0,0.3);">
+
+
+                                                const emailContentEn = `
+                                                    <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 500px; margin: 0 auto; border: 4px solid #D4AF37; border-radius: 30px; overflow: hidden; background: #ffffff; color: #1a2634; box-shadow: 0 20px 50px rgba(0,0,0,0.1);">
                                                         <!-- Header Image -->
-                                                        <div style="width: 100%; overflow: hidden; background: #1a2634;">
-                                                            <img src="https://i.postimg.cc/Dz8VMpnc/Fort.jpg" alt="Chittorgarh Fort" style="width: 100%; height: auto; display: block; opacity: 0.9;">
+                                                        <div style="width: 100%; overflow: hidden; background: #ffffff;">
+                                                            <img src="https://i.postimg.cc/Dz8VMpnc/Fort.jpg" alt="Chittorgarh Fort" style="width: 100%; height: auto; display: block;">
                                                         </div>
 
                                                         <!-- Header -->
                                                         <div style="padding: 30px 20px; text-align: center; border-bottom: 1px solid rgba(212, 175, 55, 0.2);">
                                                             <h1 style="color: #D4AF37; margin: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 3px; font-weight: 900;">Royal Heritage Pass</h1>
-                                                            <p style="color: rgba(255,255,255,0.5); margin: 5px 0 0; font-size: 10px; text-transform: uppercase; letter-spacing: 4px;">Chittorgarh • Rajasthan</p>
+                                                            <p style="color: rgba(26, 38, 52, 0.6); margin: 5px 0 0; font-size: 10px; text-transform: uppercase; letter-spacing: 4px;">Chittorgarh • Rajasthan</p>
                                                         </div>
 
                                                         <div style="padding: 40px 30px;">
-                                                            <p style="font-size: 18px; margin-bottom: 10px;">Namaste <b>${localData.name}</b> 🙏 ,</p>
-                                                            <p style="font-size: 14px; line-height: 1.8; color: rgba(255,255,255,0.8); margin-bottom: 30px;">
-                                                                वीरता और कालातीत विरासत की इस भूमि में आपका स्वागत है। राजस्थान के शानदार किलों की आपकी यात्रा आधिकारिक रूप से पुष्ट हो गई है!
+                                                            <p style="font-size: 18px; margin-bottom: 10px; color: #1a2634;">Namaste <b>${localData.name}</b> 🙏 ,</p>
+                                                            <p style="font-size: 14px; line-height: 1.8; color: #333333; margin-bottom: 30px;">
+                                                                Welcome to the land of victory and timeless heritage. Your visit to the magnificent forts of Rajasthan has been officially confirmed!
                                                             </p>
                                                             
                                                             <!-- Passcode Box -->
@@ -944,55 +1006,187 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
                                                                 <h2 style="margin: 0; font-size: 42px; color: #1a2634; letter-spacing: 6px; font-family: 'Courier New', Courier, monospace; font-weight: 900; white-space: nowrap;">${localData.passCode}</h2>
                                                             </div>
 
-                                                            <!-- Services -->
-                                                            <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 20px; margin-top: 30px; border: 1px solid rgba(255,255,255,0.1);">
-                                                                <p style="margin: 0 0 15px; font-size: 11px; color: #D4AF37; text-transform: uppercase; font-weight: 900; letter-spacing: 2px; text-align: center;">🛡️ Included Services</p>
-                                                                <p style="margin: 0; font-size: 13px; font-weight: bold; color: #ffffff; text-align: center; line-height: 1.6; text-transform: uppercase;">
-                                                                    ${servicesList}
-                                                                </p>
+                                                            <!-- Booking Details -->
+                                                            <div style="background: #ffffff; padding: 25px; border-radius: 20px; margin-top: 30px; border: 2px solid #D4AF37; box-shadow: 0 10px 30px rgba(212,175,55,0.1);">
+                                                                <div style="background: #D4AF37; padding: 12px; border-radius: 12px; margin-bottom: 20px; text-align: center;">
+                                                                    <p style="margin: 0; font-size: 14px; color: #1a2634; font-weight: 900; text-transform: uppercase; letter-spacing: 2px;">📋 Your Booking Details</p>
+                                                                </div>
+                                                                
+                                                                <table style="width: 100%; font-size: 13px; color: #333333; border-collapse: collapse;">
+                                                                    ${localData.hotelName ? `
+                                                                    <tr style="border-bottom: 1px solid rgba(212, 175, 55, 0.1);">
+                                                                        <td style="padding: 12px 5px; color: #666666; font-weight: bold;">🏨 Hotel</td>
+                                                                        <td style="padding: 12px 5px; text-align: right; font-weight: bold; color: #1a2634;">${localData.hotelName} (${localData.hotel})</td>
+                                                                    </tr>` : ''}
+                                                                    ${localData.taxiName ? `
+                                                                    <tr style="border-bottom: 1px solid rgba(212, 175, 55, 0.1);">
+                                                                        <td style="padding: 12px 5px; color: #666666; font-weight: bold;">🚗 Driver</td>
+                                                                        <td style="padding: 12px 5px; text-align: right; font-weight: bold; color: #1a2634;">${localData.taxiName}</td>
+                                                                    </tr>` : ''}
+                                                                    ${localData.vehicleNumber ? `
+                                                                    <tr style="border-bottom: 1px solid rgba(212, 175, 55, 0.1);">
+                                                                        <td style="padding: 12px 5px; color: #666666; font-weight: bold;">🔢 Taxi No</td>
+                                                                        <td style="padding: 12px 5px; text-align: right; font-weight: bold; color: #1a2634;">${localData.vehicleNumber}</td>
+                                                                    </tr>` : ''}
+                                                                    ${localData.driverPhone ? `
+                                                                    <tr style="border-bottom: 1px solid rgba(212, 175, 55, 0.1);">
+                                                                        <td style="padding: 12px 5px; color: #666666; font-weight: bold;">📞 Contact</td>
+                                                                        <td style="padding: 12px 5px; text-align: right; font-weight: bold; color: #D4AF37;">${localData.driverPhone}</td>
+                                                                    </tr>` : ''}
+                                                                    ${localData.guide && localData.guide !== 'None' ? `
+                                                                    <tr>
+                                                                        <td style="padding: 12px 5px; color: #666666; font-weight: bold;">🚩 Guide</td>
+                                                                        <td style="padding: 12px 5px; text-align: right; font-weight: bold; color: #1a2634;">${localData.guide}</td>
+                                                                    </tr>` : ''}
+                                                                </table>
                                                             </div>
 
-                                                            <p style="font-size: 13px; line-height: 1.6; text-align: center; color: #D4AF37; margin-top: 40px; font-weight: bold;">
-                                                                हम आपकी सुखद यात्रा की कामना करते हैं। हम आपकी यात्रा को सुगम बनाने के लिए 24x7 आपके साथ हैं।
+                                                              <p style="font-size: 13px; line-height: 1.6; text-align: center; color: #D4AF37; margin-top: 40px; font-weight: bold;">
+                                                                We wish you a pleasant journey. We are with you 24x7 to make your trip seamless.
                                                             </p>
 
-                                                            <div style="margin-top: 30px; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 10px; text-align: center;">
-                                                                <p style="margin: 0; font-size: 11px; color: rgba(255,255,255,0.4); font-style: italic;">
+                                                            <div style="margin-top: 30px; padding: 15px; background: rgba(0,0,0,0.05); border-radius: 10px; text-align: center;">
+                                                                <p style="margin: 0; font-size: 11px; color: #666666; font-style: italic;">
                                                                     ⚠️ Share this passcode only with your assigned driver or guide at the time of service.
                                                                 </p>
                                                             </div>
                                                         </div>
 
                                                         <!-- Footer -->
-                                                        <div style="background: #121b25; padding: 40px 20px; text-align: center; border-top: 1px solid rgba(212, 175, 55, 0.1);">
-                                                            <p style="margin: 0; font-size: 15px; font-weight: 900; color: #ffffff; letter-spacing: 1px;">Chittorgarh Tourism | राजस्थान 🚩</p>
+                                                        <div style="background: #f8f9fa; padding: 40px 20px; text-align: center; border-top: 1px solid rgba(212, 175, 55, 0.1);">
+                                                            <p style="margin: 0; font-size: 15px; font-weight: 900; color: #1a2634; letter-spacing: 1px;">Chittorgarh Tourism | राजस्थान 🚩</p>
                                                             <p style="margin: 12px 0 0; font-size: 16px; color: #D4AF37; font-weight: 900; letter-spacing: 2px;">"पधारो म्हारे देस" ❤️</p>
 
-                                                            <div style="margin-top: 30px; padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; background: rgba(255,255,255,0.02); border-radius: 20px;">
-                                                                <p style="margin: 0; font-size: 10px; color: rgba(255,255,255,0.4); font-style: italic; letter-spacing: 1px;">
+                                                            <div style="margin-top: 30px; padding: 20px; border-top: 1px solid rgba(0,0,0,0.1); text-align: center; background: rgba(0,0,0,0.02); border-radius: 20px;">
+                                                                <p style="margin: 0; font-size: 10px; color: #666666; font-style: italic; letter-spacing: 1px;">
                                                                     This is a system generated email. Please do not reply on this mail.
                                                                 </p>
                                                                 <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(212, 175, 55, 0.1);">
                                                                     <p style="margin: 0; font-size: 11px; color: #D4AF37; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;">
                                                                         Official Support Channels
                                                                     </p>
-                                                                    <p style="margin: 8px 0 0; font-size: 11px; color: rgba(255,255,255,0.8); line-height: 1.6;">
+                                                                    <p style="margin: 8px 0 0; font-size: 11px; color: #333333; line-height: 1.6;">
                                                                         If you have any queries, please contact on our official phone number and official email ID:
                                                                     </p>
-                                                                    <p style="margin: 12px 0 0; font-size: 13px; color: #ffffff; font-weight: bold; letter-spacing: 0.5px;">
-                                                                        Phone: 7597901057 &nbsp;|&nbsp; Email: chittortech@gmail.com
+                                                                    <p style="margin: 12px 0 0; font-size: 13px; color: #1a2634; font-weight: bold; letter-spacing: 0.5px;">
+                                                                        Phone: +91 7597451057 &nbsp;|&nbsp; Email: chittortech@gmail.com
                                                                     </p>
                                                                 </div>
                                                             </div>
 
-                                                            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05);">
-                                                                <p style="margin: 0; font-size: 10px; color: rgba(255,255,255,0.4); font-weight: bold; letter-spacing: 1px;">Powered by <b>Chittor Tech</b></p>
+                                                            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.05);">
+                                                                <p style="margin: 0; font-size: 10px; color: #666666; font-weight: bold; letter-spacing: 1px;">Powered by <b>Chittor Tech</b></p>
                                                                 <img src="https://i.postimg.cc/B6rmNMnB/chittortech-logo-1775884354186.jpg" alt="Chittor Tech" style="height: 30px; opacity: 0.8; margin-top: 10px; margin-bottom: 10px;">
-                                                                <p style="margin: 5px 0 0; font-size: 8px; color: rgba(255,255,255,0.2); text-transform: uppercase; letter-spacing: 2px;">Rajasthan's Upcoming Leading Tourism IT Partner</p>
+                                                                <p style="margin: 5px 0 0; font-size: 8px; color: #999999; text-transform: uppercase; letter-spacing: 2px;">Rajasthan's Upcoming Leading Tourism IT Partner</p>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 `;
+
+                                                const emailContentHi = `
+                                                    <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 500px; margin: 0 auto; border: 4px solid #D4AF37; border-radius: 30px; overflow: hidden; background: #ffffff; color: #1a2634; box-shadow: 0 20px 50px rgba(0,0,0,0.1);">
+                                                        <!-- Header Image -->
+                                                        <div style="width: 100%; overflow: hidden; background: #ffffff;">
+                                                            <img src="https://i.postimg.cc/Dz8VMpnc/Fort.jpg" alt="Chittorgarh Fort" style="width: 100%; height: auto; display: block;">
+                                                        </div>
+
+                                                        <!-- Header -->
+                                                        <div style="padding: 30px 20px; text-align: center; border-bottom: 1px solid rgba(212, 175, 55, 0.2);">
+                                                            <h1 style="color: #D4AF37; margin: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 3px; font-weight: 900;">शाही विरासत पास</h1>
+                                                            <p style="color: rgba(26, 38, 52, 0.6); margin: 5px 0 0; font-size: 10px; text-transform: uppercase; letter-spacing: 4px;">चित्तौड़गढ़ • राजस्थान</p>
+                                                        </div>
+
+                                                        <div style="padding: 40px 30px;">
+                                                            <p style="font-size: 18px; margin-bottom: 10px; color: #1a2634;">नमस्ते <b>${localData.name}</b> 🙏 ,</p>
+                                                            <p style="font-size: 14px; line-height: 1.8; color: #333333; margin-bottom: 30px;">
+                                                                विजय और कालातीत विरासत की भूमि में आपका स्वागत है। राजस्थान के शानदार किलों की आपकी यात्रा आधिकारिक तौर पर सुनिश्चित हो गई है!
+                                                            </p>
+                                                            
+                                                            <!-- Passcode Box -->
+                                                            <div style="background: linear-gradient(135deg, #D4AF37, #FFD700); padding: 25px 10px; text-align: center; margin: 20px 0; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.2);">
+                                                                <p style="margin: 0 0 5px; font-size: 9px; color: #1a2634; text-transform: uppercase; font-weight: 900; letter-spacing: 1px;">आपका आधिकारिक पासकोड</p>
+                                                                <h2 style="margin: 0; font-size: 42px; color: #1a2634; letter-spacing: 6px; font-family: 'Courier New', Courier, monospace; font-weight: 900; white-space: nowrap;">${localData.passCode}</h2>
+                                                            </div>
+
+                                                            <!-- Booking Details -->
+                                                            <div style="background: #ffffff; padding: 25px; border-radius: 20px; margin-top: 30px; border: 2px solid #D4AF37; box-shadow: 0 10px 30px rgba(212,175,55,0.1);">
+                                                                <div style="background: #D4AF37; padding: 12px; border-radius: 12px; margin-bottom: 20px; text-align: center;">
+                                                                    <p style="margin: 0; font-size: 14px; color: #1a2634; font-weight: 900; text-transform: uppercase; letter-spacing: 2px;">📋 आपकी बुकिंग का विवरण</p>
+                                                                </div>
+                                                                
+                                                                <table style="width: 100%; font-size: 13px; color: #333333; border-collapse: collapse;">
+                                                                    ${localData.hotelName ? `
+                                                                    <tr style="border-bottom: 1px solid rgba(212, 175, 55, 0.1);">
+                                                                        <td style="padding: 12px 5px; color: #666666; font-weight: bold;">🏨 होटल</td>
+                                                                        <td style="padding: 12px 5px; text-align: right; font-weight: bold; color: #1a2634;">${localData.hotelName} (${localData.hotel})</td>
+                                                                    </tr>` : ''}
+                                                                    ${localData.taxiName ? `
+                                                                    <tr style="border-bottom: 1px solid rgba(212, 175, 55, 0.1);">
+                                                                        <td style="padding: 12px 5px; color: #666666; font-weight: bold;">🚗 ड्राइवर</td>
+                                                                        <td style="padding: 12px 5px; text-align: right; font-weight: bold; color: #1a2634;">${localData.taxiName}</td>
+                                                                    </tr>` : ''}
+                                                                    ${localData.vehicleNumber ? `
+                                                                    <tr style="border-bottom: 1px solid rgba(212, 175, 55, 0.1);">
+                                                                        <td style="padding: 12px 5px; color: #666666; font-weight: bold;">🔢 टैक्सी नंबर</td>
+                                                                        <td style="padding: 12px 5px; text-align: right; font-weight: bold; color: #1a2634;">${localData.vehicleNumber}</td>
+                                                                    </tr>` : ''}
+                                                                    ${localData.driverPhone ? `
+                                                                    <tr style="border-bottom: 1px solid rgba(212, 175, 55, 0.1);">
+                                                                        <td style="padding: 12px 5px; color: #666666; font-weight: bold;">📞 ड्राइवर संपर्क</td>
+                                                                        <td style="padding: 12px 5px; text-align: right; font-weight: bold; color: #D4AF37;">${localData.driverPhone}</td>
+                                                                    </tr>` : ''}
+                                                                    ${localData.guide && localData.guide !== 'None' ? `
+                                                                    <tr>
+                                                                        <td style="padding: 12px 5px; color: #666666; font-weight: bold;">🚩 गाइड</td>
+                                                                        <td style="padding: 12px 5px; text-align: right; font-weight: bold; color: #1a2634;">${localData.guide}</td>
+                                                                    </tr>` : ''}
+                                                                </table>
+                                                            </div>
+
+                                                              <p style="font-size: 13px; line-height: 1.6; text-align: center; color: #D4AF37; margin-top: 40px; font-weight: bold;">
+                                                                हम आपकी सुखद यात्रा की कामना करते हैं। आपकी यात्रा को निर्बाध बनाने के लिए हम 24x7 आपके साथ हैं।
+                                                              </p>
+
+                                                            <div style="margin-top: 30px; padding: 15px; background: rgba(0,0,0,0.05); border-radius: 10px; text-align: center;">
+                                                                <p style="margin: 0; font-size: 11px; color: #666666; font-style: italic;">
+                                                                    ⚠️ इस पासकोड को सेवा के समय केवल अपने असाइन किए गए ड्राइवर या गाइड के साथ साझा करें।
+                                                                </p>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- Footer -->
+                                                        <div style="background: #f8f9fa; padding: 40px 20px; text-align: center; border-top: 1px solid rgba(212, 175, 55, 0.1);">
+                                                            <p style="margin: 0; font-size: 15px; font-weight: 900; color: #1a2634; letter-spacing: 1px;">Chittorgarh Tourism | राजस्थान 🚩</p>
+                                                            <p style="margin: 12px 0 0; font-size: 16px; color: #D4AF37; font-weight: 900; letter-spacing: 2px;">"पधारो म्हारे देस" ❤️</p>
+
+                                                            <div style="margin-top: 30px; padding: 20px; border-top: 1px solid rgba(0,0,0,0.1); text-align: center; background: rgba(0,0,0,0.02); border-radius: 20px;">
+                                                                <p style="margin: 0; font-size: 10px; color: #666666; font-style: italic; letter-spacing: 1px;">
+                                                                    यह एक सिस्टम जनरेटेड ईमेल है। कृपया इस मेल का उत्तर न दें।
+                                                                </p>
+                                                                <div style="margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(212, 175, 55, 0.1);">
+                                                                    <p style="margin: 0; font-size: 11px; color: #D4AF37; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;">
+                                                                        आधिकारिक सहायता चैनल
+                                                                    </p>
+                                                                    <p style="margin: 8px 0 0; font-size: 11px; color: #333333; line-height: 1.6;">
+                                                                        यदि आपके कोई प्रश्न हैं, तो कृपया हमारे आधिकारिक फोन नंबर और आधिकारिक ईमेल आईडी पर संपर्क करें:
+                                                                    </p>
+                                                                    <p style="margin: 12px 0 0; font-size: 13px; color: #1a2634; font-weight: bold; letter-spacing: 0.5px;">
+                                                                        Phone: +91 7597451057 &nbsp;|&nbsp; Email: chittortech@gmail.com
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+
+                                                            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.05);">
+                                                                <p style="margin: 0; font-size: 10px; color: #666666; font-weight: bold; letter-spacing: 1px;">Powered by <b>Chittor Tech</b></p>
+                                                                <img src="https://i.postimg.cc/B6rmNMnB/chittortech-logo-1775884354186.jpg" alt="Chittor Tech" style="height: 30px; opacity: 0.8; margin-top: 10px; margin-bottom: 10px;">
+                                                                <p style="margin: 5px 0 0; font-size: 8px; color: #999999; text-transform: uppercase; letter-spacing: 2px;">राजस्थान का आगामी अग्रणी पर्यटन आईटी पार्टनर</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                `;
+
+                                                const emailContent = emailLanguage === 'en' ? emailContentEn : emailContentHi;
+                                                const emailSubject = emailLanguage === 'en' ? `👑 Your Royal Tourism Pass: ${localData.passCode}` : `👑 आपका रॉयल टूरिज्म पासकोड: ${localData.passCode}`;
 
                                                 const response = await fetch('https://api.brevo.com/v3/smtp/email', {
                                                     method: 'POST',
@@ -1004,8 +1198,9 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
                                                     body: JSON.stringify({
                                                         sender: { name: SENDER_NAME, email: SENDER_EMAIL },
                                                         to: [{ email: localData.email, name: localData.name }],
-                                                        subject: `👑 Your Royal Tourism Pass: ${localData.passCode}`,
-                                                        htmlContent: emailContent
+                                                        subject: emailSubject,
+                                                        htmlContent: emailContent,
+
                                                     })
                                                 });
                                                 
@@ -1043,79 +1238,145 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
         </motion.div>
 
             {/* HIGH QUALITY PRINTABLE BILL */}
-            <div className="hidden print:block fixed inset-0 bg-white text-black p-12 z-[500] font-sans">
-                <div className="flex justify-between items-start border-b-2 border-royal-gold/30 pb-10 mb-12">
-                    <div className="space-y-4">
-                        <h1 className="text-4xl font-serif font-black uppercase tracking-tighter">Chittorgarh Tourism</h1>
-                        <p className="text-[9px] uppercase tracking-[0.5em] font-black text-gray-400">Royal Heritage Expedition Quotation</p>
+            {createPortal(
+                <div id="printable-bill" className="hidden print:block print-portal bg-white text-black p-10 z-[500] font-sans border-2 border-gray-800" style={{ width: '210mm', margin: '0 auto', position: 'relative' }}>
+                    {/* Browser Header/Footer Replacement */}
+                    <div className="flex justify-center text-sm text-gray-900 mb-6 border-t border-gray-300 pt-2">
+                        <span className="font-bold">Royal Chittorgarh | The Pride of Rajasthan</span>
                     </div>
-                    <div className="text-right">
-                        <p className="text-[10px] font-black uppercase text-gray-300 mb-1">Invoice Reference</p>
-                        <p className="text-sm font-bold tracking-widest">CT-{booking.id?.slice(-8).toUpperCase()}</p>
-                    </div>
-                </div>
 
-                <div className="grid grid-cols-2 gap-16 mb-16 px-6 py-10 bg-gray-50 rounded-3xl">
-                    <div className="space-y-4">
-                        <p className="text-[10px] uppercase font-black text-royal-gold tracking-widest mb-1">Guest Profile</p>
-                        <p className="text-3xl font-serif font-black">{localData.name}</p>
-                        <p className="text-xl font-bold text-gray-600 underline">{localData.phone}</p>
+                    {/* Header */}
+                    <div className="flex justify-between items-start mb-8">
+                        <div>
+                            <img src="https://i.postimg.cc/B6rmNMnB/chittortech-logo-1775884354186.jpg" alt="Chittor Tech" style={{ height: '40px' }} className="mb-2" />
+                            <h1 className="text-2xl font-bold text-gray-900">Chittorgarh Tourism</h1>
+                            <p className="text-xs text-gray-700">Excellence in Heritage Hospitality</p>
+                            <p className="text-xs text-gray-700">Chittorgarh, Rajasthan, India</p>
+                            <div className="text-xs text-gray-700 font-bold mt-1">
+                                <span className="inline-block mr-4" style={{ verticalAlign: 'middle' }}>
+                                    <Mail size={12} style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: '4px' }} />
+                                    chittortech@gmail.com
+                                </span>
+                                <span className="inline-block" style={{ verticalAlign: 'middle' }}>
+                                    <Phone size={12} style={{ display: 'inline-block', verticalAlign: 'middle', marginRight: '4px' }} />
+                                    +91 7597451057
+                                </span>
+                            </div>
+                        </div>
+                        <div className="text-right mt-[48px]">
+                            <h2 className="text-4xl font-bold text-gray-900 uppercase tracking-tight">Invoice</h2>
+                            <p className="text-sm font-bold text-gray-800">No: CT/{new Date().getFullYear()}/{booking.id ? String(booking.id).slice(-3).toUpperCase() : 'XXX'}</p>
+                            <p className="text-sm text-gray-800">Date: {new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</p>
+                        </div>
                     </div>
-                    <div className="text-right space-y-4">
-                        <p className="text-[10px] uppercase font-black text-royal-gold tracking-widest mb-1">Trip Summary</p>
-                        <p className="text-2xl font-serif font-black uppercase">{localData.pillarTitle || "Custom Tour"}</p>
-                        <p className="text-gray-500 font-bold">Planned Arrival: {formatDateReadable(localData.date)}</p>
+
+                    <div className="border-t-2 border-royal-gold mb-6"></div>
+
+                    {/* Bill To & Details */}
+                    <div className="grid grid-cols-2 gap-6 mb-8">
+                        <div className="border border-gray-300 p-4 rounded-lg">
+                            <h3 className="text-xs font-bold text-gray-700 uppercase mb-2">Bill To:</h3>
+                            <p className="text-base font-bold text-gray-900">{localData.name}</p>
+                            <p className="text-sm text-gray-800 font-bold">{localData.phone}</p>
+                            {localData.email && <p className="text-sm text-gray-800">{localData.email}</p>}
+                        </div>
+                        <div className="border border-gray-300 p-4 rounded-lg">
+                            <h3 className="text-xs font-bold text-gray-700 uppercase mb-2">Trip Summary:</h3>
+                            <p className="text-base font-bold text-royal-gold">{formatPillarTitle(localData.pillarTitle) || "Custom Tour"}</p>
+                            <p className="text-sm text-gray-800">Arrival Date: {formatDateReadable(localData.date)}</p>
+                            <p className="text-sm text-gray-800 font-bold">Status: {localData.paymentStatus === 'Received' ? 'Paid' : 'Pending'}</p>
+                        </div>
                     </div>
-                </div>
 
-                <div className="px-6">
-                    <table className="w-full border-collapse">
-                        <thead>
-                            <tr className="border-b-2 border-black">
-                                <th className="py-6 text-left text-[10px] uppercase font-black tracking-widest">Service Description</th>
-                                <th className="py-6 text-right text-[10px] uppercase font-black tracking-widest">Price (INR)</th>
-                            </tr>
-                        </thead>
-                        <tbody className="divide-y divide-gray-100">
-                            <tr>
-                                <td className="py-8"><p className="text-lg font-bold">Transport Package</p><p className="text-xs uppercase text-gray-400 font-bold">{localData.transport}</p></td>
-                                <td className="py-8 text-right text-2xl font-serif font-black">₹{localData.transportPrice || 0}</td>
-                            </tr>
-                            <tr>
-                                <td className="py-8"><p className="text-lg font-bold">Accommodation Arrangement</p><p className="text-xs uppercase text-gray-400 font-bold">{localData.hotel}</p></td>
-                                <td className="py-8 text-right text-2xl font-serif font-black">₹{localData.hotelPrice || 0}</td>
-                            </tr>
-                            <tr>
-                                <td className="py-8"><p className="text-lg font-bold">Professional Heritage Guide</p><p className="text-xs uppercase text-gray-400 font-bold">{localData.guide}</p></td>
-                                <td className="py-8 text-right text-2xl font-serif font-black">₹{localData.guidePrice || 0}</td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td className="py-12 text-3xl font-serif font-black uppercase tracking-tighter border-t-2 border-black pt-12">Total Estimate</td>
-                                <td className="py-12 text-5xl font-serif font-black text-right border-t-2 border-black pt-12">₹{calculateLiveTotal(localData)}</td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
+                    {/* Table */}
+                    <div className="mb-8">
+                        <table className="w-full border-collapse" style={{ border: '1px solid #9ca3af' }}>
+                            <thead>
+                                <tr className="bg-gray-100 text-gray-800 text-xs uppercase">
+                                    <th className="border border-gray-400 p-3 text-left font-bold">Description</th>
+                                    <th className="border border-gray-400 p-3 text-center font-bold" style={{ width: '80px' }}>Qty</th>
+                                    <th className="border border-gray-400 p-3 text-right font-bold" style={{ width: '120px' }}>Rate</th>
+                                    <th className="border border-gray-400 p-3 text-right font-bold" style={{ width: '120px' }}>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody className="text-sm text-gray-900">
+                                {Number(localData.transportPrice) > 0 && (
+                                    <tr>
+                                        <td className="border border-gray-300 p-3">
+                                            <p className="font-bold">Transport Package</p>
+                                            <p className="text-xs text-gray-600">{localData.transport}</p>
+                                        </td>
+                                        <td className="border border-gray-300 p-3 text-center">1</td>
+                                        <td className="border border-gray-300 p-3 text-right">₹{Number(localData.transportPrice).toFixed(2)}</td>
+                                        <td className="border border-gray-300 p-3 text-right">₹{Number(localData.transportPrice).toFixed(2)}</td>
+                                    </tr>
+                                )}
+                                {Number(localData.hotelPrice) > 0 && (
+                                    <tr>
+                                        <td className="border border-gray-300 p-3">
+                                            <p className="font-bold">Accommodation Arrangement</p>
+                                            <p className="text-xs text-gray-600">{localData.hotel}</p>
+                                        </td>
+                                        <td className="border border-gray-300 p-3 text-center">1</td>
+                                        <td className="border border-gray-300 p-3 text-right">₹{Number(localData.hotelPrice).toFixed(2)}</td>
+                                        <td className="border border-gray-300 p-3 text-right">₹{Number(localData.hotelPrice).toFixed(2)}</td>
+                                    </tr>
+                                )}
+                                {Number(localData.guidePrice) > 0 && (
+                                    <tr>
+                                        <td className="border border-gray-300 p-3">
+                                            <p className="font-bold">Professional Heritage Guide</p>
+                                            <p className="text-xs text-gray-600">{localData.guide}</p>
+                                        </td>
+                                        <td className="border border-gray-300 p-3 text-center">1</td>
+                                        <td className="border border-gray-300 p-3 text-right">₹{Number(localData.guidePrice).toFixed(2)}</td>
+                                        <td className="border border-gray-300 p-3 text-right">₹{Number(localData.guidePrice).toFixed(2)}</td>
+                                    </tr>
+                                )}
+                            </tbody>
+                            <tfoot>
+                                <tr className="font-bold text-sm text-gray-900">
+                                    <td colSpan="3" className="border border-gray-300 p-3 text-right">Subtotal</td>
+                                    <td className="border border-gray-300 p-3 text-right">₹{Number(calculateLiveTotal(localData)).toFixed(2)}</td>
+                                </tr>
+                                <tr className="font-bold text-base bg-gray-50 text-gray-900">
+                                    <td colSpan="3" className="border border-gray-300 p-3 text-right">Total Amount</td>
+                                    <td className="border border-gray-300 p-3 text-right text-royal-gold">₹{Number(calculateLiveTotal(localData)).toFixed(2)}</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
 
-                <div className="absolute bottom-16 left-0 w-full text-center px-12">
-                    <div className="h-px bg-gray-100 w-full mb-8"></div>
-                    <p className="text-[10px] uppercase font-black text-gray-300 tracking-[0.6em]">Authorized Quote by Chittorgarh Tourism Department</p>
-                </div>
-            </div>
+                    {/* Footer */}
+                    <div className="text-center text-xs text-gray-600 pt-4 border-t border-gray-200 mt-auto">
+                        <p>Computer generated document. No signature required.</p>
+                        <p className="font-bold text-gray-700">Powered by Chittor Tech</p>
+                    </div>
+                </div>,
+                document.body
+            )}
 
             <style>{`
                 @media print {
-                    body * { visibility: hidden !important; }
-                    .print\\:block, .print\\:block * { visibility: visible !important; }
-                    .print\\:block { position: fixed; left: 0; top: 0; width: 100%; height: 100%; background: white !important; }
+                    #root { display: none !important; }
+                    .print-portal { 
+                        display: block !important; 
+                        position: absolute !important; 
+                        left: 0 !important; 
+                        top: 0 !important; 
+                        width: 100% !important; 
+                        height: auto !important; 
+                        background: white !important; 
+                        z-index: 9999 !important;
+                    }
+                    @page {
+                        margin: 0;
+                    }
                 }
             `}</style>
         </div>
     );
 };
-
 const ProviderModal = ({ provider, defaultType, onClose, onSave, isSaving }) => {
     const [localData, setLocalData] = useState(provider || {
         name: '',
@@ -1126,9 +1387,13 @@ const ProviderModal = ({ provider, defaultType, onClose, onSave, isSaving }) => 
         vehicleNumber: '', // for taxi
         vehicleType: 'Royal SUV', // for taxi
         address: '',
-        location: ''
+        location: '',
+        aadharNumber: '',
+        age: '',
+        photoUrl: '',
+        rates: ''
     });
-
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         onSave(localData);
@@ -1149,11 +1414,42 @@ const ProviderModal = ({ provider, defaultType, onClose, onSave, isSaving }) => 
                 </div>
                 <form onSubmit={handleSubmit} className="space-y-6 max-h-[70vh] overflow-y-auto px-2 custom-scrollbar">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        
+                        {/* Photo URL Section */}
+                        <div className="md:col-span-2 flex flex-col items-center justify-center border-2 border-dashed border-slate-200 rounded-2xl p-6 bg-slate-50">
+                            {localData.photoUrl ? (
+                                <img src={localData.photoUrl} alt="Provider" className="w-24 h-24 rounded-full object-cover mb-4 shadow-lg border-2 border-royal-gold" />
+                            ) : (
+                                <div className="w-24 h-24 rounded-full bg-slate-200 flex items-center justify-center mb-4 border-2 border-transparent">
+                                    <User className="w-10 h-10 text-slate-400" />
+                                </div>
+                            )}
+                            <div className="w-full">
+                                <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 block text-center">Direct Image Link (e.g., from postimages.org)</label>
+                                <input 
+                                    value={localData.photoUrl || ''} 
+                                    onChange={(e) => setLocalData({...localData, photoUrl: e.target.value})} 
+                                    placeholder="https://i.postimg.cc/..." 
+                                    className="w-full bg-white border border-slate-200 rounded-xl p-3 text-sm focus:border-royal-gold outline-none text-center" 
+                                />
+                            </div>
+                        </div>
+
                         <div className="md:col-span-2">
                             <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 block">Provider Name / Business Name</label>
                             <input required value={localData.name} onChange={e => setLocalData({...localData, name: e.target.value})} placeholder="e.g. Maharana Travels or Hotel Royal" className="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-sm focus:border-royal-gold outline-none" />
                         </div>
                         
+                        <div>
+                            <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 block">Aadhar Card Number</label>
+                            <input required value={localData.aadharNumber || ''} onChange={e => setLocalData({...localData, aadharNumber: e.target.value})} placeholder="0000 0000 0000" maxLength="14" className="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-sm focus:border-royal-gold outline-none" />
+                        </div>
+                        
+                        <div>
+                            <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 block">Age</label>
+                            <input required type="number" min="18" max="100" value={localData.age || ''} onChange={e => setLocalData({...localData, age: e.target.value})} placeholder="e.g. 35" className="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-sm focus:border-royal-gold outline-none" />
+                        </div>
+
                         <div>
                             <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 block">Phone Number (Calling)</label>
                             <input required value={localData.phone} onChange={e => setLocalData({...localData, phone: e.target.value})} placeholder="+91 00000 00000" className="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-sm focus:border-royal-gold outline-none" />
@@ -1166,7 +1462,7 @@ const ProviderModal = ({ provider, defaultType, onClose, onSave, isSaving }) => 
 
                         <div className="md:col-span-2">
                             <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 block">Provider Email ID</label>
-                            <input type="email" value={localData.email} onChange={e => setLocalData({...localData, email: e.target.value})} placeholder="contact@provider.com" className="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-sm focus:border-royal-gold outline-none" />
+                            <input required type="email" value={localData.email} onChange={e => setLocalData({...localData, email: e.target.value})} placeholder="contact@provider.com" className="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-sm focus:border-royal-gold outline-none" />
                         </div>
 
                         <div className="md:col-span-2">
@@ -1197,6 +1493,11 @@ const ProviderModal = ({ provider, defaultType, onClose, onSave, isSaving }) => 
                                 </div>
                             </>
                         )}
+
+                        <div className="md:col-span-2">
+                            <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 block">Pricing / Rates (e.g., ₹12/km or ₹500/day)</label>
+                            <input value={localData.rates || ''} onChange={e => setLocalData({...localData, rates: e.target.value})} placeholder="Describe rates, per km charges, or package details..." className="w-full bg-slate-50 border border-slate-200 rounded-xl p-4 text-sm focus:border-royal-gold outline-none" />
+                        </div>
 
                         <div className="md:col-span-2">
                             <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 block">Physical Address</label>
@@ -1239,6 +1540,10 @@ const AdminPage = () => {
     const [providerTypeFilter, setProviderTypeFilter] = useState('all');
     const [showProviderModal, setShowProviderModal] = useState(false);
     const [editingProvider, setEditingProvider] = useState(null);
+    const [providerSearchTerm, setProviderSearchTerm] = useState('');
+    const [activity, setActivity] = useState([]);
+    const [selectedProviderForDetails, setSelectedProviderForDetails] = useState(null);
+    const [feedback, setFeedback] = useState([]);
 
     const prevBookingsRef = React.useRef([]);
     const initialLoadRef = React.useRef(false);
@@ -1277,6 +1582,7 @@ const AdminPage = () => {
                 if (change.type === "added") {
                     console.log("Detecting new inquiry:", data.name);
                     addNotification("New Inquiry", `${data.name} just sent a request!`, "success");
+                    setActivity(prev => [{ id: change.doc.id, title: "New Inquiry", message: `${data.name} sent a request`, time: new Date() }, ...prev.slice(0, 19)]);
                 }
                 if (change.type === "modified") {
                     const newData = data;
@@ -1289,6 +1595,7 @@ const AdminPage = () => {
                             if (newData[key] && !oldBooking[key]) {
                                 console.log(`Service ${s} redeemed for ${newData.name}`);
                                 addNotification("Service Redeemed", `${newData.name}'s ${s} has been verified!`, "info");
+                                setActivity(prev => [{ id: `${newData.id}-${s}`, title: "Service Redeemed", message: `${newData.name}'s ${s} verified`, time: new Date() }, ...prev.slice(0, 19)]);
                             }
                         });
                     }
@@ -1313,6 +1620,16 @@ const AdminPage = () => {
         return () => unsubscribe();
     }, [isLoggedIn]);
 
+    useEffect(() => {
+        if (!isLoggedIn) return;
+        console.log("Initializing Feedback Real-time Listener...");
+        const q = query(collection(db, "feedback"), orderBy("createdAt", "desc"));
+        const unsubscribe = onSnapshot(q, (snapshot) => {
+            const feedbackList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            setFeedback(feedbackList);
+        });
+        return () => unsubscribe();
+    }, [isLoggedIn]);
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -1330,6 +1647,120 @@ const AdminPage = () => {
         await deleteDoc(doc(db, "bookings", id));
         addNotification("Archived", "Lead moved to archives.", "error");
         setConfirmDelete(null);
+    };
+
+    const sendWelcomeEmail = async (providerData, providerCode) => {
+        if (!providerData.email) return false;
+        try {
+            const emailContent = `
+                <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 4px solid #D4AF37; border-radius: 30px; overflow: hidden; background: #1a2634; color: #ffffff; box-shadow: 0 20px 50px rgba(0,0,0,0.3);">
+                    <div style="width: 100%; overflow: hidden; background: #1a2634;">
+                        <img src="https://i.postimg.cc/Dz8VMpnc/Fort.jpg" alt="Chittorgarh Fort" style="width: 100%; height: auto; display: block; opacity: 0.9;">
+                    </div>
+                    <div style="padding: 30px 20px; text-align: center; border-bottom: 1px solid rgba(212, 175, 55, 0.2);">
+                        <h1 style="color: #D4AF37; margin: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 3px; font-weight: 900;">Welcome to Chittorgarh Tourism Team</h1>
+                        <p style="color: rgba(255,255,255,0.5); margin: 5px 0 0; font-size: 10px; text-transform: uppercase; letter-spacing: 4px;">Official Partner Portfolio</p>
+                    </div>
+                    <div style="padding: 40px 30px;">
+                        <p style="font-size: 18px; margin-bottom: 10px;">नमस्ते <b>${providerData.name}</b> 🙏 ,</p>
+                        <p style="font-size: 14px; line-height: 1.8; color: rgba(255,255,255,0.8); margin-bottom: 30px;">
+                            हमें आपको चित्तौड़गढ़ पर्यटन के आधिकारिक सेवा प्रदाता नेटवर्क में शामिल करते हुए बहुत खुशी हो रही है। वीरता की इस भूमि में मेहमानों को सर्वोत्तम अनुभव प्रदान करने की हमारी यात्रा में आपकी भूमिका अत्यंत महत्वपूर्ण है।
+                        </p>
+                        
+                        <div style="background: linear-gradient(135deg, #D4AF37, #FFD700); padding: 25px 10px; text-align: center; margin: 20px 0; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.2);">
+                            <p style="margin: 0 0 5px; font-size: 9px; color: #1a2634; text-transform: uppercase; font-weight: 900; letter-spacing: 1px;">Your Official ID Card Number</p>
+                            <h2 style="margin: 0; font-size: 42px; color: #1a2634; letter-spacing: 6px; font-family: 'Courier New', Courier, monospace; font-weight: 900; white-space: nowrap;">${providerCode}</h2>
+                            
+                            <div style="margin: 20px auto 10px; background: rgba(26, 38, 52, 0.1); padding: 12px; border-radius: 10px; max-width: 250px; border: 1px dashed rgba(26, 38, 52, 0.3);">
+                                <p style="margin: 0 0 5px; font-size: 10px; color: #1a2634; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;">Login PIN / पिन</p>
+                                <p style="margin: 0; font-size: 24px; color: #1a2634; letter-spacing: 8px; font-family: monospace; font-weight: bold;">1234</p>
+                            </div>
+                            
+                            <p style="margin: 10px 0 0; font-size: 9px; color: #1a2634; font-weight: bold; opacity: 0.7;">(पोर्टल लॉगिन के लिए आईडी और पिन सुरक्षित रखें)</p>
+                        </div>
+
+                        <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 20px; margin-top: 30px; border: 1px solid rgba(255,255,255,0.1);">
+                            <p style="margin: 0 0 15px; font-size: 11px; color: #D4AF37; text-transform: uppercase; font-weight: 900; letter-spacing: 2px;">🛡️ Account Details</p>
+                            <p style="margin: 0; font-size: 13px; color: #ffffff; line-height: 2;">
+                                <b>Partner Category:</b> ${providerData.type === 'taxi' ? 'Driver' : providerData.type.toUpperCase()}<br/>
+                                <b>Registered Phone:</b> ${providerData.phone}<br/>
+                                <b>WhatsApp Number:</b> ${providerData.whatsapp || '---'}<br/>
+                                <b>Official Address:</b> ${providerData.address || 'Chittorgarh'}
+                            </p>
+                        </div>
+
+                        <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 20px; margin-top: 30px; border: 1px solid rgba(255,255,255,0.1);">
+                            <p style="margin: 0 0 15px; font-size: 11px; color: #D4AF37; text-transform: uppercase; font-weight: 900; letter-spacing: 2px;">🔗 Staff Verification Portal</p>
+                            <p style="margin: 0 0 15px; font-size: 13px; color: #ffffff; line-height: 1.6;">
+                                This is the link where you can access your dashboard and verify guest passes:
+                            </p>
+                            <a href="https://visitchittorgarh.in/staff-verify" style="display: inline-block; background: #D4AF37; color: #1a2634; padding: 12px 24px; border-radius: 10px; text-decoration: none; font-weight: 900; margin-bottom: 15px; letter-spacing: 1px;">OPEN VERIFICATION PORTAL</a>
+                            <p style="margin: 0; font-size: 12px; color: rgba(255,255,255,0.8); line-height: 1.6; background: rgba(212, 175, 55, 0.1); padding: 15px; border-left: 4px solid #D4AF37; border-radius: 0 10px 10px 0;">
+                                💡 <b>Pro Tip:</b> Please open this link in your phone's browser and select <b>"Add to Home Screen"</b> (या Add to Desktop). This will install it as an App on your phone, so you don't have to click the link every time!
+                            </p>
+                        </div>
+
+                        <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 20px; margin-top: 30px; border: 1px solid rgba(255,255,255,0.1);">
+                            <p style="margin: 0 0 15px; font-size: 11px; color: #D4AF37; text-transform: uppercase; font-weight: 900; letter-spacing: 2px;">⭐ Important: Service Quality & Ratings</p>
+                            <p style="margin: 0; font-size: 13px; color: #ffffff; line-height: 1.6;">
+                                कृपया अपनी सेवा का स्तर हमेशा उत्तम बनाए रखें। हमारा सिस्टम कस्टमर रिव्यूज और रेटिंग्स को ट्रैक करता है। आपकी रेटिंग के आधार पर ही आपका प्रमोशन और अन्य लाभ तय किए जाते हैं। अच्छी रेटिंग न होने पर सिस्टम द्वारा एक्शन लिया जा सकता है। रेटिंग आपके प्रोफाइल के लिए अत्यंत महत्वपूर्ण है।
+                            </p>
+                        </div>
+
+                        <p style="font-size: 13px; line-height: 1.6; color: #D4AF37; margin-top: 40px; font-weight: bold; text-align: center;">
+                            हम एक साथ मिलकर पर्यटन को नई ऊंचाइयों पर ले जाएंगे। "पधारो म्हारे देस" ❤️
+                        </p>
+                    </div>
+                    <div style="background: #121b25; padding: 40px 20px; text-align: center; border-top: 1px solid rgba(212, 175, 55, 0.1);">
+                        <p style="margin: 0; font-size: 15px; font-weight: 900; color: #ffffff; letter-spacing: 1px;">Chittorgarh Tourism | राजस्थान 🚩</p>
+                        <div style="margin-top: 30px; padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; background: rgba(255,255,255,0.02); border-radius: 20px;">
+                            <p style="margin: 0; font-size: 11px; color: #D4AF37; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;">Partner Support</p>
+                            <p style="margin: 8px 0 0; font-size: 11px; color: rgba(255,255,255,0.8);">If you need any assistance, please contact our official office at +91 7597451057.</p>
+                        </div>
+                        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05);">
+                            <p style="margin: 0; font-size: 10px; color: rgba(255,255,255,0.4); font-weight: bold; letter-spacing: 1px;">Powered by <b>Chittor Tech</b></p>
+                            <img src="https://i.postimg.cc/B6rmNMnB/chittortech-logo-1775884354186.jpg" alt="Chittor Tech" style="height: 30px; opacity: 0.8; margin-top: 10px; margin-bottom: 10px;">
+                            <p style="margin: 5px 0 0; font-size: 8px; color: rgba(255,255,255,0.2); text-transform: uppercase; letter-spacing: 2px;">Rajasthan's Upcoming Leading Tourism IT Partner</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            await fetch('https://api.brevo.com/v3/smtp/email', {
+                method: 'POST',
+                headers: {
+                    'accept': 'application/json',
+                    'api-key': BREVO_API_KEY,
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    sender: { name: SENDER_NAME, email: SENDER_EMAIL },
+                    to: [{ email: providerData.email, name: providerData.name }],
+                    subject: `👑 Welcome to Chittorgarh Tourism Network | ID: ${providerCode}`,
+                    htmlContent: emailContent
+                })
+            });
+            console.log(`Welcome email sent to: ${providerData.email}`);
+            return true;
+        } catch (e) {
+            console.error("Welcome Email Error:", e);
+            return false;
+        }
+    };
+
+    const resendWelcomeMail = async (provider) => {
+        if (!provider.email) {
+            addNotification("Error", "No email address found for this partner", "error");
+            return;
+        }
+        setLoading(true);
+        const success = await sendWelcomeEmail(provider, provider.providerCode);
+        setLoading(false);
+        if (success) {
+            addNotification("Success", "Welcome email resent successfully", "success");
+        } else {
+            addNotification("Error", "Failed to resend welcome email", "error");
+        }
     };
 
     const saveProvider = async (providerData) => {
@@ -1353,75 +1784,7 @@ const AdminPage = () => {
 
                 // Trigger Welcome Email via Brevo API
                 if (providerData.email) {
-                    try {
-                        const emailContent = `
-                            <div style="font-family: 'Segoe UI', Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 4px solid #D4AF37; border-radius: 30px; overflow: hidden; background: #1a2634; color: #ffffff; box-shadow: 0 20px 50px rgba(0,0,0,0.3);">
-                                <div style="width: 100%; overflow: hidden; background: #1a2634;">
-                                    <img src="https://i.postimg.cc/Dz8VMpnc/Fort.jpg" alt="Chittorgarh Fort" style="width: 100%; height: auto; display: block; opacity: 0.9;">
-                                </div>
-                                <div style="padding: 30px 20px; text-align: center; border-bottom: 1px solid rgba(212, 175, 55, 0.2);">
-                                    <h1 style="color: #D4AF37; margin: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 3px; font-weight: 900;">Welcome to Chittorgarh Tourism Team</h1>
-                                    <p style="color: rgba(255,255,255,0.5); margin: 5px 0 0; font-size: 10px; text-transform: uppercase; letter-spacing: 4px;">Official Partner Portfolio</p>
-                                </div>
-                                <div style="padding: 40px 30px;">
-                                    <p style="font-size: 18px; margin-bottom: 10px;">नमस्ते <b>${providerData.name}</b> 🙏 ,</p>
-                                    <p style="font-size: 14px; line-height: 1.8; color: rgba(255,255,255,0.8); margin-bottom: 30px;">
-                                        हमें आपको चित्तौड़गढ़ पर्यटन के आधिकारिक सेवा प्रदाता नेटवर्क में शामिल करते हुए बहुत खुशी हो रही है। वीरता की इस भूमि में मेहमानों को सर्वोत्तम अनुभव प्रदान करने की हमारी यात्रा में आपकी भूमिका अत्यंत महत्वपूर्ण है।
-                                    </p>
-                                    
-                                    <div style="background: linear-gradient(135deg, #D4AF37, #FFD700); padding: 25px 10px; text-align: center; margin: 20px 0; border-radius: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.2);">
-                                        <p style="margin: 0 0 5px; font-size: 9px; color: #1a2634; text-transform: uppercase; font-weight: 900; letter-spacing: 1px;">Your Official ID Card Number</p>
-                                        <h2 style="margin: 0; font-size: 42px; color: #1a2634; letter-spacing: 6px; font-family: 'Courier New', Courier, monospace; font-weight: 900; white-space: nowrap;">${providerCode}</h2>
-                                        <p style="margin: 10px 0 0; font-size: 9px; color: #1a2634; font-weight: bold; opacity: 0.7;">(कृपया इस नंबर को सुरक्षित रखें)</p>
-                                    </div>
-
-                                    <div style="background: rgba(255,255,255,0.05); padding: 25px; border-radius: 20px; margin-top: 30px; border: 1px solid rgba(255,255,255,0.1);">
-                                        <p style="margin: 0 0 15px; font-size: 11px; color: #D4AF37; text-transform: uppercase; font-weight: 900; letter-spacing: 2px;">🛡️ Account Details</p>
-                                        <p style="margin: 0; font-size: 13px; color: #ffffff; line-height: 2;">
-                                            <b>Partner Category:</b> ${providerData.type === 'taxi' ? 'Driver' : providerData.type.toUpperCase()}<br/>
-                                            <b>Registered Phone:</b> ${providerData.phone}<br/>
-                                            <b>WhatsApp Number:</b> ${providerData.whatsapp || '---'}<br/>
-                                            <b>Official Address:</b> ${providerData.address || 'Chittorgarh'}
-                                        </p>
-                                    </div>
-
-                                    <p style="font-size: 13px; line-height: 1.6; color: #D4AF37; margin-top: 40px; font-weight: bold; text-align: center;">
-                                        हम एक साथ मिलकर पर्यटन को नई ऊंचाइयों पर ले जाएंगे। "पधारो म्हारे देस" ❤️
-                                    </p>
-                                </div>
-                                <div style="background: #121b25; padding: 40px 20px; text-align: center; border-top: 1px solid rgba(212, 175, 55, 0.1);">
-                                    <p style="margin: 0; font-size: 15px; font-weight: 900; color: #ffffff; letter-spacing: 1px;">Chittorgarh Tourism | राजस्थान 🚩</p>
-                                    <div style="margin-top: 30px; padding: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; background: rgba(255,255,255,0.02); border-radius: 20px;">
-                                        <p style="margin: 0; font-size: 11px; color: #D4AF37; font-weight: 900; text-transform: uppercase; letter-spacing: 1px;">Partner Support</p>
-                                        <p style="margin: 8px 0 0; font-size: 11px; color: rgba(255,255,255,0.8);">If you need any assistance, please contact our official office at 7597901057.</p>
-                                    </div>
-                                    <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05);">
-                                        <p style="margin: 0; font-size: 10px; color: rgba(255,255,255,0.4); font-weight: bold; letter-spacing: 1px;">Powered by <b>Chittor Tech</b></p>
-                                        <img src="https://i.postimg.cc/B6rmNMnB/chittortech-logo-1775884354186.jpg" alt="Chittor Tech" style="height: 30px; opacity: 0.8; margin-top: 10px; margin-bottom: 10px;">
-                                        <p style="margin: 5px 0 0; font-size: 8px; color: rgba(255,255,255,0.2); text-transform: uppercase; letter-spacing: 2px;">Rajasthan's Upcoming Leading Tourism IT Partner</p>
-                                    </div>
-                                </div>
-                            </div>
-                        `;
-
-                        await fetch('https://api.brevo.com/v3/smtp/email', {
-                            method: 'POST',
-                            headers: {
-                                'accept': 'application/json',
-                                'api-key': BREVO_API_KEY,
-                                'content-type': 'application/json'
-                            },
-                            body: JSON.stringify({
-                                sender: { name: SENDER_NAME, email: SENDER_EMAIL },
-                                to: [{ email: providerData.email, name: providerData.name }],
-                                subject: `👑 Welcome to Chittorgarh Tourism Network | ID: ${providerCode}`,
-                                htmlContent: emailContent
-                            })
-                        });
-                        console.log(`Welcome email sent to: ${providerData.email}`);
-                    } catch (e) {
-                        console.error("Welcome Email Error:", e);
-                    }
+                    await sendWelcomeEmail(providerData, providerCode);
                 }
                 addNotification("Success", "Partner added & Welcome Mail sent!", "success");
             }
@@ -1477,7 +1840,7 @@ const AdminPage = () => {
             const date = formatDateReadable(b.date).replace(/,/g, '');
             const total = getRowTotal(b);
             const notes = (b.adminNotes || '').replace(/,/g, ';').replace(/\n/g, ' ');
-            return `${b.name},${b.phone},${b.pillarTitle || 'Custom'},${date},${total},${b.status},${b.visitStatus || 'pending'},${notes}\n`;
+            return `${b.name},${b.phone},${formatPillarTitle(b.pillarTitle) || 'Custom'},${date},${total},${b.status},${b.visitStatus || 'pending'},${notes}\n`;
         });
         const blob = new Blob([headers, ...rows], { type: 'text/csv' });
         const url = window.URL.createObjectURL(blob);
@@ -1487,21 +1850,103 @@ const AdminPage = () => {
         a.click();
     };
 
+    const getDisplayStatus = (booking) => {
+        const services = booking.includedServices || [];
+        if (services.length > 0) {
+            const redeemedCount = services.filter(s => {
+                const key = SERVICE_KEY_MAP[s] || s.toLowerCase();
+                return booking[`redeemed_${key}`];
+            }).length;
+            
+            if (redeemedCount === services.length) {
+                return "Service Done";
+            } else if (redeemedCount > 0) {
+                return "Services in Progress";
+            }
+        }
+        
+        if (booking.status === 'contacted') {
+            return "Contacted";
+        }
+        return "New Query";
+    };
+
+    const getProviderServiceCount = (provider) => {
+        const key = provider.type;
+        const nameField = `${key}Name`;
+        return bookings.filter(b => 
+            b[nameField]?.trim().toLowerCase() === provider.name?.trim().toLowerCase() && 
+            b[`redeemed_${key}`]
+        ).length;
+    };
+
+    const getProviderTotalEarnings = (provider) => {
+        const key = provider.type;
+        const nameField = `${key}Name`;
+        const priceField = key === 'taxi' ? 'transportPrice' : `${key}Price`;
+        return bookings.filter(b => 
+            b[nameField]?.trim().toLowerCase() === provider.name?.trim().toLowerCase() && 
+            b[`redeemed_${key}`]
+        ).reduce((sum, b) => sum + Number(b[priceField] || 0), 0);
+    };
+
+    const getProviderRating = (providerId) => {
+        const providerFeedback = feedback.filter(f => f.providerId === providerId);
+        if (providerFeedback.length === 0) return "0.0";
+        const sum = providerFeedback.reduce((acc, curr) => acc + curr.rating, 0);
+        return (sum / providerFeedback.length).toFixed(1);
+    };
+
     if (!isLoggedIn) {
         return (
-            <div className="min-h-screen flex items-center justify-center p-6 bg-slate-50 text-black no-print">
-                <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="w-full max-w-md p-10 rounded-[3rem] bg-white border border-slate-200 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.1)] relative overflow-hidden">
+            <div className="min-h-screen bg-[#0a0a0b] flex flex-col items-center justify-between relative overflow-hidden text-white no-print">
+                <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-royal-gold/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 animate-pulse" />
+                <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-royal-gold/5 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/3 animate-pulse" />
+                
+                <header className="w-full py-8 flex justify-center z-50">
+                    <h2 className="text-2xl md:text-3xl font-serif font-black italic tracking-tight text-royal-gold uppercase drop-shadow-2xl">
+                        Chittorgarh Paryatan
+                    </h2>
+                </header>
+
+                <motion.div 
+                    initial={{ opacity: 0, y: 20 }} 
+                    animate={{ opacity: 1, y: 0 }} 
+                    className="w-full max-w-md p-10 rounded-[3rem] bg-white/[0.03] border border-white/10 backdrop-blur-xl relative z-10 my-auto shadow-2xl"
+                >
                     <div className="text-center mb-10">
-                        <div className="w-16 h-16 rounded-2xl bg-royal-gold/10 flex items-center justify-center mx-auto mb-6"><Lock className="w-8 h-8 text-royal-gold" /></div>
-                        <h1 className="text-2xl font-serif font-bold mb-2">{t.admin.loginTitle}</h1>
-                        <p className="text-xs text-black/60 uppercase tracking-widest">{t.admin.pinPlaceholder}</p>
+                        <div className="w-16 h-16 bg-royal-gold/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                            <Lock className="w-8 h-8 text-royal-gold" />
+                        </div>
+                        <h1 className="text-3xl font-serif text-white font-black italic uppercase tracking-tighter mb-2">{t.admin.loginTitle}</h1>
+                        <p className="text-[10px] text-royal-gold font-black uppercase tracking-[0.4em]">{t.admin.pinPlaceholder}</p>
                     </div>
-                    <form onSubmit={handleLogin} className="space-y-6">
-                        <input autoFocus type="password" maxLength={4} value={pin} onChange={(e) => setPin(e.target.value)} className="w-full bg-slate-50 border border-slate-200 rounded-2xl py-6 px-10 text-center text-3xl tracking-[1em] text-royal-gold focus:outline-none focus:border-royal-gold/50" placeholder="****" />
-                        {error && <p className="text-red-400 text-center text-xs font-bold uppercase tracking-wider">{error}</p>}
-                        <button type="submit" className="w-full py-5 bg-royal-gold text-royal-black font-black uppercase tracking-widest text-xs rounded-2xl shadow-xl">{t.admin.loginBtn}</button>
+                    
+                    <form onSubmit={handleLogin} className="space-y-8">
+                        <div className="space-y-4">
+                            <p className="text-[10px] text-white/30 font-black uppercase tracking-widest text-center">Identity Verification</p>
+                            <input 
+                                autoFocus 
+                                type="password" 
+                                maxLength={4} 
+                                value={pin} 
+                                onChange={(e) => setPin(e.target.value.replace(/[^0-9]/g, ''))} 
+                                className="w-full bg-black/40 border border-white/10 rounded-2xl py-6 px-10 text-center text-3xl tracking-[1em] text-royal-gold focus:outline-none focus:border-royal-gold/50 shadow-inner" 
+                                placeholder="****" 
+                            />
+                        </div>
+
+                        {error && <p className="text-red-400 text-[10px] font-black uppercase tracking-wider text-center bg-red-500/10 p-4 rounded-xl border border-red-500/20">{error}</p>}
+                        
+                        <button type="submit" className="w-full py-5 bg-royal-gold text-royal-black font-black uppercase tracking-widest text-xs rounded-2xl shadow-2xl hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center">
+                            {t.admin.loginBtn}
+                        </button>
                     </form>
                 </motion.div>
+
+                <div className="py-8 text-center text-white/20 text-[9px] font-black uppercase tracking-widest">
+                    Official Admin Portal
+                </div>
             </div>
         );
     }
@@ -1557,9 +2002,8 @@ const AdminPage = () => {
                         </div>
                     </button>
                 </div>
-
-                {activeTab === 'bookings' ? (
-                    <>
+                        {activeTab === 'bookings' ? (
+                            <>
 
 
 
@@ -1635,18 +2079,28 @@ const AdminPage = () => {
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-                    <div className="bg-white border border-slate-200 p-10 rounded-[3rem] flex items-center gap-8 shadow-xl">
-                        <div className="w-16 h-16 rounded-2xl bg-blue-500/10 flex items-center justify-center text-blue-400 shrink-0"><TrendingUp className="w-8 h-8" /></div>
-                        <div><p className="text-[10px] text-black/60 uppercase tracking-[0.2em] mb-1 font-black">Total Queries</p><p className="text-4xl font-serif text-black">{bookings.length}</p></div>
+                {/* Key Metrics */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                    <div className="bg-white border border-slate-200 p-8 rounded-[2rem] flex items-center gap-6 shadow-xl">
+                        <div className="w-14 h-14 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-500 shrink-0"><Users className="w-6 h-6" /></div>
+                        <div>
+                            <p className="text-[10px] text-black/40 font-black uppercase tracking-[0.2em] mb-1">Total Inquiries</p>
+                            <p className="text-3xl font-serif text-black font-black">{bookings.length}</p>
+                        </div>
                     </div>
-                    <div className="bg-white border border-slate-200 p-10 rounded-[3rem] flex items-center gap-8 shadow-xl">
-                        <div className="w-16 h-16 rounded-2xl bg-royal-gold/10 flex items-center justify-center text-royal-gold shrink-0"><Clock className="w-8 h-8" /></div>
-                        <div><p className="text-[10px] text-black/60 uppercase tracking-[0.2em] mb-1 font-black">Active Queries</p><p className="text-4xl font-serif text-black">{bookings.filter(b => b.status !== 'contacted').length}</p></div>
+                    <div className="bg-white border border-slate-200 p-8 rounded-[2rem] flex items-center gap-6 shadow-xl">
+                        <div className="w-14 h-14 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-500 shrink-0"><Clock className="w-6 h-6" /></div>
+                        <div>
+                            <p className="text-[10px] text-black/40 font-black uppercase tracking-[0.2em] mb-1">Pending Inquiries</p>
+                            <p className="text-3xl font-serif text-black font-black">{bookings.filter(b => b.status !== 'contacted').length}</p>
+                        </div>
                     </div>
-                    <div className="bg-white border border-slate-200 p-10 rounded-[3rem] flex items-center gap-8 shadow-xl">
-                        <div className="w-16 h-16 rounded-2xl bg-green-500/10 flex items-center justify-center text-green-400 shrink-0"><CheckCircle2 className="w-8 h-8" /></div>
-                        <div><p className="text-[10px] text-black/60 uppercase tracking-[0.2em] mb-1 font-black">Success Stories</p><p className="text-4xl font-serif text-black">{bookings.filter(b => b.status === 'contacted').length}</p></div>
+                    <div className="bg-white border border-slate-200 p-8 rounded-[2rem] flex items-center gap-6 shadow-xl">
+                        <div className="w-14 h-14 rounded-xl bg-green-500/10 flex items-center justify-center text-green-500 shrink-0"><TrendingUp className="w-6 h-6" /></div>
+                        <div>
+                            <p className="text-[10px] text-black/40 font-black uppercase tracking-[0.2em] mb-1">Est. Revenue</p>
+                            <p className="text-3xl font-serif text-black font-black">₹{bookings.reduce((sum, b) => sum + getRowTotal(b), 0)}</p>
+                        </div>
                     </div>
                 </div>
 
@@ -1697,47 +2151,45 @@ const AdminPage = () => {
                                                                     );
                                                                 })}
                                                             </div>
-                                                            <span className="text-[12px] font-black uppercase tracking-widest text-black/60">
-                                                                {booking.includedServices.filter(s => {
-                                                                    const key = SERVICE_KEY_MAP[s] || s.toLowerCase();
-                                                                    return booking[`redeemed_${key}`];
-                                                                }).length}/{booking.includedServices.length} Redeemed
-                                                            </span>
                                                         </div>
                                                     )}
                                                 </div>
                                             </div>
                                         </td>
                                         <td className="px-10 py-10 border-r-2 border-slate-950">
-                                            <div className="flex flex-col gap-1 items-start">
-                                                <span className="px-4 py-2 bg-slate-900 rounded-full text-[9px] font-black uppercase text-white tracking-widest whitespace-nowrap overflow-hidden text-ellipsis max-w-[150px]">
-                                                    {booking.pillarTitle || "Custom"}
-                                                </span>
-                                            </div>
-                                        </td>
-                                        <td className="px-10 py-10 text-sm font-black text-black tracking-wider border-r-2 border-slate-950">
-                                            <div className="whitespace-nowrap">{formatDateReadable(booking.date)}</div>
+                                            <a href="https://www.visitchittorgarh.in/" target="_blank" rel="noopener noreferrer" className="text-[11px] font-black uppercase tracking-widest text-slate-900 hover:text-royal-gold transition-colors">
+                                                {formatPillarTitle(booking.pillarTitle) || "Custom Discovery"}
+                                            </a>
                                         </td>
                                         <td className="px-10 py-10 border-r-2 border-slate-950">
-                                            <div className="flex items-baseline gap-1">
-                                                <span className="text-xl font-serif text-royal-gold font-bold">₹</span>
-                                                <span className="text-3xl font-serif text-black font-bold">{getRowTotal(booking)}</span>
-                                            </div>
+                                            <p className="text-[11px] font-black uppercase tracking-widest text-slate-900">{formatDateReadable(booking.date)}</p>
                                         </td>
                                         <td className="px-10 py-10 border-r-2 border-slate-950">
-                                            <div className="flex">
-                                                {booking.status === 'contacted' ? (
-                                                    <span className="text-white text-[9px] font-black uppercase bg-green-500 px-5 py-2.5 rounded-xl border border-green-600 whitespace-nowrap">Contacted</span>
-                                                ) : (
-                                                    <span className="text-black text-[9px] font-black uppercase bg-amber-400 px-5 py-2.5 rounded-xl border border-amber-500 whitespace-nowrap">New Inquiry</span>
-                                                )}
-                                            </div>
+                                            <p className="text-xl font-serif text-black font-black">₹{getRowTotal(booking)}</p>
                                         </td>
-                                        <td className="px-8 py-10 text-center min-w-[300px]">
-                                            <div className="flex justify-center gap-5">
-                                                <a href={`https://wa.me/${booking.phone?.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()} className="p-4 bg-green-500 text-white rounded-2xl hover:bg-green-600 transition-all shadow-xl flex items-center justify-center shrink-0"><MessageSquare className="w-5 h-5" /></a>
-                                                <button onClick={(e) => toggleStatus(booking, e)} className="p-4 bg-royal-gold text-royal-black rounded-2xl hover:bg-black hover:text-royal-gold transition-all shadow-xl flex items-center justify-center shrink-0"><CheckCircle2 className="w-5 h-5" /></button>
-                                                <button onClick={(e) => { e.stopPropagation(); setConfirmDelete(booking.id); }} className="p-4 bg-red-500 text-white rounded-2xl hover:bg-red-600 transition-all shadow-xl flex items-center justify-center shrink-0"><Trash2 className="w-5 h-5" /></button>
+                                        <td className="px-10 py-10 border-r-2 border-slate-950">
+                                            <button onClick={(e) => toggleStatus(booking, e)} className={cn(
+                                                "px-4 py-2.5 rounded-xl text-[8px] font-black uppercase tracking-widest flex items-center gap-2 border w-fit",
+                                                booking.status === 'contacted' ? "bg-green-500/10 border-green-500 text-green-500" : "bg-royal-gold/10 border-royal-gold text-royal-gold"
+                                            )}>
+                                                <div className={cn("w-1.5 h-1.5 rounded-full", booking.status === 'contacted' ? "bg-green-500" : "bg-royal-gold animate-pulse")}></div>
+                                                {getDisplayStatus(booking)}
+                                            </button>
+                                        </td>
+                                        <td className="px-8 py-10">
+                                            <div className="flex items-center justify-center gap-3" onClick={(e) => e.stopPropagation()}>
+                                                {/* WhatsApp Button */}
+                                                <a href={`https://wa.me/${booking.phone.replace(/[^0-9]/g, '')}`} target="_blank" rel="noopener noreferrer" 
+                                                    onClick={() => {
+                                                        if (booking.status !== 'contacted') {
+                                                            updateDoc(doc(db, "bookings", booking.id), { status: 'contacted' });
+                                                        }
+                                                    }}
+                                                    className="p-4 bg-green-500 text-white rounded-2xl hover:bg-green-600 transition-all shadow-xl flex items-center justify-center shrink-0" title="Chat on WhatsApp">
+                                                    <MessageCircle className="w-5 h-5" />
+                                                </a>
+                                                <button onClick={() => setSelectedBooking(booking)} className="p-4 bg-slate-100 text-black/40 rounded-2xl hover:bg-slate-950 hover:text-royal-gold transition-all shadow-xl flex items-center justify-center shrink-0" title="View Details"><ExternalLink className="w-5 h-5" /></button>
+                                                <button onClick={(e) => { e.stopPropagation(); setConfirmDelete(booking.id); }} className="p-4 bg-red-50 text-red-500 rounded-2xl hover:bg-red-500 hover:text-white transition-all shadow-xl flex items-center justify-center shrink-0" title="Delete"><Trash2 className="w-5 h-5" /></button>
                                             </div>
                                         </td>
                                     </motion.tr>
@@ -1748,127 +2200,125 @@ const AdminPage = () => {
                 </div>
                 </>
             ) : (
-                    /* SERVICE PROVIDERS VIEW */
-                    <div className="space-y-12">
-                        <div className="bg-slate-950 p-12 rounded-[4rem] border-2 border-slate-900 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] relative overflow-hidden group">
-                            <div className="absolute top-0 right-0 w-96 h-96 bg-royal-gold/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
-                            <div className="absolute bottom-0 left-0 w-64 h-64 bg-royal-gold/5 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2" />
-                            
-                            <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-12 relative z-10">
-                                <div className="shrink-0">
-                                    <p className="text-[10px] text-royal-gold font-black uppercase tracking-[0.5em] mb-4">Partner Management</p>
-                                    <h2 className="text-5xl font-serif text-white font-black uppercase tracking-tight">Service Directory</h2>
-                                    <p className="text-xs text-white/40 uppercase tracking-[0.3em] mt-4 font-black flex items-center gap-2">
-                                        <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
-                                        {providers.length} Verified Partners Active
-                                    </p>
-                                </div>
-                                
-                                <div className="flex-1 flex justify-center">
-                                    <div className="flex flex-wrap justify-center gap-2 bg-white/5 p-2 rounded-[2rem] border border-white/10 backdrop-blur-xl w-fit">
-                                        {['all', 'taxi', 'hotel', 'guide', 'restaurant', 'cafe'].map(type => (
-                                            <button 
-                                                key={type}
-                                                onClick={() => setProviderTypeFilter(type)}
-                                                className={cn(
-                                                    "px-6 py-3 rounded-2xl text-[9px] font-black uppercase tracking-widest transition-all",
-                                                    providerTypeFilter === type 
-                                                        ? "bg-royal-gold text-royal-black shadow-xl" 
-                                                        : "text-white/40 hover:text-white hover:bg-white/5"
-                                                )}
-                                            >
-                                                {type}
-                                            </button>
-                                        ))}
-                                    </div>
-                                </div>
-
-                                <button 
-                                    onClick={() => { setEditingProvider(null); setShowProviderModal(true); }}
-                                    className="px-10 py-5 bg-white text-black font-black uppercase tracking-widest text-xs rounded-2xl flex items-center gap-4 shadow-2xl hover:bg-royal-gold transition-all group shrink-0"
-                                >
-                                    <Plus className="w-5 h-5 group-hover:rotate-90 transition-all" />
-                                    Add Partner
-                                </button>
+                /* SERVICE PROVIDERS VIEW */
+                <div className="space-y-12">
+                    <div className="bg-slate-950 p-12 rounded-[4rem] border-2 border-slate-900 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] relative overflow-hidden group">
+                        <div className="absolute top-0 right-0 w-96 h-96 bg-royal-gold/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
+                        <div className="absolute bottom-0 left-0 w-64 h-64 bg-royal-gold/5 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2" />
+                        
+                        <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-12 relative z-10">
+                            <div className="shrink-0">
+                                <p className="text-[10px] text-royal-gold font-black uppercase tracking-[0.5em] mb-4">Partner Management</p>
+                                <h2 className="text-5xl font-serif text-white font-black uppercase tracking-tight">Service Directory</h2>
+                                <p className="text-xs text-white/40 uppercase tracking-[0.3em] mt-4 font-black flex items-center gap-2">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                                    {providers.length} Verified Partners Active
+                                </p>
                             </div>
+                            
+                            <div className="flex-1 flex justify-center">
+                                <div className="flex flex-wrap justify-center gap-2 bg-white/5 p-2 rounded-[2rem] border border-white/10 backdrop-blur-xl w-fit">
+                                    {['all', 'taxi', 'hotel', 'guide', 'restaurant', 'cafe'].map(type => (
+                                        <button 
+                                            key={type}
+                                            onClick={() => setProviderTypeFilter(type)}
+                                            className={cn(
+                                                "px-6 py-3 rounded-2xl text-[9px] font-black uppercase tracking-widest transition-all",
+                                                providerTypeFilter === type 
+                                                    ? "bg-royal-gold text-royal-black shadow-xl" 
+                                                    : "text-white/40 hover:text-white hover:bg-white/5"
+                                            )}
+                                        >
+                                            {type}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <button 
+                                onClick={() => { setEditingProvider(null); setShowProviderModal(true); }}
+                                className="px-10 py-5 bg-white text-black font-black uppercase tracking-widest text-xs rounded-2xl flex items-center gap-4 shadow-2xl hover:bg-royal-gold transition-all group shrink-0"
+                            >
+                                <Plus className="w-5 h-5 group-hover:rotate-90 transition-all" />
+                                Add Partner
+                            </button>
                         </div>
+                    </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                            {providers.filter(p => providerTypeFilter === 'all' || p.type === providerTypeFilter).map(p => (
-                                <motion.div 
-                                    key={p.id}
-                                    layout
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    className="bg-white border-2 border-slate-100 rounded-[4rem] p-12 hover:border-royal-gold/30 hover:shadow-[0_60px_100px_-20px_rgba(0,0,0,0.08)] transition-all group relative overflow-hidden"
-                                >
-                                    {/* Action Hover */}
-                                    <div className="absolute top-10 right-10 flex gap-3 opacity-0 group-hover:opacity-100 transition-all translate-y-2 group-hover:translate-y-0">
-                                        <button onClick={() => { setEditingProvider(p); setShowProviderModal(true); }} className="p-4 bg-slate-100 text-slate-600 rounded-2xl hover:bg-black hover:text-royal-gold transition-all shadow-sm"><Edit2 className="w-4 h-4" /></button>
-                                        <button onClick={() => deleteProvider(p.id)} className="p-4 bg-red-50 text-red-500 rounded-2xl hover:bg-red-500 hover:text-white transition-all shadow-sm"><Trash2 className="w-4 h-4" /></button>
-                                    </div>
-
-                                    <div className="flex flex-col items-start mb-10">
+                    <div className="space-y-4">
+                        {providers.filter(p => providerTypeFilter === 'all' || p.type === providerTypeFilter).map(p => (
+                            <motion.div 
+                                key={p.id}
+                                layout
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                onClick={() => { setSelectedProviderForDetails(p); }}
+                                className="bg-white border border-slate-200 rounded-3xl p-6 hover:border-royal-gold/30 hover:shadow-lg transition-all flex flex-col md:flex-row items-center justify-between gap-6 cursor-pointer"
+                            >
+                                <div className="flex items-center gap-6 w-full md:w-auto">
+                                    {p.photoUrl ? (
+                                        <div className="w-16 h-16 rounded-2xl overflow-hidden border-2 border-royal-gold/20 shrink-0">
+                                            <img src={p.photoUrl} alt={p.name} className="w-full h-full object-cover" />
+                                        </div>
+                                    ) : (
                                         <div className={cn(
-                                            "w-20 h-20 rounded-[2rem] flex items-center justify-center mb-8 shadow-xl relative group-hover:rotate-6 transition-all duration-500",
+                                            "w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 text-white",
                                             p.type === 'taxi' ? "bg-slate-950 text-royal-gold" : 
-                                            p.type === 'hotel' ? "bg-amber-500 text-white" :
-                                            p.type === 'guide' ? "bg-emerald-500 text-white" :
-                                            "bg-rose-500 text-white"
+                                            p.type === 'hotel' ? "bg-amber-500" :
+                                            p.type === 'guide' ? "bg-emerald-500" :
+                                            "bg-rose-500"
                                         )}>
-                                            {p.type === 'taxi' ? <Car className="w-10 h-10" /> : 
-                                             p.type === 'hotel' ? <Hotel className="w-10 h-10" /> :
-                                             p.type === 'guide' ? <UserCheck className="w-10 h-10" /> :
-                                             p.type === 'restaurant' ? <UtensilsCrossed className="w-10 h-10" /> :
-                                             <Coffee className="w-10 h-10" />}
+                                            {p.type === 'taxi' ? <Car className="w-8 h-8" /> : 
+                                             p.type === 'hotel' ? <Hotel className="w-8 h-8" /> :
+                                             p.type === 'guide' ? <UserCheck className="w-8 h-8" /> :
+                                             p.type === 'restaurant' ? <UtensilsCrossed className="w-8 h-8" /> :
+                                             <Coffee className="w-8 h-8" />}
                                         </div>
-                                        <div className="space-y-2">
-                                            <div className="flex items-center gap-3">
-                                                <p className="text-[11px] text-royal-gold font-black uppercase tracking-[0.5em]">{p.type}</p>
-                                                {p.providerCode && (
-                                                    <span className="text-[8px] bg-royal-gold/10 text-royal-gold px-2 py-0.5 rounded-md font-black tracking-widest border border-royal-gold/20">
-                                                        ID: {p.providerCode}
-                                                    </span>
-                                                )}
-                                            </div>
-                                            <h3 className="text-4xl font-serif text-black font-black tracking-tighter leading-none">{p.name}</h3>
+                                    )}
+                                    <div>
+                                        <div className="flex items-center gap-2 mb-1">
+                                            <p className="text-[10px] text-royal-gold font-black uppercase tracking-widest">{p.type}</p>
+                                            {p.providerCode && (
+                                                <span className="text-[8px] bg-royal-gold/10 text-royal-gold px-2 py-0.5 rounded-md font-black tracking-widest border border-royal-gold/20">
+                                                    ID: {p.providerCode}
+                                                </span>
+                                            )}
+                                            <span 
+                                                onClick={(e) => { e.stopPropagation(); setSelectedProviderForDetails(p); }}
+                                                className="text-[8px] bg-green-500/10 text-green-500 px-2 py-0.5 rounded-md font-black tracking-widest border border-green-500/20 cursor-pointer hover:bg-green-500 hover:text-white transition-all"
+                                                title="Click to view history"
+                                            >
+                                                {getProviderServiceCount(p)} Services Done
+                                            </span>
+                                            <span className="text-[8px] bg-amber-500/10 text-amber-500 px-2 py-0.5 rounded-md font-black tracking-widest border border-amber-500/20 flex items-center gap-0.5">
+                                                <Star className="w-2.5 h-2.5 fill-amber-500 text-transparent" /> {getProviderRating(p.id)} ({feedback.filter(f => f.providerId === p.id).length})
+                                            </span>
                                         </div>
+                                        <h3 className="text-xl font-serif text-black font-black tracking-tight">{p.name}</h3>
+                                        <p className="text-xs text-black/60 font-black tracking-widest mt-1 flex items-center gap-2">
+                                            <Phone className="w-3.5 h-3.5 text-slate-400" /> {p.phone}
+                                        </p>
                                     </div>
+                                </div>
 
-                                    <div className="space-y-4 pt-10 border-t border-slate-100">
-                                        <div className="flex items-center justify-between p-6 bg-slate-50 rounded-3xl group/item hover:bg-black hover:text-white transition-all duration-300">
-                                            <div className="flex items-center gap-5">
-                                                <div className="p-3 bg-white rounded-xl shadow-sm text-slate-400 group-hover/item:bg-white/10 group-hover/item:text-royal-gold"><Phone className="w-5 h-5" /></div>
-                                                <span className="text-sm font-black tracking-widest">{p.phone}</span>
-                                            </div>
-                                            <a href={`tel:${p.phone}`} className="p-3 bg-white text-slate-400 rounded-xl shadow-sm hover:text-green-500 transition-all group-hover/item:bg-white/10"><ExternalLink className="w-5 h-5" /></a>
+                                <div className="flex flex-wrap items-center gap-4 w-full md:w-auto justify-end" onClick={(e) => e.stopPropagation()}>
+                                    {p.type === 'taxi' && (
+                                        <div className="flex gap-2">
+                                            <span className="px-3 py-1.5 bg-slate-100 rounded-lg text-[9px] font-black uppercase tracking-widest text-slate-600">Plate: {p.vehicleNumber || '---'}</span>
+                                            <span className="px-3 py-1.5 bg-slate-100 rounded-lg text-[9px] font-black uppercase tracking-widest text-slate-600">{p.vehicleType}</span>
                                         </div>
-
-                                        {p.type === 'taxi' && (
-                                            <div className="grid grid-cols-2 gap-4">
-                                                <div className="p-6 bg-slate-50 rounded-3xl flex flex-col gap-2">
-                                                    <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest">Plate No.</p>
-                                                    <p className="text-[11px] font-black text-slate-900 uppercase tracking-wider">{p.vehicleNumber || '---'}</p>
-                                                </div>
-                                                <div className="p-6 bg-slate-50 rounded-3xl flex flex-col gap-2">
-                                                    <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest">Category</p>
-                                                    <p className="text-[11px] font-black text-slate-900 uppercase tracking-wider">{p.vehicleType}</p>
-                                                </div>
-                                            </div>
-                                        )}
-
-                                        {p.type === 'hotel' && (
-                                            <div className="p-6 bg-slate-50 rounded-3xl flex flex-col gap-2">
-                                                <p className="text-[8px] font-black text-slate-400 uppercase tracking-widest">Accommodations</p>
-                                                <p className="text-[11px] font-black text-slate-900 uppercase tracking-wider">{p.roomTypes || 'Standard Heritage'}</p>
-                                            </div>
-                                        )}
-
-                                        <div className="p-6 bg-slate-50 rounded-3xl flex items-center gap-4">
-                                            <MapPin className="w-5 h-5 text-slate-300" />
-                                            <p className="text-xs font-bold text-slate-500 italic truncate">{p.address || 'Chittorgarh'}</p>
-                                        </div>
+                                    )}
+                                    {p.type === 'hotel' && (
+                                        <span className="px-3 py-1.5 bg-slate-100 rounded-lg text-[9px] font-black uppercase tracking-widest text-slate-600">{p.roomTypes || 'Standard'}</span>
+                                    )}
+                                    
+                                    <div className="flex gap-2">
+                                        <a href={`tel:${p.phone}`} className="p-3 bg-slate-100 text-slate-600 rounded-xl hover:bg-black hover:text-royal-gold transition-all" title="Call"><Phone className="w-4 h-4" /></a>
+                                        <button onClick={() => resendWelcomeMail(p)} className="p-3 bg-amber-50 text-amber-500 rounded-xl hover:bg-amber-500 hover:text-white transition-all" title="Resend Welcome Email"><Mail className="w-4 h-4" /></button>
+                                        <button onClick={() => { setEditingProvider(p); setShowProviderModal(true); }} className="p-3 bg-slate-100 text-slate-600 rounded-xl hover:bg-black hover:text-royal-gold transition-all" title="Edit"><Edit2 className="w-4 h-4" /></button>
+                                        <button onClick={() => deleteProvider(p.id)} className="p-3 bg-red-50 text-red-500 rounded-xl hover:bg-red-500 hover:text-white transition-all" title="Delete"><Trash2 className="w-4 h-4" /></button>
                                     </div>
+                                </div>
                                 </motion.div>
                             ))}
                         </div>
@@ -1884,6 +2334,112 @@ const AdminPage = () => {
                         onSave={saveProvider}
                         isSaving={loading}
                     />
+                )}
+                {selectedProviderForDetails && (
+                    <motion.div 
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[200] flex items-center justify-center p-4"
+                    >
+                        <div className="bg-white rounded-[2.5rem] p-8 max-w-2xl w-full max-h-[80vh] overflow-y-auto shadow-2xl border-2 border-slate-950">
+                            <div className="flex justify-between items-center mb-6">
+                                <h3 className="text-xl font-serif font-black text-black">{selectedProviderForDetails.name}'s Profile & History</h3>
+                                <button onClick={() => setSelectedProviderForDetails(null)} className="p-2 hover:bg-slate-100 rounded-full transition-all"><X className="w-6 h-6 text-black" /></button>
+                            </div>
+
+                            {/* Provider Summary Card */}
+                            <div className="bg-slate-50 border border-slate-200 rounded-3xl p-6 mb-6 flex flex-col md:flex-row items-center justify-between gap-6">
+                                <div className="flex items-center gap-4">
+                                    {selectedProviderForDetails.photoUrl ? (
+                                        <div className="w-16 h-16 rounded-2xl overflow-hidden border-2 border-royal-gold/20 shrink-0">
+                                            <img src={selectedProviderForDetails.photoUrl} alt={selectedProviderForDetails.name} className="w-full h-full object-cover" />
+                                        </div>
+                                    ) : (
+                                        <div className="w-16 h-16 rounded-2xl bg-royal-gold text-royal-black flex items-center justify-center font-black text-lg shrink-0">
+                                            {selectedProviderForDetails.name?.charAt(0)}
+                                        </div>
+                                    )}
+                                    <div>
+                                        <h4 className="text-lg font-black text-black">{selectedProviderForDetails.name}</h4>
+                                        <p className="text-xs text-black/60 font-black uppercase tracking-widest">{selectedProviderForDetails.type}</p>
+                                        <p className="text-[10px] text-black/40 font-black tracking-widest mt-0.5">{selectedProviderForDetails.phone}</p>
+                                        {selectedProviderForDetails.rates && (
+                                            <p className="text-[11px] text-royal-gold font-bold mt-2 bg-royal-gold/10 px-3 py-1.5 rounded-lg border border-royal-gold/20 w-fit">
+                                                Rates: {selectedProviderForDetails.rates}
+                                            </p>
+                                        )}
+                                    </div>
+                                </div>
+                                <div className="flex gap-3 flex-wrap justify-center">
+                                    <div className="bg-white px-3 py-2 rounded-xl border border-slate-200 text-center min-w-[80px]">
+                                        <p className="text-[9px] text-black/40 font-black uppercase tracking-widest mb-0.5">Services</p>
+                                        <p className="text-lg font-serif font-black text-black">{getProviderServiceCount(selectedProviderForDetails)}</p>
+                                    </div>
+                                    <div className="bg-white px-3 py-2 rounded-xl border border-slate-200 text-center min-w-[80px]">
+                                        <p className="text-[9px] text-black/40 font-black uppercase tracking-widest mb-0.5">Rating</p>
+                                        <p className="text-lg font-serif font-black text-amber-500 flex items-center justify-center gap-0.5">
+                                            <Star className="w-3.5 h-3.5 fill-amber-500 text-transparent" />
+                                            {getProviderRating(selectedProviderForDetails.id)}
+                                        </p>
+                                    </div>
+                                    <div className="bg-white px-3 py-2 rounded-xl border border-slate-200 text-center min-w-[80px]">
+                                        <p className="text-[9px] text-black/40 font-black uppercase tracking-widest mb-0.5">Total Vol.</p>
+                                        <p className="text-lg font-serif font-black text-green-600">₹{getProviderTotalEarnings(selectedProviderForDetails)}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="space-y-4">
+                                {bookings.filter(b => {
+                                    const key = selectedProviderForDetails.type;
+                                    const nameField = `${key}Name`;
+                                    return b[nameField]?.trim().toLowerCase() === selectedProviderForDetails.name?.trim().toLowerCase() && b[`redeemed_${key}`];
+                                }).length > 0 ? (
+                                    bookings.filter(b => {
+                                        const key = selectedProviderForDetails.type;
+                                        const nameField = `${key}Name`;
+                                        return b[nameField]?.trim().toLowerCase() === selectedProviderForDetails.name?.trim().toLowerCase() && b[`redeemed_${key}`];
+                                    }).map(b => (
+                                        <div key={b.id} className="border border-slate-200 p-6 rounded-2xl flex justify-between items-center bg-slate-50 hover:border-royal-gold/30 transition-all">
+                                            <div>
+                                                <p className="text-sm font-black text-black">{b.name}</p>
+                                                <p className="text-[10px] text-black/40 font-black uppercase tracking-widest mt-1">
+                                                    {formatDateReadable(b[`redeemed_${selectedProviderForDetails.type}_at`])}
+                                                </p>
+                                            </div>
+                                            <div className="text-right">
+                                                <p className="text-xs font-black uppercase text-green-600">Redeemed</p>
+                                                <p className="text-[10px] text-black/60 mt-1">{b.phone}</p>
+                                                {(() => {
+                                                    const f = feedback.find(f => f.bookingId === b.id && f.providerId === selectedProviderForDetails.id);
+                                                    return (
+                                                        <div className="mt-2 flex flex-col items-end">
+                                                            {f ? (
+                                                                <>
+                                                                    <div className="flex justify-end gap-0.5 text-amber-500 text-xs">
+                                                                        {[...Array(f.rating)].map((_, i) => <Star key={i} className="w-3 h-3 fill-amber-500 text-transparent" />)}
+                                                                    </div>
+                                                                    <p className="text-[10px] text-black/60 mt-1 italic">"{f.comment || 'No comment'}"</p>
+                                                                </>
+                                                            ) : (
+                                                                <p className="text-[10px] text-black/40 mt-1">Feedback: Pending</p>
+                                                            )}
+                                                        </div>
+                                                    );
+                                                })()}
+                                            </div>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <div className="text-center py-10">
+                                        <div className="w-12 h-12 bg-slate-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-slate-400"><Clock className="w-6 h-6" /></div>
+                                        <p className="text-xs text-black/40 font-black uppercase tracking-widest">No services redeemed yet</p>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </motion.div>
                 )}
             </AnimatePresence>
 

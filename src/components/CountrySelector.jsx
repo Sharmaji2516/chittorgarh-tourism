@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import { Crown, Globe, Check } from 'lucide-react';
 
 const CountrySelector = () => {
     const { changeLanguage, isLangModalOpen, showLangModal, hideLangModal } = useLanguage();
@@ -52,35 +53,40 @@ const CountrySelector = () => {
     if (!isLangModalOpen) return null;
 
     return (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-royal-black/95 md:bg-black/80 md:backdrop-blur-sm p-4">
-            <div className="bg-royal-black border border-royal-gold p-6 md:p-8 rounded-lg max-w-md w-full shadow-2xl relative max-h-[90vh] overflow-y-auto custom-scrollbar">
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/85 backdrop-blur-md p-4 animate-fade-in">
+            <div className="bg-heritage-charcoal/90 border border-heritage-gold/30 p-6 md:p-10 rounded-2xl max-w-md w-full shadow-[0_0_50px_rgba(212,175,55,0.15)] relative max-h-[90vh] overflow-y-auto custom-scrollbar transition-all duration-500 hover:border-heritage-gold/50">
                 {/* Close Button */}
                 <button
                     onClick={hideLangModal}
-                    className="absolute top-4 right-4 text-royal-gold/50 hover:text-royal-gold transition-colors z-10"
+                    className="absolute top-5 right-5 text-heritage-gold/50 hover:text-heritage-gold transition-colors z-10"
                 >
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
-                <div className="text-center mb-6 pt-4 md:pt-0">
-                    <div className="text-4xl md:text-5xl mb-4 md:mb-6 animate-bounce">🏰</div>
-                    <h2 className="text-2xl md:text-3xl font-serif text-royal-gold mb-2 md:mb-3 tracking-wide">Welcome to Chittorgarh</h2>
-                    <div className="h-px w-20 md:w-24 bg-royal-gold/30 mx-auto mb-4"></div>
-                    <p className="text-royal-white italic font-light text-base md:text-lg mb-4 leading-relaxed px-2">
+                
+                <div className="text-center mb-8 pt-2">
+                    <div className="relative inline-block mb-4">
+                        <Crown className="w-12 h-12 text-heritage-gold mx-auto animate-pulse-slow" />
+                        <div className="absolute inset-0 bg-heritage-gold/20 blur-xl rounded-full -z-10"></div>
+                    </div>
+                    <h2 className="text-3xl md:text-4xl font-serif text-heritage-gold mb-2 tracking-wide font-bold">Welcome to Chittorgarh</h2>
+                    <div className="h-px w-24 bg-gradient-to-r from-transparent via-heritage-gold/50 to-transparent mx-auto mb-6"></div>
+                    <p className="text-royal-white italic font-light text-base md:text-lg mb-6 leading-relaxed px-2">
                         "Where history is carved in stone, <br className="hidden md:block" />
                         and valor is whispered by the wind. <br className="hidden md:block" />
                         Step into the timeless heritage of legends."
                     </p>
-                    <p className="text-gray-400 text-[10px] uppercase tracking-widest mt-4 md:mt-6">
-                        Visiting from <span className="text-royal-gold font-bold">{detectedCountry}</span>
-                    </p>
+                    <div className="flex items-center justify-center gap-2 text-gray-400 text-[11px] uppercase tracking-widest mt-4">
+                        <Globe className="w-4 h-4 text-heritage-gold/70" />
+                        <span>Visiting from <span className="text-heritage-gold font-bold">{detectedCountry}</span></span>
+                    </div>
                 </div>
 
-                <div className="space-y-4 md:space-y-6 mb-6 md:mb-8">
+                <div className="space-y-4 mb-8">
                     <div>
-                        <label className="block text-[10px] uppercase tracking-[0.2em] text-royal-gold/60 mb-3 text-center italic">Choose Your Preferred Language</label>
-                        <div className="grid grid-cols-1 gap-2">
+                        <label className="block text-[11px] uppercase tracking-[0.2em] text-heritage-gold/60 mb-4 text-center italic font-medium">Choose Your Preferred Language</label>
+                        <div className="grid grid-cols-1 gap-3">
                             {[
                                 { val: 'en', label: 'English', sub: 'International' },
                                 { val: 'hi', label: 'हिंदी', sub: 'India' }
@@ -88,13 +94,18 @@ const CountrySelector = () => {
                                 <button
                                     key={lang.val}
                                     onClick={() => setSelectedLanguage(lang.val)}
-                                    className={`flex items-center justify-between px-4 py-2.5 md:py-3 rounded border transition-all duration-300 ${selectedLanguage === lang.val
-                                        ? 'bg-royal-gold/10 border-royal-gold text-royal-gold shadow-[0_0_15px_rgba(212,175,55,0.1)]'
-                                        : 'bg-zinc-900/50 border-royal-gold/10 text-gray-400 hover:border-royal-gold/30'
+                                    className={`flex items-center justify-between px-5 py-3.5 rounded-xl border transition-all duration-300 ${selectedLanguage === lang.val
+                                        ? 'bg-heritage-gold/10 border-heritage-gold text-heritage-gold shadow-[0_0_20px_rgba(212,175,55,0.1)]'
+                                        : 'bg-heritage-charcoal-light/50 border-white/5 text-gray-400 hover:border-heritage-gold/30 hover:text-white'
                                         }`}
                                 >
-                                    <span className="font-medium text-sm md:text-base">{lang.label}</span>
-                                    <span className="text-[9px] md:text-[10px] opacity-60 uppercase">{lang.sub}</span>
+                                    <div className="flex flex-col items-start">
+                                        <span className="font-semibold text-sm md:text-base">{lang.label}</span>
+                                        <span className="text-[10px] opacity-60 uppercase mt-0.5">{lang.sub}</span>
+                                    </div>
+                                    {selectedLanguage === lang.val && (
+                                        <Check className="w-5 h-5 text-heritage-gold" />
+                                    )}
                                 </button>
                             ))}
                         </div>
@@ -103,9 +114,10 @@ const CountrySelector = () => {
 
                 <button
                     onClick={handleSave}
-                    className="w-full bg-royal-gold text-royal-black font-bold py-3.5 md:py-4 rounded shadow-lg shadow-royal-gold/20 hover:bg-royal-gold-light hover:scale-[1.01] active:scale-[0.98] transition-all duration-300 uppercase tracking-[0.2em] text-[10px] md:text-xs"
+                    className="w-full bg-heritage-gold text-heritage-charcoal font-bold py-4 rounded-xl shadow-lg shadow-heritage-gold/20 hover:bg-heritage-gold-light hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 uppercase tracking-[0.2em] text-xs relative overflow-hidden group"
                 >
-                    Begin Your Journey
+                    <span className="relative z-10">Begin Your Journey</span>
+                    <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
                 </button>
             </div>
         </div>
@@ -113,3 +125,4 @@ const CountrySelector = () => {
 };
 
 export default CountrySelector;
+

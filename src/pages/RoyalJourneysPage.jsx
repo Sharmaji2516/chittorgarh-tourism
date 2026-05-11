@@ -36,16 +36,19 @@ const RoyalJourneysPage = ({ t }) => {
     ];
 
     return (
-        <div className="min-h-screen bg-heritage-charcoal">
+        <div className="min-h-screen bg-[#0a0a0b] text-white relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-royal-gold/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 animate-pulse" />
+            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-royal-gold/5 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/3 animate-pulse" />
+            
             {/* Header Section */}
-            <div className="pt-32 pb-16 text-center px-4 relative overflow-hidden">
+            <div className="pt-32 pb-16 text-center px-4 relative">
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-royal-gold/5 blur-[120px] rounded-full pointer-events-none"></div>
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="relative z-10"
                 >
-                    <h1 className="text-5xl md:text-7xl font-serif text-white mb-6 tracking-tighter uppercase">
+                    <h1 className="text-5xl md:text-7xl font-serif text-white font-black italic mb-6 tracking-tighter uppercase drop-shadow-2xl">
                         {t.nav.royalJourneys}
                     </h1>
                     <p className="max-w-2xl mx-auto text-gray-400 font-light italic text-lg leading-relaxed">
@@ -87,7 +90,7 @@ const RoyalJourneysPage = ({ t }) => {
                                     <motion.div 
                                         key={pkg.id}
                                         whileHover={{ y: -10 }}
-                                        className="group relative bg-heritage-charcoal/60 backdrop-blur-3xl rounded-[3rem] p-10 border border-white/5 hover:border-royal-gold transition-all duration-500 shadow-2xl overflow-hidden"
+                                        className="group relative bg-white/[0.03] backdrop-blur-3xl rounded-[3rem] p-10 border border-white/10 hover:border-royal-gold transition-all duration-500 shadow-2xl overflow-hidden"
                                     >
                                         <div className="absolute -top-24 -right-24 w-64 h-64 bg-royal-gold/5 blur-[80px] rounded-full group-hover:bg-royal-gold/10 transition-colors"></div>
                                         
@@ -97,7 +100,7 @@ const RoyalJourneysPage = ({ t }) => {
                                             </div>
                                         </div>
 
-                                        <h3 className="text-4xl font-serif text-white mb-6 group-hover:text-royal-gold transition-colors">{pkg.name}</h3>
+                                        <h3 className="text-4xl font-serif text-white font-black italic mb-6 group-hover:text-royal-gold transition-colors tracking-tight">{pkg.name}</h3>
                                         <p className="text-gray-400 mb-10 leading-relaxed italic">"{pkg.desc}"</p>
 
                                         <div className="space-y-4 mb-12">
@@ -110,8 +113,8 @@ const RoyalJourneysPage = ({ t }) => {
                                         </div>
 
                                         <button 
-                                            onClick={() => openFullBooking(`Book ${pkg.name} Package`)}
-                                            className="w-full py-5 bg-royal-gold text-royal-black font-black uppercase tracking-widest text-xs rounded-2xl flex items-center justify-center gap-3 shadow-xl hover:brightness-110 active:scale-95 transition-all"
+                                            onClick={() => openFullBooking(`${pkg.name} Package`)}
+                                            className="w-full py-5 bg-royal-gold text-royal-black font-black uppercase tracking-widest text-xs rounded-2xl flex items-center justify-center gap-3 shadow-2xl shadow-royal-gold/20 hover:scale-[1.02] active:scale-95 transition-all"
                                         >
                                             Inquire for Expedition
                                             <ArrowRight className="w-4 h-4" />
@@ -132,36 +135,39 @@ const RoyalJourneysPage = ({ t }) => {
                         <Section id="individual" title="Individual Services" subtitle="Directly book verified local services" className="bg-transparent !pt-0">
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
                                 {/* Stay Service */}
-                                <NavLink to="/stays" className="group bg-white/5 backdrop-blur-2xl p-8 rounded-[2.5rem] border border-white/10 hover:border-royal-gold transition-all duration-500 shadow-2xl flex flex-col items-center text-center">
+                                <NavLink to="/stays" className="group bg-white/[0.03] backdrop-blur-2xl p-8 rounded-[3rem] border border-white/10 hover:border-royal-gold transition-all duration-500 shadow-2xl flex flex-col items-center text-center relative overflow-hidden">
+                                    <div className="absolute top-0 right-0 w-32 h-32 bg-royal-gold/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl group-hover:bg-royal-gold/10 transition-colors" />
                                     <div className="w-16 h-16 bg-royal-gold/10 rounded-2xl flex items-center justify-center text-royal-gold mb-6 group-hover:scale-110 transition-transform">
                                         <Hotel className="w-8 h-8" />
                                     </div>
-                                    <h3 className="text-2xl font-serif text-white mb-3">Grand Stays</h3>
-                                    <p className="text-gray-400 text-xs mb-8">Verified heritage hotels and resorts with exclusive concierge rates.</p>
+                                    <h3 className="text-2xl font-serif text-white font-black italic mb-3 tracking-tight">Grand Stays</h3>
+                                    <p className="text-white/60 text-sm mb-8 leading-relaxed">Verified heritage hotels and resorts with exclusive concierge rates.</p>
                                     <div className="mt-auto flex items-center gap-2 text-royal-gold text-[10px] font-black uppercase tracking-widest">
                                         Browse Stays <ArrowRight className="w-4 h-4" />
                                     </div>
                                 </NavLink>
 
                                 {/* Transport Service */}
-                                <div onClick={() => setShowTransportSelection(true)} className="cursor-pointer group bg-white/5 backdrop-blur-2xl p-8 rounded-[2.5rem] border border-white/10 hover:border-royal-gold transition-all duration-500 shadow-2xl flex flex-col items-center text-center">
+                                <div onClick={() => setShowTransportSelection(true)} className="cursor-pointer group bg-white/[0.03] backdrop-blur-2xl p-8 rounded-[3rem] border border-white/10 hover:border-royal-gold transition-all duration-500 shadow-2xl flex flex-col items-center text-center relative overflow-hidden">
+                                    <div className="absolute top-0 right-0 w-32 h-32 bg-royal-gold/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl group-hover:bg-royal-gold/10 transition-colors" />
                                     <div className="w-16 h-16 bg-royal-gold/10 rounded-2xl flex items-center justify-center text-royal-gold mb-6 group-hover:scale-110 transition-transform">
                                         <Car className="w-8 h-8" />
                                     </div>
-                                    <h3 className="text-2xl font-serif text-white mb-3">Royal Transport</h3>
-                                    <p className="text-gray-400 text-xs mb-8">Professional chauffeurs with premium SUVs, Sedans and local Autos.</p>
+                                    <h3 className="text-2xl font-serif text-white font-black italic mb-3 tracking-tight">Royal Transport</h3>
+                                    <p className="text-white/60 text-sm mb-8 leading-relaxed">Professional chauffeurs with premium SUVs, Sedans and local Autos.</p>
                                     <div className="mt-auto flex items-center gap-2 text-royal-gold text-[10px] font-black uppercase tracking-widest">
                                         Book Transport <ArrowRight className="w-4 h-4" />
                                     </div>
                                 </div>
 
                                 {/* Guide Service */}
-                                <div onClick={() => openQuickInquiry('Certified Heritage Guide', 'Guide')} className="cursor-pointer group bg-white/5 backdrop-blur-2xl p-8 rounded-[2.5rem] border border-white/10 hover:border-royal-gold transition-all duration-500 shadow-2xl flex flex-col items-center text-center">
+                                <div onClick={() => openQuickInquiry('Certified Heritage Guide', 'Guide')} className="cursor-pointer group bg-white/[0.03] backdrop-blur-2xl p-8 rounded-[3rem] border border-white/10 hover:border-royal-gold transition-all duration-500 shadow-2xl flex flex-col items-center text-center relative overflow-hidden">
+                                    <div className="absolute top-0 right-0 w-32 h-32 bg-royal-gold/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl group-hover:bg-royal-gold/10 transition-colors" />
                                     <div className="w-16 h-16 bg-royal-gold/10 rounded-2xl flex items-center justify-center text-royal-gold mb-6 group-hover:scale-110 transition-transform">
                                         <Map className="w-8 h-8" />
                                     </div>
-                                    <h3 className="text-2xl font-serif text-white mb-3">Expert Guides</h3>
-                                    <p className="text-gray-400 text-xs mb-8">Certified historians and storytellers to walk you through the legend of the Fort.</p>
+                                    <h3 className="text-2xl font-serif text-white font-black italic mb-3 tracking-tight">Expert Guides</h3>
+                                    <p className="text-white/60 text-sm mb-8 leading-relaxed">Certified historians and storytellers to walk you through the legend of the Fort.</p>
                                     <div className="mt-auto flex items-center gap-2 text-royal-gold text-[10px] font-black uppercase tracking-widest">
                                         Find a Guide <ArrowRight className="w-4 h-4" />
                                     </div>

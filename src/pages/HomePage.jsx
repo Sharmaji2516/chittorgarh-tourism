@@ -71,7 +71,7 @@ const HomePage = ({ t, searchQuery }) => {
                             <h2 className="text-3xl font-serif text-white mb-4">The Royal Expedition</h2>
                             <p className="text-gray-400 mb-8 leading-relaxed">Planning from outside Chittorgarh? Let us curate your entire journey from Arrival to Departure. Includes Stay, Transport, Guide & Dining.</p>
                         </div>
-                        <NavLink to="/itineraries" className="w-full py-5 bg-royal-gold text-royal-black font-black uppercase tracking-widest text-xs rounded-2xl flex items-center justify-center gap-3 hover:scale-105 active:scale-95 transition-all">
+                        <NavLink to="/royal-journeys" className="w-full py-5 bg-royal-gold text-royal-black font-black uppercase tracking-widest text-xs rounded-2xl flex items-center justify-center gap-3 hover:scale-105 active:scale-95 transition-all">
                             Explore Packages
                             <ArrowRight className="w-4 h-4" />
                         </NavLink>

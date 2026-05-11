@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
+import { getStorage } from "firebase/storage";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -16,6 +17,7 @@ const firebaseConfig = {
 // Initialize Firebase only if keys are provided
 let db = null;
 let analytics = null;
+let storage = null;
 let isFirebaseConfigured = false;
 
 try {
@@ -23,6 +25,7 @@ try {
         const app = initializeApp(firebaseConfig);
         db = getFirestore(app);
         analytics = getAnalytics(app);
+        storage = getStorage(app);
         isFirebaseConfigured = true;
     } else {
         console.warn("Firebase is using placeholder keys. Data will not be saved until you add your real config.");
@@ -55,4 +58,5 @@ export const saveBookingToFirebase = async (bookingData) => {
     }
 };
 
-export { db };
+export { db, storage };
+
