@@ -13,7 +13,7 @@ const HomePage = ({ t, searchQuery }) => {
             title: t.pillars.fort.title,
             subtitle: t.pillars.fort.subtitle,
             desc: t.pillars.fort.desc,
-            image: "/assets/images/Chittorgarh Fort.webp",
+            image: "/assets/images/fort_generated.png",
             icon: Shield,
             link: "/attractions/fort",
             color: "from-royal-gold to-orange-500"
@@ -23,7 +23,7 @@ const HomePage = ({ t, searchQuery }) => {
             title: t.pillars.nature.title,
             subtitle: t.pillars.nature.subtitle,
             desc: t.pillars.nature.desc,
-            image: "/assets/images/Bassi Wildlife.jpg",
+            image: "/assets/images/nature_generated.png",
             icon: Wind,
             link: "/attractions/nature",
             color: "from-green-600 to-teal-500"
@@ -33,7 +33,7 @@ const HomePage = ({ t, searchQuery }) => {
             title: t.pillars.spiritual.title,
             subtitle: t.pillars.spiritual.subtitle,
             desc: t.pillars.spiritual.desc,
-            image: "/assets/images/Sanvliya-ji-Temple.jpg",
+            image: "/assets/images/temple_generated.png",
             icon: Sunrise,
             link: "/attractions/spiritual",
             color: "from-blue-600 to-purple-500"
@@ -43,7 +43,7 @@ const HomePage = ({ t, searchQuery }) => {
             title: t.pillars.scenic.title,
             subtitle: t.pillars.scenic.subtitle,
             desc: t.pillars.scenic.desc,
-            image: "/assets/images/menal-waterfall-new.jpg",
+            image: "/assets/images/waterfall_generated.png",
             icon: Mountain,
             link: "/attractions/scenic",
             color: "from-amber-600 to-red-500"
@@ -91,9 +91,83 @@ const HomePage = ({ t, searchQuery }) => {
                             <h2 className="text-3xl font-serif text-white mb-4">Instant On-Demand</h2>
                             <p className="text-gray-400 mb-8 leading-relaxed">Already in Chittorgarh? Book individual services like a private taxi for fort visit, a professional guide, or a heritage hotel room.</p>
                         </div>
-                        <div className="grid grid-cols-2 gap-4">
-                            <NavLink to="/stays" className="py-4 bg-white/5 border border-white/10 rounded-xl text-[10px] font-black uppercase tracking-widest text-center hover:bg-royal-gold hover:text-royal-black transition-all">Stays</NavLink>
-                            <NavLink to="/how-to-reach" className="py-4 bg-white/5 border border-white/10 rounded-xl text-[10px] font-black uppercase tracking-widest text-center hover:bg-royal-gold hover:text-royal-black transition-all">Transport</NavLink>
+                        <div className="space-y-4">
+                            {/* Taxi */}
+                            <motion.div whileHover={{ scale: 1.02 }} className="relative rounded-2xl overflow-hidden cursor-pointer group border border-white/10 hover:border-royal-gold/50 transition-all duration-500 bg-white/5">
+                                <div className="h-32 overflow-hidden">
+                                    <img src="/assets/images/Private Taxi.jpg" alt="Taxi" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                                </div>
+                                <div className="p-4">
+                                    <h3 className="text-lg font-serif text-white group-hover:text-royal-gold transition-colors">Private Taxi</h3>
+                                    <p className="text-gray-400 text-xs mt-1">Book a premium cab for your local visits.</p>
+                                </div>
+                            </motion.div>
+                            
+                            {/* Guide */}
+                            <motion.div whileHover={{ scale: 1.02 }} className="relative rounded-2xl overflow-hidden cursor-pointer group border border-white/10 hover:border-royal-gold/50 transition-all duration-500 bg-white/5">
+                                <div className="h-32 overflow-hidden">
+                                    <img src="/assets/images/Guide.jpg" alt="Guide" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                                </div>
+                                <div className="p-4">
+                                    <h3 className="text-lg font-serif text-white group-hover:text-royal-gold transition-colors">Expert Guide</h3>
+                                    <p className="text-gray-400 text-xs mt-1">Unlock the secrets of the fort with a local historian.</p>
+                                </div>
+                            </motion.div>
+
+                            {/* Hotel */}
+                            <motion.div whileHover={{ scale: 1.02 }} className="relative rounded-2xl overflow-hidden cursor-pointer group border border-white/10 hover:border-royal-gold/50 transition-all duration-500 bg-white/5">
+                                <div className="h-32 overflow-hidden">
+                                    <img src="/assets/images/Royal Stays.jpg" alt="Hotel" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                                </div>
+                                <div className="p-4">
+                                    <h3 className="text-lg font-serif text-white group-hover:text-royal-gold transition-colors">Heritage Stay</h3>
+                                    <p className="text-gray-400 text-xs mt-1">Experience royal comfort in curated hotels.</p>
+                                </div>
+                            </motion.div>
+
+                            {/* Restaurant */}
+                            <motion.div whileHover={{ scale: 1.02 }} className="relative rounded-2xl overflow-hidden cursor-pointer group border border-white/10 hover:border-royal-gold/50 transition-all duration-500 bg-white/5">
+                                <div className="h-32 overflow-hidden">
+                                    <img src="/assets/images/Dinning Hall.jpg" alt="Restaurant" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                                </div>
+                                <div className="p-4">
+                                    <h3 className="text-lg font-serif text-white group-hover:text-royal-gold transition-colors">Fine Dining</h3>
+                                    <p className="text-gray-400 text-xs mt-1">Savor the best of Mewari and global cuisine.</p>
+                                </div>
+                            </motion.div>
+
+                            {/* Cafe */}
+                            <motion.div whileHover={{ scale: 1.02 }} className="relative rounded-2xl overflow-hidden cursor-pointer group border border-white/10 hover:border-royal-gold/50 transition-all duration-500 bg-white/5">
+                                <div className="h-32 overflow-hidden">
+                                    <img src="/assets/images/Cafe.jpg" alt="Cafe" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                                </div>
+                                <div className="p-4">
+                                    <h3 className="text-lg font-serif text-white group-hover:text-royal-gold transition-colors">Cozy Cafes</h3>
+                                    <p className="text-gray-400 text-xs mt-1">Relax at the best hangout spots with views.</p>
+                                </div>
+                            </motion.div>
+
+                            {/* Photographer */}
+                            <motion.div whileHover={{ scale: 1.02 }} className="relative rounded-2xl overflow-hidden cursor-pointer group border border-white/10 hover:border-royal-gold/50 transition-all duration-500 bg-white/5">
+                                <div className="h-32 overflow-hidden">
+                                    <img src="/assets/images/Photography.jpg" alt="Photographer" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                                </div>
+                                <div className="p-4">
+                                    <h3 className="text-lg font-serif text-white group-hover:text-royal-gold transition-colors">Photographer</h3>
+                                    <p className="text-gray-400 text-xs mt-1">Capture your memories with professional shoots.</p>
+                                </div>
+                            </motion.div>
+
+                            {/* Horse Photo */}
+                            <motion.div whileHover={{ scale: 1.02 }} className="relative rounded-2xl overflow-hidden cursor-pointer group border border-white/10 hover:border-royal-gold/50 transition-all duration-500 bg-white/5">
+                                <div className="h-32 overflow-hidden">
+                                    <img src="/assets/images/Horse Photography.jpg" alt="Horse Photo" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                                </div>
+                                <div className="p-4">
+                                    <h3 className="text-lg font-serif text-white group-hover:text-royal-gold transition-colors">Horse Photography</h3>
+                                    <p className="text-gray-400 text-xs mt-1">Get majestic photos on horseback at the fort.</p>
+                                </div>
+                            </motion.div>
                         </div>
                     </motion.div>
                 </div>
@@ -109,32 +183,34 @@ const HomePage = ({ t, searchQuery }) => {
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: idx * 0.1 }}
-                                className="group relative h-[450px] md:h-[550px] rounded-[3rem] overflow-hidden shadow-2xl border border-white/5"
+                                className="group flex flex-col bg-white/5 backdrop-blur-xl rounded-[2rem] overflow-hidden shadow-2xl border border-white/10 hover:border-royal-gold/30 transition-all duration-500 hover:scale-[1.02] h-full"
                             >
-                                {/* Image Background */}
-                                <div className="absolute inset-0">
+                                {/* Image Section */}
+                                <div className="h-[250px] md:h-[300px] overflow-hidden relative">
                                     <img src={cat.image} alt={cat.title} className="w-full h-full object-cover transition-transform duration-[4s] group-hover:scale-110" />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-royal-black via-royal-black/40 to-transparent opacity-90"></div>
+                                    <div className="absolute inset-0 bg-gradient-to-t from-royal-black/60 to-transparent"></div>
                                 </div>
                                 
-                                {/* Content Overlay */}
-                                <div className="absolute inset-0 p-10 flex flex-col justify-end">
-                                    <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${cat.color} flex items-center justify-center shadow-2xl mb-6 transform group-hover:-translate-y-3 transition-transform duration-500`}>
-                                        <cat.icon className="w-8 h-8 text-white" />
+                                {/* Content Section (Box below image) */}
+                                <div className="p-8 flex flex-col flex-grow justify-between bg-white/[0.02]">
+                                    <div>
+                                        <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${cat.color} flex items-center justify-center shadow-lg mb-4 transform group-hover:scale-110 transition-transform duration-500`}>
+                                            <cat.icon className="w-6 h-6 text-white" />
+                                        </div>
+                                        <h4 className="text-royal-gold font-bold tracking-[0.2em] uppercase text-xs mb-2 opacity-80">
+                                            {cat.subtitle}
+                                        </h4>
+                                        <h3 className="text-2xl md:text-3xl font-serif text-white mb-4 group-hover:text-royal-gold transition-colors duration-500">
+                                            {cat.title}
+                                        </h3>
+                                        <p className="text-white/70 text-sm leading-relaxed mb-6">
+                                            {cat.desc}
+                                        </p>
                                     </div>
-                                    <h4 className="text-royal-gold font-bold tracking-[0.4em] uppercase text-xs mb-3 opacity-80">
-                                        {cat.subtitle}
-                                    </h4>
-                                    <h3 className="text-4xl md:text-5xl font-serif text-white mb-6 group-hover:text-royal-gold transition-colors duration-500">
-                                        {cat.title}
-                                    </h3>
-                                    <p className="text-white/70 text-base max-w-md leading-relaxed mb-10 opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-6 group-hover:translate-y-0">
-                                        {cat.desc}
-                                    </p>
                                     
                                     <NavLink
                                         to={cat.link}
-                                        className="w-fit flex items-center gap-4 px-10 py-4 bg-white/5 backdrop-blur-xl border border-white/10 text-white rounded-full font-bold uppercase tracking-widest text-xs hover:bg-royal-gold hover:text-royal-black hover:border-royal-gold transition-all duration-300 shadow-xl"
+                                        className="w-fit flex items-center gap-3 px-8 py-3 bg-white/5 border border-white/10 text-white rounded-full font-bold uppercase tracking-widest text-xs hover:bg-royal-gold hover:text-royal-black hover:border-royal-gold transition-all duration-300 shadow-md"
                                     >
                                         {t.pillars.button}
                                         <ArrowRight className="w-4 h-4" />

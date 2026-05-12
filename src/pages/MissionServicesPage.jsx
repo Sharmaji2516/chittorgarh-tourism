@@ -1,6 +1,6 @@
 import React from 'react';
 import Section from '../components/Section';
-import { ShieldCheck, HeartHandshake, Car, Map, Hotel, UtensilsCrossed, ChevronRight, Coffee } from 'lucide-react';
+import { ShieldCheck, HeartHandshake, Car, Map, Hotel, UtensilsCrossed, ChevronRight, Coffee, Camera } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const MissionServicesPage = ({ t }) => {
@@ -14,6 +14,7 @@ const MissionServicesPage = ({ t }) => {
             case 'hotel': return <Hotel className="w-8 h-8" />;
             case 'restaurant': return <UtensilsCrossed className="w-8 h-8" />;
             case 'coffee': return <Coffee className="w-8 h-8" />;
+            case 'camera': return <Camera className="w-8 h-8" />;
             default: return <ChevronRight className="w-8 h-8" />;
         }
     };

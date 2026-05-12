@@ -773,6 +773,17 @@ export const content = {
           title: "Cafe & Hangouts",
           desc: "Relax at the city's most vibrant cafes with stunning views. We help you discover the perfect spots for coffee and leisure.",
           icon: "coffee"
+        },
+        {
+          title: "Private Photographer",
+          desc: "Capture your royal moments with our professional photographers who know the best angles and spots in the fort.",
+          icon: "camera"
+        },
+
+        {
+          title: "Horse Photography",
+          desc: "Get stunning pictures on horseback against the backdrop of the majestic Chittorgarh Fort.",
+          icon: "camera"
         }
       ]
     },
@@ -1580,6 +1591,17 @@ export const content = {
           title: "कैफे और हैंगआउट",
           desc: "शानदार दृश्यों के साथ शहर के सबसे जीवंत कैफे में आराम करें। हम आपको कॉफी और फुरसत के लिए सही स्थान खोजने में मदद करते हैं।",
           icon: "coffee"
+        },
+        {
+          title: "प्राइवेट फोटोग्राफर",
+          desc: "किले में बेहतरीन एंगल्स और स्पॉट्स के साथ आपकी यादों को कैमरे में कैद करने के लिए पेशेवर फोटोग्राफर।",
+          icon: "camera"
+        },
+
+        {
+          title: "हॉर्स फोटोग्राफी",
+          desc: "भव्य चित्तौड़गढ़ किले की पृष्ठभूमि में घोड़े पर बैठकर शानदार तस्वीरें खिंचवाएं।",
+          icon: "camera"
         }
       ]
     },

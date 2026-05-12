@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 const Footer = () => {
     const { t } = useLanguage();
     const [isBenefitsOpen, setIsBenefitsOpen] = useState(false);
+    const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
 
     return (
         <footer className="bg-heritage-charcoal text-royal-white/60 py-16 border-t border-royal-gold/20 relative overflow-hidden">
@@ -27,31 +28,33 @@ const Footer = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-center md:text-left mb-16">
                     {/* Explore Section */}
-                    <div className="flex flex-col items-center md:items-start group">
+                    <div className="flex flex-col items-center md:items-start group w-full">
                         <h4 className="text-royal-gold uppercase tracking-[0.3em] mb-6 text-xs font-black flex items-center gap-2">
                             <span className="w-1.5 h-1.5 rounded-full bg-royal-gold"></span>
                             {t.footer.explore}
                         </h4>
-                        <ul className="space-y-4 font-serif italic text-sm">
-                            {[
-                                { name: t.nav.history, path: '/#history' },
-                                { name: t.nav.attractions, path: '/attractions' },
-                                { name: t.nav.localRoyalCuisine, path: '/flavors' },
-                                { name: t.nav.hotels, path: '/stays' },
-                                { name: t.nav.localVocal, path: '/vocal-for-local' },
-                                { name: t.nav.missionServices, path: '/mission-services' },
-                                { name: "Terms & Conditions", path: '/terms' }
-                            ].map((item) => (
-                                <li key={item.name}>
-                                    <NavLink 
-                                        to={item.path} 
-                                        className="hover:text-royal-gold transition-all duration-300 hover:pl-2 relative block"
-                                    >
-                                        {item.name}
-                                    </NavLink>
-                                </li>
-                            ))}
-                        </ul>
+                        <div className="bg-royal-black/30 backdrop-blur-sm border border-royal-gold/10 rounded-2xl p-6 w-full max-w-sm hover:border-royal-gold/30 transition-all duration-500 shadow-xl group-hover:shadow-royal-gold/5">
+                            <ul className="space-y-3 font-serif italic text-sm">
+                                {[
+                                    { name: t.nav.history, path: '/#history' },
+                                    { name: t.nav.attractions, path: '/attractions' },
+                                    { name: t.nav.localRoyalCuisine, path: '/flavors' },
+                                    { name: t.nav.hotels, path: '/stays' },
+                                    { name: t.nav.localVocal, path: '/vocal-for-local' },
+                                    { name: t.nav.missionServices, path: '/mission-services' },
+                                    { name: "Terms & Conditions", path: '/terms' }
+                                ].map((item) => (
+                                    <li key={item.name}>
+                                        <NavLink 
+                                            to={item.path} 
+                                            className="hover:text-royal-gold transition-all duration-300 hover:pl-2 relative block text-royal-white/70 hover:text-white"
+                                        >
+                                            {item.name}
+                                        </NavLink>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     </div>
 
                     {/* Benefits Section */}
@@ -85,53 +88,64 @@ const Footer = () => {
                     </div>
 
                     {/* Contact Section */}
-                    <div className="flex flex-col items-center md:items-start">
+                    <div className="flex flex-col items-center md:items-start w-full">
                         <h4 className="text-royal-gold uppercase tracking-[0.3em] mb-6 text-xs font-black flex items-center gap-2">
                             <span className="w-1.5 h-1.5 rounded-full bg-royal-gold"></span>
                             {t.footer.contact}
                         </h4>
-                        <div className="space-y-4">
-                            <a href="tel:+917597901057" className="group flex items-center gap-3 hover:text-royal-gold transition-all">
-                                <div className="w-8 h-8 rounded-lg bg-royal-gold/5 border border-royal-gold/20 flex items-center justify-center group-hover:bg-royal-gold/20 transition-all">
-                                    <span className="text-[10px]">📞</span>
-                                </div>
-                                <span className="text-sm font-medium tracking-wider">+91 7597901057</span>
-                            </a>
-                            <a href="mailto:chittortech@gmail.com" className="group flex items-center gap-3 hover:text-royal-gold transition-all">
-                                <div className="w-8 h-8 rounded-lg bg-royal-gold/5 border border-royal-gold/20 flex items-center justify-center group-hover:bg-royal-gold/20 transition-all">
-                                    <span className="text-[10px]">✉️</span>
-                                </div>
-                                <span className="text-sm font-medium tracking-wider lowercase">chittortech@gmail.com</span>
-                            </a>
-                        </div>
-                    </div>
+                        <div className="bg-royal-black/30 backdrop-blur-sm border border-royal-gold/10 rounded-2xl p-6 w-full max-w-sm hover:border-royal-gold/30 transition-all duration-500 shadow-xl">
+                            <div className="space-y-4">
+                                <a href="tel:+917597451057" className="group flex items-center gap-3 hover:text-royal-gold transition-all">
+                                    <div className="w-8 h-8 rounded-lg bg-royal-gold/5 border border-royal-gold/20 flex items-center justify-center group-hover:bg-royal-gold/20 transition-all">
+                                        <span className="text-[10px]">📞</span>
+                                    </div>
+                                    <span className="text-sm font-medium tracking-wider">+91 7597451057</span>
+                                </a>
+                                
+                                <a href="https://wa.me/917597451057?text=Hello!%20I%20want%20to%20know%20more%20about%20Chittorgarh%20Tourism%20services." target="_blank" rel="noopener noreferrer" className="group flex items-center gap-3 hover:text-royal-gold transition-all">
+                                    <div className="w-8 h-8 rounded-lg bg-royal-gold/5 border border-royal-gold/20 flex items-center justify-center group-hover:bg-royal-gold/20 transition-all">
+                                        <span className="text-[10px]">💬</span>
+                                    </div>
+                                    <span className="text-sm font-medium tracking-wider">WhatsApp Us</span>
+                                </a>
 
-                    {/* Connect Section */}
-                    <div className="flex flex-col items-center md:items-start">
-                        <h4 className="text-royal-gold uppercase tracking-[0.3em] mb-6 text-xs font-black flex items-center gap-2">
-                            <span className="w-1.5 h-1.5 rounded-full bg-royal-gold"></span>
-                            {t.footer.connect}
-                        </h4>
-                        <div className="flex gap-4">
-                            <a 
-                                href="https://wa.me/917597901057" 
-                                target="_blank" 
-                                rel="noopener noreferrer" 
-                                className="px-6 py-2.5 rounded-xl bg-royal-black/40 border border-royal-gold/10 hover:border-royal-gold/40 hover:text-royal-gold transition-all text-xs font-bold uppercase tracking-widest backdrop-blur-sm"
-                            >
-                                WhatsApp
-                            </a>
-                            <a 
-                                href="mailto:chittortech@gmail.com" 
-                                className="px-6 py-2.5 rounded-xl bg-royal-black/40 border border-royal-gold/10 hover:border-royal-gold/40 hover:text-royal-gold transition-all text-xs font-bold uppercase tracking-widest backdrop-blur-sm"
-                            >
-                                Email
-                            </a>
+                                <a href="mailto:visitchittorgarh@gmail.com?subject=Inquiry%20from%20Chittorgarh%20Tourism%20Website&body=Hello,%20I%20am%20interested%20in%20your%20services." className="group flex items-center gap-3 hover:text-royal-gold transition-all">
+                                    <div className="w-8 h-8 rounded-lg bg-royal-gold/5 border border-royal-gold/20 flex items-center justify-center group-hover:bg-royal-gold/20 transition-all">
+                                        <span className="text-[10px]">✉️</span>
+                                    </div>
+                                    <span className="text-sm font-medium tracking-wider lowercase">visitchittorgarh@gmail.com</span>
+                                </a>
+
+                                {/* Feedback Section */}
+                                {window.location.hostname === 'localhost' && (
+                                    <div className="pt-2 border-t border-royal-gold/10">
+                                        <button
+                                            onClick={() => setIsFeedbackOpen(!isFeedbackOpen)}
+                                            className="w-full py-2.5 rounded-xl bg-royal-black/40 border border-royal-gold/10 hover:border-royal-gold/40 hover:text-royal-gold transition-all text-xs font-bold uppercase tracking-widest backdrop-blur-sm"
+                                        >
+                                            {isFeedbackOpen ? "Close Feedback" : "Share Suggestion & Feedback"}
+                                        </button>
+                                        <AnimatePresence>
+                                            {isFeedbackOpen && (
+                                                <motion.div
+                                                    initial={{ opacity: 0, height: 0 }}
+                                                    animate={{ opacity: 1, height: 'auto' }}
+                                                    exit={{ opacity: 0, height: 0 }}
+                                                    transition={{ duration: 0.3 }}
+                                                    className="w-full mt-4 overflow-hidden"
+                                                >
+                                                    <FeedbackForm />
+                                                </motion.div>
+                                            )}
+                                        </AnimatePresence>
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                {window.location.hostname === 'localhost' && <div className="mb-16"><FeedbackForm /></div>}
+
 
                 {/* Bottom Bar */}
                 {/* Bottom Bar - ChittorTech Branding */}
@@ -165,11 +179,11 @@ const Footer = () => {
 
                         {/* Contact & Copyright */}
                         <div className="flex flex-col items-center gap-6 w-full">
-                            <a href="mailto:chittortech@gmail.com" className="group flex items-center gap-4 hover:text-royal-gold transition-all duration-300">
+                            <a href="mailto:visitchittorgarh@gmail.com" className="group flex items-center gap-4 hover:text-royal-gold transition-all duration-300">
                                 <div className="w-10 h-10 rounded-xl bg-royal-gold/5 border border-royal-gold/10 flex items-center justify-center group-hover:border-royal-gold/40 transition-all">
                                     <span className="text-lg">✉️</span>
                                 </div>
-                                <span className="text-sm font-bold tracking-widest text-royal-white/70 group-hover:text-royal-white lowercase">chittortech@gmail.com</span>
+                                <span className="text-sm font-bold tracking-widest text-royal-white/70 group-hover:text-royal-white lowercase">visitchittorgarh@gmail.com</span>
                             </a>
 
                             <p className="text-[10px] text-royal-white/40 uppercase tracking-[0.2em] font-bold text-center">
