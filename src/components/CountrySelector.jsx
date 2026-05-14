@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../context/LanguageContext';
-import { Crown, Globe, Check } from 'lucide-react';
+import { Globe, Check } from 'lucide-react';
 
 const CountrySelector = () => {
     const { changeLanguage, isLangModalOpen, showLangModal, hideLangModal } = useLanguage();
@@ -67,15 +67,16 @@ const CountrySelector = () => {
                 
                 <div className="text-center mb-8 pt-2">
                     <div className="relative inline-block mb-4">
-                        <Crown className="w-12 h-12 text-heritage-gold mx-auto animate-pulse-slow" />
-                        <div className="absolute inset-0 bg-heritage-gold/20 blur-xl rounded-full -z-10"></div>
+                        <div className="w-64 h-40 mx-auto rounded-xl border border-heritage-gold/30 overflow-hidden shadow-lg shadow-heritage-gold/10">
+                            <img src="/logo.jpg" alt="Logo" className="w-full h-full object-cover" />
+                        </div>
+                        <div className="absolute inset-0 bg-heritage-gold/10 blur-xl rounded-full -z-10"></div>
                     </div>
-                    <h2 className="text-3xl md:text-4xl font-serif text-heritage-gold mb-2 tracking-wide font-bold">Welcome to Chittorgarh</h2>
+                    <h2 className="text-3xl md:text-4xl font-serif text-heritage-gold mb-2 tracking-wide font-bold">पधारो सा!</h2>
                     <div className="h-px w-24 bg-gradient-to-r from-transparent via-heritage-gold/50 to-transparent mx-auto mb-6"></div>
                     <p className="text-royal-white italic font-light text-base md:text-lg mb-6 leading-relaxed px-2">
-                        "Where history is carved in stone, <br className="hidden md:block" />
-                        and valor is whispered by the wind. <br className="hidden md:block" />
-                        Step into the timeless heritage of legends."
+                        "आप चित्तौड़गढ़ की धरा पर हैं।" <br className="hidden md:block" />
+                        <span className="text-sm text-heritage-gold/70 not-italic font-normal tracking-wide block mt-2">Where history is carved in stone, and valor is whispered by the wind.</span>
                     </p>
                     <div className="flex items-center justify-center gap-2 text-gray-400 text-[11px] uppercase tracking-widest mt-4">
                         <Globe className="w-4 h-4 text-heritage-gold/70" />

@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { NavLink } from 'react-router-dom';
-import { Wind, Shield, Sunrise, Mountain, ArrowRight } from 'lucide-react';
+import { Wind, Shield, Sunrise, Mountain, ArrowRight, Check } from 'lucide-react';
 import Hero from '../components/Hero';
 import Section from '../components/Section';
 
@@ -33,7 +33,7 @@ const HomePage = ({ t, searchQuery }) => {
             title: t.pillars.spiritual.title,
             subtitle: t.pillars.spiritual.subtitle,
             desc: t.pillars.spiritual.desc,
-            image: "/assets/images/temple_generated.png",
+            image: "/assets/images/Sanvliya-ji-Temple.jpg",
             icon: Sunrise,
             link: "/attractions/spiritual",
             color: "from-blue-600 to-purple-500"
@@ -69,8 +69,8 @@ const HomePage = ({ t, searchQuery }) => {
                                 <div className="w-16 h-16 bg-royal-gold rounded-2xl flex items-center justify-center mb-8 shadow-xl">
                                     <Shield className="w-8 h-8 text-royal-black" />
                                 </div>
-                                <h2 className="text-3xl font-serif text-white mb-4">The Royal Expedition</h2>
-                                <p className="text-gray-400 mb-6 leading-relaxed">Planning from outside Chittorgarh? Let us curate your entire journey from Arrival to Departure. Includes Stay, Transport, Guide & Dining.</p>
+                                <h2 className="text-3xl font-serif text-white mb-4">{t.pathsSection.royalExpedition.title}</h2>
+                                <p className="text-gray-400 mb-6 leading-relaxed">{t.pathsSection.royalExpedition.desc}</p>
                             </div>
                             
                             <div className="flex-1 flex flex-col justify-around my-4">
@@ -100,7 +100,7 @@ const HomePage = ({ t, searchQuery }) => {
                             </div>
                         </div>
                         <NavLink to="/royal-journeys" className="w-full py-5 bg-royal-gold text-royal-black font-black uppercase tracking-widest text-xs rounded-2xl flex items-center justify-center gap-3 hover:scale-105 active:scale-95 transition-all">
-                            Explore Packages
+                            {t.pathsSection.royalExpedition.button}
                             <ArrowRight className="w-4 h-4" />
                         </NavLink>
                     </motion.div>
@@ -116,8 +116,8 @@ const HomePage = ({ t, searchQuery }) => {
                             <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mb-8 shadow-xl">
                                 <Wind className="w-8 h-8 text-royal-gold" />
                             </div>
-                            <h2 className="text-3xl font-serif text-white mb-4">Instant On-Demand</h2>
-                            <p className="text-gray-400 mb-8 leading-relaxed">Already in Chittorgarh? Book individual services like a private taxi for fort visit, a professional guide, or a heritage hotel room.</p>
+                            <h2 className="text-3xl font-serif text-white mb-4">{t.pathsSection.instantOnDemand.title}</h2>
+                            <p className="text-gray-400 mb-8 leading-relaxed">{t.pathsSection.instantOnDemand.desc}</p>
                         </div>
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                             {/* Taxi */}
@@ -127,8 +127,8 @@ const HomePage = ({ t, searchQuery }) => {
                                         <img src="/assets/images/Private Taxi.jpg" alt="Taxi" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                                     </div>
                                     <div className="p-4">
-                                        <h3 className="text-lg font-serif text-white group-hover:text-royal-gold transition-colors">Private Taxi</h3>
-                                        <p className="text-gray-400 text-xs mt-1">Book a premium cab for your local visits.</p>
+                                        <h3 className="text-lg font-serif text-white group-hover:text-royal-gold transition-colors">{t.pathsSection.instantOnDemand.services.taxi.title}</h3>
+                                        <p className="text-gray-400 text-xs mt-1">{t.pathsSection.instantOnDemand.services.taxi.desc}</p>
                                     </div>
                                 </motion.div>
                             </NavLink>
@@ -140,8 +140,8 @@ const HomePage = ({ t, searchQuery }) => {
                                         <img src="/assets/images/Guide.jpg" alt="Guide" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                                     </div>
                                     <div className="p-4">
-                                        <h3 className="text-lg font-serif text-white group-hover:text-royal-gold transition-colors">Expert Guide</h3>
-                                        <p className="text-gray-400 text-xs mt-1">Unlock the secrets of the fort with a local historian.</p>
+                                        <h3 className="text-lg font-serif text-white group-hover:text-royal-gold transition-colors">{t.pathsSection.instantOnDemand.services.guide.title}</h3>
+                                        <p className="text-gray-400 text-xs mt-1">{t.pathsSection.instantOnDemand.services.guide.desc}</p>
                                     </div>
                                 </motion.div>
                             </NavLink>
@@ -153,8 +153,8 @@ const HomePage = ({ t, searchQuery }) => {
                                         <img src="/assets/images/Royal Stays.jpg" alt="Hotel" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                                     </div>
                                     <div className="p-4">
-                                        <h3 className="text-lg font-serif text-white group-hover:text-royal-gold transition-colors">Heritage Stay</h3>
-                                        <p className="text-gray-400 text-xs mt-1">Experience royal comfort in curated hotels.</p>
+                                        <h3 className="text-lg font-serif text-white group-hover:text-royal-gold transition-colors">{t.pathsSection.instantOnDemand.services.hotel.title}</h3>
+                                        <p className="text-gray-400 text-xs mt-1">{t.pathsSection.instantOnDemand.services.hotel.desc}</p>
                                     </div>
                                 </motion.div>
                             </NavLink>
@@ -166,8 +166,8 @@ const HomePage = ({ t, searchQuery }) => {
                                         <img src="/assets/images/Dinning Hall.jpg" alt="Restaurant" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                                     </div>
                                     <div className="p-4">
-                                        <h3 className="text-lg font-serif text-white group-hover:text-royal-gold transition-colors">Fine Dining</h3>
-                                        <p className="text-gray-400 text-xs mt-1">Savor the best of Mewari and global cuisine.</p>
+                                        <h3 className="text-lg font-serif text-white group-hover:text-royal-gold transition-colors">{t.pathsSection.instantOnDemand.services.dining.title}</h3>
+                                        <p className="text-gray-400 text-xs mt-1">{t.pathsSection.instantOnDemand.services.dining.desc}</p>
                                     </div>
                                 </motion.div>
                             </NavLink>
@@ -179,8 +179,8 @@ const HomePage = ({ t, searchQuery }) => {
                                         <img src="/assets/images/Cafe.jpg" alt="Cafe" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                                     </div>
                                     <div className="p-4">
-                                        <h3 className="text-lg font-serif text-white group-hover:text-royal-gold transition-colors">Cozy Cafes</h3>
-                                        <p className="text-gray-400 text-xs mt-1">Relax at the best hangout spots with views.</p>
+                                        <h3 className="text-lg font-serif text-white group-hover:text-royal-gold transition-colors">{t.pathsSection.instantOnDemand.services.cafe.title}</h3>
+                                        <p className="text-gray-400 text-xs mt-1">{t.pathsSection.instantOnDemand.services.cafe.desc}</p>
                                     </div>
                                 </motion.div>
                             </NavLink>
@@ -192,8 +192,8 @@ const HomePage = ({ t, searchQuery }) => {
                                         <img src="/assets/images/Photography.jpg" alt="Photographer" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                                     </div>
                                     <div className="p-4">
-                                        <h3 className="text-lg font-serif text-white group-hover:text-royal-gold transition-colors">Photographer</h3>
-                                        <p className="text-gray-400 text-xs mt-1">Capture your memories with professional shoots.</p>
+                                        <h3 className="text-lg font-serif text-white group-hover:text-royal-gold transition-colors">{t.pathsSection.instantOnDemand.services.photographer.title}</h3>
+                                        <p className="text-gray-400 text-xs mt-1">{t.pathsSection.instantOnDemand.services.photographer.desc}</p>
                                     </div>
                                 </motion.div>
                             </NavLink>
@@ -228,9 +228,12 @@ const HomePage = ({ t, searchQuery }) => {
                                 className="group flex flex-col bg-white/5 backdrop-blur-xl rounded-[2rem] overflow-hidden shadow-2xl border border-white/10 hover:border-royal-gold/30 transition-all duration-500 hover:scale-[1.02] h-full"
                             >
                                 {/* Image Section */}
-                                <div className="h-[250px] md:h-[300px] overflow-hidden relative">
-                                    <img src={cat.image} alt={cat.title} className="w-full h-full object-cover transition-transform duration-[4s] group-hover:scale-110" />
-                                    <div className="absolute inset-0 bg-gradient-to-t from-royal-black/60 to-transparent"></div>
+                                <div className="h-[250px] md:h-[300px] overflow-hidden relative bg-heritage-charcoal">
+                                    {cat.objectContain && (
+                                        <div className="absolute inset-0 bg-cover bg-center blur-2xl opacity-40" style={{ backgroundImage: `url(${cat.image})` }}></div>
+                                    )}
+                                    <img src={cat.image} alt={cat.title} className={`relative z-10 w-full h-full ${cat.objectContain ? 'object-contain' : 'object-cover'} transition-transform duration-[4s] group-hover:scale-110`} style={{ objectPosition: cat.objectPosition || 'center' }} />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-royal-black/60 to-transparent z-20"></div>
                                 </div>
                                 
                                 {/* Content Section (Box below image) */}
@@ -268,68 +271,31 @@ const HomePage = ({ t, searchQuery }) => {
             <Section id="testimonials" className="bg-transparent py-20 border-t border-white/5">
                 <div className="max-w-7xl mx-auto px-4 md:px-8">
                     <div className="text-center mb-12">
-                        <h4 className="text-royal-gold uppercase tracking-[0.3em] mb-4 text-xs font-black">Testimonials</h4>
+                        <h4 className="text-royal-gold uppercase tracking-[0.3em] mb-4 text-xs font-black">{t.testimonialsSection.title}</h4>
                         <h2 className="text-3xl md:text-4xl font-serif text-white filter drop-shadow-[0_0_8px_rgba(212,175,55,0.3)]">
-                            What Our Guests Say
+                            {t.testimonialsSection.subtitle}
                         </h2>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                        {/* Testimonial 1 */}
-                        <div className="bg-royal-black/30 backdrop-blur-sm border border-royal-gold/10 rounded-2xl p-6 hover:border-royal-gold/30 transition-all duration-500">
-                            <div className="flex text-royal-gold mb-4">
-                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                            </div>
-                            <p className="text-white/70 text-sm leading-relaxed mb-6 italic">
-                                "Amazing experience! The guide was very knowledgeable and the taxi was clean and comfortable."
-                            </p>
-                            <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 bg-gradient-to-br from-royal-gold to-amber-500 rounded-full flex items-center justify-center text-royal-black font-bold">
-                                    R
+                        {t.testimonialsSection.items.map((item, index) => (
+                            <div key={index} className="bg-royal-black/30 backdrop-blur-sm border border-royal-gold/10 rounded-2xl p-6 hover:border-royal-gold/30 transition-all duration-500">
+                                <div className="flex text-royal-gold mb-4">
+                                    <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
                                 </div>
-                                <div>
-                                    <h4 className="text-white text-sm font-bold">Rahul S.</h4>
-                                    <p className="text-gray-500 text-xs">Verified Traveler</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Testimonial 2 */}
-                        <div className="bg-royal-black/30 backdrop-blur-sm border border-royal-gold/10 rounded-2xl p-6 hover:border-royal-gold/30 transition-all duration-500">
-                            <div className="flex text-royal-gold mb-4">
-                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                            </div>
-                            <p className="text-white/70 text-sm leading-relaxed mb-6 italic">
-                                "Best service in Chittorgarh. Highly recommended for family trips. The team is very supportive."
-                            </p>
-                            <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 bg-gradient-to-br from-royal-gold to-amber-500 rounded-full flex items-center justify-center text-royal-black font-bold">
-                                    P
-                                </div>
-                                <div>
-                                    <h4 className="text-white text-sm font-bold">Priya M.</h4>
-                                    <p className="text-gray-500 text-xs">Verified Traveler</p>
+                                <p className="text-white/70 text-sm leading-relaxed mb-6 italic">
+                                    "{item.quote}"
+                                </p>
+                                <div className="flex items-center gap-3">
+                                    <div className="w-10 h-10 bg-gradient-to-br from-royal-gold to-amber-500 rounded-full flex items-center justify-center text-royal-black font-bold">
+                                        {item.name.charAt(0)}
+                                    </div>
+                                    <div>
+                                        <h4 className="text-white text-sm font-bold">{item.name}</h4>
+                                        <p className="text-gray-500 text-xs">{item.role}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                        {/* Testimonial 3 */}
-                        <div className="bg-royal-black/30 backdrop-blur-sm border border-royal-gold/10 rounded-2xl p-6 hover:border-royal-gold/30 transition-all duration-500">
-                            <div className="flex text-royal-gold mb-4">
-                                <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
-                            </div>
-                            <p className="text-white/70 text-sm leading-relaxed mb-6 italic">
-                                "Smooth and reliable. The driver was very polite and knew all the short routes and best food spots."
-                            </p>
-                            <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 bg-gradient-to-br from-royal-gold to-amber-500 rounded-full flex items-center justify-center text-royal-black font-bold">
-                                    A
-                                </div>
-                                <div>
-                                    <h4 className="text-white text-sm font-bold">Amit K.</h4>
-                                    <p className="text-gray-500 text-xs">Verified Traveler</p>
-                                </div>
-                            </div>
-                        </div>
+                        ))}
                     </div>
                 </div>
             </Section>
@@ -338,29 +304,67 @@ const HomePage = ({ t, searchQuery }) => {
             <Section id="about-us" className="bg-transparent py-20 border-t border-white/5">
                 <div className="max-w-7xl mx-auto px-4 md:px-8">
                     <div className="bg-royal-black/30 backdrop-blur-sm border border-royal-gold/10 rounded-3xl p-8 md:p-12 shadow-xl hover:border-royal-gold/30 transition-all duration-500">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                            <div>
-                                <h4 className="text-royal-gold uppercase tracking-[0.3em] mb-4 text-xs font-black flex items-center gap-2">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-royal-gold"></span>
-                                    About Us
-                                </h4>
-                                <h2 className="text-3xl md:text-4xl font-serif text-white mb-6 filter drop-shadow-[0_0_8px_rgba(212,175,55,0.3)]">
-                                    Local Experts serving in Chittorgarh
-                                </h2>
-                                <p className="text-gray-300 mb-6 text-lg leading-relaxed font-serif italic">
-                                    "Founded on 1st May, we are proud locals dedicated to serving you in the historic land of Chittorgarh, Rajasthan."
-                                </p>
-                                <p className="text-white/70 text-sm leading-relaxed mb-6">
-                                    We bring you the true essence of Chittorgarh. With deep local roots, we ensure that your visit to the land of valor and sacrifice is comfortable, authentic, and unforgettable.
-                                </p>
-                                <div className="flex items-center gap-4 text-emerald-400 text-sm font-bold">
-                                    <div className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.5)]"></div>
-                                    <span>Serving since 1st May</span>
-                                </div>
+                        <div className="max-w-4xl mx-auto">
+                            <h4 className="text-royal-gold uppercase tracking-[0.3em] mb-4 text-xs font-black flex items-center gap-2 justify-center">
+                                <span className="w-1.5 h-1.5 rounded-full bg-royal-gold"></span>
+                                {t.aboutSection.title}
+                            </h4>
+                            <h2 className="text-3xl md:text-4xl font-serif text-white mb-6 filter drop-shadow-[0_0_8px_rgba(212,175,55,0.3)] text-center">
+                                {t.aboutSection.subtitle}
+                            </h2>
+                            <p className="text-gray-300 mb-6 text-lg leading-relaxed font-serif italic">
+                                {t.aboutSection.quote}
+                            </p>
+                            <p className="text-white/70 text-sm leading-relaxed mb-6">
+                                {t.aboutSection.desc}
+                            </p>
+                            
+                            {/* Features List */}
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                                {t.aboutSection.features.map((feature, index) => (
+                                    <div key={index} className="flex items-center gap-3 text-white/80 text-sm">
+                                        <Check className="w-5 h-5 text-royal-gold flex-shrink-0" />
+                                        <span>{feature}</span>
+                                    </div>
+                                ))}
                             </div>
-                            <div className="rounded-2xl overflow-hidden border border-royal-gold/20 shadow-2xl h-64 md:h-80">
-                                <img src="/assets/images/fort_generated.png" alt="About Us" className="w-full h-full object-cover" />
+
+                            <div className="flex items-center gap-4 text-emerald-400 text-sm font-bold justify-center">
+                                <div className="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.5)]"></div>
+                                <span>{t.aboutSection.servingSince}</span>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </Section>
+
+            {/* Why Us Section */}
+            <Section id="why-us" className="bg-transparent py-20 border-t border-white/5">
+                <div className="max-w-7xl mx-auto px-4 md:px-8">
+                    <div className="max-w-4xl mx-auto">
+                        <h4 className="text-royal-gold uppercase tracking-[0.3em] mb-4 text-xs font-black flex items-center gap-2 justify-center">
+                            <span className="w-1.5 h-1.5 rounded-full bg-royal-gold"></span>
+                            {t.whyUsSection.title}
+                        </h4>
+                        <h2 className="text-3xl md:text-4xl font-serif text-white mb-6 filter drop-shadow-[0_0_8px_rgba(212,175,55,0.3)] text-center">
+                            {t.whyUsSection.subtitle}
+                        </h2>
+                        
+                        <div className="space-y-6">
+                            {t.whyUsSection.items.map((item, index) => {
+                                const Icon = index === 0 ? Wind : index === 1 ? Shield : Sunrise;
+                                return (
+                                    <div key={index} className="flex gap-4">
+                                        <div className="w-12 h-12 bg-royal-gold/10 rounded-xl flex items-center justify-center flex-shrink-0">
+                                            <Icon className="w-6 h-6 text-royal-gold" />
+                                        </div>
+                                        <div>
+                                            <h3 className="text-white font-serif text-lg mb-1">{item.title}</h3>
+                                            <p className="text-gray-400 text-sm">{item.desc}</p>
+                                        </div>
+                                    </div>
+                                );
+                            })}
                         </div>
                     </div>
                 </div>

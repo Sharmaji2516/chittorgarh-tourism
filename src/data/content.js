@@ -40,6 +40,7 @@ export const content = {
       title: "Chittorgarh",
       subtitle: "The Citadel of Valor & Sacrifice",
       desc: "Where every stone tells a story of unmatched bravery and eternal glory.",
+      foodMessage: "Experience the true taste of Mewar with our delicious and authentic Dal Baati Churma and local delicacies, served with love.",
       cta: "Experience the Legacy",
       scroll: "Scroll to Explore",
       exploreLegend: "Explore the Legend",
@@ -955,7 +956,110 @@ export const content = {
         notNeeded: "Not Needed"
       }
     },
-
+    testimonialsSection: {
+      title: "Testimonials",
+      subtitle: "What Our Guests Say",
+      items: [
+        {
+          quote: "Amazing experience! The guide was very knowledgeable and the taxi was clean and comfortable.",
+          name: "Rahul S.",
+          role: "Verified Traveler"
+        },
+        {
+          quote: "Best service in Chittorgarh. Highly recommended for family trips. The team is very supportive.",
+          name: "Priya M.",
+          role: "Verified Traveler"
+        },
+        {
+          quote: "Smooth and reliable. The driver was very polite and knew all the short routes and best food spots.",
+          name: "Amit K.",
+          role: "Verified Traveler"
+        }
+      ]
+    },
+    pathsSection: {
+      royalExpedition: {
+        title: "The Royal Expedition",
+        desc: "Planning from outside Chittorgarh? Let us curate your entire journey from Arrival to Departure. Includes Stay, Transport, Guide & Dining.",
+        button: "Explore Packages"
+      },
+      instantOnDemand: {
+        title: "Instant On-Demand",
+        desc: "Already in Chittorgarh? Book individual services like a private taxi for fort visit, a professional guide, or a heritage hotel room.",
+        button: "Explore Services",
+        services: {
+          taxi: { title: "Private Taxi", desc: "Book a premium cab for your local visits." },
+          guide: { title: "Expert Guide", desc: "Unlock the secrets of the fort with a local historian." },
+          hotel: { title: "Heritage Stay", desc: "Experience royal comfort in curated hotels." },
+          dining: { title: "Fine Dining", desc: "Savor the best of Mewari and global cuisine." },
+          cafe: { title: "Cozy Cafes", desc: "Relax at the best hangout spots with views." },
+          photographer: { title: "Photographer", desc: "Capture your memories with professional shoots." }
+        }
+      }
+    },
+    aboutSection: {
+      title: "About Us",
+      subtitle: "Local Experts serving in Chittorgarh",
+      quote: "Founded on 1st May, we are proud locals dedicated to serving you in the historic land of Chittorgarh, Rajasthan.",
+      desc: "We bring you the true essence of Chittorgarh. With deep local roots, we ensure that your visit to the land of valor and sacrifice is comfortable, authentic, and unforgettable.",
+      features: [
+        "Expert Local Guides",
+        "Customized Tour Plans",
+        "Reliable Taxi Services",
+        "24/7 Ground Support"
+      ],
+      servingSince: "Serving since 1st May"
+    },
+    whyUsSection: {
+      title: "Why Choose Us",
+      subtitle: "Crafting Unforgettable Journeys",
+      items: [
+        {
+          title: "Customize Packages",
+          desc: "Tailor your trip to your preferences. Choose your destinations, stay, and activities for a unique experience."
+        },
+        {
+          title: "Adventure Tours",
+          desc: "Explore thrilling destinations and activities, from Chittorgarh Fort to wild outskirts."
+        },
+        {
+          title: "Royal Vacation",
+          desc: "Indulge in best accommodations and exclusive experiences designed for those seeking a lavish escape."
+        }
+      ]
+    },
+    royalJourneysPage: {
+      portalToPast: "Your portal to the past. Whether you need a complete planned expedition or a quick on-demand service, we ensure royal standards.",
+      royalExpeditions: "Royal Expeditions",
+      onDemandServices: "On-Demand Services",
+      individualServices: "Individual Services",
+      bookVerifiedServices: "Directly book verified local services",
+      grandStays: "Grand Stays",
+      verifiedHotels: "Verified heritage hotels and resorts with exclusive concierge rates.",
+      royalTransport: "Royal Transport",
+      professionalChauffeurs: "Professional chauffeurs with premium SUVs, Sedans and local Autos.",
+      expertGuides: "Expert Guides",
+      certifiedHistorians: "Certified historians and storytellers to walk you through the legend of the Fort.",
+      fineDining: "Fine Dining",
+      savorMewari: "Savor the best of Mewari and global cuisine.",
+      cozyCafes: "Cozy Cafes",
+      relaxHangout: "Relax at the best hangout spots with views.",
+      photographer: "Photographer",
+      captureMemories: "Capture your memories with professional shoots.",
+      horsePhoto: "Horse Photo",
+      majesticPhotos: "Get majestic photos on horseback at the fort.",
+      browseStays: "Browse Stays",
+      bookTransport: "Book Transport",
+      findGuide: "Find a Guide",
+      reserveTable: "Reserve Table",
+      visitCafe: "Visit Cafe",
+      bookShoot: "Book Shoot",
+      bookSession: "Book Session",
+      completePackage: "Complete Package",
+      inquireOnWebsite: "Inquire on Website",
+      inquireOnWhatsApp: "Inquire on WhatsApp",
+      whatsappMessage: "🌟 *Chittorgarh Tourism Inquiry* 🌟\n\nHello! I am interested in the *{name}* Package.\n\n📅 *Duration:* {duration}\n✨ *Status:* Looking for more details and booking.\n\nPlease provide me with the details and availability. Thanks! 🙏"
+    }
   },
   hi: {
     nav: {
@@ -998,6 +1102,7 @@ export const content = {
       title: "चित्तौड़गढ़",
       subtitle: "शौर्य और बलिदान की पावन धरा",
       desc: "जहाँ हर पत्थर अटूट वीरता और शाश्वत गौरव की कहानी कहता है।",
+      foodMessage: "हमारे स्वादिष्ट और प्रामाणिक दाल बाटी चूरमा और स्थानीय व्यंजनों के साथ मेवाड़ के असली स्वाद का अनुभव करें, जो प्यार से परोसा जाता है।",
       cta: "विरासत का अनुभव करें",
       scroll: "अन्वेषण करें",
       exploreLegend: "किंवदंती को एक्सप्लोर करें",
@@ -1781,21 +1886,24 @@ export const content = {
           name: "किला विरासत",
           duration: "1 दिन",
           includes: ["प्राइवेट एसयूवी", "प्रमाणित गाइड", "पारंपरिक भोजन"],
-          desc: "चित्तौड़गढ़ किले के हर रहस्य को कवर करने वाली अंतिम 1-दिवसीय यात्रा।"
+          desc: "चित्तौड़गढ़ किले के हर रहस्य को कवर करने वाली अंतिम 1-दिवसीय यात्रा。",
+          image: "/assets/images/fort-legacy.jpg"
         },
         {
           id: "twoDays",
           name: "मेवाड़ विरासत",
           duration: "2 दिन",
           includes: ["लक्जरी स्टे", "पूर्ण परिवहन", "वन्यजीव सफारी"],
-          desc: "इतिहास में गहराई से उतरने के बाद बस्सी और ऐतिहासिक शहर का शांत अन्वेषण।"
+          desc: "इतिहास में गहराई से उतरने के बाद बस्सी और ऐतिहासिक शहर का शांत अन्वेषण。",
+          image: "/assets/images/Bassi-Wildlife-Sanctuary-Chittorgarh.jpg"
         },
         {
           id: "threeDays",
           name: "आध्यात्मिक और मनोरम",
           duration: "3 दिन",
           includes: ["मंदिर दर्शन", "जलप्रपात यात्रा", "प्रीमियम स्टे"],
-          desc: "दिव्य सांवलिया जी मंदिर और लुभावने मेनाल जलप्रपात वाली एक भव्य यात्रा।"
+          desc: "दिव्य सांवलिया जी मंदिर और लुभावने मेनाल जलप्रपात वाली एक भव्य यात्रा。",
+          image: "/assets/images/spiritual-tour.jpg"
         }
       ]
     },
@@ -1810,6 +1918,110 @@ export const content = {
         { id: 7, name: "मिर्ची बड़ा", image: "/assets/images/mirchi-bada.jpg" },
         { id: 8, name: "भरवां भिंडी", image: "/assets/images/stuffed-bhindi.jpg" },
       ],
+    },
+    testimonialsSection: {
+      title: "प्रशंसापत्र",
+      subtitle: "हमारे मेहमान क्या कहते हैं",
+      items: [
+        {
+          quote: "अद्भुत अनुभव! गाइड बहुत जानकार था और टैक्सी साफ और आरामदायक थी।",
+          name: "राहुल एस.",
+          role: "सत्यापित यात्री"
+        },
+        {
+          quote: "चित्तौड़गढ़ में सबसे अच्छी सेवा। पारिवारिक यात्राओं के लिए अत्यधिक अनुशंसित। टीम बहुत सहयोगी है।",
+          name: "प्रिया एम.",
+          role: "सत्यापित यात्री"
+        },
+        {
+          quote: "सहज और विश्वसनीय। ड्राइवर बहुत विनम्र था और सभी छोटे रास्तों और सर्वोत्तम भोजन स्थानों को जानता था।",
+          name: "अमित के.",
+          role: "सत्यापित यात्री"
+        }
+      ]
+    },
+    pathsSection: {
+      royalExpedition: {
+        title: "शाही अभियान",
+        desc: "चित्तौड़गढ़ के बाहर से योजना बना रहे हैं? आगमन से प्रस्थान तक अपनी पूरी यात्रा का प्रबंधन हमें करने दें। इसमें ठहरना, परिवहन, गाइड और भोजन शामिल है।",
+        button: "पैकेज देखें"
+      },
+      instantOnDemand: {
+        title: "तत्काल ऑन-डिमांड",
+        desc: "पहले से ही चित्तौड़गढ़ में हैं? किले की यात्रा के लिए प्राइवेट टैक्सी, पेशेवर गाइड, या हेरिटेज होटल का कमरा जैसी व्यक्तिगत सेवाएं बुक करें।",
+        button: "सेवाएं देखें",
+        services: {
+          taxi: { title: "प्राइवेट टैक्सी", desc: "अपनी स्थानीय यात्राओं के लिए एक प्रीमियम कैब बुक करें।" },
+          guide: { title: "विशेषज्ञ गाइड", desc: "एक स्थानीय इतिहासकार के साथ किले के रहस्यों को जानें।" },
+          hotel: { title: "हेरिटेज स्टे", desc: "चयनित होटलों में शाही आराम का अनुभव करें।" },
+          dining: { title: "शानदार भोजन", desc: "मेवाड़ी और वैश्विक व्यंजनों के बेहतरीन स्वाद का आनंद लें।" },
+          cafe: { title: "आरामदायक कैफे", desc: "शानदार नजारों के साथ बेहतरीन हैंगआउट स्पॉट्स पर आराम करें।" },
+          photographer: { title: "फोटोग्राफर", desc: "पेशेवर शूट के साथ अपनी यादों को कैद करें।" }
+        }
+      }
+    },
+    aboutSection: {
+      title: "हमारे बारे में",
+      subtitle: "चित्तौड़गढ़ में सेवा करने वाले स्थानीय विशेषज्ञ",
+      quote: "\"1 मई को स्थापित, हम राजस्थान के चित्तौड़गढ़ की ऐतिहासिक भूमि में आपकी सेवा करने के लिए समर्पित गौरवान्वित स्थानीय लोग हैं।\"",
+      desc: "हम आपके लिए चित्तौड़गढ़ का वास्तविक सार लेकर आते हैं। गहरी स्थानीय जड़ों के साथ, हम सुनिश्चित करते हैं कि वीरता और बलिदान की भूमि पर आपकी यात्रा आरामदायक, प्रामाणिक और अविस्मरणीय हो।",
+      features: [
+        "विशेषज्ञ स्थानीय गाइड",
+        "अनुकूलित टूर प्लान",
+        "विश्वसनीय टैक्सी सेवाएं",
+        "24/7 ग्राउंड सपोर्ट"
+      ],
+      servingSince: "1 मई से सेवा में"
+    },
+    whyUsSection: {
+      title: "हमें क्यों चुनें",
+      subtitle: "अविस्मरणीय यात्राएं बनाना",
+      items: [
+        {
+          title: "पैकेज अनुकूलित करें",
+          desc: "अपनी प्राथमिकताओं के अनुसार अपनी यात्रा तैयार करें। अपने गंतव्य, प्रवास और गतिविधियों का चयन करें।"
+        },
+        {
+          title: "साहसिक यात्राएँ",
+          desc: "चित्तौड़गढ़ किले से लेकर बाहरी इलाकों तक रोमांचक स्थानों और गतिविधियों का अन्वेषण करें।"
+        },
+        {
+          title: "शाही अवकाश",
+          desc: "भव्य पलायन की तलाश करने वालों के लिए डिज़ाइन किए गए सर्वोत्तम आवास और विशेष अनुभवों का आनंद लें।"
+        }
+      ]
+    },
+    royalJourneysPage: {
+      portalToPast: "अतीत के लिए आपका पोर्टल। चाहे आपको एक पूर्ण नियोजित अभियान की आवश्यकता हो या त्वरित ऑन-डिमांड सेवा की, हम शाही मानकों को सुनिश्चित करते हैं।",
+      royalExpeditions: "शाही अभियान",
+      onDemandServices: "ऑन-डिमांड सेवाएं",
+      individualServices: "व्यक्तिगत सेवाएं",
+      bookVerifiedServices: "सत्यापित स्थानीय सेवाओं को सीधे बुक करें",
+      grandStays: "भव्य प्रवास",
+      verifiedHotels: "विशेष कंसीयज दरों के साथ सत्यापित विरासत होटल और रिसॉर्ट्स।",
+      royalTransport: "शाही परिवहन",
+      professionalChauffeurs: "प्रीमियम एसयूवी, सेडान और स्थानीय ऑटो के साथ पेशेवर ड्राइवर।",
+      expertGuides: "विशेषज्ञ गाइड",
+      certifiedHistorians: "किले की कहानी से रूबरू कराने के लिए प्रमाणित इतिहासकार और कहानीकार।",
+      fineDining: "फाइन डाइनिंग",
+      savorMewari: "सर्वोत्तम मेवाड़ी और वैश्विक व्यंजनों का स्वाद लें।",
+      cozyCafes: "आरामदायक कैफे",
+      relaxHangout: "दृश्यों के साथ बेहतरीन हैंगआउट स्थानों पर आराम करें।",
+      photographer: "फोटोग्राफर",
+      captureMemories: "पेशेवर शूट के साथ अपनी यादों को कैद करें।",
+      horsePhoto: "घोड़े के साथ फोटो",
+      majesticPhotos: "किले में घोड़े पर सवार होकर शानदार तस्वीरें लें।",
+      browseStays: "होटल देखें",
+      bookTransport: "परिवहन बुक करें",
+      findGuide: "गाइड खोजें",
+      reserveTable: "टेबल रिजर्व करें",
+      visitCafe: "कैफे जाएं",
+      bookShoot: "शूट बुक करें",
+      bookSession: "सेशन बुक करें",
+      completePackage: "पूर्ण पैकेज",
+      inquireOnWebsite: "वेबसाइट पर पूछताछ करें",
+      inquireOnWhatsApp: "व्हाट्सएप पर पूछताछ करें",
+      whatsappMessage: "🌟 *चित्तौड़गढ़ पर्यटन पूछताछ* 🌟\n\nनमस्ते! मुझे *{name}* पैकेज में दिलचस्पी है।\n\n📅 *अवधि:* {duration}\n✨ *स्थिति:* अधिक विवरण और बुकिंग की तलाश है।\n\nकृपया मुझे विवरण और उपलब्धता प्रदान करें। धन्यवाद! 🙏"
     },
     footer: {
       explore: "खोजें",

@@ -59,6 +59,15 @@ const Hero = () => {
                 >
                     {t.hero.desc}
                 </motion.p>
+
+                <motion.p
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.8 }}
+                    className="text-base md:text-lg text-royal-gold max-w-3xl mx-auto font-medium leading-relaxed mt-4"
+                >
+                    {t.hero.foodMessage}
+                </motion.p>
             </div>
         </div>
     );

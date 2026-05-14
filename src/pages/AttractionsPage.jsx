@@ -60,7 +60,7 @@ const AttractionsPage = ({ t, filteredAttractions, setSelectedAttraction }) => {
             
             {/* Header Section */}
             <div className="mb-20">
-                <div className="flex items-center gap-6 mb-4">
+                <div className="flex items-center gap-6 mb-4 md:justify-center">
                     <motion.div 
                         initial={{ rotate: -10, scale: 0.8 }}
                         animate={{ rotate: 0, scale: 1 }}
@@ -68,7 +68,7 @@ const AttractionsPage = ({ t, filteredAttractions, setSelectedAttraction }) => {
                     >
                         <Icon className="w-8 h-8 text-white" />
                     </motion.div>
-                    <div>
+                    <div className="md:text-center">
                         <h1 className="text-4xl md:text-6xl font-serif text-white">{title}</h1>
                         <p className="text-royal-gold font-bold uppercase tracking-[0.4em] text-xs md:text-base mt-2">{subtitle}</p>
                     </div>
