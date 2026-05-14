@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Shield, Zap, ArrowRight, Car, Hotel, Map, History, ShieldCheck, HeartHandshake, X } from 'lucide-react';
+import { Shield, Zap, ArrowRight, Car, Hotel, Map, History, ShieldCheck, HeartHandshake, X, Utensils, Coffee, Camera } from 'lucide-react';
 import Section from '../components/Section';
 import BookingModal from '../components/BookingModal';
 import QuickInquiryModal from '../components/QuickInquiryModal';
@@ -100,6 +100,12 @@ const RoyalJourneysPage = ({ t }) => {
                                             </div>
                                         </div>
 
+                                        {pkg.image && (
+                                            <div className="w-full h-48 mb-6 overflow-hidden rounded-2xl">
+                                                <img src={pkg.image} alt={pkg.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                                            </div>
+                                        )}
+
                                         <h3 className="text-4xl font-serif text-white font-black italic mb-6 group-hover:text-royal-gold transition-colors tracking-tight">{pkg.name}</h3>
                                         <p className="text-gray-400 mb-10 leading-relaxed italic">"{pkg.desc}"</p>
 
@@ -112,13 +118,24 @@ const RoyalJourneysPage = ({ t }) => {
                                             ))}
                                         </div>
 
-                                        <button 
-                                            onClick={() => openFullBooking(`${pkg.name} Package`)}
-                                            className="w-full py-5 bg-royal-gold text-royal-black font-black uppercase tracking-widest text-xs rounded-2xl flex items-center justify-center gap-3 shadow-2xl shadow-royal-gold/20 hover:scale-[1.02] active:scale-95 transition-all"
-                                        >
-                                            Inquire for Expedition
-                                            <ArrowRight className="w-4 h-4" />
-                                        </button>
+                                        <div className="flex flex-col gap-3">
+                                            <button 
+                                                onClick={() => openFullBooking(`${pkg.name} Package`)}
+                                                className="w-full py-4 bg-royal-gold text-royal-black font-black uppercase tracking-widest text-xs rounded-2xl flex items-center justify-center gap-3 shadow-2xl shadow-royal-gold/20 hover:scale-[1.02] active:scale-95 transition-all"
+                                            >
+                                                Inquire on Website
+                                                <ArrowRight className="w-4 h-4" />
+                                            </button>
+                                            <a 
+                                                href={`https://wa.me/917597451057?text=${encodeURIComponent(`🌟 *Chittorgarh Tourism Inquiry* 🌟\n\nHello! I am interested in the *${pkg.name}* Package.\n\n📅 *Duration:* ${pkg.duration}\n✨ *Status:* Looking for more details and booking.\n\nPlease provide me with the details and availability. Thanks! 🙏`)}`}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="w-full py-4 bg-transparent border border-royal-gold text-royal-gold font-black uppercase tracking-widest text-xs rounded-2xl flex items-center justify-center gap-3 hover:bg-royal-gold/10 transition-all"
+                                            >
+                                                Inquire on WhatsApp
+                                                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.301-.15-1.781-.879-2.057-.979-.275-.1-.475-.15-.675.15-.2.3-.775 1.05-.95 1.25-.175.2-.35.225-.65.075-.3-.15-1.265-.467-2.41-1.485-.89-.795-1.492-1.775-1.665-2.075-.175-.3-.019-.463.13-.612.134-.133.301-.35.451-.525.15-.175.2-.3.3-.5s.05-.375-.025-.525c-.075-.15-.675-1.625-.925-2.225-.244-.589-.493-.51-.675-.519-.175-.009-.375-.01-.575-.01-.2 0-.525.075-.8.375-.275.3-1.05 1.025-1.05 2.5s1.075 2.9 1.225 3.1c.15.2 2.113 3.226 5.125 4.525.715.309 1.275.494 1.71.632.72.229 1.375.196 1.89.12.575-.085 1.781-.725 2.031-1.425.25-.7.25-1.3 0-1.425-.05-.125-.2-.2-.5-.35z"/></svg>
+                                            </a>
+                                        </div>
                                     </motion.div>
                                 ))}
                             </div>
@@ -170,6 +187,58 @@ const RoyalJourneysPage = ({ t }) => {
                                     <p className="text-white/60 text-sm mb-8 leading-relaxed">Certified historians and storytellers to walk you through the legend of the Fort.</p>
                                     <div className="mt-auto flex items-center gap-2 text-royal-gold text-[10px] font-black uppercase tracking-widest">
                                         Find a Guide <ArrowRight className="w-4 h-4" />
+                                    </div>
+                                </div>
+
+                                {/* Restaurant Service */}
+                                <div onClick={() => openQuickInquiry('Fine Dining Restaurant', 'Dining')} className="cursor-pointer group bg-white/[0.03] backdrop-blur-2xl p-8 rounded-[3rem] border border-white/10 hover:border-royal-gold transition-all duration-500 shadow-2xl flex flex-col items-center text-center relative overflow-hidden">
+                                    <div className="absolute top-0 right-0 w-32 h-32 bg-royal-gold/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl group-hover:bg-royal-gold/10 transition-colors" />
+                                    <div className="w-16 h-16 bg-royal-gold/10 rounded-2xl flex items-center justify-center text-royal-gold mb-6 group-hover:scale-110 transition-transform">
+                                        <Utensils className="w-8 h-8" />
+                                    </div>
+                                    <h3 className="text-2xl font-serif text-white font-black italic mb-3 tracking-tight">Fine Dining</h3>
+                                    <p className="text-white/60 text-sm mb-8 leading-relaxed">Savor the best of Mewari and global cuisine.</p>
+                                    <div className="mt-auto flex items-center gap-2 text-royal-gold text-[10px] font-black uppercase tracking-widest">
+                                        Reserve Table <ArrowRight className="w-4 h-4" />
+                                    </div>
+                                </div>
+
+                                {/* Cafe Service */}
+                                <div onClick={() => openQuickInquiry('Cozy Cafe Visit', 'Cafe')} className="cursor-pointer group bg-white/[0.03] backdrop-blur-2xl p-8 rounded-[3rem] border border-white/10 hover:border-royal-gold transition-all duration-500 shadow-2xl flex flex-col items-center text-center relative overflow-hidden">
+                                    <div className="absolute top-0 right-0 w-32 h-32 bg-royal-gold/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl group-hover:bg-royal-gold/10 transition-colors" />
+                                    <div className="w-16 h-16 bg-royal-gold/10 rounded-2xl flex items-center justify-center text-royal-gold mb-6 group-hover:scale-110 transition-transform">
+                                        <Coffee className="w-8 h-8" />
+                                    </div>
+                                    <h3 className="text-2xl font-serif text-white font-black italic mb-3 tracking-tight">Cozy Cafes</h3>
+                                    <p className="text-white/60 text-sm mb-8 leading-relaxed">Relax at the best hangout spots with views.</p>
+                                    <div className="mt-auto flex items-center gap-2 text-royal-gold text-[10px] font-black uppercase tracking-widest">
+                                        Visit Cafe <ArrowRight className="w-4 h-4" />
+                                    </div>
+                                </div>
+
+                                {/* Photographer Service */}
+                                <div onClick={() => openQuickInquiry('Professional Photographer', 'Photography')} className="cursor-pointer group bg-white/[0.03] backdrop-blur-2xl p-8 rounded-[3rem] border border-white/10 hover:border-royal-gold transition-all duration-500 shadow-2xl flex flex-col items-center text-center relative overflow-hidden">
+                                    <div className="absolute top-0 right-0 w-32 h-32 bg-royal-gold/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl group-hover:bg-royal-gold/10 transition-colors" />
+                                    <div className="w-16 h-16 bg-royal-gold/10 rounded-2xl flex items-center justify-center text-royal-gold mb-6 group-hover:scale-110 transition-transform">
+                                        <Camera className="w-8 h-8" />
+                                    </div>
+                                    <h3 className="text-2xl font-serif text-white font-black italic mb-3 tracking-tight">Photographer</h3>
+                                    <p className="text-white/60 text-sm mb-8 leading-relaxed">Capture your memories with professional shoots.</p>
+                                    <div className="mt-auto flex items-center gap-2 text-royal-gold text-[10px] font-black uppercase tracking-widest">
+                                        Book Shoot <ArrowRight className="w-4 h-4" />
+                                    </div>
+                                </div>
+
+                                {/* Horse Photo Service */}
+                                <div onClick={() => openQuickInquiry('Horse Photography Session', 'Photography')} className="cursor-pointer group bg-white/[0.03] backdrop-blur-2xl p-8 rounded-[3rem] border border-white/10 hover:border-royal-gold transition-all duration-500 shadow-2xl flex flex-col items-center text-center relative overflow-hidden">
+                                    <div className="absolute top-0 right-0 w-32 h-32 bg-royal-gold/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-2xl group-hover:bg-royal-gold/10 transition-colors" />
+                                    <div className="w-16 h-16 bg-royal-gold/10 rounded-2xl flex items-center justify-center text-royal-gold mb-6 group-hover:scale-110 transition-transform">
+                                        <Camera className="w-8 h-8" />
+                                    </div>
+                                    <h3 className="text-2xl font-serif text-white font-black italic mb-3 tracking-tight">Horse Photo</h3>
+                                    <p className="text-white/60 text-sm mb-8 leading-relaxed">Get majestic photos on horseback at the fort.</p>
+                                    <div className="mt-auto flex items-center gap-2 text-royal-gold text-[10px] font-black uppercase tracking-widest">
+                                        Book Session <ArrowRight className="w-4 h-4" />
                                     </div>
                                 </div>
                             </div>

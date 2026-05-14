@@ -26,19 +26,19 @@ const Footer = () => {
                     <div className="h-px w-12 md:w-24 bg-gradient-to-l from-transparent to-royal-gold/40"></div>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 text-center md:text-left mb-16">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left mb-16">
                     {/* Explore Section */}
-                    <div className="flex flex-col items-center md:items-start group w-full">
+                    <div className="flex flex-col items-center md:items-start group w-full h-full">
                         <h4 className="text-royal-gold uppercase tracking-[0.3em] mb-6 text-xs font-black flex items-center gap-2">
                             <span className="w-1.5 h-1.5 rounded-full bg-royal-gold"></span>
                             {t.footer.explore}
                         </h4>
-                        <div className="bg-royal-black/30 backdrop-blur-sm border border-royal-gold/10 rounded-2xl p-6 w-full max-w-sm hover:border-royal-gold/30 transition-all duration-500 shadow-xl group-hover:shadow-royal-gold/5">
-                            <ul className="space-y-3 font-serif italic text-sm">
+                        <div className="bg-royal-black/30 backdrop-blur-sm border border-royal-gold/10 rounded-2xl p-6 w-full flex-1 flex flex-col hover:border-royal-gold/30 transition-all duration-500 shadow-xl group-hover:shadow-royal-gold/5">
+                            <ul className="space-y-4 font-serif italic text-sm">
                                 {[
                                     { name: t.nav.history, path: '/#history' },
                                     { name: t.nav.attractions, path: '/attractions' },
-                                    { name: t.nav.localRoyalCuisine, path: '/flavors' },
+                                    { name: t.nav.royalJourneys, path: '/royal-journeys' },
                                     { name: t.nav.hotels, path: '/stays' },
                                     { name: t.nav.localVocal, path: '/vocal-for-local' },
                                     { name: t.nav.missionServices, path: '/mission-services' },
@@ -58,62 +58,78 @@ const Footer = () => {
                     </div>
 
                     {/* Benefits Section */}
-                    <div className="flex flex-col items-center md:items-start group">
+                    <div className="flex flex-col items-center md:items-start group w-full h-full">
                         <h4 
                             onClick={() => setIsBenefitsOpen(!isBenefitsOpen)}
-                            className="text-royal-gold uppercase tracking-[0.3em] mb-6 text-xs font-black flex items-center gap-2 cursor-pointer hover:text-white transition-colors"
+                            className="text-royal-gold uppercase tracking-[0.3em] mb-6 text-xs font-black flex items-center gap-2 cursor-pointer md:cursor-default hover:text-white transition-colors"
                         >
                             <span className="w-1.5 h-1.5 rounded-full bg-royal-gold"></span>
                             {t.footer.benefitsTitle}
-                            <span className={`transform transition-transform duration-300 ${isBenefitsOpen ? 'rotate-180' : 'rotate-0'} text-[10px]`}>▼</span>
+                            <span className={`transform transition-transform duration-300 ${isBenefitsOpen ? 'rotate-180' : 'rotate-0'} text-[10px] md:hidden`}>▼</span>
                         </h4>
-                        <AnimatePresence>
-                            {isBenefitsOpen && (
-                                <motion.ul 
-                                    initial={{ opacity: 0, height: 0 }}
-                                    animate={{ opacity: 1, height: 'auto' }}
-                                    exit={{ opacity: 0, height: 0 }}
-                                    transition={{ duration: 0.3 }}
-                                    className="space-y-4 overflow-hidden"
-                                >
-                                    {t.footer.benefitPoints.map((point, index) => (
-                                        <li key={index} className="flex gap-3 text-sm leading-relaxed group/item">
-                                            <span className="text-royal-gold shrink-0 mt-0.5 opacity-40 group-hover/item:opacity-100 transition-opacity">✦</span>
-                                            <span className="text-royal-white/50 group-hover/item:text-royal-white/80 transition-colors">{point}</span>
-                                        </li>
-                                    ))}
-                                </motion.ul>
-                            )}
-                        </AnimatePresence>
+                        
+                        {/* Mobile View: Toggle */}
+                        <div className="md:hidden w-full">
+                            <AnimatePresence>
+                                {isBenefitsOpen && (
+                                    <motion.ul 
+                                        initial={{ opacity: 0, height: 0 }}
+                                        animate={{ opacity: 1, height: 'auto' }}
+                                        exit={{ opacity: 0, height: 0 }}
+                                        transition={{ duration: 0.3 }}
+                                        className="space-y-4 overflow-hidden bg-royal-black/30 backdrop-blur-sm border border-royal-gold/10 rounded-2xl p-6"
+                                    >
+                                        {t.footer.benefitPoints.map((point, index) => (
+                                            <li key={index} className="flex gap-3 text-sm leading-relaxed group/item text-left">
+                                                <span className="text-royal-gold shrink-0 mt-0.5 opacity-40 group-hover/item:opacity-100 transition-opacity">✦</span>
+                                                <span className="text-royal-white/70 group-hover/item:text-royal-white transition-colors">{point}</span>
+                                            </li>
+                                        ))}
+                                    </motion.ul>
+                                )}
+                            </AnimatePresence>
+                        </div>
+
+                        {/* Desktop View: Always Visible Box */}
+                        <div className="hidden md:flex flex-col justify-between bg-royal-black/30 backdrop-blur-sm border border-royal-gold/10 rounded-2xl p-6 w-full flex-1 hover:border-royal-gold/30 transition-all duration-500 shadow-xl group-hover:shadow-royal-gold/5">
+                            <ul className="space-y-4 flex-1 flex flex-col justify-between">
+                                {t.footer.benefitPoints.map((point, index) => (
+                                    <li key={index} className="flex gap-3 text-sm leading-relaxed group/item">
+                                        <span className="text-royal-gold shrink-0 mt-0.5 opacity-40 group-hover/item:opacity-100 transition-opacity">✦</span>
+                                        <span className="text-royal-white/70 group-hover/item:text-royal-white transition-colors">{point}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     </div>
 
                     {/* Contact Section */}
-                    <div className="flex flex-col items-center md:items-start w-full">
+                    <div className="flex flex-col items-center md:items-start w-full h-full">
                         <h4 className="text-royal-gold uppercase tracking-[0.3em] mb-6 text-xs font-black flex items-center gap-2">
                             <span className="w-1.5 h-1.5 rounded-full bg-royal-gold"></span>
                             {t.footer.contact}
                         </h4>
-                        <div className="bg-royal-black/30 backdrop-blur-sm border border-royal-gold/10 rounded-2xl p-6 w-full max-w-sm hover:border-royal-gold/30 transition-all duration-500 shadow-xl">
-                            <div className="space-y-4">
+                        <div className="bg-royal-black/30 backdrop-blur-sm border border-royal-gold/10 rounded-2xl p-6 w-full flex-1 flex flex-col justify-between hover:border-royal-gold/30 transition-all duration-500 shadow-xl">
+                            <div className="space-y-4 flex-1 flex flex-col justify-between">
                                 <a href="tel:+917597451057" className="group flex items-center gap-3 hover:text-royal-gold transition-all">
                                     <div className="w-8 h-8 rounded-lg bg-royal-gold/5 border border-royal-gold/20 flex items-center justify-center group-hover:bg-royal-gold/20 transition-all">
                                         <span className="text-[10px]">📞</span>
                                     </div>
-                                    <span className="text-sm font-medium tracking-wider">+91 7597451057</span>
+                                    <span className="text-sm font-medium tracking-wider text-royal-white/70 group-hover:text-royal-white">+91 7597451057</span>
                                 </a>
                                 
                                 <a href="https://wa.me/917597451057?text=Hello!%20I%20want%20to%20know%20more%20about%20Chittorgarh%20Tourism%20services." target="_blank" rel="noopener noreferrer" className="group flex items-center gap-3 hover:text-royal-gold transition-all">
                                     <div className="w-8 h-8 rounded-lg bg-royal-gold/5 border border-royal-gold/20 flex items-center justify-center group-hover:bg-royal-gold/20 transition-all">
                                         <span className="text-[10px]">💬</span>
                                     </div>
-                                    <span className="text-sm font-medium tracking-wider">WhatsApp Us</span>
+                                    <span className="text-sm font-medium tracking-wider text-royal-white/70 group-hover:text-royal-white">WhatsApp Us</span>
                                 </a>
 
                                 <a href="mailto:visitchittorgarh@gmail.com?subject=Inquiry%20from%20Chittorgarh%20Tourism%20Website&body=Hello,%20I%20am%20interested%20in%20your%20services." className="group flex items-center gap-3 hover:text-royal-gold transition-all">
                                     <div className="w-8 h-8 rounded-lg bg-royal-gold/5 border border-royal-gold/20 flex items-center justify-center group-hover:bg-royal-gold/20 transition-all">
                                         <span className="text-[10px]">✉️</span>
                                     </div>
-                                    <span className="text-sm font-medium tracking-wider lowercase">visitchittorgarh@gmail.com</span>
+                                    <span className="text-sm font-medium tracking-wider lowercase text-royal-white/70 group-hover:text-royal-white">visitchittorgarh@gmail.com</span>
                                 </a>
 
                                 {/* Feedback Section */}
@@ -140,20 +156,20 @@ const Footer = () => {
                                         </AnimatePresence>
                                     </div>
                                 )}
-                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
 
 
                 {/* Bottom Bar */}
                 {/* Bottom Bar - ChittorTech Branding */}
                 <div className="border-t border-royal-gold/10 pt-16 flex flex-col items-center gap-10">
-                    <div className="flex flex-col items-center gap-8 bg-royal-black/20 p-8 rounded-[2rem] border border-royal-gold/5 backdrop-blur-md max-w-sm w-full mx-auto shadow-2xl">
+                    <div className="flex flex-col md:flex-row items-center justify-between gap-8 bg-royal-black/20 p-8 rounded-[2rem] border border-royal-gold/5 backdrop-blur-md max-w-sm md:max-w-full w-full mx-auto shadow-2xl">
                         {/* Product Badge */}
-                        <div className="flex items-center gap-4 bg-royal-black/40 px-6 py-4 rounded-full border border-royal-gold/20 shadow-inner group transition-all duration-500 hover:border-royal-gold/50">
-                            <div className="w-14 h-14 bg-white rounded-2xl p-2 shadow-lg transform group-hover:scale-105 transition-transform">
+                        <div className="flex items-center gap-4 bg-royal-black/40 px-6 py-4 rounded-full border border-royal-gold/20 shadow-inner group transition-all duration-500 hover:border-royal-gold/50 w-full md:w-auto justify-center md:justify-start">
+                            <div className="w-14 h-14 bg-white rounded-2xl p-2 shadow-lg transform group-hover:scale-105 transition-transform shrink-0">
                                 <img src="/chittortech_logo.png" alt="ChittorTech" className="w-full h-full object-contain" />
                             </div>
                             <div className="flex flex-col">
@@ -163,7 +179,7 @@ const Footer = () => {
                         </div>
 
                         {/* Recognition Badges */}
-                        <div className="flex flex-col gap-3">
+                        <div className="flex flex-col gap-3 w-full md:w-auto items-center md:items-start">
                             <div className="flex items-center gap-3 group">
                                 <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.5)]"></div>
                                 <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider group-hover:text-emerald-300 transition-colors">Recognized by iStart Rajasthan</span>
@@ -175,10 +191,10 @@ const Footer = () => {
                         </div>
 
                         {/* Divider */}
-                        <div className="w-full border-t border-dashed border-royal-white/10"></div>
+                        <div className="w-full border-t border-dashed border-royal-white/10 md:hidden"></div>
 
                         {/* Contact & Copyright */}
-                        <div className="flex flex-col items-center gap-6 w-full">
+                        <div className="flex flex-col items-center md:items-end gap-6 w-full md:w-auto">
                             <a href="mailto:visitchittorgarh@gmail.com" className="group flex items-center gap-4 hover:text-royal-gold transition-all duration-300">
                                 <div className="w-10 h-10 rounded-xl bg-royal-gold/5 border border-royal-gold/10 flex items-center justify-center group-hover:border-royal-gold/40 transition-all">
                                     <span className="text-lg">✉️</span>
@@ -186,7 +202,7 @@ const Footer = () => {
                                 <span className="text-sm font-bold tracking-widest text-royal-white/70 group-hover:text-royal-white lowercase">visitchittorgarh@gmail.com</span>
                             </a>
 
-                            <p className="text-[10px] text-royal-white/40 uppercase tracking-[0.2em] font-bold text-center">
+                            <p className="text-[10px] text-royal-white/40 uppercase tracking-[0.2em] font-bold text-center md:text-right">
                                 © 2026 CHITTORTECH ALL RIGHTS RESERVED
                             </p>
                         </div>

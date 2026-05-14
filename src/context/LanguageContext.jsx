@@ -4,12 +4,20 @@ import { content } from '../data/content';
 const LanguageContext = createContext();
 
 export const LanguageProvider = ({ children }) => {
-    const [lang, setLang] = useState('hi'); // 'en' or 'hi'
+    const [lang, setLang] = useState(() => {
+        if (typeof window !== 'undefined') {
+            return localStorage.getItem('language') || 'hi';
+        }
+        return 'hi';
+    }); // 'en' or 'hi'
     const [isLangModalOpen, setIsLangModalOpen] = useState(false);
 
     const changeLanguage = (newLang) => {
         if (content[newLang]) {
             setLang(newLang);
+            if (typeof window !== 'undefined') {
+                localStorage.setItem('language', newLang);
+            }
         }
     };
 

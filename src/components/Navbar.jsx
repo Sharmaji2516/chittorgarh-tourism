@@ -20,7 +20,6 @@ const Navbar = () => {
     const navLinks = [
         { name: t.nav.home || 'Home', href: '/' },
         { name: t.nav.attractions || 'Attractions', href: '/attractions' },
-        { name: t.nav.localRoyalCuisine, href: '/flavors' },
         { name: t.nav.royalJourneys, href: '/royal-journeys' },
         { name: t.nav.localVocal || 'Vocal For Local', href: '/vocal-for-local' },
         { name: t.nav.missionServices, href: '/mission-services' },
@@ -59,13 +58,13 @@ const Navbar = () => {
                             whileTap={{ scale: 0.95 }}
                             className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br from-royal-gold via-orange-400 to-royal-gold flex items-center justify-center shadow-[0_0_20px_rgba(212,175,55,0.3)] group-hover:shadow-[0_0_30px_rgba(212,175,55,0.5)] transition-shadow duration-500 overflow-hidden"
                         >
-                            <img src="/logo.jpg" alt="Logo" className="w-full h-full object-cover" />
+                            <img src="/logo_maharana.png" alt="Logo" className="w-full h-full object-cover" />
                         </motion.div>
                         <div className="flex flex-col">
-                            <span className="text-white text-base md:text-xl font-bold font-serif tracking-[0.15em] leading-tight">
+                            <span className="text-white text-base md:text-xl font-bold font-serif tracking-[0.15em] leading-tight group-hover:text-royal-gold transition-colors duration-300">
                                 {t.nav.brandTitle}
                             </span>
-                            <span className="text-royal-gold text-[10px] md:text-xs font-bold tracking-[0.4em] uppercase opacity-80 decoration-royal-gold/30">
+                            <span className="text-royal-gold text-[10px] md:text-xs font-bold tracking-[0.4em] uppercase opacity-80 group-hover:opacity-100 transition-opacity duration-300">
                                 {t.nav.brandTagline}
                             </span>
                         </div>
@@ -73,13 +72,13 @@ const Navbar = () => {
 
                     {/* Desktop Menu - Centralized & Spaced */}
                     <div className="hidden lg:block absolute left-1/2 -translate-x-1/2">
-                        <div className="flex items-center space-x-2">
+                        <div className="flex items-center space-x-1 bg-black/20 backdrop-blur-md px-2 py-1.5 rounded-full border border-white/5">
                             {navLinks.map((link) => (
                                 <NavLink
                                     key={link.name}
                                     to={link.href}
                                     className={({ isActive }) => cn(
-                                        "relative px-4 py-2 text-[11px] font-bold transition-all uppercase tracking-[0.2em] group",
+                                        "relative px-5 py-2 text-xs font-semibold transition-all uppercase tracking-wider group rounded-full",
                                         isActive ? "text-royal-gold" : "text-white/70 hover:text-white"
                                     )}
                                 >
@@ -88,12 +87,14 @@ const Navbar = () => {
                                             <span className="relative z-10">{link.name}</span>
                                             {isActive && (
                                                 <motion.div
-                                                    layoutId="nav-underline"
-                                                    className="absolute bottom-0 left-0 right-0 h-[2px] bg-royal-gold shadow-[0_0_8px_rgba(212,175,55,0.8)]"
+                                                    layoutId="nav-active-pill"
+                                                    className="absolute inset-0 bg-royal-gold/15 rounded-full border border-royal-gold/20"
                                                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                                                 />
                                             )}
-                                            <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 rounded-lg transition-opacity duration-300" />
+                                            {!isActive && (
+                                                <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 rounded-full transition-all duration-300 transform scale-95 group-hover:scale-100" />
+                                            )}
                                         </>
                                     )}
                                 </NavLink>
@@ -110,7 +111,7 @@ const Navbar = () => {
                                 e.preventDefault();
                                 showLangModal();
                             }}
-                            className="flex items-center gap-3 px-5 py-2.5 rounded-full border border-royal-gold/30 bg-royal-gold/5 text-royal-gold hover:bg-royal-gold hover:text-royal-black transition-all duration-300 shadow-lg shadow-black/20 group"
+                            className="flex items-center gap-3 px-5 py-2.5 rounded-full border border-royal-gold/30 bg-royal-gold/5 text-royal-gold hover:bg-royal-gold hover:text-royal-black hover:shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-all duration-500 shadow-lg shadow-black/20 group"
                         >
                             <Globe className="w-4 h-4 group-hover:rotate-12 transition-transform" />
                             <span className="text-[10px] font-bold uppercase tracking-widest">{lang === 'en' ? 'हिन्दी' : 'English'}</span>

@@ -132,6 +132,14 @@ const QuickInquiryModal = ({ isOpen, onClose, entityName, category }) => {
                                     <ShieldCheck className="w-4 h-4" />
                                     <span className="text-[9px] font-bold uppercase tracking-widest">Verified Royal Concierge Service</span>
                                 </div>
+
+                                {/* WhatsApp QR Code */}
+                                <div className="border-t border-white/5 pt-6 mt-6 text-center">
+                                    <p className="text-[10px] text-royal-gold uppercase tracking-widest font-black mb-3">Or Scan to Chat Instantly</p>
+                                    <div className="w-32 h-32 mx-auto bg-white p-2 rounded-xl border border-royal-gold/20 shadow-lg">
+                                        <img src="/assets/images/whatsapp_qr.jpg" alt="WhatsApp QR Code" className="w-full h-full object-cover" />
+                                    </div>
+                                </div>
                             </form>
                         )}
                     </div>

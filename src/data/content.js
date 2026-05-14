@@ -5,7 +5,8 @@ export const content = {
       history: "History",
       attractions: "Attractions",
       localRoyalCuisine: "Famous Local Flavors",
-      royalJourneys: "Royal Journeys",
+      royalJourneys: "Packages",
+      hotels: "Stays",
       localVocal: "Vocal For Local",
       itineraries: "Itineraries",
       missionServices: "Mission & Services",
@@ -680,21 +681,24 @@ export const content = {
           name: "Fort Legacy",
           duration: "1 Day",
           includes: ["Private SUV", "Certified Guide", "Traditional Lunch"],
-          desc: "The ultimate 1-day journey covering every secret of the Chittorgarh Fort."
+          desc: "The ultimate 1-day journey covering every secret of the Chittorgarh Fort.",
+          image: "/assets/images/fort-legacy.jpg"
         },
         {
           id: "twoDays",
           name: "Mewar Heritage",
           duration: "2 Days",
           includes: ["Luxury Stay", "Full Transport", "Wildlife Safari"],
-          desc: "A deep dive into history followed by a serene exploration of Bassi and the historic city."
+          desc: "A deep dive into history followed by a serene exploration of Bassi and the historic city.",
+          image: "/assets/images/Bassi-Wildlife-Sanctuary-Chittorgarh.jpg"
         },
         {
           id: "threeDays",
           name: "Spiritual & Scenic",
           duration: "3 Days",
           includes: ["Temple Tour", "Waterfall Visit", "Premium Stay"],
-          desc: "A grand journey featuring the divine Sanwaliya Ji Temple and the breathtaking Menal Waterfall."
+          desc: "A grand journey featuring the divine Sanwaliya Ji Temple and the breathtaking Menal Waterfall.",
+          image: "/assets/images/spiritual-tour.jpg"
         }
       ]
     },
@@ -960,6 +964,7 @@ export const content = {
       attractions: "पर्यटन स्थल",
       localRoyalCuisine: "प्रसिद्ध स्थानीय स्वाद",
       royalJourneys: "शाही यात्राएं",
+      hotels: "ठहरने के स्थान",
       localVocal: "वोकल फॉर लोकल",
       itineraries: "यात्रा कार्यक्रम",
       missionServices: "मिशन और सेवाएँ",

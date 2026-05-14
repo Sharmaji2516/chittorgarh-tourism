@@ -6,7 +6,7 @@ import Section from './components/Section';
 import AttractionModal from './components/AttractionModal';
 import Footer from './components/Footer';
 import CountrySelector from './components/CountrySelector';
-import FactCards from './components/FactCards';
+
 import ScrollToTop from './components/ScrollToTop';
 import { motion, AnimatePresence } from 'framer-motion';
 import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
@@ -26,6 +26,8 @@ import VerificationPage from './pages/VerificationPage';
 import StaffVerificationPage from './pages/StaffVerificationPage';
 import FeedbackPage from './pages/FeedbackPage';
 import TermsPage from './pages/TermsPage';
+import ServiceDetailsPage from './pages/ServiceDetailsPage';
+import FloatingInquiry from './components/FloatingInquiry';
 
 const MainContent = () => {
   const { t } = useLanguage();
@@ -56,10 +58,11 @@ const MainContent = () => {
         {!isStandalonePage && <VisitModal />}
         {!isStandalonePage && <CountrySelector />}
         {!isStandalonePage && <Navbar />}
-        {!isStandalonePage && <FactCards />}
+
+        {!isStandalonePage && <FloatingInquiry />}
 
         {/* Routes Section */}
-        <div className={cn("space-y-0", !isStandalonePage && location.pathname !== '/' ? "pt-20" : "")}>
+        <div className={cn("space-y-0", !isStandalonePage ? "pt-20" : "")}>
           <Routes>
             <Route path="/" element={
               <HomePage
@@ -109,6 +112,7 @@ const MainContent = () => {
             <Route path="/staff-verify" element={<StaffVerificationPage />} />
             <Route path="/feedback" element={<FeedbackPage />} />
             <Route path="/terms" element={<TermsPage />} />
+            <Route path="/service/:serviceId" element={<ServiceDetailsPage />} />
           </Routes>
 
         </div>
