@@ -862,6 +862,18 @@ export const content = {
       desc: "We proudly support the 'Vocal for Local' movement. Our initiative is to bridge the gap between tourists and our local artisans and small shops. Too often, visitors come and go without discovering the hidden gems of our city. By connecting you directly with them, we aim to preserve our rich heritage and empower the local community.",
       items: [
         {
+          id: 4,
+          name: "Mewari Special Achar",
+          specialty: "Premium Homemade Pickles",
+          location: "Chittorgarh",
+          desc: "Experience the authentic taste of Mewar with our premium homemade pickles, prepared using traditional recipes.",
+          image: "/assets/images/mewari_achar_logo.png",
+          mapLink: "https://maps.google.com/?q=Mewari+Special+Achar+Chittorgarh",
+          type: "vendor",
+          distances: { railway: "N/A", bus: "N/A" },
+          website: "https://www.mewari-achar.shop/"
+        },
+        {
           id: 1,
           name: "Raj Kumar Crafts",
           specialty: "Handcrafted Pottery",
@@ -1784,6 +1796,18 @@ export const content = {
         "हमारे स्थानीय कारीगरों और विक्रेताओं का समर्थन करें जो विरासत को जीवित रखते हैं।",
       desc: "हम 'वोकल फॉर लोकल' पहल का गर्व से समर्थन करते हैं। हमारा उद्देश्य पर्यटकों को सीधे छोटी दुकानों और स्थानीय कारीगरों से जोड़ना है। अक्सर पर्यटक आते हैं और इन छिपे हुए खजानों को जाने बिना ही चले जाते हैं। आपको सीधे उनसे जोड़कर, हम अपनी समृद्ध विरासत को सहेजने और स्थानीय समुदाय को सशक्त बनाने का प्रयास कर रहे हैं।",
       items: [
+        {
+          id: 4,
+          name: "मेवाड़ी स्पेशल अचार",
+          specialty: "प्रीमियम होममेड अचार",
+          location: "चित्तौड़गढ़",
+          desc: "पारंपरिक व्यंजनों का उपयोग करके तैयार किए गए हमारे प्रीमियम होममेड अचार के साथ मेवाड़ के असली स्वाद का अनुभव करें।",
+          image: "/assets/images/mewari_achar_logo.png",
+          mapLink: "https://maps.google.com/?q=Mewari+Special+Achar+Chittorgarh",
+          type: "vendor",
+          distances: { railway: "N/A", bus: "N/A" },
+          website: "https://www.mewari-achar.shop/"
+        },
         {
           id: 1,
           name: "राज कुमार क्राफ्ट्स",

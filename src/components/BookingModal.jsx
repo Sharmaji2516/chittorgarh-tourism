@@ -37,23 +37,23 @@ const BookingModal = ({ isOpen, onClose, pillarTitle }) => {
             await saveBookingToFirebase(finalData);
 
             const phoneNumber = "917597451057";
-            const message = `*👑 Royal Expedition Inquiry*%0A%0A` +
-                `*🛡️ Expedition:* ${pillarTitle || 'Custom'}%0A` +
-                `*📅 Date:* ${bookingData.date}%0A` +
-                `*🕒 Arrival Time:* ${bookingData.arrivalTime || 'Not Specified'}%0A` +
-                `*🕒 Departure Time:* ${bookingData.departureTime || 'Not Specified'}%0A` +
-                `*👥 Travelers:* ${bookingData.travelers}%0A%0A` +
-                `*-- Preferences --*%0A` +
-                `*🚗 Vehicle:* ${bookingData.transport}%0A` +
-                `*🏨 Room:* ${bookingData.hotel}%0A` +
-                `*🍽️ Cuisine:* ${bookingData.cuisine || 'Not Specified'}%0A%0A` +
-                `*📜 Special Needs:* ${bookingData.requirements || 'None'}%0A%0A` +
-                `*-- Contact --*%0A` +
-                `*👤 Name:* ${bookingData.name}%0A` +
-                `*📱 Phone:* ${bookingData.phone}%0A%0A` +
+            const message = `*👑 Royal Expedition Inquiry*\n\n` +
+                `*🛡️ Expedition:* ${pillarTitle || 'Custom'}\n` +
+                `*📅 Date:* ${bookingData.date}\n` +
+                `*🕒 Arrival Time:* ${bookingData.arrivalTime || 'Not Specified'}\n` +
+                `*🕒 Departure Time:* ${bookingData.departureTime || 'Not Specified'}\n` +
+                `*👥 Travelers:* ${bookingData.travelers}\n\n` +
+                `*-- Preferences --*\n` +
+                `*🚗 Vehicle:* ${bookingData.transport}\n` +
+                `*🏨 Room:* ${bookingData.hotel}\n` +
+                `*🍽️ Cuisine:* ${bookingData.cuisine || 'Not Specified'}\n\n` +
+                `*📜 Special Needs:* ${bookingData.requirements || 'None'}\n\n` +
+                `*-- Contact --*\n` +
+                `*👤 Name:* ${bookingData.name}\n` +
+                `*📱 Phone:* ${bookingData.phone}\n\n` +
                 `I am interested in this Royal Expedition. Please contact me with availability and a custom quote.`;
 
-            window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+            window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
             setSubmitted(true);
         } catch (error) {
             console.error("Submission Error:", error);

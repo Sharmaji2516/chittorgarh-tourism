@@ -33,16 +33,16 @@ const QuickInquiryModal = ({ isOpen, onClose, entityName, category }) => {
 
             // WhatsApp Message
             const phoneNumber = "917597901057";
-            const message = `*👑 On-Demand Inquiry*%0A%0A` +
-                `*🛡️ Service:* ${entityName}%0A` +
-                `*📅 From:* ${formData.startDate}%0A` +
-                `*📅 To:* ${formData.endDate}%0A%0A` +
-                `*-- Guest Details --*%0A` +
-                `*👤 Name:* ${formData.name}%0A` +
-                `*📱 Phone:* ${formData.phone}%0A%0A` +
+            const message = `*👑 On-Demand Inquiry*\n\n` +
+                `*🛡️ Service:* ${entityName}\n` +
+                `*📅 From:* ${formData.startDate}\n` +
+                `*📅 To:* ${formData.endDate}\n\n` +
+                `*-- Guest Details --*\n` +
+                `*👤 Name:* ${formData.name}\n` +
+                `*📱 Phone:* ${formData.phone}\n\n` +
                 `I am interested in this service. Please contact me with availability and pricing.`;
 
-            window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+            window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
             setSubmitted(true);
         } catch (error) {
             console.error("Inquiry Error:", error);

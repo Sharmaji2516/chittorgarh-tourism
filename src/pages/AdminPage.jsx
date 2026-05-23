@@ -399,47 +399,47 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
         const total = calculateLiveTotal(localData);
         const phoneNumber = "91" + localData.phone?.replace(/[^0-9]/g, '');
         
-        const messageEn = `*👑 Updated Royal Inquiry*%0A%0A` +
-            `Hello ${localData.name}, we have updated your travel details based on current availability:%0A%0A` +
-            `*🛡️ Package:* ${localData.pillarTitle || "Custom"}%0A` +
-            `*📅 Date:* ${formatDateReadable(localData.date)}%0A%0A` +
-            `*-- Revised Options --*%0A` +
-            `*🚗 Transport:* ${localData.transport}%0A` +
-            `*🏨 Hotel:* ${localData.hotel}%0A` +
-            `*🚩 Guide:* ${localData.guide}%0A%0A` +
-            `*💰 New Total Estimate: ₹${total}*%0A%0A` +
+        const messageEn = `*👑 Updated Royal Inquiry*\n\n` +
+            `Hello ${localData.name}, we have updated your travel details based on current availability:\n\n` +
+            `*🛡️ Package:* ${localData.pillarTitle || "Custom"}\n` +
+            `*📅 Date:* ${formatDateReadable(localData.date)}\n\n` +
+            `*-- Revised Options --*\n` +
+            `*🚗 Transport:* ${localData.transport}\n` +
+            `*🏨 Hotel:* ${localData.hotel}\n` +
+            `*🚩 Guide:* ${localData.guide}\n\n` +
+            `*💰 New Total Estimate: ₹${total}*\n\n` +
             `Please let us know if this works for you.`;
             
-        const messageHi = `*👑 अपडेटेड रॉयल इंक्वायरी*%0A%0A` +
-            `नमस्ते ${localData.name}, हमने वर्तमान उपलब्धता के आधार पर आपके यात्रा विवरण को अपडेट किया है:%0A%0A` +
-            `*🛡️ पैकेज:* ${localData.pillarTitle || "कस्टम"}%0A` +
-            `*📅 तिथि:* ${formatDateReadable(localData.date)}%0A%0A` +
-            `*-- संशोधित विकल्प --*%0A` +
-            `*🚗 परिवहन:* ${localData.transport}%0A` +
-            `*🏨 होटल:* ${localData.hotel}%0A` +
-            `*🚩 गाइड:* ${localData.guide}%0A%0A` +
-            `*💰 नया कुल अनुमान: ₹${total}*%0A%0A` +
+        const messageHi = `*👑 अपडेटेड रॉयल इंक्वायरी*\n\n` +
+            `नमस्ते ${localData.name}, हमने वर्तमान उपलब्धता के आधार पर आपके यात्रा विवरण को अपडेट किया है:\n\n` +
+            `*🛡️ पैकेज:* ${localData.pillarTitle || "कस्टम"}\n` +
+            `*📅 तिथि:* ${formatDateReadable(localData.date)}\n\n` +
+            `*-- संशोधित विकल्प --*\n` +
+            `*🚗 परिवहन:* ${localData.transport}\n` +
+            `*🏨 होटल:* ${localData.hotel}\n` +
+            `*🚩 गाइड:* ${localData.guide}\n\n` +
+            `*💰 नया कुल अनुमान: ₹${total}*\n\n` +
             `कृपया हमें बताएं कि क्या यह आपके लिए सही है।`;
             
         const message = emailLanguage === 'en' ? messageEn : messageHi;
-        window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+        window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
     };
 
     const sendWelcomeMessage = () => {
         const phoneNumber = "91" + localData.phone?.replace(/[^0-9]/g, '');
         
-        const messageEn = `*👑 Welcome to Chittorgarh!*%0A%0A` +
-            `Hello ${localData.name}, thank you for choosing us for your heritage journey. We are excited to host you!%0A%0A` +
-            `Our team is preparing your custom itinerary for *${localData.pillarTitle || "Expedition"}*.%0A%0A` +
+        const messageEn = `*👑 Welcome to Chittorgarh!*\n\n` +
+            `Hello ${localData.name}, thank you for choosing us for your heritage journey. We are excited to host you!\n\n` +
+            `Our team is preparing your custom itinerary for *${localData.pillarTitle || "Expedition"}*.\n\n` +
             `Is there anything specific you would like to see?`;
             
-        const messageHi = `*👑 चित्तौड़गढ़ में आपका स्वागत है!*%0A%0A` +
-            `नमस्ते ${localData.name}, अपनी विरासत यात्रा के लिए हमें चुनने के लिए धन्यवाद। हम आपकी मेजबानी करने के लिए उत्साहित हैं!%0A%0A` +
-            `हमारी टीम *${localData.pillarTitle || "एक्सपीडिशन"}* के लिए आपका कस्टम यात्रा कार्यक्रम तैयार कर रही है।%0A%0A` +
+        const messageHi = `*👑 चित्तौड़गढ़ में आपका स्वागत है!*\n\n` +
+            `नमस्ते ${localData.name}, अपनी विरासत यात्रा के लिए हमें चुनने के लिए धन्यवाद। हम आपकी मेजबानी करने के लिए उत्साहित हैं!\n\n` +
+            `हमारी टीम *${localData.pillarTitle || "एक्सपीडिशन"}* के लिए आपका कस्टम यात्रा कार्यक्रम तैयार कर रही है।\n\n` +
             `क्या कुछ खास है जो आप देखना चाहेंगे?`;
             
         const message = emailLanguage === 'en' ? messageEn : messageHi;
-        window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+        window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
     };
 
     return (
@@ -454,22 +454,22 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
                 initial={{ scale: 0.9, opacity: 0, y: 30 }}
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 exit={{ scale: 0.9, opacity: 0, y: 30 }}
-                className="relative w-full max-w-6xl bg-white border border-slate-200 rounded-[4rem] overflow-hidden shadow-[0_50px_150px_-30px_rgba(0,0,0,0.2)] flex flex-col lg:flex-row max-h-[95vh]"
+                className="relative w-full max-w-6xl bg-white border border-slate-200 rounded-3xl lg:rounded-[4rem] overflow-hidden shadow-[0_50px_150px_-30px_rgba(0,0,0,0.2)] flex flex-col lg:flex-row max-h-[90vh] lg:max-h-[95vh]"
             >
                 {/* Side Brand Panel */}
-                <div className="w-full lg:w-72 bg-royal-gold/10 border-b lg:border-b-0 lg:border-r border-royal-gold/10 p-10 flex flex-col justify-between items-start text-left">
-                    <div className="z-10 w-full space-y-8">
-                        <div className="w-20 h-20 rounded-3xl bg-royal-gold flex items-center justify-center shadow-2xl shadow-royal-gold/40 mb-10">
-                            <User className="w-10 h-10 text-royal-black" />
+                <div className="w-full lg:w-72 bg-royal-gold/10 border-b lg:border-b-0 lg:border-r border-royal-gold/10 p-6 lg:p-10 flex flex-col justify-between items-start text-left shrink-0">
+                    <div className="z-10 w-full space-y-4 lg:space-y-8">
+                        <div className="w-12 h-12 lg:w-20 lg:h-20 rounded-2xl lg:rounded-3xl bg-royal-gold flex items-center justify-center shadow-xl lg:shadow-2xl shadow-royal-gold/40 mb-4 lg:mb-10">
+                            <User className="w-6 h-6 lg:w-10 lg:h-10 text-royal-black" />
                         </div>
                         
-                        <div className="space-y-6">
+                        <div className="space-y-4 lg:space-y-6">
                             <div>
                                 <p className="text-[10px] text-royal-gold font-black uppercase tracking-[0.4em] mb-2">Guest Profile</p>
                                 <h3 className="text-xl font-serif text-black font-bold leading-tight">{localData.name}</h3>
                             </div>
                             
-                            <div className="space-y-4">
+                            <div className="space-y-3 lg:space-y-4">
                                 <div className="flex items-center gap-3">
                                     <div className="p-2 bg-royal-gold/10 rounded-lg"><Phone className="w-3.5 h-3.5 text-royal-gold" /></div>
                                     <p className="text-[11px] font-black text-black/80 tracking-widest">{localData.phone}</p>
@@ -483,7 +483,7 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
                             </div>
                         </div>
 
-                        <div className="pt-8 border-t border-royal-gold/10 w-full">
+                        <div className="pt-4 lg:pt-8 border-t border-royal-gold/10 w-full">
                             <p className="text-[9px] text-black/40 uppercase tracking-widest mb-3">Expedition Status</p>
                             <div className={cn(
                                 "inline-flex items-center gap-2 px-4 py-2 rounded-full text-[9px] font-black uppercase tracking-widest leading-none",
@@ -497,41 +497,41 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
                 </div>
 
                 {/* Main Lead Details Content */}
-                <div className="flex-1 p-8 lg:p-14 overflow-y-auto custom-scrollbar bg-white">
+                <div className="flex-1 p-6 md:p-10 lg:p-14 overflow-y-auto custom-scrollbar bg-white">
                     {/* Header Row */}
-                    <div className="flex justify-between items-start mb-8">
+                    <div className="flex justify-between items-start gap-4 mb-6 md:mb-8">
                         <div>
-                            <span className="text-[10px] text-royal-gold font-bold uppercase tracking-[0.3em] mb-3 block">Guest Expedition Registry</span>
-                            <div className="flex items-center gap-4 flex-wrap">
-                                <h2 className="text-4xl md:text-5xl font-serif text-black">{localData.name}</h2>
+                            <span className="text-[10px] text-royal-gold font-bold uppercase tracking-[0.3em] mb-2 md:mb-3 block">Guest Expedition Registry</span>
+                            <div className="flex items-center gap-3 md:gap-4 flex-wrap">
+                                <h2 className="text-2xl md:text-4xl lg:text-5xl font-serif text-black">{localData.name}</h2>
                                 <button onClick={() => setEditMode(!editMode)} className="p-2 bg-slate-100 hover:bg-royal-gold hover:text-royal-black rounded-lg transition-all">
-                                    <Edit2 className="w-4 h-4" />
+                                    <Edit2 className="w-3.5 h-3.5 md:w-4 md:h-4" />
                                 </button>
                             </div>
                         </div>
-                        <button onClick={onClose} className="p-4 bg-slate-100 hover:bg-slate-200 rounded-full transition-all text-black/60 hover:text-black shrink-0">
-                            <X className="w-6 h-6" />
+                        <button onClick={onClose} className="p-3 md:p-4 bg-slate-100 hover:bg-slate-200 rounded-full transition-all text-black/60 hover:text-black shrink-0">
+                            <X className="w-5 h-5 md:w-6 md:h-6" />
                         </button>
                     </div>
 
                     {/* Trip Info Row (Phone | Package | Date) */}
-                    <div className="flex flex-wrap items-center gap-x-12 gap-y-6 py-8 border-y border-slate-100 mb-10">
+                    <div className="flex flex-wrap items-center gap-x-6 md:gap-x-12 gap-y-4 md:gap-y-6 py-6 md:py-8 border-y border-slate-100 mb-6 md:mb-10">
                         <div className="flex items-center gap-4">
-                            <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-100"><Phone className="w-4 h-4 text-royal-gold" /></div>
+                            <div className="p-2 md:p-2.5 bg-slate-50 rounded-xl border border-slate-100"><Phone className="w-4 h-4 text-royal-gold" /></div>
                             <div>
                                 <p className="text-[9px] text-black/40 uppercase tracking-widest font-black mb-0.5">Contact Number</p>
                                 <p className="text-sm font-black tracking-widest text-black">{localData.phone}</p>
                             </div>
                         </div>
                         <div className="flex items-center gap-4">
-                            <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-100"><MapPin className="w-4 h-4 text-royal-gold" /></div>
+                            <div className="p-2 md:p-2.5 bg-slate-50 rounded-xl border border-slate-100"><MapPin className="w-4 h-4 text-royal-gold" /></div>
                             <div>
                                 <p className="text-[9px] text-black/40 uppercase tracking-widest font-black mb-0.5">Experience Package</p>
                                 <p className="text-sm font-bold text-black uppercase tracking-wide">{formatPillarTitle(localData.pillarTitle) || "Custom Discovery"}</p>
                             </div>
                         </div>
                         <div className="flex items-center gap-4">
-                            <div className="p-2.5 bg-slate-50 rounded-xl border border-slate-100"><Calendar className="w-4 h-4 text-royal-gold" /></div>
+                            <div className="p-2 md:p-2.5 bg-slate-50 rounded-xl border border-slate-100"><Calendar className="w-4 h-4 text-royal-gold" /></div>
                             <div>
                                 <p className="text-[9px] text-black/40 uppercase tracking-widest font-black mb-0.5">Arrival Date</p>
                                 <p className="text-sm font-bold text-black">{formatDateReadable(localData.date)}</p>
@@ -541,7 +541,7 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
 
                     {/* Status & Billing Row */}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
-                        <div className="p-8 rounded-[3rem] bg-slate-50 border border-slate-100">
+                        <div className="p-6 md:p-8 rounded-2xl md:rounded-[3rem] bg-slate-50 border border-slate-100">
                             <p className="text-[9px] text-black/40 uppercase tracking-widest mb-4 font-black">Payment & Visit Status</p>
                             <div className="flex flex-col gap-6">
                                 <div className="flex flex-wrap gap-2">
@@ -587,12 +587,12 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
                                 </div>
                             </div>
                         </div>
-                        <div className="p-8 rounded-[3rem] bg-gradient-to-br from-royal-gold/10 via-royal-gold/5 to-transparent border border-royal-gold/10 flex flex-col justify-center relative overflow-hidden group">
+                        <div className="p-6 md:p-8 rounded-2xl md:rounded-[3rem] bg-gradient-to-br from-royal-gold/10 via-royal-gold/5 to-transparent border border-royal-gold/10 flex flex-col justify-center relative overflow-hidden group">
                             <p className="text-[10px] text-royal-gold font-black uppercase tracking-[0.5em] mb-2 z-10">Live Invoice Estimate</p>
                             <p className="text-4xl text-black font-serif z-10">₹{calculateLiveTotal(localData)}</p>
                             {localData.paymentStatus === 'Received' && (
                                 <div className="mt-6 z-10 space-y-4">
-                                    <div className="bg-white/50 p-4 rounded-2xl border border-royal-gold/20">
+                                    <div className="bg-white/50 p-3 md:p-4 rounded-2xl border border-royal-gold/20">
                                         <p className="text-[8px] text-royal-gold uppercase font-black tracking-widest mb-3">Select Services for Pass</p>
                                         <div className="grid grid-cols-2 gap-2">
                                             {Object.entries(selectedServices).map(([key, value]) => (
@@ -628,7 +628,7 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
                     </div>
 
                     {/* Admin Notes Row */}
-                    <div className="mb-10 p-8 rounded-[3rem] bg-slate-50/50 border border-slate-100/50">
+                    <div className="mb-6 md:mb-10 p-6 md:p-8 rounded-2xl md:rounded-[3rem] bg-slate-50/50 border border-slate-100/50">
                         <div className="flex items-center gap-3 mb-4">
                             <div className="p-2 bg-royal-gold/10 rounded-lg"><MessageCircle className="w-4 h-4 text-royal-gold" /></div>
                             <p className="text-[10px] text-black/40 uppercase tracking-widest font-black">Internal Admin Notes / Remarks</p>
@@ -638,7 +638,7 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
                                 value={localData.adminNotes || ''} 
                                 onChange={(e) => setLocalData({...localData, adminNotes: e.target.value})}
                                 placeholder="Add specific requirements, budget notes, or follow-up details..."
-                                className="w-full bg-white border border-slate-200 rounded-[2rem] p-6 text-sm text-black focus:outline-none focus:border-royal-gold min-h-[100px] shadow-inner"
+                                className="w-full bg-white border border-slate-200 rounded-xl md:rounded-[2rem] p-4 md:p-6 text-sm text-black focus:outline-none focus:border-royal-gold min-h-[100px] shadow-inner"
                             />
                         ) : (
                             <div className="text-sm text-black/70 italic px-2">
@@ -853,21 +853,21 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
                     </div>
 
                     {/* Action Bar */}
-                    <div className="mt-6 flex flex-col md:flex-row gap-5 no-print">
+                    <div className="mt-6 flex flex-col sm:flex-row gap-4 sm:gap-5 no-print">
                         {editMode ? (
                             <button 
                                 onClick={handleUpdate}
                                 disabled={isSaving}
-                                className="flex-1 py-6 bg-blue-500 text-white font-black uppercase tracking-widest text-xs rounded-3xl flex items-center justify-center gap-4 hover:brightness-110 shadow-2xl transition-all"
+                                className="flex-1 py-4 sm:py-6 bg-blue-500 text-white font-black uppercase tracking-widest text-xs rounded-2xl sm:rounded-3xl flex items-center justify-center gap-4 hover:brightness-110 shadow-2xl transition-all"
                             >
                                 {isSaving ? <Loader2 className="w-6 h-6 animate-spin" /> : <Save className="w-6 h-6" />}
                                 Save Changes
                             </button>
                         ) : (
-                            <div className="flex flex-1 gap-3">
+                            <div className="grid grid-cols-2 lg:flex lg:flex-1 gap-2 md:gap-3">
                                 <button 
                                     onClick={sendUpdateWhatsApp}
-                                    className="px-6 py-5 bg-green-500 text-white font-black uppercase tracking-widest text-[10px] rounded-2xl flex items-center justify-center gap-3 hover:shadow-lg hover:shadow-green-500/20 transition-all active:scale-95 group"
+                                    className="w-full px-4 py-3 sm:px-6 sm:py-4 bg-green-500 text-white font-black uppercase tracking-widest text-[10px] rounded-xl sm:rounded-2xl flex items-center justify-center gap-3 hover:shadow-lg hover:shadow-green-500/20 transition-all active:scale-95 group"
                                 >
                                     <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                                     WhatsApp Quote
@@ -875,21 +875,21 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
                                 <button 
                                     onClick={sendQuotationEmail}
                                     disabled={!localData.email || isSaving}
-                                    className="px-6 py-5 bg-royal-gold text-royal-black font-black uppercase tracking-widest text-[10px] rounded-2xl flex items-center justify-center gap-3 hover:shadow-lg hover:shadow-royal-gold/20 transition-all active:scale-95 group disabled:opacity-50 disabled:grayscale"
+                                    className="w-full px-4 py-3 sm:px-6 sm:py-4 bg-royal-gold text-royal-black font-black uppercase tracking-widest text-[10px] rounded-xl sm:rounded-2xl flex items-center justify-center gap-3 hover:shadow-lg hover:shadow-royal-gold/20 transition-all active:scale-95 group disabled:opacity-50 disabled:grayscale"
                                 >
                                     {isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Mail className="w-4 h-4 group-hover:-translate-y-1 transition-transform" />}
                                     Email Quote
                                 </button>
                                 <button 
                                     onClick={sendWelcomeMessage}
-                                    className="flex-1 px-6 py-5 bg-blue-500 text-white font-black uppercase tracking-widest text-[10px] rounded-2xl flex items-center justify-center gap-3 hover:shadow-lg hover:shadow-blue-500/20 transition-all active:scale-95 group"
+                                    className="w-full px-4 py-3 sm:px-6 sm:py-4 bg-blue-500 text-white font-black uppercase tracking-widest text-[10px] rounded-xl sm:rounded-2xl flex items-center justify-center gap-3 hover:shadow-lg hover:shadow-blue-500/20 transition-all active:scale-95 group"
                                 >
                                     <MessageSquare className="w-4 h-4 group-hover:scale-110 transition-transform" />
                                     Welcome
                                 </button>
                                 <button 
                                     onClick={handlePrint}
-                                    className="px-8 py-5 bg-slate-900 text-white font-black uppercase tracking-widest text-[10px] rounded-2xl flex items-center justify-center gap-3 hover:shadow-lg hover:shadow-slate-900/20 transition-all active:scale-95 group"
+                                    className="w-full px-4 py-3 sm:px-6 sm:py-4 bg-slate-900 text-white font-black uppercase tracking-widest text-[10px] rounded-xl sm:rounded-2xl flex items-center justify-center gap-3 hover:shadow-lg hover:shadow-slate-900/20 transition-all active:scale-95 group"
                                 >
                                     <Printer className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform" />
                                     Print
@@ -898,7 +898,7 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
                         )}
                         <button 
                             onClick={onClose}
-                            className="px-10 py-6 bg-slate-100 text-black/70 font-black uppercase tracking-widest text-xs rounded-3xl hover:bg-slate-200 transition-all"
+                            className="px-6 sm:px-10 py-4 sm:py-6 bg-slate-100 text-black/70 font-black uppercase tracking-widest text-xs rounded-xl sm:rounded-3xl hover:bg-slate-200 transition-all"
                         >
                             Close
                         </button>
@@ -910,21 +910,27 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
                 {showPass && (
                     <div className="fixed inset-0 z-[120] flex items-center justify-center p-4">
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setShowPass(false)} className="absolute inset-0 bg-slate-950/90 backdrop-blur-md" />
-                        <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} className="relative bg-white rounded-[3rem] p-10 max-w-sm w-full shadow-2xl overflow-hidden border-8 border-royal-gold">
-                            <div className="absolute top-0 left-0 w-full h-2 bg-royal-gold"></div>
-                            <div className="text-center space-y-8">
+                        <motion.div 
+                            initial={{ scale: 0.9, opacity: 0 }} 
+                            animate={{ scale: 1, opacity: 1 }} 
+                            exit={{ scale: 0.9, opacity: 0 }} 
+                            className="relative bg-white rounded-3xl sm:rounded-[3rem] p-6 sm:p-10 max-w-sm w-full max-h-[90vh] flex flex-col shadow-2xl border-8 border-royal-gold overflow-hidden"
+                        >
+                            <div className="absolute top-0 left-0 w-full h-2 bg-royal-gold z-20"></div>
+                            <div className="overflow-y-auto flex-1 custom-scrollbar pr-1 sm:pr-2 space-y-6 sm:space-y-8 mt-2">
+                                <div className="text-center space-y-8">
                                 <div className="w-20 h-20 bg-royal-gold/10 rounded-3xl flex items-center justify-center mx-auto">
                                     <Lock className="w-10 h-10 text-royal-gold" />
                                 </div>
                                 <div>
-                                    <h3 className="text-2xl font-serif text-black uppercase tracking-tighter font-black">Royal Tourism Pass</h3>
-                                    <p className="text-[10px] text-royal-gold font-black uppercase tracking-[0.4em]">Official 6-Digit Security Code</p>
+                                    <h3 className="text-xl sm:text-2xl font-serif text-black uppercase tracking-tighter font-black">Royal Tourism Pass</h3>
+                                    <p className="text-[9px] sm:text-[10px] text-royal-gold font-black uppercase tracking-[0.2em] sm:tracking-[0.4em]">Official 6-Digit Security Code</p>
                                 </div>
 
-                                <div className="bg-slate-950 p-8 rounded-[2.5rem] border-4 border-royal-gold/30 shadow-2xl relative overflow-hidden group">
+                                <div className="bg-slate-950 p-6 sm:p-8 rounded-[2rem] sm:rounded-[2.5rem] border-4 border-royal-gold/30 shadow-2xl relative overflow-hidden group">
                                     <div className="absolute inset-0 bg-gradient-to-br from-royal-gold/5 to-transparent opacity-50"></div>
-                                    <p className="text-5xl font-mono text-royal-gold font-black tracking-[0.2em] relative z-10">{localData.passCode || '------'}</p>
-                                    <p className="text-[8px] text-white/30 uppercase tracking-[0.5em] mt-4 relative z-10 font-black italic">Private Security Code</p>
+                                    <p className="text-3xl sm:text-5xl font-mono text-royal-gold font-black tracking-[0.1em] sm:tracking-[0.2em] relative z-10">{localData.passCode || '------'}</p>
+                                    <p className="text-[8px] text-white/30 uppercase tracking-[0.3em] sm:tracking-[0.5em] mt-3 sm:mt-4 relative z-10 font-black italic">Private Security Code</p>
                                 </div>
 
                                 <div className="text-left space-y-4">
@@ -963,12 +969,12 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
                                             const servicesList = Object.entries(selectedServices).filter(([_, v]) => v).map(([k, _]) => k.toUpperCase()).join(", ");
                                             const phoneNumber = "91" + localData.phone?.replace(/[^0-9]/g, '');
                                             
-                                            const messageEn = `*👑 Your Royal Tourism Pass is Ready!*%0A%0AHello ${localData.name}, your payment of ₹${calculateLiveTotal(localData)} has been received.%0A%0A*🛡️ Your Unique Pass Code:* ${localData.passCode}%0A*✅ Included Services:* ${servicesList}%0A%0A*⚠️ Important:* Do not share this 6-digit code with anyone except your assigned driver. Please keep this code safe for verification.`;
+                                            const messageEn = `*👑 Your Royal Tourism Pass is Ready!*\n\nHello ${localData.name}, your payment of ₹${calculateLiveTotal(localData)} has been received.\n\n*🛡️ Your Unique Pass Code:* ${localData.passCode}\n*✅ Included Services:* ${servicesList}\n\n*⚠️ Important:* Do not share this 6-digit code with anyone except your assigned driver. Please keep this code safe for verification.`;
                                             
-                                            const messageHi = `*👑 आपका रॉयल टूरिज्म पास तैयार है!*%0A%0Aनमस्ते ${localData.name}, आपका ₹${calculateLiveTotal(localData)} का भुगतान प्राप्त हो गया है।%0A%0A*🛡️ आपका यूनिक पास कोड:* ${localData.passCode}%0A*✅ शामिल सेवाएँ:* ${servicesList}%0A%0A*⚠️ महत्वपूर्ण:* इस 6-अंकीय कोड को अपने आवंटित ड्राइवर के अलावा किसी के साथ साझा न करें। कृपया सत्यापन के लिए इस कोड को सुरक्षित रखें।`;
+                                            const messageHi = `*👑 आपका रॉयल टूरिज्म पास तैयार है!*\n\nनमस्ते ${localData.name}, आपका ₹${calculateLiveTotal(localData)} का भुगतान प्राप्त हो गया है।\n\n*🛡️ आपका यूनिक पास कोड:* ${localData.passCode}\n*✅ शामिल सेवाएँ:* ${servicesList}\n\n*⚠️ महत्वपूर्ण:* इस 6-अंकीय कोड को अपने आवंटित ड्राइवर के अलावा किसी के साथ साझा न करें। कृपया सत्यापन के लिए इस कोड को सुरक्षित रखें।`;
                                             
                                             const message = emailLanguage === 'en' ? messageEn : messageHi;
-                                            window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+                                            window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
                                         }}
                                         className="w-full py-4 bg-green-500 text-white rounded-2xl font-black uppercase tracking-widest text-[10px] flex items-center justify-center gap-2 hover:bg-green-600 transition-all shadow-lg"
                                     >
@@ -1231,6 +1237,7 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
                                     </button>
                                 </div>
                             </div>
+                            </div>
                         </motion.div>
                     </div>
                 )}
@@ -1402,8 +1409,8 @@ const ProviderModal = ({ provider, defaultType, onClose, onSave, isSaving }) => 
     return (
         <div className="fixed inset-0 z-[150] flex items-center justify-center p-4">
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose} className="absolute inset-0 bg-slate-950/80 backdrop-blur-md" />
-            <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="relative bg-white rounded-[3rem] p-10 max-w-xl w-full shadow-2xl overflow-hidden">
-                <div className="flex justify-between items-center mb-8">
+            <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="relative bg-white rounded-3xl md:rounded-[3rem] p-6 md:p-10 max-w-xl w-full max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+                <div className="flex justify-between items-center mb-6 md:mb-8">
                     <div className="flex flex-col">
                         <h2 className="text-2xl font-serif font-black uppercase tracking-tight">{provider ? 'Edit Partner' : 'Add New Partner'}</h2>
                         {localData.providerCode && (
@@ -1412,7 +1419,7 @@ const ProviderModal = ({ provider, defaultType, onClose, onSave, isSaving }) => 
                     </div>
                     <button onClick={onClose} className="p-2 bg-slate-100 rounded-full hover:bg-slate-200 transition-all"><X className="w-5 h-5" /></button>
                 </div>
-                <form onSubmit={handleSubmit} className="space-y-6 max-h-[70vh] overflow-y-auto px-2 custom-scrollbar">
+                <form onSubmit={handleSubmit} className="space-y-6 overflow-y-auto px-2 custom-scrollbar flex-1">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         
                         {/* Photo URL Section */}
@@ -1912,7 +1919,7 @@ const AdminPage = () => {
                 <motion.div 
                     initial={{ opacity: 0, y: 20 }} 
                     animate={{ opacity: 1, y: 0 }} 
-                    className="w-full max-w-md p-10 rounded-[3rem] bg-white/[0.03] border border-white/10 backdrop-blur-xl relative z-10 my-auto shadow-2xl"
+                    className="w-full max-w-md p-6 md:p-10 rounded-3xl md:rounded-[3rem] bg-white/[0.03] border border-white/10 backdrop-blur-xl relative z-10 my-auto shadow-2xl"
                 >
                     <div className="text-center mb-10">
                         <div className="w-16 h-16 bg-royal-gold/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
@@ -1954,33 +1961,33 @@ const AdminPage = () => {
     return (
         <div className="min-h-screen bg-slate-50 text-black no-print selection:bg-royal-gold selection:text-royal-black">
             {/* STICKY BLACK HEADER */}
-            <header className="sticky top-0 z-[100] bg-slate-950 border-b border-white/5 px-8 md:px-16 py-6 flex flex-col md:flex-row justify-between items-center gap-6 shadow-2xl">
-                <div className="flex flex-col md:flex-row items-center gap-8">
-                    <div className="flex items-center gap-6">
-                        <div className="p-3 bg-royal-gold/10 rounded-2xl border border-royal-gold/20"><LayoutDashboard className="w-6 h-6 text-royal-gold" /></div>
-                        <h1 className="text-xl md:text-2xl font-serif text-white tracking-tight">Chittorgarh Booking Dashboard</h1>
+            <header className="sticky top-0 z-[100] bg-slate-950 border-b border-white/5 px-4 md:px-16 py-4 md:py-6 flex flex-col md:flex-row justify-between items-center gap-4 md:gap-6 shadow-2xl">
+                <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
+                    <div className="flex items-center gap-4 md:gap-6">
+                        <div className="p-2 md:p-3 bg-royal-gold/10 rounded-xl md:rounded-2xl border border-royal-gold/20"><LayoutDashboard className="w-5 h-5 md:w-6 md:h-6 text-royal-gold" /></div>
+                        <h1 className="text-lg md:text-2xl font-serif text-white tracking-tight">Chittorgarh Booking Dashboard</h1>
                     </div>
                 </div>
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-3 md:gap-4">
 
-                    <button onClick={exportToCSV} className="flex items-center gap-3 px-6 py-3 bg-white/5 border border-white/10 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-royal-gold hover:text-royal-black transition-all text-royal-gold shadow-lg">
+                    <button onClick={exportToCSV} className="flex items-center gap-3 px-3 md:px-6 py-2 md:py-3 bg-white/5 border border-white/10 rounded-lg md:rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-royal-gold hover:text-royal-black transition-all text-royal-gold shadow-lg">
                         <FileText className="w-4 h-4" />
                         Export Data
                     </button>
-                    <Link to="/" className="flex items-center gap-3 px-6 py-3 bg-red-500/10 border border-red-500/20 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-red-500 hover:text-white transition-all text-red-400 shadow-lg">
+                    <Link to="/" className="flex items-center gap-3 px-3 md:px-6 py-2 md:py-3 bg-red-500/10 border border-red-500/20 rounded-lg md:rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-red-500 hover:text-white transition-all text-red-400 shadow-lg">
                         <LogOut className="w-4 h-4" />
                         Exit Dashboard
                     </Link>
                 </div>
             </header>
 
-            <div className="w-full pt-16 pb-20 px-4 md:px-8 lg:px-12">
+            <div className="w-full pt-8 md:pt-16 pb-12 md:pb-20 px-4 md:px-8 lg:px-12">
                 {/* Dashboard Tabs */}
-                <div className="flex gap-4 mb-12 bg-white p-3 rounded-[2.5rem] border border-slate-200 w-full">
+                <div className="flex gap-2 md:gap-4 mb-8 md:mb-12 bg-white p-2 md:p-3 rounded-2xl md:rounded-[2.5rem] border border-slate-200 w-full">
                     <button 
                         onClick={() => setActiveTab('bookings')}
                         className={cn(
-                            "flex-1 px-10 py-5 rounded-3xl text-[10px] font-black uppercase tracking-widest transition-all",
+                            "flex-1 px-3 md:px-10 py-3 md:py-5 rounded-xl md:rounded-3xl text-[10px] font-black uppercase tracking-widest transition-all",
                             activeTab === 'bookings' ? "bg-slate-950 text-royal-gold shadow-xl" : "text-black/40 hover:text-black"
                         )}
                     >
@@ -1992,7 +1999,7 @@ const AdminPage = () => {
                     <button 
                         onClick={() => setActiveTab('providers')}
                         className={cn(
-                            "flex-1 px-10 py-5 rounded-3xl text-[10px] font-black uppercase tracking-widest transition-all",
+                            "flex-1 px-3 md:px-10 py-3 md:py-5 rounded-xl md:rounded-3xl text-[10px] font-black uppercase tracking-widest transition-all",
                             activeTab === 'providers' ? "bg-slate-950 text-royal-gold shadow-xl" : "text-black/40 hover:text-black"
                         )}
                     >
@@ -2007,38 +2014,38 @@ const AdminPage = () => {
 
 
 
-                <div className="space-y-10 mb-16">
+                <div className="space-y-6 md:space-y-10 mb-10 md:mb-16">
                     {/* Search Bar - Royal Style */}
                     <div className="relative group">
-                        <Search className="absolute left-10 top-1/2 -translate-y-1/2 w-8 h-8 text-royal-gold/40 group-focus-within:text-royal-gold transition-all duration-500" />
+                        <Search className="absolute left-5 md:left-10 top-1/2 -translate-y-1/2 w-5 h-5 md:w-8 md:h-8 text-royal-gold/40 group-focus-within:text-royal-gold transition-all duration-500" />
                         <input 
                             type="text" 
                             placeholder="Search by Traveler Name, Phone or Package..." 
                             value={searchTerm} 
                             onChange={(e) => setSearchTerm(e.target.value)} 
-                            className="w-full bg-white border-2 border-slate-100 rounded-[3rem] py-10 pl-24 pr-10 focus:outline-none focus:border-royal-gold focus:ring-8 focus:ring-royal-gold/5 text-2xl font-serif font-black text-slate-900 transition-all shadow-[0_30px_60px_-15px_rgba(0,0,0,0.05)]" 
+                            className="w-full bg-white border-2 border-slate-100 rounded-2xl md:rounded-[3rem] py-5 md:py-10 pl-14 md:pl-24 pr-6 md:pr-10 focus:outline-none focus:border-royal-gold focus:ring-8 focus:ring-royal-gold/5 text-lg md:text-2xl font-serif font-black text-slate-900 transition-all shadow-[0_30px_60px_-15px_rgba(0,0,0,0.05)]" 
                         />
                     </div>
                     
                     {/* Filter Registry Section */}
-                    <div className="bg-slate-950 p-8 md:p-12 rounded-[4rem] border-2 border-slate-900 shadow-2xl relative overflow-hidden group">
+                    <div className="bg-slate-950 p-6 md:p-12 rounded-3xl md:rounded-[4rem] border-2 border-slate-900 shadow-2xl relative overflow-hidden group">
                         <div className="absolute top-0 right-0 w-96 h-96 bg-royal-gold/5 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
                         
-                        <div className="flex flex-col md:flex-row items-end justify-between gap-10 relative z-10">
-                            <div className="flex flex-wrap items-center gap-10">
-                                <div>
+                        <div className="flex flex-col md:flex-row items-end justify-between gap-6 md:gap-10 relative z-10">
+                            <div className="flex flex-wrap items-center gap-6 md:gap-10 w-full md:w-auto">
+                                <div className="w-full md:w-auto">
                                     <p className="text-[10px] text-royal-gold/60 font-black uppercase tracking-[0.5em] mb-4 flex items-center gap-2">
                                         <Calendar className="w-3.5 h-3.5" />
                                         Registry Date Range
                                     </p>
-                                    <div className="flex items-center gap-4 bg-white/5 border border-white/10 px-8 py-5 rounded-2xl backdrop-blur-md">
-                                        <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} className="bg-transparent text-[11px] font-black uppercase outline-none text-white appearance-none cursor-pointer" />
+                                    <div className="flex flex-wrap md:flex-nowrap items-center gap-2 md:gap-4 bg-white/5 border border-white/10 px-4 md:px-8 py-3 md:py-5 rounded-2xl backdrop-blur-md">
+                                        <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} className="bg-transparent text-[11px] font-black uppercase outline-none text-white appearance-none cursor-pointer min-w-[100px] flex-1" />
                                         <span className="text-white/20 font-black text-[9px]">TO</span>
-                                        <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} className="bg-transparent text-[11px] font-black uppercase outline-none text-white appearance-none cursor-pointer" />
+                                        <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} className="bg-transparent text-[11px] font-black uppercase outline-none text-white appearance-none cursor-pointer min-w-[100px] flex-1" />
                                     </div>
                                 </div>
 
-                                <div>
+                                <div className="w-full md:w-auto">
                                     <p className="text-[10px] text-royal-gold/60 font-black uppercase tracking-[0.5em] mb-4 flex items-center gap-2">
                                         <Info className="w-3.5 h-3.5" />
                                         Inquiry Status
@@ -2046,7 +2053,7 @@ const AdminPage = () => {
                                     <select 
                                         value={statusFilter} 
                                         onChange={(e) => setStatusFilter(e.target.value)}
-                                        className="bg-white/5 border border-white/10 px-8 py-5 rounded-2xl backdrop-blur-md text-[11px] font-black uppercase tracking-widest text-white outline-none cursor-pointer hover:border-royal-gold/30 transition-all"
+                                        className="bg-white/5 border border-white/10 px-4 md:px-8 py-3 md:py-5 rounded-2xl backdrop-blur-md text-[11px] font-black uppercase tracking-widest text-white outline-none cursor-pointer hover:border-royal-gold/30 transition-all w-full md:w-auto"
                                     >
                                         <option value="all" className="bg-slate-900">All Statuses</option>
                                         <option value="submitted" className="bg-slate-900">New Inquiries</option>
@@ -2055,8 +2062,8 @@ const AdminPage = () => {
                                 </div>
                             </div>
 
-                            <div className="flex flex-col items-end gap-6">
-                                <div className="text-right">
+                            <div className="flex flex-col items-start md:items-end gap-6 w-full md:w-auto">
+                                <div className="text-left md:text-right">
                                     <p className="text-[10px] text-white/30 font-black uppercase tracking-[0.3em] mb-1">Filtered Results</p>
                                     <p className="text-4xl font-serif text-white italic">
                                         <span className="text-royal-gold">{filteredBookings.length}</span>
@@ -2068,7 +2075,7 @@ const AdminPage = () => {
                                 {(searchTerm || startDate || endDate || statusFilter !== 'all') && (
                                     <button 
                                         onClick={() => { setSearchTerm(''); setStartDate(''); setEndDate(''); setStatusFilter('all'); }}
-                                        className="flex items-center gap-3 px-8 py-4 bg-red-500/10 border border-red-500/20 text-red-400 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-red-500 hover:text-white transition-all shadow-lg"
+                                        className="flex items-center gap-3 px-8 py-4 bg-red-500/10 border border-red-500/20 text-red-400 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-red-500 hover:text-white transition-all shadow-lg w-full md:w-auto justify-center"
                                     >
                                         <X className="w-4 h-4" />
                                         Clear Registry Filters
@@ -2080,22 +2087,22 @@ const AdminPage = () => {
                 </div>
 
                 {/* Key Metrics */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-                    <div className="bg-white border border-slate-200 p-8 rounded-[2rem] flex items-center gap-6 shadow-xl">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 mb-8 md:mb-12">
+                    <div className="bg-white border border-slate-200 p-6 md:p-8 rounded-2xl md:rounded-[2rem] flex items-center gap-6 shadow-xl">
                         <div className="w-14 h-14 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-500 shrink-0"><Users className="w-6 h-6" /></div>
                         <div>
                             <p className="text-[10px] text-black/40 font-black uppercase tracking-[0.2em] mb-1">Total Inquiries</p>
                             <p className="text-3xl font-serif text-black font-black">{bookings.length}</p>
                         </div>
                     </div>
-                    <div className="bg-white border border-slate-200 p-8 rounded-[2rem] flex items-center gap-6 shadow-xl">
+                    <div className="bg-white border border-slate-200 p-6 md:p-8 rounded-2xl md:rounded-[2rem] flex items-center gap-6 shadow-xl">
                         <div className="w-14 h-14 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-500 shrink-0"><Clock className="w-6 h-6" /></div>
                         <div>
                             <p className="text-[10px] text-black/40 font-black uppercase tracking-[0.2em] mb-1">Pending Inquiries</p>
                             <p className="text-3xl font-serif text-black font-black">{bookings.filter(b => b.status !== 'contacted').length}</p>
                         </div>
                     </div>
-                    <div className="bg-white border border-slate-200 p-8 rounded-[2rem] flex items-center gap-6 shadow-xl">
+                    <div className="bg-white border border-slate-200 p-6 md:p-8 rounded-2xl md:rounded-[2rem] flex items-center gap-6 shadow-xl">
                         <div className="w-14 h-14 rounded-xl bg-green-500/10 flex items-center justify-center text-green-500 shrink-0"><TrendingUp className="w-6 h-6" /></div>
                         <div>
                             <p className="text-[10px] text-black/40 font-black uppercase tracking-[0.2em] mb-1">Est. Revenue</p>
@@ -2104,7 +2111,7 @@ const AdminPage = () => {
                     </div>
                 </div>
 
-                <div className="bg-white border-2 border-slate-950 rounded-[3.5rem] overflow-hidden shadow-2xl">
+                <div className="bg-white border-2 border-slate-950 rounded-3xl md:rounded-[3.5rem] overflow-hidden shadow-2xl">
                     <div className="overflow-x-auto custom-scrollbar">
                         <table className="min-w-[1000px] w-full text-left border-collapse">
                             <thead className="bg-slate-950 border-b-2 border-slate-950">
@@ -2202,28 +2209,28 @@ const AdminPage = () => {
             ) : (
                 /* SERVICE PROVIDERS VIEW */
                 <div className="space-y-12">
-                    <div className="bg-slate-950 p-12 rounded-[4rem] border-2 border-slate-900 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] relative overflow-hidden group">
+                    <div className="bg-slate-950 p-6 md:p-12 rounded-3xl md:rounded-[4rem] border-2 border-slate-900 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.5)] relative overflow-hidden group">
                         <div className="absolute top-0 right-0 w-96 h-96 bg-royal-gold/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
                         <div className="absolute bottom-0 left-0 w-64 h-64 bg-royal-gold/5 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2" />
                         
-                        <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-12 relative z-10">
-                            <div className="shrink-0">
+                        <div className="flex flex-col xl:flex-row justify-between items-start xl:items-center gap-6 md:gap-12 relative z-10">
+                            <div className="shrink-0 w-full xl:w-auto">
                                 <p className="text-[10px] text-royal-gold font-black uppercase tracking-[0.5em] mb-4">Partner Management</p>
-                                <h2 className="text-5xl font-serif text-white font-black uppercase tracking-tight">Service Directory</h2>
+                                <h2 className="text-3xl md:text-5xl font-serif text-white font-black uppercase tracking-tight">Service Directory</h2>
                                 <p className="text-xs text-white/40 uppercase tracking-[0.3em] mt-4 font-black flex items-center gap-2">
-                                    <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
+                                    <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
                                     {providers.length} Verified Partners Active
                                 </p>
                             </div>
                             
-                            <div className="flex-1 flex justify-center">
-                                <div className="flex flex-wrap justify-center gap-2 bg-white/5 p-2 rounded-[2rem] border border-white/10 backdrop-blur-xl w-fit">
+                            <div className="flex-1 flex justify-center w-full xl:w-auto">
+                                <div className="flex flex-wrap justify-center gap-1 md:gap-2 bg-white/5 p-1 md:p-2 rounded-xl md:rounded-[2rem] border border-white/10 backdrop-blur-xl w-full sm:w-auto">
                                     {['all', 'taxi', 'hotel', 'guide', 'restaurant', 'cafe'].map(type => (
                                         <button 
                                             key={type}
                                             onClick={() => setProviderTypeFilter(type)}
                                             className={cn(
-                                                "px-6 py-3 rounded-2xl text-[9px] font-black uppercase tracking-widest transition-all",
+                                                "px-3 py-2 md:px-6 md:py-3 rounded-lg md:rounded-2xl text-[8px] md:text-[9px] font-black uppercase tracking-widest transition-all flex-1 sm:flex-none text-center",
                                                 providerTypeFilter === type 
                                                     ? "bg-royal-gold text-royal-black shadow-xl" 
                                                     : "text-white/40 hover:text-white hover:bg-white/5"
@@ -2237,7 +2244,7 @@ const AdminPage = () => {
 
                             <button 
                                 onClick={() => { setEditingProvider(null); setShowProviderModal(true); }}
-                                className="px-10 py-5 bg-white text-black font-black uppercase tracking-widest text-xs rounded-2xl flex items-center gap-4 shadow-2xl hover:bg-royal-gold transition-all group shrink-0"
+                                className="w-full md:w-auto px-6 py-4 md:px-10 md:py-5 bg-white text-black font-black uppercase tracking-widest text-xs rounded-xl md:rounded-2xl flex items-center justify-center gap-4 shadow-2xl hover:bg-royal-gold transition-all group shrink-0"
                             >
                                 <Plus className="w-5 h-5 group-hover:rotate-90 transition-all" />
                                 Add Partner
@@ -2276,21 +2283,21 @@ const AdminPage = () => {
                                         </div>
                                     )}
                                     <div>
-                                        <div className="flex items-center gap-2 mb-1">
-                                            <p className="text-[10px] text-royal-gold font-black uppercase tracking-widest">{p.type}</p>
+                                        <div className="flex flex-wrap items-center gap-2 mb-1.5 md:mb-1">
+                                            <p className="text-[10px] text-royal-gold font-black uppercase tracking-widest whitespace-nowrap">{p.type}</p>
                                             {p.providerCode && (
-                                                <span className="text-[8px] bg-royal-gold/10 text-royal-gold px-2 py-0.5 rounded-md font-black tracking-widest border border-royal-gold/20">
+                                                <span className="text-[8px] bg-royal-gold/10 text-royal-gold px-2 py-0.5 rounded-md font-black tracking-widest border border-royal-gold/20 whitespace-nowrap">
                                                     ID: {p.providerCode}
                                                 </span>
                                             )}
                                             <span 
                                                 onClick={(e) => { e.stopPropagation(); setSelectedProviderForDetails(p); }}
-                                                className="text-[8px] bg-green-500/10 text-green-500 px-2 py-0.5 rounded-md font-black tracking-widest border border-green-500/20 cursor-pointer hover:bg-green-500 hover:text-white transition-all"
+                                                className="text-[8px] bg-green-500/10 text-green-500 px-2 py-0.5 rounded-md font-black tracking-widest border border-green-500/20 cursor-pointer hover:bg-green-500 hover:text-white transition-all whitespace-nowrap"
                                                 title="Click to view history"
                                             >
                                                 {getProviderServiceCount(p)} Services Done
                                             </span>
-                                            <span className="text-[8px] bg-amber-500/10 text-amber-500 px-2 py-0.5 rounded-md font-black tracking-widest border border-amber-500/20 flex items-center gap-0.5">
+                                            <span className="text-[8px] bg-amber-500/10 text-amber-500 px-2 py-0.5 rounded-md font-black tracking-widest border border-amber-500/20 flex items-center gap-0.5 whitespace-nowrap">
                                                 <Star className="w-2.5 h-2.5 fill-amber-500 text-transparent" /> {getProviderRating(p.id)} ({feedback.filter(f => f.providerId === p.id).length})
                                             </span>
                                         </div>
@@ -2301,15 +2308,15 @@ const AdminPage = () => {
                                     </div>
                                 </div>
 
-                                <div className="flex flex-wrap items-center gap-4 w-full md:w-auto justify-end" onClick={(e) => e.stopPropagation()}>
+                                <div className="flex flex-wrap items-center gap-4 w-full md:w-auto justify-between md:justify-end" onClick={(e) => e.stopPropagation()}>
                                     {p.type === 'taxi' && (
-                                        <div className="flex gap-2">
-                                            <span className="px-3 py-1.5 bg-slate-100 rounded-lg text-[9px] font-black uppercase tracking-widest text-slate-600">Plate: {p.vehicleNumber || '---'}</span>
-                                            <span className="px-3 py-1.5 bg-slate-100 rounded-lg text-[9px] font-black uppercase tracking-widest text-slate-600">{p.vehicleType}</span>
+                                        <div className="flex gap-2 flex-wrap">
+                                            <span className="px-3 py-1.5 bg-slate-100 rounded-lg text-[9px] font-black uppercase tracking-widest text-slate-600 whitespace-nowrap">Plate: {p.vehicleNumber || '---'}</span>
+                                            <span className="px-3 py-1.5 bg-slate-100 rounded-lg text-[9px] font-black uppercase tracking-widest text-slate-600 whitespace-nowrap">{p.vehicleType}</span>
                                         </div>
                                     )}
                                     {p.type === 'hotel' && (
-                                        <span className="px-3 py-1.5 bg-slate-100 rounded-lg text-[9px] font-black uppercase tracking-widest text-slate-600">{p.roomTypes || 'Standard'}</span>
+                                        <span className="px-3 py-1.5 bg-slate-100 rounded-lg text-[9px] font-black uppercase tracking-widest text-slate-600 whitespace-nowrap">{p.roomTypes || 'Standard'}</span>
                                     )}
                                     
                                     <div className="flex gap-2">
@@ -2342,14 +2349,14 @@ const AdminPage = () => {
                         exit={{ opacity: 0 }}
                         className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[200] flex items-center justify-center p-4"
                     >
-                        <div className="bg-white rounded-[2.5rem] p-8 max-w-2xl w-full max-h-[80vh] overflow-y-auto shadow-2xl border-2 border-slate-950">
+                        <div className="bg-white rounded-3xl md:rounded-[2.5rem] p-6 md:p-8 max-w-2xl w-full max-h-[80vh] overflow-y-auto shadow-2xl border-2 border-slate-950">
                             <div className="flex justify-between items-center mb-6">
                                 <h3 className="text-xl font-serif font-black text-black">{selectedProviderForDetails.name}'s Profile & History</h3>
                                 <button onClick={() => setSelectedProviderForDetails(null)} className="p-2 hover:bg-slate-100 rounded-full transition-all"><X className="w-6 h-6 text-black" /></button>
                             </div>
 
                             {/* Provider Summary Card */}
-                            <div className="bg-slate-50 border border-slate-200 rounded-3xl p-6 mb-6 flex flex-col md:flex-row items-center justify-between gap-6">
+                            <div className="bg-slate-50 border border-slate-200 rounded-3xl p-4 md:p-6 mb-6 flex flex-col md:flex-row items-center justify-between gap-6">
                                 <div className="flex items-center gap-4">
                                     {selectedProviderForDetails.photoUrl ? (
                                         <div className="w-16 h-16 rounded-2xl overflow-hidden border-2 border-royal-gold/20 shrink-0">
@@ -2401,7 +2408,7 @@ const AdminPage = () => {
                                         const nameField = `${key}Name`;
                                         return b[nameField]?.trim().toLowerCase() === selectedProviderForDetails.name?.trim().toLowerCase() && b[`redeemed_${key}`];
                                     }).map(b => (
-                                        <div key={b.id} className="border border-slate-200 p-6 rounded-2xl flex justify-between items-center bg-slate-50 hover:border-royal-gold/30 transition-all">
+                                        <div key={b.id} className="border border-slate-200 p-4 md:p-6 rounded-2xl flex flex-col sm:flex-row justify-between sm:items-center bg-slate-50 hover:border-royal-gold/30 transition-all gap-4">
                                             <div>
                                                 <p className="text-sm font-black text-black">{b.name}</p>
                                                 <p className="text-[10px] text-black/40 font-black uppercase tracking-widest mt-1">
