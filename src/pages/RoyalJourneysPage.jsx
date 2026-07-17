@@ -5,6 +5,74 @@ import Section from '../components/Section';
 import BookingModal from '../components/BookingModal';
 import QuickInquiryModal from '../components/QuickInquiryModal';
 import { NavLink } from 'react-router-dom';
+import SEOHead from '../components/SEOHead';
+
+const JOURNEYS_SCHEMA = [
+  {
+    "@context": "https://schema.org",
+    "@type": "TouristTrip",
+    "name": "Chittorgarh Tour Packages & Guided Itineraries",
+    "description": "Curated 1-day, 2-day and 3-day Chittorgarh tour packages with expert local guides, luxury cabs and heritage experiences.",
+    "url": "https://visitchittorgarh.in/royal-journeys",
+    "image": "https://visitchittorgarh.in/Fort.png",
+    "touristType": ["Cultural tourist", "Heritage tourist", "Family tourist", "Couple"],
+    "itinerary": {
+      "@type": "ItemList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "1-Day Chittorgarh Tour" },
+        { "@type": "ListItem", "position": 2, "name": "2-Day Chittorgarh Heritage Tour" },
+        { "@type": "ListItem", "position": 3, "name": "3-Day Chittorgarh Royal Expedition" }
+      ]
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How many days are enough for Chittorgarh?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "2 days are ideal to explore Chittorgarh thoroughly. Day 1 covers the main fort complex including Vijay Stambh, Kirti Stambh, Padmini Palace and Rana Kumbha Palace. Day 2 covers Sanwariyaji Temple, Bassi Wildlife Sanctuary and Menal Waterfall."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best time to visit Chittorgarh?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "October to March is the best time to visit Chittorgarh. The weather is pleasant with temperatures between 10–25°C, ideal for sightseeing. The Mewar Festival in March and Teej in August are also popular times to visit."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Chittorgarh worth visiting?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Absolutely. Chittorgarh is home to India's largest fort complex (a UNESCO World Heritage Site), the iconic Vijay Stambh (Tower of Victory), Padmini Palace, and the legendary Meera Temple. It offers unmatched Rajput history, architecture and culture."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How to reach Chittorgarh from Udaipur?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Chittorgarh is 115 km from Udaipur — approximately 2 hours by car or 2.5 hours by train. Direct trains like the Mewar Express connect Udaipur to Chittorgarh Railway Station regularly."
+        }
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://visitchittorgarh.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Royal Journeys & Tours", "item": "https://visitchittorgarh.in/royal-journeys" }
+    ]
+  }
+];
+
 
 const RoyalJourneysPage = ({ t }) => {
     const [isBookingOpen, setIsBookingOpen] = useState(false);
@@ -37,6 +105,14 @@ const RoyalJourneysPage = ({ t }) => {
 
     return (
         <div className="min-h-screen bg-[#0a0a0b] text-white relative overflow-hidden">
+            <SEOHead
+                title="Chittorgarh Tour Packages & Itineraries | 1-3 Day Trips"
+                description="Plan your Chittorgarh trip with curated 1-day, 2-day & 3-day itineraries. Book guided heritage tours, luxury cabs & Rajasthani packages with expert local guides."
+                canonical="/royal-journeys"
+                keywords="Chittorgarh tour package, Chittorgarh itinerary, 1 day Chittorgarh tour, 2 day Chittorgarh, Chittorgarh guided tour, Rajasthan tour package"
+                ogImage="https://visitchittorgarh.in/Fort.png"
+                schema={JOURNEYS_SCHEMA}
+            />
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-royal-gold/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 animate-pulse" />
             <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-royal-gold/5 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/3 animate-pulse" />
             

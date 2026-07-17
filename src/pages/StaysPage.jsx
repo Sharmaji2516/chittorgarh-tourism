@@ -3,6 +3,40 @@ import Section from '../components/Section';
 import { motion } from 'framer-motion';
 import { Hotel, ArrowRight, ShieldCheck, MapPin, Star, Zap, HeartHandshake } from 'lucide-react';
 import QuickInquiryModal from '../components/QuickInquiryModal';
+import SEOHead from '../components/SEOHead';
+
+const STAYS_SCHEMA = [
+  {
+    "@context": "https://schema.org",
+    "@type": "LodgingBusiness",
+    "name": "Chittorgarh Hotels & Heritage Stays",
+    "description": "Handpicked hotels and heritage properties in Chittorgarh — from luxury heritage havelis to budget-friendly guesthouses, with local concierge services.",
+    "url": "https://visitchittorgarh.in/stays",
+    "image": "https://visitchittorgarh.in/Fort.png",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Chittorgarh",
+      "addressRegion": "Rajasthan",
+      "addressCountry": "IN",
+      "postalCode": "312001"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "24.8887",
+      "longitude": "74.6269"
+    },
+    "priceRange": "₹₹–₹₹₹"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://visitchittorgarh.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Hotels & Stays", "item": "https://visitchittorgarh.in/stays" }
+    ]
+  }
+];
+
 
 const StaysPage = ({ t }) => {
     const [isInquiryOpen, setIsInquiryOpen] = useState(false);
@@ -17,6 +51,14 @@ const StaysPage = ({ t }) => {
 
     return (
         <div className="space-y-0">
+            <SEOHead
+                title="Hotels in Chittorgarh | Heritage, Budget & Luxury Stays"
+                description="Book the best hotels in Chittorgarh — heritage havelis, budget guesthouses & luxury resorts. Handpicked stays with VIP rates, local concierge & Rajasthani hospitality."
+                canonical="/stays"
+                keywords="hotels in Chittorgarh, Chittorgarh hotels, heritage hotel Chittorgarh, budget hotel Chittorgarh, luxury stay Chittorgarh, Chittorgarh accommodation"
+                ogImage="https://visitchittorgarh.in/Fort.png"
+                schema={STAYS_SCHEMA}
+            />
             {/* Header Section */}
             <div className="pt-20 pb-12 text-center px-4">
                 <motion.div

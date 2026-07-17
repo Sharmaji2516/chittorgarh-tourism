@@ -1,6 +1,40 @@
 import React from 'react';
 import { ShieldCheck, HeartHandshake, Car, Map, Hotel, UtensilsCrossed, ChevronRight, Coffee, Camera } from 'lucide-react';
 import { motion } from 'framer-motion';
+import SEOHead from '../components/SEOHead';
+
+const MISSION_SCHEMA = [
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Visit Chittorgarh — Local Guide & Tourism Services",
+    "description": "Expert local guides, certified tourist assistance, fort walkthroughs, heritage tours and customised Chittorgarh experiences for families, couples and solo travellers.",
+    "url": "https://visitchittorgarh.in/mission-services",
+    "image": "https://visitchittorgarh.in/Fort.png",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Chittorgarh",
+      "addressRegion": "Rajasthan",
+      "addressCountry": "IN",
+      "postalCode": "312001"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "24.8887",
+      "longitude": "74.6269"
+    },
+    "priceRange": "₹₹"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://visitchittorgarh.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Local Guide Services", "item": "https://visitchittorgarh.in/mission-services" }
+    ]
+  }
+];
+
 
 const MissionServicesPage = ({ t }) => {
     const mission = t.missionPage;
@@ -20,6 +54,14 @@ const MissionServicesPage = ({ t }) => {
 
     return (
         <div className="min-h-screen bg-[#0a0a0b] text-white relative overflow-hidden">
+            <SEOHead
+                title="Chittorgarh Local Guide Services | Expert Tourist Help"
+                description="Book expert local guides in Chittorgarh. Certified fort walkthroughs, heritage tours, taxi hire & customised experiences for families, couples & solo travellers."
+                canonical="/mission-services"
+                keywords="Chittorgarh local guide, tourist guide Chittorgarh, Chittorgarh tour guide, fort walkthrough Chittorgarh, Chittorgarh taxi, heritage tour guide"
+                ogImage="https://visitchittorgarh.in/Fort.png"
+                schema={MISSION_SCHEMA}
+            />
             {/* Background decorations */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-royal-gold/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 animate-pulse" />
             <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-royal-gold/5 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/3 animate-pulse" />

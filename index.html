@@ -1,19 +1,63 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" dir="ltr">
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/png" href="/logo_maharana.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Royal Chittorgarh | The Pride of Rajasthan</title>
-  <meta name="description"
-    content="Explore the majestic history of Chittorgarh, the land of bravery and sacrifice. Discover Chittorgarh Fort, Bassi Wildlife Sanctuary, and authentic Rajasthani cuisine." />
-  <!-- Preconnect for Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Fallback title/description — overridden dynamically by react-helmet-async per page -->
+  <title>Visit Chittorgarh | Rajasthan Heritage, Fort & Tourism Guide</title>
+  <meta name="description" content="Plan your trip to Chittorgarh — explore India's largest fort, Vijay Stambh, Padmini Palace, Meera Temple, best hotels, restaurants & guided tours. Your complete Chittorgarh travel guide." />
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+
+  <!-- Geo Targeting -->
+  <meta name="geo.region" content="IN-RJ" />
+  <meta name="geo.placename" content="Chittorgarh, Rajasthan, India" />
+  <meta name="geo.position" content="24.8887;74.6269" />
+  <meta name="ICBM" content="24.8887, 74.6269" />
+
+  <!-- PWA & Branding -->
+  <meta name="theme-color" content="#D4AF37" />
+  <meta name="application-name" content="Visit Chittorgarh" />
+  <meta name="author" content="Visit Chittorgarh — ChittorTech" />
+
+  <!-- Favicon & App Icons -->
+  <link rel="icon" type="image/png" href="/logo_maharana.png" />
+  <link rel="apple-touch-icon" href="/logo_maharana.png" />
+
+  <!-- Canonical (fallback for homepage) -->
+  <link rel="canonical" href="https://visitchittorgarh.in/" />
+
+  <!-- Preconnect for Fonts (performance) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Font Preload hints for LCP improvement -->
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" />
   <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap"
-    rel="stylesheet">
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap"
+    rel="stylesheet" media="print" onload="this.media='all'" />
+  <noscript>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet" />
+  </noscript>
+
+  <!-- Open Graph Fallback (overridden by react-helmet-async) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Visit Chittorgarh" />
+  <meta property="og:title" content="Visit Chittorgarh | Rajasthan Heritage & Tourism" />
+  <meta property="og:description" content="Explore Chittorgarh Fort, Vijay Stambh, Padmini Palace, top hotels, restaurants & itineraries. Your ultimate Chittorgarh travel guide." />
+  <meta property="og:url" content="https://visitchittorgarh.in/" />
+  <meta property="og:image" content="https://visitchittorgarh.in/Fort.png" />
+  <meta property="og:locale" content="en_IN" />
+
+  <!-- Twitter Card Fallback -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Visit Chittorgarh | Rajasthan Heritage & Tourism" />
+  <meta name="twitter:description" content="Your complete guide to Chittorgarh — India's city of valour. Forts, temples, hotels, food & more." />
+  <meta name="twitter:image" content="https://visitchittorgarh.in/Fort.png" />
 </head>
 
 <body>

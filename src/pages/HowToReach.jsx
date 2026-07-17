@@ -4,6 +4,65 @@ import { Plane, Train, Car, MapPin, Bus, ExternalLink, Navigation } from 'lucide
 import Section from '../components/Section';
 import DirectionsButton from '../components/DirectionsButton';
 import { NavLink } from 'react-router-dom';
+import SEOHead from '../components/SEOHead';
+
+const HOW_TO_REACH_SCHEMA = [
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How to reach Chittorgarh by train?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Chittorgarh Railway Station is a major junction connected to Delhi, Mumbai, Udaipur, Jaipur, Kota and Ajmer. Key trains include Chetak Express, Mewar Express, and Chittorgarh-Udaipur Passenger. The station is approximately 5 km from Chittorgarh Fort."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the nearest airport to Chittorgarh?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Maharana Pratap Airport (UDR) in Udaipur is the nearest airport, located 115 km from Chittorgarh (approximately 2 hours by road). Jaipur International Airport (JAI) is a larger alternative at 320 km."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How far is Chittorgarh from Udaipur?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Chittorgarh is 115 km from Udaipur via NH 76. The road journey takes approximately 2 hours. Regular train services connect both cities in 2.5 hours."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How far is Chittorgarh from Jaipur?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Chittorgarh is approximately 320 km from Jaipur. The road journey takes 5–6 hours via NH 48 and NH 148D. Train connections are also available."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a bus service to Chittorgarh?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, RSRTC (Rajasthan State Road Transport Corporation) operates regular bus services to Chittorgarh from Udaipur, Jaipur, Kota, Ajmer and other major Rajasthan cities. Private Volvo buses are also available."
+        }
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://visitchittorgarh.in/" },
+      { "@type": "ListItem", "position": 2, "name": "How to Reach Chittorgarh", "item": "https://visitchittorgarh.in/how-to-reach" }
+    ]
+  }
+];
+
 
 const HowToReach = () => {
     const [isPlanning, setIsPlanning] = useState(false);
@@ -69,6 +128,14 @@ const HowToReach = () => {
 
     return (
         <div className="min-h-screen pt-24 pb-12">
+            <SEOHead
+                title="How to Reach Chittorgarh | Train, Bus, Flight & Road"
+                description="Complete travel guide to Chittorgarh — reach by train (Chetak/Mewar Express), flight via Udaipur, RSRTC bus or road from Jaipur, Kota & Delhi. Distances & booking links."
+                canonical="/how-to-reach"
+                keywords="how to reach Chittorgarh, Chittorgarh train, Chittorgarh airport, Udaipur to Chittorgarh, Jaipur to Chittorgarh, Chittorgarh bus, Chittorgarh distance"
+                ogImage="https://visitchittorgarh.in/Fort.png"
+                schema={HOW_TO_REACH_SCHEMA}
+            />
             <Section id="reach-hero" title="Travel to the Citadel" className="bg-transparent">
                 <div className="max-w-4xl mx-auto text-center mb-16 px-4">
                     <p className="text-xl text-royal-white/80 font-serif italic leading-relaxed">

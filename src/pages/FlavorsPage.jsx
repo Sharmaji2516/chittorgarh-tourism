@@ -5,6 +5,65 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Utensils, Coffee, LayoutGrid, Star, ArrowRight, X, CheckCircle2 } from 'lucide-react';
 import { cn } from '../utils/cn';
 import BookingModal from '../components/BookingModal';
+import SEOHead from '../components/SEOHead';
+
+const FLAVORS_SCHEMA = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "Chittorgarh Local Food & Dining Guide",
+    "description": "Discover the best Rajasthani food in Chittorgarh — authentic Dal Baati Churma, street food vendors, cafes and local restaurants curated by local experts.",
+    "url": "https://visitchittorgarh.in/flavors",
+    "image": "https://visitchittorgarh.in/Fort.png",
+    "servesCuisine": ["Rajasthani", "Indian", "North Indian", "Street Food"],
+    "priceRange": "₹–₹₹",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Chittorgarh",
+      "addressRegion": "Rajasthan",
+      "addressCountry": "IN"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the famous food of Chittorgarh?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Dal Baati Churma is the most famous dish of Chittorgarh. Other popular dishes include Ker Sangri, Gatte ki Sabzi, Laal Maas, Ghevar, and Mawa Kachori."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the best restaurants in Chittorgarh?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Top restaurants in Chittorgarh include Padmini Restaurant, Chokhi Dhani Chittorgarh, Hotel Pratap Palace Restaurant and several local dhabas near the fort serving authentic Rajasthani thali."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Where can I find street food in Chittorgarh?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The best street food in Chittorgarh is found near Collectorate Chowk, Fort Road market, and the main Sita Mata Bazar where vendors sell kachori, samosa, and local sweets."
+        }
+      }
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://visitchittorgarh.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Food & Flavors", "item": "https://visitchittorgarh.in/flavors" }
+    ]
+  }
+];
+
 
 const FlavorsPage = ({ t, filteredVendors, filteredCafes, searchQuery }) => {
     const [activeCategory, setActiveCategory] = useState('all'); // 'all', 'vendors', 'cafes', 'dishes'
@@ -31,6 +90,14 @@ const FlavorsPage = ({ t, filteredVendors, filteredCafes, searchQuery }) => {
 
     return (
         <div className="space-y-0">
+            <SEOHead
+                title="Chittorgarh Food Guide | Best Restaurants & Street Food"
+                description="Discover the best Rajasthani food in Chittorgarh — Dal Baati Churma, local street vendors, authentic cafes & top restaurants. Your complete Chittorgarh food guide 2025."
+                canonical="/flavors"
+                keywords="Chittorgarh restaurants, food in Chittorgarh, Rajasthani cuisine, Dal Baati Churma, street food Chittorgarh, best cafes Chittorgarh"
+                ogImage="https://visitchittorgarh.in/Fort.png"
+                schema={FLAVORS_SCHEMA}
+            />
             {/* Page Header & Filter Bar */}
             <div className="pt-12 pb-8 text-center px-4">
                 {!searchQuery && (

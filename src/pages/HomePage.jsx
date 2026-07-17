@@ -4,6 +4,73 @@ import { NavLink } from 'react-router-dom';
 import { Wind, Shield, Sunrise, Mountain, ArrowRight, Check } from 'lucide-react';
 import Hero from '../components/Hero';
 import Section from '../components/Section';
+import SEOHead from '../components/SEOHead';
+
+const HOME_SCHEMAS = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Visit Chittorgarh",
+    "url": "https://visitchittorgarh.in",
+    "logo": "https://visitchittorgarh.in/logo_maharana.png",
+    "description": "Your complete guide to Chittorgarh tourism — forts, temples, hotels, restaurants and local experiences in Rajasthan.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Chittorgarh",
+      "addressRegion": "Rajasthan",
+      "addressCountry": "IN",
+      "postalCode": "312001"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "Tourist Information",
+      "areaServed": "IN",
+      "availableLanguage": ["English", "Hindi"]
+    },
+    "sameAs": [
+      "https://www.facebook.com/visitchittorgarh",
+      "https://www.instagram.com/visitchittorgarh"
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Visit Chittorgarh",
+    "url": "https://visitchittorgarh.in",
+    "description": "Complete Chittorgarh tourism guide — attractions, hotels, food, itineraries and local experiences.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://visitchittorgarh.in/attractions?q={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "TouristDestination",
+    "name": "Chittorgarh",
+    "description": "Chittorgarh is a historic city in Rajasthan, India, home to India's largest fort — Chittorgarh Fort — and numerous palaces, temples and monuments representing Rajput bravery and heritage.",
+    "url": "https://visitchittorgarh.in",
+    "image": "https://visitchittorgarh.in/Fort.png",
+    "touristType": ["Cultural tourist", "Heritage tourist", "Pilgrimage tourist", "Adventure tourist"],
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "24.8887",
+      "longitude": "74.6269"
+    },
+    "includesAttraction": [
+      { "@type": "TouristAttraction", "name": "Chittorgarh Fort" },
+      { "@type": "TouristAttraction", "name": "Vijay Stambh" },
+      { "@type": "TouristAttraction", "name": "Kirti Stambh" },
+      { "@type": "TouristAttraction", "name": "Padmini Palace" },
+      { "@type": "TouristAttraction", "name": "Meera Temple" },
+      { "@type": "TouristAttraction", "name": "Sanwariyaji Temple" }
+    ]
+  }
+];
+
 
 const HomePage = ({ t, searchQuery }) => {
     // Data for the 4 major categories
@@ -52,6 +119,14 @@ const HomePage = ({ t, searchQuery }) => {
 
     return (
         <div className="overflow-x-hidden min-h-screen bg-heritage-charcoal">
+            <SEOHead
+                title="Visit Chittorgarh | Rajasthan Heritage, Fort & Tourism Guide"
+                description="Explore Chittorgarh — India's city of valour. Discover Chittorgarh Fort, Vijay Stambh, Padmini Palace, Meera Temple, top hotels, restaurants & guided itineraries."
+                canonical="/"
+                keywords="Chittorgarh, Visit Chittorgarh, Chittorgarh Tourism, Chittorgarh Fort, Places to visit in Chittorgarh, Rajasthan Tourism, Vijay Stambh, Padmini Palace"
+                ogImage="https://visitchittorgarh.in/Fort.png"
+                schema={HOME_SCHEMAS}
+            />
             <Hero />
             
             {/* Strategy Selection: Dual Path */}

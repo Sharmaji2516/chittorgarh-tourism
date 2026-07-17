@@ -2,6 +2,39 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HeartHandshake, X, ArrowRight } from 'lucide-react';
 import VendorCard from '../components/VendorCard';
+import SEOHead from '../components/SEOHead';
+
+const LOCAL_VOCAL_SCHEMA = [
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Chittorgarh Handicrafts & Local Shopping",
+    "description": "Explore authentic Chittorgarh handicrafts — Thewa jewelry, Daabu printed fabrics, Rajasthani miniature paintings, terracotta pottery and traditional souvenirs.",
+    "url": "https://visitchittorgarh.in/vocal-for-local",
+    "image": "https://visitchittorgarh.in/Fort.png",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Chittorgarh",
+      "addressRegion": "Rajasthan",
+      "addressCountry": "IN",
+      "postalCode": "312001"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "24.8887",
+      "longitude": "74.6269"
+    }
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://visitchittorgarh.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Local Shopping & Handicrafts", "item": "https://visitchittorgarh.in/vocal-for-local" }
+    ]
+  }
+];
+
 
 const LocalVocalPage = ({ t, filteredLocalVocal, searchQuery }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -11,6 +44,14 @@ const LocalVocalPage = ({ t, filteredLocalVocal, searchQuery }) => {
 
     return (
         <div className="min-h-screen bg-[#0a0a0b] text-white relative overflow-hidden">
+            <SEOHead
+                title="Chittorgarh Shopping | Thewa Art, Handicrafts & Souvenirs"
+                description="Shop authentic Chittorgarh handicrafts — Thewa gold jewelry, Daabu block-printed fabrics, Rajasthani miniature paintings & local souvenirs. Support local artisans."
+                canonical="/vocal-for-local"
+                keywords="Chittorgarh shopping, Thewa jewelry Chittorgarh, handicrafts Chittorgarh, Daabu print, Rajasthani souvenirs, local market Chittorgarh"
+                ogImage="https://visitchittorgarh.in/Fort.png"
+                schema={LOCAL_VOCAL_SCHEMA}
+            />
             {/* Background decorations */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-royal-gold/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 animate-pulse" />
             <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-royal-gold/5 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/3 animate-pulse" />

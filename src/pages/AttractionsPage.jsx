@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useParams, Link } from 'react-router-dom';
 import AttractionCard from '../components/AttractionCard';
 import { MapPin, Info, Shield, Wind, Sunrise, Mountain } from 'lucide-react';
+import SEOHead from '../components/SEOHead';
+
 
 const AttractionsPage = ({ t, filteredAttractions, setSelectedAttraction }) => {
     const { category } = useParams();
@@ -55,9 +57,77 @@ const AttractionsPage = ({ t, filteredAttractions, setSelectedAttraction }) => {
 
     if (!main) return <div className="text-white pt-40 text-center">Loading...</div>;
 
+    // Dynamic SEO config per category
+    const SEO_CONFIG = {
+        fort: {
+            title: "Chittorgarh Fort & Monuments | Complete Visitor Guide",
+            description: "Explore Chittorgarh Fort — India's largest fort. Visit Vijay Stambh, Kirti Stambh, Padmini Palace, Rana Kumbha Palace & Gaumukh Reservoir. History, timings & entry fee.",
+            keywords: "Chittorgarh Fort, Vijay Stambh, Kirti Stambh, Padmini Palace, Rana Kumbha Palace, Gaumukh Reservoir, Chittorgarh Fort entry fee, Chittorgarh Fort timings",
+            schema: [
+                {
+                    "@context": "https://schema.org",
+                    "@type": "TouristAttraction",
+                    "name": "Chittorgarh Fort",
+                    "description": "India's largest fort complex and a UNESCO World Heritage Site. The fort houses over 65 historic structures including the iconic Vijay Stambh, Padmini Palace, and Kirti Stambh.",
+                    "url": "https://visitchittorgarh.in/attractions/fort",
+                    "image": "https://visitchittorgarh.in/Fort.png",
+                    "geo": { "@type": "GeoCoordinates", "latitude": "24.8887", "longitude": "74.6269" },
+                    "address": { "@type": "PostalAddress", "addressLocality": "Chittorgarh", "addressRegion": "Rajasthan", "addressCountry": "IN" },
+                    "touristType": ["Cultural tourist", "Heritage tourist", "History enthusiast"],
+                    "containsPlace": [
+                        { "@type": "TouristAttraction", "name": "Vijay Stambh", "description": "Tower of Victory built by Maharana Kumbha in 1448 CE to commemorate his victory over Malwa Sultanate." },
+                        { "@type": "TouristAttraction", "name": "Kirti Stambh", "description": "Tower of Fame — a 12th century Jain pillar built by a Jain merchant dedicated to Adinath." },
+                        { "@type": "TouristAttraction", "name": "Padmini Palace", "description": "Palace of the legendary queen Rani Padmini, associated with the historic siege of Chittorgarh." },
+                        { "@type": "TouristAttraction", "name": "Rana Kumbha Palace", "description": "The residence of Maharana Kumbha, the most prominent Mewar ruler, where Meera Bai also lived." },
+                        { "@type": "TouristAttraction", "name": "Gaumukh Reservoir", "description": "Ancient sacred water tank inside the fort fed by a spring through a cow-mouth shaped spout." },
+                        { "@type": "TouristAttraction", "name": "Kalika Mata Temple", "description": "8th century temple originally dedicated to the Sun God, later converted to a temple of Goddess Kali." }
+                    ]
+                },
+                { "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://visitchittorgarh.in/" }, { "@type": "ListItem", "position": 2, "name": "Attractions", "item": "https://visitchittorgarh.in/attractions" }, { "@type": "ListItem", "position": 3, "name": "Chittorgarh Fort", "item": "https://visitchittorgarh.in/attractions/fort" }] }
+            ]
+        },
+        spiritual: {
+            title: "Temples in Chittorgarh | Meera Temple & Sanwariyaji",
+            description: "Visit sacred temples in Chittorgarh — Meera Temple, Sanwariyaji Temple, Kalika Mata Mandir & Kumbha Shyam Temple. Pilgrimage guide, darshan timings & travel tips.",
+            keywords: "Meera Temple Chittorgarh, Sanwariyaji Temple, Kalika Mata Temple, Chittorgarh pilgrimage, temples in Chittorgarh, Sanwariya Seth Temple",
+            schema: [
+                { "@context": "https://schema.org", "@type": "TouristAttraction", "name": "Meera Temple, Chittorgarh", "description": "Sacred temple dedicated to the poet-saint Meera Bai, located inside Chittorgarh Fort. A pilgrimage site for devotees across India.", "url": "https://visitchittorgarh.in/attractions/spiritual", "image": "https://visitchittorgarh.in/Fort.png", "geo": { "@type": "GeoCoordinates", "latitude": "24.8912", "longitude": "74.6308" }, "address": { "@type": "PostalAddress", "addressLocality": "Chittorgarh", "addressRegion": "Rajasthan", "addressCountry": "IN" } },
+                { "@context": "https://schema.org", "@type": "TouristAttraction", "name": "Sanwariyaji Temple (Sanwariya Seth)", "description": "Famous Krishna temple located 40 km from Chittorgarh in Mandphiya village, one of the most visited pilgrimage sites in Rajasthan.", "url": "https://visitchittorgarh.in/attractions/spiritual", "address": { "@type": "PostalAddress", "addressLocality": "Mandphiya, Chittorgarh", "addressRegion": "Rajasthan", "addressCountry": "IN" } },
+                { "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://visitchittorgarh.in/" }, { "@type": "ListItem", "position": 2, "name": "Attractions", "item": "https://visitchittorgarh.in/attractions" }, { "@type": "ListItem", "position": 3, "name": "Temples & Spiritual", "item": "https://visitchittorgarh.in/attractions/spiritual" }] }
+            ]
+        },
+        nature: {
+            title: "Bassi Wildlife Sanctuary Chittorgarh | Nature & Wildlife",
+            description: "Explore Bassi Wildlife Sanctuary near Chittorgarh — home to leopards, sloth bears, chinkara & over 150 bird species. Safari timings, entry fees & travel guide.",
+            keywords: "Bassi Wildlife Sanctuary, Chittorgarh wildlife, wildlife safari Chittorgarh, nature Chittorgarh, bird watching Chittorgarh",
+            schema: [
+                { "@context": "https://schema.org", "@type": "TouristAttraction", "name": "Bassi Wildlife Sanctuary", "description": "Spread across 138 sq km, Bassi Wildlife Sanctuary is home to leopards, wolves, chinkara, sloth bears, and over 150 bird species. Located 25 km from Chittorgarh.", "url": "https://visitchittorgarh.in/attractions/nature", "image": "https://visitchittorgarh.in/Fort.png", "geo": { "@type": "GeoCoordinates", "latitude": "24.8450", "longitude": "74.8300" }, "address": { "@type": "PostalAddress", "addressLocality": "Bassi, Chittorgarh", "addressRegion": "Rajasthan", "addressCountry": "IN" } },
+                { "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://visitchittorgarh.in/" }, { "@type": "ListItem", "position": 2, "name": "Attractions", "item": "https://visitchittorgarh.in/attractions" }, { "@type": "ListItem", "position": 3, "name": "Nature & Wildlife", "item": "https://visitchittorgarh.in/attractions/nature" }] }
+            ]
+        },
+        scenic: {
+            title: "Menal Waterfall & Scenic Spots near Chittorgarh",
+            description: "Discover Menal Waterfall — the 'Khajuraho of Rajasthan' — and other scenic beauty spots near Chittorgarh. Photography spots, best visit time & travel guide.",
+            keywords: "Menal Waterfall Chittorgarh, Menal Rajasthan, scenic spots Chittorgarh, photography Chittorgarh, weekend trip from Udaipur",
+            schema: [
+                { "@context": "https://schema.org", "@type": "TouristAttraction", "name": "Menal Waterfall & Temple Complex", "description": "Known as the 'Khajuraho of Rajasthan', Menal features a stunning waterfall and a 10th–12th century temple complex dedicated to Lord Shiva. Located 95 km from Chittorgarh.", "url": "https://visitchittorgarh.in/attractions/scenic", "image": "https://visitchittorgarh.in/Fort.png", "geo": { "@type": "GeoCoordinates", "latitude": "25.0800", "longitude": "75.4500" }, "address": { "@type": "PostalAddress", "addressLocality": "Menal, Chittorgarh", "addressRegion": "Rajasthan", "addressCountry": "IN" } },
+                { "@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://visitchittorgarh.in/" }, { "@type": "ListItem", "position": 2, "name": "Attractions", "item": "https://visitchittorgarh.in/attractions" }, { "@type": "ListItem", "position": 3, "name": "Scenic Spots", "item": "https://visitchittorgarh.in/attractions/scenic" }] }
+            ]
+        }
+    };
+
+    const activeSEO = SEO_CONFIG[category] || SEO_CONFIG['fort'];
+
     return (
         <div className="pt-32 pb-24 max-w-[1440px] mx-auto px-4 md:px-12 min-h-screen">
-            
+            <SEOHead
+                title={activeSEO.title}
+                description={activeSEO.description}
+                canonical={`/attractions/${category || 'fort'}`}
+                keywords={activeSEO.keywords}
+                ogImage="https://visitchittorgarh.in/Fort.png"
+                schema={activeSEO.schema}
+            />
             {/* Header Section */}
             <div className="mb-20">
                 <div className="flex items-center gap-6 mb-4 md:justify-center">

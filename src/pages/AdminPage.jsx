@@ -56,6 +56,17 @@ const formatPillarTitle = (title) => {
     return title;
 };
 
+const getCategoryCue = (type) => {
+    const cues = {
+        taxi: 'TAXI | Driver',
+        hotel: 'HOTEL | Accommodation',
+        guide: 'GUIDE | Expert',
+        restaurant: 'RESTAURANT | Dining',
+        cafe: 'CAFE | Hangouts'
+    };
+    return cues[type] || type.toUpperCase();
+};
+
 import { cn } from '../utils/cn';
 
 const BREVO_API_KEY = import.meta.env.VITE_BREVO_API_KEY;
@@ -90,13 +101,20 @@ const formatDateReadable = (dateStr) => {
     }
 };
 
-const BookingDetailModal = ({ booking, providers = [], onClose }) => {
+const BookingDetailModal = ({ booking, providers = [], onClose, onUpdate }) => {
 
     const [editMode, setEditMode] = useState(false);
     const [localData, setLocalData] = useState(booking);
     const [isSaving, setIsSaving] = useState(false);
     const [showPass, setShowPass] = useState(false);
     const [emailLanguage, setEmailLanguage] = useState('hi');
+
+    useEffect(() => {
+        if (!editMode) {
+            setLocalData(booking);
+        }
+    }, [booking, editMode]);
+
     const [selectedServices, setSelectedServices] = useState({
         'Private Taxi': booking.transport !== 'Not Needed',
         'Hotel Booking': booking.hotel !== 'Not Needed',
@@ -145,6 +163,13 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
 
 
             setLocalData(prev => ({ ...prev, ...updateData }));
+            if (onUpdate) {
+                onUpdate(booking.id, {
+                    passCode: newCode,
+                    passGenerationCount: newGenerationCount,
+                    includedServices: updateData.includedServices
+                });
+            }
             setShowPass(true);
         } catch (err) {
             console.error("Pass Generation Error:", err);
@@ -157,14 +182,18 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
         setIsSaving(true);
         try {
             const newTotal = calculateLiveTotal(localData);
-            await updateDoc(doc(db, "bookings", booking.id), {
+            const updatedFields = {
                 ...localData,
                 totalAmount: newTotal,
                 transportPrice: Number(localData.transportPrice || 0),
                 hotelPrice: Number(localData.hotelPrice || 0),
                 guidePrice: Number(localData.guidePrice || 0)
-            });
+            };
+            await updateDoc(doc(db, "bookings", booking.id), updatedFields);
             setEditMode(false);
+            if (onUpdate) {
+                onUpdate(booking.id, updatedFields);
+            }
         } catch (err) {
             console.error("Update Error:", err);
         } finally {
@@ -649,18 +678,18 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
 
                     {/* Service Management */}
                     <div className="space-y-6 pt-10 border-t border-slate-100">
-                        <h4 className="text-[10px] text-black/40 uppercase tracking-[0.5em] font-black mb-6">Service Management</h4>
+                        <h4 className="text-xs text-black uppercase tracking-[0.4em] font-black mb-6 text-center">Service Management</h4>
                         
                         <div className="flex flex-col gap-4">
                             {/* Transport */}
-                            <div className="flex items-center justify-between p-6 rounded-3xl bg-white/[0.02] border border-white/5 flex-wrap gap-4">
-                                <div className="flex items-center gap-5 min-w-[200px]">
+                            <div className="flex items-center justify-between p-4 lg:p-6 rounded-3xl bg-white/[0.02] border border-slate-100 gap-4">
+                                <div className="flex items-center gap-3 lg:gap-5 min-w-0 flex-1">
                                     <div className="p-3 bg-royal-gold/10 rounded-xl shrink-0"><Car className="w-5 h-5 text-royal-gold" /></div>
-                                    <div className="flex-1">
+                                    <div className="flex-1 min-w-0">
                                         <div className="flex items-center gap-3 mb-1">
-                                            <p className="text-[10px] text-black/60 uppercase tracking-widest">Transport Service</p>
+                                            <p className="text-[10px] text-black/60 uppercase tracking-widest truncate">Transport Service</p>
                                             {localData.redeemed_taxi && (
-                                                <span className="text-[7px] bg-green-500 text-white px-2 py-0.5 rounded-full font-black uppercase tracking-widest flex items-center gap-1">
+                                                <span className="text-[7px] bg-green-500 text-white px-2 py-0.5 rounded-full font-black uppercase tracking-widest flex items-center gap-1 shrink-0">
                                                     <CheckCircle2 className="w-2 h-2" />
                                                     Redeemed
                                                 </span>
@@ -703,10 +732,10 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
 
                                         ) : (
                                             <div>
-                                                <p className="text-black font-bold uppercase tracking-wider text-sm">{localData.transport}</p>
-                                                {localData.taxiName && <p className="text-[11px] text-royal-gold font-bold italic">{localData.taxiName}</p>}
+                                                <p className="text-black font-bold uppercase tracking-wider text-sm truncate">{localData.transport}</p>
+                                                {localData.taxiName && <p className="text-[11px] text-royal-gold font-bold italic truncate">{localData.taxiName}</p>}
                                                 {localData.redeemed_taxi_at && (
-                                                    <p className="text-[9px] text-black/30 font-black uppercase mt-1">
+                                                    <p className="text-[9px] text-black/30 font-black uppercase mt-1 truncate">
                                                         Verified: {new Date(localData.redeemed_taxi_at).toLocaleString()}
                                                     </p>
                                                 )}
@@ -714,18 +743,18 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
                                         )}
                                     </div>
                                 </div>
-                                <span className="text-xl font-serif text-royal-gold">₹{localData.transportPrice || 0}</span>
+                                <span className="text-lg lg:text-xl font-serif text-royal-gold shrink-0">₹{localData.transportPrice || 0}</span>
                             </div>
 
                             {/* Hotel */}
-                            <div className="flex items-center justify-between p-6 rounded-3xl bg-white/[0.02] border border-white/5 flex-wrap gap-4">
-                                <div className="flex items-center gap-5 min-w-[200px]">
+                            <div className="flex items-center justify-between p-4 lg:p-6 rounded-3xl bg-white/[0.02] border border-slate-100 gap-4">
+                                <div className="flex items-center gap-3 lg:gap-5 min-w-0 flex-1">
                                     <div className="p-3 bg-royal-gold/10 rounded-xl shrink-0"><Hotel className="w-5 h-5 text-royal-gold" /></div>
-                                    <div className="flex-1">
+                                    <div className="flex-1 min-w-0">
                                         <div className="flex items-center gap-3 mb-1">
-                                            <p className="text-[10px] text-black/60 uppercase tracking-widest">Accommodation</p>
+                                            <p className="text-[10px] text-black/60 uppercase tracking-widest truncate">Accommodation</p>
                                             {localData.redeemed_hotel && (
-                                                <span className="text-[7px] bg-green-500 text-white px-2 py-0.5 rounded-full font-black uppercase tracking-widest flex items-center gap-1">
+                                                <span className="text-[7px] bg-green-500 text-white px-2 py-0.5 rounded-full font-black uppercase tracking-widest flex items-center gap-1 shrink-0">
                                                     <CheckCircle2 className="w-2 h-2" />
                                                     Redeemed
                                                 </span>
@@ -760,10 +789,10 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
 
                                         ) : (
                                             <div>
-                                                <p className="text-black font-bold uppercase tracking-wider text-sm">{localData.hotel}</p>
-                                                {localData.hotelName && <p className="text-[11px] text-royal-gold font-bold italic">{localData.hotelName}</p>}
+                                                <p className="text-black font-bold uppercase tracking-wider text-sm truncate">{localData.hotel}</p>
+                                                {localData.hotelName && <p className="text-[11px] text-royal-gold font-bold italic truncate">{localData.hotelName}</p>}
                                                 {localData.redeemed_hotel_at && (
-                                                    <p className="text-[9px] text-black/30 font-black uppercase mt-1">
+                                                    <p className="text-[9px] text-black/30 font-black uppercase mt-1 truncate">
                                                         Verified: {new Date(localData.redeemed_hotel_at).toLocaleString()}
                                                     </p>
                                                 )}
@@ -771,18 +800,18 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
                                         )}
                                     </div>
                                 </div>
-                                <span className="text-xl font-serif text-royal-gold">₹{localData.hotelPrice || 0}</span>
+                                <span className="text-lg lg:text-xl font-serif text-royal-gold shrink-0">₹{localData.hotelPrice || 0}</span>
                             </div>
 
                             {/* Guide */}
-                            <div className="flex items-center justify-between p-6 rounded-3xl bg-white/[0.02] border border-white/5 flex-wrap gap-4">
-                                <div className="flex items-center gap-5 min-w-[200px]">
+                            <div className="flex items-center justify-between p-4 lg:p-6 rounded-3xl bg-white/[0.02] border border-slate-100 gap-4">
+                                <div className="flex items-center gap-3 lg:gap-5 min-w-0 flex-1">
                                     <div className="p-3 bg-royal-gold/10 rounded-xl shrink-0"><UserCheck className="w-5 h-5 text-royal-gold" /></div>
-                                    <div className="flex-1">
+                                    <div className="flex-1 min-w-0">
                                         <div className="flex items-center gap-3 mb-1">
-                                            <p className="text-[10px] text-black/60 uppercase tracking-widest">Heritage Guide</p>
+                                            <p className="text-[10px] text-black/60 uppercase tracking-widest truncate">Heritage Guide</p>
                                             {localData.redeemed_guide && (
-                                                <span className="text-[7px] bg-green-500 text-white px-2 py-0.5 rounded-full font-black uppercase tracking-widest flex items-center gap-1">
+                                                <span className="text-[7px] bg-green-500 text-white px-2 py-0.5 rounded-full font-black uppercase tracking-widest flex items-center gap-1 shrink-0">
                                                     <CheckCircle2 className="w-2 h-2" />
                                                     Redeemed
                                                 </span>
@@ -817,10 +846,10 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
 
                                         ) : (
                                             <div>
-                                                <p className="text-black font-bold uppercase tracking-wider text-sm">{localData.guide}</p>
-                                                {localData.guideName && <p className="text-[11px] text-royal-gold font-bold italic">{localData.guideName}</p>}
+                                                <p className="text-black font-bold uppercase tracking-wider text-sm truncate">{localData.guide}</p>
+                                                {localData.guideName && <p className="text-[11px] text-royal-gold font-bold italic truncate">{localData.guideName}</p>}
                                                 {localData.redeemed_guide_at && (
-                                                    <p className="text-[9px] text-black/30 font-black uppercase mt-1">
+                                                    <p className="text-[9px] text-black/30 font-black uppercase mt-1 truncate">
                                                         Verified: {new Date(localData.redeemed_guide_at).toLocaleString()}
                                                     </p>
                                                 )}
@@ -828,7 +857,7 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
                                         )}
                                     </div>
                                 </div>
-                                <span className="text-xl font-serif text-royal-gold">₹{localData.guidePrice || 0}</span>
+                                <span className="text-lg lg:text-xl font-serif text-royal-gold shrink-0">₹{localData.guidePrice || 0}</span>
                             </div>
                         </div>
                     </div>
@@ -1385,20 +1414,26 @@ const BookingDetailModal = ({ booking, providers = [], onClose }) => {
     );
 };
 const ProviderModal = ({ provider, defaultType, onClose, onSave, isSaving }) => {
-    const [localData, setLocalData] = useState(provider || {
-        name: '',
-        phone: '',
-        whatsapp: '',
-        email: '',
-        type: defaultType || 'taxi', // taxi, hotel, guide, restaurant, cafe
-        vehicleNumber: '', // for taxi
-        vehicleType: 'Royal SUV', // for taxi
-        address: '',
-        location: '',
-        aadharNumber: '',
-        age: '',
-        photoUrl: '',
-        rates: ''
+    const [localData, setLocalData] = useState(() => {
+        const base = provider || {
+            name: '',
+            phone: '',
+            whatsapp: '',
+            email: '',
+            type: defaultType || 'taxi', // taxi, hotel, guide, restaurant, cafe
+            vehicleNumber: '', // for taxi
+            vehicleType: 'Royal SUV', // for taxi
+            address: '',
+            location: '',
+            aadharNumber: '',
+            age: '',
+            photoUrl: '',
+            rates: ''
+        };
+        return {
+            gender: 'male',
+            ...base
+        };
     });
     
     const handleSubmit = (e) => {
@@ -1424,12 +1459,14 @@ const ProviderModal = ({ provider, defaultType, onClose, onSave, isSaving }) => 
                         
                         {/* Photo URL Section */}
                         <div className="md:col-span-2 flex flex-col items-center justify-center border-2 border-dashed border-slate-200 rounded-2xl p-6 bg-slate-50">
-                            {localData.photoUrl ? (
+                            {localData.photoUrl && localData.photoUrl.trim() !== '' ? (
                                 <img src={localData.photoUrl} alt="Provider" className="w-24 h-24 rounded-full object-cover mb-4 shadow-lg border-2 border-royal-gold" />
                             ) : (
-                                <div className="w-24 h-24 rounded-full bg-slate-200 flex items-center justify-center mb-4 border-2 border-transparent">
-                                    <User className="w-10 h-10 text-slate-400" />
-                                </div>
+                                <img 
+                                    src={localData.gender === 'female' ? 'https://api.dicebear.com/7.x/avataaars/png?seed=Lily' : 'https://api.dicebear.com/7.x/avataaars/png?seed=Jack'} 
+                                    alt="Provider Avatar" 
+                                    className="w-24 h-24 rounded-full object-cover mb-4 shadow-lg border-2 border-royal-gold bg-slate-200" 
+                                />
                             )}
                             <div className="w-full">
                                 <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 block text-center">Direct Image Link (e.g., from postimages.org)</label>
@@ -1481,6 +1518,36 @@ const ProviderModal = ({ provider, defaultType, onClose, onSave, isSaving }) => 
                                 <option value="restaurant">Fine Dining Restaurant</option>
                                 <option value="cafe">Cafe & Hangouts</option>
                             </select>
+                        </div>
+
+                        <div className="md:col-span-2">
+                            <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 block">Gender / Default Avatar</label>
+                            <div className="flex gap-4">
+                                <button
+                                    type="button"
+                                    onClick={() => setLocalData({ ...localData, gender: 'male' })}
+                                    className={cn(
+                                        "flex-1 py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all border",
+                                        localData.gender === 'male' || !localData.gender
+                                            ? "bg-royal-gold border-royal-gold text-royal-black"
+                                            : "bg-slate-50 border-slate-200 text-slate-500 hover:bg-slate-100"
+                                    )}
+                                >
+                                    Male / Boy Avatar
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => setLocalData({ ...localData, gender: 'female' })}
+                                    className={cn(
+                                        "flex-1 py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all border",
+                                        localData.gender === 'female'
+                                            ? "bg-royal-gold border-royal-gold text-royal-black"
+                                            : "bg-slate-50 border-slate-200 text-slate-500 hover:bg-slate-100"
+                                    )}
+                                >
+                                    Female / Girl Avatar
+                                </button>
+                            </div>
                         </div>
 
                         {localData.type === 'taxi' && (
@@ -1570,73 +1637,66 @@ const AdminPage = () => {
 
     useEffect(() => {
         if (!isLoggedIn) return;
-        console.log("Initializing Admin Real-time Listener...");
-        const q = query(collection(db, "bookings"), orderBy("createdAt", "desc"));
         
-        const unsubscribe = onSnapshot(q, (snapshot) => {
-            if (!initialLoadRef.current) {
-                console.log("Initial snapshot received.");
-                const initialBookings = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                prevBookingsRef.current = initialBookings;
-                setBookings(initialBookings);
-                setLoading(false);
-                initialLoadRef.current = true;
-                return;
-            }
-
-            snapshot.docChanges().forEach((change) => {
-                const data = change.doc.data();
-                if (change.type === "added") {
-                    console.log("Detecting new inquiry:", data.name);
-                    addNotification("New Inquiry", `${data.name} just sent a request!`, "success");
-                    setActivity(prev => [{ id: change.doc.id, title: "New Inquiry", message: `${data.name} sent a request`, time: new Date() }, ...prev.slice(0, 19)]);
-                }
-                if (change.type === "modified") {
-                    const newData = data;
-                    const oldBooking = prevBookingsRef.current.find(b => b.id === change.doc.id);
-                    
-                    if (oldBooking) {
-                        const services = ['taxi', 'hotel', 'guide', 'restaurant', 'cafe'];
-                        services.forEach(s => {
-                            const key = `redeemed_${s}`;
-                            if (newData[key] && !oldBooking[key]) {
-                                console.log(`Service ${s} redeemed for ${newData.name}`);
-                                addNotification("Service Redeemed", `${newData.name}'s ${s} has been verified!`, "info");
-                                setActivity(prev => [{ id: `${newData.id}-${s}`, title: "Service Redeemed", message: `${newData.name}'s ${s} verified`, time: new Date() }, ...prev.slice(0, 19)]);
-                            }
-                        });
-                    }
-                }
-            });
-
-            const updatedBookings = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-            prevBookingsRef.current = updatedBookings;
-            setBookings(updatedBookings);
+        console.log("Listening to bookings...");
+        setLoading(true);
+        const q = query(collection(db, "bookings"), orderBy("createdAt", "desc"));
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            const bookingsList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            prevBookingsRef.current = bookingsList;
+            setBookings(bookingsList);
+            setLoading(false);
+        }, (error) => {
+            console.error("Firestore bookings onSnapshot error:", error);
+            addNotification("Database Error", "Failed to sync bookings: " + error.message, "error");
+            setLoading(false);
         });
+
         return () => unsubscribe();
     }, [isLoggedIn]);
 
     useEffect(() => {
         if (!isLoggedIn) return;
-        console.log("Initializing Providers Listener...");
+        
+        console.log("Listening to providers...");
         const q = query(collection(db, "providers"), orderBy("name", "asc"));
-        const unsubscribe = onSnapshot(q, (snapshot) => {
-            const providersList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            const providersList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
             setProviders(providersList);
+        }, (error) => {
+            console.error("Firestore providers onSnapshot error:", error);
+            addNotification("Database Error", "Failed to sync providers: " + error.message, "error");
         });
+
         return () => unsubscribe();
     }, [isLoggedIn]);
 
     useEffect(() => {
         if (!isLoggedIn) return;
-        console.log("Initializing Feedback Real-time Listener...");
+        
+        console.log("Listening to feedback...");
         const q = query(collection(db, "feedback"), orderBy("createdAt", "desc"));
-        const unsubscribe = onSnapshot(q, (snapshot) => {
-            const feedbackList = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            const feedbackList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
             setFeedback(feedbackList);
+        }, (error) => {
+            console.error("Firestore feedback onSnapshot error:", error);
+            addNotification("Database Error", "Failed to sync feedback: " + error.message, "error");
         });
+
         return () => unsubscribe();
     }, [isLoggedIn]);
+
+    useEffect(() => {
+        if (selectedBooking) {
+            const updated = bookings.find(b => b.id === selectedBooking.id);
+            if (updated) {
+                if (JSON.stringify(updated) !== JSON.stringify(selectedBooking)) {
+                    setSelectedBooking(updated);
+                }
+            }
+        }
+    }, [bookings, selectedBooking]);
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -1646,12 +1706,15 @@ const AdminPage = () => {
 
     const toggleStatus = async (booking, e) => {
         e.stopPropagation();
-        await updateDoc(doc(db, "bookings", booking.id), { status: booking.status === 'contacted' ? 'submitted' : 'contacted' });
+        const newStatus = booking.status === 'contacted' ? 'submitted' : 'contacted';
+        await updateDoc(doc(db, "bookings", booking.id), { status: newStatus });
+        setBookings(prev => prev.map(b => b.id === booking.id ? { ...b, status: newStatus } : b));
     };
 
     const deleteBooking = async (id, e) => {
         if (e) e.stopPropagation();
         await deleteDoc(doc(db, "bookings", id));
+        setBookings(prev => prev.filter(b => b.id !== id));
         addNotification("Archived", "Lead moved to archives.", "error");
         setConfirmDelete(null);
     };
@@ -1775,6 +1838,7 @@ const AdminPage = () => {
         try {
             if (editingProvider) {
                 await updateDoc(doc(db, "providers", editingProvider.id), providerData);
+                setProviders(prev => prev.map(p => p.id === editingProvider.id ? { ...p, ...providerData } : p));
                 addNotification("Success", "Partner updated successfully", "success");
             } else {
                 // Generate Unique Provider Code
@@ -1783,11 +1847,19 @@ const AdminPage = () => {
                 const randomId = Math.floor(1000 + Math.random() * 9000);
                 const providerCode = `${prefix}-${randomId}`;
 
-                await addDoc(collection(db, "providers"), {
+                const docRef = await addDoc(collection(db, "providers"), {
                     ...providerData,
                     providerCode,
                     createdAt: new Date().toISOString()
                 });
+
+                const newProvider = {
+                    id: docRef.id,
+                    ...providerData,
+                    providerCode,
+                    createdAt: new Date().toISOString()
+                };
+                setProviders(prev => [...prev, newProvider].sort((a, b) => a.name.localeCompare(b.name)));
 
                 // Trigger Welcome Email via Brevo API
                 if (providerData.email) {
@@ -1809,6 +1881,7 @@ const AdminPage = () => {
         if (!window.confirm("Are you sure you want to delete this provider?")) return;
         try {
             await deleteDoc(doc(db, "providers", id));
+            setProviders(prev => prev.filter(p => p.id !== id));
             addNotification("Deleted", "Provider removed from system", "info");
         } catch (err) {
             console.error("Delete Provider Error:", err);
@@ -1902,6 +1975,11 @@ const AdminPage = () => {
         if (providerFeedback.length === 0) return "0.0";
         const sum = providerFeedback.reduce((acc, curr) => acc + curr.rating, 0);
         return (sum / providerFeedback.length).toFixed(1);
+    };
+
+    const handleBookingUpdate = (id, updatedFields) => {
+        setBookings(prev => prev.map(b => b.id === id ? { ...b, ...updatedFields } : b));
+        setSelectedBooking(prev => prev && prev.id === id ? { ...prev, ...updatedFields } : prev);
     };
 
     if (!isLoggedIn) {
@@ -2033,17 +2111,7 @@ const AdminPage = () => {
                         
                         <div className="flex flex-col md:flex-row items-end justify-between gap-6 md:gap-10 relative z-10">
                             <div className="flex flex-wrap items-center gap-6 md:gap-10 w-full md:w-auto">
-                                <div className="w-full md:w-auto">
-                                    <p className="text-[10px] text-royal-gold/60 font-black uppercase tracking-[0.5em] mb-4 flex items-center gap-2">
-                                        <Calendar className="w-3.5 h-3.5" />
-                                        Registry Date Range
-                                    </p>
-                                    <div className="flex flex-wrap md:flex-nowrap items-center gap-2 md:gap-4 bg-white/5 border border-white/10 px-4 md:px-8 py-3 md:py-5 rounded-2xl backdrop-blur-md">
-                                        <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} className="bg-transparent text-[11px] font-black uppercase outline-none text-white appearance-none cursor-pointer min-w-[100px] flex-1" />
-                                        <span className="text-white/20 font-black text-[9px]">TO</span>
-                                        <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} className="bg-transparent text-[11px] font-black uppercase outline-none text-white appearance-none cursor-pointer min-w-[100px] flex-1" />
-                                    </div>
-                                </div>
+
 
                                 <div className="w-full md:w-auto">
                                     <p className="text-[10px] text-royal-gold/60 font-black uppercase tracking-[0.5em] mb-4 flex items-center gap-2">
@@ -2072,9 +2140,9 @@ const AdminPage = () => {
                                     </p>
                                 </div>
 
-                                {(searchTerm || startDate || endDate || statusFilter !== 'all') && (
+                                {(searchTerm || statusFilter !== 'all') && (
                                     <button 
-                                        onClick={() => { setSearchTerm(''); setStartDate(''); setEndDate(''); setStatusFilter('all'); }}
+                                        onClick={() => { setSearchTerm(''); setStatusFilter('all'); }}
                                         className="flex items-center gap-3 px-8 py-4 bg-red-500/10 border border-red-500/20 text-red-400 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-red-500 hover:text-white transition-all shadow-lg w-full md:w-auto justify-center"
                                     >
                                         <X className="w-4 h-4" />
@@ -2088,21 +2156,21 @@ const AdminPage = () => {
 
                 {/* Key Metrics */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8 mb-8 md:mb-12">
-                    <div className="bg-white border border-slate-200 p-6 md:p-8 rounded-2xl md:rounded-[2rem] flex items-center gap-6 shadow-xl">
+                    <div className="bg-white border border-slate-200 p-6 md:p-8 rounded-2xl md:rounded-[2rem] flex flex-col items-center justify-center text-center gap-4 shadow-xl">
                         <div className="w-14 h-14 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-500 shrink-0"><Users className="w-6 h-6" /></div>
                         <div>
                             <p className="text-[10px] text-black/40 font-black uppercase tracking-[0.2em] mb-1">Total Inquiries</p>
                             <p className="text-3xl font-serif text-black font-black">{bookings.length}</p>
                         </div>
                     </div>
-                    <div className="bg-white border border-slate-200 p-6 md:p-8 rounded-2xl md:rounded-[2rem] flex items-center gap-6 shadow-xl">
+                    <div className="bg-white border border-slate-200 p-6 md:p-8 rounded-2xl md:rounded-[2rem] flex flex-col items-center justify-center text-center gap-4 shadow-xl">
                         <div className="w-14 h-14 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-500 shrink-0"><Clock className="w-6 h-6" /></div>
                         <div>
                             <p className="text-[10px] text-black/40 font-black uppercase tracking-[0.2em] mb-1">Pending Inquiries</p>
                             <p className="text-3xl font-serif text-black font-black">{bookings.filter(b => b.status !== 'contacted').length}</p>
                         </div>
                     </div>
-                    <div className="bg-white border border-slate-200 p-6 md:p-8 rounded-2xl md:rounded-[2rem] flex items-center gap-6 shadow-xl">
+                    <div className="bg-white border border-slate-200 p-6 md:p-8 rounded-2xl md:rounded-[2rem] flex flex-col items-center justify-center text-center gap-4 shadow-xl">
                         <div className="w-14 h-14 rounded-xl bg-green-500/10 flex items-center justify-center text-green-500 shrink-0"><TrendingUp className="w-6 h-6" /></div>
                         <div>
                             <p className="text-[10px] text-black/40 font-black uppercase tracking-[0.2em] mb-1">Est. Revenue</p>
@@ -2190,6 +2258,7 @@ const AdminPage = () => {
                                                     onClick={() => {
                                                         if (booking.status !== 'contacted') {
                                                             updateDoc(doc(db, "bookings", booking.id), { status: 'contacted' });
+                                                            setBookings(prev => prev.map(b => b.id === booking.id ? { ...b, status: 'contacted' } : b));
                                                         }
                                                     }}
                                                     className="p-4 bg-green-500 text-white rounded-2xl hover:bg-green-600 transition-all shadow-xl flex items-center justify-center shrink-0" title="Chat on WhatsApp">
@@ -2263,28 +2332,22 @@ const AdminPage = () => {
                                 className="bg-white border border-slate-200 rounded-3xl p-6 hover:border-royal-gold/30 hover:shadow-lg transition-all flex flex-col md:flex-row items-center justify-between gap-6 cursor-pointer"
                             >
                                 <div className="flex items-center gap-6 w-full md:w-auto">
-                                    {p.photoUrl ? (
-                                        <div className="w-16 h-16 rounded-2xl overflow-hidden border-2 border-royal-gold/20 shrink-0">
-                                            <img src={p.photoUrl} alt={p.name} className="w-full h-full object-cover" />
-                                        </div>
-                                    ) : (
-                                        <div className={cn(
-                                            "w-16 h-16 rounded-2xl flex items-center justify-center shrink-0 text-white",
-                                            p.type === 'taxi' ? "bg-slate-950 text-royal-gold" : 
-                                            p.type === 'hotel' ? "bg-amber-500" :
-                                            p.type === 'guide' ? "bg-emerald-500" :
-                                            "bg-rose-500"
-                                        )}>
-                                            {p.type === 'taxi' ? <Car className="w-8 h-8" /> : 
-                                             p.type === 'hotel' ? <Hotel className="w-8 h-8" /> :
-                                             p.type === 'guide' ? <UserCheck className="w-8 h-8" /> :
-                                             p.type === 'restaurant' ? <UtensilsCrossed className="w-8 h-8" /> :
-                                             <Coffee className="w-8 h-8" />}
-                                        </div>
-                                    )}
+                                    <div className="w-16 h-16 rounded-2xl overflow-hidden border-2 border-royal-gold/20 shrink-0 bg-slate-50 flex items-center justify-center">
+                                        <img 
+                                            src={
+                                                p.photoUrl && p.photoUrl.trim() !== '' 
+                                                    ? p.photoUrl 
+                                                    : p.gender === 'female' 
+                                                        ? 'https://api.dicebear.com/7.x/avataaars/png?seed=Lily' 
+                                                        : 'https://api.dicebear.com/7.x/avataaars/png?seed=Jack'
+                                            } 
+                                            alt={p.name} 
+                                            className="w-full h-full object-cover" 
+                                        />
+                                    </div>
                                     <div>
                                         <div className="flex flex-wrap items-center gap-2 mb-1.5 md:mb-1">
-                                            <p className="text-[10px] text-royal-gold font-black uppercase tracking-widest whitespace-nowrap">{p.type}</p>
+                                            <p className="text-[10px] text-royal-gold font-black uppercase tracking-widest whitespace-nowrap">{getCategoryCue(p.type)}</p>
                                             {p.providerCode && (
                                                 <span className="text-[8px] bg-royal-gold/10 text-royal-gold px-2 py-0.5 rounded-md font-black tracking-widest border border-royal-gold/20 whitespace-nowrap">
                                                     ID: {p.providerCode}
@@ -2358,15 +2421,19 @@ const AdminPage = () => {
                             {/* Provider Summary Card */}
                             <div className="bg-slate-50 border border-slate-200 rounded-3xl p-4 md:p-6 mb-6 flex flex-col md:flex-row items-center justify-between gap-6">
                                 <div className="flex items-center gap-4">
-                                    {selectedProviderForDetails.photoUrl ? (
-                                        <div className="w-16 h-16 rounded-2xl overflow-hidden border-2 border-royal-gold/20 shrink-0">
-                                            <img src={selectedProviderForDetails.photoUrl} alt={selectedProviderForDetails.name} className="w-full h-full object-cover" />
-                                        </div>
-                                    ) : (
-                                        <div className="w-16 h-16 rounded-2xl bg-royal-gold text-royal-black flex items-center justify-center font-black text-lg shrink-0">
-                                            {selectedProviderForDetails.name?.charAt(0)}
-                                        </div>
-                                    )}
+                                    <div className="w-16 h-16 rounded-2xl overflow-hidden border-2 border-royal-gold/20 shrink-0 bg-slate-50 flex items-center justify-center">
+                                        <img 
+                                            src={
+                                                selectedProviderForDetails.photoUrl && selectedProviderForDetails.photoUrl.trim() !== '' 
+                                                    ? selectedProviderForDetails.photoUrl 
+                                                    : selectedProviderForDetails.gender === 'female' 
+                                                        ? 'https://api.dicebear.com/7.x/avataaars/png?seed=Lily' 
+                                                        : 'https://api.dicebear.com/7.x/avataaars/png?seed=Jack'
+                                            } 
+                                            alt={selectedProviderForDetails.name} 
+                                            className="w-full h-full object-cover" 
+                                        />
+                                    </div>
                                     <div>
                                         <h4 className="text-lg font-black text-black">{selectedProviderForDetails.name}</h4>
                                         <p className="text-xs text-black/60 font-black uppercase tracking-widest">{selectedProviderForDetails.type}</p>
@@ -2496,7 +2563,7 @@ const AdminPage = () => {
                 </div>
             </footer>
 
-            <AnimatePresence>{selectedBooking && <BookingDetailModal booking={selectedBooking} providers={providers} onClose={() => setSelectedBooking(null)} />}</AnimatePresence>
+            <AnimatePresence>{selectedBooking && <BookingDetailModal booking={selectedBooking} providers={providers} onClose={() => setSelectedBooking(null)} onUpdate={handleBookingUpdate} />}</AnimatePresence>
 
             
             {/* Real-time Notifications */}
