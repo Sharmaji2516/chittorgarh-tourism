@@ -129,10 +129,10 @@ const HowToReach = () => {
     return (
         <div className="min-h-screen pt-24 pb-12">
             <SEOHead
-                title="How to Reach Chittorgarh | Train, Bus, Flight & Road"
-                description="Complete travel guide to Chittorgarh — reach by train (Chetak/Mewar Express), flight via Udaipur, RSRTC bus or road from Jaipur, Kota & Delhi. Distances & booking links."
+                title="How to Reach Chittorgarh | Delhi, Jaipur & Udaipur Travel Guide"
+                description="Complete travel instructions to Chittorgarh Fort by train, flight, bus or road. Learn how to reach Chittorgarh from Delhi, Jaipur, Mumbai, Ahmedabad & Udaipur."
                 canonical="/how-to-reach"
-                keywords="how to reach Chittorgarh, Chittorgarh train, Chittorgarh airport, Udaipur to Chittorgarh, Jaipur to Chittorgarh, Chittorgarh bus, Chittorgarh distance"
+                keywords="how to reach Chittorgarh, Delhi to Chittorgarh train, Udaipur to Chittorgarh distance, Jaipur to Chittorgarh bus, Chittorgarh railway station, Udaipur airport to Chittorgarh cab, road trip to Chittorgarh, Ahmedabad to Chittorgarh road, Mumbai to Chittorgarh train"
                 ogImage="https://visitchittorgarh.in/Fort.png"
                 schema={HOW_TO_REACH_SCHEMA}
             />

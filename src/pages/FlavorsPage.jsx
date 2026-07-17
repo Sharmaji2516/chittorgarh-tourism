@@ -94,7 +94,7 @@ const FlavorsPage = ({ t, filteredVendors, filteredCafes, searchQuery }) => {
                 title="Chittorgarh Food Guide | Best Restaurants & Street Food"
                 description="Discover the best Rajasthani food in Chittorgarh — Dal Baati Churma, local street vendors, authentic cafes & top restaurants. Your complete Chittorgarh food guide 2025."
                 canonical="/flavors"
-                keywords="Chittorgarh restaurants, food in Chittorgarh, Rajasthani cuisine, Dal Baati Churma, street food Chittorgarh, best cafes Chittorgarh"
+                keywords="Chittorgarh restaurants, food in Chittorgarh, Rajasthani cuisine, Dal Baati Churma, street food Chittorgarh, best cafes Chittorgarh, Mewari food Rajasthan, traditional Rajasthani thali, where to eat in Chittorgarh, food tourism India"
                 ogImage="https://visitchittorgarh.in/Fort.png"
                 schema={FLAVORS_SCHEMA}
             />

@@ -58,7 +58,7 @@ const MissionServicesPage = ({ t }) => {
                 title="Chittorgarh Local Guide Services | Expert Tourist Help"
                 description="Book expert local guides in Chittorgarh. Certified fort walkthroughs, heritage tours, taxi hire & customised experiences for families, couples & solo travellers."
                 canonical="/mission-services"
-                keywords="Chittorgarh local guide, tourist guide Chittorgarh, Chittorgarh tour guide, fort walkthrough Chittorgarh, Chittorgarh taxi, heritage tour guide"
+                keywords="Chittorgarh local guide, tourist guide Chittorgarh, Chittorgarh tour guide, fort walkthrough Chittorgarh, Chittorgarh taxi, heritage tour guide, book a guide in Rajasthan, Rajasthan certified tourist guide, historical tours Rajasthan, local travel services Chittorgarh"
                 ogImage="https://visitchittorgarh.in/Fort.png"
                 schema={MISSION_SCHEMA}
             />

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import SEOHead from '../components/SEOHead';
 import { db } from '../lib/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { motion } from 'framer-motion';
@@ -50,6 +51,12 @@ const FeedbackPage = () => {
     if (isSubmitted) {
         return (
             <div className="min-h-screen bg-[#0a0a0b] flex flex-col items-center justify-center text-white p-4">
+                <SEOHead 
+                    title="Feedback Submitted | Visit Chittorgarh"
+                    description="Thank you for sharing your experience and feedback with us."
+                    canonical="/feedback"
+                    keywords="Chittorgarh tourism feedback, feedback submitted"
+                />
                 <motion.div 
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -67,6 +74,12 @@ const FeedbackPage = () => {
 
     return (
         <div className="min-h-screen bg-[#0a0a0b] flex flex-col items-center justify-center text-white p-4 relative overflow-hidden">
+            <SEOHead 
+                title="Share Your Experience | Visit Chittorgarh Feedback"
+                description="Help us improve our Chittorgarh tourism services. Provide feedback on your tour, hotel stay, tour guide, or private taxi ride."
+                canonical="/feedback"
+                keywords="Chittorgarh tourism feedback, review Chittorgarh visit, tourist reviews Chittorgarh, rate guide Chittorgarh"
+            />
             {/* Background Orbs */}
             <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-royal-gold/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3" />
             <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-royal-gold/5 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/3" />

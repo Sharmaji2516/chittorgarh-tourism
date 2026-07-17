@@ -48,7 +48,7 @@ const LocalVocalPage = ({ t, filteredLocalVocal, searchQuery }) => {
                 title="Chittorgarh Shopping | Thewa Art, Handicrafts & Souvenirs"
                 description="Shop authentic Chittorgarh handicrafts — Thewa gold jewelry, Daabu block-printed fabrics, Rajasthani miniature paintings & local souvenirs. Support local artisans."
                 canonical="/vocal-for-local"
-                keywords="Chittorgarh shopping, Thewa jewelry Chittorgarh, handicrafts Chittorgarh, Daabu print, Rajasthani souvenirs, local market Chittorgarh"
+                keywords="Chittorgarh shopping, Thewa jewelry Chittorgarh, handicrafts Chittorgarh, Daabu print, Rajasthani souvenirs, local market Chittorgarh, Rajasthani handicrafts shopping, local artisans Rajasthan, unique art forms of Rajasthan, where to buy souvenirs in Rajasthan"
                 ogImage="https://visitchittorgarh.in/Fort.png"
                 schema={LOCAL_VOCAL_SCHEMA}
             />

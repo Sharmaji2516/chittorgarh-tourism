@@ -106,10 +106,10 @@ const RoyalJourneysPage = ({ t }) => {
     return (
         <div className="min-h-screen bg-[#0a0a0b] text-white relative overflow-hidden">
             <SEOHead
-                title="Chittorgarh Tour Packages & Itineraries | 1-3 Day Trips"
-                description="Plan your Chittorgarh trip with curated 1-day, 2-day & 3-day itineraries. Book guided heritage tours, luxury cabs & Rajasthani packages with expert local guides."
+                title="Chittorgarh Tour Packages & Itineraries | Rajasthan Heritage Tours"
+                description="Curated 1-day, 2-day & 3-day Chittorgarh itineraries and tour packages. Book guided heritage tours, local taxis & custom Rajasthan travel plans."
                 canonical="/royal-journeys"
-                keywords="Chittorgarh tour package, Chittorgarh itinerary, 1 day Chittorgarh tour, 2 day Chittorgarh, Chittorgarh guided tour, Rajasthan tour package"
+                keywords="Chittorgarh tour package, Chittorgarh itinerary, 1 day Chittorgarh tour, 2 day Chittorgarh, Chittorgarh guided tour, Rajasthan tour package, Udaipur to Chittorgarh tour package, Mewar tourism package, Rajasthan heritage tour itineraries, best travel agent Chittorgarh"
                 ogImage="https://visitchittorgarh.in/Fort.png"
                 schema={JOURNEYS_SCHEMA}
             />

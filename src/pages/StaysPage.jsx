@@ -55,7 +55,7 @@ const StaysPage = ({ t }) => {
                 title="Hotels in Chittorgarh | Heritage, Budget & Luxury Stays"
                 description="Book the best hotels in Chittorgarh — heritage havelis, budget guesthouses & luxury resorts. Handpicked stays with VIP rates, local concierge & Rajasthani hospitality."
                 canonical="/stays"
-                keywords="hotels in Chittorgarh, Chittorgarh hotels, heritage hotel Chittorgarh, budget hotel Chittorgarh, luxury stay Chittorgarh, Chittorgarh accommodation"
+                keywords="hotels in Chittorgarh, Chittorgarh hotels, heritage hotel Chittorgarh, budget hotel Chittorgarh, luxury stay Chittorgarh, Chittorgarh accommodation, heritage resorts in Rajasthan, luxury stays Rajasthan, stay near Chittorgarh Fort, hotel booking Rajasthan"
                 ogImage="https://visitchittorgarh.in/Fort.png"
                 schema={STAYS_SCHEMA}
             />

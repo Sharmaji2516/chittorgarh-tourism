@@ -1,6 +1,7 @@
 import React from 'react';
 import Section from '../components/Section';
 import { motion } from 'framer-motion';
+import SEOHead from '../components/SEOHead';
 import { ShieldCheck, FileText, Scale, CreditCard, MessageSquare, AlertTriangle, UserX, Brush } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -41,6 +42,12 @@ const TermsPage = () => {
 
     return (
         <div className="relative overflow-hidden">
+            <SEOHead 
+                title="Terms & Conditions | Visit Chittorgarh"
+                description="Read the terms of service, booking policies, guidelines, and conditions for booking tours, guides, and hotels on Visit Chittorgarh."
+                canonical="/terms"
+                keywords="Chittorgarh tourism terms, terms and conditions, travel policy Rajasthan, booking cancellation Chittorgarh"
+            />
             {/* Background Orbs for Premium Aesthetic */}
             <div className="absolute top-20 left-10 w-72 h-72 bg-royal-gold/5 rounded-full blur-3xl -z-10 opacity-30" />
             <div className="absolute bottom-40 right-10 w-96 h-96 bg-royal-gold/5 rounded-full blur-3xl -z-10 opacity-30" />

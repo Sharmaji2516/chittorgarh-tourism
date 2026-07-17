@@ -120,10 +120,10 @@ const HomePage = ({ t, searchQuery }) => {
     return (
         <div className="overflow-x-hidden min-h-screen bg-heritage-charcoal">
             <SEOHead
-                title="Visit Chittorgarh | Rajasthan Heritage, Fort & Tourism Guide"
-                description="Explore Chittorgarh — India's city of valour. Discover Chittorgarh Fort, Vijay Stambh, Padmini Palace, Meera Temple, top hotels, restaurants & guided itineraries."
+                title="Visit Chittorgarh | Rajasthan Tourism & Chittorgarh Fort Guide"
+                description="Complete travel guide to Chittorgarh Fort, India's largest fort. Book expert Mewari guides, local taxi services, heritage hotels & tours of Rajasthan."
                 canonical="/"
-                keywords="Chittorgarh, Visit Chittorgarh, Chittorgarh Tourism, Chittorgarh Fort, Places to visit in Chittorgarh, Rajasthan Tourism, Vijay Stambh, Padmini Palace"
+                keywords="Chittorgarh Tourism, Chittorgarh Fort, Rajasthan Tourism, Vijay Stambh, Padmini Palace, Udaipur to Chittorgarh road trip, places to visit near Udaipur, Rajasthan heritage sites, largest fort in India, weekend getaways Rajasthan"
                 ogImage="https://visitchittorgarh.in/Fort.png"
                 schema={HOME_SCHEMAS}
             />
