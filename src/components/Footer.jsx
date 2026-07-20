@@ -11,8 +11,8 @@ const Footer = () => {
 
     return (
         <footer className="bg-heritage-charcoal text-royal-white/60 py-16 border-t border-royal-gold/20 relative overflow-hidden">
-            {/* Background Texture Overlay */}
-            <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/natural-paper.png")' }}></div>
+            {/* Background Texture Overlay (using pure CSS) */}
+            <div className="absolute inset-0 opacity-[0.02] pointer-events-none bg-[radial-gradient(circle_at_bottom,_var(--tw-gradient-stops))] from-royal-gold/10 via-transparent to-transparent"></div>
             
             {/* Ambient Glows */}
             <div className="absolute -top-24 -left-24 w-96 h-96 bg-royal-gold/5 blur-[120px] rounded-full"></div>

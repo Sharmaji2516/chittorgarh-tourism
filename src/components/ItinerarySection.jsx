@@ -20,8 +20,8 @@ const ItinerarySection = ({ content }) => {
 
     return (
         <section className="py-20 bg-heritage-charcoal dark:bg-heritage-charcoal transition-colors duration-300 relative overflow-hidden" id="itineraries">
-            {/* Sandstone Texture Overlay */}
-            <div className="absolute inset-0 opacity-10 pointer-events-none" style={{ backgroundImage: 'url("https://www.transparenttextures.com/patterns/sandpaper.png")' }}></div>
+            {/* Sandstone Texture Overlay (using pure CSS gradient noise style rather than external URL) */}
+            <div className="absolute inset-0 opacity-[0.02] pointer-events-none bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-heritage-gold/20 via-transparent to-transparent"></div>
 
             <div className="container mx-auto px-4 relative z-10">
                 <div className="text-center mb-16">

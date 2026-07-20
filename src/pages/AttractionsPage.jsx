@@ -156,6 +156,8 @@ const AttractionsPage = ({ t, filteredAttractions, setSelectedAttraction }) => {
                     <div className="h-[400px] lg:h-auto group overflow-hidden">
                         <img 
                             src={main.image} 
+                            srcSet={`${main.image.replace('.webp', '-mobile.webp')} 400w, ${main.image} 800w`}
+                            sizes="(max-width: 768px) 400px, 800px"
                             alt={main.name} 
                             className="w-full h-full object-cover transition-transform duration-[5s] group-hover:scale-110" 
                         />

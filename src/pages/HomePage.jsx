@@ -201,7 +201,7 @@ const HomePage = ({ t, searchQuery }) => {
                             <NavLink to="/service/taxi" className="block">
                                 <motion.div whileHover={{ scale: 1.02 }} className="relative rounded-2xl overflow-hidden cursor-pointer group border border-white/10 hover:border-royal-gold/50 transition-all duration-500 bg-white/5">
                                     <div className="h-32 overflow-hidden">
-                                        <img src="/assets/images/Private Taxi.webp" alt="Taxi" loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                                        <img src="/assets/images/Private Taxi.webp" srcSet="/assets/images/Private Taxi-mobile.webp 400w, /assets/images/Private Taxi.webp 735w" sizes="(max-width: 768px) 400px, 735px" alt="Taxi" loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                                     </div>
                                     <div className="p-4">
                                         <h3 className="text-lg font-serif text-white group-hover:text-royal-gold transition-colors">{t.pathsSection.instantOnDemand.services.taxi.title}</h3>
@@ -214,7 +214,7 @@ const HomePage = ({ t, searchQuery }) => {
                             <NavLink to="/service/guide" className="block">
                                 <motion.div whileHover={{ scale: 1.02 }} className="relative rounded-2xl overflow-hidden cursor-pointer group border border-white/10 hover:border-royal-gold/50 transition-all duration-500 bg-white/5">
                                     <div className="h-32 overflow-hidden">
-                                        <img src="/assets/images/Guide.webp" alt="Guide" loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                                        <img src="/assets/images/Guide.webp" srcSet="/assets/images/Guide-mobile.webp 400w, /assets/images/Guide.webp 800w" sizes="(max-width: 768px) 400px, 800px" alt="Guide" loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                                     </div>
                                     <div className="p-4">
                                         <h3 className="text-lg font-serif text-white group-hover:text-royal-gold transition-colors">{t.pathsSection.instantOnDemand.services.guide.title}</h3>
@@ -227,7 +227,7 @@ const HomePage = ({ t, searchQuery }) => {
                             <NavLink to="/service/hotel" className="block">
                                 <motion.div whileHover={{ scale: 1.02 }} className="relative rounded-2xl overflow-hidden cursor-pointer group border border-white/10 hover:border-royal-gold/50 transition-all duration-500 bg-white/5">
                                     <div className="h-32 overflow-hidden">
-                                        <img src="/assets/images/Royal Stays.webp" alt="Hotel" loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                                        <img src="/assets/images/Royal Stays.webp" srcSet="/assets/images/Royal Stays-mobile.webp 400w, /assets/images/Royal Stays.webp 800w" sizes="(max-width: 768px) 400px, 800px" alt="Hotel" loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                                     </div>
                                     <div className="p-4">
                                         <h3 className="text-lg font-serif text-white group-hover:text-royal-gold transition-colors">{t.pathsSection.instantOnDemand.services.hotel.title}</h3>
@@ -240,7 +240,7 @@ const HomePage = ({ t, searchQuery }) => {
                             <NavLink to="/service/restaurant" className="block">
                                 <motion.div whileHover={{ scale: 1.02 }} className="relative rounded-2xl overflow-hidden cursor-pointer group border border-white/10 hover:border-royal-gold/50 transition-all duration-500 bg-white/5">
                                     <div className="h-32 overflow-hidden">
-                                        <img src="/assets/images/Dinning Hall.webp" alt="Restaurant" loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                                        <img src="/assets/images/Dinning Hall.webp" srcSet="/assets/images/Dinning Hall-mobile.webp 400w, /assets/images/Dinning Hall.webp 800w" sizes="(max-width: 768px) 400px, 800px" alt="Restaurant" loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                                     </div>
                                     <div className="p-4">
                                         <h3 className="text-lg font-serif text-white group-hover:text-royal-gold transition-colors">{t.pathsSection.instantOnDemand.services.dining.title}</h3>
@@ -253,7 +253,7 @@ const HomePage = ({ t, searchQuery }) => {
                             <NavLink to="/service/cafe" className="block">
                                 <motion.div whileHover={{ scale: 1.02 }} className="relative rounded-2xl overflow-hidden cursor-pointer group border border-white/10 hover:border-royal-gold/50 transition-all duration-500 bg-white/5">
                                     <div className="h-32 overflow-hidden">
-                                        <img src="/assets/images/Cafe.webp" alt="Cafe" loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                                        <img src="/assets/images/Cafe.webp" srcSet="/assets/images/Cafe-mobile.webp 400w, /assets/images/Cafe.webp 800w" sizes="(max-width: 768px) 400px, 800px" alt="Cafe" loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                                     </div>
                                     <div className="p-4">
                                         <h3 className="text-lg font-serif text-white group-hover:text-royal-gold transition-colors">{t.pathsSection.instantOnDemand.services.cafe.title}</h3>
@@ -266,7 +266,7 @@ const HomePage = ({ t, searchQuery }) => {
                             <NavLink to="/service/photographer" className="block">
                                 <motion.div whileHover={{ scale: 1.02 }} className="relative rounded-2xl overflow-hidden cursor-pointer group border border-white/10 hover:border-royal-gold/50 transition-all duration-500 bg-white/5">
                                     <div className="h-32 overflow-hidden">
-                                        <img src="/assets/images/Photography.webp" alt="Photographer" loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                                        <img src="/assets/images/Photography.webp" srcSet="/assets/images/Photography-mobile.webp 400w, /assets/images/Photography.webp 800w" sizes="(max-width: 768px) 400px, 800px" alt="Photographer" loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                                     </div>
                                     <div className="p-4">
                                         <h3 className="text-lg font-serif text-white group-hover:text-royal-gold transition-colors">{t.pathsSection.instantOnDemand.services.photographer.title}</h3>
@@ -279,7 +279,7 @@ const HomePage = ({ t, searchQuery }) => {
                             <NavLink to="/service/horse-photo" className="block">
                                 <motion.div whileHover={{ scale: 1.02 }} className="relative rounded-2xl overflow-hidden cursor-pointer group border border-white/10 hover:border-royal-gold/50 transition-all duration-500 bg-white/5">
                                     <div className="h-32 overflow-hidden">
-                                        <img src="/assets/images/Horse Photography.webp" alt="Horse Photo" loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                                        <img src="/assets/images/Horse Photography.webp" srcSet="/assets/images/Horse Photography-mobile.webp 400w, /assets/images/Horse Photography.webp 736w" sizes="(max-width: 768px) 400px, 736px" alt="Horse Photo" loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                                     </div>
                                     <div className="p-4">
                                         <h3 className="text-lg font-serif text-white group-hover:text-royal-gold transition-colors">Horse Photography</h3>
@@ -309,7 +309,16 @@ const HomePage = ({ t, searchQuery }) => {
                                     {cat.objectContain && (
                                         <div className="absolute inset-0 bg-cover bg-center blur-2xl opacity-40" style={{ backgroundImage: `url(${cat.image})` }}></div>
                                     )}
-                                    <img src={cat.image} alt={cat.title} loading="lazy" decoding="async" className={`relative z-10 w-full h-full ${cat.objectContain ? 'object-contain' : 'object-cover'} transition-transform duration-[4s] group-hover:scale-110`} style={{ objectPosition: cat.objectPosition || 'center' }} />
+                                    <img 
+                                        src={cat.image} 
+                                        srcSet={`${cat.image.replace('.webp', '-mobile.webp')} 400w, ${cat.image} 800w`}
+                                        sizes="(max-width: 768px) 400px, 800px"
+                                        alt={cat.title} 
+                                        loading="lazy" 
+                                        decoding="async" 
+                                        className={`relative z-10 w-full h-full ${cat.objectContain ? 'object-contain' : 'object-cover'} transition-transform duration-[4s] group-hover:scale-110`} 
+                                        style={{ objectPosition: cat.objectPosition || 'center' }} 
+                                    />
                                     <div className="absolute inset-0 bg-gradient-to-t from-royal-black/60 to-transparent z-20"></div>
                                 </div>
                                 

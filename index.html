@@ -39,10 +39,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-  <!-- Preconnect for Firebase services (used for bookings, admin, inquiries) -->
-  <link rel="preconnect" href="https://firestore.googleapis.com" crossorigin />
-  <link rel="preconnect" href="https://firebase.googleapis.com" crossorigin />
+  <!-- DNS Prefetch for Firebase Storage & APIs (resolves early without holding open unused connections) -->
   <link rel="dns-prefetch" href="https://storage.googleapis.com" />
+  <link rel="dns-prefetch" href="https://firestore.googleapis.com" />
+  <link rel="dns-prefetch" href="https://firebase.googleapis.com" />
   <link rel="dns-prefetch" href="https://www.googleapis.com" />
 
   <!-- Font loading — async, non-blocking -->

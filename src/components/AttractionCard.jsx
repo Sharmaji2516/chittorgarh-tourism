@@ -29,6 +29,8 @@ const AttractionCard = ({ attraction, onExplore }) => {
             <div className="relative h-64 overflow-hidden group/image">
                 <img
                     src={images.length > 0 ? images[currentImageIndex] : 'https://via.placeholder.com/400x300?text=No+Image'}
+                    srcSet={images.length > 0 && images[currentImageIndex].includes('.webp') ? `${images[currentImageIndex].replace('.webp', '-mobile.webp')} 400w, ${images[currentImageIndex]} 800w` : undefined}
+                    sizes="(max-width: 768px) 400px, 800px"
                     alt={attraction.name}
                     onError={(e) => {
                         e.target.onerror = null;
