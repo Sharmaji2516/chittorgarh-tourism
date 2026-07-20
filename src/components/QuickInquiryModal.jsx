@@ -72,7 +72,7 @@ const QuickInquiryModal = ({ isOpen, onClose, entityName, category }) => {
                             <h3 className="text-xl md:text-2xl font-serif text-white">{submitted ? "Inquiry Received" : "Secure Best Price"}</h3>
                             <p className="text-[9px] text-royal-gold uppercase tracking-[0.4em] mt-1 font-black">{entityName}</p>
                         </div>
-                        <button onClick={onClose} className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-all text-white/30 hover:text-white">
+                        <button onClick={onClose} aria-label="Close inquiry modal" className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-all text-white/30 hover:text-white">
                             <X className="w-5 h-5" />
                         </button>
                     </div>

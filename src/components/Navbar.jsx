@@ -58,7 +58,7 @@ const Navbar = () => {
                             whileTap={{ scale: 0.95 }}
                             className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br from-royal-gold via-orange-400 to-royal-gold flex items-center justify-center shadow-[0_0_20px_rgba(212,175,55,0.3)] group-hover:shadow-[0_0_30px_rgba(212,175,55,0.5)] transition-shadow duration-500 overflow-hidden"
                         >
-                            <img src="/logo_maharana.png" alt="Logo" className="w-full h-full object-cover" />
+                            <img src="/logo_maharana.webp" alt="Logo" className="w-full h-full object-cover" />
                         </motion.div>
                         <div className="flex flex-col">
                             <span className="text-white text-base md:text-xl font-bold font-serif tracking-[0.15em] leading-tight group-hover:text-royal-gold transition-colors duration-300">
@@ -111,6 +111,7 @@ const Navbar = () => {
                                 e.preventDefault();
                                 showLangModal();
                             }}
+                            aria-label="Change language"
                             className="flex items-center gap-3 px-5 py-2.5 rounded-full border border-royal-gold/30 bg-royal-gold/5 text-royal-gold hover:bg-royal-gold hover:text-royal-black hover:shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-all duration-500 shadow-lg shadow-black/20 group"
                         >
                             <Globe className="w-4 h-4 group-hover:rotate-12 transition-transform" />
@@ -122,6 +123,7 @@ const Navbar = () => {
                     <div className="flex lg:hidden">
                         <button
                             onClick={() => setIsOpen(!isOpen)}
+                            aria-label="Toggle navigation menu"
                             className="bg-white/5 backdrop-blur-md p-2.5 rounded-xl text-white hover:text-royal-gold hover:bg-white/10 transition-all border border-white/10 group active:scale-95"
                         >
                             {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6 group-hover:rotate-90 transition-transform duration-300" />}

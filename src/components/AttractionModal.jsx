@@ -49,6 +49,7 @@ const AttractionModal = ({ attraction, onClose }) => {
                     {/* Close Button */}
                     <button
                         onClick={onClose}
+                        aria-label="Close attraction modal"
                         className="absolute top-4 right-4 z-10 p-2 bg-black/50 text-white rounded-full hover:bg-red-500/80 transition-colors"
                     >
                         <X className="w-6 h-6" />
