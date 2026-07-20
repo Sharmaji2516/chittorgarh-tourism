@@ -12,10 +12,18 @@ const CountrySelector = () => {
         detectCountry();
         const savedLang = localStorage.getItem('userLang');
         const welcomeSeen = localStorage.getItem('welcomeSeen_v2');
+        // Delay modal by 5s after idle — ensures it NEVER appears during LCP window
+        // Returning visitors (welcomeSeen_v2 set) are never shown the modal again
         if (!savedLang || !welcomeSeen) {
-            showLangModal();
+            const show = () => setTimeout(() => showLangModal(), 5000);
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(show);
+            } else {
+                show();
+            }
         }
     }, []);
+
 
     const detectCountry = () => {
         const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;

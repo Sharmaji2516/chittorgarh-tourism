@@ -1,9 +1,10 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { getAnalytics } from "firebase/analytics";
 import { getStorage } from "firebase/storage";
+// NOTE: getAnalytics removed from eager init — it was loading Firebase Analytics
+// on every page including homepage, adding 77KB+ of unused JS to initial load.
+// Analytics is now handled separately via the GA4 gtag in index.html.
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyAWqbcd4-XTUvBoMTJ_2Zbnj6bDTTs7qjQ",
   authDomain: "chittorgarh-tourism-d47d5.firebaseapp.com",
@@ -14,9 +15,7 @@ const firebaseConfig = {
   measurementId: "G-J10EQ1J444"
 };
 
-// Initialize Firebase only if keys are provided
 let db = null;
-let analytics = null;
 let storage = null;
 let isFirebaseConfigured = false;
 
@@ -24,8 +23,8 @@ try {
     if (firebaseConfig.apiKey !== "YOUR_API_KEY") {
         const app = initializeApp(firebaseConfig);
         db = getFirestore(app);
-        analytics = getAnalytics(app);
         storage = getStorage(app);
+        // Analytics intentionally NOT initialized here — reduces initial bundle by ~77KB
         isFirebaseConfigured = true;
     } else {
         console.warn("Firebase is using placeholder keys. Data will not be saved until you add your real config.");
@@ -52,7 +51,6 @@ export const saveBookingToFirebase = async (bookingData) => {
         });
         console.log("Booking saved with ID: ", docRef.id);
 
-        // Telegram Notification Alert
         const token = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
         const chatId = import.meta.env.VITE_TELEGRAM_CHAT_ID;
         if (token && chatId) {
@@ -84,4 +82,3 @@ export const saveBookingToFirebase = async (bookingData) => {
 };
 
 export { db, storage };
-

@@ -32,9 +32,8 @@
   <!-- Canonical (fallback for homepage) -->
   <link rel="canonical" href="https://visitchittorgarh.in/" />
 
-  <!-- Hero Image Preload for LCP Boost — serve mobile-specific image to mobile devices -->
-  <link rel="preload" as="image" href="/Fort-mobile.webp" media="(max-width: 768px)" fetchpriority="high" />
-  <link rel="preload" as="image" href="/Fort.webp" media="(min-width: 769px)" fetchpriority="high" />
+  <!-- Hero Image Preload for LCP — unconditional preload ensures browser fetches early regardless of device -->
+  <link rel="preload" as="image" href="/Fort.webp" fetchpriority="high" imagesrcset="/Fort-mobile.webp 600w, /Fort.webp 1200w" imagesizes="100vw" />
 
   <!-- Preconnect for Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -91,10 +90,10 @@
       window.gaLoaded = true;
       var script = document.createElement('script');
       script.async = true;
-      script.src = 'https://www.googletagmanager.com/gtag/js?id=%VITE_GA_MEASUREMENT_ID%';
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=G-J10EQ1J444';
       document.head.appendChild(script);
       gtag('js', new Date());
-      gtag('config', '%VITE_GA_MEASUREMENT_ID%', { send_page_view: true });
+      gtag('config', 'G-J10EQ1J444', { send_page_view: true });
     }
     if ('requestIdleCallback' in window) {
       requestIdleCallback(function () { setTimeout(loadGA, 2000); });
