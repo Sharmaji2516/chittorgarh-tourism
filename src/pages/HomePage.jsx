@@ -80,7 +80,7 @@ const HomePage = ({ t, searchQuery }) => {
             title: t.pillars.fort.title,
             subtitle: t.pillars.fort.subtitle,
             desc: t.pillars.fort.desc,
-            image: "/assets/images/fort_generated.png",
+            image: "/assets/images/fort_generated.webp",
             icon: Shield,
             link: "/attractions/fort",
             color: "from-royal-gold to-orange-500"
@@ -90,7 +90,7 @@ const HomePage = ({ t, searchQuery }) => {
             title: t.pillars.nature.title,
             subtitle: t.pillars.nature.subtitle,
             desc: t.pillars.nature.desc,
-            image: "/assets/images/nature_generated.png",
+            image: "/assets/images/nature_generated.webp",
             icon: Wind,
             link: "/attractions/nature",
             color: "from-green-600 to-teal-500"
@@ -110,7 +110,7 @@ const HomePage = ({ t, searchQuery }) => {
             title: t.pillars.scenic.title,
             subtitle: t.pillars.scenic.subtitle,
             desc: t.pillars.scenic.desc,
-            image: "/assets/images/waterfall_generated.png",
+            image: "/assets/images/waterfall_generated.webp",
             icon: Mountain,
             link: "/attractions/scenic",
             color: "from-amber-600 to-red-500"
