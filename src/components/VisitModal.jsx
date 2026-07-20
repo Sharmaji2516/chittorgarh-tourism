@@ -7,18 +7,28 @@ const VisitModal = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const checkVisit = () => {
+        let timer;
+        const checkVisit = (immediate = false) => {
             const visited = localStorage.getItem('ctt_visited');
             if (!visited) {
-                setShow(true);
+                if (immediate) {
+                    setShow(true);
+                } else {
+                    timer = setTimeout(() => setShow(true), 3500);
+                }
             }
         };
 
-        checkVisit();
+        checkVisit(false);
+
+        const handleReset = () => checkVisit(true);
 
         // Listen for reset events from Footer
-        window.addEventListener('resetVisitStatus', checkVisit);
-        return () => window.removeEventListener('resetVisitStatus', checkVisit);
+        window.addEventListener('resetVisitStatus', handleReset);
+        return () => {
+            if (timer) clearTimeout(timer);
+            window.removeEventListener('resetVisitStatus', handleReset);
+        };
     }, []);
 
     const handleVisit = (type) => {

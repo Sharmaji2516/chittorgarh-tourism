@@ -1,5 +1,3 @@
-@import 'leaflet/dist/leaflet.css';
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -42,9 +40,16 @@
     @apply absolute inset-0 border border-heritage-gold/10 rounded-2xl -m-1 pointer-events-none;
   }
 
+  /* Parchment card — local CSS gradient, no external fetch */
   .parchment-card {
     @apply bg-heritage-parchment text-amber-950 shadow-inner border border-amber-900/10 rounded-xl relative overflow-hidden;
-    background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+    background-image: linear-gradient(
+      135deg,
+      rgba(252, 245, 229, 1) 0%,
+      rgba(244, 220, 170, 0.6) 40%,
+      rgba(252, 245, 229, 1) 70%,
+      rgba(235, 210, 155, 0.4) 100%
+    );
   }
 
   .heritage-btn-primary {

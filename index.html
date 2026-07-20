@@ -2,22 +2,16 @@
 <html lang="en" dir="ltr">
 
 <head>
-  <!-- Google Analytics (GA4) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=%VITE_GA_MEASUREMENT_ID%"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', '%VITE_GA_MEASUREMENT_ID%');
-  </script>
-
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="google-site-verification" content="EqZvIO73SXztCMKmVu7phPSgGqNHjZQt6ZAcU8QJrzg" />
 
   <!-- Fallback title/description — overridden dynamically by react-helmet-async per page -->
-  <title>Visit Chittorgarh | Rajasthan Heritage, Fort & Tourism Guide</title>
-  <meta name="description" content="Plan your trip to Chittorgarh — explore India's largest fort, Vijay Stambh, Padmini Palace, Meera Temple, best hotels, restaurants & guided tours. Your complete Chittorgarh travel guide." />
+  <title>Visit Chittorgarh | Rajasthan Heritage, Fort &amp; Tourism Guide</title>
+  <meta name="description" content="Plan your trip to Chittorgarh — explore India's largest fort, Vijay Stambh, Padmini Palace, Meera Temple, best hotels, restaurants &amp; guided tours. Your complete Chittorgarh travel guide." />
+  <meta name="keywords" content="Chittorgarh Tourism, Chittorgarh Fort Guide, Visit Chittorgarh Fort India, Chittorgarh Tourism for Foreign Tourists, Rajasthan Heritage Tours USA UK Europe Canada Australia, Foreign Tourist Entry Ticket Chittorgarh Fort, Best Heritage Hotels Chittorgarh, Mewari Guides English Speaking, Udaipur to Chittorgarh Road Trip, Vijay Stambh Padmini Palace Tour, Sanwariyaji Temple Taxi Service, UNESCO Forts India Tour, Places to visit in Chittorgarh, Chittorgarh Fort Timings, Chittorgarh Light and Sound Show" />
+  <meta name="coverage" content="Worldwide (195+ Countries)" />
+  <meta name="target_countries" content="AF, AL, DZ, AD, AO, AG, AR, AM, AU, AT, AZ, BS, BH, BD, BB, BY, BE, BZ, BJ, BT, BO, BA, BW, BR, BN, BG, BF, BI, KH, CM, CA, CV, CF, TD, CL, CN, CO, KM, CG, CD, CR, CI, HR, CU, CY, CZ, DK, DJ, DM, DO, EC, EG, SV, GQ, ER, EE, ET, FJ, FI, FR, GA, GM, GE, DE, GH, GR, GD, GT, GN, GW, GY, HT, HN, HU, IS, IN, ID, IR, IQ, IE, IL, IT, JM, JP, JO, KZ, KE, KI, KP, KR, KW, KG, LA, LV, LB, LS, LR, LY, LI, LT, LU, MG, MW, MY, MV, ML, MT, MH, MR, MU, MX, FM, MD, MC, MN, ME, MA, MZ, MM, NA, NR, NP, NL, NZ, NI, NE, NG, NO, OM, PK, PW, PA, PG, PY, PE, PH, PL, PT, QA, RO, RU, RW, KN, LC, VC, WS, SM, ST, SA, SN, RS, SC, SL, SG, SK, SI, SB, SO, ZA, ES, LK, SD, SR, SZ, SE, CH, SY, TW, TJ, TZ, TH, TL, TG, TO, TT, TN, TR, TM, TV, UG, UA, AE, GB, US, UY, UZ, VU, VA, VE, VN, YE, ZM, ZW" />
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
 
   <!-- Geo Targeting -->
@@ -38,14 +32,21 @@
   <!-- Canonical (fallback for homepage) -->
   <link rel="canonical" href="https://visitchittorgarh.in/" />
 
-  <!-- Hero Image Preload for LCP Boost -->
-  <link rel="preload" as="image" href="/Fort.webp" fetchpriority="high" />
+  <!-- Hero Image Preload for LCP Boost — serve mobile-specific image to mobile devices -->
+  <link rel="preload" as="image" href="/Fort-mobile.webp" media="(max-width: 768px)" fetchpriority="high" />
+  <link rel="preload" as="image" href="/Fort.webp" media="(min-width: 769px)" fetchpriority="high" />
 
-  <!-- Preconnect for Fonts (performance) -->
+  <!-- Preconnect for Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-  <!-- Font Preload hints for LCP improvement -->
+  <!-- Preconnect for Firebase services (used for bookings, admin, inquiries) -->
+  <link rel="preconnect" href="https://firestore.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://firebase.googleapis.com" crossorigin />
+  <link rel="dns-prefetch" href="https://storage.googleapis.com" />
+  <link rel="dns-prefetch" href="https://www.googleapis.com" />
+
+  <!-- Font loading — async, non-blocking -->
   <link rel="preload" as="style"
     href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" />
   <link
@@ -57,20 +58,50 @@
       rel="stylesheet" />
   </noscript>
 
-  <!-- Open Graph Fallback (overridden by react-helmet-async) -->
+  <!-- Open Graph & Multi-National Locales (195+ Country Target) -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Visit Chittorgarh" />
-  <meta property="og:title" content="Visit Chittorgarh | Rajasthan Heritage & Tourism" />
-  <meta property="og:description" content="Explore Chittorgarh Fort, Vijay Stambh, Padmini Palace, top hotels, restaurants & itineraries. Your ultimate Chittorgarh travel guide." />
+  <meta property="og:title" content="Visit Chittorgarh | Rajasthan Heritage &amp; Tourism" />
+  <meta property="og:description" content="Explore Chittorgarh Fort, Vijay Stambh, Padmini Palace, top hotels, restaurants &amp; itineraries. Your ultimate Chittorgarh travel guide." />
   <meta property="og:url" content="https://visitchittorgarh.in/" />
-  <meta property="og:image" content="https://visitchittorgarh.in/Fort.png" />
+  <meta property="og:image" content="https://visitchittorgarh.in/Fort.webp" />
   <meta property="og:locale" content="en_IN" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="og:locale:alternate" content="en_GB" />
+  <meta property="og:locale:alternate" content="en_AU" />
+  <meta property="og:locale:alternate" content="fr_FR" />
+  <meta property="og:locale:alternate" content="de_DE" />
+  <meta property="og:locale:alternate" content="es_ES" />
+  <meta property="og:locale:alternate" content="ja_JP" />
+  <meta property="og:locale:alternate" content="ru_RU" />
+  <meta property="og:locale:alternate" content="ar_SA" />
 
-  <!-- Twitter Card Fallback -->
+  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Visit Chittorgarh | Rajasthan Heritage & Tourism" />
-  <meta name="twitter:description" content="Your complete guide to Chittorgarh — India's city of valour. Forts, temples, hotels, food & more." />
-  <meta name="twitter:image" content="https://visitchittorgarh.in/Fort.png" />
+  <meta name="twitter:title" content="Visit Chittorgarh | Rajasthan Heritage &amp; Tourism" />
+  <meta name="twitter:description" content="Your complete guide to Chittorgarh — India's city of valour. Forts, temples, hotels, food &amp; more." />
+  <meta name="twitter:image" content="https://visitchittorgarh.in/Fort.webp" />
+
+  <!-- Deferred Google Analytics (GA4) — loads after page is fully interactive -->
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    function loadGA() {
+      if (window.gaLoaded) return;
+      window.gaLoaded = true;
+      var script = document.createElement('script');
+      script.async = true;
+      script.src = 'https://www.googletagmanager.com/gtag/js?id=%VITE_GA_MEASUREMENT_ID%';
+      document.head.appendChild(script);
+      gtag('js', new Date());
+      gtag('config', '%VITE_GA_MEASUREMENT_ID%', { send_page_view: true });
+    }
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(function () { setTimeout(loadGA, 2000); });
+    } else {
+      window.addEventListener('load', function () { setTimeout(loadGA, 3000); });
+    }
+  </script>
 </head>
 
 <body>

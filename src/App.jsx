@@ -3,16 +3,12 @@ import { LanguageProvider, useLanguage } from './context/LanguageContext';
 import Navbar from './components/Navbar';
 import { cn } from './utils/cn';
 import Section from './components/Section';
-import AttractionModal from './components/AttractionModal';
 import Footer from './components/Footer';
-import CountrySelector from './components/CountrySelector';
-
 import ScrollToTop from './components/ScrollToTop';
-import { motion, AnimatePresence } from 'framer-motion';
 import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 
-// Lazy loaded page components for optimal initial JS bundle size
+// ─── Lazy-loaded page components ──────────────────────────────────────────────
 const FlavorsPage = lazy(() => import('./pages/FlavorsPage'));
 const StaysPage = lazy(() => import('./pages/StaysPage'));
 const LocalVocalPage = lazy(() => import('./pages/LocalVocalPage'));
@@ -27,8 +23,11 @@ const FeedbackPage = lazy(() => import('./pages/FeedbackPage'));
 const TermsPage = lazy(() => import('./pages/TermsPage'));
 const ServiceDetailsPage = lazy(() => import('./pages/ServiceDetailsPage'));
 
-import VisitModal from './components/VisitModal';
-import FloatingInquiry from './components/FloatingInquiry';
+// ─── Lazy-loaded UI modals (not needed for initial paint) ─────────────────────
+const AttractionModal = lazy(() => import('./components/AttractionModal'));
+const CountrySelector = lazy(() => import('./components/CountrySelector'));
+const FloatingInquiry = lazy(() => import('./components/FloatingInquiry'));
+const VisitModal = lazy(() => import('./components/VisitModal'));
 
 const PageLoader = () => (
   <div className="min-h-[60vh] flex items-center justify-center">
@@ -36,11 +35,13 @@ const PageLoader = () => (
   </div>
 );
 
+// Null suspense fallback for modals — they render nothing while loading
+const NullFallback = () => null;
+
 const MainContent = () => {
   const { t } = useLanguage();
   const [selectedAttraction, setSelectedAttraction] = useState(null);
   const location = useLocation();
-  const navigate = useNavigate();
 
   // One-time cleanup of legacy local storage data
   React.useEffect(() => {
@@ -62,11 +63,23 @@ const MainContent = () => {
 
       {/* Main Content Wrapper */}
       <div className="relative z-10 flex flex-col w-full">
-        {!isStandalonePage && <VisitModal />}
-        {!isStandalonePage && <CountrySelector />}
+        {/* Modals — lazy loaded with null fallback so they don't block initial paint */}
+        {!isStandalonePage && (
+          <Suspense fallback={<NullFallback />}>
+            <VisitModal />
+          </Suspense>
+        )}
+        {!isStandalonePage && (
+          <Suspense fallback={<NullFallback />}>
+            <CountrySelector />
+          </Suspense>
+        )}
         {!isStandalonePage && <Navbar />}
-
-        {!isStandalonePage && <FloatingInquiry />}
+        {!isStandalonePage && (
+          <Suspense fallback={<NullFallback />}>
+            <FloatingInquiry />
+          </Suspense>
+        )}
 
         {/* Routes Section */}
         <div className={cn("space-y-0", !isStandalonePage ? "pt-20" : "")}>
@@ -126,10 +139,16 @@ const MainContent = () => {
         </div>
 
         {!isStandalonePage && <Footer />}
-        <AttractionModal
-          attraction={selectedAttraction}
-          onClose={() => setSelectedAttraction(null)}
-        />
+
+        {/* AttractionModal — only renders when an attraction is selected */}
+        {selectedAttraction && (
+          <Suspense fallback={<NullFallback />}>
+            <AttractionModal
+              attraction={selectedAttraction}
+              onClose={() => setSelectedAttraction(null)}
+            />
+          </Suspense>
+        )}
       </div>
     </div>
   );

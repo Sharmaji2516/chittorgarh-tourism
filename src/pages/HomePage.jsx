@@ -5,6 +5,7 @@ import { Wind, Shield, Sunrise, Mountain, ArrowRight, Check } from 'lucide-react
 import Hero from '../components/Hero';
 import Section from '../components/Section';
 import SEOHead from '../components/SEOHead';
+import InternationalSEO from '../components/InternationalSEO';
 
 const HOME_SCHEMAS = [
   {
@@ -100,7 +101,7 @@ const HomePage = ({ t, searchQuery }) => {
             title: t.pillars.spiritual.title,
             subtitle: t.pillars.spiritual.subtitle,
             desc: t.pillars.spiritual.desc,
-            image: "/assets/images/Sanvliya-ji-Temple.jpg",
+            image: "/assets/images/Sanvliya-ji-Temple.webp",
             icon: Sunrise,
             link: "/attractions/spiritual",
             color: "from-blue-600 to-purple-500"
@@ -127,6 +128,7 @@ const HomePage = ({ t, searchQuery }) => {
                 ogImage="https://visitchittorgarh.in/Fort.png"
                 schema={HOME_SCHEMAS}
             />
+            <InternationalSEO />
             <Hero />
             
             {/* Strategy Selection: Dual Path */}
@@ -153,7 +155,7 @@ const HomePage = ({ t, searchQuery }) => {
                                     <div key={pkg.id} className="flex items-center gap-4 md:gap-6 bg-white/5 p-3 md:p-4 rounded-xl hover:bg-white/10 transition-all border border-white/5 hover:border-royal-gold/20">
                                         {/* Image: Hidden on mobile, shown on desktop */}
                                         <div className="w-16 h-16 md:w-24 md:h-24 rounded-lg overflow-hidden flex-shrink-0 hidden md:block">
-                                            <img src={pkg.image} alt={pkg.name} className="w-full h-full object-cover" />
+                                            <img src={pkg.image} alt={pkg.name} loading="lazy" decoding="async" className="w-full h-full object-cover" />
                                         </div>
                                         <div className="flex-1 min-w-0">
                                             <div className="flex items-center justify-between">
@@ -199,7 +201,7 @@ const HomePage = ({ t, searchQuery }) => {
                             <NavLink to="/service/taxi" className="block">
                                 <motion.div whileHover={{ scale: 1.02 }} className="relative rounded-2xl overflow-hidden cursor-pointer group border border-white/10 hover:border-royal-gold/50 transition-all duration-500 bg-white/5">
                                     <div className="h-32 overflow-hidden">
-                                        <img src="/assets/images/Private Taxi.jpg" alt="Taxi" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                                        <img src="/assets/images/Private Taxi.webp" alt="Taxi" loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                                     </div>
                                     <div className="p-4">
                                         <h3 className="text-lg font-serif text-white group-hover:text-royal-gold transition-colors">{t.pathsSection.instantOnDemand.services.taxi.title}</h3>
@@ -212,7 +214,7 @@ const HomePage = ({ t, searchQuery }) => {
                             <NavLink to="/service/guide" className="block">
                                 <motion.div whileHover={{ scale: 1.02 }} className="relative rounded-2xl overflow-hidden cursor-pointer group border border-white/10 hover:border-royal-gold/50 transition-all duration-500 bg-white/5">
                                     <div className="h-32 overflow-hidden">
-                                        <img src="/assets/images/Guide.jpg" alt="Guide" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                                        <img src="/assets/images/Guide.webp" alt="Guide" loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                                     </div>
                                     <div className="p-4">
                                         <h3 className="text-lg font-serif text-white group-hover:text-royal-gold transition-colors">{t.pathsSection.instantOnDemand.services.guide.title}</h3>
@@ -225,7 +227,7 @@ const HomePage = ({ t, searchQuery }) => {
                             <NavLink to="/service/hotel" className="block">
                                 <motion.div whileHover={{ scale: 1.02 }} className="relative rounded-2xl overflow-hidden cursor-pointer group border border-white/10 hover:border-royal-gold/50 transition-all duration-500 bg-white/5">
                                     <div className="h-32 overflow-hidden">
-                                        <img src="/assets/images/Royal Stays.jpg" alt="Hotel" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                                        <img src="/assets/images/Royal Stays.webp" alt="Hotel" loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                                     </div>
                                     <div className="p-4">
                                         <h3 className="text-lg font-serif text-white group-hover:text-royal-gold transition-colors">{t.pathsSection.instantOnDemand.services.hotel.title}</h3>
@@ -238,7 +240,7 @@ const HomePage = ({ t, searchQuery }) => {
                             <NavLink to="/service/restaurant" className="block">
                                 <motion.div whileHover={{ scale: 1.02 }} className="relative rounded-2xl overflow-hidden cursor-pointer group border border-white/10 hover:border-royal-gold/50 transition-all duration-500 bg-white/5">
                                     <div className="h-32 overflow-hidden">
-                                        <img src="/assets/images/Dinning Hall.jpg" alt="Restaurant" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                                        <img src="/assets/images/Dinning Hall.webp" alt="Restaurant" loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                                     </div>
                                     <div className="p-4">
                                         <h3 className="text-lg font-serif text-white group-hover:text-royal-gold transition-colors">{t.pathsSection.instantOnDemand.services.dining.title}</h3>
@@ -251,7 +253,7 @@ const HomePage = ({ t, searchQuery }) => {
                             <NavLink to="/service/cafe" className="block">
                                 <motion.div whileHover={{ scale: 1.02 }} className="relative rounded-2xl overflow-hidden cursor-pointer group border border-white/10 hover:border-royal-gold/50 transition-all duration-500 bg-white/5">
                                     <div className="h-32 overflow-hidden">
-                                        <img src="/assets/images/Cafe.jpg" alt="Cafe" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                                        <img src="/assets/images/Cafe.webp" alt="Cafe" loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                                     </div>
                                     <div className="p-4">
                                         <h3 className="text-lg font-serif text-white group-hover:text-royal-gold transition-colors">{t.pathsSection.instantOnDemand.services.cafe.title}</h3>
@@ -264,7 +266,7 @@ const HomePage = ({ t, searchQuery }) => {
                             <NavLink to="/service/photographer" className="block">
                                 <motion.div whileHover={{ scale: 1.02 }} className="relative rounded-2xl overflow-hidden cursor-pointer group border border-white/10 hover:border-royal-gold/50 transition-all duration-500 bg-white/5">
                                     <div className="h-32 overflow-hidden">
-                                        <img src="/assets/images/Photography.jpg" alt="Photographer" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                                        <img src="/assets/images/Photography.webp" alt="Photographer" loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                                     </div>
                                     <div className="p-4">
                                         <h3 className="text-lg font-serif text-white group-hover:text-royal-gold transition-colors">{t.pathsSection.instantOnDemand.services.photographer.title}</h3>
@@ -277,7 +279,7 @@ const HomePage = ({ t, searchQuery }) => {
                             <NavLink to="/service/horse-photo" className="block">
                                 <motion.div whileHover={{ scale: 1.02 }} className="relative rounded-2xl overflow-hidden cursor-pointer group border border-white/10 hover:border-royal-gold/50 transition-all duration-500 bg-white/5">
                                     <div className="h-32 overflow-hidden">
-                                        <img src="/assets/images/Horse Photography.jpg" alt="Horse Photo" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                                        <img src="/assets/images/Horse Photography.webp" alt="Horse Photo" loading="lazy" decoding="async" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                                     </div>
                                     <div className="p-4">
                                         <h3 className="text-lg font-serif text-white group-hover:text-royal-gold transition-colors">Horse Photography</h3>
@@ -307,7 +309,7 @@ const HomePage = ({ t, searchQuery }) => {
                                     {cat.objectContain && (
                                         <div className="absolute inset-0 bg-cover bg-center blur-2xl opacity-40" style={{ backgroundImage: `url(${cat.image})` }}></div>
                                     )}
-                                    <img src={cat.image} alt={cat.title} className={`relative z-10 w-full h-full ${cat.objectContain ? 'object-contain' : 'object-cover'} transition-transform duration-[4s] group-hover:scale-110`} style={{ objectPosition: cat.objectPosition || 'center' }} />
+                                    <img src={cat.image} alt={cat.title} loading="lazy" decoding="async" className={`relative z-10 w-full h-full ${cat.objectContain ? 'object-contain' : 'object-cover'} transition-transform duration-[4s] group-hover:scale-110`} style={{ objectPosition: cat.objectPosition || 'center' }} />
                                     <div className="absolute inset-0 bg-gradient-to-t from-royal-black/60 to-transparent z-20"></div>
                                 </div>
                                 

@@ -161,7 +161,7 @@ export const content = {
           desc: "A revered temple dedicated to Lord Krishna, known as 'Sanwaria Seth', attracting millions of devotees.",
           wiki: "https://en.wikipedia.org/wiki/Sanwariaji_Temple",
           bestTime: "Year-round (Festivals preferred)",
-          image: "/assets/images/Sanvliya-ji-Temple.jpg",
+          image: "/assets/images/Sanvliya-ji-Temple.webp",
           coordinates: [24.6067, 74.5246],
           distances: {
             railway: "40 km",
@@ -175,7 +175,7 @@ export const content = {
           desc: "Built by Rana Kumbha to commemorate his victory. A 9-story tower adorned with intricate sculptures.",
           wiki: "https://en.wikipedia.org/wiki/Vijay_Stambha",
           bestTime: "Oct - March (Pleasant Weather)",
-          image: "/assets/images/Vjay.jpg",
+          image: "/assets/images/Vjay.webp",
           coordinates: [24.8878, 74.6451],
           distances: {
             railway: "6 km",
@@ -231,7 +231,7 @@ export const content = {
           desc: "A sacred water tank shaped like a cow's mouth, vital for the fort's water supply and a scenic spot.",
           wiki: "https://en.wikipedia.org/wiki/Chittor_Fort#Gaumukh_Reservoir",
           bestTime: "Monsoon & Winter",
-          image: "/assets/images/gaumukh-reservoir4.jpg",
+          image: "/assets/images/gaumukh-reservoir4.webp",
           coordinates: [24.887, 74.643],
           distances: {
             railway: "6 km",
@@ -259,7 +259,7 @@ export const content = {
           desc: "A magnificent palace built by Maharana Fateh Singh, now a museum appointed with royal artifacts.",
           wiki: "https://en.wikipedia.org/wiki/Chittor_Fort",
           bestTime: "Oct - March",
-          image: "/assets/images/Fateh.jpg",
+          image: "/assets/images/Fateh.webp",
           coordinates: [24.89, 74.644],
           distances: {
             railway: "8 km",
@@ -287,7 +287,7 @@ export const content = {
           desc: "An 8th-century sun temple converted to a Kali temple, known for its intricate carvings and spiritual aura.",
           wiki: "https://en.wikipedia.org/wiki/Kalika_Mata_Temple,_Chittorgarh_Fort",
           bestTime: "Oct - March",
-          image: "/assets/images/Kalika.jpg",
+          image: "/assets/images/Kalika.webp",
           coordinates: [24.8845, 74.6438],
           distances: {
             railway: "8 km",
@@ -329,7 +329,7 @@ export const content = {
           desc: "Known as the 'Mini Khajuraho', this site features a massive waterfall and 11th-century temples.",
           wiki: "https://en.wikipedia.org/wiki/Menal",
           bestTime: "July - Sept (Monsoon)",
-          image: "/assets/images/menal-waterfall-new.jpg",
+          image: "/assets/images/menal-waterfall-new.webp",
           coordinates: [25.044, 75.148],
           distances: {
             railway: "85 km",
@@ -343,7 +343,7 @@ export const content = {
           desc: "A mesmerizing evening show at the fort narrating the glorious history of Mewar and its brave rulers.",
           wiki: "https://en.wikipedia.org/wiki/Chittor_Fort",
           bestTime: "Evening (7:00 PM)",
-          image: "/assets/images/Light-and-sound-show.jpg",
+          image: "/assets/images/Light-and-sound-show.webp",
           coordinates: [24.8879, 74.6454],
           distances: {
             railway: "6 km",
@@ -357,7 +357,7 @@ export const content = {
           desc: "Known as the 'Haridwar of Rajasthan', this sacred temple on the banks of the Banas river is a place of high religious significance.",
           wiki: "https://en.wikipedia.org/wiki/Matrikundia",
           bestTime: "Year-round",
-          image: "/assets/images/matrikundia.jpg",
+          image: "/assets/images/matrikundia.webp",
           coordinates: [25.044, 74.354],
           distances: {
             railway: "45 km",
@@ -371,7 +371,7 @@ export const content = {
           desc: "Famous for the rare flying squirrel, teak forest, and rich biodiversity, this sanctuary is a paradise for nature lovers.",
           wiki: "https://en.wikipedia.org/wiki/Sita_Mata_Wildlife_Sanctuary",
           bestTime: "Oct - Feb",
-          image: "/assets/images/sitamata.jpg",
+          image: "/assets/images/sitamata.webp",
           coordinates: [24.28, 74.33],
           distances: {
             railway: "75 km",
@@ -385,7 +385,7 @@ export const content = {
           desc: "One of the oldest towns in Rajasthan, featuring ruins of ancient temples and stupas. Located on the banks of the Berach River.",
           wiki: "https://en.wikipedia.org/wiki/Nagari,_Rajasthan",
           bestTime: "Oct - March",
-          image: "/assets/images/nagari.jpg",
+          image: "/assets/images/nagari.webp",
           coordinates: [24.96, 74.68],
           distances: {
             railway: "20 km",
@@ -404,7 +404,7 @@ export const content = {
           specialty: "Authentic Rajasthani Thali",
           location: "Chittorgarh",
           desc: "Famous for its traditional Daal Baati Churma and rustic ambiance. A true taste of Rajasthan.",
-          image: "/assets/images/dal-batti-churma-new.jpg",
+          image: "/assets/images/dal-batti-churma-new.webp",
           mapLink: "https://share.google/MNSRduo3ZrKPaPOrj",
           distances: {
             railway: "2 km",
@@ -418,7 +418,7 @@ export const content = {
           specialty: "Gulab Jamun",
           location: "Chittorgarh Fort Road",
           desc: "Famous for its melt-in-the-mouth Gulab Jamuns, a treat for every sweet tooth visiting the Fort.",
-          image: "/assets/images/gulab-jamun-new.jpg",
+          image: "/assets/images/gulab-jamun-new.webp",
           mapLink: "https://maps.google.com/?q=Agarsen+Sweets+Chittorgarh",
           distances: {
             railway: "3 km",
@@ -432,7 +432,7 @@ export const content = {
           specialty: "Famous Gulab Jamun",
           location: "Bassi, Chittorgarh",
           desc: "Renowned across the region for its rich and delicious Gulab Jamuns. A must-visit stop in Bassi.",
-          image: "/assets/images/gulab-jamun-new.jpg",
+          image: "/assets/images/gulab-jamun-new.webp",
           mapLink: "https://maps.google.com/?q=Somani+Restaurant+Bassi",
           distances: {
             railway: "25 km",
@@ -446,7 +446,7 @@ export const content = {
           specialty: "Authentic Daal Baati Churma",
           location: "Collectorate Road",
           desc: "The ultimate destination for pilgrims and foodies seeking the most authentic Rajasthani Thali experience in town.",
-          image: "/assets/images/dal-batti-churma.jpg",
+          image: "/assets/images/dal-batti-churma.webp",
           mapLink: "https://maps.google.com/?q=Manuhar+Dining+Hall+Chittorgarh",
           distances: {
             railway: "1.5 km",
@@ -460,7 +460,7 @@ export const content = {
           specialty: "Bajra Roti & Ker Sangri",
           location: "Fort Village",
           desc: "Located right inside the fort village, offering a rustic experience with traditional wood-fired cooking flavors.",
-          image: "/assets/images/stuffed-bhindi.jpg",
+          image: "/assets/images/stuffed-bhindi.webp",
           mapLink:
             "https://maps.google.com/?q=Barbarik+Restaurant+Chittorgarh+Fort",
           distances: {
@@ -475,7 +475,7 @@ export const content = {
           specialty: "Rajasthani Laal Maas",
           location: "Near Fort Entrance",
           desc: "A legendary spot for non-vegetarian lovers, serving the spiciest and most flavorful Laal Maas in the region.",
-          image: "/assets/images/mirchi-bada.jpg",
+          image: "/assets/images/mirchi-bada.webp",
           mapLink: "https://maps.google.com/?q=Akbari+Restaurant+Chittorgarh",
           distances: {
             railway: "5 km",
@@ -561,7 +561,7 @@ export const content = {
         id: "heritage",
         name: "Heritage Fort Palace",
         desc: "Experience 16th-century royal living in a restored fort palace with authentic Mewari architecture.",
-        image: "/assets/images/fateh-prakash-new.jpg"
+        image: "/assets/images/fateh-prakash-new.webp"
       },
       {
         id: "luxury",
@@ -683,7 +683,7 @@ export const content = {
           duration: "1 Day",
           includes: ["Private SUV", "Certified Guide", "Traditional Lunch"],
           desc: "The ultimate 1-day journey covering every secret of the Chittorgarh Fort.",
-          image: "/assets/images/fort-legacy.jpg"
+          image: "/assets/images/fort-legacy.webp"
         },
         {
           id: "twoDays",
@@ -691,7 +691,7 @@ export const content = {
           duration: "2 Days",
           includes: ["Luxury Stay", "Full Transport", "Wildlife Safari"],
           desc: "A deep dive into history followed by a serene exploration of Bassi and the historic city.",
-          image: "/assets/images/Bassi-Wildlife-Sanctuary-Chittorgarh.jpg"
+          image: "/assets/images/Bassi-Wildlife-Sanctuary-Chittorgarh.webp"
         },
         {
           id: "threeDays",
@@ -699,20 +699,20 @@ export const content = {
           duration: "3 Days",
           includes: ["Temple Tour", "Waterfall Visit", "Premium Stay"],
           desc: "A grand journey featuring the divine Sanwaliya Ji Temple and the breathtaking Menal Waterfall.",
-          image: "/assets/images/spiritual-tour.jpg"
+          image: "/assets/images/spiritual-tour.webp"
         }
       ]
     },
     dishes: {
       items: [
-        { id: 1, name: "Dal Batti Churma", image: "/assets/images/dal-batti-churma-new.jpg" },
-        { id: 2, name: "Gulab Jamun", image: "/assets/images/gulab-jamun-new.jpg" },
-        { id: 3, name: "Gatte Ki Sabzi", image: "/assets/images/gatte-ki-sabzi.jpg" },
-        { id: 4, name: "Kadi Kachori", image: "/assets/images/kadi-kachori.jpg" },
-        { id: 5, name: "Gunjiya", image: "/assets/images/gunjiya.jpg" },
-        { id: 6, name: "Samosa", image: "/assets/images/samosa.jpg" },
-        { id: 7, name: "Mirchi Bada", image: "/assets/images/mirchi-bada.jpg" },
-        { id: 8, name: "Stuffed Bhindi", image: "/assets/images/stuffed-bhindi.jpg" },
+        { id: 1, name: "Dal Batti Churma", image: "/assets/images/dal-batti-churma-new.webp" },
+        { id: 2, name: "Gulab Jamun", image: "/assets/images/gulab-jamun-new.webp" },
+        { id: 3, name: "Gatte Ki Sabzi", image: "/assets/images/gatte-ki-sabzi.webp" },
+        { id: 4, name: "Kadi Kachori", image: "/assets/images/kadi-kachori.webp" },
+        { id: 5, name: "Gunjiya", image: "/assets/images/gunjiya.webp" },
+        { id: 6, name: "Samosa", image: "/assets/images/samosa.webp" },
+        { id: 7, name: "Mirchi Bada", image: "/assets/images/mirchi-bada.webp" },
+        { id: 8, name: "Stuffed Bhindi", image: "/assets/images/stuffed-bhindi.webp" },
       ],
     },
     footer: {
@@ -845,7 +845,7 @@ export const content = {
         title: "Taste the Heritage",
         desc: "Discover the culinary heritage of Chittorgarh. From the spicy Dal Baati to the sweet Gulab Jamun, every bite is a royal treat.",
         link: "Explore Cuisine",
-        image: "/assets/images/dal-batti-churma.jpg",
+        image: "/assets/images/dal-batti-churma.webp",
       },
       stays: {
         title: "Stay Like Royalty",
@@ -867,7 +867,7 @@ export const content = {
           specialty: "Premium Homemade Pickles",
           location: "Chittorgarh",
           desc: "Experience the authentic taste of Mewar with our premium homemade pickles, prepared using traditional recipes.",
-          image: "/assets/images/mewari_achar_logo.png",
+          image: "/assets/images/mewari_achar_logo.webp",
           mapLink: "https://maps.google.com/?q=Mewari+Special+Achar+Chittorgarh",
           type: "vendor",
           distances: { railway: "N/A", bus: "N/A" },
@@ -1208,7 +1208,7 @@ export const content = {
           desc: "भगवान कृष्ण (सांवलिया सेठ) को समर्पित एक प्रसिद्ध मंदिर, जहाँ लाखों भक्त दर्शन के लिए आते हैं।",
           wiki: "https://hi.wikipedia.org/wiki/%E0%A4%B8%E0%A4%BE%E0%A4%82%E0%A4%B5%E0%A4%B2%E0%A4%BF%E0%A4%AF%E0%A4%BE_%E0%A4%B8%E0%A5%87%E0%A4%A0",
           bestTime: "साल भर (त्योहारों पर विशेष)",
-          image: "/assets/images/Sanvliya-ji-Temple.jpg",
+          image: "/assets/images/Sanvliya-ji-Temple.webp",
           coordinates: [24.6067, 74.5246],
           distances: {
             railway: "35 किमी",
@@ -1222,7 +1222,7 @@ export const content = {
           desc: "राणा कुंभा द्वारा अपनी जीत के उपलक्ष्य में निर्मित। यह 9 मंजिला स्तंभ जटिल नक्काशी से सुसज्जित है।",
           wiki: "https://hi.wikipedia.org/wiki/%E0%A4%B5%E0%A4%BF%E0%A4%9C%E0%A4%AF_%E0%A4%B8%E0%A5%8D%E0%A4%A4%E0%A4%82%E0%A4%AD",
           bestTime: "अक्टूबर - मार्च",
-          image: "/assets/images/Vjay.jpg",
+          image: "/assets/images/Vjay.webp",
           coordinates: [24.8878, 74.6451],
           distances: {
             railway: "7 किमी",
@@ -1278,7 +1278,7 @@ export const content = {
           desc: "गाय के मुख के आकार का एक पवित्र जल कुंड, जो किले की जल आपूर्ति के लिए महत्वपूर्ण था।",
           wiki: "https://hi.wikipedia.org/wiki/%E0%A4%9A%E0%A4%BF%E0%A4%A4%E0%A5%8D%E0%A4%A4%E0%A5%8C%E0%A4%A1%E0%A4%BC_%E0%A4%A6%E0%A5%81%E0%A4%B0%E0%A5%8D%E0%A4%97#%E0%A4%97%E0%A5%8C%E0%A4%AE%E0%A5%81%E0%A4%96_%E0%A4%95%E0%A5%81%E0%A4%A3%E0%A5%8D%E0%A4%A1",
           bestTime: "मॉनसून और सर्दी",
-          image: "/assets/images/gaumukh-reservoir4.jpg",
+          image: "/assets/images/gaumukh-reservoir4.webp",
           coordinates: [24.887, 74.643],
           distances: {
             railway: "7.2 किमी",
@@ -1306,7 +1306,7 @@ export const content = {
           desc: "महाराणा फतेह सिंह द्वारा निर्मित एक भव्य महल, जो अब शाही कलाकृतियों वाला एक संग्रहालय है।",
           wiki: "https://hi.wikipedia.org/wiki/चित्तौड़गढ़_दुर्ग",
           bestTime: "अक्टूबर - मार्च",
-          image: "/assets/images/Fateh.jpg",
+          image: "/assets/images/Fateh.webp",
           coordinates: [24.89, 74.644],
           distances: {
             railway: "5.5 किमी",
@@ -1334,7 +1334,7 @@ export const content = {
           desc: "8वीं शताब्दी का सूर्य मंदिर जिसे काली मंदिर में परिवर्तित किया गया, जो अपनी जटिल नक्काशी के लिए जाना जाता है।",
           wiki: "https://hi.wikipedia.org/wiki/कालिका_माता_मंदिर,_चित्तौड़गढ़",
           bestTime: "अक्टूबर - मार्च",
-          image: "/assets/images/Kalika.jpg",
+          image: "/assets/images/Kalika.webp",
           coordinates: [24.8845, 74.6438],
           distances: {
             railway: "7 किमी",
@@ -1376,7 +1376,7 @@ export const content = {
           desc: "'मिनी खजुराहो' के रूप में जाना जाने वाला, यह स्थल एक विशाल जलप्रपात और 11वीं सदी के मंदिरों के लिए प्रसिद्ध है।",
           wiki: "https://hi.wikipedia.org/wiki/मेनाल",
           bestTime: "जुलाई - सितंबर (मानसून)",
-          image: "/assets/images/menal-waterfall-new.jpg",
+          image: "/assets/images/menal-waterfall-new.webp",
           coordinates: [25.044, 75.148],
           distances: {
             railway: "90 किमी",
@@ -1390,7 +1390,7 @@ export const content = {
           desc: "किले में एक मंत्रमुग्ध कर देने वाला शाम का शो जो मेवाड़ के गौरवशाली इतिहास और इसके बहादुर शासकों का वर्णन करता है।",
           wiki: "https://en.wikipedia.org/wiki/Chittor_Fort",
           bestTime: "शाम (7:00 बजे)",
-          image: "/assets/images/Light-and-sound-show.jpg",
+          image: "/assets/images/Light-and-sound-show.webp",
           coordinates: [24.8879, 74.6454],
           distances: {
             railway: "6 किमी",
@@ -1409,7 +1409,7 @@ export const content = {
           specialty: "राजस्थानी थाली",
           location: "चित्तौड़गढ़",
           desc: "अपने पारंपरिक दाल बाटी चूरमा और देसी माहौल के लिए प्रसिद्ध। राजस्थान का असली स्वाद।",
-          image: "/assets/images/dal-batti-churma-new.jpg",
+          image: "/assets/images/dal-batti-churma-new.webp",
           mapLink: "https://share.google/MNSRduo3ZrKPaPOrj",
           distances: {
             railway: "2 किमी",
@@ -1423,7 +1423,7 @@ export const content = {
           specialty: "गुलाब जामुन",
           location: "चित्तौड़गढ़ फोर्ट रोड",
           desc: "अपने मुंह में घुलने वाले गुलाब जामुन के लिए प्रसिद्ध। किले की यात्रा के दौरान मीठा खाने का सही स्थान।",
-          image: "/assets/images/gulab-jamun-new.jpg",
+          image: "/assets/images/gulab-jamun-new.webp",
           mapLink: "https://maps.google.com/?q=Agarsen+Sweets+Chittorgarh",
           distances: {
             railway: "3 किमी",
@@ -1437,7 +1437,7 @@ export const content = {
           specialty: "प्रसिद्ध गुलाब जामुन",
           location: "बस्सी, चित्तौड़गढ़",
           desc: "बस्सी और पूरे क्षेत्र में अपने स्वादिष्ट गुलाब जामुन के लिए विख्यात। बस्सी में एक अनिवार्य पड़ाव।",
-          image: "/assets/images/gulab-jamun-new.jpg",
+          image: "/assets/images/gulab-jamun-new.webp",
           mapLink: "https://maps.google.com/?q=Somani+Restaurant+Bassi",
           distances: {
             railway: "25 किमी",
@@ -1451,7 +1451,7 @@ export const content = {
           specialty: "प्रामाणिक दाल बाटी चूरमा",
           location: "कलेक्ट्रेट रोड",
           desc: "शहर में सबसे प्रामाणिक राजस्थानी थाली अनुभव चाहने वाले तीर्थयात्रियों और भोजन प्रेमियों के लिए अंतिम गंतव्य।",
-          image: "/assets/images/dal-batti-churma.jpg",
+          image: "/assets/images/dal-batti-churma.webp",
           mapLink: "https://maps.google.com/?q=Manuhar+Dining+Hall+Chittorgarh",
           distances: {
             railway: "1.5 किमी",
@@ -1465,7 +1465,7 @@ export const content = {
           specialty: "बाजरा रोटी और केर सांगरी",
           location: "किला गांव",
           desc: "किले के गांव के ठीक अंदर स्थित, पारंपरिक लकड़ी के चूल्हे के खाना पकाने के स्वाद के साथ एक देहाती अनुभव प्रदान करता है।",
-          image: "/assets/images/stuffed-bhindi.jpg",
+          image: "/assets/images/stuffed-bhindi.webp",
           mapLink:
             "https://maps.google.com/?q=Barbarik+Restaurant+Chittorgarh+Fort",
           distances: {
@@ -1480,7 +1480,7 @@ export const content = {
           specialty: "राजस्थानी लाल मास",
           location: "किले के प्रवेश द्वार के पास",
           desc: "मांसाहार प्रेमियों के लिए एक प्रसिद्ध स्थान, जो इस क्षेत्र का सबसे तीखा और स्वादिष्ट लाल मास परोसता है।",
-          image: "/assets/images/mirchi-bada.jpg",
+          image: "/assets/images/mirchi-bada.webp",
           mapLink: "https://maps.google.com/?q=Akbari+Restaurant+Chittorgarh",
           distances: {
             railway: "5 किमी",
@@ -1566,7 +1566,7 @@ export const content = {
         id: "heritage",
         name: "हेरिटेज फोर्ट पैलेस",
         desc: "प्रामाणिक मेवाड़ी वास्तुकला के साथ एक बहाल किले के महल में 16 वीं शताब्दी के शाही जीवन का अनुभव करें।",
-        image: "/assets/images/fateh-prakash-new.jpg"
+        image: "/assets/images/fateh-prakash-new.webp"
       },
       {
         id: "luxury",
@@ -1780,7 +1780,7 @@ export const content = {
         title: "विरासत का स्वाद",
         desc: "मेवाड़ के प्रामाणिक स्वादों का आनंद लें, तीखे लाल मांस से लेकर प्रसिद्ध दाल बाटी तक।",
         link: "व्यंजन देखें",
-        image: "/assets/images/dal-batti-churma.jpg",
+        image: "/assets/images/dal-batti-churma.webp",
       },
       stays: {
         title: "शाही अंदाज में ठहरें",
@@ -1802,7 +1802,7 @@ export const content = {
           specialty: "प्रीमियम होममेड अचार",
           location: "चित्तौड़गढ़",
           desc: "पारंपरिक व्यंजनों का उपयोग करके तैयार किए गए हमारे प्रीमियम होममेड अचार के साथ मेवाड़ के असली स्वाद का अनुभव करें।",
-          image: "/assets/images/mewari_achar_logo.png",
+          image: "/assets/images/mewari_achar_logo.webp",
           mapLink: "https://maps.google.com/?q=Mewari+Special+Achar+Chittorgarh",
           type: "vendor",
           distances: { railway: "N/A", bus: "N/A" },
@@ -1911,7 +1911,7 @@ export const content = {
           duration: "1 दिन",
           includes: ["प्राइवेट एसयूवी", "प्रमाणित गाइड", "पारंपरिक भोजन"],
           desc: "चित्तौड़गढ़ किले के हर रहस्य को कवर करने वाली अंतिम 1-दिवसीय यात्रा。",
-          image: "/assets/images/fort-legacy.jpg"
+          image: "/assets/images/fort-legacy.webp"
         },
         {
           id: "twoDays",
@@ -1919,7 +1919,7 @@ export const content = {
           duration: "2 दिन",
           includes: ["लक्जरी स्टे", "पूर्ण परिवहन", "वन्यजीव सफारी"],
           desc: "इतिहास में गहराई से उतरने के बाद बस्सी और ऐतिहासिक शहर का शांत अन्वेषण。",
-          image: "/assets/images/Bassi-Wildlife-Sanctuary-Chittorgarh.jpg"
+          image: "/assets/images/Bassi-Wildlife-Sanctuary-Chittorgarh.webp"
         },
         {
           id: "threeDays",
@@ -1927,20 +1927,20 @@ export const content = {
           duration: "3 दिन",
           includes: ["मंदिर दर्शन", "जलप्रपात यात्रा", "प्रीमियम स्टे"],
           desc: "दिव्य सांवलिया जी मंदिर और लुभावने मेनाल जलप्रपात वाली एक भव्य यात्रा。",
-          image: "/assets/images/spiritual-tour.jpg"
+          image: "/assets/images/spiritual-tour.webp"
         }
       ]
     },
     dishes: {
       items: [
-        { id: 1, name: "दाल बाटी चूरमा", image: "/assets/images/dal-batti-churma-new.jpg" },
-        { id: 2, name: "गुलाब जामुन", image: "/assets/images/gulab-jamun-new.jpg" },
-        { id: 3, name: "गट्टे की सब्जी", image: "/assets/images/gatte-ki-sabzi.jpg" },
-        { id: 4, name: "कढ़ी कचोरी", image: "/assets/images/kadi-kachori.jpg" },
-        { id: 5, name: "गुंजिया", image: "/assets/images/gunjiya.jpg" },
-        { id: 6, name: "समोसा", image: "/assets/images/samosa.jpg" },
-        { id: 7, name: "मिर्ची बड़ा", image: "/assets/images/mirchi-bada.jpg" },
-        { id: 8, name: "भरवां भिंडी", image: "/assets/images/stuffed-bhindi.jpg" },
+        { id: 1, name: "दाल बाटी चूरमा", image: "/assets/images/dal-batti-churma-new.webp" },
+        { id: 2, name: "गुलाब जामुन", image: "/assets/images/gulab-jamun-new.webp" },
+        { id: 3, name: "गट्टे की सब्जी", image: "/assets/images/gatte-ki-sabzi.webp" },
+        { id: 4, name: "कढ़ी कचोरी", image: "/assets/images/kadi-kachori.webp" },
+        { id: 5, name: "गुंजिया", image: "/assets/images/gunjiya.webp" },
+        { id: 6, name: "समोसा", image: "/assets/images/samosa.webp" },
+        { id: 7, name: "मिर्ची बड़ा", image: "/assets/images/mirchi-bada.webp" },
+        { id: 8, name: "भरवां भिंडी", image: "/assets/images/stuffed-bhindi.webp" },
       ],
     },
     testimonialsSection: {

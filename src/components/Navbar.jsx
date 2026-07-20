@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Search, Globe, ChevronRight } from 'lucide-react';
+import { Menu, X, Globe, ChevronRight } from 'lucide-react';
 import { cn } from '../utils/cn';
 import { NavLink, useLocation } from 'react-router-dom';
 
@@ -9,12 +9,32 @@ const Navbar = () => {
     const { lang, changeLanguage, t, showLangModal } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [scrollProgress, setScrollProgress] = useState(0);
     const location = useLocation();
+    const rafRef = useRef(null);
 
+    const isHome = location.pathname === '/';
+
+    // OPT-7: Single merged scroll listener with passive flag + rAF throttle
     useEffect(() => {
-        const handleScroll = () => setScrolled(window.scrollY > 20);
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+        const handleScroll = () => {
+            if (rafRef.current) return; // already queued, skip
+            rafRef.current = requestAnimationFrame(() => {
+                const scrollY = window.scrollY;
+                setScrolled(scrollY > 20);
+                const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+                if (totalHeight > 0) {
+                    setScrollProgress((scrollY / totalHeight) * 100);
+                }
+                rafRef.current = null;
+            });
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            if (rafRef.current) cancelAnimationFrame(rafRef.current);
+        };
     }, []);
 
     const navLinks = [
@@ -24,19 +44,6 @@ const Navbar = () => {
         { name: t.nav.localVocal || 'Vocal For Local', href: '/vocal-for-local' },
         { name: t.nav.missionServices, href: '/mission-services' },
     ];
-
-    const isHome = location.pathname === '/';
-    const [scrollProgress, setScrollProgress] = useState(0);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const progress = (window.scrollY / totalHeight) * 100;
-            setScrollProgress(progress);
-        };
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
 
     return (
         <nav className={cn(
@@ -53,12 +60,18 @@ const Navbar = () => {
 
                     {/* Logo Section */}
                     <NavLink to="/" className="flex-shrink-0 flex items-center gap-3 group relative">
-                        <motion.div 
+                        <motion.div
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                             className="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br from-royal-gold via-orange-400 to-royal-gold flex items-center justify-center shadow-[0_0_20px_rgba(212,175,55,0.3)] group-hover:shadow-[0_0_30px_rgba(212,175,55,0.5)] transition-shadow duration-500 overflow-hidden"
                         >
-                            <img src="/logo_maharana.webp" alt="Logo" className="w-full h-full object-cover" />
+                            <img
+                                src="/logo_maharana.webp"
+                                alt="Visit Chittorgarh Logo"
+                                width={48}
+                                height={48}
+                                className="w-full h-full object-cover"
+                            />
                         </motion.div>
                         <div className="flex flex-col">
                             <span className="text-white text-base md:text-xl font-bold font-serif tracking-[0.15em] leading-tight group-hover:text-royal-gold transition-colors duration-300">
@@ -70,7 +83,7 @@ const Navbar = () => {
                         </div>
                     </NavLink>
 
-                    {/* Desktop Menu - Centralized & Spaced */}
+                    {/* Desktop Menu */}
                     <div className="hidden lg:block absolute left-1/2 -translate-x-1/2">
                         <div className="flex items-center space-x-1 bg-black/20 backdrop-blur-md px-2 py-1.5 rounded-full border border-white/5">
                             {navLinks.map((link) => (
@@ -119,7 +132,7 @@ const Navbar = () => {
                         </motion.button>
                     </div>
 
-                    {/* Mobile Menu Button Container */}
+                    {/* Mobile Menu Button */}
                     <div className="flex lg:hidden">
                         <button
                             onClick={() => setIsOpen(!isOpen)}
@@ -160,8 +173,8 @@ const Navbar = () => {
                                             onClick={() => setIsOpen(false)}
                                             className={({ isActive }) => cn(
                                                 "group flex items-center justify-between p-4 rounded-2xl transition-all duration-300",
-                                                isActive 
-                                                    ? "bg-royal-gold/10 border border-royal-gold/20 shadow-[inset_0_0_20px_rgba(212,175,55,0.05)]" 
+                                                isActive
+                                                    ? "bg-royal-gold/10 border border-royal-gold/20 shadow-[inset_0_0_20px_rgba(212,175,55,0.05)]"
                                                     : "hover:bg-white/5 border border-transparent"
                                             )}
                                         >
@@ -191,7 +204,7 @@ const Navbar = () => {
                                 ))}
                             </div>
 
-                            <motion.div 
+                            <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.5 }}

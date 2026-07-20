@@ -1,27 +1,28 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 
 const Hero = () => {
     const { t } = useLanguage();
 
-    const bgImageDesktop = "/Fort.webp";
-    const bgImageMobile = "/Fort.webp";
-
     return (
         <div className="flex flex-col items-center w-full bg-heritage-charcoal">
-            {/* Image Section */}
+            {/* Image Section — explicit width/height prevents CLS */}
             <div className="w-full h-[50vh] md:h-[75vh] relative overflow-hidden">
-                <motion.img 
-                    src="/Fort.webp" 
-                    alt="Chittorgarh Fort" 
+                <motion.img
+                    // Responsive srcset: mobile gets 600px image (~55 KB), desktop gets full 1200px
+                    src="/Fort.webp"
+                    srcSet="/Fort-mobile.webp 600w, /Fort.webp 1200w"
+                    sizes="(max-width: 768px) 100vw, 100vw"
+                    alt="Chittorgarh Fort — India's Largest Fort in Rajasthan"
                     fetchPriority="high"
-                    decoding="async"
+                    decoding="sync"
+                    width={1200}
+                    height={675}
                     className="w-full h-full object-cover"
-                    initial={{ scale: 1.1 }}
+                    initial={{ scale: 1.05 }}
                     animate={{ scale: 1 }}
-                    transition={{ duration: 10, repeat: Infinity, repeatType: "reverse", ease: "linear" }}
+                    transition={{ duration: 1.2, ease: "easeOut" }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-heritage-charcoal/50"></div>
             </div>

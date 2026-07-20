@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import 'leaflet/dist/leaflet.css';
 import { motion } from 'framer-motion';
 import { Plane, Train, Car, MapPin, Bus, ExternalLink, Navigation } from 'lucide-react';
 import Section from '../components/Section';

@@ -68,7 +68,7 @@ const CountrySelector = () => {
                 <div className="text-center mb-8 pt-2">
                     <div className="relative inline-block mb-4">
                         <div className="w-64 h-40 mx-auto rounded-xl border border-heritage-gold/30 overflow-hidden shadow-lg shadow-heritage-gold/10">
-                            <img src="/logo.jpg" alt="Logo" className="w-full h-full object-cover" />
+                            <img src="/logo_maharana.webp" alt="Visit Chittorgarh Logo" width={256} height={160} loading="lazy" decoding="async" className="w-full h-full object-cover" />
                         </div>
                         <div className="absolute inset-0 bg-heritage-gold/10 blur-xl rounded-full -z-10"></div>
                     </div>
