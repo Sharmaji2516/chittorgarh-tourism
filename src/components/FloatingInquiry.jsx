@@ -10,11 +10,11 @@ const FloatingInquiry = () => {
             {/* Floating Button */}
             <button
                 onClick={() => setIsOpen(true)}
-                className="fixed bottom-6 right-6 z-[100] bg-gradient-to-r from-royal-gold to-amber-500 text-royal-black p-4 rounded-full shadow-2xl hover:scale-110 transition-transform duration-300 flex items-center justify-center group"
+                className="fixed bottom-6 right-6 z-[100] bg-gradient-to-r from-royal-gold to-amber-500 text-royal-black px-6 py-4 rounded-full shadow-[0_0_25px_rgba(212,175,55,0.4)] border border-royal-gold/30 hover:scale-105 active:scale-95 hover:shadow-[0_0_30px_rgba(212,175,55,0.6)] transition-all duration-300 flex items-center gap-2 group cursor-pointer"
                 aria-label="Quick Inquiry"
             >
-                <MessageCircle className="w-6 h-6 group-hover:rotate-12 transition-transform" />
-                <span className="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-500 ease-in-out text-xs font-bold uppercase tracking-wider ml-0 group-hover:ml-2 whitespace-nowrap">
+                <MessageCircle className="w-5 h-5 group-hover:scale-110 transition-transform text-royal-black animate-pulse" />
+                <span className="text-xs font-black uppercase tracking-[0.2em] whitespace-nowrap text-royal-black">
                     Inquire Now
                 </span>
             </button>

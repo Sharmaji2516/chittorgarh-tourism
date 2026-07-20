@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/((?!assets/|logo_maharana.png|favicon.png|favicon.svg|Fort.png|chittorgarh_fort.jpg|chittortech_logo.png|logo.jpg|robots.txt|sitemap.xml).*)",
+      "destination": "/index.html"
+    }
+  ]
+}

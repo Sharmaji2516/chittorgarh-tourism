@@ -51,6 +51,31 @@ export const saveBookingToFirebase = async (bookingData) => {
             source: 'website_v2'
         });
         console.log("Booking saved with ID: ", docRef.id);
+
+        // Telegram Notification Alert
+        const token = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
+        const chatId = import.meta.env.VITE_TELEGRAM_CHAT_ID;
+        if (token && chatId) {
+            const text = `🔥 *New Lead Alert on visitchittorgarh.in* 🔥\n\n` +
+                         `👤 *Name:* ${bookingData.name || 'Not specified'}\n` +
+                         `📱 *Phone:* ${bookingData.phone || 'Not specified'}\n` +
+                         `✉️ *Email:* ${bookingData.email || 'Not specified'}\n` +
+                         `🛡️ *Service:* ${bookingData.pillarTitle || bookingData.category || 'General'}\n` +
+                         `📅 *Start/Dates:* ${bookingData.date || bookingData.startDate || 'Not specified'}\n` +
+                         `📅 *End Date:* ${bookingData.endDate || 'Not specified'}\n` +
+                         `👥 *Travelers:* ${bookingData.travelers || 'Not specified'}`;
+
+            fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: text,
+                    parse_mode: 'Markdown'
+                })
+            }).catch(err => console.error("Telegram notification failed:", err));
+        }
+
         return docRef.id;
     } catch (e) {
         console.error("Error adding document: ", e);

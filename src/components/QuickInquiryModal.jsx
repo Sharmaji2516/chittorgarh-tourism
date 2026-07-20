@@ -39,7 +39,8 @@ const QuickInquiryModal = ({ isOpen, onClose, entityName, category }) => {
                 `*📅 To:* ${formData.endDate}\n\n` +
                 `*-- Guest Details --*\n` +
                 `*👤 Name:* ${formData.name}\n` +
-                `*📱 Phone:* ${formData.phone}\n\n` +
+                `*📱 Phone:* ${formData.phone}\n` +
+                `*✉️ Email:* ${formData.email}\n\n` +
                 `I am interested in this service. Please contact me with availability and pricing.`;
 
             window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
@@ -122,6 +123,11 @@ const QuickInquiryModal = ({ isOpen, onClose, entityName, category }) => {
                                 <div className="relative group">
                                     <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-royal-gold/50 group-focus-within:text-royal-gold transition-colors" />
                                     <input required type="tel" placeholder="WhatsApp Number" value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})} className="w-full bg-white/[0.03] border border-white/10 rounded-xl py-4 pl-12 pr-4 text-white text-sm focus:outline-none focus:border-royal-gold" />
+                                </div>
+
+                                <div className="relative group">
+                                    <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-royal-gold/50 group-focus-within:text-royal-gold transition-colors" />
+                                    <input required type="email" placeholder="Email Address" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full bg-white/[0.03] border border-white/10 rounded-xl py-4 pl-12 pr-4 text-white text-sm focus:outline-none focus:border-royal-gold" />
                                 </div>
 
                                 <button type="submit" disabled={isSubmitting} className="w-full py-5 bg-gradient-to-r from-royal-gold to-amber-500 text-royal-black font-black uppercase tracking-[0.2em] text-[10px] rounded-2xl hover:brightness-110 shadow-2xl transition-all">
