@@ -3,10 +3,15 @@ import { HelmetProvider } from 'react-helmet-async'
 import './index.css'
 import App from './App.jsx'
 
-// StrictMode removed in production: it causes double-invocation of effects
-// and lifecycle methods which adds ~50-100ms TBT on mobile CPUs.
-// Strict mode benefits apply only during development; in the Vercel build
-// (NODE_ENV=production), React already opts out of double-rendering internally.
+// Register Service Worker for instant offline & asset caching
+if ('serviceWorker' in navigator && import.meta.env.PROD) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js').catch((err) => {
+      console.warn('SW registration failed:', err);
+    });
+  });
+}
+
 createRoot(document.getElementById('root')).render(
   <HelmetProvider>
     <App />
