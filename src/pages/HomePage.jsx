@@ -176,28 +176,26 @@ const HomePage = ({ t, searchQuery }) => {
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        className="group bg-royal-gold/10 backdrop-blur-2xl p-10 rounded-[3rem] border border-royal-gold/20 hover:border-royal-gold transition-all duration-500 shadow-2xl flex flex-col justify-between"
+                        className="group bg-royal-gold/10 backdrop-blur-2xl p-6 sm:p-10 rounded-[3rem] border border-royal-gold/20 hover:border-royal-gold transition-all duration-500 shadow-2xl flex flex-col justify-between"
                     >
-                        <div className="flex-1 flex flex-col">
-                            <div>
-                                <div className="w-16 h-16 bg-royal-gold rounded-2xl flex items-center justify-center mb-8 shadow-xl">
-                                    <Shield className="w-8 h-8 text-royal-black" />
-                                </div>
-                                <h2 className="text-3xl font-serif text-white mb-4">{t.pathsSection.royalExpedition.title}</h2>
-                                <p className="text-gray-400 mb-6 leading-relaxed">{t.pathsSection.royalExpedition.desc}</p>
+                        <div className="flex-1 flex flex-col items-center md:items-start text-center md:text-left">
+                            <div className="w-16 h-16 bg-royal-gold rounded-2xl flex items-center justify-center mb-6 shadow-xl">
+                                <Shield className="w-8 h-8 text-royal-black" />
                             </div>
+                            <h2 className="text-2xl sm:text-3xl font-serif text-white mb-3">{t.pathsSection.royalExpedition.title}</h2>
+                            <p className="text-gray-400 mb-6 leading-relaxed text-xs sm:text-sm max-w-md">{t.pathsSection.royalExpedition.desc}</p>
                             
-                            <div className="flex-1 flex flex-col justify-around my-4">
+                            <div className="w-full flex-1 flex flex-col justify-around my-4 space-y-3">
                                 {t.packages.items.map((pkg) => (
-                                    <div key={pkg.id} className="flex items-center gap-4 md:gap-6 bg-white/5 p-3 md:p-4 rounded-xl hover:bg-white/10 transition-all border border-white/5 hover:border-royal-gold/20">
+                                    <div key={pkg.id} className="flex items-center justify-between gap-4 bg-white/5 p-3 md:p-4 rounded-2xl hover:bg-white/10 transition-all border border-white/5 hover:border-royal-gold/20">
                                         {/* Image: Hidden on mobile, shown on desktop */}
                                         <div className="w-16 h-16 md:w-24 md:h-24 rounded-lg overflow-hidden flex-shrink-0 hidden md:block">
                                             <img src={pkg.image} alt={pkg.name} loading="lazy" decoding="async" className="w-full h-full object-cover" />
                                         </div>
-                                        <div className="flex-1 min-w-0">
+                                        <div className="flex-1 text-left min-w-0">
                                             <div className="flex items-center justify-between">
-                                                <h3 className="text-white font-medium text-sm md:text-base">{pkg.name}</h3>
-                                                <span className="text-royal-gold text-xs md:text-sm font-bold">{pkg.duration}</span>
+                                                <h3 className="text-white font-medium text-xs sm:text-base">{pkg.name}</h3>
+                                                <span className="text-royal-gold text-xs sm:text-sm font-bold ml-2 shrink-0">{pkg.duration}</span>
                                             </div>
                                             {/* Description: Hidden on mobile, shown on desktop */}
                                             <p className="text-gray-400 text-xs md:text-sm mt-1 md:mt-2 hidden md:block leading-relaxed">{pkg.desc}</p>
@@ -213,7 +211,7 @@ const HomePage = ({ t, searchQuery }) => {
                                 ))}
                             </div>
                         </div>
-                        <NavLink to="/royal-journeys" className="w-full py-5 bg-royal-gold text-royal-black font-black uppercase tracking-widest text-xs rounded-2xl flex items-center justify-center gap-3 hover:scale-105 active:scale-95 transition-all">
+                        <NavLink to="/royal-journeys" className="w-full py-4 sm:py-5 bg-royal-gold text-royal-black font-black uppercase tracking-widest text-xs rounded-2xl flex items-center justify-center gap-3 hover:scale-105 active:scale-95 transition-all mt-4">
                             {t.pathsSection.royalExpedition.button}
                             <ArrowRight className="w-4 h-4" />
                         </NavLink>
@@ -224,14 +222,14 @@ const HomePage = ({ t, searchQuery }) => {
                         initial={{ opacity: 0, x: 50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
-                        className="group bg-white/5 backdrop-blur-2xl p-10 rounded-[3rem] border border-white/10 hover:border-royal-gold/40 transition-all duration-500 shadow-2xl flex flex-col justify-between"
+                        className="group bg-white/5 backdrop-blur-2xl p-6 sm:p-10 rounded-[3rem] border border-white/10 hover:border-royal-gold/40 transition-all duration-500 shadow-2xl flex flex-col justify-between"
                     >
-                        <div>
-                            <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mb-8 shadow-xl">
+                        <div className="flex flex-col items-center md:items-start text-center md:text-left">
+                            <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mb-6 shadow-xl">
                                 <Wind className="w-8 h-8 text-royal-gold" />
                             </div>
-                            <h2 className="text-3xl font-serif text-white mb-4">{t.pathsSection.instantOnDemand.title}</h2>
-                            <p className="text-gray-400 mb-8 leading-relaxed">{t.pathsSection.instantOnDemand.desc}</p>
+                            <h2 className="text-2xl sm:text-3xl font-serif text-white mb-3">{t.pathsSection.instantOnDemand.title}</h2>
+                            <p className="text-gray-400 mb-6 leading-relaxed text-xs sm:text-sm max-w-md">{t.pathsSection.instantOnDemand.desc}</p>
                         </div>
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
                             {/* Taxi */}
