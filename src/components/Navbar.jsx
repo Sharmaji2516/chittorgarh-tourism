@@ -143,8 +143,20 @@ const Navbar = () => {
                         </motion.button>
                     </div>
 
-                    {/* Mobile Menu Button */}
-                    <div className="flex lg:hidden">
+                    {/* Mobile Header Buttons */}
+                    <div className="flex items-center gap-3 lg:hidden">
+                        {/* Mobile Bell/Ring Notification App Button */}
+                        <button
+                            onClick={() => window.dispatchEvent(new CustomEvent('openAppPromoModal'))}
+                            aria-label="Get App"
+                            className="relative bg-royal-gold/15 backdrop-blur-md p-2.5 rounded-xl text-royal-gold border border-royal-gold/30 hover:bg-royal-gold hover:text-royal-black transition-all group active:scale-95 shadow-[0_0_15px_rgba(212,175,55,0.3)] animate-pulse"
+                        >
+                            <Smartphone className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                            <span className="absolute -top-1 -right-1 w-3 h-3 bg-amber-400 rounded-full border-2 border-heritage-charcoal animate-ping" />
+                            <span className="absolute -top-1 -right-1 w-3 h-3 bg-amber-400 rounded-full border-2 border-heritage-charcoal" />
+                        </button>
+
+                        {/* Mobile Hamburger Menu Button */}
                         <button
                             onClick={() => setIsOpen(!isOpen)}
                             aria-label="Toggle navigation menu"
@@ -213,13 +225,41 @@ const Navbar = () => {
                                         </NavLink>
                                     </motion.div>
                                 ))}
+
+                                {/* Mobile App Download Button in Drawer */}
+                                <motion.div
+                                    initial={{ opacity: 0, x: -30 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: navLinks.length * 0.08, ease: "easeOut" }}
+                                >
+                                    <button
+                                        onClick={() => {
+                                            setIsOpen(false);
+                                            window.dispatchEvent(new CustomEvent('openAppPromoModal'));
+                                        }}
+                                        className="w-full flex items-center justify-between p-4 rounded-2xl bg-gradient-to-r from-royal-gold/20 via-amber-500/10 to-transparent border border-royal-gold/40 text-royal-gold hover:border-royal-gold transition-all duration-300 shadow-[0_0_20px_rgba(212,175,55,0.2)] group"
+                                    >
+                                        <div className="flex items-center gap-3 text-left">
+                                            <div className="w-10 h-10 rounded-xl bg-royal-gold/20 border border-royal-gold/40 flex items-center justify-center shrink-0">
+                                                <Smartphone className="w-5 h-5 text-royal-gold" />
+                                            </div>
+                                            <div>
+                                                <div className="text-sm font-bold text-white group-hover:text-royal-gold transition-colors">Get Official App</div>
+                                                <div className="text-[10px] text-gray-400">Offline Guides & Fort Maps</div>
+                                            </div>
+                                        </div>
+                                        <div className="w-8 h-8 rounded-full bg-royal-gold/20 flex items-center justify-center">
+                                            <ChevronRight className="w-4 h-4 text-royal-gold group-hover:translate-x-1 transition-transform" />
+                                        </div>
+                                    </button>
+                                </motion.div>
                             </div>
 
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.5 }}
-                                className="mt-auto pt-8 pb-12"
+                                className="mt-auto pt-6 pb-12"
                             >
                                 <button
                                     onClick={() => {

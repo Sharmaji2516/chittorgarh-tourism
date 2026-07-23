@@ -47,19 +47,6 @@ const MainContent = () => {
   const [isAppPromoOpen, setIsAppPromoOpen] = useState(false);
   const location = useLocation();
 
-  // Auto-show App Promo Modal for mobile users after 6 seconds once per session
-  React.useEffect(() => {
-    const isMobile = window.innerWidth <= 768 || /Android|iPhone|iPad/i.test(navigator.userAgent);
-    const hasSeenPromo = sessionStorage.getItem('ctt_app_promo_seen');
-    if (isMobile && !hasSeenPromo) {
-      const timer = setTimeout(() => {
-        setIsAppPromoOpen(true);
-        sessionStorage.setItem('ctt_app_promo_seen', 'true');
-      }, 6000);
-      return () => clearTimeout(timer);
-    }
-  }, []);
-
   // Listen for custom event from Navbar to open App Promo Modal
   React.useEffect(() => {
     const handleOpenAppPromo = () => setIsAppPromoOpen(true);
