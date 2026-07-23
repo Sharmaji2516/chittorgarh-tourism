@@ -68,7 +68,7 @@ const QuickInquiryModal = ({ isOpen, onClose, entityName, category }) => {
                     `• <b>Email:</b> <code>${escapeHTML(formData.email)}</code>\n` +
                     `━━━━━━━━━━━━━━━━━━━━`;
 
-                await fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
+                const tgResponse = await fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -84,7 +84,15 @@ const QuickInquiryModal = ({ isOpen, onClose, entityName, category }) => {
                             ]
                         }
                     })
-                }).catch(err => console.error("Telegram notification failed:", err));
+                }).catch(err => { console.error("Telegram fetch error:", err); return null; });
+                if (tgResponse) {
+                    const tgData = await tgResponse.json();
+                    if (!tgData.ok) {
+                        console.error("Telegram API error:", tgData);
+                    } else {
+                        console.log("Telegram notification sent OK:", tgData.result?.message_id);
+                    }
+                }
             }
 
             await saveBookingToFirebase(finalData);
@@ -149,14 +157,14 @@ const QuickInquiryModal = ({ isOpen, onClose, entityName, category }) => {
                                             <label className="text-[10px] text-royal-gold uppercase tracking-widest font-black ml-2">Check-In</label>
                                             <div className="relative">
                                                 <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-royal-gold" />
-                                                <input required type="date" value={formData.startDate} onChange={(e) => setFormData({ ...formData, startDate: e.target.value })} onClick={(e) => e.target.showPicker?.()} onFocus={(e) => e.target.showPicker?.()} className="w-full bg-white/[0.03] border border-white/10 rounded-xl py-4 pl-12 pr-4 text-white text-xs focus:outline-none focus:border-royal-gold cursor-pointer" />
+                                                <input required type="date" value={formData.startDate} onChange={(e) => setFormData({ ...formData, startDate: e.target.value })} onClick={(e) => { try { e.target.showPicker?.(); } catch(_){} }} className="w-full bg-white/[0.03] border border-white/10 rounded-xl py-4 pl-12 pr-4 text-white text-xs focus:outline-none focus:border-royal-gold cursor-pointer" />
                                             </div>
                                         </div>
                                         <div className="space-y-2">
                                             <label className="text-[10px] text-royal-gold uppercase tracking-widest font-black ml-2">Check-Out</label>
                                             <div className="relative">
                                                 <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-royal-gold" />
-                                                <input required type="date" value={formData.endDate} onChange={(e) => setFormData({ ...formData, endDate: e.target.value })} onClick={(e) => e.target.showPicker?.()} onFocus={(e) => e.target.showPicker?.()} className="w-full bg-white/[0.03] border border-white/10 rounded-xl py-4 pl-12 pr-4 text-white text-xs focus:outline-none focus:border-royal-gold cursor-pointer" />
+                                                <input required type="date" value={formData.endDate} onChange={(e) => setFormData({ ...formData, endDate: e.target.value })} onClick={(e) => { try { e.target.showPicker?.(); } catch(_){} }} className="w-full bg-white/[0.03] border border-white/10 rounded-xl py-4 pl-12 pr-4 text-white text-xs focus:outline-none focus:border-royal-gold cursor-pointer" />
                                             </div>
                                         </div>
                                     </div>

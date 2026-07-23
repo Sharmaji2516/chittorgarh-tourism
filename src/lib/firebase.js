@@ -54,14 +54,23 @@ export const saveBookingToFirebase = async (bookingData) => {
         const token = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
         const chatId = import.meta.env.VITE_TELEGRAM_CHAT_ID;
         if (token && chatId) {
-            const text = `🔥 *New Lead Alert on visitchittorgarh.in* 🔥\n\n` +
-                         `👤 *Name:* ${bookingData.name || 'Not specified'}\n` +
-                         `📱 *Phone:* ${bookingData.phone || 'Not specified'}\n` +
-                         `✉️ *Email:* ${bookingData.email || 'Not specified'}\n` +
-                         `🛡️ *Service:* ${bookingData.pillarTitle || bookingData.category || 'General'}\n` +
-                         `📅 *Start/Dates:* ${bookingData.date || bookingData.startDate || 'Not specified'}\n` +
-                         `📅 *End Date:* ${bookingData.endDate || 'Not specified'}\n` +
-                         `👥 *Travelers:* ${bookingData.travelers || 'Not specified'}`;
+            const esc = (s) => s ? String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') : 'Not specified';
+            const phone = bookingData.phone || '';
+            const cleanPhone = phone.replace(/\D/g, '');
+            const waPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone;
+
+            const text = 
+                `🏰 <b>CHITTORGARH TOURISM</b> 🏰\n` +
+                `━━━━━━━━━━━━━━━━━━━━\n` +
+                `🔥 <b>New Lead — visitchittorgarh.in</b>\n\n` +
+                `🛡️ <b>Service:</b> <code>${esc(bookingData.pillarTitle || bookingData.category || 'General')}</code>\n` +
+                `📅 <b>Dates:</b> <code>${esc(bookingData.date || bookingData.startDate || 'N/A')} → ${esc(bookingData.endDate || 'N/A')}</code>\n` +
+                `👥 <b>Travelers:</b> <code>${esc(bookingData.travelers)}</code>\n\n` +
+                `<b>👤 Guest Details:</b>\n` +
+                `• <b>Name:</b> ${esc(bookingData.name)}\n` +
+                `• <b>Phone:</b> <code>${esc(bookingData.phone)}</code>\n` +
+                `• <b>Email:</b> <code>${esc(bookingData.email)}</code>\n` +
+                `━━━━━━━━━━━━━━━━━━━━`;
 
             fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
                 method: 'POST',
@@ -69,9 +78,18 @@ export const saveBookingToFirebase = async (bookingData) => {
                 body: JSON.stringify({
                     chat_id: chatId,
                     text: text,
-                    parse_mode: 'Markdown'
+                    parse_mode: 'HTML',
+                    reply_markup: {
+                        inline_keyboard: [[
+                            { text: '💬 Chat on WhatsApp', url: `https://wa.me/${waPhone}` },
+                            { text: '📞 Call Customer', url: `tel:${phone}` }
+                        ]]
+                    }
                 })
-            }).catch(err => console.error("Telegram notification failed:", err));
+            }).then(r => r.json()).then(d => {
+                if (!d.ok) console.error('Telegram API error:', d);
+                else console.log('Telegram notification sent OK:', d.result?.message_id);
+            }).catch(err => console.error('Telegram fetch error:', err));
         }
 
         return docRef.id;
