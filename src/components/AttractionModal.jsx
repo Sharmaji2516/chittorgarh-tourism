@@ -63,57 +63,55 @@ const AttractionModal = ({ attraction, onClose }) => {
                                 alt={attraction.name}
                                 className="w-full h-full object-cover"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
-                            <div className="absolute bottom-4 left-4">
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+                            <div className="absolute bottom-4 inset-x-4 text-center flex flex-col items-center">
                                 <h2 className="text-2xl md:text-3xl font-bold text-white font-serif">{attraction.name}</h2>
-                                <div className="flex items-center text-royal-gold mt-1">
+                                <div className="flex items-center justify-center text-royal-gold mt-1">
                                     <MapPin className="w-4 h-4 mr-1" />
-                                    <span className="text-sm">Chittorgarh Fort</span>
+                                    <span className="text-sm font-medium">Chittorgarh Fort</span>
                                 </div>
                             </div>
                         </div>
 
                         {/* Content Section */}
-                        <div className="w-full md:w-1/2 p-6 md:p-8 space-y-6">
+                        <div className="w-full md:w-1/2 p-6 md:p-8 space-y-6 text-center">
 
                             {/* Description */}
-                            <div>
-                                <h3 className="text-lg font-bold text-royal-gold mb-2 font-serif border-b border-royal-gold/20 pb-1">About</h3>
-                                <p className="text-gray-300 leading-relaxed text-sm md:text-base">
+                            <div className="text-center">
+                                <h3 className="text-lg font-bold text-royal-gold mb-2 font-serif border-b border-royal-gold/20 pb-1 text-center">About</h3>
+                                <p className="text-gray-300 leading-relaxed text-sm md:text-base text-center">
                                     {attraction.desc}
                                 </p>
                             </div>
 
                             {/* Best Time to Visit */}
                             {attraction.bestTime && (
-                                <div className="flex items-start gap-4 p-4 bg-white/5 rounded-lg border border-royal-gold/10">
-                                    <Calendar className="w-6 h-6 text-royal-gold shrink-0 mt-0.5" />
-                                    <div>
-                                        <h4 className="text-sm font-bold text-white mb-1">Best Time to Visit</h4>
-                                        <p className="text-gray-400 text-sm">{attraction.bestTime}</p>
-                                    </div>
+                                <div className="flex flex-col items-center justify-center p-4 bg-white/5 rounded-2xl border border-royal-gold/10 text-center space-y-1">
+                                    <Calendar className="w-6 h-6 text-royal-gold mb-1" />
+                                    <h4 className="text-sm font-bold text-white">Best Time to Visit</h4>
+                                    <p className="text-gray-400 text-sm">{attraction.bestTime}</p>
                                 </div>
                             )}
 
                             {/* Distances */}
                             {attraction.distances && (
                                 <div>
-                                    <h3 className="text-lg font-bold text-royal-gold mb-3 font-serif border-b border-royal-gold/20 pb-1">How to Reach</h3>
-                                    <div className="grid grid-cols-1 gap-3">
-                                        <div className="flex items-center gap-3 text-sm text-gray-300">
-                                            <Train className="w-5 h-5 text-blue-400 shrink-0" />
+                                    <h3 className="text-lg font-bold text-royal-gold mb-3 font-serif border-b border-royal-gold/20 pb-1 text-center">How to Reach</h3>
+                                    <div className="grid grid-cols-1 gap-2.5 bg-white/5 p-4 rounded-2xl border border-white/5">
+                                        <div className="flex items-center justify-center gap-2.5 text-sm text-gray-300">
+                                            <Train className="w-4 h-4 text-blue-400 shrink-0" />
                                             <span>
                                                 <span className="text-white font-medium">Railway:</span> {attraction.distances.railway}
                                             </span>
                                         </div>
-                                        <div className="flex items-center gap-3 text-sm text-gray-300">
-                                            <Bus className="w-5 h-5 text-green-400 shrink-0" />
+                                        <div className="flex items-center justify-center gap-2.5 text-sm text-gray-300">
+                                            <Bus className="w-4 h-4 text-green-400 shrink-0" />
                                             <span>
                                                 <span className="text-white font-medium">Bus Stand:</span> {attraction.distances.bus}
                                             </span>
                                         </div>
-                                        <div className="flex items-center gap-3 text-sm text-gray-300">
-                                            <Plane className="w-5 h-5 text-orange-400 shrink-0" />
+                                        <div className="flex items-center justify-center gap-2.5 text-sm text-gray-300">
+                                            <Plane className="w-4 h-4 text-orange-400 shrink-0" />
                                             <span>
                                                 <span className="text-white font-medium">Airport:</span> {attraction.distances.airport}
                                             </span>
