@@ -118,17 +118,15 @@ const Navbar = () => {
 
                     {/* Right Side Actions */}
                     <div className="hidden md:flex items-center gap-4">
-                        <a
-                            href="https://play.google.com/store/apps/details?id=com.kushsharma.visitchittorgarh"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-4 py-2 rounded-full border border-royal-gold/30 bg-royal-gold/10 text-royal-gold hover:bg-royal-gold hover:text-royal-black transition-all duration-300 shadow-md group"
+                        <button
+                            onClick={() => window.dispatchEvent(new CustomEvent('openAppPromoModal'))}
+                            className="flex items-center gap-2 px-4 py-2 rounded-full border border-royal-gold/30 bg-royal-gold/10 text-royal-gold hover:bg-royal-gold hover:text-royal-black transition-all duration-300 shadow-md group cursor-pointer"
                         >
                             <svg className="w-4 h-4 fill-current shrink-0 group-hover:scale-110 transition-transform" viewBox="0 0 24 24">
                                 <path d="M3.609 1.814L13.792 12 3.61 22.186a2.372 2.372 0 0 1-.61-1.615V3.429c0-.623.23-1.201.609-1.615zm11.604 11.608l2.677 2.677-12.019 6.94 9.342-9.617zm0-2.844L5.871 1.054l12.019 6.94-2.677 2.584zm1.422 1.422l3.493 2.017c.87.502.87 1.316 0 1.818l-3.493 2.017-2.617-2.617 2.617-3.235z"/>
                             </svg>
                             <span className="text-[10px] font-bold uppercase tracking-wider">Get App</span>
-                        </a>
+                        </button>
 
                         <motion.button
                             whileHover={{ scale: 1.05 }}
