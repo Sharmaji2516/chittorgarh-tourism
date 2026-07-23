@@ -1,5 +1,5 @@
 import React from 'react';
-import { Smartphone, Download, Star, ShieldCheck, Zap } from 'lucide-react';
+import { Smartphone, Star, ShieldCheck, Zap } from 'lucide-react';
 
 const PLAY_STORE_URL = "https://play.google.com/store/apps/details?id=com.kushsharma.visitchittorgarh";
 
@@ -19,20 +19,20 @@ const AppDownloadBanner = () => {
                         </div>
 
                         <h2 className="text-3xl md:text-5xl font-black text-white font-serif tracking-wide leading-tight">
-                            Explore Chittorgarh <br />
+                            Carry Chittorgarh Travel Companion <br />
                             <span className="bg-gradient-to-r from-royal-gold via-amber-300 to-amber-500 bg-clip-text text-transparent">
-                                Right From Your Phone
+                                In Your Pocket!
                             </span>
                         </h2>
 
                         <p className="text-gray-300 text-sm md:text-base max-w-xl leading-relaxed">
-                            Download the official Visit Chittorgarh Android app for instant audio guides, offline fort maps, local itinerary planning, and direct booking support.
+                            Download the official Visit Chittorgarh Android app for instant audio guides, interactive fort maps, local itinerary planning, and direct booking support.
                         </p>
 
                         {/* Features Badges */}
                         <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 text-xs font-semibold text-gray-300">
                             <span className="flex items-center gap-1.5 bg-white/5 border border-white/10 px-3 py-1.5 rounded-lg">
-                                <Zap className="w-3.5 h-3.5 text-royal-gold" /> Fast & Offline Maps
+                                <Zap className="w-3.5 h-3.5 text-royal-gold" /> Instant Access & Interactive Maps
                             </span>
                             <span className="flex items-center gap-1.5 bg-white/5 border border-white/10 px-3 py-1.5 rounded-lg">
                                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" /> Verified Tour Guides
@@ -72,10 +72,8 @@ const AppDownloadBanner = () => {
 
                             {/* Screen Center Icon */}
                             <div className="flex flex-col items-center justify-center gap-3 my-auto">
-                                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-royal-gold to-amber-600 p-0.5 shadow-lg">
-                                    <div className="w-full h-full bg-black rounded-[14px] flex items-center justify-center">
-                                        <img src="/Fort.png" alt="Visit Chittorgarh App" className="w-12 h-12 object-contain" />
-                                    </div>
+                                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-royal-gold via-amber-400 to-amber-600 p-0.5 shadow-lg overflow-hidden">
+                                    <img src="/logo_maharana.png" alt="Visit Chittorgarh App Emblem" className="w-full h-full object-cover rounded-full bg-black" />
                                 </div>
                                 <div className="text-center">
                                     <div className="text-sm font-bold text-white">Chittorgarh Tourism</div>

@@ -38,27 +38,29 @@ const AppPromoModal = ({ isOpen, onClose }) => {
                         <X className="w-4 h-4" />
                     </button>
 
-                    {/* App Icon */}
-                    <div className="mx-auto w-20 h-20 bg-gradient-to-br from-royal-gold to-amber-600 rounded-2xl p-0.5 shadow-[0_0_25px_rgba(212,175,55,0.4)] mb-4">
-                        <div className="w-full h-full bg-black rounded-[14px] flex items-center justify-center">
-                            <img src="/Fort.png" alt="Chittorgarh App" className="w-12 h-12 object-contain" />
-                        </div>
+                    {/* App Emblem Logo Container */}
+                    <div className="mx-auto w-24 h-24 rounded-full bg-gradient-to-br from-royal-gold via-amber-400 to-amber-600 p-0.5 shadow-[0_0_30px_rgba(212,175,55,0.4)] mb-4 overflow-hidden">
+                        <img 
+                            src="/logo_maharana.png" 
+                            alt="Chittorgarh Tourism Logo" 
+                            className="w-full h-full object-cover rounded-full bg-black" 
+                        />
                     </div>
 
-                    {/* Title */}
-                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-royal-gold/10 border border-royal-gold/30 text-royal-gold text-[10px] font-black uppercase tracking-widest mb-2">
-                        <Smartphone className="w-3.5 h-3.5" /> Official Android Guide
+                    {/* Tagline */}
+                    <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-royal-gold/10 border border-royal-gold/30 text-royal-gold text-[10px] font-black uppercase tracking-widest mb-3">
+                        <Smartphone className="w-3.5 h-3.5" /> Official Android App
                     </div>
 
-                    <h3 className="text-2xl font-black text-white font-serif tracking-wide mb-2">
-                        Carry Chittorgarh <br />
+                    <h3 className="text-xl md:text-2xl font-black text-white font-serif tracking-wide mb-3 leading-snug">
+                        Carry Chittorgarh Travel Companion <br />
                         <span className="bg-gradient-to-r from-royal-gold via-amber-300 to-amber-500 bg-clip-text text-transparent">
                             In Your Pocket!
                         </span>
                     </h3>
 
                     <p className="text-gray-300 text-xs md:text-sm leading-relaxed mb-6">
-                        Get instant offline fort maps, audio stories of Rajput valor, live navigation, and seamless local support during your trip.
+                        Download the official Visit Chittorgarh app for audio guides, fort navigation, heritage stories, and instant local support.
                     </p>
 
                     {/* Key Perks List */}
@@ -67,7 +69,7 @@ const AppPromoModal = ({ isOpen, onClose }) => {
                             <div className="w-6 h-6 rounded-lg bg-royal-gold/10 border border-royal-gold/30 flex items-center justify-center shrink-0">
                                 <Zap className="w-3.5 h-3.5 text-royal-gold" />
                             </div>
-                            <span>Works Offline Inside Fort Premises</span>
+                            <span>Instant Access & Interactive Maps</span>
                         </div>
                         <div className="flex items-center gap-2.5 text-xs text-gray-200 font-medium">
                             <div className="w-6 h-6 rounded-lg bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center shrink-0">
@@ -79,7 +81,7 @@ const AppPromoModal = ({ isOpen, onClose }) => {
                             <div className="w-6 h-6 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-center justify-center shrink-0">
                                 <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
                             </div>
-                            <span>100% Free - No Ads & Fast Access</span>
+                            <span>100% Free - Fast Experience</span>
                         </div>
                     </div>
 
