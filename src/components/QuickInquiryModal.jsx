@@ -29,17 +29,32 @@ const QuickInquiryModal = ({ isOpen, onClose, entityName, category }) => {
                 createdAt: new Date().toISOString()
             };
 
+            const formatDateString = (dateStr) => {
+                if (!dateStr) return 'Not Specified';
+                try {
+                    const parts = dateStr.split('-');
+                    if (parts.length !== 3) return dateStr;
+                    const date = new Date(parts[0], parseInt(parts[1]) - 1, parts[2]);
+                    return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+                } catch (_) {
+                    return dateStr;
+                }
+            };
+
+            const formattedStart = formatDateString(formData.startDate);
+            const formattedEnd = formatDateString(formData.endDate);
+
             // WhatsApp Message (Must run before first await to bypass popup blocker)
             const phoneNumber = "917597451057";
-            const message = `*👑 On-Demand Inquiry*\n\n` +
-                `*🛡️ Service:* ${entityName}\n` +
-                `*📅 From:* ${formData.startDate}\n` +
-                `*📅 To:* ${formData.endDate}\n\n` +
-                `*-- Guest Details --*\n` +
-                `*👤 Name:* ${formData.name}\n` +
-                `*📱 Phone:* ${formData.phone}\n` +
-                `*✉️ Email:* ${formData.email}\n\n` +
-                `I am interested in this service. Please contact me with availability and pricing.`;
+            const message = `🏰 *CHITTORGARH TOURISM*\n` +
+                `━━━━━━━━━━━━━━━━━━━━\n` +
+                `✨ *New Inquiry Received*\n\n` +
+                `🛡️ *Service:* ${entityName}\n` +
+                `📅 *Dates:* ${formattedStart} → ${formattedEnd}\n\n` +
+                `👤 *Guest:* ${formData.name}\n` +
+                `📱 *Phone:* ${formData.phone}\n` +
+                `✉️ *Email:* ${formData.email}\n` +
+                `━━━━━━━━━━━━━━━━━━━━`;
 
             window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
 
@@ -58,10 +73,9 @@ const QuickInquiryModal = ({ isOpen, onClose, entityName, category }) => {
                 const telegramText = 
                     `🏰 <b>CHITTORGARH TOURISM</b> 🏰\n` +
                     `━━━━━━━━━━━━━━━━━━━━\n` +
-                    `✨ <b>New On-Demand Inquiry</b> ✨\n\n` +
+                    `✨ <b>New Inquiry Received</b> ✨\n\n` +
                     `🛡️ <b>Service:</b> <code>${escapeHTML(entityName)}</code>\n` +
-                    `📅 <b>Check-In:</b> <code>${escapeHTML(formData.startDate)}</code>\n` +
-                    `📅 <b>Check-Out:</b> <code>${escapeHTML(formData.endDate)}</code>\n\n` +
+                    `📅 <b>Dates:</b> <code>${escapeHTML(formattedStart)} → ${escapeHTML(formattedEnd)}</code>\n\n` +
                     `<b>👤 Guest Details:</b>\n` +
                     `• <b>Name:</b> ${escapeHTML(formData.name)}\n` +
                     `• <b>Phone:</b> <code>${escapeHTML(formData.phone)}</code>\n` +

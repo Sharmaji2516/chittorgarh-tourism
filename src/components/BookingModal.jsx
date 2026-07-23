@@ -34,23 +34,37 @@ const BookingModal = ({ isOpen, onClose, pillarTitle }) => {
                 termsVersion: '1.0'
             };
 
+            const formatDateString = (dateStr) => {
+                if (!dateStr) return 'Not Specified';
+                try {
+                    const parts = dateStr.split('-');
+                    if (parts.length !== 3) return dateStr;
+                    const date = new Date(parts[0], parseInt(parts[1]) - 1, parts[2]);
+                    return date.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+                } catch (_) {
+                    return dateStr;
+                }
+            };
+
+            const formattedDate = formatDateString(bookingData.date);
+
             await saveBookingToFirebase(finalData);
 
             const phoneNumber = "917597451057";
-            const message = `*👑 Royal Expedition Inquiry*\n\n` +
-                `*🛡️ Expedition:* ${pillarTitle || 'Custom'}\n` +
-                `*📅 Date:* ${bookingData.date}\n` +
-                `*🕒 Arrival Time:* ${bookingData.arrivalTime || 'Not Specified'}\n` +
-                `*🕒 Departure Time:* ${bookingData.departureTime || 'Not Specified'}\n` +
-                `*👥 Travelers:* ${bookingData.travelers}\n\n` +
-                `*-- Preferences --*\n` +
-                `*🚗 Vehicle:* ${bookingData.transport}\n` +
-                `*🏨 Room:* ${bookingData.hotel}\n` +
-                `*🍽️ Cuisine:* ${bookingData.cuisine || 'Not Specified'}\n\n` +
-                `*📜 Special Needs:* ${bookingData.requirements || 'None'}\n\n` +
-                `*👤 Name:* ${bookingData.name}\n` +
-                `*📱 Phone:* ${bookingData.phone}\n\n` +
-                `I am interested in this Royal Expedition. Please contact me with availability and a custom quote.`;
+            const message = `🏰 *CHITTORGARH TOURISM*\n` +
+                `━━━━━━━━━━━━━━━━━━━━\n` +
+                `👑 *Royal Expedition Booking*\n\n` +
+                `🛡️ *Expedition:* ${pillarTitle || 'Custom'}\n` +
+                `📅 *Date:* ${formattedDate}\n` +
+                `🕒 *Timing:* ${bookingData.arrivalTime || 'Flexible'} - ${bookingData.departureTime || 'Flexible'}\n` +
+                `👥 *Travelers:* ${bookingData.travelers}\n\n` +
+                `🚗 *Vehicle:* ${bookingData.transport}\n` +
+                `🏨 *Hotel:* ${bookingData.hotel}\n` +
+                `🍽️ *Cuisine:* ${bookingData.cuisine || 'Not Specified'}\n\n` +
+                `👤 *Guest:* ${bookingData.name}\n` +
+                `📱 *Phone:* ${bookingData.phone}\n` +
+                `✉️ *Email:* ${bookingData.email || 'Not Provided'}\n` +
+                `━━━━━━━━━━━━━━━━━━━━`;
 
             window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
 
@@ -69,17 +83,14 @@ const BookingModal = ({ isOpen, onClose, pillarTitle }) => {
                 const telegramText = 
                     `🏰 <b>CHITTORGARH TOURISM</b> 🏰\n` +
                     `━━━━━━━━━━━━━━━━━━━━\n` +
-                    `✨ <b>New Expedition Booking</b> ✨\n\n` +
+                    `👑 <b>Royal Expedition Booking</b> 👑\n\n` +
                     `🛡️ <b>Expedition:</b> <code>${escapeHTML(pillarTitle || 'Custom')}</code>\n` +
-                    `📅 <b>Date:</b> <code>${escapeHTML(bookingData.date)}</code>\n` +
-                    `🕒 <b>Arrival:</b> <code>${escapeHTML(bookingData.arrivalTime || 'Not Specified')}</code>\n` +
-                    `🕒 <b>Departure:</b> <code>${escapeHTML(bookingData.departureTime || 'Not Specified')}</code>\n` +
+                    `📅 <b>Date:</b> <code>${escapeHTML(formattedDate)}</code>\n` +
                     `👥 <b>Travelers:</b> <code>${escapeHTML(bookingData.travelers)}</code>\n\n` +
                     `<b>🚗 Preferences:</b>\n` +
-                    `• *Vehicle:* ${escapeHTML(bookingData.transport)}\n` +
-                    `• *Room:* ${escapeHTML(bookingData.hotel)}\n` +
-                    `• *Cuisine:* ${escapeHTML(bookingData.cuisine || 'Not Specified')}\n` +
-                    `• *Needs:* ${escapeHTML(bookingData.requirements || 'None')}\n\n` +
+                    `• <b>Vehicle:</b> ${escapeHTML(bookingData.transport)}\n` +
+                    `• <b>Hotel:</b> ${escapeHTML(bookingData.hotel)}\n` +
+                    `• <b>Cuisine:</b> ${escapeHTML(bookingData.cuisine || 'Not Specified')}\n\n` +
                     `<b>👤 Guest Details:</b>\n` +
                     `• <b>Name:</b> ${escapeHTML(bookingData.name)}\n` +
                     `• <b>Phone:</b> <code>${escapeHTML(bookingData.phone)}</code>\n` +
