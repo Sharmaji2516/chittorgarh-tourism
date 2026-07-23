@@ -132,6 +132,24 @@ const Footer = () => {
                                     <span className="text-sm font-medium tracking-wider lowercase text-royal-white/70 group-hover:text-royal-white">visitchittorgarh@gmail.com</span>
                                 </a>
 
+                                {/* Android App Download Link */}
+                                <div className="pt-3 border-t border-royal-gold/10">
+                                    <a
+                                        href="https://play.google.com/store/apps/details?id=com.kushsharma.visitchittorgarh"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="group flex items-center gap-3 bg-gradient-to-r from-royal-gold/10 to-amber-500/10 border border-royal-gold/30 hover:border-royal-gold px-3.5 py-2.5 rounded-xl transition-all duration-300"
+                                    >
+                                        <svg className="w-6 h-6 text-royal-gold shrink-0 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="currentColor">
+                                            <path d="M3.609 1.814L13.792 12 3.61 22.186a2.372 2.372 0 0 1-.61-1.615V3.429c0-.623.23-1.201.609-1.615zm11.604 11.608l2.677 2.677-12.019 6.94 9.342-9.617zm0-2.844L5.871 1.054l12.019 6.94-2.677 2.584zm1.422 1.422l3.493 2.017c.87.502.87 1.316 0 1.818l-3.493 2.017-2.617-2.617 2.617-3.235z"/>
+                                        </svg>
+                                        <div>
+                                            <div className="text-[9px] uppercase font-semibold text-royal-gold/80 tracking-wider">GET IT ON</div>
+                                            <div className="text-xs font-bold text-white group-hover:text-royal-gold transition-colors">Google Play App</div>
+                                        </div>
+                                    </a>
+                                </div>
+
                                 {/* Feedback Section */}
                                 {window.location.hostname === 'localhost' && (
                                     <div className="pt-2 border-t border-royal-gold/10">

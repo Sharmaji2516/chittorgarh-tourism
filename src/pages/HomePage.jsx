@@ -6,6 +6,7 @@ import Hero from '../components/Hero';
 import Section from '../components/Section';
 import SEOHead from '../components/SEOHead';
 import InternationalSEO from '../components/InternationalSEO';
+import AppDownloadBanner from '../components/AppDownloadBanner';
 
 const HOME_SCHEMAS = [
   {
@@ -491,6 +492,9 @@ const HomePage = ({ t, searchQuery }) => {
                     </div>
                 </div>
             </Section>
+
+            {/* Android App Download Banner */}
+            <AppDownloadBanner />
         </div>
     );
 };
