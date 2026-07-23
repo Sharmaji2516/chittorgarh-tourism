@@ -35,6 +35,42 @@ const HOME_SCHEMAS = [
   },
   {
     "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Chittorgarh Tourism",
+    "image": "https://visitchittorgarh.in/Fort.png",
+    "url": "https://visitchittorgarh.in",
+    "telephone": "+91-XXXXXXXXXX",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Fort Road, Near Fort Gate",
+      "addressLocality": "Chittorgarh",
+      "addressRegion": "Rajasthan",
+      "postalCode": "312001",
+      "addressCountry": "IN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "24.8887",
+      "longitude": "74.6269"
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "opens": "09:00",
+      "closes": "18:00"
+    }
+  },
+  {
+    "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Visit Chittorgarh",
     "url": "https://visitchittorgarh.in",

@@ -55,29 +55,30 @@ const QuickInquiryModal = ({ isOpen, onClose, entityName, category }) => {
 
     return (
         <AnimatePresence>
-            <div className="fixed inset-0 z-[150] flex items-center justify-center p-4 md:p-8 overflow-hidden">
+            <div className="fixed inset-0 z-[150] overflow-y-auto">
                 <motion.div 
                     initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
                     onClick={onClose}
-                    className="absolute inset-0 bg-royal-black/98 backdrop-blur-2xl"
+                    className="fixed inset-0 bg-royal-black/98 backdrop-blur-2xl"
                 />
                 
-                <motion.div
-                    initial={{ scale: 0.95, opacity: 0, y: 50 }} animate={{ scale: 1, opacity: 1, y: 0 }} exit={{ scale: 0.95, opacity: 0, y: 50 }}
-                    className="relative w-full max-w-lg bg-heritage-charcoal border border-white/10 rounded-[3rem] overflow-hidden shadow-2xl flex flex-col"
-                >
-                    {/* Header */}
-                    <div className="p-8 border-b border-white/5 flex justify-between items-center bg-white/[0.02]">
-                        <div>
-                            <h3 className="text-xl md:text-2xl font-serif text-white">{submitted ? "Inquiry Received" : "Secure Best Price"}</h3>
-                            <p className="text-[9px] text-royal-gold uppercase tracking-[0.4em] mt-1 font-black">{entityName}</p>
+                <div className="flex min-h-full items-center justify-center p-4 md:p-8 relative">
+                    <motion.div
+                        initial={{ scale: 0.95, opacity: 0, y: 50 }} animate={{ scale: 1, opacity: 1, y: 0 }} exit={{ scale: 0.95, opacity: 0, y: 50 }}
+                        className="relative w-full max-w-lg bg-heritage-charcoal border border-white/10 rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl flex flex-col my-4 md:my-8"
+                    >
+                        {/* Header */}
+                        <div className="p-6 md:p-8 border-b border-white/5 flex justify-between items-center bg-white/[0.02]">
+                            <div>
+                                <h3 className="text-xl md:text-2xl font-serif text-white">{submitted ? "Inquiry Received" : "Secure Best Price"}</h3>
+                                <p className="text-[9px] text-royal-gold uppercase tracking-[0.4em] mt-1 font-black">{entityName}</p>
+                            </div>
+                            <button onClick={onClose} aria-label="Close inquiry modal" className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-all text-white/30 hover:text-white">
+                                <X className="w-5 h-5" />
+                            </button>
                         </div>
-                        <button onClick={onClose} aria-label="Close inquiry modal" className="p-2 bg-white/5 hover:bg-white/10 rounded-full transition-all text-white/30 hover:text-white">
-                            <X className="w-5 h-5" />
-                        </button>
-                    </div>
 
-                    <div className="p-8 md:p-10">
+                        <div className="p-6 md:p-10">
                         {submitted ? (
                             <motion.div 
                                 initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
@@ -149,7 +150,8 @@ const QuickInquiryModal = ({ isOpen, onClose, entityName, category }) => {
                             </form>
                         )}
                     </div>
-                </motion.div>
+                    </motion.div>
+                </div>
             </div>
         </AnimatePresence>
     );

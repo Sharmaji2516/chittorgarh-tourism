@@ -22,6 +22,7 @@ const StaffVerificationPage = lazy(() => import('./pages/StaffVerificationPage')
 const FeedbackPage = lazy(() => import('./pages/FeedbackPage'));
 const TermsPage = lazy(() => import('./pages/TermsPage'));
 const ServiceDetailsPage = lazy(() => import('./pages/ServiceDetailsPage'));
+const BlogPage = lazy(() => import('./pages/BlogPage'));
 
 // ─── Lazy-loaded UI modals (not needed for initial paint) ─────────────────────
 const AttractionModal = lazy(() => import('./components/AttractionModal'));
@@ -128,6 +129,7 @@ const MainContent = () => {
                 />
               } />
               <Route path="/mission-services" element={<MissionServicesPage t={t} />} />
+              <Route path="/blog" element={<BlogPage t={t} />} />
               <Route path="/admin" element={<AdminPage />} />
               <Route path="/verify/:id" element={<VerificationPage />} />
               <Route path="/staff-verify" element={<StaffVerificationPage />} />
