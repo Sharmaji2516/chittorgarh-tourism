@@ -81,8 +81,7 @@ export const saveBookingToFirebase = async (bookingData) => {
                     parse_mode: 'HTML',
                     reply_markup: {
                         inline_keyboard: [[
-                            { text: '💬 Chat on WhatsApp', url: `https://wa.me/${waPhone}` },
-                            { text: '📞 Call Customer', url: `tel:${phone}` }
+                            { text: '💬 Chat on WhatsApp', url: `https://wa.me/${waPhone}` }
                         ]]
                     }
                 })

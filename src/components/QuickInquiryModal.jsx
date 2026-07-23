@@ -78,8 +78,7 @@ const QuickInquiryModal = ({ isOpen, onClose, entityName, category }) => {
                         reply_markup: {
                             inline_keyboard: [
                                 [
-                                    { text: "💬 Chat on WhatsApp", url: `https://wa.me/${waPhone}` },
-                                    { text: "📞 Call Customer", url: `tel:${formData.phone}` }
+                                    { text: "💬 Chat on WhatsApp", url: `https://wa.me/${waPhone}` }
                                 ]
                             ]
                         }
