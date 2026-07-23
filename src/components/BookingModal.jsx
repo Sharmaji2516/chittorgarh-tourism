@@ -48,12 +48,63 @@ const BookingModal = ({ isOpen, onClose, pillarTitle }) => {
                 `*🏨 Room:* ${bookingData.hotel}\n` +
                 `*🍽️ Cuisine:* ${bookingData.cuisine || 'Not Specified'}\n\n` +
                 `*📜 Special Needs:* ${bookingData.requirements || 'None'}\n\n` +
-                `*-- Contact --*\n` +
                 `*👤 Name:* ${bookingData.name}\n` +
                 `*📱 Phone:* ${bookingData.phone}\n\n` +
                 `I am interested in this Royal Expedition. Please contact me with availability and a custom quote.`;
 
             window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+
+            // Telegram Notification
+            const telegramToken = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
+            const telegramChatId = import.meta.env.VITE_TELEGRAM_CHAT_ID;
+            if (telegramToken && telegramChatId) {
+                const cleanPhone = bookingData.phone.replace(/\D/g, '');
+                const waPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone;
+
+                const escapeHTML = (str) => {
+                    if (!str) return '';
+                    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                };
+
+                const telegramText = 
+                    `🏰 <b>CHITTORGARH TOURISM</b> 🏰\n` +
+                    `━━━━━━━━━━━━━━━━━━━━\n` +
+                    `✨ <b>New Expedition Booking</b> ✨\n\n` +
+                    `🛡️ <b>Expedition:</b> <code>${escapeHTML(pillarTitle || 'Custom')}</code>\n` +
+                    `📅 <b>Date:</b> <code>${escapeHTML(bookingData.date)}</code>\n` +
+                    `🕒 <b>Arrival:</b> <code>${escapeHTML(bookingData.arrivalTime || 'Not Specified')}</code>\n` +
+                    `🕒 <b>Departure:</b> <code>${escapeHTML(bookingData.departureTime || 'Not Specified')}</code>\n` +
+                    `👥 <b>Travelers:</b> <code>${escapeHTML(bookingData.travelers)}</code>\n\n` +
+                    `<b>🚗 Preferences:</b>\n` +
+                    `• *Vehicle:* ${escapeHTML(bookingData.transport)}\n` +
+                    `• *Room:* ${escapeHTML(bookingData.hotel)}\n` +
+                    `• *Cuisine:* ${escapeHTML(bookingData.cuisine || 'Not Specified')}\n` +
+                    `• *Needs:* ${escapeHTML(bookingData.requirements || 'None')}\n\n` +
+                    `<b>👤 Guest Details:</b>\n` +
+                    `• <b>Name:</b> ${escapeHTML(bookingData.name)}\n` +
+                    `• <b>Phone:</b> <code>${escapeHTML(bookingData.phone)}</code>\n` +
+                    `• <b>Email:</b> <code>${escapeHTML(bookingData.email || 'Not Provided')}</code>\n` +
+                    `━━━━━━━━━━━━━━━━━━━━`;
+
+                await fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: telegramChatId,
+                        text: telegramText,
+                        parse_mode: 'HTML',
+                        reply_markup: {
+                            inline_keyboard: [
+                                [
+                                    { text: "💬 Chat on WhatsApp", url: `https://wa.me/${waPhone}` },
+                                    { text: "📞 Call Customer", url: `tel:${bookingData.phone}` }
+                                ]
+                            ]
+                        }
+                    })
+                }).catch(err => console.error("Telegram notification failed:", err));
+            }
+
             setSubmitted(true);
         } catch (error) {
             console.error("Submission Error:", error);
@@ -216,8 +267,8 @@ const BookingModal = ({ isOpen, onClose, pillarTitle }) => {
                                                         </div>
                                                         <div className="mt-4 p-4 bg-royal-gold/10 border border-royal-gold/20 rounded-xl">
                                                             <p className="text-xs text-white/70 font-medium leading-relaxed">
-                                                                <span className="text-royal-gold font-black uppercase tracking-widest text-[10px] block mb-1">Important Note</span>
-                                                                Please inform us of your exact arrival and departure times. We will provide your detailed, time-specific itinerary based on that. This is just a general overview.
+                                                                 <span className="text-royal-gold font-black uppercase tracking-widest text-[10px] block mb-1">Important Note</span>
+                                                                 Please inform us of your exact arrival and departure times. We will provide your detailed, time-specific itinerary based on that. This is just a general overview.
                                                             </p>
                                                         </div>
                                                     </div>
@@ -226,7 +277,7 @@ const BookingModal = ({ isOpen, onClose, pillarTitle }) => {
                                                 <div className="space-y-8">
                                                     <div className="relative group">
                                                         <Calendar className="absolute left-6 top-1/2 -translate-y-1/2 w-6 h-6 text-royal-gold group-focus-within:scale-110 transition-transform" />
-                                                        <input required type="date" value={bookingData.date || ''} onChange={(e) => updateBooking({ date: e.target.value })} className="w-full bg-white/[0.03] border border-white/10 rounded-[1.5rem] py-6 pl-16 pr-6 text-white text-lg focus:outline-none focus:border-royal-gold focus:bg-white/5 transition-all" />
+                                                        <input required type="date" value={bookingData.date || ''} onChange={(e) => updateBooking({ date: e.target.value })} onClick={(e) => e.target.showPicker?.()} onFocus={(e) => e.target.showPicker?.()} className="w-full bg-white/[0.03] border border-white/10 rounded-[1.5rem] py-6 pl-16 pr-6 text-white text-lg focus:outline-none focus:border-royal-gold focus:bg-white/5 transition-all cursor-pointer" />
                                                     </div>
 
                                                     <div className="space-y-4">
@@ -321,7 +372,7 @@ const BookingModal = ({ isOpen, onClose, pillarTitle }) => {
                                         )}
 
                                         {step === 3 && (
-                                            <motion.div key="step3" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-10">
+                                            <motion.div key="step3" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -10 }} className="space-y-6">
                                                 <div className="p-8 rounded-[2.5rem] bg-white/[0.02] border border-white/5 space-y-5">
                                                     <p className="text-[10px] text-royal-gold font-black uppercase tracking-[0.4em] mb-4 text-center">Inquiry Summary</p>
                                                     <div className="flex justify-between items-center"><span className="text-[9px] text-white/30 uppercase tracking-widest">Vehicle</span><span className="text-xs text-white font-bold">{bookingData.transport}</span></div>
@@ -362,11 +413,17 @@ const BookingModal = ({ isOpen, onClose, pillarTitle }) => {
                                                     </label>
                                                 </div>
 
-                                                <div className="flex gap-4">
-                                                    <button type="button" onClick={handleBack} className="w-20 rounded-2xl bg-white/5 text-white/30 flex items-center justify-center hover:bg-white/10 transition-colors"><X className="w-5 h-5" /></button>
-                                                    <button type="button" onClick={handleSubmit} disabled={isSubmitting || !bookingData.name || !bookingData.phone || !bookingData.email || !agreedToTerms} className="flex-1 py-6 bg-gradient-to-r from-royal-gold to-amber-500 text-royal-black font-black uppercase tracking-[0.2em] text-xs rounded-2xl hover:brightness-110 shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed">
-                                                        {isSubmitting ? <Loader2 className="w-6 h-6 animate-spin mx-auto" /> : "Finalize Booking"}
-                                                    </button>
+                                                <div className="flex flex-col gap-3">
+                                                    <div className="flex gap-4">
+                                                        <button type="button" onClick={handleBack} className="w-20 rounded-2xl bg-white/5 text-white/30 flex items-center justify-center hover:bg-white/10 transition-colors"><X className="w-5 h-5" /></button>
+                                                        <button type="button" onClick={handleSubmit} disabled={isSubmitting || !bookingData.name || !bookingData.phone || !bookingData.email || !agreedToTerms} className="flex-1 py-6 bg-gradient-to-r from-royal-gold to-amber-500 text-royal-black font-black uppercase tracking-[0.2em] text-xs rounded-2xl hover:brightness-110 shadow-2xl disabled:opacity-50 disabled:cursor-not-allowed">
+                                                            {isSubmitting ? <Loader2 className="w-6 h-6 animate-spin mx-auto" /> : "Finalize Booking"}
+                                                        </button>
+                                                    </div>
+                                                    
+                                                    <a href="tel:+917597451057" className="w-full py-5 bg-white/5 border border-white/10 text-white font-black uppercase tracking-[0.2em] text-[10px] rounded-2xl flex items-center justify-center gap-2 hover:bg-white hover:text-royal-black transition-all">
+                                                        📞 Call Directly: +91 75974 51057
+                                                    </a>
                                                 </div>
                                             </motion.div>
                                         )}

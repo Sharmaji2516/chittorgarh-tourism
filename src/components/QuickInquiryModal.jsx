@@ -29,9 +29,7 @@ const QuickInquiryModal = ({ isOpen, onClose, entityName, category }) => {
                 createdAt: new Date().toISOString()
             };
 
-            await saveBookingToFirebase(finalData);
-
-            // WhatsApp Message
+            // WhatsApp Message (Must run before first await to bypass popup blocker)
             const phoneNumber = "917597451057";
             const message = `*👑 On-Demand Inquiry*\n\n` +
                 `*🛡️ Service:* ${entityName}\n` +
@@ -44,6 +42,53 @@ const QuickInquiryModal = ({ isOpen, onClose, entityName, category }) => {
                 `I am interested in this service. Please contact me with availability and pricing.`;
 
             window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+
+            // Telegram Notification
+            const telegramToken = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
+            const telegramChatId = import.meta.env.VITE_TELEGRAM_CHAT_ID;
+            if (telegramToken && telegramChatId) {
+                const cleanPhone = formData.phone.replace(/\D/g, '');
+                const waPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone;
+
+                const escapeHTML = (str) => {
+                    if (!str) return '';
+                    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                };
+
+                const telegramText = 
+                    `🏰 <b>CHITTORGARH TOURISM</b> 🏰\n` +
+                    `━━━━━━━━━━━━━━━━━━━━\n` +
+                    `✨ <b>New On-Demand Inquiry</b> ✨\n\n` +
+                    `🛡️ <b>Service:</b> <code>${escapeHTML(entityName)}</code>\n` +
+                    `📅 <b>Check-In:</b> <code>${escapeHTML(formData.startDate)}</code>\n` +
+                    `📅 <b>Check-Out:</b> <code>${escapeHTML(formData.endDate)}</code>\n\n` +
+                    `<b>👤 Guest Details:</b>\n` +
+                    `• <b>Name:</b> ${escapeHTML(formData.name)}\n` +
+                    `• <b>Phone:</b> <code>${escapeHTML(formData.phone)}</code>\n` +
+                    `• <b>Email:</b> <code>${escapeHTML(formData.email)}</code>\n` +
+                    `━━━━━━━━━━━━━━━━━━━━`;
+
+                await fetch(`https://api.telegram.org/bot${telegramToken}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: telegramChatId,
+                        text: telegramText,
+                        parse_mode: 'HTML',
+                        reply_markup: {
+                            inline_keyboard: [
+                                [
+                                    { text: "💬 Chat on WhatsApp", url: `https://wa.me/${waPhone}` },
+                                    { text: "📞 Call Customer", url: `tel:${formData.phone}` }
+                                ]
+                            ]
+                        }
+                    })
+                }).catch(err => console.error("Telegram notification failed:", err));
+            }
+
+            await saveBookingToFirebase(finalData);
+
             setSubmitted(true);
         } catch (error) {
             console.error("Inquiry Error:", error);
@@ -104,14 +149,14 @@ const QuickInquiryModal = ({ isOpen, onClose, entityName, category }) => {
                                             <label className="text-[10px] text-royal-gold uppercase tracking-widest font-black ml-2">Check-In</label>
                                             <div className="relative">
                                                 <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-royal-gold" />
-                                                <input required type="date" value={formData.startDate} onChange={(e) => setFormData({ ...formData, startDate: e.target.value })} className="w-full bg-white/[0.03] border border-white/10 rounded-xl py-4 pl-12 pr-4 text-white text-xs focus:outline-none focus:border-royal-gold" />
+                                                <input required type="date" value={formData.startDate} onChange={(e) => setFormData({ ...formData, startDate: e.target.value })} onClick={(e) => e.target.showPicker?.()} onFocus={(e) => e.target.showPicker?.()} className="w-full bg-white/[0.03] border border-white/10 rounded-xl py-4 pl-12 pr-4 text-white text-xs focus:outline-none focus:border-royal-gold cursor-pointer" />
                                             </div>
                                         </div>
                                         <div className="space-y-2">
                                             <label className="text-[10px] text-royal-gold uppercase tracking-widest font-black ml-2">Check-Out</label>
                                             <div className="relative">
                                                 <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-royal-gold" />
-                                                <input required type="date" value={formData.endDate} onChange={(e) => setFormData({ ...formData, endDate: e.target.value })} className="w-full bg-white/[0.03] border border-white/10 rounded-xl py-4 pl-12 pr-4 text-white text-xs focus:outline-none focus:border-royal-gold" />
+                                                <input required type="date" value={formData.endDate} onChange={(e) => setFormData({ ...formData, endDate: e.target.value })} onClick={(e) => e.target.showPicker?.()} onFocus={(e) => e.target.showPicker?.()} className="w-full bg-white/[0.03] border border-white/10 rounded-xl py-4 pl-12 pr-4 text-white text-xs focus:outline-none focus:border-royal-gold cursor-pointer" />
                                             </div>
                                         </div>
                                     </div>
@@ -131,9 +176,15 @@ const QuickInquiryModal = ({ isOpen, onClose, entityName, category }) => {
                                         <input required type="email" placeholder="Email Address" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="w-full bg-white/[0.03] border border-white/10 rounded-xl py-4 pl-12 pr-4 text-white text-sm focus:outline-none focus:border-royal-gold" />
                                     </div>
 
-                                    <button type="submit" disabled={isSubmitting} className="w-full py-5 bg-gradient-to-r from-royal-gold to-amber-500 text-royal-black font-black uppercase tracking-[0.2em] text-[10px] rounded-2xl hover:brightness-110 shadow-2xl transition-all">
-                                        {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin mx-auto" /> : "Send Inquiry via WhatsApp"}
-                                    </button>
+                                    <div className="flex flex-col gap-3">
+                                        <button type="submit" disabled={isSubmitting} className="w-full py-5 bg-gradient-to-r from-royal-gold to-amber-500 text-royal-black font-black uppercase tracking-[0.2em] text-[10px] rounded-2xl hover:brightness-110 shadow-2xl transition-all">
+                                            {isSubmitting ? <Loader2 className="w-5 h-5 animate-spin mx-auto" /> : "Send Inquiry via WhatsApp"}
+                                        </button>
+                                        
+                                        <a href="tel:+917597451057" className="w-full py-5 bg-white/5 border border-white/10 text-white font-black uppercase tracking-[0.2em] text-[10px] rounded-2xl flex items-center justify-center gap-2 hover:bg-white hover:text-royal-black transition-all">
+                                            📞 Call Directly: +91 75974 51057
+                                        </a>
+                                    </div>
 
                                     <div className="flex items-center justify-center gap-3 text-royal-gold/40">
                                         <ShieldCheck className="w-4 h-4" />
