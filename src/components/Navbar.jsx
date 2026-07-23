@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Globe, ChevronRight } from 'lucide-react';
+import { Menu, X, Globe, ChevronRight, Smartphone } from 'lucide-react';
 import { cn } from '../utils/cn';
 import { NavLink, useLocation } from 'react-router-dom';
 
