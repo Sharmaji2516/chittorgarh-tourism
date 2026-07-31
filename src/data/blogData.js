@@ -145,5 +145,101 @@ For a complete experience, book a room in one of the heritage havelis or boutiqu
     readTime: "5 min read",
     image: "/assets/images/spiritual_generated.webp",
     tags: ["Travel Guide", "Chittorgarh", "Heritage"]
+  },
+  {
+    id: "kirti-stambh-chittorgarh-guide",
+    title: "Kirti Stambh Chittorgarh: The Sacred Jain Tower of Fame",
+    summary: "Discover the history, spiritual significance, and architecture of Kirti Stambh inside Chittorgarh Fort. The 12th-century tower dedicated to Adinath.",
+    content: `Kirti Stambh, also known as the **Tower of Fame**, is one of the most beautiful and spiritually significant monuments located inside the UNESCO-listed Chittorgarh Fort. 
+
+### Historical Background
+Unlike Vijay Stambh, which was built by a king, Kirti Stambh was built by a wealthy Digambara Jain merchant named Jijaji Kathod in the 12th century. The tower is dedicated to **Adinath**, the first Jain Tirthankara, and is a symbol of Jain art, culture, and influence in Mewar history.
+
+### Striking Architecture
+Standing 22 meters high, Kirti Stambh is a 7-story tower decorated with detailed sculptures of Digambara Tirthankaras.
+- **Sculpture Details:** The columns and niches are carved with figures of Jain saints and dancers.
+- **Observation Deck:** A narrow flight of stairs leads to the top floor, which offers a beautiful view of the surrounding fort complex.
+
+### Visitor Guidelines
+- **Location:** Inside Chittorgarh Fort, near the Eastern gate.
+- **Entry Pass:** Included in the general entry pass of Chittorgarh Fort (₹40 for Indians, ₹600 for foreigners).`,
+    author: "Heritage Desk",
+    date: "July 29, 2026",
+    readTime: "4 min read",
+    image: "/assets/images/spiritual_generated.webp",
+    tags: ["Culture", "Heritage", "Temples"]
+  },
+  {
+    id: "gaumukh-reservoir-sacred-spring",
+    title: "Gaumukh Reservoir: The Sacred Natural Spring of Chittorgarh Fort",
+    summary: "Explore Gaumukh Kund, the sacred water reservoir inside Chittorgarh Fort. Learn about its source, spiritual history, and visitor tips.",
+    content: `Among the 84 historic water bodies that once supplied Chittorgarh Fort, the **Gaumukh Reservoir** (Gaumukh Kund) is considered the most sacred. Located near the Samadhisvara Temple, it is a peaceful spot that attracts both tourists and pilgrims.
+
+### The Cow's Mouth Spring
+The reservoir gets its name from a natural rock formation shaped like a **cow's mouth** (Gaumukh). 
+- **The Miracle of the Water:** A natural spring of clear water flows from the rocks through this mouth, falling directly into the deep green reservoir pool below.
+- **Continuous Flow:** Even during hot summer months, the water continues to trickle from the rocks.
+
+### Spiritual Significance
+Devotees visit Gaumukh Kund to wash their hands and feet before entering the nearby temples. Feeding the large fish that live in the reservoir's green water is also considered a local tradition.
+
+### Visitor Tips
+- **Photography:** The reservoir offers one of the best photography spots in the fort, especially during early morning or sunset when the sunlight reflects off the stone steps.
+- **Caution:** The steps leading down to the water can be slippery, so walk carefully.`,
+    author: "Explorer",
+    date: "July 30, 2026",
+    readTime: "3 min read",
+    image: "/assets/images/nature_generated.webp",
+    tags: ["Nature", "Fort", "Culture"]
+  },
+  {
+    id: "thewa-art-jewellery-chittorgarh",
+    title: "Thewa Art Jewellery: Chittorgarh's Legendary Gold-on-Glass Craft",
+    summary: "Discover the history and process of Thewa jewellery, the traditional gold-on-glass handcraft from the Chittorgarh region.",
+    content: `Thewa is a unique and legendary handcraft style that originated in the Mewar-Pratapgarh region near Chittorgarh. It involves the fusion of detailed, hand-carved gold sheets onto colored glass.
+
+### The Historic Legacy
+Thewa art was developed over 250 years ago by local artisans who received royal patronage from Mewar kings. The secrets of this craft are traditionally passed down from father to son in local artisan families (called *Rajsonis*).
+
+### The Making Process
+Thewa involves a complex and detailed process:
+1. **Engraving:** A thin sheet of 23-karat gold is hand-engraved with patterns representing peacock battles, royal hunts, and Krishna stories.
+2. **Glass Fusion:** The gold sheet is carefully fused onto premium, colored glass sheets (green, blue, and red).
+3. **Framing:** The finished gold-on-glass piece is set in sterling silver or gold-plated frames.
+
+### Where to Buy
+You can find authentic Thewa jewelry in local markets near the fort road and Sadar Bazar. Buying directly from local shops supports traditional artisans.`,
+    author: "Editor",
+    date: "July 30, 2026",
+    readTime: "4 min read",
+    image: "/assets/images/nature_generated.webp",
+    tags: ["Culture", "Shopping", "Local Craft"]
+  },
+  {
+    id: "chittorgarh-light-sound-show-guide",
+    title: "Chittorgarh Fort Light & Sound Show: Timings, Tickets & Booking Guide",
+    summary: "Plan your evening with our guide to the Chittorgarh Fort Light & Sound Show. Includes latest ticket prices, show times, and seating details.",
+    content: `Watching the spectacular **Light & Sound Show** is the perfect way to conclude your day at the historic Chittorgarh Fort. The show uses dramatic colored lights and sound effects to narrate the legendary history of Mewar.
+
+### The Historical Experience
+The show takes place near the main monuments of the fort. It covers:
+- The rise of the Mewar dynasty.
+- The three historic sieges of Chittorgarh.
+- The heroic battles of Rana Kumbha, Maharana Pratap, and the legendary sacrifice of Rani Padmini.
+
+### Show Timings
+The show is conducted every evening in both Hindi and English:
+*   **Hindi Show:** 7:00 PM to 7:45 PM
+*   **English Show:** 8:00 PM to 8:45 PM
+*(Note: Timings can change slightly during winter, starting 30 minutes earlier).*
+
+### Ticket Booking
+- **Price:** ₹100 for adults, ₹50 for children/students.
+- **Where to buy:** Tickets can be bought directly at the fort ticket counter in the evening.`,
+    author: "Travel Desk",
+    date: "July 31, 2026",
+    readTime: "4 min read",
+    image: "/assets/images/fort_generated.webp",
+    tags: ["Fort", "Itinerary", "Attractions"]
   }
 ];
