@@ -37,14 +37,14 @@ const HOME_SCHEMAS = [
   {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "name": "Chittorgarh Tourism",
-    "image": "https://visitchittorgarh.in/Fort.png",
+    "name": "Visit Chittorgarh",
+    "image": "https://visitchittorgarh.in/Fort.webp",
     "url": "https://visitchittorgarh.in",
-    "telephone": "+91-XXXXXXXXXX",
+    "telephone": "+91-7597451057",
     "priceRange": "$$",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Fort Road, Near Fort Gate",
+      "streetAddress": "Birla Shiksha Kendra, Industrial Area",
       "addressLocality": "Chittorgarh",
       "addressRegion": "Rajasthan",
       "postalCode": "312001",

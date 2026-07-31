@@ -43,6 +43,7 @@ const Navbar = () => {
         { name: t.nav.royalJourneys, href: '/royal-journeys' },
         { name: t.nav.localVocal || 'Vocal For Local', href: '/vocal-for-local' },
         { name: t.nav.missionServices, href: '/mission-services' },
+        { name: t.nav.blog || 'Blog', href: '/blog' },
     ];
 
     return (

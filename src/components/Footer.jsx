@@ -42,6 +42,7 @@ const Footer = () => {
                                     { name: t.nav.hotels, path: '/stays' },
                                     { name: t.nav.localVocal, path: '/vocal-for-local' },
                                     { name: t.nav.missionServices, path: '/mission-services' },
+                                    { name: t.nav.blog || 'Blog', path: '/blog' },
                                     { name: "Terms & Conditions", path: '/terms' }
                                 ].map((item) => (
                                     <li key={item.name}>
@@ -111,6 +112,15 @@ const Footer = () => {
                         </h4>
                         <div className="bg-royal-black/30 backdrop-blur-sm border border-royal-gold/10 rounded-2xl p-6 w-full flex-1 flex flex-col justify-between hover:border-royal-gold/30 transition-all duration-500 shadow-xl">
                             <div className="space-y-4 flex-1 flex flex-col justify-between">
+                                <div className="group flex items-start gap-3">
+                                    <div className="w-8 h-8 rounded-lg bg-royal-gold/5 border border-royal-gold/20 flex items-center justify-center transition-all shrink-0">
+                                        <span className="text-[10px] text-royal-gold">📍</span>
+                                    </div>
+                                    <span className="text-xs text-royal-white/70 tracking-wide leading-relaxed">
+                                        Birla Shiksha Kendra, Industrial Area,<br />Chittorgarh, Rajasthan 312001
+                                    </span>
+                                </div>
+
                                 <a href="tel:+917597451057" className="group flex items-center gap-3 hover:text-royal-gold transition-all">
                                     <div className="w-8 h-8 rounded-lg bg-royal-gold/5 border border-royal-gold/20 flex items-center justify-center group-hover:bg-royal-gold/20 transition-all">
                                         <span className="text-[10px]">📞</span>
