@@ -67,5 +67,83 @@ Built during the reign of the Chahamanas (Chauhans), the temples feature exquisi
     readTime: "4 min read",
     image: "/assets/images/nature_generated.webp",
     tags: ["Nature", "Monsoon", "Waterfalls"]
+  },
+  {
+    id: "best-time-to-visit-chittorgarh",
+    title: "Best Time to Visit Chittorgarh: Weather, Festivals & Season Guide",
+    summary: "When is the best time to visit Chittorgarh? Learn about weather, temperatures, monsoon greenery, and vibrant festivals to plan your perfect Rajasthan trip.",
+    content: `Planning a trip to the historic city of Chittorgarh? Timing is key to fully enjoying the open-air heritage site and climbing the massive stone ramparts of India's largest fort.
+
+### Winter (October to March) — The Peak Season
+Winter is undoubtedly the best time to visit Chittorgarh. The weather remains cool and pleasant, with daytime temperatures hovering between 15°C and 25°C.
+- **Why it is ideal:** Perfect for sightseeing. The fort covers over 700 acres, and walking between palaces and towers requires several hours of outdoor activity.
+- **Key Events:** You can experience local festivals like the Maharana Pratap Jayanti celebrations and winter cultural fairs.
+
+### Monsoon (July to September) — The Scenic Getaway
+If you love lush greenery, mist, and waterfalls, monsoon is an incredible time to travel to Chittorgarh.
+- **Why it is ideal:** The surrounding plains turn vibrant green, and the fort's water reservoirs (like Gaumukh Kund) fill up. It is also the only time the nearby **Menal Waterfall** is active and roaring.
+- **Weather:** Temperatures drop slightly to 28°C–32°C, though humidity can be high.
+
+### Summer (April to June) — The Off-Peak Season
+Summers in Rajasthan are intensely hot, with temperatures often crossing 40°C. 
+- **Sightseeing Tip:** If you visit during summer, explore the fort early in the morning (from 8:00 AM to 10:30 AM) or late in the evening to avoid the scorching afternoon heat.`,
+    author: "Travel Desk",
+    date: "July 20, 2026",
+    readTime: "4 min read",
+    image: "/assets/images/nature_generated.webp",
+    tags: ["Travel Guide", "Weather", "Rajasthan"]
+  },
+  {
+    id: "1-day-chittorgarh-itinerary",
+    title: "1-Day Chittorgarh Itinerary: The Ultimate 24-Hour Travel Plan",
+    summary: "Only have one day in Chittorgarh? Follow our hourly guide to explore the massive fort, enjoy authentic Mewari food, see the light and sound show, and shop local crafts.",
+    content: `If you are planning a day trip to Chittorgarh (often as a road trip from Udaipur), this timed 1-day itinerary will ensure you see all the top monuments and experience the local culture without feeling rushed.
+
+### 08:30 AM — Reach Chittorgarh Fort
+Start your day early at the legendary Chittorgarh Fort. Hire a local guide at the first gate (Padan Pol) to explain the rich history as you drive up through the 7 massive gateways.
+
+### 09:30 AM — Vijay Stambh & Kumbha Palace
+Explore the **Rana Kumbha Palace**, the oldest structure inside the fort, known for its historic underground vaults. Next, walk over to the **Vijay Stambh** (Tower of Victory), a stunning 9-story sandstone tower covered in detailed carvings of Hindu deities.
+
+### 11:30 AM — Padmini Palace & Gaumukh Kund
+Drive to **Padmini Palace**, surrounded by a scenic water pool. This is the historic site where Rani Padmini lived. On the way back, stop at the **Gaumukh Kund**, a sacred water reservoir shaped like a cow's mouth where water naturally trickles from the rocks.
+
+### 01:30 PM — Authentic Mewari Thali Lunch
+Head down to the city and enjoy a traditional Rajasthani lunch. Try the local Dal Baati Churma, Gatte ki Sabji, and Kadhi at heritage dining spots.
+
+### 03:30 PM — Spiritual Peace & Local Shopping
+Visit the **Meera Temple**, dedicated to the royal poetess Meera Bai, and then spend an hour shopping for Daabu prints, wooden toys, and authentic Thewa jewelry in the local bazaars near the fort road.
+
+### 06:30 PM — Fort Light & Sound Show
+Head back to the fort in the evening to watch the spectacular **Light & Sound Show** which narrates the heroic tales of Mewar in both Hindi and English.`,
+    author: "Local Guide",
+    date: "July 25, 2026",
+    readTime: "5 min read",
+    image: "/assets/images/fort_generated.webp",
+    tags: ["Itinerary", "Travel Guide", "Fort"]
+  },
+  {
+    id: "chittorgarh-travel-guide",
+    title: "Complete Chittorgarh Travel Guide: Places to Visit, Eat, Stay & Shop",
+    summary: "Plan your trip to the city of Rajput valour with our complete travel guide. Covers history, transport, top monuments, local food, and stays.",
+    content: `Welcome to the ultimate guide to Chittorgarh, the historic capital of Mewar, famous worldwide for the heroism of its kings and the sacrifice of its queens.
+
+### How to Reach Chittorgarh
+- **By Air:** The nearest airport is Maharana Pratap Airport in Udaipur (about 90 km away). You can easily book a taxi or take a bus from the airport to Chittorgarh.
+- **By Train:** Chittorgarh Junction is well connected to major cities like Delhi, Mumbai, Jaipur, Udaipur, and Ahmedabad.
+- **By Road:** Excellent national highways (NH-27 and NH-48) connect Chittorgarh to Udaipur (2 hours) and Jaipur (4.5 hours).
+
+### Top 3 Things to Do
+1. **Explore the 700-Acre Fort:** Hire an e-rickshaw or guide-driven car to see all the lakes, temples, and palaces inside.
+2. **Visit Sanwariyaji Temple:** A major Krishna pilgrimage temple located 40 km from the city.
+3. **Try Authentic Local Sweets:** Do not leave without tasting the famous local sweets and street food near the station road.
+
+### Where to Stay
+For a complete experience, book a room in one of the heritage havelis or boutique hotels located near the foot of the fort, offering beautiful night views of the illuminated ramparts.`,
+    author: "Editor",
+    date: "July 28, 2026",
+    readTime: "5 min read",
+    image: "/assets/images/spiritual_generated.webp",
+    tags: ["Travel Guide", "Chittorgarh", "Heritage"]
   }
 ];
