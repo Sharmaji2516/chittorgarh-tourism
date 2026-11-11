@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { 
   ShieldCheck, Compass, MessageCircle, Phone, Award, Star, ArrowRight, 
   Clock, MapPin, CheckCircle2, Car, Users, Calendar, Utensils, Hotel, 
-  Camera, Landmark, Sparkles, ChevronRight, ExternalLink, HeartHandshake, Eye
+  Camera, Landmark, Sparkles, ChevronRight, ExternalLink, HeartHandshake, Eye, Globe, Train
 } from 'lucide-react';
 
 import Hero from '../components/Hero';
@@ -906,7 +906,7 @@ const HomePage = () => {
             {blogPosts.slice(0, 3).map((post) => (
               <NavLink
                 key={post.id}
-                to={`/blog?post=${post.id}`}
+                to={`/blog/${post.id}`}
                 className="bg-white rounded-2xl sm:rounded-3xl border border-[#EFE7D9] overflow-hidden shadow-heritage hover:border-[#C49A32] hover:-translate-y-1 transition-all group flex flex-col justify-between"
               >
                 <div>
@@ -1014,6 +1014,97 @@ const HomePage = () => {
           >
             Follow on Instagram <ExternalLink className="w-3.5 h-3.5" />
           </a>
+        </div>
+      </section>
+
+      {/* SECTION 13B: India & Global Routes, States, Monuments & Tour Guides Hub */}
+      <section className="py-12 sm:py-16 bg-[#EFE7D9]/45 border-t border-[#EFE7D9]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 sm:mb-10">
+            <div>
+              <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#A65F3D] block mb-1.5">
+                Pan-India &amp; International Travel Hub
+              </span>
+              <h2 className="text-2xl sm:text-4xl font-serif font-black text-[#25231F]">
+                Plan Your Route to Chittorgarh
+              </h2>
+              <p className="text-xs sm:text-sm text-[#25231F]/70 mt-1.5 max-w-2xl">
+                Explore dedicated travel guides by departure city, state, country, airport, railway station, and fort monument.
+              </p>
+            </div>
+            <NavLink
+              to="/destinations-and-routes"
+              className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-[#C49A32] hover:bg-[#b08728] text-white rounded-2xl text-xs font-bold uppercase tracking-wider shadow-sm transition-colors shrink-0"
+            >
+              Browse All 150+ Routes &amp; Guides <ArrowRight className="w-4 h-4" />
+            </NavLink>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+            {/* Popular City & Airport Routes */}
+            <div className="bg-white rounded-2xl p-5 border border-[#EFE7D9] shadow-sm">
+              <h3 className="font-serif font-bold text-base text-[#25231F] mb-3 flex items-center gap-2">
+                <Train className="w-4 h-4 text-[#A65F3D]" /> Popular City &amp; Airport Routes
+              </h3>
+              <ul className="space-y-2 text-xs text-[#25231F]/80">
+                <li><NavLink to="/udaipur-to-chittorgarh" className="hover:text-[#A65F3D] font-medium">→ Udaipur to Chittorgarh (112 km)</NavLink></li>
+                <li><NavLink to="/udaipur-airport-to-chittorgarh" className="hover:text-[#A65F3D] font-medium">→ Udaipur Airport (UDR) to Fort</NavLink></li>
+                <li><NavLink to="/jaipur-to-chittorgarh" className="hover:text-[#A65F3D] font-medium">→ Jaipur to Chittorgarh (315 km)</NavLink></li>
+                <li><NavLink to="/ahmedabad-to-chittorgarh" className="hover:text-[#A65F3D] font-medium">→ Ahmedabad to Chittorgarh</NavLink></li>
+                <li><NavLink to="/delhi-to-chittorgarh" className="hover:text-[#A65F3D] font-medium">→ Delhi to Chittorgarh (Trains &amp; Air)</NavLink></li>
+                <li><NavLink to="/mumbai-to-chittorgarh" className="hover:text-[#A65F3D] font-medium">→ Mumbai to Chittorgarh</NavLink></li>
+                <li><NavLink to="/indore-to-chittorgarh" className="hover:text-[#A65F3D] font-medium">→ Indore to Chittorgarh</NavLink></li>
+              </ul>
+            </div>
+
+            {/* Individual Fort Monuments */}
+            <div className="bg-white rounded-2xl p-5 border border-[#EFE7D9] shadow-sm">
+              <h3 className="font-serif font-bold text-base text-[#25231F] mb-3 flex items-center gap-2">
+                <Landmark className="w-4 h-4 text-[#C49A32]" /> Fort Landmarks &amp; Temples
+              </h3>
+              <ul className="space-y-2 text-xs text-[#25231F]/80">
+                <li><NavLink to="/chittorgarh-fort" className="hover:text-[#A65F3D] font-medium">→ Chittorgarh Fort Complete Guide</NavLink></li>
+                <li><NavLink to="/vijay-stambh" className="hover:text-[#A65F3D] font-medium">→ Vijay Stambh (Tower of Victory)</NavLink></li>
+                <li><NavLink to="/kirti-stambh" className="hover:text-[#A65F3D] font-medium">→ Kirti Stambh (Jain Tower)</NavLink></li>
+                <li><NavLink to="/rani-padmini-palace" className="hover:text-[#A65F3D] font-medium">→ Rani Padmini Palace</NavLink></li>
+                <li><NavLink to="/rana-kumbha-palace" className="hover:text-[#A65F3D] font-medium">→ Rana Kumbha Palace</NavLink></li>
+                <li><NavLink to="/sanwariya-seth-temple" className="hover:text-[#A65F3D] font-medium">→ Shri Sanwariya Seth Temple</NavLink></li>
+                <li><NavLink to="/menal-waterfall" className="hover:text-[#A65F3D] font-medium">→ Menal Waterfall &amp; Temples</NavLink></li>
+              </ul>
+            </div>
+
+            {/* Indian State Guides */}
+            <div className="bg-white rounded-2xl p-5 border border-[#EFE7D9] shadow-sm">
+              <h3 className="font-serif font-bold text-base text-[#25231F] mb-3 flex items-center gap-2">
+                <MapPin className="w-4 h-4 text-[#526B50]" /> Indian State Travel Guides
+              </h3>
+              <ul className="space-y-2 text-xs text-[#25231F]/80">
+                <li><NavLink to="/chittorgarh-tourism-from-gujarat" className="hover:text-[#A65F3D] font-medium">→ Tourism from Gujarat</NavLink></li>
+                <li><NavLink to="/chittorgarh-tourism-from-maharashtra" className="hover:text-[#A65F3D] font-medium">→ Tourism from Maharashtra</NavLink></li>
+                <li><NavLink to="/chittorgarh-tourism-from-delhi" className="hover:text-[#A65F3D] font-medium">→ Tourism from Delhi NCR</NavLink></li>
+                <li><NavLink to="/chittorgarh-tourism-from-madhya-pradesh" className="hover:text-[#A65F3D] font-medium">→ Tourism from Madhya Pradesh</NavLink></li>
+                <li><NavLink to="/chittorgarh-tourism-from-karnataka" className="hover:text-[#A65F3D] font-medium">→ Tourism from Karnataka</NavLink></li>
+                <li><NavLink to="/chittorgarh-tourism-from-west-bengal" className="hover:text-[#A65F3D] font-medium">→ Tourism from West Bengal</NavLink></li>
+                <li><NavLink to="/destinations-and-routes" className="text-[#A65F3D] font-bold hover:underline">→ View all 21 Indian States</NavLink></li>
+              </ul>
+            </div>
+
+            {/* International Country Guides & Packages */}
+            <div className="bg-white rounded-2xl p-5 border border-[#EFE7D9] shadow-sm">
+              <h3 className="font-serif font-bold text-base text-[#25231F] mb-3 flex items-center gap-2">
+                <Globe className="w-4 h-4 text-[#C49A32]" /> International &amp; Packages
+              </h3>
+              <ul className="space-y-2 text-xs text-[#25231F]/80">
+                <li><NavLink to="/chittorgarh-fort-travel-guide-international-tourists" className="hover:text-[#A65F3D] font-medium">→ International Tourists Manual</NavLink></li>
+                <li><NavLink to="/visit-chittorgarh-from-usa" className="hover:text-[#A65F3D] font-medium">→ Visit from USA</NavLink></li>
+                <li><NavLink to="/chittorgarh-tourism-uk-travellers" className="hover:text-[#A65F3D] font-medium">→ UK Travellers Guide</NavLink></li>
+                <li><NavLink to="/chittorgarh-tourism-from-australia" className="hover:text-[#A65F3D] font-medium">→ Visit from Australia</NavLink></li>
+                <li><NavLink to="/visit-chittorgarh-from-uae" className="hover:text-[#A65F3D] font-medium">→ Visit from UAE (Dubai/Abu Dhabi)</NavLink></li>
+                <li><NavLink to="/udaipur-and-chittorgarh-tour-package" className="hover:text-[#A65F3D] font-medium">→ Udaipur &amp; Chittorgarh Package</NavLink></li>
+                <li><NavLink to="/destinations-and-routes" className="text-[#A65F3D] font-bold hover:underline">→ View all 27 Countries &amp; Tours</NavLink></li>
+              </ul>
+            </div>
+          </div>
         </div>
       </section>
 

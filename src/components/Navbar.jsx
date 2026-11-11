@@ -62,12 +62,13 @@ const Navbar = () => {
 
     const navLinks = [
         { name: 'Home', href: '/' },
-        { name: 'Explore Destinations', href: '/attractions' },
-        { name: 'Tour Packages', href: '/royal-journeys' },
-        { name: 'Private Guide', href: '/service/guide' },
-        { name: 'Private Taxi', href: '/service/taxi' },
-        { name: 'Travel Blog', href: '/blog' },
-        { name: 'About Us', href: '/#about-us', isAnchor: true },
+        { name: 'Destinations', href: '/attractions' },
+        { name: 'Routes & Guides', href: '/destinations-and-routes' },
+        { name: 'Packages', href: '/royal-journeys' },
+        { name: 'Guide', href: '/service/guide' },
+        { name: 'Taxi', href: '/service/taxi' },
+        { name: 'Blog', href: '/blog' },
+        { name: 'About', href: '/#about-us', isAnchor: true },
         { name: 'Contact', href: '/#contact', isAnchor: true },
     ];
 
@@ -143,7 +144,7 @@ const Navbar = () => {
                                             href={link.href}
                                             onClick={(e) => handleAnchorClick(e, link.href)}
                                             className={cn(
-                                                "px-3 py-2 text-xs font-semibold uppercase tracking-wider rounded-xl transition-colors",
+                                                "px-2.5 py-2 text-[11px] font-semibold uppercase tracking-wider rounded-xl transition-colors whitespace-nowrap",
                                                 (scrolled || !isHome)
                                                     ? "text-[#25231F]/80 hover:text-[#A65F3D] hover:bg-[#EFE7D9]/50"
                                                     : "text-white/85 hover:text-white hover:bg-white/10"
@@ -159,7 +160,7 @@ const Navbar = () => {
                                         key={link.name}
                                         to={link.href}
                                         className={({ isActive }) => cn(
-                                            "px-3 py-2 text-xs font-semibold uppercase tracking-wider rounded-xl transition-colors",
+                                            "px-2.5 py-2 text-[11px] font-semibold uppercase tracking-wider rounded-xl transition-colors whitespace-nowrap",
                                             isActive
                                                 ? ((scrolled || !isHome)
                                                     ? "text-[#C49A32] font-black bg-[#EFE7D9]"
