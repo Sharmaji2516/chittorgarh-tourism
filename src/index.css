@@ -4,55 +4,91 @@
 
 @layer base {
   :root {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --bg-primary: #F8F5EF;
+    --bg-sandstone: #EFE7D9;
+    --text-charcoal: #25231F;
+    --accent-gold: #C49A32;
+    --accent-terracotta: #A65F3D;
+    --accent-forest: #526B50;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    color-scheme: light;
   }
 
   body {
-    @apply bg-surface-900 text-surface-50 font-sans antialiased;
-    /* Kept relative to allow specific background images in components */
+    background-color: #F8F5EF;
+    color: #25231F;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, .font-serif {
+    font-family: 'Playfair Display', Georgia, serif;
+    letter-spacing: -0.01em;
   }
 }
 
 @layer utilities {
+  .heritage-card {
+    @apply bg-white rounded-3xl border border-mewar-border shadow-heritage transition-all duration-300;
+  }
+
+  .heritage-card-hover {
+    @apply hover:border-mewar-gold hover:shadow-heritage-hover hover:-translate-y-1 transition-all duration-300;
+  }
+
+  .sandstone-card {
+    @apply bg-mewar-sandstone/60 rounded-3xl border border-mewar-border backdrop-blur-sm;
+  }
+
   .glass {
-    @apply bg-white/5 backdrop-blur-md border border-white/10 shadow-lg;
+    @apply bg-white/80 backdrop-blur-md border border-mewar-border/60 shadow-heritage;
   }
 
   .glass-card {
-    @apply bg-surface-800/50 backdrop-blur-md border border-white/5 shadow-xl hover:bg-surface-800/70 transition-all duration-300;
+    @apply bg-white/90 backdrop-blur-md border border-mewar-border shadow-heritage hover:border-mewar-gold transition-all duration-300;
   }
 
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-royal-gold to-orange-400;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-mewar-terracotta via-mewar-gold to-mewar-forest;
   }
 
   .heritage-gradient {
-    @apply bg-gradient-to-br from-heritage-charcoal via-royal-black to-heritage-charcoal-light;
+    @apply bg-gradient-to-b from-mewar-ivory via-mewar-sandstone/40 to-mewar-ivory;
   }
 
   .ornate-border {
-    @apply border border-heritage-gold/30 rounded-2xl relative;
+    @apply border border-mewar-gold/40 rounded-3xl relative;
   }
 
   .ornate-border::before {
     content: '';
-    @apply absolute inset-0 border border-heritage-gold/10 rounded-2xl -m-1 pointer-events-none;
+    @apply absolute inset-0 border border-mewar-terracotta/20 rounded-3xl -m-1 pointer-events-none;
   }
 
-  /* Parchment card — local CSS gradient, no external fetch */
   .parchment-card {
-    @apply bg-heritage-parchment text-amber-950 shadow-inner border border-amber-900/10 rounded-xl relative overflow-hidden;
+    @apply bg-mewar-sandstone text-mewar-charcoal shadow-heritage border border-mewar-border rounded-2xl relative overflow-hidden;
     background-image: linear-gradient(
       135deg,
-      rgba(252, 245, 229, 1) 0%,
-      rgba(244, 220, 170, 0.6) 40%,
-      rgba(252, 245, 229, 1) 70%,
-      rgba(235, 210, 155, 0.4) 100%
+      #F8F5EF 0%,
+      #EFE7D9 60%,
+      #E8DEC8 100%
     );
   }
 
   .heritage-btn-primary {
-    @apply px-8 py-3 bg-heritage-charcoal text-heritage-parchment rounded-full font-bold uppercase tracking-widest hover:bg-heritage-charcoal-light transition-all transform hover:-translate-y-1 shadow-lg border border-heritage-gold/20;
+    @apply px-7 py-3.5 bg-mewar-charcoal text-white rounded-2xl font-bold uppercase tracking-wider text-xs hover:bg-mewar-terracotta transition-all transform hover:-translate-y-0.5 shadow-md active:scale-95;
+  }
+
+  .heritage-btn-gold {
+    @apply px-7 py-3.5 bg-mewar-gold text-white rounded-2xl font-bold uppercase tracking-wider text-xs hover:bg-mewar-gold-dark transition-all transform hover:-translate-y-0.5 shadow-md active:scale-95;
+  }
+
+  .heritage-btn-secondary {
+    @apply px-7 py-3.5 bg-white text-mewar-charcoal border border-mewar-border rounded-2xl font-bold uppercase tracking-wider text-xs hover:border-mewar-gold hover:bg-mewar-ivory transition-all transform hover:-translate-y-0.5 shadow-sm active:scale-95;
   }
 }

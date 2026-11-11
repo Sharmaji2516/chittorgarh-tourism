@@ -1,78 +1,135 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
+import { ShieldCheck, Compass, MessageCircle, Star, ArrowRight, Award } from 'lucide-react';
+import { trackWhatsAppClick } from '../utils/analytics';
+
+const VERIFIED_WA_LINK = "https://wa.me/917597451057?text=Namaste!%20I%20would%20like%20to%20plan%20a%20tour%20to%20Chittorgarh%20Fort.%20Please%20share%20details.";
 
 const Hero = () => {
     const { t } = useLanguage();
 
+    const triggerPlanTrip = () => {
+        window.dispatchEvent(new CustomEvent('openTripPlannerModal'));
+    };
+
     return (
-        <div className="flex flex-col items-center w-full bg-heritage-charcoal">
-            {/* Image Section — explicit width/height prevents CLS */}
-            <div className="w-full h-[50vh] md:h-[75vh] relative overflow-hidden">
-                <motion.img
-                    // Responsive srcset: mobile gets 600px image (~55 KB), desktop gets full 1200px
-                    src="/Fort.webp"
-                    srcSet="/Fort-mobile.webp 600w, /Fort.webp 1200w"
-                    sizes="(max-width: 768px) 100vw, 100vw"
-                    alt="Chittorgarh Fort — India's Largest Fort in Rajasthan"
-                    fetchPriority="high"
-                    decoding="sync"
-                    width={1200}
-                    height={675}
-                    className="w-full h-full object-cover"
-                    initial={{ scale: 1.05 }}
-                    animate={{ scale: 1 }}
-                    transition={{ duration: 1.2, ease: "easeOut" }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-heritage-charcoal/50"></div>
+        <header className="relative w-full bg-[#F8F5EF] overflow-hidden">
+            {/* Visual Hero Banner */}
+            <div className="relative w-full min-h-[85vh] lg:min-h-[92vh] flex items-center justify-center">
+                {/* Background Image with Warm Heritage Vignette */}
+                <div className="absolute inset-0 z-0">
+                    <img
+                        src="/Fort.webp"
+                        srcSet="/Fort-mobile.webp 600w, /Fort.webp 1200w"
+                        sizes="100vw"
+                        alt="Chittorgarh Fort — UNESCO World Heritage Site in Rajasthan, India"
+                        fetchPriority="high"
+                        decoding="sync"
+                        width={1200}
+                        height={675}
+                        className="w-full h-full object-cover object-center scale-105"
+                    />
+                    {/* Multi-stage warm heritage gradient overlay: ivory base to preserve photography while ensuring high contrast readability */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#25231F]/90 via-[#25231F]/45 to-[#25231F]/30"></div>
+                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-transparent via-[#25231F]/30 to-[#25231F]/80"></div>
+                </div>
+
+                {/* Hero Content */}
+                <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-28 sm:py-36 text-center text-white">
+                    {/* Badge */}
+                    <motion.div
+                        initial={{ opacity: 0, y: -15 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6 }}
+                        className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/25 text-white text-xs font-semibold uppercase tracking-[0.25em] mb-6 shadow-sm"
+                    >
+                        <Award className="w-3.5 h-3.5 text-[#DFBA5A]" />
+                        <span>UNESCO World Heritage Site • Rajasthan, India</span>
+                    </motion.div>
+
+                    {/* Main H1 Heading */}
+                    <motion.h1
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.7, delay: 0.1 }}
+                        className="text-4xl sm:text-6xl md:text-7xl font-serif font-black tracking-tight leading-[1.08] mb-6 drop-shadow-md"
+                    >
+                        Visit Chittorgarh
+                    </motion.h1>
+
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.7, delay: 0.2 }}
+                        className="text-lg sm:text-2xl font-serif italic text-[#DFBA5A] mb-6 max-w-3xl mx-auto drop-shadow-sm"
+                    >
+                        The Citadel of Valor, Sacrifice & Eternal Glory
+                    </motion.p>
+
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.7, delay: 0.3 }}
+                        className="text-sm sm:text-base md:text-lg text-white/90 max-w-2xl mx-auto font-light leading-relaxed mb-10 drop-shadow-sm"
+                    >
+                        Experience India's largest fort with authorized Mewari historians, curated heritage stays, sanitized private taxi transfers & genuine local hospitality.
+                    </motion.p>
+
+                    {/* Prominent CTAs */}
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.7, delay: 0.4 }}
+                        className="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto"
+                    >
+                        <button
+                            onClick={triggerPlanTrip}
+                            className="w-full sm:w-auto px-8 py-4 bg-[#C49A32] hover:bg-[#b08728] text-white font-bold uppercase tracking-wider text-xs rounded-2xl shadow-xl hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2.5 border border-[#DFBA5A]/40"
+                        >
+                            <Compass className="w-4 h-4" />
+                            <span>Plan Your Trip</span>
+                        </button>
+
+                        <a
+                            href={VERIFIED_WA_LINK}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={() => trackWhatsAppClick('hero_wa_btn')}
+                            className="w-full sm:w-auto px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold uppercase tracking-wider text-xs rounded-2xl shadow-xl hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2.5 border border-emerald-400/30"
+                        >
+                            <MessageCircle className="w-4 h-4" />
+                            <span>WhatsApp Tour Desk</span>
+                        </a>
+                    </motion.div>
+
+                    {/* Trust Indicators Bar */}
+                    <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.8, delay: 0.6 }}
+                        className="mt-14 pt-8 border-t border-white/15 grid grid-cols-2 md:grid-cols-4 gap-4 text-center text-xs text-white/90"
+                    >
+                        <div className="flex flex-col items-center gap-1">
+                            <span className="font-serif text-xl sm:text-2xl font-bold text-[#DFBA5A]">700+</span>
+                            <span className="text-[11px] text-white/75 uppercase tracking-wider">Acres Citadel Fort</span>
+                        </div>
+                        <div className="flex flex-col items-center gap-1">
+                            <span className="font-serif text-xl sm:text-2xl font-bold text-[#DFBA5A]">100%</span>
+                            <span className="text-[11px] text-white/75 uppercase tracking-wider">Govt. Verified Guides</span>
+                        </div>
+                        <div className="flex flex-col items-center gap-1">
+                            <span className="font-serif text-xl sm:text-2xl font-bold text-[#DFBA5A]">24/7</span>
+                            <span className="text-[11px] text-white/75 uppercase tracking-wider">Local Ground Support</span>
+                        </div>
+                        <div className="flex flex-col items-center gap-1">
+                            <span className="font-serif text-xl sm:text-2xl font-bold text-[#DFBA5A]">4.9★</span>
+                            <span className="text-[11px] text-white/75 uppercase tracking-wider">Traveler Rating</span>
+                        </div>
+                    </motion.div>
+                </div>
             </div>
-
-            {/* Content Section below image */}
-            <div className="max-w-5xl mx-auto py-12 px-6 text-center">
-                <motion.p
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    className="text-royal-gold text-sm md:text-base uppercase tracking-[0.3em] mb-4 font-serif"
-                >
-                    {t.hero.subtitle}
-                </motion.p>
-
-                <motion.h1
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                    className="text-4xl md:text-6xl font-bold text-white mb-6 font-serif tracking-tight"
-                >
-                    {t.hero.title}
-                </motion.h1>
-
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.4 }}
-                    className="w-24 h-1 bg-gradient-to-r from-transparent via-royal-gold to-transparent mx-auto mb-8"
-                />
-
-                <motion.p
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 1, delay: 0.6 }}
-                    className="text-base md:text-lg text-gray-200 max-w-3xl mx-auto font-light leading-relaxed"
-                >
-                    {t.hero.desc}
-                </motion.p>
-
-                <motion.p
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.8 }}
-                    className="text-base md:text-lg text-royal-gold max-w-3xl mx-auto font-medium leading-relaxed mt-4"
-                >
-                    {t.hero.foodMessage}
-                </motion.p>
-            </div>
-        </div>
+        </header>
     );
 };
 

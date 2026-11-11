@@ -1,115 +1,81 @@
 import React from 'react';
-import Section from '../components/Section';
-import { motion } from 'framer-motion';
+import { ShieldCheck, FileText, ArrowLeft, Phone, Mail } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import SEOHead from '../components/SEOHead';
-import { ShieldCheck, FileText, Scale, CreditCard, MessageSquare, AlertTriangle, UserX, Brush } from 'lucide-react';
-import { useLanguage } from '../context/LanguageContext';
 
 const TermsPage = () => {
-    const { t } = useLanguage();
-    const termsData = t.termsPage;
+  return (
+    <div className="min-h-screen bg-[#F8F5EF] text-[#25231F] pt-28 pb-24">
+      <SEOHead
+        title="Terms & Conditions & Booking Policy | Visit Chittorgarh"
+        description="Official terms of service, customer inquiry model, booking guidelines and cancellation policies for Visit Chittorgarh tourism."
+        canonical="/terms"
+      />
 
-    const getIcon = (id) => {
-        switch (id) {
-            case 1: return <FileText className="w-6 h-6" />;
-            case 2: return <Scale className="w-6 h-6" />;
-            case 3: return <ShieldCheck className="w-6 h-6" />;
-            case 4: return <Scale className="w-6 h-6" />;
-            case 5: return <CreditCard className="w-6 h-6" />;
-            case 6: return <ShieldCheck className="w-6 h-6" />;
-            case 7: return <MessageSquare className="w-6 h-6" />;
-            case 8: return <AlertTriangle className="w-6 h-6" />;
-            case 9: return <UserX className="w-6 h-6" />;
-            case 10: return <Brush className="w-6 h-6" />;
-            case 11: return <FileText className="w-6 h-6" />;
-            case 12: return <Scale className="w-6 h-6" />;
-            default: return <FileText className="w-6 h-6" />;
-        }
-    };
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <nav className="text-xs text-[#25231F]/60 mb-6 flex items-center gap-2">
+          <Link to="/" className="hover:text-[#A65F3D]">Home</Link>
+          <span>/</span>
+          <span className="text-[#25231F] font-bold">Terms & Conditions</span>
+        </nav>
 
-    const renderContent = (content) => {
-        const parts = content.split(': ');
-        if (parts.length > 1 && parts[0].length < 60) {
-            return (
-                <span>
-                    <strong className="text-royal-gold font-semibold">{parts[0]}:</strong>{' '}
-                    {parts.slice(1).join(': ')}
-                </span>
-            );
-        }
-        return content;
-    };
+        <div className="bg-white rounded-3xl p-8 sm:p-12 border border-[#EFE7D9] shadow-heritage">
+          <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A32] bg-[#EFE7D9] px-4 py-1.5 rounded-full inline-block mb-4">
+            Official Policies
+          </span>
+          <h1 className="text-3xl sm:text-4xl font-serif font-black text-[#25231F] mb-6">
+            Terms & Conditions
+          </h1>
+          <p className="text-xs text-[#25231F]/60 mb-8 pb-4 border-b border-[#EFE7D9]">
+            Last updated: March 2026 • Visit Chittorgarh (A Product of ChittorTech)
+          </p>
 
-    return (
-        <div className="relative overflow-hidden">
-            <SEOHead 
-                title="Terms & Conditions | Visit Chittorgarh"
-                description="Read the terms of service, booking policies, guidelines, and conditions for booking tours, guides, and hotels on Visit Chittorgarh."
-                canonical="/terms"
-                keywords="Chittorgarh tourism terms, terms and conditions, travel policy Rajasthan, booking cancellation Chittorgarh"
-            />
-            {/* Background Orbs for Premium Aesthetic */}
-            <div className="absolute top-20 left-10 w-72 h-72 bg-royal-gold/5 rounded-full blur-3xl -z-10 opacity-30" />
-            <div className="absolute bottom-40 right-10 w-96 h-96 bg-royal-gold/5 rounded-full blur-3xl -z-10 opacity-30" />
-            
-            <Section id="terms" title={termsData.title} className="bg-transparent py-16">
-                <div className="max-w-4xl mx-auto px-4 relative">
-                    
-                    <motion.div 
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
-                        className="text-center mb-16 relative"
-                    >
-                        {/* Decorative line */}
-                        <div className="w-24 h-0.5 bg-gradient-to-r from-transparent via-royal-gold to-transparent mx-auto mb-6" />
-                        
-                        <p className="text-royal-gold text-lg md:text-2xl font-serif italic mb-6">
-                            "{termsData.welcome}"
-                        </p>
-                        <p className="text-gray-300 leading-relaxed max-w-3xl mx-auto text-base md:text-lg">
-                            {termsData.govern}
-                        </p>
-                    </motion.div>
+          <div className="space-y-6 text-xs sm:text-sm text-[#25231F]/80 leading-relaxed">
+            <section>
+              <h2 className="text-lg font-serif font-bold text-[#25231F] mb-2">1. Concierge & Inquiry Model</h2>
+              <p>
+                Visit Chittorgarh provides direct tourism advisory, authorized tour guide facilitation, and private sanitized taxi coordination. Inquiries submitted via our frontend forms connect travelers directly with our verified local concierge desk on WhatsApp and phone (+91 75974 51057).
+              </p>
+            </section>
 
-                    <div className="space-y-8">
-                        {termsData.items.map((term, index) => (
-                            <motion.div 
-                                key={term.id}
-                                initial={{ opacity: 0, y: 30 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true, margin: "-100px" }}
-                                transition={{ duration: 0.5, delay: index * 0.05 }}
-                                className="group bg-gradient-to-br from-heritage-charcoal/90 to-heritage-charcoal/50 backdrop-blur-lg p-6 md:p-8 rounded-2xl border border-royal-gold/10 hover:border-royal-gold/30 transition-all duration-500 shadow-xl hover:shadow-royal-gold/5 flex flex-col md:flex-row gap-6 items-start"
-                            >
-                                <div className="w-12 h-12 bg-royal-gold/5 group-hover:bg-royal-gold/10 rounded-xl flex items-center justify-center text-royal-gold flex-shrink-0 transition-colors duration-500 border border-royal-gold/10 group-hover:border-royal-gold/30">
-                                    {getIcon(term.id)}
-                                </div>
-                                <div className="flex-1">
-                                    <h3 className="text-xl font-serif text-white mb-3 group-hover:text-royal-gold transition-colors duration-500">
-                                        {term.title}
-                                    </h3>
-                                    <p className="text-gray-400 text-sm md:text-base leading-relaxed group-hover:text-gray-300 transition-colors duration-500">
-                                        {renderContent(term.content)}
-                                    </p>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
+            <section>
+              <h2 className="text-lg font-serif font-bold text-[#25231F] mb-2">2. Transparent Pricing & Quotations</h2>
+              <p>
+                All package and vehicle quotations are provided with upfront clarity regarding toll taxes, driver allowances, parking charges, and monument admission rules. No unverified surcharges or unexpected commissions apply.
+              </p>
+            </section>
 
-                    <motion.div 
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.5 }}
-                        className="mt-16 text-center text-gray-500 text-sm font-medium tracking-wide"
-                    >
-                        {termsData.lastUpdated}
-                    </motion.div>
-                </div>
-            </Section>
+            <section>
+              <h2 className="text-lg font-serif font-bold text-[#25231F] mb-2">3. Authorized Tour Guide Verification</h2>
+              <p>
+                All guides dispatched through Visit Chittorgarh hold valid government identification and certification. Travelers are advised not to engage with unverified touts or unauthorized solicitors outside the monument gates.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-lg font-serif font-bold text-[#25231F] mb-2">4. Privacy & Communication</h2>
+              <p>
+                Guest phone numbers, email addresses, and travel schedules are utilized strictly for coordinating your requested tour services. We do not sell or distribute traveler data to third-party commercial marketing firms.
+              </p>
+            </section>
+
+            <section>
+              <h2 className="text-lg font-serif font-bold text-[#25231F] mb-2">5. Contact Information</h2>
+              <p>
+                For official correspondence, inquiries, or feedback:
+              </p>
+              <div className="mt-3 p-4 bg-[#F8F5EF] rounded-xl border border-[#EFE7D9] space-y-1.5 text-xs">
+                <p><strong>Business:</strong> Visit Chittorgarh (ChittorTech)</p>
+                <p><strong>Address:</strong> Birla Shiksha Kendra, Industrial Area, Chittorgarh, Rajasthan 312001</p>
+                <p><strong>Phone:</strong> +91 75974 51057</p>
+                <p><strong>Email:</strong> visitchittorgarh@gmail.com</p>
+              </div>
+            </section>
+          </div>
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default TermsPage;

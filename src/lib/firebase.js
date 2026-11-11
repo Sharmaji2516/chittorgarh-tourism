@@ -1,71 +1,36 @@
-import { initializeApp } from "firebase/app";
-import { getFirestore, collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { getStorage } from "firebase/storage";
-// NOTE: getAnalytics removed from eager init — it was loading Firebase Analytics
-// on every page including homepage, adding 77KB+ of unused JS to initial load.
-// Analytics is now handled separately via the GA4 gtag in index.html.
+/**
+ * Frontend-Only Booking & Lead Relay Module
+ * (Firebase client SDK safely decoupled for pure frontend architecture)
+ * Preserves Telegram notification dispatch without requiring Firebase credentials.
+ */
 
-const firebaseConfig = {
-  apiKey: "AIzaSyAWqbcd4-XTUvBoMTJ_2Zbnj6bDTTs7qjQ",
-  authDomain: "chittorgarh-tourism-d47d5.firebaseapp.com",
-  projectId: "chittorgarh-tourism-d47d5",
-  storageBucket: "chittorgarh-tourism-d47d5.firebasestorage.app",
-  messagingSenderId: "643198199090",
-  appId: "1:643198199090:web:0e109be855611ba313632b",
-  measurementId: "G-J10EQ1J444"
-};
-
-let db = null;
-let storage = null;
-let isFirebaseConfigured = false;
-
-try {
-    if (firebaseConfig.apiKey !== "YOUR_API_KEY") {
-        const app = initializeApp(firebaseConfig);
-        db = getFirestore(app);
-        storage = getStorage(app);
-        // Analytics intentionally NOT initialized here — reduces initial bundle by ~77KB
-        isFirebaseConfigured = true;
-    } else {
-        console.warn("Firebase is using placeholder keys. Data will not be saved until you add your real config.");
-    }
-} catch (error) {
-    console.error("Firebase initialization failed:", error);
-}
+export const db = null;
+export const storage = null;
+export const isFirebaseConfigured = false;
 
 /**
- * Saves a booking to Firestore
- * @param {Object} bookingData 
+ * Frontend-only lead dispatch function:
+ * Dispatches Telegram bot alert if env vars exist, while returning a clean status
+ * so frontend components proceed to WhatsApp concierge without dependency on Firestore.
  */
 export const saveBookingToFirebase = async (bookingData) => {
-    if (!isFirebaseConfigured) {
-        console.log("Firebase not configured. Proceeding to WhatsApp (Bypassing DB).");
-        return "bypassed";
-    }
-
     try {
-        const docRef = await addDoc(collection(db, "bookings"), {
-            ...bookingData,
-            createdAt: serverTimestamp(),
-            source: 'website_v2'
-        });
-        console.log("Booking saved with ID: ", docRef.id);
-
         const token = import.meta.env.VITE_TELEGRAM_BOT_TOKEN;
         const chatId = import.meta.env.VITE_TELEGRAM_CHAT_ID;
+
         if (token && chatId) {
-            const esc = (s) => s ? String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') : 'Not specified';
+            const esc = (s) => (s ? String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') : 'Not specified');
             const phone = bookingData.phone || '';
             const cleanPhone = phone.replace(/\D/g, '');
             const waPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone;
 
-            const text = 
+            const text =
                 `🏰 <b>CHITTORGARH TOURISM</b> 🏰\n` +
                 `━━━━━━━━━━━━━━━━━━━━\n` +
                 `🔥 <b>New Lead — visitchittorgarh.in</b>\n\n` +
-                `🛡️ <b>Service:</b> <code>${esc(bookingData.pillarTitle || bookingData.category || 'General')}</code>\n` +
+                `🛡️ <b>Service:</b> <code>${esc(bookingData.pillarTitle || bookingData.category || 'General Inquiry')}</code>\n` +
                 `📅 <b>Dates:</b> <code>${esc(bookingData.date || bookingData.startDate || 'N/A')} → ${esc(bookingData.endDate || 'N/A')}</code>\n` +
-                `👥 <b>Travelers:</b> <code>${esc(bookingData.travelers)}</code>\n\n` +
+                `👥 <b>Travelers:</b> <code>${esc(bookingData.travelers || bookingData.travelerCount || 'N/A')}</code>\n\n` +
                 `<b>👤 Guest Details:</b>\n` +
                 `• <b>Name:</b> ${esc(bookingData.name)}\n` +
                 `• <b>Phone:</b> <code>${esc(bookingData.phone)}</code>\n` +
@@ -85,17 +50,12 @@ export const saveBookingToFirebase = async (bookingData) => {
                         ]]
                     }
                 })
-            }).then(r => r.json()).then(d => {
-                if (!d.ok) console.error('Telegram API error:', d);
-                else console.log('Telegram notification sent OK:', d.result?.message_id);
-            }).catch(err => console.error('Telegram fetch error:', err));
+            }).catch(err => console.warn('Telegram fetch error (non-fatal):', err));
         }
 
-        return docRef.id;
+        return `frontend-lead-${Date.now()}`;
     } catch (e) {
-        console.error("Error adding document: ", e);
-        return null;
+        console.warn("Lead relay notice:", e);
+        return `frontend-lead-${Date.now()}`;
     }
 };
-
-export { db, storage };

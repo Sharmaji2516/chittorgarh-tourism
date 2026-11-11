@@ -1,195 +1,126 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { HeartHandshake, X, ArrowRight } from 'lucide-react';
-import VendorCard from '../components/VendorCard';
+import { motion } from 'framer-motion';
+import { HeartHandshake, ArrowRight, ShieldCheck, ShoppingBag, Palette, MessageCircle, Compass } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
+import { trackWhatsAppClick } from '../utils/analytics';
 
 const LOCAL_VOCAL_SCHEMA = [
   {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "Chittorgarh Handicrafts & Local Shopping",
-    "description": "Explore authentic Chittorgarh handicrafts — Thewa jewelry, Daabu printed fabrics, Rajasthani miniature paintings, terracotta pottery and traditional souvenirs.",
+    "description": "Explore authentic Chittorgarh handicrafts — Thewa jewelry, Daabu printed fabrics, Rajasthani miniature paintings and local artisan souvenirs.",
     "url": "https://visitchittorgarh.in/vocal-for-local",
-    "image": "https://visitchittorgarh.in/Fort.png",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Chittorgarh",
-      "addressRegion": "Rajasthan",
-      "addressCountry": "IN",
-      "postalCode": "312001"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": "24.8887",
-      "longitude": "74.6269"
-    }
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://visitchittorgarh.in/" },
-      { "@type": "ListItem", "position": 2, "name": "Local Shopping & Handicrafts", "item": "https://visitchittorgarh.in/vocal-for-local" }
-    ]
+    "image": "https://visitchittorgarh.in/Fort.webp"
   }
 ];
 
+const LocalVocalPage = ({ t, filteredLocalVocal = [] }) => {
+    const triggerPlanTrip = () => {
+        window.dispatchEvent(new CustomEvent('openTripPlannerModal'));
+    };
 
-const LocalVocalPage = ({ t, filteredLocalVocal, searchQuery }) => {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedVendor, setSelectedVendor] = useState(null);
-    const [userName, setUserName] = useState('');
-    const [userPhone, setUserPhone] = useState('');
+    const artisanCategories = [
+        {
+            title: "Thewa Gold-on-Glass Jewellery",
+            desc: "250-year-old royal art fusing hand-engraved 23K gold filigree onto vibrant Belgian glass.",
+            badge: "UNESCO Heritage Craft",
+            image: "/assets/images/nature_generated.webp"
+        },
+        {
+            title: "Daabu Mud-Resist Block Printing",
+            desc: "Handcrafted natural indigo textiles printed using generational wooden blocks and organic mud resist in Akola.",
+            badge: "Authentic Textile Art",
+            image: "/assets/images/temple_generated.webp"
+        },
+        {
+            title: "Rajasthani Wooden Toys & Lac Bangles",
+            desc: "Traditional wooden craftsmanship, vibrant lacquered bangles, and hand-embroidered leather juttis from local artisans.",
+            badge: "Traditional Bazaars",
+            image: "/assets/images/fort_generated.webp"
+        }
+    ];
 
     return (
-        <div className="min-h-screen bg-[#0a0a0b] text-white relative overflow-hidden">
+        <div className="min-h-screen bg-[#F8F5EF] text-[#25231F] pt-28 pb-24">
             <SEOHead
-                title="Chittorgarh Shopping | Thewa Art, Handicrafts & Souvenirs"
-                description="Shop authentic Chittorgarh handicrafts — Thewa gold jewelry, Daabu block-printed fabrics, Rajasthani miniature paintings & local souvenirs. Support local artisans."
+                title="Chittorgarh Shopping | Thewa Art, Daabu Prints & Handicrafts"
+                description="Shop authentic Chittorgarh handicrafts — Thewa gold jewelry, Daabu block-printed fabrics, and local artisan crafts. Support local generational masters."
                 canonical="/vocal-for-local"
-                keywords="Chittorgarh shopping, Thewa jewelry Chittorgarh, handicrafts Chittorgarh, Daabu print, Rajasthani souvenirs, local market Chittorgarh, Rajasthani handicrafts shopping, local artisans Rajasthan, unique art forms of Rajasthan, where to buy souvenirs in Rajasthan"
-                ogImage="https://visitchittorgarh.in/Fort.png"
+                keywords="Chittorgarh shopping, Thewa jewelry Chittorgarh, handicrafts Chittorgarh, Daabu print, Rajasthani souvenirs, local market Chittorgarh"
                 schema={LOCAL_VOCAL_SCHEMA}
             />
-            {/* Background decorations */}
-            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-royal-gold/5 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/3 animate-pulse" />
-            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-royal-gold/5 rounded-full blur-[120px] translate-y-1/2 -translate-x-1/3 animate-pulse" />
 
-            <div className="pt-32 pb-16 text-center px-4 relative">
-                <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-royal-gold/5 blur-[120px] rounded-full pointer-events-none"></div>
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8 }}
-                    className="relative z-10"
-                >
-                    <h1 className="text-5xl md:text-7xl font-serif text-white font-black italic mb-6 tracking-tighter uppercase drop-shadow-2xl">
-                        {t.localVocal.title}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                {/* Header */}
+                <div className="text-center max-w-3xl mx-auto mb-16">
+                    <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#A65F3D] bg-[#EFE7D9] px-4 py-1.5 rounded-full inline-block mb-3">
+                        Vocal for Local • Empowering Artisans
+                    </span>
+                    <h1 className="text-3xl sm:text-5xl font-serif font-black text-[#25231F] mb-4">
+                        Local Artisans & Handicrafts
                     </h1>
-                    
-                    {!searchQuery && (
-                        <>
-                            <p className="max-w-2xl mx-auto text-royal-gold font-light italic text-lg md:text-xl mb-8">
-                                "{t.localVocal.subtitle}"
-                            </p>
-                            
-                            {t.localVocal.desc && (
-                                <div className="max-w-4xl mx-auto bg-white/[0.03] backdrop-blur-3xl rounded-[2.5rem] p-8 md:p-10 border border-white/10 shadow-2xl mb-16">
-                                    <div className="flex justify-center mb-6">
-                                        <HeartHandshake className="w-12 h-12 text-royal-gold opacity-80" />
-                                    </div>
-                                    <p className="text-royal-white/80 text-sm md:text-base leading-relaxed text-justify md:text-center font-light">
-                                        {t.localVocal.desc}
-                                    </p>
-                                </div>
-                            )}
-                        </>
-                    )}
-                </motion.div>
-            </div>
-
-            <div className="max-w-7xl mx-auto px-4 pb-20 relative z-10">
-                <motion.div 
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-                >
-                    {filteredLocalVocal.map((item, idx) => (
-                        <motion.div
-                            key={`local-vocal-${item.id}`}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: 0.1 * idx }}
-                        >
-                            <VendorCard 
-                                vendor={item} 
-                                onClick={() => {
-                                    setSelectedVendor(item);
-                                    setIsModalOpen(true);
-                                }}
-                            />
-                        </motion.div>
-                    ))}
-                </motion.div>
-
-                {filteredLocalVocal.length > 0 && (
-                    <p className="text-royal-gold/30 text-[10px] uppercase tracking-[0.3em] font-serif mt-20 text-center italic">
-                        * {t.common.disclaimer}
+                    <p className="text-sm sm:text-base text-[#25231F]/70 leading-relaxed font-light">
+                        Support generational craft masters of Mewar. Buy directly from authentic artisans without middleman markups or counterfeit commercial souvenirs.
                     </p>
-                )}
-            </div>
+                </div>
 
-            {/* Custom Inquiry Modal */}
-            <AnimatePresence>
-                {isModalOpen && selectedVendor && (
-                    <div className="fixed inset-0 z-[120] flex items-center justify-center p-4">
-                        <motion.div 
-                            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                            onClick={() => setIsModalOpen(false)}
-                            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
-                        />
-                        
-                        <motion.div
-                            initial={{ scale: 0.9, opacity: 0 }}
-                            animate={{ scale: 1, opacity: 1 }}
-                            exit={{ scale: 0.9, opacity: 0 }}
-                            className="relative w-full max-w-md bg-heritage-charcoal border border-white/10 rounded-[2rem] p-8 shadow-2xl z-20"
+                {/* Craft Highlights */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                    {artisanCategories.map((craft, idx) => (
+                        <div
+                            key={idx}
+                            className="bg-white rounded-3xl border border-[#EFE7D9] overflow-hidden shadow-heritage hover:border-[#C49A32] transition-all flex flex-col justify-between"
                         >
-                            <button 
-                                onClick={() => setIsModalOpen(false)} 
-                                className="absolute top-6 right-6 text-white/40 hover:text-white"
-                            >
-                                <X className="w-5 h-5" />
-                            </button>
-                            
-                            <h3 className="text-2xl font-serif text-white mb-2">{selectedVendor.name}</h3>
-                            <p className="text-royal-gold text-xs uppercase tracking-widest mb-6">Inquire for Best Price</p>
-                            
-                            <div className="space-y-6">
-                                <div className="space-y-2">
-                                    <label className="text-[10px] text-white/60 uppercase tracking-widest font-bold">Your Name</label>
-                                    <input 
-                                        type="text" 
-                                        value={userName} 
-                                        onChange={(e) => setUserName(e.target.value)} 
-                                        className="w-full bg-white/5 border border-white/10 rounded-xl py-4 px-4 text-white focus:outline-none focus:border-royal-gold"
-                                        placeholder="Enter your name"
-                                    />
+                            <div>
+                                <div className="h-52 overflow-hidden bg-[#EFE7D9] relative">
+                                    <img src={craft.image} alt={craft.title} className="w-full h-full object-cover" />
+                                    <span className="absolute top-3 left-3 bg-[#25231F]/80 text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">
+                                        {craft.badge}
+                                    </span>
                                 </div>
-                                <div className="space-y-2">
-                                    <label className="text-[10px] text-white/60 uppercase tracking-widest font-bold">Phone Number</label>
-                                    <input 
-                                        type="tel" 
-                                        value={userPhone} 
-                                        onChange={(e) => setUserPhone(e.target.value)} 
-                                        className="w-full bg-white/5 border border-white/10 rounded-xl py-4 px-4 text-white focus:outline-none focus:border-royal-gold"
-                                        placeholder="Enter phone number"
-                                    />
+                                <div className="p-6 sm:p-8">
+                                    <h3 className="text-xl font-serif font-bold text-[#25231F] mb-3">{craft.title}</h3>
+                                    <p className="text-xs text-[#25231F]/70 leading-relaxed mb-6">{craft.desc}</p>
                                 </div>
-                                
-                                <button 
-                                    onClick={() => {
-                                        const phoneNumber = "917597451057";
-                                        const message = selectedVendor.id === 4 
-                                            ? `Mewari Special Achar Inquiry\n\nHello! I am interested in ordering the Mewari Special Achar.\n\nMy Name: ${userName}\nMy Phone: ${userPhone}\n\nPlease provide me with the price and delivery details. Thanks!`
-                                            : `Hello! I am interested in inquiring about ${selectedVendor.name}.\n\nMy Name: ${userName}\nMy Phone: ${userPhone}`;
-                                        
-                                        window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
-                                        setIsModalOpen(false);
-                                    }}
-                                    disabled={!userName || !userPhone}
-                                    className="w-full py-4 bg-royal-gold text-royal-black font-black uppercase tracking-widest text-xs rounded-xl flex items-center justify-center gap-3 hover:scale-[1.02] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                                >
-                                    Inquire Now via WhatsApp
-                                    <ArrowRight className="w-4 h-4" />
-                                </button>
                             </div>
-                        </motion.div>
+                            <div className="p-6 sm:p-8 pt-0 border-t border-[#EFE7D9]/60">
+                                <a
+                                    href={`https://wa.me/917597451057?text=${encodeURIComponent(`Hello! Where can I visit authentic workshops for ${craft.title} in Chittorgarh?`)}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="w-full py-3 bg-[#25231F] hover:bg-[#A65F3D] text-white rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-colors"
+                                >
+                                    <MessageCircle className="w-4 h-4" />
+                                    Locate Verified Workshop
+                                </a>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                {/* Artisan Support Statement */}
+                <div className="bg-[#25231F] text-white rounded-3xl p-8 sm:p-12 text-center flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
+                    <div className="text-center sm:text-left">
+                        <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#C49A32] block mb-1">
+                            Responsible Heritage Tourism
+                        </span>
+                        <h3 className="text-2xl sm:text-3xl font-serif font-bold text-white mb-2">
+                            Want an Artisan Studio Walking Tour?
+                        </h3>
+                        <p className="text-xs sm:text-sm text-white/70 max-w-xl">
+                            Our local guides take you into ancient weaver courtyards and silversmith workshops for authentic craft demonstrations.
+                        </p>
                     </div>
-                )}
-            </AnimatePresence>
+
+                    <button
+                        onClick={triggerPlanTrip}
+                        className="px-8 py-4 bg-[#C49A32] hover:bg-[#b08728] text-white rounded-2xl text-xs font-bold uppercase tracking-wider shrink-0 shadow-lg"
+                    >
+                        Inquire Artisan Tour
+                    </button>
+                </div>
+            </div>
         </div>
     );
 };

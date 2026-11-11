@@ -1,35 +1,41 @@
 # robots.txt — visitchittorgarh.in
-# Generated for SEO optimization
+# Official Chittorgarh Tourism Web Portal
 
 User-agent: *
 Allow: /
 Allow: /attractions
-Allow: /attractions/fort
-Allow: /attractions/nature
-Allow: /attractions/spiritual
-Allow: /attractions/scenic
+Allow: /attractions/*
+Allow: /places-to-visit-in-chittorgarh
+Allow: /chittorgarh-travel-guide
+Allow: /royal-journeys
+Allow: /packages
+Allow: /tour-packages
+Allow: /chittorgarh-1-day-tour
+Allow: /chittorgarh-2-days-tour
+Allow: /chittorgarh-3-days-tour
+Allow: /service/*
+Allow: /udaipur-to-chittorgarh-taxi
+Allow: /jaipur-to-chittorgarh-taxi
 Allow: /stays
 Allow: /flavors
-Allow: /royal-journeys
 Allow: /vocal-for-local
 Allow: /how-to-reach
 Allow: /mission-services
+Allow: /blog
+Allow: /blog/*
 Allow: /feedback
 Allow: /terms
 
-# Block admin and internal routes from indexing
+# Block internal operational routes
 Disallow: /admin
 Disallow: /admin/
 Disallow: /staff-verify
 Disallow: /staff-verify/
 Disallow: /verify/
 
-# Block query parameters that create duplicate content
+# Block duplicate query crawler traps
 Disallow: /*?*print=
 Disallow: /*?*debug=
-
-# Crawl-delay for polite crawling
-Crawl-delay: 2
 
 # Sitemap location
 Sitemap: https://visitchittorgarh.in/sitemap.xml

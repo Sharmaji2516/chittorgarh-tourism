@@ -23,81 +23,71 @@ const AttractionCard = ({ attraction, onExplore }) => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            whileHover={{ y: -10 }}
-            className="glass-card rounded-2xl overflow-hidden group"
+            whileHover={{ y: -6 }}
+            className="bg-white rounded-3xl overflow-hidden border border-[#EFE7D9] shadow-heritage hover:border-[#C49A32] transition-all duration-300 group flex flex-col justify-between"
         >
-            <div className="relative h-64 overflow-hidden group/image">
-                <img
-                    src={images.length > 0 ? images[currentImageIndex] : 'https://via.placeholder.com/400x300?text=No+Image'}
-                    srcSet={images.length > 0 && images[currentImageIndex].includes('.webp') ? `${images[currentImageIndex].replace('.webp', '-mobile.webp')} 400w, ${images[currentImageIndex]} 800w` : undefined}
-                    sizes="(max-width: 768px) 400px, 800px"
-                    alt={attraction.name}
-                    onError={(e) => {
-                        e.target.onerror = null;
-                        e.target.src = 'https://via.placeholder.com/400x300?text=Image+Error';
-                        console.error("Image failed to load:", images[currentImageIndex]);
-                    }}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
+            <div>
+                <div className="relative h-60 overflow-hidden group/image bg-[#EFE7D9]">
+                    <img
+                        src={images.length > 0 ? images[currentImageIndex] : 'https://via.placeholder.com/400x300?text=No+Image'}
+                        srcSet={images.length > 0 && images[currentImageIndex].includes('.webp') ? `${images[currentImageIndex].replace('.webp', '-mobile.webp')} 400w, ${images[currentImageIndex]} 800w` : undefined}
+                        sizes="(max-width: 768px) 400px, 800px"
+                        alt={attraction.name}
+                        onError={(e) => {
+                            e.target.onerror = null;
+                            e.target.src = 'https://via.placeholder.com/400x300?text=Image+Error';
+                        }}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-                {/* Navigation Arrows */}
-                {images.length > 1 && (
-                    <>
-                        <button
-                            onClick={prevImage}
-                            className="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-black/50 text-white rounded-full opacity-0 group-hover/image:opacity-100 transition-opacity hover:bg-black/80"
-                        >
-                            <ChevronLeft className="w-5 h-5" />
-                        </button>
-                        <button
-                            onClick={nextImage}
-                            className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-black/50 text-white rounded-full opacity-0 group-hover/image:opacity-100 transition-opacity hover:bg-black/80"
-                        >
-                            <ChevronRight className="w-5 h-5" />
-                        </button>
+                    {/* Navigation Arrows */}
+                    {images.length > 1 && (
+                        <>
+                            <button
+                                onClick={prevImage}
+                                className="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-black/60 text-white rounded-full opacity-0 group-hover/image:opacity-100 transition-opacity hover:bg-black/90"
+                            >
+                                <ChevronLeft className="w-4 h-4" />
+                            </button>
+                            <button
+                                onClick={nextImage}
+                                className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-black/60 text-white rounded-full opacity-0 group-hover/image:opacity-100 transition-opacity hover:bg-black/90"
+                            >
+                                <ChevronRight className="w-4 h-4" />
+                            </button>
+                        </>
+                    )}
 
-                        {/* Dots Indicator */}
-                        <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
-                            {images.map((_, idx) => (
-                                <div
-                                    key={idx}
-                                    className={`w-1.5 h-1.5 rounded-full transition-colors ${idx === currentImageIndex ? 'bg-royal-gold' : 'bg-white/50'
-                                        }`}
-                                />
-                            ))}
+                    <div className="absolute bottom-0 left-0 p-5 w-full pointer-events-none">
+                        <h3 className="text-xl font-bold text-white font-serif mb-0.5 drop-shadow-sm group-hover:text-[#DFBA5A] transition-colors">{attraction.name}</h3>
+                        <div className="flex items-center text-white/80 text-xs">
+                            <MapPin className="w-3 h-3 mr-1 text-[#DFBA5A]" />
+                            <span>Chittorgarh Fort</span>
                         </div>
-                    </>
-                )}
-
-                <div className="absolute bottom-0 left-0 p-6 w-full pointer-events-none">
-                    <h3 className="text-xl md:text-2xl font-bold text-white font-serif mb-1 group-hover:text-royal-gold transition-colors">{attraction.name}</h3>
-                    <div className="flex items-center text-gray-300 text-sm">
-                        <MapPin className="w-3 h-3 mr-1 text-royal-gold" />
-                        <span>Chittorgarh</span>
                     </div>
+                </div>
+
+                <div className="p-6">
+                    {attraction.bestTime && (
+                        <div className="inline-flex items-center text-[10px] text-[#A65F3D] px-2.5 py-1 bg-[#EFE7D9] rounded-md font-bold uppercase tracking-wider mb-3">
+                            <span className="mr-1">🕒</span> {attraction.bestTime.split('(')[0].trim()}
+                        </div>
+                    )}
+
+                    <p className="text-[#25231F]/70 text-xs leading-relaxed mb-6 line-clamp-3">
+                        {attraction.desc}
+                    </p>
                 </div>
             </div>
 
-            <div className="p-6">
-                <div className="flex items-center justify-between mb-4">
-                    {attraction.bestTime && (
-                        <div className="flex items-center text-xs text-royal-gold/80 px-2 py-1 bg-royal-gold/10 rounded-full border border-royal-gold/20">
-                            <i className="mr-1">🕒</i> {attraction.bestTime.split('(')[0].trim()}
-                        </div>
-                    )}
-                </div>
-
-                <p className="text-gray-400 text-sm leading-relaxed mb-6 line-clamp-3 group-hover:line-clamp-none transition-all duration-300">
-                    {attraction.desc}
-                </p>
-
+            <div className="p-6 pt-0 border-t border-[#EFE7D9]/60 flex items-center justify-between">
                 <button
                     onClick={() => onExplore && onExplore(attraction)}
-                    className="flex items-center text-royal-gold text-sm font-bold uppercase tracking-widest hover:text-white transition-colors group/btn cursor-pointer py-2 px-4 border border-royal-gold/30 rounded hover:bg-royal-gold/10"
+                    className="w-full flex items-center justify-center text-[#C49A32] text-xs font-bold uppercase tracking-wider hover:text-white transition-all py-2.5 px-4 border border-[#C49A32]/40 rounded-xl hover:bg-[#C49A32] shadow-sm"
                 >
-                    Explore Details
-                    <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform" />
+                    Explore Monument Details
+                    <ArrowRight className="w-3.5 h-3.5 ml-1.5" />
                 </button>
             </div>
         </motion.div>

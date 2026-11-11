@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import Section from '../components/Section';
 import { motion } from 'framer-motion';
-import { Hotel, ArrowRight, ShieldCheck, MapPin, Star, Zap, HeartHandshake } from 'lucide-react';
-import QuickInquiryModal from '../components/QuickInquiryModal';
+import { Hotel, ArrowRight, ShieldCheck, MapPin, Star, Compass, MessageCircle, CheckCircle2 } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
+import { trackWhatsAppClick } from '../utils/analytics';
 
 const STAYS_SCHEMA = [
   {
@@ -12,7 +11,7 @@ const STAYS_SCHEMA = [
     "name": "Chittorgarh Hotels & Heritage Stays",
     "description": "Handpicked hotels and heritage properties in Chittorgarh — from luxury heritage havelis to budget-friendly guesthouses, with local concierge services.",
     "url": "https://visitchittorgarh.in/stays",
-    "image": "https://visitchittorgarh.in/Fort.png",
+    "image": "https://visitchittorgarh.in/Fort.webp",
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Chittorgarh",
@@ -20,172 +19,156 @@ const STAYS_SCHEMA = [
       "addressCountry": "IN",
       "postalCode": "312001"
     },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": "24.8887",
-      "longitude": "74.6269"
-    },
     "priceRange": "₹₹–₹₹₹"
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://visitchittorgarh.in/" },
-      { "@type": "ListItem", "position": 2, "name": "Hotels & Stays", "item": "https://visitchittorgarh.in/stays" }
-    ]
   }
 ];
 
-
 const StaysPage = ({ t }) => {
-    const [isInquiryOpen, setIsInquiryOpen] = useState(false);
-    const [selectedHotel, setSelectedHotel] = useState('');
-
-    const openInquiry = (hotelName) => {
-        setSelectedHotel(hotelName);
-        setIsInquiryOpen(true);
+    const triggerPlanTrip = () => {
+        window.dispatchEvent(new CustomEvent('openTripPlannerModal'));
     };
 
-    const hotels = t.hotels.items;
+    const handleHotelInquiry = (hotelName) => {
+        const msg = `🏨 *Hotel Booking Inquiry — Chittorgarh*\n\n` +
+            `Hello! I would like to inquire about booking a stay at *${hotelName}*.\n` +
+            `Please share current availability, room tariffs, and concierge deals. Thanks!`;
+        trackWhatsAppClick('hotel_card_wa', hotelName);
+        window.open(`https://wa.me/917597451057?text=${encodeURIComponent(msg)}`, '_blank');
+    };
+
+    const hotels = t?.hotels?.items || [
+        {
+            id: 1,
+            name: "Boutique Heritage Haveli Stay",
+            desc: "Authentic Rajput haveli with traditional jharokhas, courtyards, and rooftop views of Chittorgarh Fort ramparts.",
+            price: "₹3,500 - ₹6,500 / night",
+            image: "/assets/images/Royal Stays.webp"
+        },
+        {
+            id: 2,
+            name: "Royal Palace Luxury Resort",
+            desc: "Spacious luxury suites surrounded by lush gardens, swimming pool, and fine dining Mewari restaurant.",
+            price: "₹5,500 - ₹9,500 / night",
+            image: "/assets/images/Dinning Hall.webp"
+        },
+        {
+            id: 3,
+            name: "Fort View Comfort Inn",
+            desc: "Modern air-conditioned family hotel located conveniently near Chittorgarh Railway Station and Fort entrance road.",
+            price: "₹1,800 - ₹3,200 / night",
+            image: "/assets/images/Cafe.webp"
+        }
+    ];
 
     return (
-        <div className="space-y-0">
+        <div className="min-h-screen bg-[#F8F5EF] text-[#25231F] pt-28 pb-24">
             <SEOHead
                 title="Hotels in Chittorgarh | Heritage, Budget & Luxury Stays"
-                description="Book the best hotels in Chittorgarh — heritage havelis, budget guesthouses & luxury resorts. Handpicked stays with VIP rates, local concierge & Rajasthani hospitality."
+                description="Book the best hotels in Chittorgarh — heritage havelis, budget guesthouses & luxury resorts. Handpicked stays with VIP rates and local concierge."
                 canonical="/stays"
-                keywords="hotels in Chittorgarh, Chittorgarh hotels, heritage hotel Chittorgarh, budget hotel Chittorgarh, luxury stay Chittorgarh, Chittorgarh accommodation, heritage resorts in Rajasthan, luxury stays Rajasthan, stay near Chittorgarh Fort, hotel booking Rajasthan"
-                ogImage="https://visitchittorgarh.in/Fort.png"
+                keywords="hotels in Chittorgarh, Chittorgarh hotels, heritage hotel Chittorgarh, budget hotel Chittorgarh, luxury stay Chittorgarh"
                 schema={STAYS_SCHEMA}
             />
-            {/* Header Section */}
-            <div className="pt-20 pb-12 text-center px-4">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                >
-                    <h1 className="text-4xl md:text-6xl font-serif text-white mb-6 tracking-wider">
-                        {t.hotels.title}
+
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                {/* Header */}
+                <div className="text-center max-w-3xl mx-auto mb-16">
+                    <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A32] bg-[#EFE7D9] px-4 py-1.5 rounded-full inline-block mb-3">
+                        Curated Accommodations
+                    </span>
+                    <h1 className="text-3xl sm:text-5xl font-serif font-black text-[#25231F] mb-4">
+                        Heritage Hotels & Stays
                     </h1>
-                    <p className="max-w-2xl mx-auto text-gray-400 mb-8 font-light italic text-lg">
-                        "Handpicked Royal Residences. We negotiate directly with owners to ensure you get the best rates and VIP treatment."
+                    <p className="text-sm sm:text-base text-[#25231F]/70 leading-relaxed font-light">
+                        Experience authentic Mewari hospitality. From royal havelis overlooking the floodlit fort to tranquil countryside heritage resorts.
                     </p>
-                    
-                    {/* Why Book With Us Banner */}
-                    <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 bg-royal-gold/5 p-6 rounded-[2rem] border border-royal-gold/10">
-                        {t.common.conciergeBenefits.map((benefit, i) => (
-                            <div key={i} className="flex flex-col items-center gap-2">
-                                <ShieldCheck className="w-5 h-5 text-royal-gold" />
-                                <span className="text-[9px] text-white/60 font-black uppercase tracking-widest text-center">{benefit}</span>
-                            </div>
-                        ))}
-                    </div>
-                </motion.div>
-            </div>
+                </div>
 
-            {/* Individual Stays Grid */}
-            <Section id="hotels-list" title="The Royal Collection" className="bg-transparent !pt-0">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {/* Stays Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
                     {hotels.map((hotel) => (
-                        <motion.div
+                        <div
                             key={hotel.id}
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            whileHover={{ y: -10 }}
-                            className="group relative bg-heritage-charcoal/40 rounded-[2.5rem] overflow-hidden border border-white/5 hover:border-royal-gold/40 transition-all duration-500 shadow-2xl flex flex-col h-full"
+                            className="bg-white rounded-3xl border border-[#EFE7D9] overflow-hidden shadow-heritage hover:border-[#C49A32] hover:-translate-y-1 transition-all group flex flex-col justify-between"
                         >
-                            {/* Best Price Tag */}
-                            <div className="absolute top-6 left-6 px-4 py-2 bg-royal-gold text-royal-black text-[10px] font-black uppercase tracking-widest rounded-full shadow-xl z-10 flex items-center gap-2">
-                                <Zap className="w-3 h-3 fill-royal-black" />
-                                Best Price Guaranteed
-                            </div>
-
-                            <div className="h-64 overflow-hidden relative">
-                                <img 
-                                    src={hotel.image || "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=800&auto=format&fit=crop"} 
-                                    alt={hotel.name} 
-                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
-                                />
-                                <div className="absolute inset-0 bg-gradient-to-t from-heritage-charcoal via-transparent to-transparent opacity-80" />
-                            </div>
-
-                            <div className="p-8 flex-grow flex flex-col">
-                                <div className="flex items-center gap-2 text-royal-gold mb-4">
-                                    <Star className="w-4 h-4 fill-royal-gold" />
-                                    <span className="text-[10px] font-black uppercase tracking-[0.2em]">{t.common.verified}</span>
+                            <div>
+                                <div className="h-56 relative overflow-hidden bg-[#EFE7D9]">
+                                    <img
+                                        src={hotel.image}
+                                        alt={hotel.name}
+                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                                    />
+                                    <span className="absolute top-3 left-3 bg-[#25231F]/80 backdrop-blur-sm text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full flex items-center gap-1">
+                                        <ShieldCheck className="w-3.5 h-3.5 text-[#C49A32]" />
+                                        Verified Partner
+                                    </span>
                                 </div>
 
-                                <h3 className="text-2xl font-serif text-white mb-4 group-hover:text-royal-gold transition-colors">
-                                    {hotel.name}
-                                </h3>
+                                <div className="p-6 sm:p-8">
+                                    <h3 className="text-xl font-serif font-bold text-[#25231F] group-hover:text-[#A65F3D] transition-colors mb-2">
+                                        {hotel.name}
+                                    </h3>
+                                    <p className="text-xs text-[#25231F]/70 leading-relaxed mb-6">
+                                        {hotel.desc}
+                                    </p>
 
-                                <p className="text-gray-400 text-sm leading-relaxed mb-8 flex-grow">
-                                    {hotel.desc}
-                                </p>
-
-                                <div className="pt-6 border-t border-white/5 flex flex-col gap-4">
-                                    <div className="flex items-center justify-between">
-                                        <div className="flex items-center gap-2 text-white/40 text-[10px] uppercase font-bold tracking-widest">
-                                            <MapPin className="w-3 h-3 text-royal-gold" />
-                                            Chittorgarh
+                                    <div className="space-y-2 text-xs text-[#25231F]/80 mb-6">
+                                        <div className="flex items-center gap-2">
+                                            <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                                            <span>Fort View Rooftop Dining</span>
                                         </div>
-                                        <div className="text-royal-gold font-serif italic text-lg">Special Rates</div>
+                                        <div className="flex items-center gap-2">
+                                            <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                                            <span>Air-Conditioned & Sanitized Rooms</span>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                                            <span>Free Wi-Fi & Breakfast Options</span>
+                                        </div>
                                     </div>
-                                    <button 
-                                        onClick={() => openInquiry(hotel.name)}
-                                        className="w-full py-4 bg-royal-gold text-royal-black font-black uppercase tracking-widest text-[10px] rounded-xl flex items-center justify-center gap-2 hover:brightness-110 transition-all"
-                                    >
-                                        Secure Best Price
-                                        <ArrowRight className="w-4 h-4" />
-                                    </button>
                                 </div>
                             </div>
-                        </motion.div>
+
+                            <div className="p-6 sm:p-8 pt-0 border-t border-[#EFE7D9]/60 flex items-center justify-between">
+                                <button
+                                    onClick={() => handleHotelInquiry(hotel.name)}
+                                    className="px-5 py-3 bg-[#C49A32] hover:bg-[#b08728] text-white rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2 shadow-sm transition-transform active:scale-95"
+                                >
+                                    <MessageCircle className="w-4 h-4" />
+                                    Inquire Rates
+                                </button>
+                                <button
+                                    onClick={triggerPlanTrip}
+                                    className="px-4 py-3 bg-[#F8F5EF] hover:bg-[#EFE7D9] text-[#25231F] rounded-xl text-xs font-bold uppercase tracking-wider border border-[#EFE7D9]"
+                                >
+                                    Add to Tour
+                                </button>
+                            </div>
+                        </div>
                     ))}
                 </div>
-            </Section>
 
-            {/* Why Book With Us Deep Dive */}
-            <Section className="bg-royal-gold/5 py-20 mb-20 border-y border-royal-gold/10">
-                <div className="max-w-5xl mx-auto text-center mb-16">
-                    <h2 className="text-3xl font-serif text-white mb-6">Why Book Through Our Concierge?</h2>
-                    <p className="text-gray-400">Avoid the hidden costs of direct booking. We are local, we are here, and we guarantee the best Mewari experience.</p>
-                </div>
-                <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
-                    <div className="flex gap-6">
-                        <div className="w-16 h-16 shrink-0 rounded-2xl bg-royal-gold/10 flex items-center justify-center text-royal-gold">
-                            <HeartHandshake className="w-8 h-8" />
-                        </div>
-                        <div>
-                            <h4 className="text-xl font-serif text-white mb-2">Unbeatable Local Rates</h4>
-                            <p className="text-gray-400 text-sm">We have exclusive contracts with hotels that are not available on other sites or even for direct walk-ins.</p>
-                        </div>
+                {/* Concierge Benefits Banner */}
+                <div className="bg-[#25231F] text-white rounded-3xl p-8 sm:p-12 text-center flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
+                    <div className="text-center sm:text-left">
+                        <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#C49A32] block mb-1">
+                            Visit Chittorgarh Concierge
+                        </span>
+                        <h3 className="text-2xl sm:text-3xl font-serif font-bold text-white mb-2">
+                            Need Hotel Recommendations or Group Bookings?
+                        </h3>
+                        <p className="text-xs sm:text-sm text-white/70 max-w-xl">
+                            Our ground team coordinates directly with verified properties to guarantee best room categories and seamless check-in.
+                        </p>
                     </div>
-                    <div className="flex gap-6">
-                        <div className="w-16 h-16 shrink-0 rounded-2xl bg-royal-gold/10 flex items-center justify-center text-royal-gold">
-                            <ShieldCheck className="w-8 h-8" />
-                        </div>
-                        <div>
-                            <h4 className="text-xl font-serif text-white mb-2">24/7 Ground Support</h4>
-                            <p className="text-gray-400 text-sm">If you face any issue at the hotel, our local team is just 10 minutes away to resolve it for you personally.</p>
-                        </div>
-                    </div>
+
+                    <button
+                        onClick={triggerPlanTrip}
+                        className="px-8 py-4 bg-[#C49A32] hover:bg-[#b08728] text-white rounded-2xl text-xs font-bold uppercase tracking-wider shrink-0 shadow-lg"
+                    >
+                        Inquire Stay Package
+                    </button>
                 </div>
-            </Section>
-
-            <QuickInquiryModal 
-                isOpen={isInquiryOpen}
-                onClose={() => setIsInquiryOpen(false)}
-                entityName={selectedHotel}
-                category="Hotel Stay"
-            />
-
-            <div className="pb-16 text-center">
-                <p className="text-royal-gold/30 text-[10px] uppercase tracking-[0.3em] font-serif italic">
-                    * {t.common.disclaimer}
-                </p>
             </div>
         </div>
     );

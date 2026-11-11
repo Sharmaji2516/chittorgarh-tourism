@@ -7,55 +7,62 @@ export default {
     theme: {
         extend: {
             fontFamily: {
-                serif: ['Playfair Display', 'serif'], // Keep existing serif for heritage feel
-                sans: ['Inter', 'system-ui', 'sans-serif'],
+                serif: ['Playfair Display', 'Georgia', 'serif'],
+                sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
             },
             colors: {
-                'royal-gold': '#d4af37',
-                'royal-black': '#1a1a1a',
-                'royal-white': '#f5f5f5',
-                'heritage': {
-                    'gold': '#D4AF37',
-                    'gold-light': '#F1D98F',
-                    'charcoal': '#121212',
-                    'charcoal-light': '#1E1E1E',
-                    'stone': '#E5E4E2',
-                    'sand': '#F4A460',
-                    'parchment': '#FCF5E5',
+                // Mewar Heritage Palette (Design System)
+                'mewar': {
+                    'ivory': '#F8F5EF',        // Primary background: Warm Ivory / Off White
+                    'sandstone': '#EFE7D9',    // Secondary background: Light Sandstone / Beige
+                    'charcoal': '#25231F',     // Primary text: Deep Charcoal
+                    'charcoal-soft': '#423D37',
+                    'gold': '#C49A32',         // Accent: Royal Gold
+                    'gold-light': '#DFBA5A',
+                    'gold-dark': '#9A7723',
+                    'terracotta': '#A65F3D',   // Secondary accent: Terracotta / Heritage Brown
+                    'terracotta-dark': '#874628',
+                    'forest': '#526B50',       // Natural accent: Muted Forest Green
+                    'cream': '#FFFDF9',
+                    'border': '#E4DAC6',
+                    'border-subtle': '#EDE5D6',
                 },
-                primary: {
-                    50: '#f5f3ff',
-                    100: '#ede9fe',
-                    200: '#ddd6fe',
-                    300: '#c4b5fd',
-                    400: '#a78bfa',
-                    500: '#8b5cf6',
-                    600: '#7c3aed',
-                    700: '#6d28d9',
-                    800: '#5b21b6',
-                    900: '#4c1d95',
-                    950: '#2e1065',
+                'royal-gold': '#C49A32',
+                'royal-black': '#25231F',
+                'royal-white': '#FFFDF9',
+                'heritage': {
+                    'gold': '#C49A32',
+                    'gold-light': '#DFBA5A',
+                    'charcoal': '#25231F',
+                    'charcoal-light': '#38342E',
+                    'stone': '#EFE7D9',
+                    'sand': '#E4DAC6',
+                    'parchment': '#F8F5EF',
                 },
                 surface: {
-                    50: '#f8fafc',
-                    100: '#f1f5f9',
-                    200: '#e2e8f0',
-                    300: '#cbd5e1',
-                    400: '#94a3b8',
-                    500: '#64748b',
-                    600: '#475569',
-                    700: '#334155',
-                    800: '#1e293b',
-                    900: '#0f172a',
-                    950: '#020617',
+                    50: '#F8F5EF',
+                    100: '#EFE7D9',
+                    200: '#E4DAC6',
+                    300: '#D5C7AE',
+                    400: '#B09F83',
+                    500: '#8A775C',
+                    600: '#5F513C',
+                    700: '#423829',
+                    800: '#2F271D',
+                    900: '#25231F',
+                    950: '#171613',
                 }
+            },
+            boxShadow: {
+                'heritage': '0 10px 30px -5px rgba(37, 35, 31, 0.08), 0 4px 10px -2px rgba(37, 35, 31, 0.04)',
+                'heritage-hover': '0 20px 40px -10px rgba(166, 95, 61, 0.15), 0 8px 16px -4px rgba(37, 35, 31, 0.06)',
+                'gold-glow': '0 0 25px rgba(196, 154, 50, 0.25)',
             },
             animation: {
                 'fade-in': 'fadeIn 0.5s ease-out',
                 'slide-up': 'slideUp 0.5s ease-out',
                 'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                 'shimmer': 'shimmer 3s linear infinite',
-                'glow': 'glow 2s ease-in-out infinite alternate',
             },
             keyframes: {
                 fadeIn: {
@@ -70,10 +77,6 @@ export default {
                     '0%': { transform: 'translateX(-100%)' },
                     '100%': { transform: 'translateX(100%)' },
                 },
-                glow: {
-                    '0%': { boxShadow: '0 0 5px rgba(212, 175, 55, 0.2), 0 0 10px rgba(212, 175, 55, 0.1)' },
-                    '100%': { boxShadow: '0 0 20px rgba(212, 175, 55, 0.6), 0 0 30px rgba(212, 175, 55, 0.4)' },
-                }
             }
         },
     },

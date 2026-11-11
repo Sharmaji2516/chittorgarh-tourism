@@ -1,255 +1,304 @@
-import React, { useState } from 'react';
-import { useLanguage } from '../context/LanguageContext';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
-import FeedbackForm from './FeedbackForm';
-import { motion, AnimatePresence } from 'framer-motion';
+import { Phone, MessageCircle, Mail, MapPin, Award, Compass, ExternalLink, Instagram, Facebook, Youtube } from 'lucide-react';
+import { trackWhatsAppClick, trackPhoneCallClick } from '../utils/analytics';
+
+const VERIFIED_PHONE = "+91 75974 51057";
+const VERIFIED_WA_LINK = "https://wa.me/917597451057?text=Namaste!%20I%20would%20like%20to%20inquire%20about%20Chittorgarh%20Tourism%20services.";
+const VERIFIED_EMAIL = "visitchittorgarh@gmail.com";
 
 const Footer = () => {
-    const { t } = useLanguage();
-    const [isBenefitsOpen, setIsBenefitsOpen] = useState(false);
-    const [isFeedbackOpen, setIsFeedbackOpen] = useState(false);
+    const triggerPlanTrip = () => {
+        window.dispatchEvent(new CustomEvent('openTripPlannerModal'));
+    };
 
     return (
-        <footer className="bg-heritage-charcoal text-royal-white/60 py-16 border-t border-royal-gold/20 relative overflow-hidden">
-            {/* Background Texture Overlay (using pure CSS) */}
-            <div className="absolute inset-0 opacity-[0.02] pointer-events-none bg-[radial-gradient(circle_at_bottom,_var(--tw-gradient-stops))] from-royal-gold/10 via-transparent to-transparent"></div>
-            
-            {/* Ambient Glows */}
-            <div className="absolute -top-24 -left-24 w-96 h-96 bg-royal-gold/5 blur-[120px] rounded-full"></div>
-            <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-royal-gold/5 blur-[120px] rounded-full"></div>
+        <footer id="contact" className="bg-[#25231F] text-[#F8F5EF] pt-16 pb-12 border-t border-[#C49A32]/30 relative overflow-hidden">
+            {/* Subtle decorative background glow */}
+            <div className="absolute top-0 right-0 w-96 h-96 bg-[#C49A32]/5 blur-3xl pointer-events-none rounded-full"></div>
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#A65F3D]/5 blur-3xl pointer-events-none rounded-full"></div>
 
-            <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
-                {/* Ornate Divider */}
-                <div className="mb-12 flex justify-center items-center gap-6">
-                    <div className="h-px w-12 md:w-24 bg-gradient-to-r from-transparent to-royal-gold/40"></div>
-                    <div className="text-royal-gold text-2xl md:text-3xl filter drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]">❦</div>
-                    <div className="h-px w-12 md:w-24 bg-gradient-to-l from-transparent to-royal-gold/40"></div>
-                </div>
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left mb-16">
-                    {/* Explore Section */}
-                    <div className="flex flex-col items-center md:items-start group w-full h-full">
-                        <h4 className="text-royal-gold uppercase tracking-[0.3em] mb-6 text-xs font-black flex items-center gap-2">
-                            <span className="w-1.5 h-1.5 rounded-full bg-royal-gold"></span>
-                            {t.footer.explore}
-                        </h4>
-                        <div className="bg-royal-black/30 backdrop-blur-sm border border-royal-gold/10 rounded-2xl p-6 w-full flex-1 flex flex-col hover:border-royal-gold/30 transition-all duration-500 shadow-xl group-hover:shadow-royal-gold/5">
-                            <ul className="space-y-4 font-serif italic text-sm">
-                                {[
-                                    { name: t.nav.history, path: '/#history' },
-                                    { name: t.nav.attractions, path: '/attractions' },
-                                    { name: t.nav.royalJourneys, path: '/royal-journeys' },
-                                    { name: t.nav.hotels, path: '/stays' },
-                                    { name: t.nav.localVocal, path: '/vocal-for-local' },
-                                    { name: t.nav.missionServices, path: '/mission-services' },
-                                    { name: t.nav.blog || 'Blog', path: '/blog' },
-                                    { name: "Terms & Conditions", path: '/terms' }
-                                ].map((item) => (
-                                    <li key={item.name}>
-                                        <NavLink 
-                                            to={item.path} 
-                                            className="hover:text-royal-gold transition-all duration-300 hover:pl-2 relative block text-royal-white/70 hover:text-white"
-                                        >
-                                            {item.name}
-                                        </NavLink>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
+                {/* Top Inquiry Banner inside Footer */}
+                <div className="bg-gradient-to-r from-[#312D27] via-[#2A2722] to-[#312D27] rounded-3xl p-8 sm:p-10 border border-[#C49A32]/20 mb-16 shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-6">
+                    <div className="text-center lg:text-left">
+                        <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#C49A32] block mb-1">
+                            Experience Mewar With Experts
+                        </span>
+                        <h3 className="text-2xl sm:text-3xl font-serif font-bold text-white mb-2">
+                            Ready to Explore India's Largest Fort?
+                        </h3>
+                        <p className="text-xs sm:text-sm text-[#F8F5EF]/75 max-w-xl">
+                            Connect directly with our Chittorgarh concierge desk for authorized guides, sanitized cabs, and custom Rajasthan tour packages.
+                        </p>
                     </div>
 
-                    {/* Benefits Section */}
-                    <div className="flex flex-col items-center md:items-start group w-full h-full">
-                        <h4 
-                            onClick={() => setIsBenefitsOpen(!isBenefitsOpen)}
-                            className="text-royal-gold uppercase tracking-[0.3em] mb-6 text-xs font-black flex items-center gap-2 cursor-pointer md:cursor-default hover:text-white transition-colors"
+                    <div className="flex flex-col sm:flex-row gap-3 shrink-0 w-full sm:w-auto">
+                        <button
+                            onClick={triggerPlanTrip}
+                            className="px-6 py-3.5 bg-[#C49A32] hover:bg-[#b08728] text-white font-bold rounded-2xl text-xs uppercase tracking-wider shadow-lg flex items-center justify-center gap-2 transition-transform hover:scale-105 active:scale-95"
                         >
-                            <span className="w-1.5 h-1.5 rounded-full bg-royal-gold"></span>
-                            {t.footer.benefitsTitle}
-                            <span className={`transform transition-transform duration-300 ${isBenefitsOpen ? 'rotate-180' : 'rotate-0'} text-[10px] md:hidden`}>▼</span>
-                        </h4>
-                        
-                        {/* Mobile View: Toggle */}
-                        <div className="md:hidden w-full">
-                            <AnimatePresence>
-                                {isBenefitsOpen && (
-                                    <motion.ul 
-                                        initial={{ opacity: 0, height: 0 }}
-                                        animate={{ opacity: 1, height: 'auto' }}
-                                        exit={{ opacity: 0, height: 0 }}
-                                        transition={{ duration: 0.3 }}
-                                        className="space-y-4 overflow-hidden bg-royal-black/30 backdrop-blur-sm border border-royal-gold/10 rounded-2xl p-6"
-                                    >
-                                        {t.footer.benefitPoints.map((point, index) => (
-                                            <li key={index} className="flex gap-3 text-sm leading-relaxed group/item text-left">
-                                                <span className="text-royal-gold shrink-0 mt-0.5 opacity-40 group-hover/item:opacity-100 transition-opacity">✦</span>
-                                                <span className="text-royal-white/70 group-hover/item:text-royal-white transition-colors">{point}</span>
-                                            </li>
-                                        ))}
-                                    </motion.ul>
-                                )}
-                            </AnimatePresence>
-                        </div>
-
-                        {/* Desktop View: Always Visible Box */}
-                        <div className="hidden md:flex flex-col justify-between bg-royal-black/30 backdrop-blur-sm border border-royal-gold/10 rounded-2xl p-6 w-full flex-1 hover:border-royal-gold/30 transition-all duration-500 shadow-xl group-hover:shadow-royal-gold/5">
-                            <ul className="space-y-4 flex-1 flex flex-col justify-between">
-                                {t.footer.benefitPoints.map((point, index) => (
-                                    <li key={index} className="flex gap-3 text-sm leading-relaxed group/item">
-                                        <span className="text-royal-gold shrink-0 mt-0.5 opacity-40 group-hover/item:opacity-100 transition-opacity">✦</span>
-                                        <span className="text-royal-white/70 group-hover/item:text-royal-white transition-colors">{point}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
-
-                    {/* Contact Section */}
-                    <div className="flex flex-col items-center md:items-start w-full h-full">
-                        <h4 className="text-royal-gold uppercase tracking-[0.3em] mb-6 text-xs font-black flex items-center gap-2">
-                            <span className="w-1.5 h-1.5 rounded-full bg-royal-gold"></span>
-                            {t.footer.contact}
-                        </h4>
-                        <div className="bg-royal-black/30 backdrop-blur-sm border border-royal-gold/10 rounded-2xl p-6 w-full flex-1 flex flex-col justify-between hover:border-royal-gold/30 transition-all duration-500 shadow-xl">
-                            <div className="space-y-4 flex-1 flex flex-col justify-between">
-                                <div className="group flex items-start gap-3">
-                                    <div className="w-8 h-8 rounded-lg bg-royal-gold/5 border border-royal-gold/20 flex items-center justify-center transition-all shrink-0">
-                                        <span className="text-[10px] text-royal-gold">📍</span>
-                                    </div>
-                                    <span className="text-xs text-royal-white/70 tracking-wide leading-relaxed">
-                                        Birla Shiksha Kendra, Industrial Area,<br />Chittorgarh, Rajasthan 312001
-                                    </span>
-                                </div>
-
-                                <a href="tel:+917597451057" className="group flex items-center gap-3 hover:text-royal-gold transition-all">
-                                    <div className="w-8 h-8 rounded-lg bg-royal-gold/5 border border-royal-gold/20 flex items-center justify-center group-hover:bg-royal-gold/20 transition-all">
-                                        <span className="text-[10px]">📞</span>
-                                    </div>
-                                    <span className="text-sm font-medium tracking-wider text-royal-white/70 group-hover:text-royal-white">+91 7597451057</span>
-                                </a>
-                                
-                                <a href="https://wa.me/917597451057?text=Hello!%20I%20want%20to%20know%20more%20about%20Chittorgarh%20Tourism%20services." target="_blank" rel="noopener noreferrer" className="group flex items-center gap-3 hover:text-royal-gold transition-all">
-                                    <div className="w-8 h-8 rounded-lg bg-royal-gold/5 border border-royal-gold/20 flex items-center justify-center group-hover:bg-royal-gold/20 transition-all">
-                                        <span className="text-[10px]">💬</span>
-                                    </div>
-                                    <span className="text-sm font-medium tracking-wider text-royal-white/70 group-hover:text-royal-white">WhatsApp Us</span>
-                                </a>
-
-                                <a href="mailto:visitchittorgarh@gmail.com?subject=Inquiry%20from%20Chittorgarh%20Tourism%20Website&body=Hello,%20I%20am%20interested%20in%20your%20services." className="group flex items-center gap-3 hover:text-royal-gold transition-all">
-                                    <div className="w-8 h-8 rounded-lg bg-royal-gold/5 border border-royal-gold/20 flex items-center justify-center group-hover:bg-royal-gold/20 transition-all">
-                                        <span className="text-[10px]">✉️</span>
-                                    </div>
-                                    <span className="text-sm font-medium tracking-wider lowercase text-royal-white/70 group-hover:text-royal-white">visitchittorgarh@gmail.com</span>
-                                </a>
-
-                                {/* Android App Download Link */}
-                                <div className="pt-3 border-t border-royal-gold/10">
-                                    <a
-                                        href="https://play.google.com/store/apps/details?id=com.kushsharma.visitchittorgarh"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="group flex items-center gap-3 bg-gradient-to-r from-royal-gold/10 to-amber-500/10 border border-royal-gold/30 hover:border-royal-gold px-3.5 py-2.5 rounded-xl transition-all duration-300"
-                                    >
-                                        <svg className="w-6 h-6 text-royal-gold shrink-0 group-hover:scale-110 transition-transform" viewBox="0 0 24 24" fill="currentColor">
-                                            <path d="M3.609 1.814L13.792 12 3.61 22.186a2.372 2.372 0 0 1-.61-1.615V3.429c0-.623.23-1.201.609-1.615zm11.604 11.608l2.677 2.677-12.019 6.94 9.342-9.617zm0-2.844L5.871 1.054l12.019 6.94-2.677 2.584zm1.422 1.422l3.493 2.017c.87.502.87 1.316 0 1.818l-3.493 2.017-2.617-2.617 2.617-3.235z"/>
-                                        </svg>
-                                        <div>
-                                            <div className="text-[9px] uppercase font-semibold text-royal-gold/80 tracking-wider">GET IT ON</div>
-                                            <div className="text-xs font-bold text-white group-hover:text-royal-gold transition-colors">Google Play App</div>
-                                        </div>
-                                    </a>
-                                </div>
-
-                                {/* Feedback Section */}
-                                {window.location.hostname === 'localhost' && (
-                                    <div className="pt-2 border-t border-royal-gold/10">
-                                        <button
-                                            onClick={() => setIsFeedbackOpen(!isFeedbackOpen)}
-                                            className="w-full py-2.5 rounded-xl bg-royal-black/40 border border-royal-gold/10 hover:border-royal-gold/40 hover:text-royal-gold transition-all text-xs font-bold uppercase tracking-widest backdrop-blur-sm"
-                                        >
-                                            {isFeedbackOpen ? "Close Feedback" : "Share Suggestion & Feedback"}
-                                        </button>
-                                        <AnimatePresence>
-                                            {isFeedbackOpen && (
-                                                <motion.div
-                                                    initial={{ opacity: 0, height: 0 }}
-                                                    animate={{ opacity: 1, height: 'auto' }}
-                                                    exit={{ opacity: 0, height: 0 }}
-                                                    transition={{ duration: 0.3 }}
-                                                    className="w-full mt-4 overflow-hidden"
-                                                >
-                                                    <FeedbackForm />
-                                                </motion.div>
-                                            )}
-                                        </AnimatePresence>
-                                    </div>
-                                )}
-                        </div>
+                            <Compass className="w-4 h-4" />
+                            Plan Your Trip
+                        </button>
+                        <a
+                            href={VERIFIED_WA_LINK}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={() => trackWhatsAppClick('footer_top_banner')}
+                            className="px-6 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-2xl text-xs uppercase tracking-wider shadow-lg flex items-center justify-center gap-2 transition-transform hover:scale-105 active:scale-95"
+                        >
+                            <MessageCircle className="w-4 h-4" />
+                            WhatsApp Us
+                        </a>
                     </div>
                 </div>
-            </div>
 
+                {/* 4 Column Footer Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-16 border-b border-white/10">
 
-
-                {/* Bottom Bar */}
-                {/* Bottom Bar - ChittorTech Branding */}
-                <div className="border-t border-royal-gold/10 pt-16 flex flex-col items-center gap-10">
-                    <div className="flex flex-col md:flex-row items-center justify-between gap-8 bg-royal-black/20 p-8 rounded-[2rem] border border-royal-gold/5 backdrop-blur-md max-w-sm md:max-w-full w-full mx-auto shadow-2xl">
-                        {/* Product Badge */}
-                        <div className="flex items-center gap-4 bg-royal-black/40 px-6 py-4 rounded-full border border-royal-gold/20 shadow-inner group transition-all duration-500 hover:border-royal-gold/50 w-full md:w-auto justify-center md:justify-start">
-                            <div className="w-14 h-14 bg-white rounded-2xl p-2 shadow-lg transform group-hover:scale-105 transition-transform shrink-0">
-                                <img src="/chittortech_logo.png" alt="ChittorTech" className="w-full h-full object-contain" />
+                    {/* Column 1: Brand & Identity */}
+                    <div className="space-y-4">
+                        <div className="flex items-center gap-3">
+                            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#C49A32] to-[#A65F3D] p-0.5 shadow-md">
+                                <img
+                                    src="/logo_maharana.webp"
+                                    alt="Visit Chittorgarh"
+                                    className="w-full h-full object-cover rounded-[14px]"
+                                />
                             </div>
-                            <div className="flex flex-col">
-                                <span className="text-[10px] text-royal-white/40 uppercase tracking-[0.2em] font-bold">A Product Of</span>
-                                <span className="text-2xl text-royal-white font-black tracking-tight -mt-1 italic">ChittorTech</span>
-                            </div>
-                        </div>
-
-                        {/* Recognition Badges */}
-                        <div className="flex flex-col gap-3 w-full md:w-auto items-center md:items-start">
-                            <div className="flex items-center gap-3 group">
-                                <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.5)]"></div>
-                                <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider group-hover:text-emerald-300 transition-colors">Recognized by iStart Rajasthan</span>
-                            </div>
-                            <div className="flex items-center gap-3 group">
-                                <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.5)]"></div>
-                                <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider group-hover:text-emerald-300 transition-colors">Registered MSME | Startup India</span>
+                            <div>
+                                <span className="font-serif text-lg font-bold text-white tracking-wider block">
+                                    VISIT CHITTORGARH
+                                </span>
+                                <span className="text-[10px] text-[#C49A32] font-semibold tracking-[0.25em] uppercase">
+                                    Heritage Tourism
+                                </span>
                             </div>
                         </div>
 
-                        {/* Divider */}
-                        <div className="w-full border-t border-dashed border-royal-white/10 md:hidden"></div>
+                        <p className="text-xs text-[#F8F5EF]/70 leading-relaxed">
+                            Official digital gateway to the historic citadel of Chittorgarh. Promoting cultural preservation, authorized Mewari tour guides, and verified local hospitality.
+                        </p>
 
-                        {/* Contact & Copyright */}
-                        <div className="flex flex-col items-center md:items-end gap-6 w-full md:w-auto">
-                            <a href="mailto:visitchittorgarh@gmail.com" className="group flex items-center gap-4 hover:text-royal-gold transition-all duration-300">
-                                <div className="w-10 h-10 rounded-xl bg-royal-gold/5 border border-royal-gold/10 flex items-center justify-center group-hover:border-royal-gold/40 transition-all">
-                                    <span className="text-lg">✉️</span>
-                                </div>
-                                <span className="text-sm font-bold tracking-widest text-royal-white/70 group-hover:text-royal-white lowercase">visitchittorgarh@gmail.com</span>
+                        {/* Social Links */}
+                        <div className="pt-2 flex items-center gap-3">
+                            <a
+                                href="https://www.instagram.com/visitchittorgarh"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#F8F5EF]/80 hover:text-[#C49A32] hover:border-[#C49A32] transition-colors"
+                                aria-label="Visit Chittorgarh on Instagram"
+                            >
+                                <Instagram className="w-4 h-4" />
+                            </a>
+                            <a
+                                href="https://www.facebook.com/visitchittorgarh"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#F8F5EF]/80 hover:text-[#C49A32] hover:border-[#C49A32] transition-colors"
+                                aria-label="Visit Chittorgarh on Facebook"
+                            >
+                                <Facebook className="w-4 h-4" />
+                            </a>
+                            <a
+                                href="https://www.youtube.com/@visitchittorgarh"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#F8F5EF]/80 hover:text-[#C49A32] hover:border-[#C49A32] transition-colors"
+                                aria-label="Visit Chittorgarh on YouTube"
+                            >
+                                <Youtube className="w-4 h-4" />
+                            </a>
+                            <a
+                                href={VERIFIED_WA_LINK}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={() => trackWhatsAppClick('footer_social_wa')}
+                                className="w-9 h-9 rounded-xl bg-emerald-600/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 hover:bg-emerald-600 hover:text-white transition-colors"
+                                aria-label="Chat on WhatsApp"
+                            >
+                                <MessageCircle className="w-4 h-4" />
+                            </a>
+                        </div>
+                    </div>
+
+                    {/* Column 2: Navigation & Experiences */}
+                    <div>
+                        <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-[#C49A32] mb-5">
+                            Destinations & Tours
+                        </h4>
+                        <ul className="space-y-2.5 text-xs text-[#F8F5EF]/75">
+                            <li>
+                                <NavLink to="/attractions" className="hover:text-[#C49A32] transition-colors">
+                                    Chittorgarh Fort & Monuments
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/royal-journeys" className="hover:text-[#C49A32] transition-colors">
+                                    Curated Tour Packages
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/service/guide" className="hover:text-[#C49A32] transition-colors">
+                                    Private Tour Guide Services
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/service/taxi" className="hover:text-[#C49A32] transition-colors">
+                                    Private Taxi & Cab Rentals
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/stays" className="hover:text-[#C49A32] transition-colors">
+                                    Heritage Hotels & Stays
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/flavors" className="hover:text-[#C49A32] transition-colors">
+                                    Authentic Mewari Cuisine
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/vocal-for-local" className="hover:text-[#C49A32] transition-colors">
+                                    Vocal for Local Artisans
+                                </NavLink>
+                            </li>
+                        </ul>
+                    </div>
+
+                    {/* Column 3: Travel Guides & SEO Landing Links */}
+                    <div>
+                        <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-[#C49A32] mb-5">
+                            Travel Guides
+                        </h4>
+                        <ul className="space-y-2.5 text-xs text-[#F8F5EF]/75">
+                            <li>
+                                <NavLink to="/blog" className="hover:text-[#C49A32] transition-colors">
+                                    Travel Blog & Stories
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/how-to-reach" className="hover:text-[#C49A32] transition-colors">
+                                    How to Reach Chittorgarh
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/udaipur-to-chittorgarh-taxi" className="hover:text-[#C49A32] transition-colors">
+                                    Udaipur to Chittorgarh Taxi
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/chittorgarh-1-day-tour" className="hover:text-[#C49A32] transition-colors">
+                                    1-Day Chittorgarh Tour Plan
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/places-to-visit-in-chittorgarh" className="hover:text-[#C49A32] transition-colors">
+                                    Places to Visit in Chittorgarh
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/terms" className="hover:text-[#C49A32] transition-colors">
+                                    Terms & Cancellation Policy
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/feedback" className="hover:text-[#C49A32] transition-colors">
+                                    Guest Feedback & Reviews
+                                </NavLink>
+                            </li>
+                        </ul>
+                    </div>
+
+                    {/* Column 4: Contact & Operations Desk */}
+                    <div>
+                        <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-[#C49A32] mb-5">
+                            Concierge Desk
+                        </h4>
+                        <div className="space-y-3.5 text-xs text-[#F8F5EF]/80">
+                            <div className="flex items-start gap-3">
+                                <MapPin className="w-4 h-4 text-[#C49A32] shrink-0 mt-0.5" />
+                                <span className="leading-relaxed">
+                                    Birla Shiksha Kendra, Industrial Area,<br />Chittorgarh, Rajasthan 312001
+                                </span>
+                            </div>
+
+                            <a
+                                href="tel:+917597451057"
+                                onClick={() => trackPhoneCallClick('footer_contact_link')}
+                                className="flex items-center gap-3 hover:text-[#C49A32] transition-colors"
+                            >
+                                <Phone className="w-4 h-4 text-[#C49A32] shrink-0" />
+                                <span className="font-semibold">{VERIFIED_PHONE}</span>
                             </a>
 
-                            <p className="text-[10px] text-royal-white/40 uppercase tracking-[0.2em] font-bold text-center md:text-right">
-                                © 2026 CHITTORTECH ALL RIGHTS RESERVED
-                            </p>
+                            <a
+                                href={VERIFIED_WA_LINK}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={() => trackWhatsAppClick('footer_wa_link')}
+                                className="flex items-center gap-3 hover:text-emerald-400 transition-colors"
+                            >
+                                <MessageCircle className="w-4 h-4 text-emerald-400 shrink-0" />
+                                <span>WhatsApp: +91 75974 51057</span>
+                            </a>
+
+                            <a
+                                href={`mailto:${VERIFIED_EMAIL}`}
+                                className="flex items-center gap-3 hover:text-[#C49A32] transition-colors"
+                            >
+                                <Mail className="w-4 h-4 text-[#C49A32] shrink-0" />
+                                <span>{VERIFIED_EMAIL}</span>
+                            </a>
+
+                            {/* Android App Link */}
+                            <div className="pt-2">
+                                <a
+                                    href="https://play.google.com/store/apps/details?id=com.kushsharma.visitchittorgarh"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-white/5 border border-white/10 hover:border-[#C49A32] transition-colors"
+                                >
+                                    <svg className="w-5 h-5 text-[#C49A32] shrink-0" viewBox="0 0 24 24" fill="currentColor">
+                                        <path d="M3.609 1.814L13.792 12 3.61 22.186a2.372 2.372 0 0 1-.61-1.615V3.429c0-.623.23-1.201.609-1.615zm11.604 11.608l2.677 2.677-12.019 6.94 9.342-9.617zm0-2.844L5.871 1.054l12.019 6.94-2.677 2.584zm1.422 1.422l3.493 2.017c.87.502.87 1.316 0 1.818l-3.493 2.017-2.617-2.617 2.617-3.235z"/>
+                                    </svg>
+                                    <div className="text-left">
+                                        <div className="text-[8px] uppercase tracking-wider text-[#F8F5EF]/60">Get Official App</div>
+                                        <div className="text-[11px] font-bold text-white">Google Play Store</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Bottom Bar — ChittorTech Branding & Startup Recognition */}
+                <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-[#F8F5EF]/60">
+                    <div className="flex items-center gap-4">
+                        <div className="w-10 h-10 rounded-xl bg-white p-1 shadow-sm shrink-0">
+                            <img src="/chittortech_logo.png" alt="ChittorTech" className="w-full h-full object-contain" />
+                        </div>
+                        <div>
+                            <span className="text-[9px] uppercase tracking-widest text-[#F8F5EF]/40 block">A Product Of</span>
+                            <span className="text-sm font-black text-white italic">ChittorTech</span>
                         </div>
                     </div>
 
-                    {/* Reset Status Button */}
-                    <button
-                        onClick={() => {
-                            localStorage.removeItem('ctt_visited');
-                            window.dispatchEvent(new Event('resetVisitStatus'));
-                            window.scrollTo({ top: 0, behavior: 'smooth' });
-                        }}
-                        className="group relative px-8 py-2.5 overflow-hidden rounded-full border border-royal-gold/5 hover:border-royal-gold/20 transition-all duration-700"
-                    >
-                        <span className="relative z-10 text-[9px] uppercase tracking-[0.5em] text-royal-gold/20 group-hover:text-royal-gold/60 transition-colors">
-                            {t.footer.resetStatus}
+                    <div className="flex flex-wrap items-center justify-center gap-4 text-[11px]">
+                        <span className="inline-flex items-center gap-1.5 text-emerald-400 font-semibold">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Recognized by iStart Rajasthan
                         </span>
-                        <div className="absolute inset-0 bg-royal-gold/2 -translate-x-full group-hover:translate-x-0 transition-transform duration-700"></div>
-                    </button>
+                        <span>•</span>
+                        <span className="inline-flex items-center gap-1.5 text-emerald-400 font-semibold">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Registered MSME | Startup India
+                        </span>
+                    </div>
+
+                    <div className="text-center md:text-right text-[11px]">
+                        <p>© {new Date().getFullYear()} Visit Chittorgarh • ChittorTech. All rights reserved.</p>
+                    </div>
                 </div>
             </div>
         </footer>

@@ -25,7 +25,7 @@ const ReviewModal = ({ isOpen, onClose, entityId, entityName, onSystemUpdate }) 
             setReviewsData(data);
         } catch (err) {
             console.error("Fetch failed:", err);
-            setError("Failed to load reviews. Check your internet or Firebase rules.");
+            setError("Failed to load reviews. Please try again.");
         } finally {
             setLoading(false);
         }
@@ -68,7 +68,7 @@ const ReviewModal = ({ isOpen, onClose, entityId, entityName, onSystemUpdate }) 
             }, 1500);
         } catch (err) {
             console.error("Firestore operation error:", err);
-            setError(`Error: ${err.message || "Failed to save. Check your Firebase Rules."}`);
+            setError(`Notice: ${err.message || "Failed to save review."}`);
         } finally {
             setLoading(false);
         }

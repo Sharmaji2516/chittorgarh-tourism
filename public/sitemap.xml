@@ -4,207 +4,220 @@
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
-  <!-- Homepage — Highest Priority -->
+  <!-- Core Pages -->
   <url>
     <loc>https://visitchittorgarh.in/</loc>
-    <lastmod>2025-07-17</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
-
-  <!-- Attractions — Fort Category -->
   <url>
     <loc>https://visitchittorgarh.in/attractions</loc>
-    <lastmod>2025-07-17</lastmod>
+    <lastmod>2026-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://visitchittorgarh.in/attractions/fort</loc>
-    <lastmod>2025-07-17</lastmod>
+    <loc>https://visitchittorgarh.in/places-to-visit-in-chittorgarh</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://visitchittorgarh.in/chittorgarh-travel-guide</loc>
+    <lastmod>2026-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
 
-  <!-- Attractions — Spiritual Category -->
-  <url>
-    <loc>https://visitchittorgarh.in/attractions/spiritual</loc>
-    <lastmod>2025-07-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
-  </url>
-
-  <!-- Attractions — Nature Category -->
-  <url>
-    <loc>https://visitchittorgarh.in/attractions/nature</loc>
-    <lastmod>2025-07-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.88</priority>
-  </url>
-
-  <!-- Attractions — Scenic Category -->
-  <url>
-    <loc>https://visitchittorgarh.in/attractions/scenic</loc>
-    <lastmod>2025-07-17</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-
-  <!-- Royal Journeys / Itineraries -->
+  <!-- Tour Packages & Itineraries -->
   <url>
     <loc>https://visitchittorgarh.in/royal-journeys</loc>
-    <lastmod>2025-07-17</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.92</priority>
+  </url>
+  <url>
+    <loc>https://visitchittorgarh.in/chittorgarh-1-day-tour</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.90</priority>
   </url>
-
-  <!-- Stays / Hotels -->
   <url>
-    <loc>https://visitchittorgarh.in/stays</loc>
-    <lastmod>2025-07-17</lastmod>
+    <loc>https://visitchittorgarh.in/chittorgarh-2-days-tour</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://visitchittorgarh.in/chittorgarh-3-days-tour</loc>
+    <lastmod>2026-03-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.88</priority>
   </url>
 
-  <!-- Flavors / Food & Restaurants -->
+  <!-- Transportation & Guides -->
   <url>
-    <loc>https://visitchittorgarh.in/flavors</loc>
-    <lastmod>2025-07-17</lastmod>
+    <loc>https://visitchittorgarh.in/service/guide</loc>
+    <lastmod>2026-03-30</lastmod>
     <changefreq>weekly</changefreq>
+    <priority>0.92</priority>
+  </url>
+  <url>
+    <loc>https://visitchittorgarh.in/service/taxi</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.92</priority>
+  </url>
+  <url>
+    <loc>https://visitchittorgarh.in/udaipur-to-chittorgarh-taxi</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.92</priority>
+  </url>
+  <url>
+    <loc>https://visitchittorgarh.in/jaipur-to-chittorgarh-taxi</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.88</priority>
+  </url>
+  <url>
+    <loc>https://visitchittorgarh.in/how-to-reach</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
 
-  <!-- Vocal for Local / Shopping -->
+  <!-- Stays & Dining -->
+  <url>
+    <loc>https://visitchittorgarh.in/stays</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.88</priority>
+  </url>
+  <url>
+    <loc>https://visitchittorgarh.in/flavors</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.88</priority>
+  </url>
   <url>
     <loc>https://visitchittorgarh.in/vocal-for-local</loc>
-    <lastmod>2025-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-
-  <!-- How to Reach / Transport -->
-  <url>
-    <loc>https://visitchittorgarh.in/how-to-reach</loc>
-    <lastmod>2025-07-17</lastmod>
+    <lastmod>2026-03-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.82</priority>
   </url>
-
-  <!-- Mission Services / Local Guides -->
   <url>
     <loc>https://visitchittorgarh.in/mission-services</loc>
-    <lastmod>2025-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.78</priority>
-  </url>
-
-  <!-- Feedback -->
-  <url>
-    <loc>https://visitchittorgarh.in/feedback</loc>
-    <lastmod>2025-07-17</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.40</priority>
-  </url>
-
-  <!-- Terms & Conditions -->
-  <url>
-    <loc>https://visitchittorgarh.in/terms</loc>
-    <lastmod>2025-07-17</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.30</priority>
-  </url>
-
-  <!-- Tourism Services (Dynamic Pages) -->
-  <url>
-    <loc>https://visitchittorgarh.in/service/taxi</loc>
-    <lastmod>2025-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://visitchittorgarh.in/service/guide</loc>
-    <lastmod>2025-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://visitchittorgarh.in/service/hotel</loc>
-    <lastmod>2025-07-17</lastmod>
+    <lastmod>2026-03-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
-  <url>
-    <loc>https://visitchittorgarh.in/service/restaurant</loc>
-    <lastmod>2025-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  <url>
-    <loc>https://visitchittorgarh.in/service/cafe</loc>
-    <lastmod>2025-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://visitchittorgarh.in/service/photographer</loc>
-    <lastmod>2025-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://visitchittorgarh.in/service/horse-photo</loc>
-    <lastmod>2025-07-17</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.75</priority>
-  </url>
-  <!-- Blog Pages — Content Expansion -->
+
+  <!-- Travel Blog & Articles -->
   <url>
     <loc>https://visitchittorgarh.in/blog</loc>
-    <lastmod>2026-07-31</lastmod>
+    <lastmod>2026-03-30</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
+    <priority>0.90</priority>
   </url>
   <url>
     <loc>https://visitchittorgarh.in/blog?post=chittorgarh-fort-complete-guide</loc>
-    <lastmod>2026-07-31</lastmod>
+    <lastmod>2026-03-30</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://visitchittorgarh.in/blog?post=sanwariya-seth-temple-darshan</loc>
-    <lastmod>2026-07-31</lastmod>
+    <lastmod>2026-03-30</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
+    <priority>0.85</priority>
   </url>
   <url>
     <loc>https://visitchittorgarh.in/blog?post=menal-waterfall-nature-guide</loc>
-    <lastmod>2026-07-31</lastmod>
+    <lastmod>2026-03-30</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
+    <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://visitchittorgarh.in/blog?post=kirti-stambh-chittorgarh-guide</loc>
-    <lastmod>2026-07-31</lastmod>
+    <loc>https://visitchittorgarh.in/blog?post=best-time-to-visit-chittorgarh</loc>
+    <lastmod>2026-03-30</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
+    <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://visitchittorgarh.in/blog?post=gaumukh-reservoir-sacred-spring</loc>
-    <lastmod>2026-07-31</lastmod>
+    <loc>https://visitchittorgarh.in/blog?post=1-day-chittorgarh-itinerary</loc>
+    <lastmod>2026-03-30</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://visitchittorgarh.in/blog?post=chittorgarh-travel-guide</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://visitchittorgarh.in/blog?post=udaipur-to-chittorgarh-road-trip-guide</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://visitchittorgarh.in/blog?post=authentic-mewari-cuisine-dal-baati</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.82</priority>
+  </url>
+  <url>
+    <loc>https://visitchittorgarh.in/blog?post=why-hire-authorized-guide-chittorgarh</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.82</priority>
+  </url>
+  <url>
+    <loc>https://visitchittorgarh.in/blog?post=bassi-wildlife-sanctuary-guide</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.82</priority>
+  </url>
+  <url>
+    <loc>https://visitchittorgarh.in/blog?post=chittorgarh-2-days-itinerary-guide</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.82</priority>
   </url>
   <url>
     <loc>https://visitchittorgarh.in/blog?post=thewa-art-jewellery-chittorgarh</loc>
-    <lastmod>2026-07-31</lastmod>
+    <lastmod>2026-03-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
   </url>
   <url>
     <loc>https://visitchittorgarh.in/blog?post=chittorgarh-light-sound-show-guide</loc>
-    <lastmod>2026-07-31</lastmod>
+    <lastmod>2026-03-30</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://visitchittorgarh.in/blog?post=family-travel-guide-chittorgarh</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Legal & Feedback -->
+  <url>
+    <loc>https://visitchittorgarh.in/terms</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.60</priority>
+  </url>
+  <url>
+    <loc>https://visitchittorgarh.in/feedback</loc>
+    <lastmod>2026-03-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.60</priority>
   </url>
 
 </urlset>

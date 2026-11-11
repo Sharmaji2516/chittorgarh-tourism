@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { BookOpen, Calendar, Clock, User, ArrowLeft, ArrowRight, Tag, HelpCircle } from 'lucide-react';
-import { blogPosts } from '../data/blogData';
-import Section from '../components/Section';
+import { Calendar, Clock, User, ArrowLeft, ArrowRight, Search, Share2, MessageCircle, Compass, Check, BookOpen, Tag } from 'lucide-react';
+import { blogPosts, BLOG_CATEGORIES } from '../data/blogData';
 import SEOHead from '../components/SEOHead';
-import QuickInquiryModal from '../components/QuickInquiryModal';
+import { NavLink } from 'react-router-dom';
+import { trackWhatsAppClick } from '../utils/analytics';
 
 const BLOG_SCHEMA = [
   {
     "@context": "https://schema.org",
     "@type": "Blog",
-    "name": "Visit Chittorgarh Travel Blog",
-    "description": "Read local travel stories, historic guides, itinerary tips, and cultural information about Chittorgarh Fort and local attractions.",
+    "name": "Visit Chittorgarh Travel Blog & Mewar Chronicles",
+    "description": "Authentic travel guides, historic fortification analysis, Mewari culinary guides, and itinerary insights for Chittorgarh and Rajasthan.",
     "url": "https://visitchittorgarh.in/blog",
     "publisher": {
       "@type": "Organization",
@@ -27,250 +27,354 @@ const BLOG_SCHEMA = [
     "@type": "BreadcrumbList",
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://visitchittorgarh.in/" },
-      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://visitchittorgarh.in/blog" }
+      { "@type": "ListItem", "position": 2, "name": "Travel Blog", "item": "https://visitchittorgarh.in/blog" }
     ]
   }
 ];
 
-const BlogPage = ({ t }) => {
+const BlogPage = () => {
   const [selectedPost, setSelectedPost] = useState(null);
-  const [activeTag, setActiveTag] = useState('All');
-  const [isInquiryOpen, setIsInquiryOpen] = useState(false);
-  const [inquirySubject, setInquirySubject] = useState('');
+  const [activeCategory, setActiveCategory] = useState('All');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [copied, setCopied] = useState(false);
 
-  // Collect all unique tags
-  const allTags = ['All', ...new Set(blogPosts.flatMap(post => post.tags))];
+  // Filter posts based on category and search
+  const filteredPosts = useMemo(() => {
+    return blogPosts.filter(post => {
+      const matchesCategory = activeCategory === 'All' || post.category === activeCategory || post.tags.includes(activeCategory);
+      const matchesSearch = searchQuery.trim() === '' ||
+        post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        post.summary.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        post.content.toLowerCase().includes(searchQuery.toLowerCase());
+      return matchesCategory && matchesSearch;
+    });
+  }, [activeCategory, searchQuery]);
 
-  // Filter posts
-  const filteredPosts = activeTag === 'All'
-    ? blogPosts
-    : blogPosts.filter(post => post.tags.includes(activeTag));
+  const featuredPost = blogPosts[0];
 
-  const handleOpenInquiry = (subject) => {
-    setInquirySubject(subject);
-    setIsInquiryOpen(true);
+  const handleShare = (post, platform) => {
+    const postUrl = typeof window !== 'undefined' ? `${window.location.origin}/blog?post=${post.id}` : `https://visitchittorgarh.in/blog?post=${post.id}`;
+    const text = `Check out this Chittorgarh travel article: "${post.title}"`;
+
+    if (platform === 'whatsapp') {
+      window.open(`https://wa.me/?text=${encodeURIComponent(text + ' ' + postUrl)}`, '_blank');
+    } else if (platform === 'facebook') {
+      window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(postUrl)}`, '_blank');
+    } else if (platform === 'twitter') {
+      window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(postUrl)}`, '_blank');
+    } else {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(postUrl);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      }
+    }
+  };
+
+  const triggerPlanTrip = () => {
+    window.dispatchEvent(new CustomEvent('openTripPlannerModal'));
   };
 
   return (
-    <div className="min-h-screen text-white bg-royal-black">
+    <div className="min-h-screen bg-[#F8F5EF] text-[#25231F] pt-20 pb-20">
       <SEOHead
-        title={selectedPost ? `${selectedPost.title} | Visit Chittorgarh Blog` : "Chittorgarh Travel Blog | Guides, History & Itineraries"}
-        description={selectedPost ? selectedPost.summary : "Discover the history, top attractions, food and local guides of Chittorgarh. Read expert recommendations and itineraries."}
+        title={selectedPost ? `${selectedPost.title} | Visit Chittorgarh Blog` : "Chittorgarh Travel Blog & Guides | The Mewar Chronicles"}
+        description={selectedPost ? selectedPost.summary : "Explore authentic Chittorgarh travel guides, fort history, Mewari cuisine, Sanwariya Seth pilgrimage tips, and curated itineraries."}
         canonical={selectedPost ? `/blog?post=${selectedPost.id}` : "/blog"}
-        keywords="Chittorgarh blog, Chittorgarh travel guide, Chittorgarh fort history, visit Chittorgarh, Mewar history, Rajputana valor"
-        ogImage={selectedPost ? selectedPost.image : "https://visitchittorgarh.in/Fort.png"}
+        ogImage={selectedPost ? `https://visitchittorgarh.in${selectedPost.image}` : "https://visitchittorgarh.in/Fort.png"}
         schema={BLOG_SCHEMA}
       />
 
-      {/* Header / Hero */}
-      <AnimatePresence mode="wait">
-        {!selectedPost ? (
-          <motion.div
-            key="list-header"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="pt-24 pb-12 text-center px-4"
-          >
-            <h1 className="text-4xl md:text-6xl font-serif text-white mb-4 tracking-wider">
-              {lang => lang === 'hi' ? 'चित्तौड़गढ़ ब्लॉग' : 'The Mewar Chronicles'}
-            </h1>
-            <p className="max-w-2xl mx-auto text-gray-400 font-light italic text-lg mb-8">
-              "Discover local legends, travel guides, and heritage insights straight from the heart of Rajasthan."
-            </p>
-
-            {/* Tag Filters */}
-            <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto px-4 mt-6">
-              {allTags.map((tag) => (
-                <button
-                  key={tag}
-                  onClick={() => setActiveTag(tag)}
-                  className={`px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-300 border ${
-                    activeTag === tag
-                      ? 'bg-royal-gold text-royal-black border-royal-gold shadow-[0_0_15px_rgba(212,175,55,0.4)]'
-                      : 'bg-heritage-charcoal/40 text-white/70 border-white/10 hover:border-royal-gold/40 hover:text-white'
-                  }`}
-                >
-                  {tag}
-                </button>
-              ))}
-            </div>
-          </motion.div>
-        ) : (
-          <motion.div
-            key="detail-header"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="pt-24 pb-6 px-4 max-w-4xl mx-auto"
-          >
-            <button
-              onClick={() => setSelectedPost(null)}
-              className="flex items-center gap-2 text-royal-gold hover:text-white transition-colors duration-300 font-bold uppercase tracking-widest text-xs mb-8 group"
-            >
-              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-              Back to all stories
-            </button>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Main Content Area */}
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-12 pb-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatePresence mode="wait">
           {!selectedPost ? (
             <motion.div
-              key="post-list"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="grid grid-cols-1 md:grid-cols-3 gap-8"
-            >
-              {filteredPosts.map((post) => (
-                <motion.div
-                  key={post.id}
-                  layoutId={`card-${post.id}`}
-                  whileHover={{ y: -10 }}
-                  className="group bg-heritage-charcoal/40 rounded-[2rem] overflow-hidden border border-white/5 hover:border-royal-gold/30 transition-all duration-500 shadow-2xl flex flex-col h-full"
-                >
-                  {/* Image wrapper */}
-                  <div className="h-56 overflow-hidden relative">
-                    <div className="absolute inset-0 bg-gradient-to-t from-heritage-charcoal to-transparent opacity-60 z-10" />
-                    <img
-                      src={post.image}
-                      alt={post.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                    <div className="absolute top-4 left-4 z-20 flex gap-2">
-                      {post.tags.map(t => (
-                        <span key={t} className="px-3 py-1 bg-royal-black/80 backdrop-blur-md text-royal-gold text-[9px] font-black uppercase tracking-widest rounded-full border border-royal-gold/20">
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Body */}
-                  <div className="p-6 flex-grow flex flex-col justify-between">
-                    <div>
-                      {/* Meta Info */}
-                      <div className="flex items-center gap-4 text-white/50 text-[10px] uppercase font-bold tracking-wider mb-3">
-                        <span className="flex items-center gap-1">
-                          <Calendar className="w-3.5 h-3.5 text-royal-gold" />
-                          {post.date}
-                        </span>
-                        <span className="flex items-center gap-1">
-                          <Clock className="w-3.5 h-3.5 text-royal-gold" />
-                          {post.readTime}
-                        </span>
-                      </div>
-
-                      <h3 className="text-xl font-serif text-white mb-3 group-hover:text-royal-gold transition-colors duration-300">
-                        {post.title}
-                      </h3>
-                      <p className="text-gray-400 text-sm font-light leading-relaxed mb-6">
-                        {post.summary}
-                      </p>
-                    </div>
-
-                    <button
-                      onClick={() => setSelectedPost(post)}
-                      className="w-full py-3.5 bg-royal-gold/5 border border-royal-gold/20 hover:bg-royal-gold hover:text-royal-black text-royal-gold text-xs font-bold uppercase tracking-widest rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group/btn"
-                    >
-                      Read full article
-                      <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                    </button>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          ) : (
-            <motion.article
-              key="post-detail"
-              initial={{ opacity: 0, y: 30 }}
+              key="blog-list"
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              className="max-w-3xl mx-auto bg-heritage-charcoal/20 border border-white/5 p-8 md:p-12 rounded-[2.5rem] shadow-2xl"
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.3 }}
             >
               {/* Header */}
-              <div className="flex flex-wrap gap-4 items-center text-white/50 text-xs font-bold uppercase tracking-wider mb-6">
-                <span className="flex items-center gap-1.5">
-                  <User className="w-4 h-4 text-royal-gold" />
-                  By {selectedPost.author}
+              <div className="text-center max-w-3xl mx-auto pt-8 pb-10">
+                <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A32] bg-[#EFE7D9] px-4 py-1.5 rounded-full inline-block mb-3">
+                  The Mewar Chronicles
                 </span>
-                <span className="flex items-center gap-1.5">
-                  <Calendar className="w-4 h-4 text-royal-gold" />
-                  {selectedPost.date}
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Clock className="w-4 h-4 text-royal-gold" />
-                  {selectedPost.readTime}
-                </span>
-              </div>
+                <h1 className="text-3xl sm:text-5xl font-serif font-black text-[#25231F] mb-4">
+                  Chittorgarh Travel Blog
+                </h1>
+                <p className="text-sm sm:text-base text-[#25231F]/70 leading-relaxed font-light">
+                  Expert itineraries, fort history, temple guides, and local Mewari culinary secrets curated by certified local guides and historians.
+                </p>
 
-              <h1 className="text-3xl md:text-5xl font-serif text-white mb-8 tracking-wide leading-tight">
-                {selectedPost.title}
-              </h1>
-
-              {/* Main Image */}
-              <div className="rounded-2xl overflow-hidden mb-10 border border-white/10 shadow-2xl">
-                <img
-                  src={selectedPost.image}
-                  alt={selectedPost.title}
-                  className="w-full object-cover max-h-[400px]"
-                />
-              </div>
-
-              {/* Article Content */}
-              <div className="prose prose-invert max-w-none text-gray-300 font-light leading-relaxed space-y-6 text-base md:text-lg">
-                {selectedPost.content.split('\n\n').map((paragraph, index) => {
-                  if (paragraph.startsWith('###')) {
-                    return (
-                      <h3 key={index} className="text-xl md:text-2xl font-serif text-royal-gold font-bold pt-4 mb-2">
-                        {paragraph.replace('###', '').trim()}
-                      </h3>
-                    );
-                  }
-                  if (paragraph.startsWith('1.') || paragraph.startsWith('-')) {
-                    return (
-                      <ul key={index} className="list-disc pl-6 space-y-2 text-gray-300">
-                        {paragraph.split('\n').map((line, i) => (
-                          <li key={i}>{line.replace(/^-\s*|^[0-9]+\.\s*/, '').trim()}</li>
-                        ))}
-                      </ul>
-                    );
-                  }
-                  return (
-                    <p key={index} className="whitespace-pre-line">
-                      {paragraph}
-                    </p>
-                  );
-                })}
-              </div>
-
-              {/* Inquiry Action Box */}
-              <div className="mt-16 p-8 bg-royal-gold/5 rounded-[2rem] border border-royal-gold/20 flex flex-col md:flex-row items-center justify-between gap-6">
-                <div>
-                  <h4 className="text-lg font-serif text-white font-bold mb-2">Planning a trip to Chittorgarh?</h4>
-                  <p className="text-sm text-gray-400 font-light">Get connected with local guides, transport, and handpicked stays.</p>
+                {/* Search Input */}
+                <div className="mt-8 max-w-xl mx-auto relative">
+                  <Search className="w-5 h-5 text-[#25231F]/40 absolute left-4 top-3.5" />
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Search articles, e.g. Fort, Sanwariya Seth, Itinerary..."
+                    className="w-full pl-12 pr-4 py-3 bg-white border border-[#EFE7D9] rounded-2xl text-sm text-[#25231F] focus:outline-none focus:border-[#C49A32] shadow-sm transition-colors"
+                  />
                 </div>
-                <button
-                  onClick={() => handleOpenInquiry(`Inquiry about: ${selectedPost.title}`)}
-                  className="px-6 py-3.5 bg-royal-gold text-royal-black text-xs font-bold uppercase tracking-widest rounded-xl hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all duration-300 shrink-0"
-                >
-                  Ask local experts
-                </button>
               </div>
-            </motion.article>
+
+              {/* Category Filter Pills */}
+              <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
+                {BLOG_CATEGORIES.map((cat) => (
+                  <button
+                    key={cat}
+                    onClick={() => setActiveCategory(cat)}
+                    className={`px-4 py-2 rounded-xl text-xs font-bold tracking-wide transition-all ${
+                      activeCategory === cat
+                        ? 'bg-[#25231F] text-white shadow-md'
+                        : 'bg-white text-[#25231F]/70 border border-[#EFE7D9] hover:border-[#C49A32] hover:text-[#25231F]'
+                    }`}
+                  >
+                    {cat}
+                  </button>
+                ))}
+              </div>
+
+              {/* Featured Article Spotlight (when no active search and category is All) */}
+              {!searchQuery && activeCategory === 'All' && (
+                <div className="mb-14">
+                  <div
+                    onClick={() => { setSelectedPost(featuredPost); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                    className="group bg-white rounded-3xl border border-[#EFE7D9] overflow-hidden shadow-heritage hover:border-[#C49A32] transition-all cursor-pointer grid grid-cols-1 lg:grid-cols-12"
+                  >
+                    <div className="lg:col-span-7 h-64 sm:h-80 lg:h-full relative overflow-hidden">
+                      <img
+                        src={featuredPost.image}
+                        alt={featuredPost.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      />
+                      <div className="absolute top-4 left-4 bg-[#C49A32] text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full shadow-sm">
+                        Featured Guide
+                      </div>
+                    </div>
+                    <div className="lg:col-span-5 p-6 sm:p-10 flex flex-col justify-between">
+                      <div>
+                        <div className="flex items-center gap-3 text-xs text-[#25231F]/60 mb-3">
+                          <span className="text-[#A65F3D] font-bold uppercase tracking-wider">{featuredPost.category}</span>
+                          <span>•</span>
+                          <span className="flex items-center gap-1"><Clock className="w-3.5 h-3.5" /> {featuredPost.readTime}</span>
+                        </div>
+                        <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#25231F] group-hover:text-[#A65F3D] transition-colors leading-tight mb-4">
+                          {featuredPost.title}
+                        </h2>
+                        <p className="text-xs sm:text-sm text-[#25231F]/70 leading-relaxed mb-6">
+                          {featuredPost.summary}
+                        </p>
+                      </div>
+                      <div className="flex items-center justify-between pt-4 border-t border-[#EFE7D9]">
+                        <span className="text-xs font-semibold text-[#25231F]/70">{featuredPost.date}</span>
+                        <span className="text-xs font-bold text-[#C49A32] group-hover:translate-x-1 transition-transform flex items-center gap-1">
+                          Read Full Guide <ArrowRight className="w-3.5 h-3.5" />
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Articles Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {filteredPosts.map((post) => (
+                  <article
+                    key={post.id}
+                    onClick={() => { setSelectedPost(post); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+                    className="group bg-white rounded-3xl border border-[#EFE7D9] overflow-hidden shadow-heritage hover:border-[#C49A32] hover:-translate-y-1 transition-all cursor-pointer flex flex-col h-full"
+                  >
+                    <div className="h-52 relative overflow-hidden bg-[#EFE7D9]">
+                      <img
+                        src={post.image}
+                        alt={post.title}
+                        loading="lazy"
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      />
+                      <span className="absolute top-3 left-3 bg-[#25231F]/80 backdrop-blur-sm text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">
+                        {post.category || 'Guide'}
+                      </span>
+                    </div>
+
+                    <div className="p-6 flex flex-col flex-1 justify-between">
+                      <div>
+                        <div className="flex items-center gap-2 text-[11px] text-[#25231F]/60 mb-2">
+                          <Calendar className="w-3.5 h-3.5" />
+                          <span>{post.date}</span>
+                          <span>•</span>
+                          <Clock className="w-3.5 h-3.5" />
+                          <span>{post.readTime}</span>
+                        </div>
+                        <h3 className="text-lg font-serif font-bold text-[#25231F] group-hover:text-[#A65F3D] transition-colors leading-snug mb-3">
+                          {post.title}
+                        </h3>
+                        <p className="text-xs text-[#25231F]/70 line-clamp-3 leading-relaxed mb-4">
+                          {post.summary}
+                        </p>
+                      </div>
+
+                      <div className="pt-4 border-t border-[#EFE7D9] flex items-center justify-between text-xs">
+                        <span className="text-[#25231F]/60 font-medium">{post.author}</span>
+                        <span className="font-bold text-[#C49A32] group-hover:text-[#A65F3D] transition-colors flex items-center gap-1">
+                          Read <ArrowRight className="w-3.5 h-3.5" />
+                        </span>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
+
+              {filteredPosts.length === 0 && (
+                <div className="text-center py-16 bg-white rounded-3xl border border-[#EFE7D9] p-8 max-w-md mx-auto">
+                  <p className="text-sm text-[#25231F]/70 mb-4">No articles found matching "{searchQuery}".</p>
+                  <button
+                    onClick={() => { setSearchQuery(''); setActiveCategory('All'); }}
+                    className="px-6 py-2.5 bg-[#C49A32] text-white rounded-xl text-xs font-bold uppercase tracking-wider"
+                  >
+                    Reset Filter
+                  </button>
+                </div>
+              )}
+            </motion.div>
+          ) : (
+            /* Single Article Reader View */
+            <motion.div
+              key="blog-detail"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.3 }}
+              className="max-w-4xl mx-auto"
+            >
+              {/* Back Button */}
+              <button
+                onClick={() => setSelectedPost(null)}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-xl border border-[#EFE7D9] text-xs font-bold uppercase tracking-wider text-[#25231F] hover:bg-[#EFE7D9] transition-colors mb-6 shadow-sm"
+              >
+                <ArrowLeft className="w-4 h-4" /> Back to All Articles
+              </button>
+
+              <article className="bg-white rounded-3xl border border-[#EFE7D9] p-6 sm:p-12 shadow-heritage overflow-hidden">
+                {/* Meta Header */}
+                <div className="flex flex-wrap items-center gap-3 text-xs text-[#25231F]/60 mb-4">
+                  <span className="bg-[#EFE7D9] text-[#A65F3D] font-bold uppercase tracking-wider px-3 py-1 rounded-full">
+                    {selectedPost.category || 'Mewar Heritage'}
+                  </span>
+                  <span>•</span>
+                  <span className="flex items-center gap-1"><Calendar className="w-3.5 h-3.5" /> {selectedPost.date}</span>
+                  <span>•</span>
+                  <span className="flex items-center gap-1"><Clock className="w-3.5 h-3.5" /> {selectedPost.readTime}</span>
+                  <span>•</span>
+                  <span className="flex items-center gap-1"><User className="w-3.5 h-3.5" /> {selectedPost.author}</span>
+                </div>
+
+                <h1 className="text-2xl sm:text-4xl lg:text-5xl font-serif font-black text-[#25231F] leading-tight mb-6">
+                  {selectedPost.title}
+                </h1>
+
+                {/* Hero Image */}
+                <div className="w-full h-64 sm:h-96 rounded-2xl overflow-hidden mb-8 border border-[#EFE7D9]">
+                  <img
+                    src={selectedPost.image}
+                    alt={selectedPost.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+
+                {/* Article Body */}
+                <div className="prose prose-stone max-w-none text-sm sm:text-base leading-relaxed text-[#25231F]/85 space-y-4">
+                  {selectedPost.content.split('\n\n').map((block, idx) => {
+                    if (block.startsWith('### ')) {
+                      return (
+                        <h3 key={idx} className="text-xl sm:text-2xl font-serif font-bold text-[#25231F] mt-8 mb-3">
+                          {block.replace('### ', '')}
+                        </h3>
+                      );
+                    }
+                    if (block.startsWith('- ') || block.startsWith('1. ')) {
+                      return (
+                        <div key={idx} className="pl-4 border-l-2 border-[#C49A32] my-4 space-y-1.5 text-xs sm:text-sm">
+                          {block.split('\n').map((line, lIdx) => (
+                            <p key={lIdx} className="text-[#25231F]/80">
+                              {line.replace(/^[0-9]\.\s|\-\s/, '')}
+                            </p>
+                          ))}
+                        </div>
+                      );
+                    }
+                    return (
+                      <p key={idx} className="text-[#25231F]/85">
+                        {block}
+                      </p>
+                    );
+                  })}
+                </div>
+
+                {/* Social Share & Package Promotion Box */}
+                <div className="mt-12 pt-8 border-t border-[#EFE7D9] flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#25231F]/60 flex items-center gap-1">
+                      <Share2 className="w-4 h-4" /> Share Article:
+                    </span>
+                    <button
+                      onClick={() => handleShare(selectedPost, 'whatsapp')}
+                      className="p-2 rounded-xl bg-emerald-50 text-emerald-700 hover:bg-emerald-100 transition-colors"
+                      title="Share on WhatsApp"
+                    >
+                      <MessageCircle className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={() => handleShare(selectedPost, 'twitter')}
+                      className="p-2 rounded-xl bg-sky-50 text-sky-700 hover:bg-sky-100 transition-colors text-xs font-bold"
+                      title="Share on X / Twitter"
+                    >
+                      X
+                    </button>
+                    <button
+                      onClick={() => handleShare(selectedPost, 'copy')}
+                      className="p-2 rounded-xl bg-[#F8F5EF] text-[#25231F] hover:bg-[#EFE7D9] transition-colors text-xs font-bold"
+                      title="Copy Article Link"
+                    >
+                      {copied ? <Check className="w-4 h-4 text-emerald-600" /> : 'Copy'}
+                    </button>
+                  </div>
+
+                  {/* Plan Trip CTA */}
+                  <button
+                    onClick={triggerPlanTrip}
+                    className="px-6 py-3 bg-[#C49A32] hover:bg-[#b08728] text-white rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2 shadow-md"
+                  >
+                    <Compass className="w-4 h-4" />
+                    Plan This Tour
+                  </button>
+                </div>
+
+                {/* Related Tour Package Banner */}
+                {selectedPost.relatedPackage && (
+                  <div className="mt-8 p-6 bg-gradient-to-r from-[#EFE7D9] via-[#F8F5EF] to-[#EFE7D9] rounded-2xl border border-[#C49A32]/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div>
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-[#A65F3D]">Recommended Experience</span>
+                      <h4 className="text-base sm:text-lg font-serif font-bold text-[#25231F]">
+                        {selectedPost.relatedPackage}
+                      </h4>
+                      <p className="text-xs text-[#25231F]/70">Explore with verified Mewari guides, private transport & authentic tastings.</p>
+                    </div>
+                    <NavLink
+                      to={selectedPost.relatedPackageLink || '/royal-journeys'}
+                      className="px-5 py-2.5 bg-[#25231F] hover:bg-[#A65F3D] text-white rounded-xl text-xs font-bold uppercase tracking-wider shrink-0 transition-colors"
+                    >
+                      View Package
+                    </NavLink>
+                  </div>
+                )}
+              </article>
+            </motion.div>
           )}
         </AnimatePresence>
       </div>
-
-      <QuickInquiryModal
-        isOpen={isInquiryOpen}
-        onClose={() => setIsInquiryOpen(false)}
-        subject={inquirySubject}
-      />
     </div>
   );
 };
