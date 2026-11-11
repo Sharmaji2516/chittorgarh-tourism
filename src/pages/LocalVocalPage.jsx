@@ -5,14 +5,14 @@ import SEOHead from '../components/SEOHead';
 import { trackWhatsAppClick } from '../utils/analytics';
 
 const LOCAL_VOCAL_SCHEMA = [
-  {
-    "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "Chittorgarh Handicrafts & Local Shopping",
-    "description": "Explore authentic Chittorgarh handicrafts — Thewa jewelry, Daabu printed fabrics, Rajasthani miniature paintings and local artisan souvenirs.",
-    "url": "https://visitchittorgarh.in/vocal-for-local",
-    "image": "https://visitchittorgarh.in/Fort.webp"
-  }
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Chittorgarh Handicrafts & Local Artisans Guide",
+        "description": "Explore authentic Chittorgarh handicrafts — Thewa jewelry, Daabu printed fabrics, Rajasthani miniature paintings and local artisan souvenirs.",
+        "url": "https://www.visitchittorgarh.in/vocal-for-local",
+        "image": "https://www.visitchittorgarh.in/Fort.webp"
+    }
 ];
 
 const LocalVocalPage = ({ t, filteredLocalVocal = [] }) => {

@@ -45,16 +45,10 @@ export const INTERNATIONAL_SCHEMAS = [
     "@context": "https://schema.org",
     "@type": "TravelAgency",
     "name": "Visit Chittorgarh International Portal",
-    "url": "https://visitchittorgarh.in",
-    "image": "https://visitchittorgarh.in/Fort.png",
-    "description": "Official global tourism guide for Chittorgarh Fort, Rajasthan, India. Serving international tourists from over 195 countries with guided tours, transport, heritage hotels, and custom travel itineraries.",
-    "areaServed": GLOBAL_COUNTRIES.map(code => ({
-      "@type": "Country",
-      "identifier": code
-    })),
-    "knowsLanguage": ["English", "Hindi", "French", "German", "Spanish", "Japanese", "Russian", "Arabic"],
-    "currenciesAccepted": "INR, USD, EUR, GBP, AUD, CAD, AED, JPY, CHF",
-    "paymentAccepted": "Credit Card, Debit Card, Wire Transfer, UPI",
+    "url": "https://www.visitchittorgarh.in/",
+    "image": "https://www.visitchittorgarh.in/Fort.webp",
+    "description": "Official global tourism guide for Chittorgarh Fort, Rajasthan, India. Serving international tourists with guided tours, transport, heritage stays, and custom travel itineraries.",
+    "knowsLanguage": ["English", "Hindi"],
     "priceRange": "$$"
   },
   {
@@ -62,14 +56,10 @@ export const INTERNATIONAL_SCHEMAS = [
     "@type": "TouristDestination",
     "name": "Chittorgarh Fort UNESCO World Heritage Site",
     "description": "India's largest fort complex located in Chittorgarh, Rajasthan. Featuring Vijay Stambh, Kirti Stambh, Padmini Palace, Meera Temple, and ancient Mewari Rajput heritage.",
-    "url": "https://visitchittorgarh.in",
+    "url": "https://www.visitchittorgarh.in/",
     "audience": {
       "@type": "Audience",
-      "audienceType": "International Tourists & Heritage Travelers (195+ Countries)",
-      "geographicArea": {
-        "@type": "AdministrativeArea",
-        "name": "Worldwide / Global (195 Countries)"
-      }
+      "audienceType": "International Tourists & Heritage Travelers"
     },
     "touristType": [
       "Heritage Tourist",
@@ -82,22 +72,22 @@ export const INTERNATIONAL_SCHEMAS = [
       {
         "@type": "TouristAttraction",
         "name": "Chittorgarh Fort",
-        "url": "https://visitchittorgarh.in/attractions/fort"
+        "url": "https://www.visitchittorgarh.in/chittorgarh-fort"
       },
       {
         "@type": "TouristAttraction",
         "name": "Vijay Stambh (Tower of Victory)",
-        "url": "https://visitchittorgarh.in/attractions/fort"
+        "url": "https://www.visitchittorgarh.in/vijay-stambh"
       },
       {
         "@type": "TouristAttraction",
-        "name": "Padmini Palace",
-        "url": "https://visitchittorgarh.in/attractions/fort"
+        "name": "Rani Padmini Palace",
+        "url": "https://www.visitchittorgarh.in/rani-padmini-palace"
       },
       {
         "@type": "TouristAttraction",
         "name": "Sanwariya Seth Temple",
-        "url": "https://visitchittorgarh.in/attractions/spiritual"
+        "url": "https://www.visitchittorgarh.in/sanwariya-seth-temple"
       }
     ]
   }
@@ -106,13 +96,6 @@ export const INTERNATIONAL_SCHEMAS = [
 const InternationalSEO = () => {
   return (
     <Helmet>
-      {/* Expanded 195 Country Target & Keyword Meta Tags */}
-      <meta name="coverage" content="Worldwide (195+ Countries)" />
-      <meta name="distribution" content="Global" />
-      <meta name="target_country" content={GLOBAL_COUNTRIES.join(", ")} />
-      <meta name="keywords" content={INTERNATIONAL_KEYWORDS} />
-
-      {/* JSON-LD Schemas for International Targeting */}
       {INTERNATIONAL_SCHEMAS.map((schemaObj, idx) => (
         <script key={`intl-schema-${idx}`} type="application/ld+json">
           {JSON.stringify(schemaObj)}

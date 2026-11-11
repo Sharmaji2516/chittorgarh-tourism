@@ -200,6 +200,21 @@ const Footer = () => {
                                 </NavLink>
                             </li>
                             <li>
+                                <NavLink to="/chittorgarh-fort" className="hover:text-[#C49A32] transition-colors">
+                                    Chittorgarh Fort Complete Guide
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/chittorgarh-fort-travel-guide-international-tourists" className="hover:text-[#C49A32] transition-colors">
+                                    International Visitor Guide
+                                </NavLink>
+                            </li>
+                            <li>
+                                <NavLink to="/destinations-and-routes" className="hover:text-[#C49A32] transition-colors font-semibold text-[#DFBA5A]">
+                                    All City, State &amp; Global Routes →
+                                </NavLink>
+                            </li>
+                            <li>
                                 <NavLink to="/terms" className="hover:text-[#C49A32] transition-colors">
                                     Terms & Cancellation Policy
                                 </NavLink>

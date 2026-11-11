@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host",
-    "build": "vite build",
+    "build": "vite build && node scripts/generate-seo-artifacts.mjs",
+    "seo:validate": "node scripts/generate-seo-artifacts.mjs --validate-only",
     "lint": "eslint .",
     "preview": "vite preview",
     "deploy:firebase": "npm run build && firebase deploy --only hosting"

@@ -35,6 +35,8 @@ const ChittorgarhTwoDaysTour = lazy(() => import('./pages/seo/ChittorgarhTwoDays
 const ChittorgarhThreeDaysTour = lazy(() => import('./pages/seo/ChittorgarhThreeDaysTour'));
 const PlacesToVisitPage = lazy(() => import('./pages/seo/PlacesToVisitPage'));
 const ChittorgarhTravelGuidePage = lazy(() => import('./pages/seo/ChittorgarhTravelGuidePage'));
+const SEODirectoryPage = lazy(() => import('./pages/seo/SEODirectoryPage'));
+const SEODynamicPage = lazy(() => import('./pages/seo/SEODynamicPage'));
 
 // Google Ads Campaign Landing Page
 const CampaignLandingPage = lazy(() => import('./pages/landing/CampaignLandingPage'));
@@ -133,6 +135,7 @@ const MainContent = () => {
             <Route path="/chittorgarh-3-days-tour" element={<ChittorgarhThreeDaysTour />} />
             <Route path="/places-to-visit-in-chittorgarh" element={<PlacesToVisitPage />} />
             <Route path="/chittorgarh-travel-guide" element={<ChittorgarhTravelGuidePage />} />
+            <Route path="/destinations-and-routes" element={<SEODirectoryPage />} />
 
             {/* Google Ads Paid Marketing Landing Pages */}
             <Route path="/landing/:campaignType" element={<CampaignLandingPage />} />
@@ -141,6 +144,9 @@ const MainContent = () => {
             <Route path="/admin" element={<AdminPage />} />
             <Route path="/verify/:id" element={<VerificationPage />} />
             <Route path="/staff-verify" element={<StaffVerificationPage />} />
+
+            {/* Structured City, State, Country, Attraction & Package SEO Routes */}
+            <Route path="/:seoSlug" element={<SEODynamicPage />} />
 
             {/* 404 Route */}
             <Route path="*" element={<NotFoundPage />} />

@@ -25,6 +25,7 @@ const StaffVerificationPage = () => {
                 title="Staff & Partner Verification Portal | Visit Chittorgarh"
                 description="Official staff, tour guide, and fleet partner verification desk for Visit Chittorgarh tourism."
                 canonical="/staff-verify"
+                noIndex={true}
             />
 
             <div className="max-w-md w-full bg-white rounded-3xl p-8 border border-[#EFE7D9] shadow-xl text-center">

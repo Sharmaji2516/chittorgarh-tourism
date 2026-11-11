@@ -10,8 +10,17 @@ const MISSION_SCHEMA = [
     "@type": "LocalBusiness",
     "name": "Visit Chittorgarh — Tourism Services & Guide Council",
     "description": "Authorized local guides, certified tourist assistance, fort walkthroughs, sanitized cab fleet and curated Rajasthan experiences.",
-    "url": "https://visitchittorgarh.in/mission-services",
-    "image": "https://visitchittorgarh.in/Fort.webp"
+    "url": "https://www.visitchittorgarh.in/mission-services",
+    "image": "https://www.visitchittorgarh.in/Fort.webp",
+    "telephone": "+91-7597451057",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Birla Shiksha Kendra, Industrial Area",
+      "addressLocality": "Chittorgarh",
+      "addressRegion": "Rajasthan",
+      "postalCode": "312001",
+      "addressCountry": "IN"
+    }
   }
 ];
 

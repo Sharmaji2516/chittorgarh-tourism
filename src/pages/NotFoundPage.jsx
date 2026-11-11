@@ -10,6 +10,7 @@ const NotFoundPage = () => {
         title="404 — Page Not Found | Visit Chittorgarh"
         description="The requested page could not be found on Visit Chittorgarh. Explore Chittorgarh Fort, tour packages, or return to home."
         canonical="/404"
+        noIndex={true}
       />
 
       <div className="max-w-md w-full bg-white rounded-3xl p-8 sm:p-12 border border-[#EFE7D9] shadow-heritage text-center">

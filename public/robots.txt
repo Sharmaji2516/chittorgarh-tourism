@@ -1,44 +1,18 @@
-# robots.txt — visitchittorgarh.in
-# Official Chittorgarh Tourism Web Portal
+# robots.txt — www.visitchittorgarh.in
+# Official Visit Chittorgarh Tourism Portal
 
 User-agent: *
 Allow: /
-Allow: /attractions
-Allow: /attractions/*
-Allow: /places-to-visit-in-chittorgarh
-Allow: /chittorgarh-travel-guide
-Allow: /royal-journeys
-Allow: /packages
-Allow: /tour-packages
-Allow: /chittorgarh-1-day-tour
-Allow: /chittorgarh-2-days-tour
-Allow: /chittorgarh-3-days-tour
-Allow: /service/*
-Allow: /udaipur-to-chittorgarh-taxi
-Allow: /udaipur-to-chittorgarh-day-trip
-Allow: /chittorgarh-fort-timings-tickets
-Allow: /chittorgarh-fort-timings-entry-fee-tickets
-Allow: /udaipur-to-jaipur-via-chittorgarh-tour
-Allow: /udaipur-jaipur-via-chittorgarh-tour
-Allow: /jaipur-to-chittorgarh-taxi
-Allow: /stays
-Allow: /flavors
-Allow: /vocal-for-local
-Allow: /how-to-reach
-Allow: /mission-services
-Allow: /blog
-Allow: /blog/*
-Allow: /feedback
-Allow: /terms
 
-# Block internal operational routes
+# Block operational, private & paid campaign routes
 Disallow: /admin
 Disallow: /admin/
 Disallow: /staff-verify
 Disallow: /staff-verify/
 Disallow: /verify/
+Disallow: /landing/
 
-# Block duplicate query crawler traps
+# Block duplicate query traps
 Disallow: /*?*print=
 Disallow: /*?*debug=
 

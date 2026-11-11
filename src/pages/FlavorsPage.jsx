@@ -9,12 +9,11 @@ import { trackWhatsAppClick } from '../utils/analytics';
 const FLAVORS_SCHEMA = [
   {
     "@context": "https://schema.org",
-    "@type": "Restaurant",
-    "name": "Chittorgarh Local Food & Dining Guide",
+    "@type": "CollectionPage",
+    "name": "Chittorgarh Local Food & Mewari Dining Guide",
     "description": "Discover authentic Rajasthani food in Chittorgarh — Dal Baati Churma, local sweet vendors, rooftop cafes and heritage restaurants.",
-    "url": "https://visitchittorgarh.in/flavors",
-    "image": "https://visitchittorgarh.in/Fort.webp",
-    "servesCuisine": ["Rajasthani", "Mewari", "Indian"]
+    "url": "https://www.visitchittorgarh.in/flavors",
+    "image": "https://www.visitchittorgarh.in/Fort.webp"
   }
 ];
 

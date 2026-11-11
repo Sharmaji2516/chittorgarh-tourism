@@ -11,8 +11,8 @@ const JOURNEYS_SCHEMA = [
     "@type": "TouristTrip",
     "name": "Chittorgarh Tour Packages & Guided Itineraries",
     "description": "Curated 1-day, 2-day and 3-day Chittorgarh tour packages with expert local guides, sanitized cabs and heritage experiences.",
-    "url": "https://visitchittorgarh.in/royal-journeys",
-    "image": "https://visitchittorgarh.in/Fort.webp"
+    "url": "https://www.visitchittorgarh.in/royal-journeys",
+    "image": "https://www.visitchittorgarh.in/Fort.webp"
   }
 ];
 

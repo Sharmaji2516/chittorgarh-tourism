@@ -31,6 +31,7 @@ const VerificationPage = () => {
                 title="Voucher & Tour Verification | Visit Chittorgarh"
                 description="Verify official Visit Chittorgarh booking vouchers, tour passes, and private guide credentials."
                 canonical={`/verify/${id || 'tour'}`}
+                noIndex={true}
             />
 
             <div className="max-w-md w-full bg-white rounded-3xl p-8 border border-[#EFE7D9] shadow-xl text-center">

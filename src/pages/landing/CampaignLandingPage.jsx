@@ -106,6 +106,7 @@ const CampaignLandingPage = ({ type: propType }) => {
         title={`${data.title} | Visit Chittorgarh Official`}
         description={data.subtitle}
         canonical={data.canonical}
+        noIndex={true}
       />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">

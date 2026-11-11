@@ -17,11 +17,31 @@ const VERIFIED_WA_LINK = "https://wa.me/917597451057?text=Namaste!%20I%20would%2
 const HOME_SCHEMAS = [
   {
     "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Visit Chittorgarh — ChittorTech",
+    "url": "https://www.visitchittorgarh.in/",
+    "logo": "https://www.visitchittorgarh.in/logo_maharana.png",
+    "email": "visitchittorgarh@gmail.com",
+    "telephone": "+91-7597451057",
+    "sameAs": [
+      "https://www.instagram.com/visitchittorgarh",
+      "https://www.facebook.com/visitchittorgarh",
+      "https://www.youtube.com/@visitchittorgarh"
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Visit Chittorgarh",
+    "url": "https://www.visitchittorgarh.in/"
+  },
+  {
+    "@context": "https://schema.org",
     "@type": "TouristDestination",
     "name": "Chittorgarh Fort & Heritage City",
     "description": "UNESCO World Heritage Site in Rajasthan, India. Home to the legendary Chittorgarh Fort, Vijay Stambha, and rich Rajputana heritage.",
-    "url": "https://visitchittorgarh.in",
-    "image": "https://visitchittorgarh.in/Fort.webp",
+    "url": "https://www.visitchittorgarh.in/",
+    "image": "https://www.visitchittorgarh.in/Fort.webp",
     "geo": {
       "@type": "GeoCoordinates",
       "latitude": "24.8887",
@@ -33,10 +53,9 @@ const HOME_SCHEMAS = [
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
     "name": "Visit Chittorgarh",
-    "image": "https://visitchittorgarh.in/Fort.webp",
-    "url": "https://visitchittorgarh.in",
+    "image": "https://www.visitchittorgarh.in/Fort.webp",
+    "url": "https://www.visitchittorgarh.in/",
     "telephone": "+91-7597451057",
-    "priceRange": "$$",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Birla Shiksha Kendra, Industrial Area",
@@ -190,7 +209,7 @@ const HomePage = () => {
         title="Visit Chittorgarh | Official Tourism Guide, Fort Tours & Private Taxi"
         description="Plan your visit to Chittorgarh Fort, India's largest citadel. Book authorized Mewari guides, sanitized private cabs, heritage stays & authentic Rajasthani dining."
         canonical="/"
-        ogImage="https://visitchittorgarh.in/Fort.webp"
+        ogImage="https://www.visitchittorgarh.in/Fort.webp"
         schema={HOME_SCHEMAS}
       />
 

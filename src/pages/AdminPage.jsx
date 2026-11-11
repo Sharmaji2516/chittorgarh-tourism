@@ -25,6 +25,7 @@ const AdminPage = () => {
                 title="Admin Concierge Desk | Visit Chittorgarh"
                 description="Administrative operational portal for Visit Chittorgarh."
                 canonical="/admin"
+                noIndex={true}
             />
 
             <div className="max-w-2xl w-full bg-white rounded-3xl p-8 border border-[#EFE7D9] shadow-xl">

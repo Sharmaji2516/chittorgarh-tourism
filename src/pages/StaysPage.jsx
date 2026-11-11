@@ -7,19 +7,11 @@ import { trackWhatsAppClick } from '../utils/analytics';
 const STAYS_SCHEMA = [
   {
     "@context": "https://schema.org",
-    "@type": "LodgingBusiness",
-    "name": "Chittorgarh Hotels & Heritage Stays",
+    "@type": "CollectionPage",
+    "name": "Chittorgarh Hotels & Heritage Stays Directory",
     "description": "Handpicked hotels and heritage properties in Chittorgarh — from luxury heritage havelis to budget-friendly guesthouses, with local concierge services.",
-    "url": "https://visitchittorgarh.in/stays",
-    "image": "https://visitchittorgarh.in/Fort.webp",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Chittorgarh",
-      "addressRegion": "Rajasthan",
-      "addressCountry": "IN",
-      "postalCode": "312001"
-    },
-    "priceRange": "₹₹–₹₹₹"
+    "url": "https://www.visitchittorgarh.in/stays",
+    "image": "https://www.visitchittorgarh.in/Fort.webp"
   }
 ];
 

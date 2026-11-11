@@ -12,13 +12,13 @@ const BLOG_SCHEMA = [
     "@type": "Blog",
     "name": "Visit Chittorgarh Travel Blog & Mewar Chronicles",
     "description": "Authentic travel guides, historic fortification analysis, Mewari culinary guides, and itinerary insights for Chittorgarh and Rajasthan.",
-    "url": "https://visitchittorgarh.in/blog",
+    "url": "https://www.visitchittorgarh.in/blog",
     "publisher": {
       "@type": "Organization",
       "name": "Visit Chittorgarh",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://visitchittorgarh.in/logo_maharana.png"
+        "url": "https://www.visitchittorgarh.in/logo_maharana.png"
       }
     }
   },
@@ -26,8 +26,8 @@ const BLOG_SCHEMA = [
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
     "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://visitchittorgarh.in/" },
-      { "@type": "ListItem", "position": 2, "name": "Travel Blog", "item": "https://visitchittorgarh.in/blog" }
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.visitchittorgarh.in/" },
+      { "@type": "ListItem", "position": 2, "name": "Travel Blog", "item": "https://www.visitchittorgarh.in/blog" }
     ]
   }
 ];
@@ -91,14 +91,50 @@ const BlogPage = () => {
     window.dispatchEvent(new CustomEvent('openTripPlannerModal'));
   };
 
+  const activeSchema = selectedPost
+    ? [
+        {
+          "@context": "https://schema.org",
+          "@type": "BlogPosting",
+          "headline": selectedPost.title,
+          "description": selectedPost.summary,
+          "image": `https://www.visitchittorgarh.in${selectedPost.image}`,
+          "url": `https://www.visitchittorgarh.in/blog/${selectedPost.id}`,
+          "author": {
+            "@type": "Organization",
+            "name": selectedPost.author || "Visit Chittorgarh — Mewari Heritage Desk"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Visit Chittorgarh",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://www.visitchittorgarh.in/logo_maharana.png"
+            }
+          }
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.visitchittorgarh.in/" },
+            { "@type": "ListItem", "position": 2, "name": "Travel Blog", "item": "https://www.visitchittorgarh.in/blog" },
+            { "@type": "ListItem", "position": 3, "name": selectedPost.title, "item": `https://www.visitchittorgarh.in/blog/${selectedPost.id}` }
+          ]
+        }
+      ]
+    : BLOG_SCHEMA;
+
   return (
     <div className="min-h-screen bg-[#F8F5EF] text-[#25231F] pt-20 pb-20">
       <SEOHead
         title={selectedPost ? `${selectedPost.title} | Visit Chittorgarh Blog` : "Chittorgarh Travel Blog & Guides | The Mewar Chronicles"}
         description={selectedPost ? selectedPost.summary : "Explore authentic Chittorgarh travel guides, fort history, Mewari cuisine, Sanwariya Seth pilgrimage tips, and curated itineraries."}
         canonical={selectedPost ? `/blog/${selectedPost.id}` : "/blog"}
+        ogType={selectedPost ? "article" : "website"}
         ogImage={selectedPost ? `https://www.visitchittorgarh.in${selectedPost.image}` : "https://www.visitchittorgarh.in/Fort.webp"}
-        schema={BLOG_SCHEMA}
+        ogImageAlt={selectedPost ? selectedPost.title : "Chittorgarh Travel Blog"}
+        schema={activeSchema}
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
