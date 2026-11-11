@@ -178,3 +178,4 @@ const PlacesToVisitPage = () => {
 };
 
 export default PlacesToVisitPage;
+

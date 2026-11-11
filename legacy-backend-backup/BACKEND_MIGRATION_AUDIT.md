@@ -34,3 +34,4 @@
   - **Telegram Bot Webhook (Optional):** Non-blocking client-side notification trigger if environment variables are provided, otherwise fully bypassed.
 - **No False Claims:** Form UI explicitly informs users that inquiry details will be transferred directly to the WhatsApp concierge desk for real-time quotation and booking assistance.
 - **Zero Firebase Bundle Overhead:** Eliminating the Firebase SDK from the active frontend eliminates over 150KB+ of unnecessary JavaScript, significantly boosting Core Web Vitals and mobile Lighthouse scores.
+

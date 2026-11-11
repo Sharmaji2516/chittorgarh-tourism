@@ -233,3 +233,4 @@ const CampaignLandingPage = ({ type: propType }) => {
 };
 
 export default CampaignLandingPage;
+

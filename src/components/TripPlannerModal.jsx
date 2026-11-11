@@ -120,21 +120,21 @@ const TripPlannerModal = ({ isOpen, onClose, initialService = 'Customized Tour P
 
     return (
         <AnimatePresence>
-            <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-mewar-charcoal/60 backdrop-blur-md overflow-y-auto">
+            <div className="fixed inset-0 z-[200] flex items-center justify-center p-3 xs:p-4 sm:p-6 bg-[#25231F]/70 backdrop-blur-md overflow-y-auto">
                 <motion.div
                     initial={{ opacity: 0, scale: 0.95, y: 20 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.95, y: 20 }}
-                    className="relative w-full max-w-2xl bg-white rounded-3xl shadow-2xl border border-mewar-border overflow-hidden my-8"
+                    className="relative w-full max-w-2xl bg-white rounded-2xl sm:rounded-3xl shadow-2xl border border-[#EFE7D9] overflow-hidden my-auto max-h-[92vh] flex flex-col"
                 >
                     {/* Header */}
-                    <div className="bg-gradient-to-r from-mewar-sandstone via-mewar-ivory to-mewar-sandstone p-6 sm:p-8 border-b border-mewar-border relative">
+                    <div className="bg-gradient-to-r from-[#EFE7D9] via-[#F8F5EF] to-[#EFE7D9] p-5 sm:p-7 border-b border-[#EFE7D9] relative shrink-0">
                         <button
                             onClick={onClose}
-                            className="absolute top-5 right-5 w-10 h-10 rounded-full bg-white/80 hover:bg-white text-mewar-charcoal flex items-center justify-center transition-colors shadow-sm"
+                            className="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/90 hover:bg-white text-[#25231F] flex items-center justify-center transition-colors shadow-sm"
                             aria-label="Close"
                         >
-                            <X className="w-5 h-5" />
+                            <X className="w-4 h-4" />
                         </button>
 
                         <div className="flex items-center gap-2 mb-2">
@@ -412,3 +412,4 @@ const TripPlannerModal = ({ isOpen, onClose, initialService = 'Customized Tour P
 };
 
 export default TripPlannerModal;
+

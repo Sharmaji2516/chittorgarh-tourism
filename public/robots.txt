@@ -38,4 +38,4 @@ Disallow: /*?*print=
 Disallow: /*?*debug=
 
 # Sitemap location
-Sitemap: https://visitchittorgarh.in/sitemap.xml
+Sitemap: https://www.visitchittorgarh.in/sitemap.xml

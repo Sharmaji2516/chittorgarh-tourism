@@ -185,7 +185,7 @@ const HomePage = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F8F5EF] text-[#25231F] overflow-x-hidden selection:bg-[#C49A32] selection:text-white">
+    <div className="min-h-screen bg-[#F8F5EF] text-[#25231F] overflow-x-hidden selection:bg-[#C49A32] selection:text-white pb-24 md:pb-0">
       <SEOHead
         title="Visit Chittorgarh | Official Tourism Guide, Fort Tours & Private Taxi"
         description="Plan your visit to Chittorgarh Fort, India's largest citadel. Book authorized Mewari guides, sanitized private cabs, heritage stays & authentic Rajasthani dining."
@@ -198,9 +198,9 @@ const HomePage = () => {
       <Hero />
 
       {/* SECTION 2: Quick Tour Planning / Inquiry Section (Interactive Bar) */}
-      <section className="relative z-20 -mt-10 sm:-mt-14 max-w-6xl mx-auto px-4 sm:px-6">
-        <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-heritage border border-[#EFE7D9]">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
+      <section className="relative z-20 -mt-6 sm:-mt-14 max-w-6xl mx-auto px-3.5 sm:px-6">
+        <div className="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-heritage border border-[#EFE7D9]">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-5 sm:gap-6">
             <div className="shrink-0 text-center lg:text-left">
               <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#C49A32]">
                 Instant Tour Planner
@@ -218,7 +218,7 @@ const HomePage = () => {
                 <select
                   value={quickService}
                   onChange={(e) => setQuickService(e.target.value)}
-                  className="w-full px-3.5 py-2.5 bg-[#F8F5EF] border border-[#EFE7D9] rounded-xl text-xs font-medium text-[#25231F] focus:outline-none focus:border-[#C49A32]"
+                  className="w-full px-3.5 py-2.5 sm:py-3 bg-[#F8F5EF] border border-[#EFE7D9] rounded-xl text-xs font-medium text-[#25231F] focus:outline-none focus:border-[#C49A32]"
                 >
                   <option value="Fort Guided Tour">Private Fort Guide</option>
                   <option value="Private Taxi Service">Private Cab / Taxi</option>
@@ -236,7 +236,7 @@ const HomePage = () => {
                   type="date"
                   value={quickDate}
                   onChange={(e) => setQuickDate(e.target.value)}
-                  className="w-full px-3.5 py-2.5 bg-[#F8F5EF] border border-[#EFE7D9] rounded-xl text-xs font-medium text-[#25231F] focus:outline-none focus:border-[#C49A32]"
+                  className="w-full px-3.5 py-2.5 sm:py-3 bg-[#F8F5EF] border border-[#EFE7D9] rounded-xl text-xs font-medium text-[#25231F] focus:outline-none focus:border-[#C49A32]"
                 />
               </div>
 
@@ -247,7 +247,7 @@ const HomePage = () => {
                 <select
                   value={quickTravelers}
                   onChange={(e) => setQuickTravelers(e.target.value)}
-                  className="w-full px-3.5 py-2.5 bg-[#F8F5EF] border border-[#EFE7D9] rounded-xl text-xs font-medium text-[#25231F] focus:outline-none focus:border-[#C49A32]"
+                  className="w-full px-3.5 py-2.5 sm:py-3 bg-[#F8F5EF] border border-[#EFE7D9] rounded-xl text-xs font-medium text-[#25231F] focus:outline-none focus:border-[#C49A32]"
                 >
                   <option value="1 Solo">1 Solo Traveler</option>
                   <option value="2 (Couple)">2 Travelers (Couple)</option>
@@ -257,10 +257,10 @@ const HomePage = () => {
                 </select>
               </div>
 
-              <div className="sm:col-span-3 flex flex-col sm:flex-row gap-2.5 pt-2">
+              <div className="sm:col-span-3 flex flex-col sm:flex-row gap-2.5 pt-1 sm:pt-2">
                 <button
                   type="submit"
-                  className="flex-1 py-3 bg-[#C49A32] hover:bg-[#b08728] text-white rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm transition-transform active:scale-95"
+                  className="flex-1 py-3.5 bg-[#C49A32] hover:bg-[#b08728] text-white rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm transition-transform active:scale-95 min-h-[46px]"
                 >
                   <MessageCircle className="w-4 h-4" />
                   Get Instant WhatsApp Quote
@@ -268,7 +268,7 @@ const HomePage = () => {
                 <button
                   type="button"
                   onClick={triggerPlanTrip}
-                  className="px-6 py-3 bg-[#25231F] hover:bg-[#A65F3D] text-white rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-colors"
+                  className="px-6 py-3.5 bg-[#25231F] hover:bg-[#A65F3D] text-white rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-colors min-h-[46px]"
                 >
                   <Compass className="w-4 h-4" />
                   Detailed Trip Planner
@@ -280,7 +280,7 @@ const HomePage = () => {
       </section>
 
       {/* SECTION 3: Why Visit Chittorgarh */}
-      <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-12 sm:py-16 lg:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-14">
           <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#A65F3D] bg-[#EFE7D9] px-4 py-1.5 rounded-full inline-block mb-3">
             The Mewar Legacy
@@ -337,33 +337,33 @@ const HomePage = () => {
       </section>
 
       {/* SECTION 4: Popular Attractions */}
-      <section className="py-20 bg-[#EFE7D9]/50 border-y border-[#EFE7D9]">
+      <section className="py-12 sm:py-16 lg:py-20 bg-[#EFE7D9]/50 border-y border-[#EFE7D9]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12">
             <div>
               <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A32]">
                 Citadel Monuments & Sacred Sites
               </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-[#25231F] mt-2">
+              <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-[#25231F] mt-2">
                 Popular Attractions
               </h2>
             </div>
             <NavLink
               to="/attractions"
-              className="mt-4 md:mt-0 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#A65F3D] hover:text-[#25231F] transition-colors"
+              className="mt-3 md:mt-0 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#A65F3D] hover:text-[#25231F] transition-colors"
             >
               Explore All 15+ Monuments <ArrowRight className="w-4 h-4" />
             </NavLink>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {topAttractions.map((att) => (
               <div
                 key={att.id}
-                className="bg-white rounded-3xl border border-[#EFE7D9] overflow-hidden shadow-heritage hover:border-[#C49A32] hover:-translate-y-1 transition-all group flex flex-col justify-between"
+                className="bg-white rounded-2xl sm:rounded-3xl border border-[#EFE7D9] overflow-hidden shadow-heritage hover:border-[#C49A32] hover:-translate-y-1 transition-all group flex flex-col justify-between"
               >
                 <div>
-                  <div className="h-56 relative overflow-hidden bg-[#EFE7D9]">
+                  <div className="h-48 sm:h-56 relative overflow-hidden bg-[#EFE7D9]">
                     <img
                       src={att.image}
                       alt={att.name}
@@ -375,8 +375,8 @@ const HomePage = () => {
                     </span>
                   </div>
 
-                  <div className="p-6">
-                    <h3 className="text-xl font-serif font-bold text-[#25231F] group-hover:text-[#A65F3D] transition-colors mb-2">
+                  <div className="p-5 sm:p-6">
+                    <h3 className="text-lg sm:text-xl font-serif font-bold text-[#25231F] group-hover:text-[#A65F3D] transition-colors mb-2">
                       {att.name}
                     </h3>
                     <p className="text-xs text-[#25231F]/70 leading-relaxed mb-4">
@@ -389,7 +389,7 @@ const HomePage = () => {
                   </div>
                 </div>
 
-                <div className="p-6 pt-0 border-t border-[#EFE7D9]/60 flex items-center justify-between text-xs mt-4">
+                <div className="p-5 sm:p-6 pt-0 border-t border-[#EFE7D9]/60 flex items-center justify-between text-xs mt-4">
                   <NavLink
                     to="/attractions"
                     className="font-bold text-[#C49A32] hover:text-[#A65F3D] transition-colors flex items-center gap-1"
@@ -410,20 +410,20 @@ const HomePage = () => {
       </section>
 
       {/* SECTION 5: Private Tour Guide Services */}
-      <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-gradient-to-br from-white via-[#F8F5EF] to-white rounded-3xl border border-[#EFE7D9] p-8 sm:p-14 shadow-heritage grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          <div className="lg:col-span-6 space-y-6">
+      <section className="py-12 sm:py-16 lg:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-gradient-to-br from-white via-[#F8F5EF] to-white rounded-2xl sm:rounded-3xl border border-[#EFE7D9] p-6 sm:p-14 shadow-heritage grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 items-center">
+          <div className="lg:col-span-6 space-y-4 sm:space-y-6">
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A32] bg-[#EFE7D9] px-4 py-1.5 rounded-full inline-block">
               Authorized Mewari Historians
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-[#25231F] leading-tight">
+            <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-[#25231F] leading-tight">
               Private Tour Guide in Chittorgarh
             </h2>
             <p className="text-xs sm:text-sm text-[#25231F]/75 leading-relaxed">
               Don't just look at stones — experience the living saga of Rajasthan. Our certified local guides are passionate historians who bring the architecture, legends of Padmini, and heroism of Maharana Kumbha to life at your own pace.
             </p>
 
-            <div className="space-y-3">
+            <div className="space-y-2.5 sm:space-y-3">
               <div className="flex items-center gap-3 text-xs text-[#25231F]/85">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                 <span>Govt. Certified & Verified Historians (Fluent in Hindi & English)</span>
@@ -442,16 +442,16 @@ const HomePage = () => {
               </div>
             </div>
 
-            <div className="pt-4 flex flex-col sm:flex-row gap-3">
+            <div className="pt-2 sm:pt-4 flex flex-col sm:flex-row gap-3">
               <NavLink
                 to="/service/guide"
-                className="px-7 py-3.5 bg-[#25231F] hover:bg-[#A65F3D] text-white text-xs font-bold uppercase tracking-wider rounded-2xl shadow-md transition-all text-center"
+                className="px-7 py-3.5 bg-[#25231F] hover:bg-[#A65F3D] text-white text-xs font-bold uppercase tracking-wider rounded-2xl shadow-md transition-all text-center min-h-[46px] flex items-center justify-center"
               >
                 Learn Guide Details
               </NavLink>
               <button
                 onClick={triggerPlanTrip}
-                className="px-7 py-3.5 bg-[#C49A32] hover:bg-[#b08728] text-white text-xs font-bold uppercase tracking-wider rounded-2xl shadow-md transition-all flex items-center justify-center gap-2"
+                className="px-7 py-3.5 bg-[#C49A32] hover:bg-[#b08728] text-white text-xs font-bold uppercase tracking-wider rounded-2xl shadow-md transition-all flex items-center justify-center gap-2 min-h-[46px]"
               >
                 <Compass className="w-4 h-4" />
                 Book Private Guide
@@ -460,19 +460,19 @@ const HomePage = () => {
           </div>
 
           <div className="lg:col-span-6 relative">
-            <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+            <div className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
               <img
                 src="/assets/images/Guide.webp"
                 alt="Authorized Tour Guide at Chittorgarh Fort"
-                className="w-full h-80 sm:h-96 object-cover"
+                className="w-full h-64 sm:h-96 object-cover"
               />
             </div>
-            <div className="absolute -bottom-5 -left-5 bg-white p-4 rounded-2xl border border-[#EFE7D9] shadow-xl flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
+            <div className="absolute -bottom-3 -left-3 sm:-bottom-5 sm:-left-5 bg-white p-3 sm:p-4 rounded-xl sm:rounded-2xl border border-[#EFE7D9] shadow-xl flex items-center gap-2.5 sm:gap-3">
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-sm">
                 ✓
               </div>
               <div>
-                <span className="text-[10px] uppercase font-bold text-[#25231F]/60 block">Verified Badge</span>
+                <span className="text-[9px] sm:text-[10px] uppercase font-bold text-[#25231F]/60 block">Verified Badge</span>
                 <span className="text-xs font-bold text-[#25231F]">Govt. Recognized Guide</span>
               </div>
             </div>
@@ -481,13 +481,13 @@ const HomePage = () => {
       </section>
 
       {/* SECTION 6: Private Taxi & Transportation */}
-      <section className="py-20 bg-[#EFE7D9]/40 border-y border-[#EFE7D9]">
+      <section className="py-12 sm:py-16 lg:py-20 bg-[#EFE7D9]/40 border-y border-[#EFE7D9]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-14">
+          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-14">
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#A65F3D]">
               Sanitized AC Fleet & Transfers
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-[#25231F] mt-2">
+            <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-[#25231F] mt-2">
               Private Taxi & Cab Service
             </h2>
             <p className="text-xs sm:text-sm text-[#25231F]/70 mt-3 leading-relaxed">
@@ -495,11 +495,11 @@ const HomePage = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             {/* Sedan */}
-            <div className="bg-white rounded-3xl border border-[#EFE7D9] p-6 shadow-heritage hover:border-[#C49A32] transition-all flex flex-col justify-between">
+            <div className="bg-white rounded-2xl sm:rounded-3xl border border-[#EFE7D9] p-5 sm:p-6 shadow-heritage hover:border-[#C49A32] transition-all flex flex-col justify-between">
               <div>
-                <div className="h-44 rounded-2xl overflow-hidden mb-5 bg-[#F8F5EF]">
+                <div className="h-40 sm:h-44 rounded-2xl overflow-hidden mb-4 sm:mb-5 bg-[#F8F5EF]">
                   <img
                     src="/assets/images/sedan_taxi.webp"
                     alt="Sedan Taxi Dzire Chittorgarh"
@@ -509,7 +509,7 @@ const HomePage = () => {
                 <span className="text-[10px] font-bold uppercase tracking-wider text-[#C49A32] bg-[#EFE7D9] px-2.5 py-1 rounded-md">
                   1 - 4 Passengers
                 </span>
-                <h3 className="text-xl font-serif font-bold text-[#25231F] mt-2 mb-2">Prime Sedan (Dzire / Etios)</h3>
+                <h3 className="text-lg sm:text-xl font-serif font-bold text-[#25231F] mt-2 mb-2">Prime Sedan (Dzire / Etios)</h3>
                 <p className="text-xs text-[#25231F]/70 leading-relaxed mb-4">
                   Perfect for couples and small families. Air-conditioned, spacious boot space for luggage, and polite uniformed chauffeur.
                 </p>
@@ -521,19 +521,19 @@ const HomePage = () => {
               </div>
               <button
                 onClick={triggerPlanTrip}
-                className="w-full py-3 bg-[#25231F] hover:bg-[#A65F3D] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors"
+                className="w-full py-3 bg-[#25231F] hover:bg-[#A65F3D] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors min-h-[44px]"
               >
                 Book Sedan
               </button>
             </div>
 
             {/* SUV */}
-            <div className="bg-white rounded-3xl border-2 border-[#C49A32] p-6 shadow-heritage transition-all flex flex-col justify-between relative">
+            <div className="bg-white rounded-2xl sm:rounded-3xl border-2 border-[#C49A32] p-5 sm:p-6 shadow-heritage transition-all flex flex-col justify-between relative">
               <span className="absolute -top-3.5 right-6 bg-[#C49A32] text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-sm">
                 Most Popular
               </span>
               <div>
-                <div className="h-44 rounded-2xl overflow-hidden mb-5 bg-[#F8F5EF]">
+                <div className="h-40 sm:h-44 rounded-2xl overflow-hidden mb-4 sm:mb-5 bg-[#F8F5EF]">
                   <img
                     src="/assets/images/suv_taxi.webp"
                     alt="SUV Innova Crysta Chittorgarh"
@@ -543,7 +543,7 @@ const HomePage = () => {
                 <span className="text-[10px] font-bold uppercase tracking-wider text-[#A65F3D] bg-[#EFE7D9] px-2.5 py-1 rounded-md">
                   5 - 7 Passengers
                 </span>
-                <h3 className="text-xl font-serif font-bold text-[#25231F] mt-2 mb-2">Royal SUV (Innova / Ertiga)</h3>
+                <h3 className="text-lg sm:text-xl font-serif font-bold text-[#25231F] mt-2 mb-2">Royal SUV (Innova / Ertiga)</h3>
                 <p className="text-xs text-[#25231F]/70 leading-relaxed mb-4">
                   High seating for scenic highway vistas. Maximum comfort for multi-generation family road trips across Rajasthan.
                 </p>
@@ -555,16 +555,16 @@ const HomePage = () => {
               </div>
               <button
                 onClick={triggerPlanTrip}
-                className="w-full py-3 bg-[#C49A32] hover:bg-[#b08728] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors shadow-sm"
+                className="w-full py-3 bg-[#C49A32] hover:bg-[#b08728] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors shadow-sm min-h-[44px]"
               >
                 Book SUV
               </button>
             </div>
 
             {/* Tempo Traveller */}
-            <div className="bg-white rounded-3xl border border-[#EFE7D9] p-6 shadow-heritage hover:border-[#C49A32] transition-all flex flex-col justify-between">
+            <div className="bg-white rounded-2xl sm:rounded-3xl border border-[#EFE7D9] p-5 sm:p-6 shadow-heritage hover:border-[#C49A32] transition-all flex flex-col justify-between">
               <div>
-                <div className="h-44 rounded-2xl overflow-hidden mb-5 bg-[#F8F5EF]">
+                <div className="h-40 sm:h-44 rounded-2xl overflow-hidden mb-4 sm:mb-5 bg-[#F8F5EF]">
                   <img
                     src="/assets/images/tempo_traveller.webp"
                     alt="Tempo Traveller Group Chittorgarh"
@@ -574,7 +574,7 @@ const HomePage = () => {
                 <span className="text-[10px] font-bold uppercase tracking-wider text-[#526B50] bg-[#EFE7D9] px-2.5 py-1 rounded-md">
                   9 - 16 Passengers
                 </span>
-                <h3 className="text-xl font-serif font-bold text-[#25231F] mt-2 mb-2">Luxury Tempo Traveller</h3>
+                <h3 className="text-lg sm:text-xl font-serif font-bold text-[#25231F] mt-2 mb-2">Luxury Tempo Traveller</h3>
                 <p className="text-xs text-[#25231F]/70 leading-relaxed mb-4">
                   Engineered for group tours, corporate excursions, and pilgrimage groups visiting Sanwariya Seth and Chittorgarh.
                 </p>
@@ -586,7 +586,7 @@ const HomePage = () => {
               </div>
               <button
                 onClick={triggerPlanTrip}
-                className="w-full py-3 bg-[#25231F] hover:bg-[#A65F3D] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors"
+                className="w-full py-3 bg-[#25231F] hover:bg-[#A65F3D] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors min-h-[44px]"
               >
                 Book Tempo
               </button>
@@ -596,51 +596,51 @@ const HomePage = () => {
       </section>
 
       {/* SECTION 7: Customized Tour Packages */}
-      <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
+      <section className="py-12 sm:py-16 lg:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12">
           <div>
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A32]">
               Hassle-Free Handcrafted Journeys
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-[#25231F] mt-2">
+            <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-[#25231F] mt-2">
               Tour Packages
             </h2>
           </div>
           <NavLink
             to="/royal-journeys"
-            className="mt-4 md:mt-0 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#A65F3D] hover:text-[#25231F] transition-colors"
+            className="mt-3 md:mt-0 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#A65F3D] hover:text-[#25231F] transition-colors"
           >
             Browse All Packages <ArrowRight className="w-4 h-4" />
           </NavLink>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           {curatedPackages.map((pkg) => (
             <div
               key={pkg.id}
-              className="bg-white rounded-3xl border border-[#EFE7D9] overflow-hidden shadow-heritage hover:border-[#C49A32] hover:-translate-y-1 transition-all group flex flex-col justify-between"
+              className="bg-white rounded-2xl sm:rounded-3xl border border-[#EFE7D9] overflow-hidden shadow-heritage hover:border-[#C49A32] hover:-translate-y-1 transition-all group flex flex-col justify-between"
             >
               <div>
-                <div className="h-52 relative overflow-hidden bg-[#EFE7D9]">
+                <div className="h-48 sm:h-52 relative overflow-hidden bg-[#EFE7D9]">
                   <img
                     src={pkg.image}
                     alt={pkg.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   />
-                  <span className="absolute bottom-3 left-3 bg-[#25231F]/80 backdrop-blur-sm text-white text-[11px] font-bold px-3 py-1 rounded-full flex items-center gap-1">
+                  <span className="absolute bottom-3 left-3 bg-[#25231F]/80 backdrop-blur-sm text-white text-[10px] sm:text-[11px] font-bold px-3 py-1 rounded-full flex items-center gap-1">
                     <Clock className="w-3.5 h-3.5 text-[#C49A32]" /> {pkg.duration}
                   </span>
                 </div>
 
-                <div className="p-6">
+                <div className="p-5 sm:p-6">
                   <span className="text-[10px] font-bold uppercase tracking-wider text-[#A65F3D] block mb-1">
                     {pkg.idealFor}
                   </span>
-                  <h3 className="text-xl font-serif font-bold text-[#25231F] mb-4">
+                  <h3 className="text-lg sm:text-xl font-serif font-bold text-[#25231F] mb-3">
                     {pkg.title}
                   </h3>
 
-                  <ul className="space-y-2 text-xs text-[#25231F]/80 mb-6">
+                  <ul className="space-y-2 text-xs text-[#25231F]/80 mb-5">
                     {pkg.features.map((feat, idx) => (
                       <li key={idx} className="flex items-center gap-2">
                         <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
@@ -651,11 +651,11 @@ const HomePage = () => {
                 </div>
               </div>
 
-              <div className="p-6 pt-0 border-t border-[#EFE7D9]/60 flex items-center justify-between">
+              <div className="p-5 sm:p-6 pt-0 border-t border-[#EFE7D9]/60 flex items-center justify-between">
                 <span className="text-[11px] text-[#25231F]/60 font-medium">{pkg.priceNote}</span>
                 <button
                   onClick={triggerPlanTrip}
-                  className="px-4 py-2 bg-[#C49A32] hover:bg-[#b08728] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors"
+                  className="px-4 py-2 bg-[#C49A32] hover:bg-[#b08728] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors min-h-[40px]"
                 >
                   Inquire Now
                 </button>
@@ -666,21 +666,21 @@ const HomePage = () => {
       </section>
 
       {/* SECTION 8: Heritage Hotels & Accommodation */}
-      <section className="py-20 bg-[#EFE7D9]/40 border-y border-[#EFE7D9]">
+      <section className="py-12 sm:py-16 lg:py-20 bg-[#EFE7D9]/40 border-y border-[#EFE7D9]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            <div className="lg:col-span-6 space-y-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 items-center">
+            <div className="lg:col-span-6 space-y-4 sm:space-y-6">
               <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A32] bg-[#EFE7D9] px-4 py-1.5 rounded-full inline-block">
                 Royal Comfort & Fort Views
               </span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-[#25231F] leading-tight">
+              <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-[#25231F] leading-tight">
                 Heritage Stays & Boutique Haveli Hotels
               </h2>
               <p className="text-xs sm:text-sm text-[#25231F]/75 leading-relaxed">
                 Awaken to views of the illuminated fortress walls. We connect you directly with hand-picked heritage properties, royal havelis, and boutique luxury resorts in Chittorgarh.
               </p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-[#25231F]/80">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 text-xs text-[#25231F]/80">
                 <div className="p-4 bg-white rounded-2xl border border-[#EFE7D9]">
                   <strong className="block text-sm text-[#25231F] font-serif mb-1">Fort-View Havelis</strong>
                   Boutique heritage courtyards with rooftop dining overlooking Vijay Stambha.
@@ -691,16 +691,16 @@ const HomePage = () => {
                 </div>
               </div>
 
-              <div className="pt-2 flex gap-3">
+              <div className="pt-2 flex flex-col sm:flex-row gap-3">
                 <NavLink
                   to="/stays"
-                  className="px-7 py-3.5 bg-[#25231F] hover:bg-[#A65F3D] text-white rounded-2xl text-xs font-bold uppercase tracking-wider shadow-md transition-colors"
+                  className="px-7 py-3.5 bg-[#25231F] hover:bg-[#A65F3D] text-white rounded-2xl text-xs font-bold uppercase tracking-wider shadow-md transition-colors text-center min-h-[46px] flex items-center justify-center"
                 >
                   Explore Verified Stays
                 </NavLink>
                 <button
                   onClick={triggerPlanTrip}
-                  className="px-7 py-3.5 bg-[#C49A32] hover:bg-[#b08728] text-white rounded-2xl text-xs font-bold uppercase tracking-wider shadow-md transition-colors"
+                  className="px-7 py-3.5 bg-[#C49A32] hover:bg-[#b08728] text-white rounded-2xl text-xs font-bold uppercase tracking-wider shadow-md transition-colors min-h-[46px]"
                 >
                   Inquire Stay Deals
                 </button>
@@ -708,11 +708,11 @@ const HomePage = () => {
             </div>
 
             <div className="lg:col-span-6">
-              <div className="rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
+              <div className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
                 <img
                   src="/assets/images/Royal Stays.webp"
                   alt="Heritage Hotel Room in Chittorgarh"
-                  className="w-full h-80 sm:h-96 object-cover"
+                  className="w-full h-64 sm:h-96 object-cover"
                 />
               </div>
             </div>
@@ -721,18 +721,18 @@ const HomePage = () => {
       </section>
 
       {/* SECTION 9: Traditional Mewari Food & Dining */}
-      <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      <section className="py-12 sm:py-16 lg:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 items-center">
           <div className="lg:col-span-6 order-2 lg:order-1">
-            <div className="grid grid-cols-2 gap-4">
-              <div className="rounded-2xl overflow-hidden shadow-lg border border-[#EFE7D9] h-48 sm:h-60">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              <div className="rounded-2xl overflow-hidden shadow-lg border border-[#EFE7D9] h-40 sm:h-60">
                 <img
                   src="/assets/images/dal-batti-churma-new.webp"
                   alt="Authentic Dal Baati Churma Chittorgarh"
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="rounded-2xl overflow-hidden shadow-lg border border-[#EFE7D9] h-48 sm:h-60 mt-6">
+              <div className="rounded-2xl overflow-hidden shadow-lg border border-[#EFE7D9] h-40 sm:h-60 mt-4 sm:mt-6">
                 <img
                   src="/assets/images/Dinning Hall.webp"
                   alt="Mewari Heritage Dining Hall"
@@ -742,11 +742,11 @@ const HomePage = () => {
             </div>
           </div>
 
-          <div className="lg:col-span-6 order-1 lg:order-2 space-y-6">
+          <div className="lg:col-span-6 order-1 lg:order-2 space-y-4 sm:space-y-6">
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#A65F3D] bg-[#EFE7D9] px-4 py-1.5 rounded-full inline-block">
               Culinary Heritage of Mewar
             </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-[#25231F] leading-tight">
+            <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-[#25231F] leading-tight">
               Traditional Mewari Dining & Dal Baati
             </h2>
             <p className="text-xs sm:text-sm text-[#25231F]/75 leading-relaxed">
@@ -781,28 +781,28 @@ const HomePage = () => {
       </section>
 
       {/* SECTION 10: Guest Testimonials */}
-      <section className="py-20 bg-[#EFE7D9]/50 border-y border-[#EFE7D9]">
+      <section className="py-12 sm:py-16 lg:py-20 bg-[#EFE7D9]/50 border-y border-[#EFE7D9]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto mb-14">
+          <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-14">
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A32]">
               Verified Traveler Experiences
             </span>
-            <h2 className="text-3xl sm:text-4xl font-serif font-black text-[#25231F] mt-2">
+            <h2 className="text-2xl xs:text-3xl sm:text-4xl font-serif font-black text-[#25231F] mt-2">
               What Our Guests Say
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             {testimonials.map((t, idx) => (
               <div
                 key={idx}
-                className="bg-white rounded-3xl p-8 border border-[#EFE7D9] shadow-heritage flex flex-col justify-between"
+                className="bg-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 border border-[#EFE7D9] shadow-heritage flex flex-col justify-between"
               >
                 <div>
-                  <div className="flex text-[#C49A32] text-sm mb-4">
+                  <div className="flex text-[#C49A32] text-sm mb-3 sm:mb-4">
                     {'★'.repeat(5)}
                   </div>
-                  <p className="text-xs sm:text-sm text-[#25231F]/80 italic leading-relaxed mb-6 font-serif">
+                  <p className="text-xs sm:text-sm text-[#25231F]/80 italic leading-relaxed mb-4 sm:mb-6 font-serif">
                     "{t.text}"
                   </p>
                 </div>
@@ -822,12 +822,12 @@ const HomePage = () => {
       </section>
 
       {/* SECTION 11: Travel Experiences Gallery */}
-      <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-14">
+      <section className="py-12 sm:py-16 lg:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-14">
           <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A32]">
             Visual Mewar
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-[#25231F] mt-2">
+          <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-[#25231F] mt-2">
             Travel Experiences Gallery
           </h2>
           <p className="text-xs sm:text-sm text-[#25231F]/70 mt-3">
@@ -835,63 +835,63 @@ const HomePage = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="h-60 rounded-2xl overflow-hidden shadow-md group relative">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
+          <div className="h-44 sm:h-60 rounded-2xl overflow-hidden shadow-md group relative">
             <img src="/assets/images/vijay-stambh-new.webp" alt="Vijay Stambha Carvings" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4 text-white text-xs font-bold">
-              Vijay Stambha Stone Art
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3 sm:p-4 text-white text-xs font-bold">
+              Vijay Stambha
             </div>
           </div>
-          <div className="h-60 rounded-2xl overflow-hidden shadow-md group relative">
+          <div className="h-44 sm:h-60 rounded-2xl overflow-hidden shadow-md group relative">
             <img src="/assets/images/padmini-palace-new.webp" alt="Padmini Palace Lake" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4 text-white text-xs font-bold">
-              Padmini Palace Lake Pavilion
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3 sm:p-4 text-white text-xs font-bold">
+              Padmini Palace
             </div>
           </div>
-          <div className="h-60 rounded-2xl overflow-hidden shadow-md group relative">
+          <div className="h-44 sm:h-60 rounded-2xl overflow-hidden shadow-md group relative">
             <img src="/assets/images/menal-waterfall-new.webp" alt="Menal Waterfall Canyon" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4 text-white text-xs font-bold">
-              Menal 150-Ft Waterfall
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3 sm:p-4 text-white text-xs font-bold">
+              Menal Waterfall
             </div>
           </div>
-          <div className="h-60 rounded-2xl overflow-hidden shadow-md group relative">
+          <div className="h-44 sm:h-60 rounded-2xl overflow-hidden shadow-md group relative">
             <img src="/assets/images/Light-and-sound-show.webp" alt="Fort Light and Sound Show" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4 text-white text-xs font-bold">
-              Evening Light & Sound Show
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3 sm:p-4 text-white text-xs font-bold">
+              Light & Sound Show
             </div>
           </div>
         </div>
       </section>
 
       {/* SECTION 12: Latest Travel Blogs */}
-      <section className="py-20 bg-[#EFE7D9]/40 border-y border-[#EFE7D9]">
+      <section className="py-12 sm:py-16 lg:py-20 bg-[#EFE7D9]/40 border-y border-[#EFE7D9]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12">
             <div>
               <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A32]">
                 Traveler Guides & Insights
               </span>
-              <h2 className="text-3xl sm:text-4xl font-serif font-black text-[#25231F] mt-2">
+              <h2 className="text-2xl xs:text-3xl sm:text-4xl font-serif font-black text-[#25231F] mt-2">
                 Latest Travel Blogs
               </h2>
             </div>
             <NavLink
               to="/blog"
-              className="mt-4 md:mt-0 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#A65F3D] hover:text-[#25231F] transition-colors"
+              className="mt-3 md:mt-0 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#A65F3D] hover:text-[#25231F] transition-colors"
             >
               View All 12+ Articles <ArrowRight className="w-4 h-4" />
             </NavLink>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             {blogPosts.slice(0, 3).map((post) => (
               <NavLink
                 key={post.id}
                 to={`/blog?post=${post.id}`}
-                className="bg-white rounded-3xl border border-[#EFE7D9] overflow-hidden shadow-heritage hover:border-[#C49A32] hover:-translate-y-1 transition-all group flex flex-col justify-between"
+                className="bg-white rounded-2xl sm:rounded-3xl border border-[#EFE7D9] overflow-hidden shadow-heritage hover:border-[#C49A32] hover:-translate-y-1 transition-all group flex flex-col justify-between"
               >
                 <div>
-                  <div className="h-48 relative overflow-hidden bg-[#EFE7D9]">
+                  <div className="h-44 sm:h-48 relative overflow-hidden bg-[#EFE7D9]">
                     <img
                       src={post.image}
                       alt={post.title}
@@ -902,11 +902,11 @@ const HomePage = () => {
                     </span>
                   </div>
 
-                  <div className="p-6">
+                  <div className="p-5 sm:p-6">
                     <span className="text-[11px] text-[#25231F]/60 flex items-center gap-1.5 mb-2">
                       <Clock className="w-3.5 h-3.5" /> {post.readTime}
                     </span>
-                    <h3 className="text-lg font-serif font-bold text-[#25231F] group-hover:text-[#A65F3D] transition-colors leading-snug mb-3">
+                    <h3 className="text-base sm:text-lg font-serif font-bold text-[#25231F] group-hover:text-[#A65F3D] transition-colors leading-snug mb-2 sm:mb-3">
                       {post.title}
                     </h3>
                     <p className="text-xs text-[#25231F]/70 line-clamp-2 leading-relaxed">
@@ -915,7 +915,7 @@ const HomePage = () => {
                   </div>
                 </div>
 
-                <div className="p-6 pt-0 border-t border-[#EFE7D9]/60 flex items-center justify-between text-xs">
+                <div className="p-5 sm:p-6 pt-0 border-t border-[#EFE7D9]/60 flex items-center justify-between text-xs">
                   <span className="text-[#25231F]/60 font-medium">{post.date}</span>
                   <span className="font-bold text-[#C49A32] group-hover:translate-x-1 transition-transform flex items-center gap-1">
                     Read Guide <ArrowRight className="w-3.5 h-3.5" />
@@ -928,24 +928,24 @@ const HomePage = () => {
       </section>
 
       {/* SECTION 13: Instagram Social Media Gallery */}
-      <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-3xl border border-[#EFE7D9] p-8 sm:p-12 shadow-heritage text-center">
+      <section className="py-12 sm:py-16 lg:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-white rounded-2xl sm:rounded-3xl border border-[#EFE7D9] p-6 sm:p-12 shadow-heritage text-center">
           <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A32] mb-2 block">
             Follow Our Stories
           </span>
           <h2 className="text-2xl sm:text-3xl font-serif font-black text-[#25231F] mb-3">
             @visitchittorgarh on Instagram
           </h2>
-          <p className="text-xs sm:text-sm text-[#25231F]/70 max-w-lg mx-auto mb-8">
+          <p className="text-xs sm:text-sm text-[#25231F]/70 max-w-lg mx-auto mb-6 sm:mb-8">
             Tag your memories with <span className="font-bold text-[#A65F3D]">#VisitChittorgarh</span> to be featured on our official traveler feed.
           </p>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">
             <a
               href="https://www.instagram.com/visitchittorgarh"
               target="_blank"
               rel="noopener noreferrer"
-              className="h-44 sm:h-52 rounded-2xl overflow-hidden shadow-sm hover:opacity-90 transition-opacity block group relative"
+              className="h-36 sm:h-52 rounded-2xl overflow-hidden shadow-sm hover:opacity-90 transition-opacity block group relative"
             >
               <img src="/assets/images/vijay-stambh-new.webp" alt="Instagram Post" className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
               <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-bold">
@@ -956,7 +956,7 @@ const HomePage = () => {
               href="https://www.instagram.com/visitchittorgarh"
               target="_blank"
               rel="noopener noreferrer"
-              className="h-44 sm:h-52 rounded-2xl overflow-hidden shadow-sm hover:opacity-90 transition-opacity block group relative"
+              className="h-36 sm:h-52 rounded-2xl overflow-hidden shadow-sm hover:opacity-90 transition-opacity block group relative"
             >
               <img src="/assets/images/Sanvliya-ji-Temple.webp" alt="Instagram Post" className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
               <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-bold">
@@ -967,7 +967,7 @@ const HomePage = () => {
               href="https://www.instagram.com/visitchittorgarh"
               target="_blank"
               rel="noopener noreferrer"
-              className="h-44 sm:h-52 rounded-2xl overflow-hidden shadow-sm hover:opacity-90 transition-opacity block group relative"
+              className="h-36 sm:h-52 rounded-2xl overflow-hidden shadow-sm hover:opacity-90 transition-opacity block group relative"
             >
               <img src="/assets/images/dal-batti-churma-new.webp" alt="Instagram Post" className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
               <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-bold">
@@ -978,7 +978,7 @@ const HomePage = () => {
               href="https://www.instagram.com/visitchittorgarh"
               target="_blank"
               rel="noopener noreferrer"
-              className="h-44 sm:h-52 rounded-2xl overflow-hidden shadow-sm hover:opacity-90 transition-opacity block group relative"
+              className="h-36 sm:h-52 rounded-2xl overflow-hidden shadow-sm hover:opacity-90 transition-opacity block group relative"
             >
               <img src="/assets/images/Horse Photography.webp" alt="Instagram Post" className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
               <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-bold">
@@ -991,7 +991,7 @@ const HomePage = () => {
             href="https://www.instagram.com/visitchittorgarh"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-[#25231F] hover:bg-[#A65F3D] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors shadow-sm"
+            className="inline-flex items-center gap-2 px-6 py-3 bg-[#25231F] hover:bg-[#A65F3D] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors shadow-sm min-h-[44px]"
           >
             Follow on Instagram <ExternalLink className="w-3.5 h-3.5" />
           </a>
