@@ -15,6 +15,11 @@ Allow: /chittorgarh-2-days-tour
 Allow: /chittorgarh-3-days-tour
 Allow: /service/*
 Allow: /udaipur-to-chittorgarh-taxi
+Allow: /udaipur-to-chittorgarh-day-trip
+Allow: /chittorgarh-fort-timings-tickets
+Allow: /chittorgarh-fort-timings-entry-fee-tickets
+Allow: /udaipur-to-jaipur-via-chittorgarh-tour
+Allow: /udaipur-jaipur-via-chittorgarh-tour
 Allow: /jaipur-to-chittorgarh-taxi
 Allow: /stays
 Allow: /flavors

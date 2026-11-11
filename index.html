@@ -2,6 +2,13 @@
 <html lang="en" dir="ltr">
 
 <head>
+  <!-- Google tag (GTM-TSK4V833) -->
+  <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-TSK4V833"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="google-site-verification" content="google3fc9c5f66e3ce607" />
@@ -69,27 +76,6 @@
   <meta name="twitter:title" content="Visit Chittorgarh | Rajasthan Heritage &amp; Tourism" />
   <meta name="twitter:description" content="Official tourism guide to Chittorgarh Fort. Authorized local guides, sanitized cabs, and custom Rajasthan tours." />
   <meta name="twitter:image" content="https://www.visitchittorgarh.in/Fort.webp" />
-
-  <!-- Deferred Google Analytics (GA4) -->
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    function loadGA() {
-      if (window.gaLoaded) return;
-      window.gaLoaded = true;
-      var script = document.createElement('script');
-      script.async = true;
-      script.src = 'https://www.googletagmanager.com/gtag/js?id=G-J10EQ1J444';
-      document.head.appendChild(script);
-      gtag('js', new Date());
-      gtag('config', 'G-J10EQ1J444', { send_page_view: true });
-    }
-    if ('requestIdleCallback' in window) {
-      requestIdleCallback(function () { setTimeout(loadGA, 2000); });
-    } else {
-      window.addEventListener('load', function () { setTimeout(loadGA, 3000); });
-    }
-  </script>
 </head>
 
 <body>

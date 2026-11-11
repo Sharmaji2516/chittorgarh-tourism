@@ -26,6 +26,9 @@ const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 
 // SEO Dedicated Landing Pages
 const UdaipurToChittorgarhTaxi = lazy(() => import('./pages/seo/UdaipurToChittorgarhTaxi'));
+const UdaipurToChittorgarhDayTrip = lazy(() => import('./pages/seo/UdaipurToChittorgarhDayTrip'));
+const ChittorgarhFortTimingsTickets = lazy(() => import('./pages/seo/ChittorgarhFortTimingsTickets'));
+const UdaipurToJaipurViaChittorgarhTour = lazy(() => import('./pages/seo/UdaipurToJaipurViaChittorgarhTour'));
 const JaipurToChittorgarhTaxi = lazy(() => import('./pages/seo/JaipurToChittorgarhTaxi'));
 const ChittorgarhOneDayTour = lazy(() => import('./pages/seo/ChittorgarhOneDayTour'));
 const ChittorgarhTwoDaysTour = lazy(() => import('./pages/seo/ChittorgarhTwoDaysTour'));
@@ -109,6 +112,7 @@ const MainContent = () => {
             <Route path="/mission-services" element={<MissionServicesPage t={t} />} />
             <Route path="/about" element={<MissionServicesPage t={t} />} />
             <Route path="/blog" element={<BlogPage t={t} />} />
+            <Route path="/blog/:slug" element={<BlogPage t={t} />} />
             <Route path="/terms" element={<TermsPage />} />
             <Route path="/feedback" element={<FeedbackPage />} />
             <Route path="/service/:serviceId" element={<ServiceDetailsPage />} />
@@ -116,7 +120,12 @@ const MainContent = () => {
             <Route path="/private-taxi" element={<ServiceDetailsPage />} />
             <Route path="/taxi-service" element={<ServiceDetailsPage />} />
 
-            {/* SEO Dedicated Landing Pages */}
+            {/* SEO Dedicated High-Intent Landing Pages */}
+            <Route path="/udaipur-to-chittorgarh-day-trip" element={<UdaipurToChittorgarhDayTrip />} />
+            <Route path="/chittorgarh-fort-timings-tickets" element={<ChittorgarhFortTimingsTickets />} />
+            <Route path="/chittorgarh-fort-timings-entry-fee-tickets" element={<ChittorgarhFortTimingsTickets />} />
+            <Route path="/udaipur-to-jaipur-via-chittorgarh-tour" element={<UdaipurToJaipurViaChittorgarhTour />} />
+            <Route path="/udaipur-jaipur-via-chittorgarh-tour" element={<UdaipurToJaipurViaChittorgarhTour />} />
             <Route path="/udaipur-to-chittorgarh-taxi" element={<UdaipurToChittorgarhTaxi />} />
             <Route path="/jaipur-to-chittorgarh-taxi" element={<JaipurToChittorgarhTaxi />} />
             <Route path="/chittorgarh-1-day-tour" element={<ChittorgarhOneDayTour />} />

@@ -1,9 +1,9 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, Clock, User, ArrowLeft, ArrowRight, Search, Share2, MessageCircle, Compass, Check, BookOpen, Tag } from 'lucide-react';
 import { blogPosts, BLOG_CATEGORIES } from '../data/blogData';
 import SEOHead from '../components/SEOHead';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams, useSearchParams } from 'react-router-dom';
 import { trackWhatsAppClick } from '../utils/analytics';
 
 const BLOG_SCHEMA = [
@@ -33,10 +33,26 @@ const BLOG_SCHEMA = [
 ];
 
 const BlogPage = () => {
+  const { slug } = useParams();
+  const [searchParams] = useSearchParams();
   const [selectedPost, setSelectedPost] = useState(null);
   const [activeCategory, setActiveCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [copied, setCopied] = useState(false);
+
+  // Sync post slug from URL (/blog/:slug or /blog?post=slug)
+  useEffect(() => {
+    const postSlug = slug || searchParams.get('post');
+    if (postSlug) {
+      const match = blogPosts.find(p => p.id === postSlug);
+      if (match) {
+        setSelectedPost(match);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    } else {
+      setSelectedPost(null);
+    }
+  }, [slug, searchParams]);
 
   // Filter posts based on category and search
   const filteredPosts = useMemo(() => {
@@ -53,7 +69,7 @@ const BlogPage = () => {
   const featuredPost = blogPosts[0];
 
   const handleShare = (post, platform) => {
-    const postUrl = typeof window !== 'undefined' ? `${window.location.origin}/blog?post=${post.id}` : `https://visitchittorgarh.in/blog?post=${post.id}`;
+    const postUrl = typeof window !== 'undefined' ? `${window.location.origin}/blog/${post.id}` : `https://www.visitchittorgarh.in/blog/${post.id}`;
     const text = `Check out this Chittorgarh travel article: "${post.title}"`;
 
     if (platform === 'whatsapp') {
@@ -80,8 +96,8 @@ const BlogPage = () => {
       <SEOHead
         title={selectedPost ? `${selectedPost.title} | Visit Chittorgarh Blog` : "Chittorgarh Travel Blog & Guides | The Mewar Chronicles"}
         description={selectedPost ? selectedPost.summary : "Explore authentic Chittorgarh travel guides, fort history, Mewari cuisine, Sanwariya Seth pilgrimage tips, and curated itineraries."}
-        canonical={selectedPost ? `/blog?post=${selectedPost.id}` : "/blog"}
-        ogImage={selectedPost ? `https://visitchittorgarh.in${selectedPost.image}` : "https://visitchittorgarh.in/Fort.png"}
+        canonical={selectedPost ? `/blog/${selectedPost.id}` : "/blog"}
+        ogImage={selectedPost ? `https://www.visitchittorgarh.in${selectedPost.image}` : "https://www.visitchittorgarh.in/Fort.webp"}
         schema={BLOG_SCHEMA}
       />
 
