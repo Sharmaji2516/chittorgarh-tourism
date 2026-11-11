@@ -1,0 +1,58 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+  }
+
+  body {
+    @apply bg-surface-900 text-surface-50 font-sans antialiased;
+    /* Kept relative to allow specific background images in components */
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/5 backdrop-blur-md border border-white/10 shadow-lg;
+  }
+
+  .glass-card {
+    @apply bg-surface-800/50 backdrop-blur-md border border-white/5 shadow-xl hover:bg-surface-800/70 transition-all duration-300;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-royal-gold to-orange-400;
+  }
+
+  .heritage-gradient {
+    @apply bg-gradient-to-br from-heritage-charcoal via-royal-black to-heritage-charcoal-light;
+  }
+
+  .ornate-border {
+    @apply border border-heritage-gold/30 rounded-2xl relative;
+  }
+
+  .ornate-border::before {
+    content: '';
+    @apply absolute inset-0 border border-heritage-gold/10 rounded-2xl -m-1 pointer-events-none;
+  }
+
+  /* Parchment card — local CSS gradient, no external fetch */
+  .parchment-card {
+    @apply bg-heritage-parchment text-amber-950 shadow-inner border border-amber-900/10 rounded-xl relative overflow-hidden;
+    background-image: linear-gradient(
+      135deg,
+      rgba(252, 245, 229, 1) 0%,
+      rgba(244, 220, 170, 0.6) 40%,
+      rgba(252, 245, 229, 1) 70%,
+      rgba(235, 210, 155, 0.4) 100%
+    );
+  }
+
+  .heritage-btn-primary {
+    @apply px-8 py-3 bg-heritage-charcoal text-heritage-parchment rounded-full font-bold uppercase tracking-widest hover:bg-heritage-charcoal-light transition-all transform hover:-translate-y-1 shadow-lg border border-heritage-gold/20;
+  }
+}
