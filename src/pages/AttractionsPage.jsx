@@ -172,7 +172,14 @@ const AttractionsPage = ({ t, filteredAttractions = [], setSelectedAttraction })
                                 Detailed Information
                             </button>
                             <button
-                                onClick={() => window.dispatchEvent(new CustomEvent('openTripPlannerModal'))}
+                                onClick={() => window.dispatchEvent(new CustomEvent('openTripPlannerModal', {
+                                    detail: {
+                                        mode: 'focused',
+                                        itemName: `${main.title || main.name || 'Attraction'} Guided Tour`,
+                                        itemDuration: main.bestTime || '',
+                                        category: 'Attraction Tour',
+                                    }
+                                }))}
                                 className="px-6 py-3 bg-[#25231F] hover:bg-[#A65F3D] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all"
                             >
                                 Book Guided Tour

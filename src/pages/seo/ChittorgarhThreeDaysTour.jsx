@@ -5,7 +5,14 @@ import { trackWhatsAppClick } from '../../utils/analytics';
 
 const ChittorgarhThreeDaysTour = () => {
   const triggerPlanTrip = () => {
-    window.dispatchEvent(new CustomEvent('openTripPlannerModal'));
+    window.dispatchEvent(new CustomEvent('openTripPlannerModal', {
+      detail: {
+        mode: 'focused',
+        itemName: 'Chittorgarh Three Days Royal Expedition',
+        itemDuration: '3 Days / 2 Nights',
+        category: 'Package',
+      }
+    }));
   };
 
   const handleWhatsApp = () => {

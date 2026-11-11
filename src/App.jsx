@@ -58,12 +58,27 @@ const NullFallback = () => null;
 const MainContent = () => {
   const { t } = useLanguage();
   const [selectedAttraction, setSelectedAttraction] = useState(null);
-  const [isTripPlannerOpen, setIsTripPlannerOpen] = useState(false);
+  const [tripModalConfig, setTripModalConfig] = useState({
+    isOpen: false,
+    mode: 'full',
+    itemName: '',
+    itemDuration: '',
+    category: 'Tour Package',
+  });
   const location = useLocation();
 
-  // Listen for custom event to open Trip Planner Modal
+  // Listen for custom event to open Trip Planner Modal (supports focused item inquiries)
   React.useEffect(() => {
-    const handleOpenTripPlanner = () => setIsTripPlannerOpen(true);
+    const handleOpenTripPlanner = (e) => {
+      const detail = e?.detail || {};
+      setTripModalConfig({
+        isOpen: true,
+        mode: detail.mode === 'focused' ? 'focused' : 'full',
+        itemName: detail.itemName || '',
+        itemDuration: detail.itemDuration || '',
+        category: detail.category || 'Tour Package',
+      });
+    };
     window.addEventListener('openTripPlannerModal', handleOpenTripPlanner);
     return () => window.removeEventListener('openTripPlannerModal', handleOpenTripPlanner);
   }, []);
@@ -90,8 +105,12 @@ const MainContent = () => {
       {/* Global Trip Planner Modal */}
       <Suspense fallback={<NullFallback />}>
         <TripPlannerModal
-          isOpen={isTripPlannerOpen}
-          onClose={() => setIsTripPlannerOpen(false)}
+          isOpen={tripModalConfig.isOpen}
+          mode={tripModalConfig.mode}
+          itemName={tripModalConfig.itemName}
+          itemDuration={tripModalConfig.itemDuration}
+          category={tripModalConfig.category}
+          onClose={() => setTripModalConfig((prev) => ({ ...prev, isOpen: false }))}
         />
       </Suspense>
 

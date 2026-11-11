@@ -5,7 +5,14 @@ import { trackWhatsAppClick } from '../../utils/analytics';
 
 const ChittorgarhTwoDaysTour = () => {
   const triggerPlanTrip = () => {
-    window.dispatchEvent(new CustomEvent('openTripPlannerModal'));
+    window.dispatchEvent(new CustomEvent('openTripPlannerModal', {
+      detail: {
+        mode: 'focused',
+        itemName: 'Chittorgarh Two Days Tour Package',
+        itemDuration: '2 Days / 1 Night',
+        category: 'Package',
+      }
+    }));
   };
 
   const handleWhatsApp = () => {

@@ -19,8 +19,19 @@ const JOURNEYS_SCHEMA = [
 const RoyalJourneysPage = ({ t }) => {
     const [activeTab, setActiveTab] = useState('packages');
 
-    const triggerPlanTrip = () => {
-        window.dispatchEvent(new CustomEvent('openTripPlannerModal'));
+    const triggerPlanTrip = (pkg = null) => {
+        if (pkg && pkg.name) {
+            window.dispatchEvent(new CustomEvent('openTripPlannerModal', {
+                detail: {
+                    mode: 'focused',
+                    itemName: pkg.name,
+                    itemDuration: pkg.duration || '',
+                    category: 'Package',
+                }
+            }));
+        } else {
+            window.dispatchEvent(new CustomEvent('openTripPlannerModal'));
+        }
     };
 
     const packages = t?.packages?.items || [
@@ -149,7 +160,7 @@ const RoyalJourneysPage = ({ t }) => {
 
                                 <div className="p-6 sm:p-8 pt-0 border-t border-[#EFE7D9]/60 flex flex-col gap-2.5">
                                     <button
-                                        onClick={triggerPlanTrip}
+                                        onClick={() => triggerPlanTrip(pkg)}
                                         className="w-full py-3.5 bg-[#C49A32] hover:bg-[#b08728] text-white rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm transition-transform active:scale-95"
                                     >
                                         <Compass className="w-4 h-4" />
@@ -213,7 +224,7 @@ const RoyalJourneysPage = ({ t }) => {
                     </div>
 
                     <button
-                        onClick={triggerPlanTrip}
+                        onClick={() => triggerPlanTrip(null)}
                         className="px-8 py-4 bg-[#C49A32] hover:bg-[#b08728] text-white rounded-2xl text-xs font-bold uppercase tracking-wider shrink-0 shadow-lg transition-transform active:scale-95 flex items-center gap-2"
                     >
                         <Compass className="w-4 h-4" />

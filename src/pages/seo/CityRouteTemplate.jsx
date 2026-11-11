@@ -47,7 +47,14 @@ const CityRouteTemplate = ({ page }) => {
   )}`;
 
   const triggerPlanTrip = () => {
-    window.dispatchEvent(new CustomEvent('openTripPlannerModal'));
+    window.dispatchEvent(new CustomEvent('openTripPlannerModal', {
+      detail: {
+        mode: 'focused',
+        itemName: `${page.origin} to ${page.destination} Cab & Guide`,
+        itemDuration: page.estimatedRoadTime || '',
+        category: 'Route Transfer',
+      }
+    }));
   };
 
   return (

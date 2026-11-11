@@ -238,8 +238,8 @@ const Navbar = () => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 onClick={() => trackWhatsAppClick('navbar_mobile_wa')}
-                                className="w-8.5 h-8.5 xs:w-9 xs:h-9 rounded-xl bg-emerald-600 text-white flex items-center justify-center shadow-sm active:scale-95 transition-transform"
-                                aria-label="WhatsApp Tour Desk"
+                                className="w-9 h-9 rounded-xl bg-[#128C7E] text-white flex items-center justify-center shadow-sm active:scale-95 transition-transform shrink-0"
+                                aria-label="WhatsApp"
                             >
                                 <MessageCircle className="w-4 h-4" />
                             </a>
@@ -249,7 +249,7 @@ const Navbar = () => {
                                 onClick={() => setIsOpen(!isOpen)}
                                 aria-label="Toggle navigation menu"
                                 className={cn(
-                                    "w-8.5 h-8.5 xs:w-9 xs:h-9 rounded-xl border flex items-center justify-center transition-colors active:scale-95",
+                                    "w-9 h-9 rounded-xl border flex items-center justify-center transition-colors active:scale-95 shrink-0",
                                     (scrolled || !isHome || isOpen)
                                         ? "bg-white border-[#EFE7D9] text-[#25231F]"
                                         : "bg-white/15 border-white/25 text-white"

@@ -122,7 +122,14 @@ const AttractionSEOTemplate = ({ page }) => {
               </a>
               <button
                 type="button"
-                onClick={() => window.dispatchEvent(new CustomEvent('openTripPlannerModal'))}
+                onClick={() => window.dispatchEvent(new CustomEvent('openTripPlannerModal', {
+                  detail: {
+                    mode: 'focused',
+                    itemName: `${page.name} Visit & Guide`,
+                    itemDuration: page.estimatedDuration || '',
+                    category: 'Attraction Tour',
+                  }
+                }))}
                 className="px-6 py-3.5 bg-[#C49A32] hover:bg-[#b08728] text-white rounded-2xl font-bold uppercase tracking-wider text-xs inline-flex items-center justify-center gap-2"
               >
                 <Compass className="w-4 h-4" />

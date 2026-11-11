@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { NavLink } from 'react-router-dom';
-import { 
-  ShieldCheck, Compass, MessageCircle, Phone, Award, Star, ArrowRight, 
-  Clock, MapPin, CheckCircle2, Car, Users, Calendar, Utensils, Hotel, 
+import {
+  ShieldCheck, Compass, MessageCircle, Phone, Award, Star, ArrowRight,
+  Clock, MapPin, CheckCircle2, Car, Users, Calendar, Utensils, Hotel,
   Camera, Landmark, Sparkles, ChevronRight, ExternalLink, HeartHandshake, Eye, Globe, Train
 } from 'lucide-react';
 
@@ -83,8 +83,19 @@ const HomePage = () => {
   const [quickDate, setQuickDate] = useState('');
   const [quickTravelers, setQuickTravelers] = useState('2');
 
-  const triggerPlanTrip = () => {
-    window.dispatchEvent(new CustomEvent('openTripPlannerModal'));
+  const triggerPlanTrip = (focusedDetail = null) => {
+    if (focusedDetail && focusedDetail.itemName) {
+      window.dispatchEvent(new CustomEvent('openTripPlannerModal', {
+        detail: {
+          mode: 'focused',
+          itemName: focusedDetail.itemName,
+          itemDuration: focusedDetail.itemDuration || '',
+          category: focusedDetail.category || 'Package',
+        }
+      }));
+    } else {
+      window.dispatchEvent(new CustomEvent('openTripPlannerModal'));
+    }
   };
 
   const handleQuickInquiry = (e) => {
@@ -230,14 +241,14 @@ const HomePage = () => {
             </div>
 
             <form onSubmit={handleQuickInquiry} className="flex-1 w-full grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <div>
+              <div className="min-w-0">
                 <label className="block text-[11px] font-bold uppercase tracking-wider text-[#25231F]/70 mb-1">
                   Service Type
                 </label>
                 <select
                   value={quickService}
                   onChange={(e) => setQuickService(e.target.value)}
-                  className="w-full px-3.5 py-2.5 sm:py-3 bg-[#F8F5EF] border border-[#EFE7D9] rounded-xl text-xs font-medium text-[#25231F] focus:outline-none focus:border-[#C49A32]"
+                  className="w-full min-w-0 min-h-[44px] px-3.5 py-2.5 bg-[#F8F5EF] border border-[#E4DAC6] rounded-xl text-base sm:text-xs font-medium text-[#25231F] focus:outline-none focus:border-[#C49A32]"
                 >
                   <option value="Fort Guided Tour">Private Fort Guide</option>
                   <option value="Private Taxi Service">Private Cab / Taxi</option>
@@ -247,7 +258,7 @@ const HomePage = () => {
                 </select>
               </div>
 
-              <div>
+              <div className="min-w-0">
                 <label className="block text-[11px] font-bold uppercase tracking-wider text-[#25231F]/70 mb-1">
                   Travel Date
                 </label>
@@ -255,18 +266,18 @@ const HomePage = () => {
                   type="date"
                   value={quickDate}
                   onChange={(e) => setQuickDate(e.target.value)}
-                  className="w-full px-3.5 py-2.5 sm:py-3 bg-[#F8F5EF] border border-[#EFE7D9] rounded-xl text-xs font-medium text-[#25231F] focus:outline-none focus:border-[#C49A32]"
+                  className="w-full min-w-0 min-h-[44px] px-3.5 py-2.5 bg-[#F8F5EF] border border-[#E4DAC6] rounded-xl text-base sm:text-xs font-medium text-[#25231F] focus:outline-none focus:border-[#C49A32]"
                 />
               </div>
 
-              <div>
+              <div className="min-w-0">
                 <label className="block text-[11px] font-bold uppercase tracking-wider text-[#25231F]/70 mb-1">
                   Travelers
                 </label>
                 <select
                   value={quickTravelers}
                   onChange={(e) => setQuickTravelers(e.target.value)}
-                  className="w-full px-3.5 py-2.5 sm:py-3 bg-[#F8F5EF] border border-[#EFE7D9] rounded-xl text-xs font-medium text-[#25231F] focus:outline-none focus:border-[#C49A32]"
+                  className="w-full min-w-0 min-h-[44px] px-3.5 py-2.5 bg-[#F8F5EF] border border-[#E4DAC6] rounded-xl text-base sm:text-xs font-medium text-[#25231F] focus:outline-none focus:border-[#C49A32]"
                 >
                   <option value="1 Solo">1 Solo Traveler</option>
                   <option value="2 (Couple)">2 Travelers (Couple)</option>
@@ -286,7 +297,7 @@ const HomePage = () => {
                 </button>
                 <button
                   type="button"
-                  onClick={triggerPlanTrip}
+                  onClick={() => triggerPlanTrip(null)}
                   className="px-6 py-3.5 bg-[#25231F] hover:bg-[#A65F3D] text-white rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-colors min-h-[46px]"
                 >
                   <Compass className="w-4 h-4" />
@@ -469,7 +480,7 @@ const HomePage = () => {
                 Learn Guide Details
               </NavLink>
               <button
-                onClick={triggerPlanTrip}
+                onClick={() => triggerPlanTrip({ itemName: 'Private Licensed Tour Guide', category: 'Guide' })}
                 className="px-7 py-3.5 bg-[#C49A32] hover:bg-[#b08728] text-white text-xs font-bold uppercase tracking-wider rounded-2xl shadow-md transition-all flex items-center justify-center gap-2 min-h-[46px]"
               >
                 <Compass className="w-4 h-4" />
@@ -539,7 +550,7 @@ const HomePage = () => {
                 </ul>
               </div>
               <button
-                onClick={triggerPlanTrip}
+                onClick={() => triggerPlanTrip({ itemName: 'Prime Sedan Taxi (Dzire / Etios)', category: 'Taxi' })}
                 className="w-full py-3 bg-[#25231F] hover:bg-[#A65F3D] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors min-h-[44px]"
               >
                 Book Sedan
@@ -573,7 +584,7 @@ const HomePage = () => {
                 </ul>
               </div>
               <button
-                onClick={triggerPlanTrip}
+                onClick={() => triggerPlanTrip({ itemName: 'Royal SUV Taxi (Innova / Ertiga)', category: 'Taxi' })}
                 className="w-full py-3 bg-[#C49A32] hover:bg-[#b08728] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors shadow-sm min-h-[44px]"
               >
                 Book SUV
@@ -604,7 +615,7 @@ const HomePage = () => {
                 </ul>
               </div>
               <button
-                onClick={triggerPlanTrip}
+                onClick={() => triggerPlanTrip({ itemName: 'Luxury Tempo Traveller (Group)', category: 'Taxi' })}
                 className="w-full py-3 bg-[#25231F] hover:bg-[#A65F3D] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors min-h-[44px]"
               >
                 Book Tempo
@@ -673,7 +684,7 @@ const HomePage = () => {
               <div className="p-5 sm:p-6 pt-0 border-t border-[#EFE7D9]/60 flex items-center justify-between">
                 <span className="text-[11px] text-[#25231F]/60 font-medium">{pkg.priceNote}</span>
                 <button
-                  onClick={triggerPlanTrip}
+                  onClick={() => triggerPlanTrip({ itemName: pkg.title, itemDuration: pkg.duration, category: 'Package' })}
                   className="px-4 py-2 bg-[#C49A32] hover:bg-[#b08728] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors min-h-[40px]"
                 >
                   Inquire Now
@@ -718,7 +729,7 @@ const HomePage = () => {
                   Explore Verified Stays
                 </NavLink>
                 <button
-                  onClick={triggerPlanTrip}
+                  onClick={() => triggerPlanTrip({ itemName: 'Heritage Hotel & Haveli Stay Inquiry', category: 'Stay' })}
                   className="px-7 py-3.5 bg-[#C49A32] hover:bg-[#b08728] text-white rounded-2xl text-xs font-bold uppercase tracking-wider shadow-md transition-colors min-h-[46px]"
                 >
                   Inquire Stay Deals

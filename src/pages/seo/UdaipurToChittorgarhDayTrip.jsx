@@ -47,7 +47,14 @@ const FAQ_SCHEMA = {
 
 const UdaipurToChittorgarhDayTrip = () => {
   const triggerPlanTrip = () => {
-    window.dispatchEvent(new CustomEvent('openTripPlannerModal'));
+    window.dispatchEvent(new CustomEvent('openTripPlannerModal', {
+      detail: {
+        mode: 'focused',
+        itemName: 'Udaipur to Chittorgarh Private Day Trip',
+        itemDuration: 'Full Day Excursion',
+        category: 'Package',
+      }
+    }));
   };
 
   return (
