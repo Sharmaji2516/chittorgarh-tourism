@@ -27,7 +27,7 @@ const TermsPage = () => {
             Terms & Conditions
           </h1>
           <p className="text-xs text-[#25231F]/60 mb-8 pb-4 border-b border-[#EFE7D9]">
-            Last updated: March 2026 • Visit Chittorgarh (A Product of ChittorTech)
+            Last updated: March 2026 • Visit Chittorgarh
           </p>
 
           <div className="space-y-6 text-xs sm:text-sm text-[#25231F]/80 leading-relaxed">
@@ -65,8 +65,8 @@ const TermsPage = () => {
                 For official correspondence, inquiries, or feedback:
               </p>
               <div className="mt-3 p-4 bg-[#F8F5EF] rounded-xl border border-[#EFE7D9] space-y-1.5 text-xs">
-                <p><strong>Business:</strong> Visit Chittorgarh (ChittorTech)</p>
-                <p><strong>Address:</strong> Birla Shiksha Kendra, Industrial Area, Chittorgarh, Rajasthan 312001</p>
+                <p><strong>Business:</strong> Visit Chittorgarh</p>
+                <p><strong>Address:</strong> Chittaurgarh, Rajasthan 312021</p>
                 <p><strong>Phone:</strong> +91 75974 51057</p>
                 <p><strong>Email:</strong> visitchittorgarh@gmail.com</p>
               </div>

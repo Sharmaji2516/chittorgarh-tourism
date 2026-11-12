@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Phone, MessageCircle, Mail, MapPin, Award, Compass, ExternalLink, Instagram, Facebook, Youtube } from 'lucide-react';
+import { Phone, MessageCircle, Mail, MapPin, Clock, Compass, Instagram, Facebook, Youtube } from 'lucide-react';
 import { trackWhatsAppClick, trackPhoneCallClick } from '../utils/analytics';
 
 const VERIFIED_PHONE = "+91 75974 51057";
@@ -13,7 +13,7 @@ const Footer = () => {
     };
 
     return (
-        <footer id="contact" className="bg-[#25231F] text-[#F8F5EF] pt-16 pb-12 border-t border-[#C49A32]/30 relative overflow-hidden">
+        <footer id="contact" className="bg-[#25231F] text-[#F8F5EF] pt-12 sm:pt-16 pb-24 md:pb-10 border-t border-[#C49A32]/30 relative overflow-hidden">
             {/* Subtle decorative background glow */}
             <div className="absolute top-0 right-0 w-96 h-96 bg-[#C49A32]/5 blur-3xl pointer-events-none rounded-full"></div>
             <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#A65F3D]/5 blur-3xl pointer-events-none rounded-full"></div>
@@ -21,7 +21,7 @@ const Footer = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
                 {/* Top Inquiry Banner inside Footer */}
-                <div className="bg-gradient-to-r from-[#312D27] via-[#2A2722] to-[#312D27] rounded-3xl p-8 sm:p-10 border border-[#C49A32]/20 mb-16 shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-6">
+                <div className="bg-gradient-to-r from-[#312D27] via-[#2A2722] to-[#312D27] rounded-2xl sm:rounded-3xl p-6 sm:p-10 border border-[#C49A32]/20 mb-10 sm:mb-14 shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-5 sm:gap-6">
                     <div className="text-center lg:text-left">
                         <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#C49A32] block mb-1">
                             Experience Mewar With Experts
@@ -56,11 +56,11 @@ const Footer = () => {
                 </div>
 
                 {/* 4 Column Footer Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-16 border-b border-white/10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10 pb-10 sm:pb-12 border-b border-white/10 text-center lg:text-left">
 
                     {/* Column 1: Brand & Identity */}
-                    <div className="space-y-4">
-                        <div className="flex items-center gap-3">
+                    <div className="space-y-4 flex flex-col items-center lg:items-start">
+                        <div className="flex items-center justify-center lg:justify-start gap-3">
                             <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#C49A32] to-[#A65F3D] p-0.5 shadow-md">
                                 <img
                                     src="/logo_maharana.webp"
@@ -68,7 +68,7 @@ const Footer = () => {
                                     className="w-full h-full object-cover rounded-[14px]"
                                 />
                             </div>
-                            <div>
+                            <div className="text-left">
                                 <span className="font-serif text-lg font-bold text-white tracking-wider block">
                                     VISIT CHITTORGARH
                                 </span>
@@ -78,12 +78,12 @@ const Footer = () => {
                             </div>
                         </div>
 
-                        <p className="text-xs text-[#F8F5EF]/70 leading-relaxed">
+                        <p className="text-xs text-[#F8F5EF]/70 leading-relaxed max-w-xs mx-auto lg:mx-0">
                             Official digital gateway to the historic citadel of Chittorgarh. Promoting cultural preservation, authorized Mewari tour guides, and verified local hospitality.
                         </p>
 
                         {/* Social Links */}
-                        <div className="pt-2 flex items-center gap-3">
+                        <div className="pt-2 flex items-center justify-center lg:justify-start gap-3">
                             <a
                                 href="https://www.instagram.com/visitchittorgarh"
                                 target="_blank"
@@ -228,22 +228,27 @@ const Footer = () => {
                     </div>
 
                     {/* Column 4: Contact & Operations Desk */}
-                    <div>
+                    <div className="flex flex-col items-center lg:items-start">
                         <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-[#C49A32] mb-5">
                             Concierge Desk
                         </h4>
-                        <div className="space-y-3.5 text-xs text-[#F8F5EF]/80">
-                            <div className="flex items-start gap-3">
-                                <MapPin className="w-4 h-4 text-[#C49A32] shrink-0 mt-0.5" />
+                        <div className="space-y-3.5 text-xs text-[#F8F5EF]/80 flex flex-col items-center lg:items-start">
+                            <div className="flex items-center justify-center lg:justify-start gap-2.5">
+                                <MapPin className="w-4 h-4 text-[#C49A32] shrink-0" />
                                 <span className="leading-relaxed">
-                                    Birla Shiksha Kendra, Industrial Area,<br />Chittorgarh, Rajasthan 312001
+                                    Chittaurgarh, Rajasthan 312021
                                 </span>
+                            </div>
+
+                            <div className="flex items-center justify-center lg:justify-start gap-2.5 text-emerald-400 font-semibold">
+                                <Clock className="w-4 h-4 shrink-0" />
+                                <span>24×7 Support on Call &amp; WhatsApp</span>
                             </div>
 
                             <a
                                 href="tel:+917597451057"
                                 onClick={() => trackPhoneCallClick('footer_contact_link')}
-                                className="flex items-center gap-3 hover:text-[#C49A32] transition-colors"
+                                className="flex items-center justify-center lg:justify-start gap-2.5 hover:text-[#C49A32] transition-colors"
                             >
                                 <Phone className="w-4 h-4 text-[#C49A32] shrink-0" />
                                 <span className="font-semibold">{VERIFIED_PHONE}</span>
@@ -254,7 +259,7 @@ const Footer = () => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 onClick={() => trackWhatsAppClick('footer_wa_link')}
-                                className="flex items-center gap-3 hover:text-emerald-400 transition-colors"
+                                className="flex items-center justify-center lg:justify-start gap-2.5 hover:text-emerald-400 transition-colors"
                             >
                                 <MessageCircle className="w-4 h-4 text-emerald-400 shrink-0" />
                                 <span>WhatsApp: +91 75974 51057</span>
@@ -262,14 +267,14 @@ const Footer = () => {
 
                             <a
                                 href={`mailto:${VERIFIED_EMAIL}`}
-                                className="flex items-center gap-3 hover:text-[#C49A32] transition-colors"
+                                className="flex items-center justify-center lg:justify-start gap-2.5 hover:text-[#C49A32] transition-colors"
                             >
                                 <Mail className="w-4 h-4 text-[#C49A32] shrink-0" />
                                 <span>{VERIFIED_EMAIL}</span>
                             </a>
 
                             {/* Android App Link */}
-                            <div className="pt-2">
+                            <div className="pt-2 flex justify-center lg:justify-start">
                                 <a
                                     href="https://play.google.com/store/apps/details?id=com.kushsharma.visitchittorgarh"
                                     target="_blank"
@@ -289,30 +294,24 @@ const Footer = () => {
                     </div>
                 </div>
 
-                {/* Bottom Bar — ChittorTech Branding & Startup Recognition */}
-                <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-6 text-xs text-[#F8F5EF]/60">
-                    <div className="flex items-center gap-4">
-                        <div className="w-10 h-10 rounded-xl bg-white p-1 shadow-sm shrink-0">
-                            <img src="/chittortech_logo.png" alt="ChittorTech" className="w-full h-full object-contain" />
-                        </div>
-                        <div>
-                            <span className="text-[9px] uppercase tracking-widest text-[#F8F5EF]/40 block">A Product Of</span>
-                            <span className="text-sm font-black text-white italic">ChittorTech</span>
-                        </div>
-                    </div>
+                {/* Bottom Bar — Clean Visit Chittorgarh Copyright & Quick Links */}
+                <div className="pt-6 sm:pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#F8F5EF]/65">
+                    <p className="text-center sm:text-left">
+                        © {new Date().getFullYear()} <span className="text-white font-semibold">Visit Chittorgarh</span>. All rights reserved.
+                    </p>
 
                     <div className="flex flex-wrap items-center justify-center gap-4 text-[11px]">
-                        <span className="inline-flex items-center gap-1.5 text-emerald-400 font-semibold">
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Recognized by iStart Rajasthan
-                        </span>
-                        <span>•</span>
-                        <span className="inline-flex items-center gap-1.5 text-emerald-400 font-semibold">
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Registered MSME | Startup India
-                        </span>
-                    </div>
-
-                    <div className="text-center md:text-right text-[11px]">
-                        <p>© {new Date().getFullYear()} Visit Chittorgarh • ChittorTech. All rights reserved.</p>
+                        <NavLink to="/chittorgarh-fort" className="hover:text-[#C49A32] transition-colors">
+                            Chittorgarh Fort
+                        </NavLink>
+                        <span className="text-white/25">•</span>
+                        <NavLink to="/destinations-and-routes" className="hover:text-[#C49A32] transition-colors">
+                            All Routes
+                        </NavLink>
+                        <span className="text-white/25">•</span>
+                        <NavLink to="/terms" className="hover:text-[#C49A32] transition-colors">
+                            Terms &amp; Policy
+                        </NavLink>
                     </div>
                 </div>
             </div>

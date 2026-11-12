@@ -375,7 +375,7 @@ const Navbar = () => {
 
                                 <div className="flex items-center justify-center gap-1.5 text-[9px] text-[#25231F]/60 pt-1">
                                     <ShieldCheck className="w-3 h-3 text-emerald-600" />
-                                    <span>ChittorTech • Recognized by iStart Rajasthan & Startup India</span>
+                                    <span>Visit Chittorgarh • Authorized Local Guides &amp; Concierge</span>
                                 </div>
                             </div>
                         </motion.div>

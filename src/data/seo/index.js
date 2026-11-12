@@ -245,8 +245,8 @@ export const CORE_SITE_ROUTES = [
   },
   {
     path: '/mission-services',
-    title: 'About Visit Chittorgarh | Local Concierge, Guides & ChittorTech Mission',
-    description: 'Learn how ChittorTech and Visit Chittorgarh empower authorized Mewari historians, clean transport & heritage preservation.',
+    title: 'About Visit Chittorgarh | Local Concierge, Guides & Heritage Mission',
+    description: 'Learn how Visit Chittorgarh empowers authorized Mewari historians, clean transport & heritage preservation.',
     changefreq: 'monthly',
     priority: '0.80',
   },

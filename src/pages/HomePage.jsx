@@ -18,7 +18,7 @@ const HOME_SCHEMAS = [
   {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "Visit Chittorgarh — ChittorTech",
+    "name": "Visit Chittorgarh",
     "url": "https://www.visitchittorgarh.in/",
     "logo": "https://www.visitchittorgarh.in/logo_maharana.png",
     "email": "visitchittorgarh@gmail.com",
@@ -58,10 +58,9 @@ const HOME_SCHEMAS = [
     "telephone": "+91-7597451057",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Birla Shiksha Kendra, Industrial Area",
-      "addressLocality": "Chittorgarh",
+      "addressLocality": "Chittaurgarh",
       "addressRegion": "Rajasthan",
-      "postalCode": "312001",
+      "postalCode": "312021",
       "addressCountry": "IN"
     },
     "geo": {

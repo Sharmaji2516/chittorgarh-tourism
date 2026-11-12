@@ -15,10 +15,9 @@ const MISSION_SCHEMA = [
     "telephone": "+91-7597451057",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Birla Shiksha Kendra, Industrial Area",
-      "addressLocality": "Chittorgarh",
+      "addressLocality": "Chittaurgarh",
       "addressRegion": "Rajasthan",
-      "postalCode": "312001",
+      "postalCode": "312021",
       "addressCountry": "IN"
     }
   }
@@ -44,7 +43,7 @@ const MissionServicesPage = () => {
                 title="About Us & Tourism Mission | Visit Chittorgarh"
                 description="Learn about Visit Chittorgarh's mission: promoting authentic Mewar heritage, empowering certified local guides, and providing safe, transparent tourism experiences."
                 canonical="/mission-services"
-                keywords="About Visit Chittorgarh, Chittorgarh tourism mission, certified guides Chittorgarh, ChittorTech tourism"
+                keywords="About Visit Chittorgarh, Chittorgarh tourism mission, certified guides Chittorgarh, heritage tourism"
                 schema={MISSION_SCHEMA}
             />
 
@@ -72,7 +71,7 @@ const MissionServicesPage = () => {
                             Chittorgarh is revered across India as the cradle of Rajputana valor, the realm of Maharana Kumbha, Maharana Sanga, the poetess saint Meera Bai, and the supreme sacrifice of Queen Padmini. Yet for decades, travelers visiting the sprawling 700-acre fort struggled with unauthorized touts, fragmented transport, and unreliable information.
                         </p>
                         <p>
-                            <strong>Visit Chittorgarh</strong> was founded by ChittorTech (recognized by iStart Rajasthan & Startup India) to create a transparent, digital-first tourism platform. We bridge the gap between discerning cultural travelers and certified local professionals.
+                            <strong>Visit Chittorgarh</strong> was created to offer a transparent, digital-first tourism platform. We bridge the gap between discerning cultural travelers and certified local professionals.
                         </p>
 
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 text-center">
@@ -85,8 +84,8 @@ const MissionServicesPage = () => {
                                 <span className="text-xs text-[#25231F]/70">Hidden Commissions</span>
                             </div>
                             <div className="p-4 bg-[#F8F5EF] rounded-2xl border border-[#EFE7D9]">
-                                <span className="font-serif text-2xl font-bold text-[#526B50] block">iStart</span>
-                                <span className="text-xs text-[#25231F]/70">Govt. Recognized</span>
+                                <span className="font-serif text-2xl font-bold text-[#526B50] block">24/7</span>
+                                <span className="text-xs text-[#25231F]/70">Local Ground Support</span>
                             </div>
                         </div>
                     </div>

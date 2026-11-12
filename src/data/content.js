@@ -717,7 +717,7 @@ export const content = {
       ],
     },
     footer: {
-      copyright: "© 2026 Chittortech. All Rights Reserved.",
+      copyright: "© 2026 Visit Chittorgarh. All Rights Reserved.",
       dedication: "Dedicated to the brave souls of Mewar.",
       contact: "Contact",
       explore: "Explore",
