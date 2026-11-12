@@ -39,11 +39,11 @@ const AppPromoModal = ({ isOpen, onClose }) => {
                     </button>
 
                     {/* App Emblem Logo Container */}
-                    <div className="mx-auto w-24 h-24 rounded-full bg-gradient-to-br from-royal-gold via-amber-400 to-amber-600 p-0.5 shadow-[0_0_30px_rgba(212,175,55,0.4)] mb-4 overflow-hidden">
+                    <div className="mx-auto w-24 h-24 flex items-center justify-center shrink-0 drop-shadow-[0_0_25px_rgba(212,175,55,0.4)] mb-4">
                         <img 
-                            src="/logo_maharana.png" 
-                            alt="Chittorgarh Tourism Logo" 
-                            className="w-full h-full object-cover rounded-full bg-black" 
+                            src="/chittorgarh-tourism-logo.webp" 
+                            alt="Chittorgarh Tourism Emblem" 
+                            className="w-full h-full object-contain" 
                         />
                     </div>
 

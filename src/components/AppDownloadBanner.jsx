@@ -72,8 +72,8 @@ const AppDownloadBanner = () => {
 
                             {/* Screen Center Icon */}
                             <div className="flex flex-col items-center justify-center gap-3 my-auto">
-                                <div className="w-24 h-24 rounded-full bg-gradient-to-br from-royal-gold via-amber-400 to-amber-600 p-0.5 shadow-lg overflow-hidden">
-                                    <img src="/logo_maharana.png" alt="Visit Chittorgarh App Emblem" className="w-full h-full object-cover rounded-full bg-black" />
+                                <div className="w-24 h-24 flex items-center justify-center shrink-0 drop-shadow-xl">
+                                    <img src="/chittorgarh-tourism-logo.webp" alt="Visit Chittorgarh App Emblem" className="w-full h-full object-contain" />
                                 </div>
                                 <div className="text-center">
                                     <div className="text-sm font-bold text-white">Chittorgarh Tourism</div>

@@ -61,11 +61,11 @@ const Footer = () => {
                     {/* Column 1: Brand & Identity */}
                     <div className="space-y-4 flex flex-col items-center lg:items-start">
                         <div className="flex items-center justify-center lg:justify-start gap-3">
-                            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#C49A32] to-[#A65F3D] p-0.5 shadow-md">
+                            <div className="w-12 h-12 flex items-center justify-center shrink-0 drop-shadow-md">
                                 <img
-                                    src="/logo_maharana.webp"
-                                    alt="Visit Chittorgarh"
-                                    className="w-full h-full object-cover rounded-[14px]"
+                                    src="/chittorgarh-tourism-logo.webp"
+                                    alt="Visit Chittorgarh Official Heritage Emblem"
+                                    className="w-full h-full object-contain"
                                 />
                             </div>
                             <div className="text-left">

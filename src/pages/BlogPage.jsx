@@ -18,7 +18,7 @@ const BLOG_SCHEMA = [
       "name": "Visit Chittorgarh",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://www.visitchittorgarh.in/logo_maharana.png"
+        "url": "https://www.visitchittorgarh.in/chittorgarh-tourism-logo.png"
       }
     }
   },
@@ -109,7 +109,7 @@ const BlogPage = () => {
             "name": "Visit Chittorgarh",
             "logo": {
               "@type": "ImageObject",
-              "url": "https://www.visitchittorgarh.in/logo_maharana.png"
+              "url": "https://www.visitchittorgarh.in/chittorgarh-tourism-logo.png"
             }
           }
         },

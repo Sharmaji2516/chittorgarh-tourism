@@ -112,13 +112,13 @@ const Navbar = () => {
 
                         {/* Logo Section */}
                         <NavLink to="/" className="flex-shrink-0 flex items-center gap-2.5 sm:gap-3 group" onClick={() => setIsOpen(false)}>
-                            <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-xl sm:rounded-2xl bg-gradient-to-br from-[#C49A32] via-[#DFBA5A] to-[#A65F3D] p-0.5 shadow-md group-hover:scale-105 transition-transform overflow-hidden shrink-0">
+                            <div className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center group-hover:scale-105 transition-transform shrink-0 drop-shadow-md">
                                 <img
-                                    src="/logo_maharana.webp"
-                                    alt="Visit Chittorgarh Official Logo"
+                                    src="/chittorgarh-tourism-logo.webp"
+                                    alt="Visit Chittorgarh Official Heritage Emblem"
                                     width={48}
                                     height={48}
-                                    className="w-full h-full object-cover rounded-[10px] sm:rounded-[14px]"
+                                    className="w-full h-full object-contain"
                                 />
                             </div>
                             <div className="flex flex-col">
@@ -284,9 +284,9 @@ const Navbar = () => {
                         >
                             {/* Drawer Header */}
                             <div className="flex items-center justify-between px-5 py-4 border-b border-[#EFE7D9] bg-white shrink-0">
-                                <div className="flex items-center gap-2">
-                                    <div className="w-8 h-8 rounded-lg bg-[#C49A32] p-0.5 overflow-hidden">
-                                        <img src="/logo_maharana.webp" alt="Visit Chittorgarh" className="w-full h-full object-cover" />
+                                <div className="flex items-center gap-2.5">
+                                    <div className="w-9 h-9 flex items-center justify-center shrink-0 drop-shadow-sm">
+                                        <img src="/chittorgarh-tourism-logo.webp" alt="Visit Chittorgarh" className="w-full h-full object-contain" />
                                     </div>
                                     <div>
                                         <span className="text-xs font-serif font-black text-[#25231F] block leading-none">VISIT CHITTORGARH</span>

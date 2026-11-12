@@ -20,7 +20,7 @@ const HOME_SCHEMAS = [
     "@type": "Organization",
     "name": "Visit Chittorgarh",
     "url": "https://www.visitchittorgarh.in/",
-    "logo": "https://www.visitchittorgarh.in/logo_maharana.png",
+    "logo": "https://www.visitchittorgarh.in/chittorgarh-tourism-logo.png",
     "email": "visitchittorgarh@gmail.com",
     "telephone": "+91-7597451057",
     "sameAs": [
