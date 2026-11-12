@@ -99,7 +99,7 @@ const Navbar = () => {
                 "fixed top-0 inset-x-0 z-50 transition-all duration-300",
                 (scrolled || !isHome || isOpen)
                     ? "bg-[#F8F5EF]/95 backdrop-blur-md border-b border-[#EFE7D9] py-2 sm:py-2.5 shadow-sm"
-                    : "bg-gradient-to-b from-[#25231F]/50 via-[#25231F]/20 to-transparent py-3 sm:py-4 text-white"
+                    : "bg-gradient-to-b from-black/80 via-black/40 to-transparent py-2.5 sm:py-3.5 text-white"
             )}>
                 {/* Scroll Progress Bar */}
                 <div
@@ -107,28 +107,28 @@ const Navbar = () => {
                     style={{ width: `${scrollProgress}%` }}
                 ></div>
 
-                <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8">
-                    <div className="flex items-center justify-between h-14 sm:h-20">
+                <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+                    <div className="flex items-center justify-between h-14 sm:h-20 gap-2">
 
                         {/* Logo Section */}
-                        <NavLink to="/" className="flex-shrink-0 flex items-center gap-2.5 sm:gap-3 group" onClick={() => setIsOpen(false)}>
-                            <div className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center group-hover:scale-105 transition-transform shrink-0 drop-shadow-md">
+                        <NavLink to="/" className="flex-shrink min-w-0 flex items-center gap-2 sm:gap-3 group" onClick={() => setIsOpen(false)}>
+                            <div className="w-11 h-11 sm:w-14 sm:h-14 flex items-center justify-center shrink-0 drop-shadow-md group-hover:scale-105 transition-transform">
                                 <img
                                     src="/chittorgarh-tourism-logo.webp"
                                     alt="Visit Chittorgarh Official Heritage Emblem"
-                                    width={48}
-                                    height={48}
-                                    className="w-full h-full object-contain"
+                                    width={56}
+                                    height={56}
+                                    className="w-full h-full object-contain filter contrast-105"
                                 />
                             </div>
-                            <div className="flex flex-col">
+                            <div className="flex flex-col min-w-0 justify-center">
                                 <span className={cn(
-                                    "text-sm xs:text-base sm:text-xl font-serif font-black tracking-wide leading-none transition-colors",
-                                    (scrolled || !isHome || isOpen) ? "text-[#25231F] group-hover:text-[#A65F3D]" : "text-white group-hover:text-[#DFBA5A]"
+                                    "text-[13px] xs:text-base sm:text-xl font-serif font-black tracking-wide leading-tight transition-colors truncate",
+                                    (scrolled || !isHome || isOpen) ? "text-[#25231F] group-hover:text-[#A65F3D]" : "text-white group-hover:text-[#DFBA5A] drop-shadow-sm"
                                 )}>
                                     VISIT CHITTORGARH
                                 </span>
-                                <span className="text-[8px] sm:text-[10px] font-bold tracking-[0.25em] uppercase text-[#C49A32] mt-0.5">
+                                <span className="text-[7.5px] xs:text-[8.5px] sm:text-[10px] font-bold tracking-[0.22em] uppercase text-[#C49A32] leading-none mt-0.5">
                                     HERITAGE TOURISM
                                 </span>
                             </div>
@@ -216,20 +216,20 @@ const Navbar = () => {
                         </div>
 
                         {/* Mobile Header Right Controls: 1-Tap Language + WhatsApp + Menu Toggle */}
-                        <div className="flex items-center gap-1.5 xs:gap-2 xl:hidden">
+                        <div className="flex items-center gap-1.5 xs:gap-2 xl:hidden shrink-0">
                             {/* Mobile 1-Tap Language Toggle */}
                             <button
                                 onClick={showLangModal}
                                 aria-label="Change language"
                                 className={cn(
-                                    "px-2.5 py-1.5 rounded-lg text-[10px] font-bold border flex items-center gap-1 transition-colors",
+                                    "px-2 py-1.5 rounded-xl text-[10px] font-bold border flex items-center gap-1 transition-all active:scale-95 shadow-sm",
                                     (scrolled || !isHome || isOpen)
                                         ? "bg-white border-[#EFE7D9] text-[#25231F]"
-                                        : "bg-white/15 border-white/25 text-white"
+                                        : "bg-white/20 hover:bg-white/30 border-white/30 text-white backdrop-blur-md"
                                 )}
                             >
-                                <Globe className="w-3 h-3 text-[#C49A32]" />
-                                <span>{lang === 'en' ? 'हिन्दी' : 'EN'}</span>
+                                <Globe className="w-3.5 h-3.5 text-[#DFBA5A]" />
+                                <span className="tracking-wide">{lang === 'en' ? 'हिन्दी' : 'EN'}</span>
                             </button>
 
                             {/* Mobile WhatsApp Quick Icon */}
@@ -238,10 +238,10 @@ const Navbar = () => {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 onClick={() => trackWhatsAppClick('navbar_mobile_wa')}
-                                className="w-9 h-9 rounded-xl bg-[#128C7E] text-white flex items-center justify-center shadow-sm active:scale-95 transition-transform shrink-0"
+                                className="w-9 h-9 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white flex items-center justify-center shadow-md active:scale-95 transition-all shrink-0 border border-emerald-400/30"
                                 aria-label="WhatsApp"
                             >
-                                <MessageCircle className="w-4 h-4" />
+                                <MessageCircle className="w-4 h-4 fill-white/20" />
                             </a>
 
                             {/* Hamburger Button */}
@@ -249,10 +249,10 @@ const Navbar = () => {
                                 onClick={() => setIsOpen(!isOpen)}
                                 aria-label="Toggle navigation menu"
                                 className={cn(
-                                    "w-9 h-9 rounded-xl border flex items-center justify-center transition-colors active:scale-95 shrink-0",
+                                    "w-9 h-9 rounded-xl border flex items-center justify-center transition-all active:scale-95 shrink-0 shadow-sm",
                                     (scrolled || !isHome || isOpen)
                                         ? "bg-white border-[#EFE7D9] text-[#25231F]"
-                                        : "bg-white/15 border-white/25 text-white"
+                                        : "bg-white/20 hover:bg-white/30 border-white/30 text-white backdrop-blur-md"
                                 )}
                             >
                                 {isOpen ? <X className="w-5 h-5 text-[#A65F3D]" /> : <Menu className="w-5 h-5" />}
