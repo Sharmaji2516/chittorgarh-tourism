@@ -43,7 +43,6 @@ const CampaignLandingPage = lazy(() => import('./pages/landing/CampaignLandingPa
 
 // Lazy-loaded UI modals
 const AttractionModal = lazy(() => import('./components/AttractionModal'));
-const CountrySelector = lazy(() => import('./components/CountrySelector'));
 const FloatingInquiry = lazy(() => import('./components/FloatingInquiry'));
 const TripPlannerModal = lazy(() => import('./components/TripPlannerModal'));
 
@@ -88,12 +87,6 @@ const MainContent = () => {
   return (
     <div className="min-h-screen flex flex-col relative text-[#25231F] font-sans selection:bg-[#C49A32] selection:text-white bg-[#F8F5EF]">
       {/* Modals & Navigation */}
-      {!isStandalonePage && (
-        <Suspense fallback={<NullFallback />}>
-          <CountrySelector />
-        </Suspense>
-      )}
-
       {!isStandalonePage && <Navbar />}
 
       {!isStandalonePage && (

@@ -9,7 +9,7 @@ import { trackWhatsAppClick, trackPhoneCallClick } from '../utils/analytics';
 const VERIFIED_WA_LINK = "https://wa.me/917597451057?text=Namaste!%20I%20am%20planning%20a%20trip%20to%20Chittorgarh%20and%20would%20like%20to%20inquire%20about%20tours,%20guide,%20or%20taxi.";
 
 const Navbar = () => {
-    const { lang, showLangModal } = useLanguage();
+    const { lang, changeLanguage } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [scrollProgress, setScrollProgress] = useState(0);
@@ -180,7 +180,7 @@ const Navbar = () => {
                         <div className="hidden lg:flex items-center gap-2.5">
                             {/* Language Switch */}
                             <button
-                                onClick={showLangModal}
+                                onClick={() => changeLanguage(lang === 'en' ? 'hi' : 'en')}
                                 aria-label="Change language"
                                 className={cn(
                                     "flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold border transition-colors",
@@ -219,7 +219,7 @@ const Navbar = () => {
                         <div className="flex items-center gap-1.5 xs:gap-2 xl:hidden shrink-0">
                             {/* Mobile 1-Tap Language Toggle */}
                             <button
-                                onClick={showLangModal}
+                                onClick={() => changeLanguage(lang === 'en' ? 'hi' : 'en')}
                                 aria-label="Change language"
                                 className={cn(
                                     "px-2 py-1.5 rounded-xl text-[10px] font-bold border flex items-center gap-1 transition-all active:scale-95 shadow-sm",
