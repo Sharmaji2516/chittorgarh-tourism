@@ -501,8 +501,7 @@ const HomePage = () => {
                 ✓
               </div>
               <div>
-                <span className="text-[9px] sm:text-[10px] uppercase font-bold text-[#25231F]/60 block">Verified Badge</span>
-                <span className="text-xs font-bold text-[#25231F]">Govt. Recognized Guide</span>
+                <span className="text-xs sm:text-sm font-bold text-[#25231F] block">Rajasthan Government Approved Guide</span>
               </div>
             </div>
           </div>
