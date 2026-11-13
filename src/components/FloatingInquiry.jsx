@@ -18,22 +18,22 @@ const FloatingInquiry = () => {
 
   return (
     <>
-      {/* MOBILE ONLY: Balanced 3-Action Bottom Navigation Bar */}
+      {/* MOBILE ONLY: Balanced 2-Action Bottom Navigation Bar (Call + WhatsApp) */}
       <div
-        className="md:hidden fixed bottom-0 inset-x-0 z-[80] bg-[#FFFDF9]/95 backdrop-blur-xl border-t border-[#E4DAC6] px-2.5 pt-2 pb-[max(0.6rem,env(safe-area-inset-bottom))] shadow-[0_-6px_24px_rgba(37,35,31,0.08)]"
+        className="md:hidden fixed bottom-0 inset-x-0 z-[80] bg-[#FFFDF9]/95 backdrop-blur-xl border-t border-[#E4DAC6] px-3 pt-2 pb-[max(0.6rem,env(safe-area-inset-bottom))] shadow-[0_-6px_24px_rgba(37,35,31,0.08)]"
         role="region"
         aria-label="Quick Contact Actions"
       >
-        <div className="grid grid-cols-3 gap-2 max-w-md mx-auto">
+        <div className="grid grid-cols-2 gap-2.5 max-w-md mx-auto">
           {/* 1. Call Button */}
           <a
             href="tel:+917597451057"
             onClick={() => trackPhoneCallClick('mobile_bottom_bar')}
-            className="h-11 px-2 rounded-2xl bg-white hover:bg-[#F8F5EF] border border-[#E4DAC6] text-[#25231F] text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition-all whitespace-nowrap"
+            className="h-11 px-3 rounded-2xl bg-white hover:bg-[#F8F5EF] border border-[#E4DAC6] text-[#25231F] text-xs font-bold flex items-center justify-center gap-2 shadow-sm active:scale-95 transition-all whitespace-nowrap"
             aria-label="Call Concierge +91 75974 51057"
           >
             <Phone className="w-4 h-4 text-[#A65F3D] shrink-0" />
-            <span>Call</span>
+            <span>Call Concierge</span>
           </a>
 
           {/* 2. WhatsApp Button */}
@@ -42,23 +42,12 @@ const FloatingInquiry = () => {
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => trackWhatsAppClick('mobile_bottom_bar')}
-            className="h-11 px-2 rounded-2xl bg-[#128C7E] hover:bg-[#0f766a] text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition-all whitespace-nowrap"
+            className="h-11 px-3 rounded-2xl bg-[#128C7E] hover:bg-[#0f766a] text-white text-xs font-bold flex items-center justify-center gap-2 shadow-sm active:scale-95 transition-all whitespace-nowrap"
             aria-label="Chat on WhatsApp"
           >
             <WhatsAppIcon className="w-4 h-4 shrink-0" />
-            <span>WhatsApp</span>
+            <span>WhatsApp Us</span>
           </a>
-
-          {/* 3. Plan Trip Button */}
-          <button
-            type="button"
-            onClick={openTripPlanner}
-            className="h-11 px-2 rounded-2xl bg-[#C49A32] hover:bg-[#b08728] text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm active:scale-95 transition-all whitespace-nowrap"
-            aria-label="Plan Your Trip"
-          >
-            <Compass className="w-4 h-4 shrink-0" />
-            <span>Plan Trip</span>
-          </button>
         </div>
       </div>
 

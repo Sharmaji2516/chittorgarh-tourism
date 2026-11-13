@@ -110,8 +110,8 @@ const Navbar = () => {
                 <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-14 sm:h-20 gap-2">
 
-                        {/* Left Section: Back Button (on sub-pages) + Logo */}
-                        <div className="flex items-center gap-1.5 xs:gap-2.5 sm:gap-3 min-w-0">
+                        {/* Left Side: Back Button (on sub-pages) + Logo */}
+                        <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
                             {!isHome && (
                                 <button
                                     onClick={() => {
@@ -135,17 +135,17 @@ const Navbar = () => {
                             )}
 
                             {/* Logo Section */}
-                            <NavLink to="/" className="flex-shrink min-w-0 flex items-center gap-2 sm:gap-3 group" onClick={() => setIsOpen(false)}>
-                                <div className="w-11 h-11 sm:w-14 sm:h-14 flex items-center justify-center shrink-0 drop-shadow-md group-hover:scale-105 transition-transform">
+                            <NavLink to="/" className="flex items-center gap-2 sm:gap-3 group min-w-0" onClick={() => setIsOpen(false)}>
+                                <div className="w-10 h-10 sm:w-13 sm:h-13 flex items-center justify-center shrink-0 drop-shadow-md group-hover:scale-105 transition-transform">
                                     <img
                                         src="/chittorgarh-tourism-logo.webp"
                                         alt="Visit Chittorgarh Official Heritage Emblem"
-                                        width={56}
-                                        height={56}
+                                        width={52}
+                                        height={52}
                                         className="w-full h-full object-contain filter contrast-105"
                                     />
                                 </div>
-                                <div className="flex flex-col min-w-0 justify-center">
+                                <div className="flex flex-col justify-center min-w-0">
                                     <span className={cn(
                                         "text-[13px] xs:text-base sm:text-xl font-serif font-black tracking-wide leading-tight transition-colors truncate",
                                         (scrolled || !isHome || isOpen) ? "text-[#25231F] group-hover:text-[#A65F3D]" : "text-white group-hover:text-[#DFBA5A] drop-shadow-sm"
@@ -203,21 +203,6 @@ const Navbar = () => {
 
                         {/* Desktop Right Side CTA Buttons */}
                         <div className="hidden lg:flex items-center gap-2.5">
-                            {/* Language Switch */}
-                            <button
-                                onClick={() => changeLanguage(lang === 'en' ? 'hi' : 'en')}
-                                aria-label="Change language"
-                                className={cn(
-                                    "flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold border transition-colors",
-                                    (scrolled || !isHome)
-                                        ? "border-[#EFE7D9] text-[#25231F]/80 hover:border-[#C49A32] hover:text-[#C49A32] bg-white"
-                                        : "border-white/20 text-white/90 hover:bg-white/10"
-                                )}
-                            >
-                                <Globe className="w-3.5 h-3.5" />
-                                <span className="text-[11px]">{lang === 'en' ? 'हिन्दी' : 'EN'}</span>
-                            </button>
-
                             {/* WhatsApp CTA Button */}
                             <a
                                 href={VERIFIED_WA_LINK}
@@ -229,34 +214,10 @@ const Navbar = () => {
                                 <MessageCircle className="w-4 h-4" />
                                 <span>WhatsApp Us</span>
                             </a>
-
-                            {/* Plan Your Trip Primary CTA */}
-                            <button
-                                onClick={triggerPlanTrip}
-                                className="flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-[#C49A32] hover:bg-[#b08728] text-white text-xs font-bold uppercase tracking-wider shadow-md transition-all hover:scale-105 active:scale-95"
-                            >
-                                <Compass className="w-4 h-4" />
-                                <span>Plan Your Trip</span>
-                            </button>
                         </div>
 
-                        {/* Mobile Header Right Controls: 1-Tap Language + WhatsApp + Menu Toggle */}
-                        <div className="flex items-center gap-1.5 xs:gap-2 xl:hidden shrink-0">
-                            {/* Mobile 1-Tap Language Toggle */}
-                            <button
-                                onClick={() => changeLanguage(lang === 'en' ? 'hi' : 'en')}
-                                aria-label="Change language"
-                                className={cn(
-                                    "px-2 py-1.5 rounded-xl text-[10px] font-bold border flex items-center gap-1 transition-all active:scale-95 shadow-sm",
-                                    (scrolled || !isHome || isOpen)
-                                        ? "bg-white border-[#EFE7D9] text-[#25231F]"
-                                        : "bg-white/20 hover:bg-white/30 border-white/30 text-white backdrop-blur-md"
-                                )}
-                            >
-                                <Globe className="w-3.5 h-3.5 text-[#DFBA5A]" />
-                                <span className="tracking-wide">{lang === 'en' ? 'हिन्दी' : 'EN'}</span>
-                            </button>
-
+                        {/* Mobile Header Right Controls: WhatsApp + Hamburger */}
+                        <div className="flex items-center gap-2 xl:hidden shrink-0">
                             {/* Mobile WhatsApp Quick Icon */}
                             <a
                                 href={VERIFIED_WA_LINK}
@@ -287,7 +248,7 @@ const Navbar = () => {
                 </div>
             </nav>
 
-            {/* FULL-SCREEN DEDICATED MOBILE OVERLAY (Completely independent from nav backdrop-filter) */}
+            {/* FULL-SCREEN DEDICATED MOBILE OVERLAY */}
             <AnimatePresence>
                 {isOpen && (
                     <motion.div
@@ -295,41 +256,52 @@ const Navbar = () => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.2 }}
-                        className="xl:hidden fixed inset-0 z-[150] bg-[#25231F]/60 backdrop-blur-sm flex flex-col justify-end"
+                        className="xl:hidden fixed inset-0 z-[150] bg-[#25231F]/70 backdrop-blur-md flex flex-col justify-start"
                         onClick={() => setIsOpen(false)}
                     >
-                        {/* Drawer Sheet */}
+                        {/* Full Screen Menu Sheet */}
                         <motion.div
-                            initial={{ y: '100%' }}
+                            initial={{ y: '-100%' }}
                             animate={{ y: 0 }}
-                            exit={{ y: '100%' }}
+                            exit={{ y: '-100%' }}
                             transition={{ type: 'spring', damping: 28, stiffness: 280 }}
-                            className="w-full bg-[#F8F5EF] rounded-t-3xl border-t border-[#EFE7D9] shadow-2xl flex flex-col max-h-[88vh] overflow-hidden"
+                            className="w-full bg-[#F8F5EF] min-h-screen flex flex-col overflow-hidden"
                             onClick={(e) => e.stopPropagation()}
                         >
                             {/* Drawer Header */}
                             <div className="flex items-center justify-between px-5 py-4 border-b border-[#EFE7D9] bg-white shrink-0">
                                 <div className="flex items-center gap-2.5">
-                                    <div className="w-9 h-9 flex items-center justify-center shrink-0 drop-shadow-sm">
+                                    <div className="w-10 h-10 flex items-center justify-center shrink-0 drop-shadow-sm">
                                         <img src="/chittorgarh-tourism-logo.webp" alt="Visit Chittorgarh" className="w-full h-full object-contain" />
                                     </div>
                                     <div>
-                                        <span className="text-xs font-serif font-black text-[#25231F] block leading-none">VISIT CHITTORGARH</span>
-                                        <span className="text-[8px] uppercase tracking-widest text-[#C49A32] font-bold">Heritage Concierge</span>
+                                        <span className="text-sm font-serif font-black text-[#25231F] block leading-none">VISIT CHITTORGARH</span>
+                                        <span className="text-[9px] uppercase tracking-widest text-[#C49A32] font-bold">Heritage Concierge</span>
                                     </div>
                                 </div>
-                                <button
-                                    onClick={() => setIsOpen(false)}
-                                    className="w-8 h-8 rounded-full bg-[#F8F5EF] border border-[#EFE7D9] flex items-center justify-center text-[#25231F] active:scale-95"
-                                    aria-label="Close menu"
-                                >
-                                    <X className="w-4 h-4" />
-                                </button>
+                                <div className="flex items-center gap-2.5">
+                                    {/* Language Switcher inside Hamburger Drawer */}
+                                    <button
+                                        onClick={() => changeLanguage(lang === 'en' ? 'hi' : 'en')}
+                                        className="px-3 py-1.5 rounded-xl bg-[#F8F5EF] border border-[#EFE7D9] text-[#25231F] text-xs font-bold flex items-center gap-1.5 active:scale-95 shadow-sm"
+                                        aria-label="Toggle language"
+                                    >
+                                        <Globe className="w-4 h-4 text-[#C49A32]" />
+                                        <span>{lang === 'en' ? 'हिन्दी' : 'English'}</span>
+                                    </button>
+                                    <button
+                                        onClick={() => setIsOpen(false)}
+                                        className="w-9 h-9 rounded-full bg-[#F8F5EF] border border-[#EFE7D9] flex items-center justify-center text-[#25231F] active:scale-95 shadow-sm"
+                                        aria-label="Close menu"
+                                    >
+                                        <X className="w-5 h-5" />
+                                    </button>
+                                </div>
                             </div>
 
-                            {/* Scrollable Navigation List */}
-                            <div className="overflow-y-auto px-5 py-4 space-y-1.5 flex-1 overscroll-contain">
-                                <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#C49A32] px-2 block mb-1">
+                            {/* Scrollable Navigation List: Clean Full-Screen */}
+                            <div className="overflow-y-auto px-6 py-6 space-y-2 flex-1 overscroll-contain">
+                                <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#C49A32] px-2 block mb-2">
                                     Navigation Menu
                                 </span>
                                 {navLinks.map((link) => {
@@ -339,10 +311,10 @@ const Navbar = () => {
                                                 key={link.name}
                                                 href={link.href}
                                                 onClick={(e) => handleAnchorClick(e, link.href)}
-                                                className="flex items-center justify-between p-3 rounded-xl font-serif text-base text-[#25231F] hover:bg-[#EFE7D9] active:bg-[#EFE7D9] transition-colors"
+                                                className="flex items-center justify-between p-3.5 rounded-2xl font-serif text-lg text-[#25231F] hover:bg-white active:bg-white shadow-sm border border-transparent hover:border-[#EFE7D9] transition-all"
                                             >
                                                 <span>{link.name}</span>
-                                                <ChevronRight className="w-4 h-4 text-[#25231F]/40" />
+                                                <ChevronRight className="w-5 h-5 text-[#25231F]/40" />
                                             </a>
                                         );
                                     }
@@ -353,50 +325,46 @@ const Navbar = () => {
                                             to={link.href}
                                             onClick={() => setIsOpen(false)}
                                             className={({ isActive }) => cn(
-                                                "flex items-center justify-between p-3 rounded-xl font-serif text-base transition-colors",
+                                                "flex items-center justify-between p-3.5 rounded-2xl font-serif text-lg transition-all shadow-sm border",
                                                 isActive
-                                                    ? "bg-[#EFE7D9] text-[#A65F3D] font-bold"
-                                                    : "text-[#25231F] hover:bg-[#EFE7D9] active:bg-[#EFE7D9]"
+                                                    ? "bg-[#EFE7D9] text-[#A65F3D] font-bold border-[#C49A32]/40"
+                                                    : "text-[#25231F] bg-white/70 hover:bg-white active:bg-white border-[#EFE7D9]/60"
                                             )}
                                         >
                                             <span>{link.name}</span>
-                                            <ChevronRight className="w-4 h-4 text-[#25231F]/40" />
+                                            <ChevronRight className="w-5 h-5 text-[#25231F]/40" />
                                         </NavLink>
                                     );
                                 })}
                             </div>
 
                             {/* Fixed Action Footer inside Drawer */}
-                            <div className="p-4 bg-white border-t border-[#EFE7D9] space-y-2.5 shrink-0">
-                                <button
-                                    onClick={triggerPlanTrip}
-                                    className="w-full py-3.5 bg-[#C49A32] hover:bg-[#b08728] text-white rounded-xl font-bold uppercase tracking-wider text-xs flex items-center justify-center gap-2 shadow-md active:scale-95 transition-transform min-h-[46px]"
+                            <div className="p-5 bg-white border-t border-[#EFE7D9] space-y-3 shrink-0 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
+                                <a
+                                    href={VERIFIED_WA_LINK}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={() => {
+                                        trackWhatsAppClick('drawer_quick_wa');
+                                        setIsOpen(false);
+                                    }}
+                                    className="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl font-bold uppercase tracking-wider text-xs flex items-center justify-center gap-2 shadow-md active:scale-95 transition-transform min-h-[48px]"
                                 >
-                                    <Compass className="w-4 h-4" />
-                                    Plan Your Trip (Instant Quote)
-                                </button>
+                                    <MessageCircle className="w-4 h-4 fill-white/20" />
+                                    <span>Inquire on WhatsApp Tour Desk</span>
+                                </a>
 
-                                <div className="grid grid-cols-2 gap-2">
-                                    <a
-                                        href={VERIFIED_WA_LINK}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        onClick={() => trackWhatsAppClick('drawer_quick_wa')}
-                                        className="py-2.5 px-3 bg-emerald-600 text-white rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 active:scale-95 min-h-[44px]"
-                                    >
-                                        <MessageCircle className="w-3.5 h-3.5" />
-                                        <span>WhatsApp</span>
-                                    </a>
-
-                                    <a
-                                        href="tel:+917597451057"
-                                        onClick={() => trackPhoneCallClick('drawer_call')}
-                                        className="py-2.5 px-3 bg-[#F8F5EF] border border-[#EFE7D9] text-[#A65F3D] rounded-xl font-bold text-xs flex items-center justify-center gap-1.5 active:scale-95 min-h-[44px]"
-                                    >
-                                        <Phone className="w-3.5 h-3.5" />
-                                        <span>Call Concierge</span>
-                                    </a>
-                                </div>
+                                <a
+                                    href="tel:+917597451057"
+                                    onClick={() => {
+                                        trackPhoneCallClick('drawer_call');
+                                        setIsOpen(false);
+                                    }}
+                                    className="w-full py-3 px-4 bg-[#F8F5EF] border border-[#EFE7D9] text-[#25231F] rounded-2xl font-bold text-xs flex items-center justify-center gap-2 active:scale-95 min-h-[46px]"
+                                >
+                                    <Phone className="w-4 h-4 text-[#A65F3D]" />
+                                    <span>Direct Call Concierge (+91 75974 51057)</span>
+                                </a>
 
                                 <div className="flex items-center justify-center gap-1.5 text-[9px] text-[#25231F]/60 pt-1">
                                     <ShieldCheck className="w-3 h-3 text-emerald-600" />

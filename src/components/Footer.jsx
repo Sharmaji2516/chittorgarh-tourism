@@ -82,44 +82,18 @@ const Footer = () => {
                             Official digital gateway to the historic citadel of Chittorgarh. Promoting cultural preservation, authorized Mewari tour guides, and verified local hospitality.
                         </p>
 
-                        {/* Social Links */}
-                        <div className="pt-2 flex items-center justify-center lg:justify-start gap-3">
-                            <a
-                                href="https://www.instagram.com/visitchittorgarh"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#F8F5EF]/80 hover:text-[#C49A32] hover:border-[#C49A32] transition-colors"
-                                aria-label="Visit Chittorgarh on Instagram"
-                            >
-                                <Instagram className="w-4 h-4" />
-                            </a>
-                            <a
-                                href="https://www.facebook.com/visitchittorgarh"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#F8F5EF]/80 hover:text-[#C49A32] hover:border-[#C49A32] transition-colors"
-                                aria-label="Visit Chittorgarh on Facebook"
-                            >
-                                <Facebook className="w-4 h-4" />
-                            </a>
-                            <a
-                                href="https://www.youtube.com/@visitchittorgarh"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-[#F8F5EF]/80 hover:text-[#C49A32] hover:border-[#C49A32] transition-colors"
-                                aria-label="Visit Chittorgarh on YouTube"
-                            >
-                                <Youtube className="w-4 h-4" />
-                            </a>
+                        {/* Direct WhatsApp Contact Button */}
+                        <div className="pt-2 flex items-center justify-center lg:justify-start">
                             <a
                                 href={VERIFIED_WA_LINK}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                onClick={() => trackWhatsAppClick('footer_social_wa')}
-                                className="w-9 h-9 rounded-xl bg-emerald-600/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 hover:bg-emerald-600 hover:text-white transition-colors"
+                                onClick={() => trackWhatsAppClick('footer_direct_wa')}
+                                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all shadow-md active:scale-95 border border-emerald-400/30"
                                 aria-label="Chat on WhatsApp"
                             >
-                                <MessageCircle className="w-4 h-4" />
+                                <MessageCircle className="w-4 h-4 fill-white/20" />
+                                <span>Official WhatsApp Support</span>
                             </a>
                         </div>
                     </div>

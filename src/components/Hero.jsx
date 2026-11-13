@@ -76,30 +76,22 @@ const Hero = () => {
                         Experience India's largest fort with authorized Mewari historians, curated heritage stays, sanitized private taxi transfers & genuine local hospitality.
                     </motion.p>
 
-                    {/* Prominent CTAs: Touch-friendly on mobile */}
+                    {/* Prominent WhatsApp CTA: Touch-friendly on mobile */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.7, delay: 0.4 }}
                         className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 w-full max-w-md mx-auto"
                     >
-                        <button
-                            onClick={triggerPlanTrip}
-                            className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 bg-[#C49A32] hover:bg-[#b08728] text-white font-bold uppercase tracking-wider text-xs rounded-2xl shadow-xl hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2 border border-[#DFBA5A]/40 min-h-[48px]"
-                        >
-                            <Compass className="w-4 h-4" />
-                            <span>Plan Your Trip</span>
-                        </button>
-
                         <a
                             href={VERIFIED_WA_LINK}
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={() => trackWhatsAppClick('hero_wa_btn')}
-                            className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold uppercase tracking-wider text-xs rounded-2xl shadow-xl hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2 border border-emerald-400/30 min-h-[48px]"
+                            className="w-full sm:w-auto px-8 py-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold uppercase tracking-wider text-xs sm:text-sm rounded-2xl shadow-xl hover:scale-105 active:scale-95 transition-all flex items-center justify-center gap-2.5 border border-emerald-400/30 min-h-[48px]"
                         >
-                            <MessageCircle className="w-4 h-4" />
-                            <span>WhatsApp Tour Desk</span>
+                            <MessageCircle className="w-5 h-5 fill-white/20" />
+                            <span>Inquire on WhatsApp Tour Desk</span>
                         </a>
                     </motion.div>
 
