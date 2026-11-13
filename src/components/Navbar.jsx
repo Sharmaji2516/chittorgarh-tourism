@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Globe, MessageCircle, Compass, Phone, ChevronRight, ShieldCheck, MapPin } from 'lucide-react';
+import { Menu, X, Globe, MessageCircle, Compass, Phone, ChevronRight, ShieldCheck, MapPin, ArrowLeft } from 'lucide-react';
 import { cn } from '../utils/cn';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { trackWhatsAppClick, trackPhoneCallClick } from '../utils/analytics';
 
-const VERIFIED_WA_LINK = "https://wa.me/917597451057?text=Namaste!%20I%20am%20planning%20a%20trip%20to%20Chittorgarh%20and%20would%20like%20to%20inquire%20about%20tours,%20guide,%20or%20taxi.";
+const VERIFIED_WA_LINK = "https://wa.me/917597451057?text=Namaste!%20I%20am%20inquiring%20about%20Chittorgarh%20Fort%20Tour%20and%20Taxi%20from%20VisitChittorgarh.in";
 
 const Navbar = () => {
     const { lang, changeLanguage } = useLanguage();
@@ -110,29 +110,54 @@ const Navbar = () => {
                 <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
                     <div className="flex items-center justify-between h-14 sm:h-20 gap-2">
 
-                        {/* Logo Section */}
-                        <NavLink to="/" className="flex-shrink min-w-0 flex items-center gap-2 sm:gap-3 group" onClick={() => setIsOpen(false)}>
-                            <div className="w-11 h-11 sm:w-14 sm:h-14 flex items-center justify-center shrink-0 drop-shadow-md group-hover:scale-105 transition-transform">
-                                <img
-                                    src="/chittorgarh-tourism-logo.webp"
-                                    alt="Visit Chittorgarh Official Heritage Emblem"
-                                    width={56}
-                                    height={56}
-                                    className="w-full h-full object-contain filter contrast-105"
-                                />
-                            </div>
-                            <div className="flex flex-col min-w-0 justify-center">
-                                <span className={cn(
-                                    "text-[13px] xs:text-base sm:text-xl font-serif font-black tracking-wide leading-tight transition-colors truncate",
-                                    (scrolled || !isHome || isOpen) ? "text-[#25231F] group-hover:text-[#A65F3D]" : "text-white group-hover:text-[#DFBA5A] drop-shadow-sm"
-                                )}>
-                                    VISIT CHITTORGARH
-                                </span>
-                                <span className="text-[7.5px] xs:text-[8.5px] sm:text-[10px] font-bold tracking-[0.22em] uppercase text-[#C49A32] leading-none mt-0.5">
-                                    HERITAGE TOURISM
-                                </span>
-                            </div>
-                        </NavLink>
+                        {/* Left Section: Back Button (on sub-pages) + Logo */}
+                        <div className="flex items-center gap-1.5 xs:gap-2.5 sm:gap-3 min-w-0">
+                            {!isHome && (
+                                <button
+                                    onClick={() => {
+                                        if (window.history.length > 1) {
+                                            navigate(-1);
+                                        } else {
+                                            navigate('/');
+                                        }
+                                    }}
+                                    aria-label="Go back"
+                                    className={cn(
+                                        "w-8 h-8 sm:w-9 sm:h-9 rounded-xl border flex items-center justify-center transition-all active:scale-95 shrink-0 shadow-sm",
+                                        (scrolled || !isHome || isOpen)
+                                            ? "bg-white border-[#EFE7D9] text-[#25231F] hover:bg-[#EFE7D9]/40"
+                                            : "bg-white/20 hover:bg-white/30 border-white/30 text-white backdrop-blur-md"
+                                    )}
+                                    title="Go Back"
+                                >
+                                    <ArrowLeft className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+                                </button>
+                            )}
+
+                            {/* Logo Section */}
+                            <NavLink to="/" className="flex-shrink min-w-0 flex items-center gap-2 sm:gap-3 group" onClick={() => setIsOpen(false)}>
+                                <div className="w-11 h-11 sm:w-14 sm:h-14 flex items-center justify-center shrink-0 drop-shadow-md group-hover:scale-105 transition-transform">
+                                    <img
+                                        src="/chittorgarh-tourism-logo.webp"
+                                        alt="Visit Chittorgarh Official Heritage Emblem"
+                                        width={56}
+                                        height={56}
+                                        className="w-full h-full object-contain filter contrast-105"
+                                    />
+                                </div>
+                                <div className="flex flex-col min-w-0 justify-center">
+                                    <span className={cn(
+                                        "text-[13px] xs:text-base sm:text-xl font-serif font-black tracking-wide leading-tight transition-colors truncate",
+                                        (scrolled || !isHome || isOpen) ? "text-[#25231F] group-hover:text-[#A65F3D]" : "text-white group-hover:text-[#DFBA5A] drop-shadow-sm"
+                                    )}>
+                                        VISIT CHITTORGARH
+                                    </span>
+                                    <span className="text-[7.5px] xs:text-[8.5px] sm:text-[10px] font-bold tracking-[0.22em] uppercase text-[#C49A32] leading-none mt-0.5">
+                                        HERITAGE TOURISM
+                                    </span>
+                                </div>
+                            </NavLink>
+                        </div>
 
                         {/* Desktop Menu */}
                         <div className="hidden xl:flex items-center space-x-1">

@@ -3,7 +3,7 @@ import { Phone, Compass } from 'lucide-react';
 import { trackWhatsAppClick, trackPhoneCallClick } from '../utils/analytics';
 
 const VERIFIED_WA_LINK =
-  'https://wa.me/917597451057?text=Namaste!%20I%20would%20like%20to%20inquire%20about%20Chittorgarh%20tours,%20guide,%20or%20taxi.';
+  'https://wa.me/917597451057?text=Namaste!%20I%20am%20inquiring%20about%20Chittorgarh%20Fort%20Tour%20and%20Taxi%20from%20VisitChittorgarh.in';
 
 const WhatsAppIcon = ({ className = 'w-4 h-4' }) => (
   <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">

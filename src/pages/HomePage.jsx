@@ -12,7 +12,7 @@ import SEOHead from '../components/SEOHead';
 import { blogPosts } from '../data/blogData';
 import { trackWhatsAppClick, trackPhoneCallClick } from '../utils/analytics';
 
-const VERIFIED_WA_LINK = "https://wa.me/917597451057?text=Namaste!%20I%20would%20like%20to%20plan%20a%20tour%20in%20Chittorgarh.%20Please%20share%20details.";
+const VERIFIED_WA_LINK = "https://wa.me/917597451057?text=Namaste!%20I%20am%20inquiring%20about%20Chittorgarh%20Fort%20Tour%20and%20Taxi%20from%20VisitChittorgarh.in";
 
 const HOME_SCHEMAS = [
   {
