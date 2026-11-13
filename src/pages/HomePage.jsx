@@ -440,11 +440,16 @@ const HomePage = () => {
 
       {/* SECTION 5: Private Tour Guide Services */}
       <section className="py-12 sm:py-16 lg:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-gradient-to-br from-white via-[#F8F5EF] to-white rounded-2xl sm:rounded-3xl border border-[#EFE7D9] p-6 sm:p-14 shadow-heritage grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 items-center">
-          <div className="lg:col-span-6 space-y-4 sm:space-y-6">
-            <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A32] bg-[#EFE7D9] px-4 py-1.5 rounded-full inline-block">
-              Authorized Mewari Historians
-            </span>
+        <div className="bg-gradient-to-br from-white via-[#F8F5EF] to-white rounded-2xl sm:rounded-3xl border border-[#EFE7D9] p-6 sm:p-14 shadow-heritage max-w-4xl mx-auto">
+          <div className="space-y-4 sm:space-y-6">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A32] bg-[#EFE7D9] px-4 py-1.5 rounded-full inline-block">
+                Authorized Mewari Historians
+              </span>
+              <span className="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-700 border border-emerald-200 px-3 py-1 rounded-full text-xs font-bold">
+                <CheckCircle2 className="w-3.5 h-3.5" /> Rajasthan Government Approved Guide
+              </span>
+            </div>
             <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-[#25231F] leading-tight">
               Private Tour Guide in Chittorgarh
             </h2>
@@ -452,22 +457,22 @@ const HomePage = () => {
               Don't just look at stones — experience the living saga of Rajasthan. Our certified local guides are passionate historians who bring the architecture, legends of Padmini, and heroism of Maharana Kumbha to life at your own pace.
             </p>
 
-            <div className="space-y-2.5 sm:space-y-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 pt-2">
               <div className="flex items-center gap-3 text-xs text-[#25231F]/85">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>Govt. Certified & Verified Historians (Fluent in Hindi & English)</span>
+                <span>Govt. Certified & Verified Historians (Hindi & English)</span>
               </div>
               <div className="flex items-center gap-3 text-xs text-[#25231F]/85">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>Flexible Pace: Walk the 700-acre fort comfortably without feeling rushed</span>
+                <span>Flexible Pace across the 700-acre fort</span>
               </div>
               <div className="flex items-center gap-3 text-xs text-[#25231F]/85">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>Family & Senior Citizen Friendly: Direct vehicle drop points to avoid long walks</span>
+                <span>Family & Senior Citizen Friendly vehicle drop points</span>
               </div>
               <div className="flex items-center gap-3 text-xs text-[#25231F]/85">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>Protection from tout traps, unauthorized guides & unverified gemstone sellers</span>
+                <span>Protection from tout traps & unverified vendors</span>
               </div>
             </div>
 
@@ -485,24 +490,6 @@ const HomePage = () => {
                 <Compass className="w-4 h-4" />
                 Book Private Guide
               </button>
-            </div>
-          </div>
-
-          <div className="lg:col-span-6 relative">
-            <div className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
-              <img
-                src="/assets/images/Guide.webp"
-                alt="Authorized Tour Guide at Chittorgarh Fort"
-                className="w-full h-64 sm:h-96 object-cover"
-              />
-            </div>
-            <div className="absolute -bottom-3 -left-3 sm:-bottom-5 sm:-left-5 bg-white p-3 sm:p-4 rounded-xl sm:rounded-2xl border border-[#EFE7D9] shadow-xl flex items-center gap-2.5 sm:gap-3">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-sm">
-                ✓
-              </div>
-              <div>
-                <span className="text-xs sm:text-sm font-bold text-[#25231F] block">Rajasthan Government Approved Guide</span>
-              </div>
             </div>
           </div>
         </div>
@@ -623,191 +610,6 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* SECTION 7: Customized Tour Packages */}
-      <section className="py-12 sm:py-16 lg:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12">
-          <div>
-            <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A32]">
-              Hassle-Free Handcrafted Journeys
-            </span>
-            <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-[#25231F] mt-2">
-              Tour Packages
-            </h2>
-          </div>
-          <NavLink
-            to="/royal-journeys"
-            className="mt-3 md:mt-0 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#A65F3D] hover:text-[#25231F] transition-colors"
-          >
-            Browse All Packages <ArrowRight className="w-4 h-4" />
-          </NavLink>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-          {curatedPackages.map((pkg) => (
-            <div
-              key={pkg.id}
-              className="bg-white rounded-2xl sm:rounded-3xl border border-[#EFE7D9] overflow-hidden shadow-heritage hover:border-[#C49A32] hover:-translate-y-1 transition-all group flex flex-col justify-between"
-            >
-              <div>
-                <div className="h-48 sm:h-52 relative overflow-hidden bg-[#EFE7D9]">
-                  <img
-                    src={pkg.image}
-                    alt={pkg.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  />
-                  <span className="absolute bottom-3 left-3 bg-[#25231F]/80 backdrop-blur-sm text-white text-[10px] sm:text-[11px] font-bold px-3 py-1 rounded-full flex items-center gap-1">
-                    <Clock className="w-3.5 h-3.5 text-[#C49A32]" /> {pkg.duration}
-                  </span>
-                </div>
-
-                <div className="p-5 sm:p-6">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#A65F3D] block mb-1">
-                    {pkg.idealFor}
-                  </span>
-                  <h3 className="text-lg sm:text-xl font-serif font-bold text-[#25231F] mb-3">
-                    {pkg.title}
-                  </h3>
-
-                  <ul className="space-y-2 text-xs text-[#25231F]/80 mb-5">
-                    {pkg.features.map((feat, idx) => (
-                      <li key={idx} className="flex items-center gap-2">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                        <span>{feat}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-
-              <div className="p-5 sm:p-6 pt-0 border-t border-[#EFE7D9]/60 flex items-center justify-between">
-                <span className="text-[11px] text-[#25231F]/60 font-medium">{pkg.priceNote}</span>
-                <button
-                  onClick={() => triggerPlanTrip({ itemName: pkg.title, itemDuration: pkg.duration, category: 'Package' })}
-                  className="px-4 py-2 bg-[#C49A32] hover:bg-[#b08728] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors min-h-[40px]"
-                >
-                  Inquire Now
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* SECTION 8: Heritage Hotels & Accommodation */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-[#EFE7D9]/40 border-y border-[#EFE7D9]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 items-center">
-            <div className="lg:col-span-6 space-y-4 sm:space-y-6">
-              <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A32] bg-[#EFE7D9] px-4 py-1.5 rounded-full inline-block">
-                Royal Comfort & Fort Views
-              </span>
-              <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-[#25231F] leading-tight">
-                Heritage Stays & Boutique Haveli Hotels
-              </h2>
-              <p className="text-xs sm:text-sm text-[#25231F]/75 leading-relaxed">
-                Awaken to views of the illuminated fortress walls. We connect you directly with hand-picked heritage properties, royal havelis, and boutique luxury resorts in Chittorgarh.
-              </p>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 text-xs text-[#25231F]/80">
-                <div className="p-4 bg-white rounded-2xl border border-[#EFE7D9]">
-                  <strong className="block text-sm text-[#25231F] font-serif mb-1">Fort-View Havelis</strong>
-                  Boutique heritage courtyards with rooftop dining overlooking Vijay Stambha.
-                </div>
-                <div className="p-4 bg-white rounded-2xl border border-[#EFE7D9]">
-                  <strong className="block text-sm text-[#25231F] font-serif mb-1">Luxury Resorts</strong>
-                  Spacious family suites with royal gardens, pools, and authentic Mewari thali service.
-                </div>
-              </div>
-
-              <div className="pt-2 flex flex-col sm:flex-row gap-3">
-                <NavLink
-                  to="/stays"
-                  className="px-7 py-3.5 bg-[#25231F] hover:bg-[#A65F3D] text-white rounded-2xl text-xs font-bold uppercase tracking-wider shadow-md transition-colors text-center min-h-[46px] flex items-center justify-center"
-                >
-                  Explore Verified Stays
-                </NavLink>
-                <button
-                  onClick={() => triggerPlanTrip({ itemName: 'Heritage Hotel & Haveli Stay Inquiry', category: 'Stay' })}
-                  className="px-7 py-3.5 bg-[#C49A32] hover:bg-[#b08728] text-white rounded-2xl text-xs font-bold uppercase tracking-wider shadow-md transition-colors min-h-[46px]"
-                >
-                  Inquire Stay Deals
-                </button>
-              </div>
-            </div>
-
-            <div className="lg:col-span-6">
-              <div className="rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border-4 border-white">
-                <img
-                  src="/assets/images/Royal Stays.webp"
-                  alt="Heritage Hotel Room in Chittorgarh"
-                  className="w-full h-64 sm:h-96 object-cover"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 9: Traditional Mewari Food & Dining */}
-      <section className="py-12 sm:py-16 lg:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 items-center">
-          <div className="lg:col-span-6 order-2 lg:order-1">
-            <div className="grid grid-cols-2 gap-3 sm:gap-4">
-              <div className="rounded-2xl overflow-hidden shadow-lg border border-[#EFE7D9] h-40 sm:h-60">
-                <img
-                  src="/assets/images/dal-batti-churma-new.webp"
-                  alt="Authentic Dal Baati Churma Chittorgarh"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="rounded-2xl overflow-hidden shadow-lg border border-[#EFE7D9] h-40 sm:h-60 mt-4 sm:mt-6">
-                <img
-                  src="/assets/images/Dinning Hall.webp"
-                  alt="Mewari Heritage Dining Hall"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
-          </div>
-
-          <div className="lg:col-span-6 order-1 lg:order-2 space-y-4 sm:space-y-6">
-            <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#A65F3D] bg-[#EFE7D9] px-4 py-1.5 rounded-full inline-block">
-              Culinary Heritage of Mewar
-            </span>
-            <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-[#25231F] leading-tight">
-              Traditional Mewari Dining & Dal Baati
-            </h2>
-            <p className="text-xs sm:text-sm text-[#25231F]/75 leading-relaxed">
-              No journey to Chittorgarh is complete without tasting royal Mewari cuisine. Prepared with pure desi ghee, hand-ground spices, and generational culinary techniques.
-            </p>
-
-            <ul className="space-y-3 text-xs text-[#25231F]/80">
-              <li className="flex items-start gap-2.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#C49A32] mt-1.5"></span>
-                <span><strong>Dal Baati Churma:</strong> Clay-roasted baati drenched in pure ghee with 5-lentil panchmel dal and sweet cardamom churma.</span>
-              </li>
-              <li className="flex items-start gap-2.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#C49A32] mt-1.5"></span>
-                <span><strong>Gatte ki Sabji & Ker Sangri:</strong> Authentic Rajasthani desert beans and steamed gram flour dumplings in spiced curd gravy.</span>
-              </li>
-              <li className="flex items-start gap-2.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#C49A32] mt-1.5"></span>
-                <span><strong>Fort Road Sweets:</strong> Famous Chittorgarh gulab jamun and hot mawa kachori.</span>
-              </li>
-            </ul>
-
-            <div className="pt-2">
-              <NavLink
-                to="/flavors"
-                className="px-7 py-3.5 bg-[#25231F] hover:bg-[#A65F3D] text-white rounded-2xl text-xs font-bold uppercase tracking-wider shadow-md transition-colors inline-block"
-              >
-                Discover Food Directory
-              </NavLink>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* SECTION 10: Guest Testimonials */}
       <section className="py-12 sm:py-16 lg:py-20 bg-[#EFE7D9]/50 border-y border-[#EFE7D9]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -888,141 +690,6 @@ const HomePage = () => {
               Light & Sound Show
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* SECTION 12: Latest Travel Blogs */}
-      <section className="py-12 sm:py-16 lg:py-20 bg-[#EFE7D9]/40 border-y border-[#EFE7D9]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A32]">
-                Traveler Guides & Insights
-              </span>
-              <h2 className="text-2xl xs:text-3xl sm:text-4xl font-serif font-black text-[#25231F] mt-2">
-                Latest Travel Blogs
-              </h2>
-            </div>
-            <NavLink
-              to="/blog"
-              className="mt-3 md:mt-0 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#A65F3D] hover:text-[#25231F] transition-colors"
-            >
-              View All 12+ Articles <ArrowRight className="w-4 h-4" />
-            </NavLink>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-            {blogPosts.slice(0, 3).map((post) => (
-              <NavLink
-                key={post.id}
-                to={`/blog/${post.id}`}
-                className="bg-white rounded-2xl sm:rounded-3xl border border-[#EFE7D9] overflow-hidden shadow-heritage hover:border-[#C49A32] hover:-translate-y-1 transition-all group flex flex-col justify-between"
-              >
-                <div>
-                  <div className="h-44 sm:h-48 relative overflow-hidden bg-[#EFE7D9]">
-                    <img
-                      src={post.image}
-                      alt={post.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    />
-                    <span className="absolute top-3 left-3 bg-[#25231F]/80 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full">
-                      {post.category}
-                    </span>
-                  </div>
-
-                  <div className="p-5 sm:p-6">
-                    <span className="text-[11px] text-[#25231F]/60 flex items-center gap-1.5 mb-2">
-                      <Clock className="w-3.5 h-3.5" /> {post.readTime}
-                    </span>
-                    <h3 className="text-base sm:text-lg font-serif font-bold text-[#25231F] group-hover:text-[#A65F3D] transition-colors leading-snug mb-2 sm:mb-3">
-                      {post.title}
-                    </h3>
-                    <p className="text-xs text-[#25231F]/70 line-clamp-2 leading-relaxed">
-                      {post.summary}
-                    </p>
-                  </div>
-                </div>
-
-                <div className="p-5 sm:p-6 pt-0 border-t border-[#EFE7D9]/60 flex items-center justify-between text-xs">
-                  <span className="text-[#25231F]/60 font-medium">{post.date}</span>
-                  <span className="font-bold text-[#C49A32] group-hover:translate-x-1 transition-transform flex items-center gap-1">
-                    Read Guide <ArrowRight className="w-3.5 h-3.5" />
-                  </span>
-                </div>
-              </NavLink>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 13: Instagram Social Media Gallery */}
-      <section className="py-12 sm:py-16 lg:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-2xl sm:rounded-3xl border border-[#EFE7D9] p-6 sm:p-12 shadow-heritage text-center">
-          <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A32] mb-2 block">
-            Follow Our Stories
-          </span>
-          <h2 className="text-2xl sm:text-3xl font-serif font-black text-[#25231F] mb-3">
-            @visitchittorgarh on Instagram
-          </h2>
-          <p className="text-xs sm:text-sm text-[#25231F]/70 max-w-lg mx-auto mb-6 sm:mb-8">
-            Tag your memories with <span className="font-bold text-[#A65F3D]">#VisitChittorgarh</span> to be featured on our official traveler feed.
-          </p>
-
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">
-            <a
-              href="https://www.instagram.com/visitchittorgarh"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="h-36 sm:h-52 rounded-2xl overflow-hidden shadow-sm hover:opacity-90 transition-opacity block group relative"
-            >
-              <img src="/assets/images/vijay-stambh-new.webp" alt="Instagram Post" className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
-              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-bold">
-                View on Instagram ↗
-              </div>
-            </a>
-            <a
-              href="https://www.instagram.com/visitchittorgarh"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="h-36 sm:h-52 rounded-2xl overflow-hidden shadow-sm hover:opacity-90 transition-opacity block group relative"
-            >
-              <img src="/assets/images/Sanvliya-ji-Temple.webp" alt="Instagram Post" className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
-              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-bold">
-                View on Instagram ↗
-              </div>
-            </a>
-            <a
-              href="https://www.instagram.com/visitchittorgarh"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="h-36 sm:h-52 rounded-2xl overflow-hidden shadow-sm hover:opacity-90 transition-opacity block group relative"
-            >
-              <img src="/assets/images/dal-batti-churma-new.webp" alt="Instagram Post" className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
-              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-bold">
-                View on Instagram ↗
-              </div>
-            </a>
-            <a
-              href="https://www.instagram.com/visitchittorgarh"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="h-36 sm:h-52 rounded-2xl overflow-hidden shadow-sm hover:opacity-90 transition-opacity block group relative"
-            >
-              <img src="/assets/images/Horse Photography.webp" alt="Instagram Post" className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
-              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-bold">
-                View on Instagram ↗
-              </div>
-            </a>
-          </div>
-
-          <a
-            href="https://www.instagram.com/visitchittorgarh"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-[#25231F] hover:bg-[#A65F3D] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors shadow-sm min-h-[44px]"
-          >
-            Follow on Instagram <ExternalLink className="w-3.5 h-3.5" />
-          </a>
         </div>
       </section>
 
