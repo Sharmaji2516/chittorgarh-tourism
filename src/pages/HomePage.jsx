@@ -226,84 +226,140 @@ const HomePage = () => {
       {/* SECTION 1: Premium Hero Section */}
       <Hero />
 
-      {/* SECTION 2: Quick Tour Planning / Inquiry Section (Interactive Bar) */}
-      <section className="relative z-20 -mt-6 sm:-mt-14 max-w-6xl mx-auto px-3.5 sm:px-6">
-        <div className="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-heritage border border-[#EFE7D9]">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-5 sm:gap-6">
-            <div className="shrink-0 text-center lg:text-left">
-              <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#C49A32]">
-                Instant Tour Planner
-              </span>
-              <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#25231F]">
-                Quick Trip Inquiry
+      {/* SECTION 2: Dual Concierge Mode (Advance Trip Planning vs Instant On-Spot Arrival) */}
+      <section className="relative z-20 -mt-6 sm:-mt-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-8">
+          <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-[#C49A32] bg-[#EFE7D9] px-4 py-1.5 rounded-full inline-block">
+            Flexible Heritage Concierge
+          </span>
+          <h2 className="text-xl sm:text-3xl font-serif font-black text-[#25231F] mt-2">
+            Chahe Pehle Se Plan Karein Ya Station Par Utar Kar — We've Got You Covered!
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+          {/* Card 1: Ghar Baithe Full Trip Planning */}
+          <div className="bg-white rounded-2xl sm:rounded-3xl border-2 border-[#C49A32]/40 p-6 sm:p-8 shadow-heritage hover:border-[#C49A32] transition-all flex flex-col justify-between relative group">
+            <span className="self-start bg-[#C49A32] text-white text-[10px] sm:text-[11px] font-bold uppercase tracking-wider px-3.5 py-1 rounded-full shadow-sm mb-4">
+              RECOMMENDED FOR BEST EXPERIENCE
+            </span>
+
+            <div>
+              <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#25231F] mb-4 flex items-center gap-2">
+                🏡 Ghar Baithe Tension-Free Trip Customize Karein
               </h3>
+
+              <div className="space-y-3 sm:space-y-3.5 text-xs sm:text-sm text-[#25231F]/80 mb-6">
+                <div className="flex items-start gap-2.5">
+                  <span className="text-base shrink-0">🛋️</span>
+                  <div>
+                    <strong className="text-[#25231F] block">End-to-End Itinerary:</strong>
+                    <span>Chittorgarh Fort + Sanwaliya Seth + Menal Waterfall ka customized schedule.</span>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-2.5">
+                  <span className="text-base shrink-0">🚗</span>
+                  <div>
+                    <strong className="text-[#25231F] block">Confirmed Cab &amp; Hotel:</strong>
+                    <span>Railway Station/Airport pickup ke saath pre-verified heritage stays.</span>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-2.5">
+                  <span className="text-base shrink-0">📜</span>
+                  <div>
+                    <strong className="text-[#25231F] block">Govt. Approved Historian:</strong>
+                    <span>Prior-booked verified Mewari guide jo pura killa aaram se ghumaye.</span>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-2.5">
+                  <span className="text-base shrink-0">💰</span>
+                  <div>
+                    <strong className="text-[#25231F] block">Zero Surprise Charges:</strong>
+                    <span>Pehle se transparent quotation aur customized package WhatsApp par.</span>
+                  </div>
+                </div>
+              </div>
             </div>
 
-            <form onSubmit={handleQuickInquiry} className="flex-1 w-full grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <div className="min-w-0">
-                <label className="block text-[11px] font-bold uppercase tracking-wider text-[#25231F]/70 mb-1">
-                  Service Type
-                </label>
-                <select
-                  value={quickService}
-                  onChange={(e) => setQuickService(e.target.value)}
-                  className="w-full min-w-0 min-h-[44px] px-3.5 py-2.5 bg-[#F8F5EF] border border-[#E4DAC6] rounded-xl text-base sm:text-xs font-medium text-[#25231F] focus:outline-none focus:border-[#C49A32]"
-                >
-                  <option value="Fort Guided Tour">Private Fort Guide</option>
-                  <option value="Private Taxi Service">Private Cab / Taxi</option>
-                  <option value="Full Day Package">Full Day Heritage Package</option>
-                  <option value="Sanwariya Seth Tour">Sanwariya Seth Darshan</option>
-                  <option value="Udaipur Transfer">Udaipur to Chittorgarh Taxi</option>
-                </select>
-              </div>
+            <button
+              onClick={() => triggerPlanTrip({ itemName: 'Ghar Baithe Full Trip Planning', category: 'Advance Tour' })}
+              className="w-full py-3.5 bg-[#C49A32] hover:bg-[#b08728] text-white rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm transition-transform active:scale-95 min-h-[46px]"
+            >
+              <Compass className="w-4 h-4" />
+              Plan Full Trip From Home (WhatsApp)
+            </button>
+          </div>
 
-              <div className="min-w-0">
-                <label className="block text-[11px] font-bold uppercase tracking-wider text-[#25231F]/70 mb-1">
-                  Travel Date
-                </label>
-                <input
-                  type="date"
-                  value={quickDate}
-                  onChange={(e) => setQuickDate(e.target.value)}
-                  className="w-full min-w-0 min-h-[44px] px-3.5 py-2.5 bg-[#F8F5EF] border border-[#E4DAC6] rounded-xl text-base sm:text-xs font-medium text-[#25231F] focus:outline-none focus:border-[#C49A32]"
-                />
-              </div>
+          {/* Card 2: Chittorgarh Pahuch Chuke Hain? */}
+          <div className="bg-gradient-to-br from-[#25231F] via-[#2F2C27] to-[#1C1A17] text-white rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-heritage flex flex-col justify-between relative group border border-emerald-500/30">
+            <span className="self-start bg-emerald-600 text-white text-[10px] sm:text-[11px] font-bold uppercase tracking-wider px-3.5 py-1 rounded-full shadow-sm mb-4 flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-emerald-300 animate-ping"></span>
+              INSTANT 15-MINUTE ASSISTANCE
+            </span>
 
-              <div className="min-w-0">
-                <label className="block text-[11px] font-bold uppercase tracking-wider text-[#25231F]/70 mb-1">
-                  Travelers
-                </label>
-                <select
-                  value={quickTravelers}
-                  onChange={(e) => setQuickTravelers(e.target.value)}
-                  className="w-full min-w-0 min-h-[44px] px-3.5 py-2.5 bg-[#F8F5EF] border border-[#E4DAC6] rounded-xl text-base sm:text-xs font-medium text-[#25231F] focus:outline-none focus:border-[#C49A32]"
-                >
-                  <option value="1 Solo">1 Solo Traveler</option>
-                  <option value="2 (Couple)">2 Travelers (Couple)</option>
-                  <option value="3-4 (Family)">3-4 Travelers (Family)</option>
-                  <option value="5-7 (SUV)">5-7 (SUV / Innova)</option>
-                  <option value="8+ (Group)">8+ (Group)</option>
-                </select>
-              </div>
+            <div>
+              <h3 className="text-xl sm:text-2xl font-serif font-bold text-white mb-4 flex items-center gap-2">
+                ⚡ Already in Chittorgarh? Instant Guide &amp; Taxi Ready!
+              </h3>
 
-              <div className="sm:col-span-3 flex flex-col sm:flex-row gap-2.5 pt-1 sm:pt-2">
-                <button
-                  type="submit"
-                  className="flex-1 py-3.5 bg-[#C49A32] hover:bg-[#b08728] text-white rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm transition-transform active:scale-95 min-h-[46px]"
-                >
-                  <MessageCircle className="w-4 h-4" />
-                  Get Instant WhatsApp Quote
-                </button>
-                <button
-                  type="button"
-                  onClick={() => triggerPlanTrip(null)}
-                  className="px-6 py-3.5 bg-[#25231F] hover:bg-[#A65F3D] text-white rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-colors min-h-[46px]"
-                >
-                  <Compass className="w-4 h-4" />
-                  Detailed Trip Planner
-                </button>
+              <div className="space-y-3 sm:space-y-3.5 text-xs sm:text-sm text-[#F8F5EF]/85 mb-6">
+                <div className="flex items-start gap-2.5">
+                  <span className="text-base shrink-0">⏱️</span>
+                  <div>
+                    <strong className="text-white block">15–20 Mins Dispatch:</strong>
+                    <span>Railway Station, Bus Stand ya Hotel se immediate AC cab pickup.</span>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-2.5">
+                  <span className="text-base shrink-0">🛡️</span>
+                  <div>
+                    <strong className="text-white block">No Fort Tout Trap:</strong>
+                    <span>Gate ke anjaan dalaalo aur fake gemstone sellers se 100% suraksha.</span>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-2.5">
+                  <span className="text-base shrink-0">🎟️</span>
+                  <div>
+                    <strong className="text-white block">Direct Fort Entry Assistance:</strong>
+                    <span>Sound &amp; Light show aur entry ticketing guidance on the spot.</span>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-2.5">
+                  <span className="text-base shrink-0">📞</span>
+                  <div>
+                    <strong className="text-white block">1-Tap Direct Call / WhatsApp:</strong>
+                    <span>Turant live desk se baat karke taxi/guide arrange karwayein.</span>
+                  </div>
+                </div>
               </div>
-            </form>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+              <a
+                href="tel:+917597451057"
+                onClick={() => trackPhoneCallClick('instant_card_call')}
+                className="py-3 px-4 bg-white/10 hover:bg-white/20 border border-white/20 text-white rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all active:scale-95 min-h-[44px]"
+              >
+                <Phone className="w-4 h-4 text-[#DFBA5A]" />
+                Call Concierge Desk
+              </a>
+              <a
+                href="https://wa.me/917597451057?text=Namaste!%20I%20am%20inquiring%20about%20Chittorgarh%20Fort%20Tour%20and%20Taxi%20from%20VisitChittorgarh.in"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackWhatsAppClick('instant_card_wa')}
+                className="py-3 px-4 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all active:scale-95 shadow-md min-h-[44px]"
+              >
+                <MessageCircle className="w-4 h-4" />
+                Instant WhatsApp
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -368,18 +424,16 @@ const HomePage = () => {
       {/* SECTION 4: Popular Attractions */}
       <section className="py-12 sm:py-16 lg:py-20 bg-[#EFE7D9]/50 border-y border-[#EFE7D9]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A32]">
-                Citadel Monuments & Sacred Sites
-              </span>
-              <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-[#25231F] mt-2">
-                Popular Attractions
-              </h2>
-            </div>
+          <div className="flex flex-col items-center text-center max-w-2xl mx-auto mb-8 sm:mb-12">
+            <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A32] bg-white/70 px-3.5 py-1 rounded-full border border-[#EFE7D9]">
+              Citadel Monuments &amp; Sacred Sites
+            </span>
+            <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-[#25231F] mt-2.5">
+              Popular Attractions
+            </h2>
             <NavLink
               to="/attractions"
-              className="mt-3 md:mt-0 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#A65F3D] hover:text-[#25231F] transition-colors"
+              className="mt-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#A65F3D] hover:text-[#25231F] transition-colors"
             >
               Explore All 15+ Monuments <ArrowRight className="w-4 h-4" />
             </NavLink>
@@ -440,9 +494,9 @@ const HomePage = () => {
 
       {/* SECTION 5: Private Tour Guide Services */}
       <section className="py-12 sm:py-16 lg:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-gradient-to-br from-white via-[#F8F5EF] to-white rounded-2xl sm:rounded-3xl border border-[#EFE7D9] p-6 sm:p-14 shadow-heritage max-w-4xl mx-auto">
-          <div className="space-y-4 sm:space-y-6">
-            <div className="flex flex-wrap items-center gap-2">
+        <div className="bg-gradient-to-br from-white via-[#F8F5EF] to-white rounded-2xl sm:rounded-3xl border border-[#EFE7D9] p-6 sm:p-12 shadow-heritage max-w-3xl mx-auto text-center flex flex-col items-center">
+          <div className="space-y-4 sm:space-y-6 w-full flex flex-col items-center">
+            <div className="flex flex-wrap items-center justify-center gap-2">
               <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A32] bg-[#EFE7D9] px-4 py-1.5 rounded-full inline-block">
                 Authorized Mewari Historians
               </span>
@@ -453,30 +507,30 @@ const HomePage = () => {
             <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-[#25231F] leading-tight">
               Private Tour Guide in Chittorgarh
             </h2>
-            <p className="text-xs sm:text-sm text-[#25231F]/75 leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#25231F]/75 leading-relaxed max-w-2xl mx-auto">
               Don't just look at stones — experience the living saga of Rajasthan. Our certified local guides are passionate historians who bring the architecture, legends of Padmini, and heroism of Maharana Kumbha to life at your own pace.
             </p>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 pt-2">
-              <div className="flex items-center gap-3 text-xs text-[#25231F]/85">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 pt-2 text-left w-full max-w-2xl">
+              <div className="flex items-center gap-3 text-xs text-[#25231F]/85 bg-white/70 p-2.5 rounded-xl border border-[#EFE7D9]/60">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                 <span>Govt. Certified & Verified Historians (Hindi & English)</span>
               </div>
-              <div className="flex items-center gap-3 text-xs text-[#25231F]/85">
+              <div className="flex items-center gap-3 text-xs text-[#25231F]/85 bg-white/70 p-2.5 rounded-xl border border-[#EFE7D9]/60">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                 <span>Flexible Pace across the 700-acre fort</span>
               </div>
-              <div className="flex items-center gap-3 text-xs text-[#25231F]/85">
+              <div className="flex items-center gap-3 text-xs text-[#25231F]/85 bg-white/70 p-2.5 rounded-xl border border-[#EFE7D9]/60">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                 <span>Family & Senior Citizen Friendly vehicle drop points</span>
               </div>
-              <div className="flex items-center gap-3 text-xs text-[#25231F]/85">
+              <div className="flex items-center gap-3 text-xs text-[#25231F]/85 bg-white/70 p-2.5 rounded-xl border border-[#EFE7D9]/60">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                 <span>Protection from tout traps & unverified vendors</span>
               </div>
             </div>
 
-            <div className="pt-2 sm:pt-4 flex flex-col sm:flex-row gap-3">
+            <div className="pt-2 sm:pt-4 flex flex-col sm:flex-row justify-center gap-3 w-full sm:w-auto">
               <NavLink
                 to="/service/guide"
                 className="px-7 py-3.5 bg-[#25231F] hover:bg-[#A65F3D] text-white text-xs font-bold uppercase tracking-wider rounded-2xl shadow-md transition-all text-center min-h-[46px] flex items-center justify-center"
@@ -514,13 +568,6 @@ const HomePage = () => {
             {/* Sedan */}
             <div className="bg-white rounded-2xl sm:rounded-3xl border border-[#EFE7D9] p-5 sm:p-6 shadow-heritage hover:border-[#C49A32] transition-all flex flex-col justify-between">
               <div>
-                <div className="h-40 sm:h-44 rounded-2xl overflow-hidden mb-4 sm:mb-5 bg-[#F8F5EF]">
-                  <img
-                    src="/assets/images/sedan_taxi.webp"
-                    alt="Sedan Taxi Dzire Chittorgarh"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
                 <span className="text-[10px] font-bold uppercase tracking-wider text-[#C49A32] bg-[#EFE7D9] px-2.5 py-1 rounded-md">
                   1 - 4 Passengers
                 </span>
@@ -548,13 +595,6 @@ const HomePage = () => {
                 Most Popular
               </span>
               <div>
-                <div className="h-40 sm:h-44 rounded-2xl overflow-hidden mb-4 sm:mb-5 bg-[#F8F5EF]">
-                  <img
-                    src="/assets/images/suv_taxi.webp"
-                    alt="SUV Innova Crysta Chittorgarh"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
                 <span className="text-[10px] font-bold uppercase tracking-wider text-[#A65F3D] bg-[#EFE7D9] px-2.5 py-1 rounded-md">
                   5 - 7 Passengers
                 </span>
@@ -579,13 +619,6 @@ const HomePage = () => {
             {/* Tempo Traveller */}
             <div className="bg-white rounded-2xl sm:rounded-3xl border border-[#EFE7D9] p-5 sm:p-6 shadow-heritage hover:border-[#C49A32] transition-all flex flex-col justify-between">
               <div>
-                <div className="h-40 sm:h-44 rounded-2xl overflow-hidden mb-4 sm:mb-5 bg-[#F8F5EF]">
-                  <img
-                    src="/assets/images/tempo_traveller.webp"
-                    alt="Tempo Traveller Group Chittorgarh"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
                 <span className="text-[10px] font-bold uppercase tracking-wider text-[#526B50] bg-[#EFE7D9] px-2.5 py-1 rounded-md">
                   9 - 16 Passengers
                 </span>
@@ -603,7 +636,7 @@ const HomePage = () => {
                 onClick={() => triggerPlanTrip({ itemName: 'Luxury Tempo Traveller (Group)', category: 'Taxi' })}
                 className="w-full py-3 bg-[#25231F] hover:bg-[#A65F3D] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors min-h-[44px]"
               >
-                Book Tempo
+                Book Tempo Traveller
               </button>
             </div>
           </div>
@@ -647,139 +680,6 @@ const HomePage = () => {
                 </div>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 11: Travel Experiences Gallery */}
-      <section className="py-12 sm:py-16 lg:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-14">
-          <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A32]">
-            Visual Mewar
-          </span>
-          <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-[#25231F] mt-2">
-            Travel Experiences Gallery
-          </h2>
-          <p className="text-xs sm:text-sm text-[#25231F]/70 mt-3">
-            Real photography from the ramparts, water palaces, ancient temples, and lively bazaars of Chittorgarh.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
-          <div className="h-44 sm:h-60 rounded-2xl overflow-hidden shadow-md group relative">
-            <img src="/assets/images/vijay-stambh-new.webp" alt="Vijay Stambha Carvings" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3 sm:p-4 text-white text-xs font-bold">
-              Vijay Stambha
-            </div>
-          </div>
-          <div className="h-44 sm:h-60 rounded-2xl overflow-hidden shadow-md group relative">
-            <img src="/assets/images/padmini-palace-new.webp" alt="Padmini Palace Lake" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3 sm:p-4 text-white text-xs font-bold">
-              Padmini Palace
-            </div>
-          </div>
-          <div className="h-44 sm:h-60 rounded-2xl overflow-hidden shadow-md group relative">
-            <img src="/assets/images/menal-waterfall-new.webp" alt="Menal Waterfall Canyon" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3 sm:p-4 text-white text-xs font-bold">
-              Menal Waterfall
-            </div>
-          </div>
-          <div className="h-44 sm:h-60 rounded-2xl overflow-hidden shadow-md group relative">
-            <img src="/assets/images/Light-and-sound-show.webp" alt="Fort Light and Sound Show" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3 sm:p-4 text-white text-xs font-bold">
-              Light & Sound Show
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 13B: India & Global Routes, States, Monuments & Tour Guides Hub */}
-      <section className="py-12 sm:py-16 bg-[#EFE7D9]/45 border-t border-[#EFE7D9]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 sm:mb-10">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#A65F3D] block mb-1.5">
-                Pan-India &amp; International Travel Hub
-              </span>
-              <h2 className="text-2xl sm:text-4xl font-serif font-black text-[#25231F]">
-                Plan Your Route to Chittorgarh
-              </h2>
-              <p className="text-xs sm:text-sm text-[#25231F]/70 mt-1.5 max-w-2xl">
-                Explore dedicated travel guides by departure city, state, country, airport, railway station, and fort monument.
-              </p>
-            </div>
-            <NavLink
-              to="/destinations-and-routes"
-              className="inline-flex items-center justify-center gap-2 px-5 py-3 bg-[#C49A32] hover:bg-[#b08728] text-white rounded-2xl text-xs font-bold uppercase tracking-wider shadow-sm transition-colors shrink-0"
-            >
-              Browse All 150+ Routes &amp; Guides <ArrowRight className="w-4 h-4" />
-            </NavLink>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {/* Popular City & Airport Routes */}
-            <div className="bg-white rounded-2xl p-5 border border-[#EFE7D9] shadow-sm">
-              <h3 className="font-serif font-bold text-base text-[#25231F] mb-3 flex items-center gap-2">
-                <Train className="w-4 h-4 text-[#A65F3D]" /> Popular City &amp; Airport Routes
-              </h3>
-              <ul className="space-y-2 text-xs text-[#25231F]/80">
-                <li><NavLink to="/udaipur-to-chittorgarh" className="hover:text-[#A65F3D] font-medium">→ Udaipur to Chittorgarh (112 km)</NavLink></li>
-                <li><NavLink to="/udaipur-airport-to-chittorgarh" className="hover:text-[#A65F3D] font-medium">→ Udaipur Airport (UDR) to Fort</NavLink></li>
-                <li><NavLink to="/jaipur-to-chittorgarh" className="hover:text-[#A65F3D] font-medium">→ Jaipur to Chittorgarh (315 km)</NavLink></li>
-                <li><NavLink to="/ahmedabad-to-chittorgarh" className="hover:text-[#A65F3D] font-medium">→ Ahmedabad to Chittorgarh</NavLink></li>
-                <li><NavLink to="/delhi-to-chittorgarh" className="hover:text-[#A65F3D] font-medium">→ Delhi to Chittorgarh (Trains &amp; Air)</NavLink></li>
-                <li><NavLink to="/mumbai-to-chittorgarh" className="hover:text-[#A65F3D] font-medium">→ Mumbai to Chittorgarh</NavLink></li>
-                <li><NavLink to="/indore-to-chittorgarh" className="hover:text-[#A65F3D] font-medium">→ Indore to Chittorgarh</NavLink></li>
-              </ul>
-            </div>
-
-            {/* Individual Fort Monuments */}
-            <div className="bg-white rounded-2xl p-5 border border-[#EFE7D9] shadow-sm">
-              <h3 className="font-serif font-bold text-base text-[#25231F] mb-3 flex items-center gap-2">
-                <Landmark className="w-4 h-4 text-[#C49A32]" /> Fort Landmarks &amp; Temples
-              </h3>
-              <ul className="space-y-2 text-xs text-[#25231F]/80">
-                <li><NavLink to="/chittorgarh-fort" className="hover:text-[#A65F3D] font-medium">→ Chittorgarh Fort Complete Guide</NavLink></li>
-                <li><NavLink to="/vijay-stambh" className="hover:text-[#A65F3D] font-medium">→ Vijay Stambh (Tower of Victory)</NavLink></li>
-                <li><NavLink to="/kirti-stambh" className="hover:text-[#A65F3D] font-medium">→ Kirti Stambh (Jain Tower)</NavLink></li>
-                <li><NavLink to="/rani-padmini-palace" className="hover:text-[#A65F3D] font-medium">→ Rani Padmini Palace</NavLink></li>
-                <li><NavLink to="/rana-kumbha-palace" className="hover:text-[#A65F3D] font-medium">→ Rana Kumbha Palace</NavLink></li>
-                <li><NavLink to="/sanwariya-seth-temple" className="hover:text-[#A65F3D] font-medium">→ Shri Sanwariya Seth Temple</NavLink></li>
-                <li><NavLink to="/menal-waterfall" className="hover:text-[#A65F3D] font-medium">→ Menal Waterfall &amp; Temples</NavLink></li>
-              </ul>
-            </div>
-
-            {/* Indian State Guides */}
-            <div className="bg-white rounded-2xl p-5 border border-[#EFE7D9] shadow-sm">
-              <h3 className="font-serif font-bold text-base text-[#25231F] mb-3 flex items-center gap-2">
-                <MapPin className="w-4 h-4 text-[#526B50]" /> Indian State Travel Guides
-              </h3>
-              <ul className="space-y-2 text-xs text-[#25231F]/80">
-                <li><NavLink to="/chittorgarh-tourism-from-gujarat" className="hover:text-[#A65F3D] font-medium">→ Tourism from Gujarat</NavLink></li>
-                <li><NavLink to="/chittorgarh-tourism-from-maharashtra" className="hover:text-[#A65F3D] font-medium">→ Tourism from Maharashtra</NavLink></li>
-                <li><NavLink to="/chittorgarh-tourism-from-delhi" className="hover:text-[#A65F3D] font-medium">→ Tourism from Delhi NCR</NavLink></li>
-                <li><NavLink to="/chittorgarh-tourism-from-madhya-pradesh" className="hover:text-[#A65F3D] font-medium">→ Tourism from Madhya Pradesh</NavLink></li>
-                <li><NavLink to="/chittorgarh-tourism-from-karnataka" className="hover:text-[#A65F3D] font-medium">→ Tourism from Karnataka</NavLink></li>
-                <li><NavLink to="/chittorgarh-tourism-from-west-bengal" className="hover:text-[#A65F3D] font-medium">→ Tourism from West Bengal</NavLink></li>
-                <li><NavLink to="/destinations-and-routes" className="text-[#A65F3D] font-bold hover:underline">→ View all 21 Indian States</NavLink></li>
-              </ul>
-            </div>
-
-            {/* International Country Guides & Packages */}
-            <div className="bg-white rounded-2xl p-5 border border-[#EFE7D9] shadow-sm">
-              <h3 className="font-serif font-bold text-base text-[#25231F] mb-3 flex items-center gap-2">
-                <Globe className="w-4 h-4 text-[#C49A32]" /> International &amp; Packages
-              </h3>
-              <ul className="space-y-2 text-xs text-[#25231F]/80">
-                <li><NavLink to="/chittorgarh-fort-travel-guide-international-tourists" className="hover:text-[#A65F3D] font-medium">→ International Tourists Manual</NavLink></li>
-                <li><NavLink to="/visit-chittorgarh-from-usa" className="hover:text-[#A65F3D] font-medium">→ Visit from USA</NavLink></li>
-                <li><NavLink to="/chittorgarh-tourism-uk-travellers" className="hover:text-[#A65F3D] font-medium">→ UK Travellers Guide</NavLink></li>
-                <li><NavLink to="/chittorgarh-tourism-from-australia" className="hover:text-[#A65F3D] font-medium">→ Visit from Australia</NavLink></li>
-                <li><NavLink to="/visit-chittorgarh-from-uae" className="hover:text-[#A65F3D] font-medium">→ Visit from UAE (Dubai/Abu Dhabi)</NavLink></li>
-                <li><NavLink to="/udaipur-and-chittorgarh-tour-package" className="hover:text-[#A65F3D] font-medium">→ Udaipur &amp; Chittorgarh Package</NavLink></li>
-                <li><NavLink to="/destinations-and-routes" className="text-[#A65F3D] font-bold hover:underline">→ View all 27 Countries &amp; Tours</NavLink></li>
-              </ul>
-            </div>
           </div>
         </div>
       </section>
