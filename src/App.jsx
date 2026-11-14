@@ -1,10 +1,10 @@
 import React, { useState, useMemo, lazy, Suspense } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { LanguageProvider, useLanguage } from './context/LanguageContext';
+import { BookingProvider } from './context/BookingContext';
 import Navbar from './components/Navbar';
-import { cn } from './utils/cn';
 import Footer from './components/Footer';
 import ScrollToTop from './components/ScrollToTop';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 
 // Lazy-loaded pages
@@ -54,6 +54,8 @@ const PageLoader = () => (
 
 const NullFallback = () => null;
 
+const ROUTE_PREFIXES = ['', 'fr', 'de', 'it', 'ja', 'es', 'he', 'ar', 'hi'];
+
 const MainContent = () => {
   const { t } = useLanguage();
   const [selectedAttraction, setSelectedAttraction] = useState(null);
@@ -82,7 +84,133 @@ const MainContent = () => {
     return () => window.removeEventListener('openTripPlannerModal', handleOpenTripPlanner);
   }, []);
 
-  const isStandalonePage = location.pathname.includes('/admin') || location.pathname.includes('/staff-verify') || location.pathname.includes('/verify/');
+  const isStandalonePage =
+    location.pathname.includes('/admin') ||
+    location.pathname.includes('/staff-verify') ||
+    location.pathname.includes('/verify/');
+
+  // Route definitions for both root and international prefixes
+  const baseRoutes = useMemo(
+    () => [
+      { path: '', element: <HomePage /> },
+      {
+        path: 'flavors',
+        element: (
+          <FlavorsPage
+            t={t}
+            filteredVendors={t.vendors?.items || []}
+            filteredCafes={t.cafes?.items || []}
+          />
+        ),
+      },
+      {
+        path: 'stays',
+        element: <StaysPage t={t} filteredHotels={t.hotels?.items || []} />,
+      },
+      { path: 'royal-journeys', element: <RoyalJourneysPage t={t} /> },
+      { path: 'packages', element: <RoyalJourneysPage t={t} /> },
+      { path: 'tour-packages', element: <RoyalJourneysPage t={t} /> },
+      {
+        path: 'vocal-for-local',
+        element: (
+          <LocalVocalPage
+            t={t}
+            filteredLocalVocal={t.localVocal?.items || []}
+          />
+        ),
+      },
+      { path: 'how-to-reach', element: <HowToReach /> },
+      {
+        path: 'attractions/:category',
+        element: (
+          <AttractionsPage
+            t={t}
+            filteredAttractions={t.attractions?.items || []}
+            setSelectedAttraction={setSelectedAttraction}
+          />
+        ),
+      },
+      {
+        path: 'attractions',
+        element: (
+          <AttractionsPage
+            t={t}
+            filteredAttractions={t.attractions?.items || []}
+            setSelectedAttraction={setSelectedAttraction}
+          />
+        ),
+      },
+      {
+        path: 'destinations',
+        element: (
+          <AttractionsPage
+            t={t}
+            filteredAttractions={t.attractions?.items || []}
+            setSelectedAttraction={setSelectedAttraction}
+          />
+        ),
+      },
+      { path: 'mission-services', element: <MissionServicesPage t={t} /> },
+      { path: 'about', element: <MissionServicesPage t={t} /> },
+      { path: 'blog', element: <BlogPage t={t} /> },
+      { path: 'blog/:slug', element: <BlogPage t={t} /> },
+      { path: 'terms', element: <TermsPage /> },
+      { path: 'feedback', element: <FeedbackPage /> },
+      { path: 'service/:serviceId', element: <ServiceDetailsPage /> },
+      { path: 'private-guide', element: <ServiceDetailsPage /> },
+      { path: 'private-taxi', element: <ServiceDetailsPage /> },
+      { path: 'taxi-service', element: <ServiceDetailsPage /> },
+
+      // High-Intent SEO Landing Pages
+      {
+        path: 'udaipur-to-chittorgarh-day-trip',
+        element: <UdaipurToChittorgarhDayTrip />,
+      },
+      {
+        path: 'chittorgarh-fort-timings-tickets',
+        element: <ChittorgarhFortTimingsTickets />,
+      },
+      {
+        path: 'chittorgarh-fort-timings-entry-fee-tickets',
+        element: <ChittorgarhFortTimingsTickets />,
+      },
+      {
+        path: 'udaipur-to-jaipur-via-chittorgarh-tour',
+        element: <UdaipurToJaipurViaChittorgarhTour />,
+      },
+      {
+        path: 'udaipur-jaipur-via-chittorgarh-tour',
+        element: <UdaipurToJaipurViaChittorgarhTour />,
+      },
+      {
+        path: 'udaipur-to-chittorgarh-taxi',
+        element: <UdaipurToChittorgarhTaxi />,
+      },
+      {
+        path: 'jaipur-to-chittorgarh-taxi',
+        element: <JaipurToChittorgarhTaxi />,
+      },
+      { path: 'chittorgarh-1-day-tour', element: <ChittorgarhOneDayTour /> },
+      { path: 'chittorgarh-2-days-tour', element: <ChittorgarhTwoDaysTour /> },
+      { path: 'chittorgarh-3-days-tour', element: <ChittorgarhThreeDaysTour /> },
+      {
+        path: 'places-to-visit-in-chittorgarh',
+        element: <PlacesToVisitPage />,
+      },
+      {
+        path: 'chittorgarh-travel-guide',
+        element: <ChittorgarhTravelGuidePage />,
+      },
+      { path: 'destinations-and-routes', element: <SEODirectoryPage /> },
+
+      // Paid Landing Pages
+      { path: 'landing/:campaignType', element: <CampaignLandingPage /> },
+
+      // Dynamic Destination & City/State SEO Routes
+      { path: ':seoSlug', element: <SEODynamicPage /> },
+    ],
+    [t]
+  );
 
   return (
     <div className="min-h-screen flex flex-col relative text-[#25231F] font-sans selection:bg-[#C49A32] selection:text-white bg-[#F8F5EF]">
@@ -103,7 +231,9 @@ const MainContent = () => {
           itemName={tripModalConfig.itemName}
           itemDuration={tripModalConfig.itemDuration}
           category={tripModalConfig.category}
-          onClose={() => setTripModalConfig((prev) => ({ ...prev, isOpen: false }))}
+          onClose={() =>
+            setTripModalConfig((prev) => ({ ...prev, isOpen: false }))
+          }
         />
       </Suspense>
 
@@ -111,56 +241,32 @@ const MainContent = () => {
       <main className="flex-1 w-full">
         <Suspense fallback={<PageLoader />}>
           <Routes>
-            {/* Core Pages */}
-            <Route path="/" element={<HomePage />} />
-            <Route path="/flavors" element={<FlavorsPage t={t} filteredVendors={t.vendors?.items || []} filteredCafes={t.cafes?.items || []} />} />
-            <Route path="/stays" element={<StaysPage t={t} filteredHotels={t.hotels?.items || []} />} />
-            <Route path="/royal-journeys" element={<RoyalJourneysPage t={t} />} />
-            <Route path="/packages" element={<RoyalJourneysPage t={t} />} />
-            <Route path="/tour-packages" element={<RoyalJourneysPage t={t} />} />
-            <Route path="/vocal-for-local" element={<LocalVocalPage t={t} filteredLocalVocal={t.localVocal?.items || []} />} />
-            <Route path="/how-to-reach" element={<HowToReach />} />
-            <Route path="/attractions/:category" element={<AttractionsPage t={t} filteredAttractions={t.attractions?.items || []} setSelectedAttraction={setSelectedAttraction} />} />
-            <Route path="/attractions" element={<AttractionsPage t={t} filteredAttractions={t.attractions?.items || []} setSelectedAttraction={setSelectedAttraction} />} />
-            <Route path="/destinations" element={<AttractionsPage t={t} filteredAttractions={t.attractions?.items || []} setSelectedAttraction={setSelectedAttraction} />} />
-            <Route path="/mission-services" element={<MissionServicesPage t={t} />} />
-            <Route path="/about" element={<MissionServicesPage t={t} />} />
-            <Route path="/blog" element={<BlogPage t={t} />} />
-            <Route path="/blog/:slug" element={<BlogPage t={t} />} />
-            <Route path="/terms" element={<TermsPage />} />
-            <Route path="/feedback" element={<FeedbackPage />} />
-            <Route path="/service/:serviceId" element={<ServiceDetailsPage />} />
-            <Route path="/private-guide" element={<ServiceDetailsPage />} />
-            <Route path="/private-taxi" element={<ServiceDetailsPage />} />
-            <Route path="/taxi-service" element={<ServiceDetailsPage />} />
-
-            {/* SEO Dedicated High-Intent Landing Pages */}
-            <Route path="/udaipur-to-chittorgarh-day-trip" element={<UdaipurToChittorgarhDayTrip />} />
-            <Route path="/chittorgarh-fort-timings-tickets" element={<ChittorgarhFortTimingsTickets />} />
-            <Route path="/chittorgarh-fort-timings-entry-fee-tickets" element={<ChittorgarhFortTimingsTickets />} />
-            <Route path="/udaipur-to-jaipur-via-chittorgarh-tour" element={<UdaipurToJaipurViaChittorgarhTour />} />
-            <Route path="/udaipur-jaipur-via-chittorgarh-tour" element={<UdaipurToJaipurViaChittorgarhTour />} />
-            <Route path="/udaipur-to-chittorgarh-taxi" element={<UdaipurToChittorgarhTaxi />} />
-            <Route path="/jaipur-to-chittorgarh-taxi" element={<JaipurToChittorgarhTaxi />} />
-            <Route path="/chittorgarh-1-day-tour" element={<ChittorgarhOneDayTour />} />
-            <Route path="/chittorgarh-2-days-tour" element={<ChittorgarhTwoDaysTour />} />
-            <Route path="/chittorgarh-3-days-tour" element={<ChittorgarhThreeDaysTour />} />
-            <Route path="/places-to-visit-in-chittorgarh" element={<PlacesToVisitPage />} />
-            <Route path="/chittorgarh-travel-guide" element={<ChittorgarhTravelGuidePage />} />
-            <Route path="/destinations-and-routes" element={<SEODirectoryPage />} />
-
-            {/* Google Ads Paid Marketing Landing Pages */}
-            <Route path="/landing/:campaignType" element={<CampaignLandingPage />} />
-
-            {/* Operations Desk & Verification */}
+            {/* Standalone Portals */}
             <Route path="/admin" element={<AdminPage />} />
             <Route path="/verify/:id" element={<VerificationPage />} />
             <Route path="/staff-verify" element={<StaffVerificationPage />} />
 
-            {/* Structured City, State, Country, Attraction & Package SEO Routes */}
-            <Route path="/:seoSlug" element={<SEODynamicPage />} />
+            {/* Prefix-mapped Routes for all 9 supported languages + clean English root */}
+            {ROUTE_PREFIXES.flatMap((prefix) =>
+              baseRoutes.map((route) => {
+                const fullPath = prefix
+                  ? route.path
+                    ? `/${prefix}/${route.path}`
+                    : `/${prefix}`
+                  : route.path
+                  ? `/${route.path}`
+                  : '/';
+                return (
+                  <Route
+                    key={`${prefix || 'root'}-${route.path || 'home'}`}
+                    path={fullPath}
+                    element={route.element}
+                  />
+                );
+              })
+            )}
 
-            {/* 404 Route */}
+            {/* 404 Catch-All */}
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
@@ -181,18 +287,16 @@ const MainContent = () => {
   );
 };
 
-import { BookingProvider } from './context/BookingContext';
-
 function App() {
   return (
-    <LanguageProvider>
-      <BookingProvider>
-        <Router>
+    <Router>
+      <LanguageProvider>
+        <BookingProvider>
           <ScrollToTop />
           <MainContent />
-        </Router>
-      </BookingProvider>
-    </LanguageProvider>
+        </BookingProvider>
+      </LanguageProvider>
+    </Router>
   );
 }
 

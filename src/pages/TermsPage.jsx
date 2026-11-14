@@ -7,8 +7,11 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEOHead from '../components/SEOHead';
+import { useLanguage } from '../context/LanguageContext';
+import { getLocalizedPath } from '../config/languages';
 
 const TermsPage = () => {
+  const { lang, t } = useLanguage();
   const [activeTab, setActiveTab] = useState('all');
 
   const scrollToSection = (id) => {
@@ -19,20 +22,20 @@ const TermsPage = () => {
   };
 
   const quickSections = [
-    { id: 'sec-1', num: '01', title: 'Platform Nature', desc: 'Tourism Facilitation', icon: Compass },
-    { id: 'sec-4', num: '04', title: 'Pricing & Quotes', desc: 'No Hidden Charges', icon: FileText },
-    { id: 'sec-5', num: '05', title: 'Payments & Bookings', desc: 'Vendor Distribution', icon: CreditCard },
-    { id: 'sec-6', num: '06', title: 'Tour Guides', desc: 'Govt. Approved Guides', icon: UserCheck },
-    { id: 'sec-8', num: '08', title: 'Anti-Fraud Policy', desc: 'Zero Demands Policy', icon: AlertTriangle },
-    { id: 'sec-9', num: '09', title: 'Refunds & Cancel', desc: 'Verified Timelines', icon: RotateCcw },
-    { id: 'sec-19', num: '19', title: 'Grievance Desk', desc: 'Official Redressal', icon: HelpCircle },
-    { id: 'sec-contact', num: '@', title: 'Concierge Desk', desc: 'Address & Phone Desk', icon: MapPin },
+    { id: 'sec-1', num: '01', title: lang === 'hi' ? 'प्लेटफॉर्म का स्वरूप' : 'Platform Nature', desc: lang === 'hi' ? 'पर्यटन सुविधा व समन्वय' : 'Tourism Facilitation', icon: Compass },
+    { id: 'sec-4', num: '04', title: lang === 'hi' ? 'पारदर्शी दरें व कोटेशन' : 'Pricing & Quotes', desc: lang === 'hi' ? 'शून्य गुप्त शुल्क' : 'No Hidden Charges', icon: FileText },
+    { id: 'sec-5', num: '05', title: lang === 'hi' ? 'भुगतान व बुकिंग नीति' : 'Payments & Bookings', desc: lang === 'hi' ? 'वेंडर भुगतान वितरण' : 'Vendor Distribution', icon: CreditCard },
+    { id: 'sec-6', num: '06', title: lang === 'hi' ? 'टूर गाइड दिशानिर्देश' : 'Tour Guides', desc: lang === 'hi' ? 'राजकीय अधिकृत गाइड' : 'Govt. Approved Guides', icon: UserCheck },
+    { id: 'sec-8', num: '08', title: lang === 'hi' ? 'धोखाधड़ी निवारण' : 'Anti-Fraud Policy', desc: lang === 'hi' ? 'शून्य अतिरिक्त मांग' : 'Zero Demands Policy', icon: AlertTriangle },
+    { id: 'sec-9', num: '09', title: lang === 'hi' ? 'रिफंड व रद्दीकरण' : 'Refunds & Cancel', desc: lang === 'hi' ? 'पारदर्शी समयसीमा' : 'Verified Timelines', icon: RotateCcw },
+    { id: 'sec-19', num: '19', title: lang === 'hi' ? 'शिकायत निवारण डेस्क' : 'Grievance Desk', desc: lang === 'hi' ? 'आधिकारिक समाधान' : 'Official Redressal', icon: HelpCircle },
+    { id: 'sec-contact', num: '@', title: lang === 'hi' ? 'द्वारपाल संपर्क डेस्क' : 'Concierge Desk', desc: lang === 'hi' ? 'पता व हेल्पलाइन' : 'Address & Phone Desk', icon: MapPin },
   ];
 
   return (
     <div className="min-h-screen bg-[#F8F5EF] text-[#25231F] pt-20 sm:pt-28 pb-20">
       <SEOHead
-        title="Official Terms & Conditions | Visit Chittorgarh"
+        title={lang === 'hi' ? "आधिकारिक नियम एवं शर्तें | विजिट चित्तौड़गढ़" : "Official Terms & Conditions | Visit Chittorgarh"}
         description="Official Terms & Conditions, Booking & Payment Policies, Independent Vendor Disclosures, and Tourism Facilitation Guidelines for Visit Chittorgarh."
         canonical="/terms"
       />
@@ -45,16 +48,16 @@ const TermsPage = () => {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col items-center justify-center text-center">
           {/* Breadcrumb Navigation - Centered */}
           <nav className="text-xs text-[#DFBA5A] mb-4 flex items-center justify-center gap-2">
-            <Link to="/" className="hover:text-white flex items-center gap-1 font-medium transition-colors">
-              <ArrowLeft className="w-3.5 h-3.5" /> Back to Home
+            <Link to={getLocalizedPath('/', lang)} className="hover:text-white flex items-center gap-1 font-medium transition-colors">
+              <ArrowLeft className="w-3.5 h-3.5" /> {t.nav?.backToHome || (lang === 'hi' ? 'मुख्य पृष्ठ पर वापस' : 'Back to Home')}
             </Link>
             <span className="text-white/40">/</span>
-            <span className="text-white font-semibold">Terms &amp; Conditions</span>
+            <span className="text-white font-semibold">{lang === 'hi' ? 'नियम एवं शर्तें' : 'Terms & Conditions'}</span>
           </nav>
 
           {/* Legal Badge - Centered */}
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-[#C49A32]/40 text-[#DFBA5A] text-xs font-bold uppercase tracking-wider mb-4 mx-auto shadow-sm">
-            <Scale className="w-3.5 h-3.5 text-[#DFBA5A]" /> Legal &amp; Booking Framework
+            <Scale className="w-3.5 h-3.5 text-[#DFBA5A]" /> {lang === 'hi' ? 'वैधानिक एवं बुकिंग नियम' : 'Legal & Booking Framework'}
           </div>
 
           {/* Royal Kicker */}
@@ -64,21 +67,24 @@ const TermsPage = () => {
 
           {/* Main Title - Centered with Clear Word Spacing */}
           <h1 className="text-2xl sm:text-4xl md:text-5xl font-serif font-bold text-white tracking-normal leading-tight mb-4 [word-spacing:0.18em]">
-            Official Terms &amp; Conditions
+            {lang === 'hi' ? 'आधिकारिक नियम एवं शर्तें' : 'Official Terms & Conditions'}
           </h1>
 
           <p className="text-xs sm:text-sm md:text-base text-white/85 max-w-2xl mx-auto leading-relaxed [word-spacing:0.05em] mb-6">
-            Please read these terms carefully before making an inquiry or booking. They govern your use of the Visit Chittorgarh platform, payment processing, concierge assistance, and coordination with independent local vendors.
+            {lang === 'hi'
+              ? 'कृपया कोई भी पूछताछ या बुकिंग करने से पहले इन नियमों को ध्यानपूर्वक पढ़ें। ये विजिट चित्तौड़गढ़ प्लेटफॉर्म, भुगतान प्रक्रिया, द्वारपाल सहायता और स्थानीय स्वतंत्र सेवा प्रदाताओं के समन्वय को नियंत्रित करते हैं।'
+              : 'Please read these terms carefully before making an inquiry or booking. They govern your use of the Visit Chittorgarh platform, payment processing, concierge assistance, and coordination with independent local vendors.'
+            }
           </p>
 
           {/* Metadata badges - Centered */}
           <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs text-white/80 bg-white/5 border border-white/10 rounded-full px-5 py-2 shadow-inner">
             <span className="flex items-center gap-1.5 font-medium">
-              <span className="w-2 h-2 rounded-full bg-emerald-400"></span> Last Updated: 14 November 2026
+              <span className="w-2 h-2 rounded-full bg-emerald-400"></span> {lang === 'hi' ? 'अंतिम अपडेट: 14 नवंबर 2026' : 'Last Updated: 14 November 2026'}
             </span>
             <span className="hidden sm:inline text-white/30">•</span>
             <span className="flex items-center gap-1.5 font-medium">
-              <ShieldCheck className="w-4 h-4 text-[#DFBA5A]" /> Authorized Facilitation Desk
+              <ShieldCheck className="w-4 h-4 text-[#DFBA5A]" /> {lang === 'hi' ? 'अधिकृत सुविधा व सहायता डेस्क' : 'Authorized Facilitation Desk'}
             </span>
           </div>
         </div>
@@ -95,13 +101,15 @@ const TermsPage = () => {
               </span>
               <div>
                 <h3 className="text-sm font-bold uppercase tracking-wider text-[#25231F] font-serif [word-spacing:0.1em]">
-                  Quick Section Directory
+                  {lang === 'hi' ? 'त्वरित अनुभाग निर्देशिका' : 'Quick Section Directory'}
                 </h3>
-                <p className="text-[11px] text-[#25231F]/60">Click any topic below to jump directly to its legal terms</p>
+                <p className="text-[11px] text-[#25231F]/60">
+                  {lang === 'hi' ? 'कानूनी शर्तों को सीधे पढ़ने के लिए नीचे किसी भी विषय पर क्लिक करें' : 'Click any topic below to jump directly to its legal terms'}
+                </p>
               </div>
             </div>
             <span className="self-start sm:self-auto text-[10px] font-bold uppercase tracking-widest text-[#A65F3D] bg-[#A65F3D]/10 px-3 py-1 rounded-full border border-[#A65F3D]/20">
-              8 Key Topics
+              {lang === 'hi' ? '8 मुख्य विषय' : '8 Key Topics'}
             </span>
           </div>
 

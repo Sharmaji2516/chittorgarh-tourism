@@ -1,17 +1,27 @@
 import React from 'react';
 import { Phone, Compass } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 import { trackWhatsAppClick, trackPhoneCallClick } from '../utils/analytics';
 
 const VERIFIED_WA_LINK =
   'https://wa.me/917597451057?text=Namaste!%20I%20am%20inquiring%20about%20Chittorgarh%20Fort%20Tour%20and%20Taxi%20from%20VisitChittorgarh.in';
 
 const WhatsAppIcon = ({ className = 'w-4 h-4' }) => (
-  <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden="true">
+  <svg
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+    aria-hidden="true"
+  >
     <path d="M12.031 2c-5.516 0-9.969 4.453-9.969 9.969 0 1.766.469 3.484 1.344 5l-1.406 5.156 5.281-1.375c1.469.797 3.109 1.219 4.75 1.219 5.516 0 9.969-4.453 9.969-9.969S17.547 2 12.031 2zm5.813 14.125c-.25.703-1.422 1.344-1.969 1.422-.5.078-1.156.109-1.859-.109-.438-.141-.984-.328-1.688-.641-2.953-1.266-4.891-4.266-5.047-4.469-.141-.203-1.203-1.594-1.203-3.047s.766-2.172 1.031-2.469c.266-.297.594-.375.797-.375.188 0 .391 0 .563.016.172.016.422-.063.656.516.25.594.844 2.063.922 2.219.078.156.125.344.016.547-.109.203-.156.344-.313.516-.156.188-.328.406-.469.547-.156.156-.328.328-.141.641.188.313.844 1.391 1.813 2.25 1.25 1.109 2.297 1.453 2.609 1.609.313.156.5.125.688-.078.188-.219.797-.922 1.016-1.234.219-.313.422-.266.719-.156.297.109 1.891.891 2.219 1.047.328.156.547.234.625.375.078.141.078.813-.172 1.516z" />
   </svg>
 );
 
 const FloatingInquiry = () => {
+  const { t, lang } = useLanguage();
+  const floatingT = t.floating || {};
+  const footerT = t.footer || {};
+
   const openTripPlanner = () => {
     window.dispatchEvent(new CustomEvent('openTripPlannerModal'));
   };
@@ -33,7 +43,10 @@ const FloatingInquiry = () => {
             aria-label="Call Concierge +91 75974 51057"
           >
             <Phone className="w-4 h-4 text-[#A65F3D] shrink-0" />
-            <span>Call Concierge</span>
+            <span>
+              {floatingT.call ||
+                (lang === 'hi' ? 'कॉल करें' : 'Call Concierge')}
+            </span>
           </a>
 
           {/* 2. WhatsApp Button */}
@@ -46,7 +59,10 @@ const FloatingInquiry = () => {
             aria-label="Chat on WhatsApp"
           >
             <WhatsAppIcon className="w-4 h-4 shrink-0" />
-            <span>WhatsApp Us</span>
+            <span>
+              {floatingT.whatsapp ||
+                (lang === 'hi' ? 'व्हाट्सएप करें' : 'WhatsApp Us')}
+            </span>
           </a>
         </div>
       </div>
@@ -83,7 +99,7 @@ const FloatingInquiry = () => {
         >
           <Compass className="w-4 h-4 text-[#DFBA5A] group-hover:rotate-45 transition-transform" />
           <span className="text-xs font-bold uppercase tracking-wider">
-            Plan Your Trip
+            {footerT.planTrip || 'Plan Your Trip'}
           </span>
         </button>
       </div>

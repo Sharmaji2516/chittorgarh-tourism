@@ -135,8 +135,8 @@ const AttractionsPage = ({ t, filteredAttractions = [], setSelectedAttraction })
                 <div className="grid lg:grid-cols-12">
                     <div className="lg:col-span-6 h-72 sm:h-96 lg:h-auto overflow-hidden">
                         <img 
-                            src={main.image} 
-                            alt={main.name} 
+                            src={main.image || '/Fort.webp'} 
+                            alt={main.name || 'Chittorgarh Fort'} 
                             className="w-full h-full object-cover" 
                         />
                     </div>
