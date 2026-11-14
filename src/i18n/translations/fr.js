@@ -436,4 +436,73 @@ export const fr = {
     "title": "Comment Se Rendre à Chittorgarh",
     "desc": "Guide complet pour rejoindre Chittorgarh en avion (aéroport d’Udaipur UDR), par le réseau ferroviaire ou par les grands axes routiers."
   },
+
+  blogPage: {
+    "kicker": "Les Chroniques du Mewar",
+    "title": "Blog de Voyage de Chittorgarh",
+    "desc": "Itinéraires exclusifs, histoire de la forteresse, guides des temples et secrets gastronomiques rédigés par nos historiens locaux certifiés.",
+    "searchPlaceholder": "Rechercher des articles, ex: Forteresse, Temple, Circuit...",
+    "categories": [
+      "Tous",
+      "Guide de Voyage Chittorgarh",
+      "Lieux Historiques",
+      "Tourisme au Rajasthan",
+      "Itinéraires de Voyage",
+      "Gastronomie & Culture",
+      "Conseils aux Voyageurs"
+    ],
+    "featuredGuide": "Guide Phare",
+    "readFullGuide": "Lire le Guide Complet",
+    "read": "Lire",
+    "backToAll": "Retour aux Articles",
+    "shareArticle": "Partager l’Article :",
+    "planThisTour": "Planifier ce Circuit",
+    "recommendedExp": "Expérience Recommandée",
+    "viewPackage": "Voir le Circuit",
+    "noArticles": "Aucun article trouvé pour",
+    "resetFilter": "Réinitialiser les Filtres"
+  },
+
+  aboutPage: {
+    "kicker": "À Propos de Visit Chittorgarh",
+    "title": "Notre Mission Patrimoniale",
+    "desc": "Préserver l’histoire héroïque de Chittorgarh, valoriser nos guides locaux certifiés et offrir aux voyageurs du monde entier l’accueil sincère du Mewar.",
+    "pillarTitle": "Nos Services & Piliers Touristiques",
+    "services": [
+      {
+        "title": "Guides Historiens Agréés",
+        "desc": "Spécialistes officiels parlant couramment anglais et français."
+      },
+      {
+        "title": "Transferts en Taxi Privé",
+        "desc": "Berlines climatisées, Innova Crysta et minibus de grand confort."
+      },
+      {
+        "title": "Séjours en Haveli de Charme",
+        "desc": "Hôtels de charme et résidences princières avec vue sur le fort."
+      },
+      {
+        "title": "Réservations Gastronomiques",
+        "desc": "Authentique Dal Baati Churma au pur beurre clarifié desi ghee."
+      },
+      {
+        "title": "Séance Photo au Fort",
+        "desc": "Portraits d’exception devant les arches millénaires de grès rose."
+      },
+      {
+        "title": "Circuits Sur Mesure",
+        "desc": "Programmes personnalisés d’une journée, de deux jours et de pèlerinage."
+      }
+    ]
+  },
+
+  attractionModal: {
+    "about": "À Propos",
+    "bestTime": "Meilleure Période",
+    "howToReach": "Comment S’y Rendre",
+    "railway": "Gare Ferroviaire :",
+    "bus": "Gare Routière :",
+    "airport": "Aéroport :",
+    "readHistory": "Histoire Complète"
+  },
 };

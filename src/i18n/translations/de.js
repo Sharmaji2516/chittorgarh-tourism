@@ -436,4 +436,73 @@ export const de = {
     "title": "Anreise nach Chittorgarh",
     "desc": "Umfassende Reiseinformationen für Gäste, die über den Flughafen Udaipur (UDR), die Eisenbahn oder das Fernstraßennetz anreisen."
   },
+
+  blogPage: {
+    "kicker": "Chroniken von Mewar",
+    "title": "Chittorgarh Reiseblog & Ratgeber",
+    "desc": "Fachkundige Reiserouten, Festungsgeschichte, Tempelführer und kulinarische Geheimnisse von geprüften Historikern und Guides vor Ort.",
+    "searchPlaceholder": "Artikel durchsuchen, z. B. Festung, Tempel, Rundreise...",
+    "categories": [
+      "Alle",
+      "Chittorgarh Reiseführer",
+      "Historische Stätten",
+      "Rajasthan Tourismus",
+      "Reiserouten",
+      "Kulinarik & Kultur",
+      "Reisetipps"
+    ],
+    "featuredGuide": "Ausgewählter Reiseführer",
+    "readFullGuide": "Vollständigen Artikel lesen",
+    "read": "Lesen",
+    "backToAll": "Zurück zur Übersicht",
+    "shareArticle": "Artikel teilen:",
+    "planThisTour": "Diesen Ausflug planen",
+    "recommendedExp": "Empfohlenes Erlebnis",
+    "viewPackage": "Reisepaket ansehen",
+    "noArticles": "Keine Artikel gefunden zu",
+    "resetFilter": "Filter zurücksetzen"
+  },
+
+  aboutPage: {
+    "kicker": "Über Visit Chittorgarh",
+    "title": "Unsere Mission für das Kulturerbe",
+    "desc": "Die heldenhafte Geschichte von Chittorgarh lebendig halten, zertifizierte Gästeführer fördern und Reisenden unvergessliche Gastfreundschaft bieten.",
+    "pillarTitle": "Unsere touristischen Kernservices",
+    "services": [
+      {
+        "title": "Autorisierte Gästeführer",
+        "desc": "Staatlich geprüfte Historiker mit exzellenten Sprachkenntnissen."
+      },
+      {
+        "title": "Privattaxi & Chauffeurtransfers",
+        "desc": "Gepflegte Limousinen, Innova Crysta und geräumige Kleinbusse."
+      },
+      {
+        "title": "Historische Havelis & Hotels",
+        "desc": "Handverlesene Palasthotels und Boutique-Resorts mit Festungsblick."
+      },
+      {
+        "title": "Traditionelle Gastronomie",
+        "desc": "Authentisches Dal Baati Churma mit reinem Desi-Ghee zubereitet."
+      },
+      {
+        "title": "Festungs-Fotoshooting",
+        "desc": "Professionelle Porträts vor den gewaltigen Sandsteinmauern."
+      },
+      {
+        "title": "Maßgeschneiderte Routen",
+        "desc": "Individuelle 1-Tages-, 2-Tages- und Pilgerreise-Programme."
+      }
+    ]
+  },
+
+  attractionModal: {
+    "about": "Über das Bauwerk",
+    "bestTime": "Beste Besuchszeit",
+    "howToReach": "Anreise",
+    "railway": "Bahnhof:",
+    "bus": "Busbahnhof:",
+    "airport": "Flughafen:",
+    "readHistory": "Ausführliche Geschichte"
+  },
 };

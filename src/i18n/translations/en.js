@@ -436,4 +436,73 @@ export const en = {
     "title": "How to Reach Chittorgarh",
     "desc": "Comprehensive transport information for travelers arriving by air via Udaipur (UDR), railway network, and national highways."
   },
+
+  blogPage: {
+    "kicker": "The Mewar Chronicles",
+    "title": "Chittorgarh Travel Blog",
+    "desc": "Expert itineraries, fort history, temple guides, and local Mewari culinary secrets curated by certified local guides and historians.",
+    "searchPlaceholder": "Search articles, e.g. Fort, Sanwariya Seth, Itinerary...",
+    "categories": [
+      "All",
+      "Chittorgarh Travel Guide",
+      "Historical Places",
+      "Rajasthan Tourism",
+      "Travel Itineraries",
+      "Local Food & Culture",
+      "Travel Tips"
+    ],
+    "featuredGuide": "Featured Guide",
+    "readFullGuide": "Read Full Guide",
+    "read": "Read",
+    "backToAll": "Back to All Articles",
+    "shareArticle": "Share Article:",
+    "planThisTour": "Plan This Tour",
+    "recommendedExp": "Recommended Experience",
+    "viewPackage": "View Package",
+    "noArticles": "No articles found matching",
+    "resetFilter": "Reset Filter"
+  },
+
+  aboutPage: {
+    "kicker": "About Visit Chittorgarh",
+    "title": "Our Heritage Mission",
+    "desc": "Dedicated to preserving the dignified history of Chittorgarh, empowering certified local guides, and connecting travelers with genuine Mewari hospitality.",
+    "pillarTitle": "Core Tourism Pillars & Services",
+    "services": [
+      {
+        "title": "Authorized Heritage Tour Guides",
+        "desc": "Govt. certified historians fluent in English & Hindi."
+      },
+      {
+        "title": "Private Cab & Taxi Transfers",
+        "desc": "Sanitized AC Sedans, Innova Crysta & Tempo Travellers."
+      },
+      {
+        "title": "Heritage Haveli Accommodations",
+        "desc": "Curated palace-view boutique hotels and royal stays."
+      },
+      {
+        "title": "Mewari Dining Reservations",
+        "desc": "Authentic Dal Baati Churma cooked in pure desi ghee."
+      },
+      {
+        "title": "Fort Photo Sessions",
+        "desc": "Professional portraits against monumental sandstone arches."
+      },
+      {
+        "title": "Custom Tour Itineraries",
+        "desc": "Tailored 1-day, 2-day & pilgrimage road trip packages."
+      }
+    ]
+  },
+
+  attractionModal: {
+    "about": "About",
+    "bestTime": "Best Time to Visit",
+    "howToReach": "How to Reach",
+    "railway": "Railway:",
+    "bus": "Bus Stand:",
+    "airport": "Airport:",
+    "readHistory": "Read Full History"
+  },
 };

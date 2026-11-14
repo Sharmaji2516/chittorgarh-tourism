@@ -436,4 +436,73 @@ export const es = {
     "title": "Cómo Llegar a Chittorgarh",
     "desc": "Guía completa de transporte para viajeros que llegan por aire (aeropuerto de Udaipur UDR), tren o autopistas nacionales."
   },
+
+  blogPage: {
+    "kicker": "Crónicas de Mewar",
+    "title": "Blog de Viajes de Chittorgarh",
+    "desc": "Itinerarios expertos, historia de la fortaleza, templos sagrados y secretos culinarios seleccionados por historiadores locales certificados.",
+    "searchPlaceholder": "Buscar artículos, ej: Fuerte, Templos, Itinerario...",
+    "categories": [
+      "Todos",
+      "Guía de Viaje Chittorgarh",
+      "Lugares Históricos",
+      "Turismo en Rajastán",
+      "Itinerarios de Viaje",
+      "Comida Local y Tradición",
+      "Consejos para Viajeros"
+    ],
+    "featuredGuide": "Guía Destacada",
+    "readFullGuide": "Leer Guía Completa",
+    "read": "Leer",
+    "backToAll": "Volver a Todos los Artículos",
+    "shareArticle": "Compartir Artículo:",
+    "planThisTour": "Planificar este Tour",
+    "recommendedExp": "Experiencia Recomendada",
+    "viewPackage": "Ver Paquete",
+    "noArticles": "No se encontraron artículos para",
+    "resetFilter": "Restablecer Filtros"
+  },
+
+  aboutPage: {
+    "kicker": "Acerca de Visit Chittorgarh",
+    "title": "Nuestra Misión Patrimonial",
+    "desc": "Preservar la noble historia de Chittorgarh, empoderar a los guías locales certificados y brindar a cada visitante una auténtica hospitalidad real.",
+    "pillarTitle": "Nuestros Pilares y Servicios",
+    "services": [
+      {
+        "title": "Guías Oficiales Certificados",
+        "desc": "Historiadores locales autorizados con dominio del inglés."
+      },
+      {
+        "title": "Taxis Privados y Traslados",
+        "desc": "Vehículos climatizados, sedanes, Innova Crysta y furgonetas."
+      },
+      {
+        "title": "Estancias en Havelis Históricas",
+        "desc": "Palacios tradicionales y hoteles con vistas a la fortaleza."
+      },
+      {
+        "title": "Gastronomía Tradicional",
+        "desc": "Auténtico Dal Baati Churma cocinado con puro ghee artesanal."
+      },
+      {
+        "title": "Sesión de Fotos en el Fuerte",
+        "desc": "Fotografía profesional frente a los monumentales arcos de piedra."
+      },
+      {
+        "title": "Itinerarios Personalizados",
+        "desc": "Planes a medida de 1 día, 2 días y rutas de peregrinación."
+      }
+    ]
+  },
+
+  attractionModal: {
+    "about": "Información",
+    "bestTime": "Mejor Época",
+    "howToReach": "Cómo Llegar",
+    "railway": "Estación de Tren:",
+    "bus": "Estación de Autobuses:",
+    "airport": "Aeropuerto:",
+    "readHistory": "Historia Completa"
+  },
 };

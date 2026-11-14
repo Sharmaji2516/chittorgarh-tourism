@@ -1,10 +1,13 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, Clock, User, ArrowLeft, ArrowRight, Search, Share2, MessageCircle, Compass, Check, BookOpen, Tag } from 'lucide-react';
-import { blogPosts, BLOG_CATEGORIES } from '../data/blogData';
+import { BLOG_CATEGORIES } from '../data/blogData';
+import { getLocalizedBlogPosts, BLOG_CATEGORY_MAP } from '../data/localizedBlogs';
 import SEOHead from '../components/SEOHead';
 import { NavLink, useParams, useSearchParams } from 'react-router-dom';
 import { trackWhatsAppClick } from '../utils/analytics';
+import { useLanguage } from '../context/LanguageContext';
+import { getLocalizedPath } from '../config/languages';
 
 const BLOG_SCHEMA = [
   {
@@ -33,18 +36,26 @@ const BLOG_SCHEMA = [
 ];
 
 const BlogPage = () => {
+  const { t, lang } = useLanguage();
+  const pageT = t?.blogPage || {};
+
   const { slug } = useParams();
   const [searchParams] = useSearchParams();
   const [selectedPost, setSelectedPost] = useState(null);
-  const [activeCategory, setActiveCategory] = useState('All');
+  const [activeCategoryKey, setActiveCategoryKey] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [copied, setCopied] = useState(false);
+
+  // Localized blog posts for current active language
+  const localizedPosts = useMemo(() => {
+    return getLocalizedBlogPosts(lang);
+  }, [lang]);
 
   // Sync post slug from URL (/blog/:slug or /blog?post=slug)
   useEffect(() => {
     const postSlug = slug || searchParams.get('post');
     if (postSlug) {
-      const match = blogPosts.find(p => p.id === postSlug);
+      const match = localizedPosts.find(p => p.id === postSlug);
       if (match) {
         setSelectedPost(match);
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -52,24 +63,34 @@ const BlogPage = () => {
     } else {
       setSelectedPost(null);
     }
-  }, [slug, searchParams]);
+  }, [slug, searchParams, localizedPosts]);
+
+  const catMap = BLOG_CATEGORY_MAP[lang] || BLOG_CATEGORY_MAP.en;
 
   // Filter posts based on category and search
   const filteredPosts = useMemo(() => {
-    return blogPosts.filter(post => {
-      const matchesCategory = activeCategory === 'All' || post.category === activeCategory || post.tags.includes(activeCategory);
-      const matchesSearch = searchQuery.trim() === '' ||
-        post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        post.summary.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        post.content.toLowerCase().includes(searchQuery.toLowerCase());
+    return localizedPosts.filter(post => {
+      const selectedCategoryLabel = catMap[activeCategoryKey] || activeCategoryKey;
+      const matchesCategory = activeCategoryKey === 'All' || 
+        post.category === selectedCategoryLabel || 
+        (post.tags && post.tags.includes(selectedCategoryLabel));
+      
+      const q = searchQuery.trim().toLowerCase();
+      const matchesSearch = q === '' ||
+        post.title.toLowerCase().includes(q) ||
+        post.summary.toLowerCase().includes(q) ||
+        post.content.toLowerCase().includes(q);
+      
       return matchesCategory && matchesSearch;
     });
-  }, [activeCategory, searchQuery]);
+  }, [activeCategoryKey, searchQuery, localizedPosts, catMap]);
 
-  const featuredPost = blogPosts[0];
+  const featuredPost = localizedPosts[0] || {};
 
   const handleShare = (post, platform) => {
-    const postUrl = typeof window !== 'undefined' ? `${window.location.origin}/blog/${post.id}` : `https://www.visitchittorgarh.in/blog/${post.id}`;
+    const postUrl = typeof window !== 'undefined' 
+      ? `${window.location.origin}${getLocalizedPath(`/blog/${post.id}`, lang)}` 
+      : `https://www.visitchittorgarh.in${getLocalizedPath(`/blog/${post.id}`, lang)}`;
     const text = `Check out this Chittorgarh travel article: "${post.title}"`;
 
     if (platform === 'whatsapp') {
@@ -99,7 +120,7 @@ const BlogPage = () => {
           "headline": selectedPost.title,
           "description": selectedPost.summary,
           "image": `https://www.visitchittorgarh.in${selectedPost.image}`,
-          "url": `https://www.visitchittorgarh.in/blog/${selectedPost.id}`,
+          "url": `https://www.visitchittorgarh.in${getLocalizedPath(`/blog/${selectedPost.id}`, lang)}`,
           "author": {
             "@type": "Organization",
             "name": selectedPost.author || "Visit Chittorgarh — Mewari Heritage Desk"
@@ -118,8 +139,8 @@ const BlogPage = () => {
           "@type": "BreadcrumbList",
           "itemListElement": [
             { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.visitchittorgarh.in/" },
-            { "@type": "ListItem", "position": 2, "name": "Travel Blog", "item": "https://www.visitchittorgarh.in/blog" },
-            { "@type": "ListItem", "position": 3, "name": selectedPost.title, "item": `https://www.visitchittorgarh.in/blog/${selectedPost.id}` }
+            { "@type": "ListItem", "position": 2, "name": pageT.title || "Travel Blog", "item": `https://www.visitchittorgarh.in${getLocalizedPath('/blog', lang)}` },
+            { "@type": "ListItem", "position": 3, "name": selectedPost.title, "item": `https://www.visitchittorgarh.in${getLocalizedPath(`/blog/${selectedPost.id}`, lang)}` }
           ]
         }
       ]
@@ -128,12 +149,12 @@ const BlogPage = () => {
   return (
     <div className="min-h-screen bg-[#F8F5EF] text-[#25231F] pt-20 pb-20">
       <SEOHead
-        title={selectedPost ? `${selectedPost.title} | Visit Chittorgarh Blog` : "Chittorgarh Travel Blog & Guides | The Mewar Chronicles"}
-        description={selectedPost ? selectedPost.summary : "Explore authentic Chittorgarh travel guides, fort history, Mewari cuisine, Sanwariya Seth pilgrimage tips, and curated itineraries."}
-        canonical={selectedPost ? `/blog/${selectedPost.id}` : "/blog"}
+        title={selectedPost ? `${selectedPost.title} | ${pageT.title || 'Visit Chittorgarh Blog'}` : `${pageT.title || 'Chittorgarh Travel Blog & Guides'} | ${pageT.kicker || 'The Mewar Chronicles'}`}
+        description={selectedPost ? selectedPost.summary : (pageT.desc || "Explore authentic Chittorgarh travel guides, fort history, Mewari cuisine, Sanwariya Seth pilgrimage tips, and curated itineraries.")}
+        canonical={selectedPost ? getLocalizedPath(`/blog/${selectedPost.id}`, lang) : getLocalizedPath('/blog', lang)}
         ogType={selectedPost ? "article" : "website"}
         ogImage={selectedPost ? `https://www.visitchittorgarh.in${selectedPost.image}` : "https://www.visitchittorgarh.in/Fort.webp"}
-        ogImageAlt={selectedPost ? selectedPost.title : "Chittorgarh Travel Blog"}
+        ogImageAlt={selectedPost ? selectedPost.title : (pageT.title || "Chittorgarh Travel Blog")}
         schema={activeSchema}
       />
 
@@ -150,13 +171,13 @@ const BlogPage = () => {
               {/* Header */}
               <div className="text-center max-w-3xl mx-auto pt-8 pb-10">
                 <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A32] bg-[#EFE7D9] px-4 py-1.5 rounded-full inline-block mb-3">
-                  The Mewar Chronicles
+                  {pageT.kicker || "The Mewar Chronicles"}
                 </span>
                 <h1 className="text-3xl sm:text-5xl font-serif font-black text-[#25231F] mb-4">
-                  Chittorgarh Travel Blog
+                  {pageT.title || "Chittorgarh Travel Blog"}
                 </h1>
                 <p className="text-sm sm:text-base text-[#25231F]/70 leading-relaxed font-light">
-                  Expert itineraries, fort history, temple guides, and local Mewari culinary secrets curated by certified local guides and historians.
+                  {pageT.desc || "Expert itineraries, fort history, temple guides, and local Mewari culinary secrets curated by certified local guides and historians."}
                 </p>
 
                 {/* Search Input */}
@@ -166,7 +187,7 @@ const BlogPage = () => {
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search articles, e.g. Fort, Sanwariya Seth, Itinerary..."
+                    placeholder={pageT.searchPlaceholder || "Search articles, e.g. Fort, Sanwariya Seth, Itinerary..."}
                     className="w-full pl-12 pr-4 py-3 bg-white border border-[#EFE7D9] rounded-2xl text-sm text-[#25231F] focus:outline-none focus:border-[#C49A32] shadow-sm transition-colors"
                   />
                 </div>
@@ -174,23 +195,26 @@ const BlogPage = () => {
 
               {/* Category Filter Pills */}
               <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
-                {BLOG_CATEGORIES.map((cat) => (
-                  <button
-                    key={cat}
-                    onClick={() => setActiveCategory(cat)}
-                    className={`px-4 py-2 rounded-xl text-xs font-bold tracking-wide transition-all ${
-                      activeCategory === cat
-                        ? 'bg-[#25231F] text-white shadow-md'
-                        : 'bg-white text-[#25231F]/70 border border-[#EFE7D9] hover:border-[#C49A32] hover:text-[#25231F]'
-                    }`}
-                  >
-                    {cat}
-                  </button>
-                ))}
+                {BLOG_CATEGORIES.map((catKey) => {
+                  const label = catMap[catKey] || catKey;
+                  return (
+                    <button
+                      key={catKey}
+                      onClick={() => setActiveCategoryKey(catKey)}
+                      className={`px-4 py-2 rounded-xl text-xs font-bold tracking-wide transition-all ${
+                        activeCategoryKey === catKey
+                          ? 'bg-[#25231F] text-white shadow-md'
+                          : 'bg-white text-[#25231F]/70 border border-[#EFE7D9] hover:border-[#C49A32] hover:text-[#25231F]'
+                      }`}
+                    >
+                      {label}
+                    </button>
+                  );
+                })}
               </div>
 
               {/* Featured Article Spotlight (when no active search and category is All) */}
-              {!searchQuery && activeCategory === 'All' && (
+              {!searchQuery && activeCategoryKey === 'All' && featuredPost.title && (
                 <div className="mb-14">
                   <div
                     onClick={() => { setSelectedPost(featuredPost); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
@@ -203,7 +227,7 @@ const BlogPage = () => {
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                       />
                       <div className="absolute top-4 left-4 bg-[#C49A32] text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full shadow-sm">
-                        Featured Guide
+                        {pageT.featuredGuide || "Featured Guide"}
                       </div>
                     </div>
                     <div className="lg:col-span-5 p-6 sm:p-10 flex flex-col justify-between">
@@ -223,7 +247,7 @@ const BlogPage = () => {
                       <div className="flex items-center justify-between pt-4 border-t border-[#EFE7D9]">
                         <span className="text-xs font-semibold text-[#25231F]/70">{featuredPost.date}</span>
                         <span className="text-xs font-bold text-[#C49A32] group-hover:translate-x-1 transition-transform flex items-center gap-1">
-                          Read Full Guide <ArrowRight className="w-3.5 h-3.5" />
+                          {pageT.readFullGuide || "Read Full Guide"} <ArrowRight className="w-3.5 h-3.5" />
                         </span>
                       </div>
                     </div>
@@ -243,20 +267,16 @@ const BlogPage = () => {
                       <img
                         src={post.image}
                         alt={post.title}
-                        loading="lazy"
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                       />
                       <span className="absolute top-3 left-3 bg-[#25231F]/80 backdrop-blur-sm text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">
-                        {post.category || 'Guide'}
+                        {post.category}
                       </span>
                     </div>
 
-                    <div className="p-6 flex flex-col flex-1 justify-between">
+                    <div className="p-6 sm:p-7 flex flex-col justify-between flex-1">
                       <div>
-                        <div className="flex items-center gap-2 text-[11px] text-[#25231F]/60 mb-2">
-                          <Calendar className="w-3.5 h-3.5" />
-                          <span>{post.date}</span>
-                          <span>•</span>
+                        <div className="flex items-center gap-2 text-xs text-[#25231F]/60 mb-2">
                           <Clock className="w-3.5 h-3.5" />
                           <span>{post.readTime}</span>
                         </div>
@@ -271,7 +291,7 @@ const BlogPage = () => {
                       <div className="pt-4 border-t border-[#EFE7D9] flex items-center justify-between text-xs">
                         <span className="text-[#25231F]/60 font-medium">{post.author}</span>
                         <span className="font-bold text-[#C49A32] group-hover:text-[#A65F3D] transition-colors flex items-center gap-1">
-                          Read <ArrowRight className="w-3.5 h-3.5" />
+                          {pageT.read || "Read"} <ArrowRight className="w-3.5 h-3.5" />
                         </span>
                       </div>
                     </div>
@@ -281,12 +301,12 @@ const BlogPage = () => {
 
               {filteredPosts.length === 0 && (
                 <div className="text-center py-16 bg-white rounded-3xl border border-[#EFE7D9] p-8 max-w-md mx-auto">
-                  <p className="text-sm text-[#25231F]/70 mb-4">No articles found matching "{searchQuery}".</p>
+                  <p className="text-sm text-[#25231F]/70 mb-4">{pageT.noArticles || 'No articles found matching'} "{searchQuery}".</p>
                   <button
-                    onClick={() => { setSearchQuery(''); setActiveCategory('All'); }}
+                    onClick={() => { setSearchQuery(''); setActiveCategoryKey('All'); }}
                     className="px-6 py-2.5 bg-[#C49A32] text-white rounded-xl text-xs font-bold uppercase tracking-wider"
                   >
-                    Reset Filter
+                    {pageT.resetFilter || "Reset Filter"}
                   </button>
                 </div>
               )}
@@ -306,7 +326,7 @@ const BlogPage = () => {
                 onClick={() => setSelectedPost(null)}
                 className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-xl border border-[#EFE7D9] text-xs font-bold uppercase tracking-wider text-[#25231F] hover:bg-[#EFE7D9] transition-colors mb-6 shadow-sm"
               >
-                <ArrowLeft className="w-4 h-4" /> Back to All Articles
+                <ArrowLeft className="w-4 h-4" /> {pageT.backToAll || "Back to All Articles"}
               </button>
 
               <article className="bg-white rounded-3xl border border-[#EFE7D9] p-6 sm:p-12 shadow-heritage overflow-hidden">
@@ -369,7 +389,7 @@ const BlogPage = () => {
                 <div className="mt-12 pt-8 border-t border-[#EFE7D9] flex flex-col sm:flex-row items-center justify-between gap-4">
                   <div className="flex items-center gap-2">
                     <span className="text-xs font-bold uppercase tracking-wider text-[#25231F]/60 flex items-center gap-1">
-                      <Share2 className="w-4 h-4" /> Share Article:
+                      <Share2 className="w-4 h-4" /> {pageT.shareArticle || "Share Article:"}
                     </span>
                     <button
                       onClick={() => handleShare(selectedPost, 'whatsapp')}
@@ -400,7 +420,7 @@ const BlogPage = () => {
                     className="px-6 py-3 bg-[#C49A32] hover:bg-[#b08728] text-white rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2 shadow-md"
                   >
                     <Compass className="w-4 h-4" />
-                    Plan This Tour
+                    {pageT.planThisTour || "Plan This Tour"}
                   </button>
                 </div>
 
@@ -408,17 +428,23 @@ const BlogPage = () => {
                 {selectedPost.relatedPackage && (
                   <div className="mt-8 p-6 bg-gradient-to-r from-[#EFE7D9] via-[#F8F5EF] to-[#EFE7D9] rounded-2xl border border-[#C49A32]/30 flex flex-col sm:flex-row items-center justify-between gap-4">
                     <div>
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-[#A65F3D]">Recommended Experience</span>
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-[#A65F3D]">
+                        {pageT.recommendedExp || "Recommended Experience"}
+                      </span>
                       <h4 className="text-base sm:text-lg font-serif font-bold text-[#25231F]">
                         {selectedPost.relatedPackage}
                       </h4>
-                      <p className="text-xs text-[#25231F]/70">Explore with verified Mewari guides, private transport & authentic tastings.</p>
+                      <p className="text-xs text-[#25231F]/70">
+                        {lang === 'ja' 
+                          ? '公認歴史ガイド、専用車送迎、本場メーワール料理のテイスティング付き。'
+                          : 'Explore with verified Mewari guides, private transport & authentic tastings.'}
+                      </p>
                     </div>
                     <NavLink
-                      to={selectedPost.relatedPackageLink || '/royal-journeys'}
+                      to={getLocalizedPath(selectedPost.relatedPackageLink || '/royal-journeys', lang)}
                       className="px-5 py-2.5 bg-[#25231F] hover:bg-[#A65F3D] text-white rounded-xl text-xs font-bold uppercase tracking-wider shrink-0 transition-colors"
                     >
-                      View Package
+                      {pageT.viewPackage || "View Package"}
                     </NavLink>
                   </div>
                 )}
