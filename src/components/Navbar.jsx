@@ -153,7 +153,7 @@ const Navbar = () => {
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-14 sm:h-20 gap-2">
             {/* Left Side: Back Button (on sub-pages) + Logo */}
-            <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+            <div className="flex items-center gap-2 sm:gap-3 shrink-0 z-10">
               {!isHome && (
                 <button
                   onClick={() => {
@@ -179,7 +179,7 @@ const Navbar = () => {
               {/* Logo Section */}
               <NavLink
                 to={getLocalizedPath('/', lang)}
-                className="flex items-center gap-2 sm:gap-3 group min-w-0"
+                className="flex items-center gap-2 sm:gap-3 group shrink-0"
                 onClick={() => setIsOpen(false)}
               >
                 <div className="w-10 h-10 sm:w-13 sm:h-13 flex items-center justify-center shrink-0 drop-shadow-md group-hover:scale-105 transition-transform">
@@ -191,10 +191,10 @@ const Navbar = () => {
                     className="w-full h-full object-contain filter contrast-105"
                   />
                 </div>
-                <div className="flex flex-col justify-center min-w-0">
+                <div className="flex flex-col justify-center shrink-0">
                   <span
                     className={cn(
-                      'text-xs xs:text-sm sm:text-lg md:text-xl font-serif font-black tracking-tight sm:tracking-wide leading-tight transition-colors whitespace-nowrap',
+                      'text-xs xs:text-sm sm:text-base md:text-xl font-serif font-black tracking-tight sm:tracking-wide leading-tight transition-colors whitespace-nowrap',
                       scrolled || !isHome || isOpen
                         ? 'text-[#25231F] group-hover:text-[#A65F3D]'
                         : 'text-white group-hover:text-[#DFBA5A] drop-shadow-sm'
@@ -202,7 +202,7 @@ const Navbar = () => {
                   >
                     VISIT CHITTORGARH
                   </span>
-                  <span className="text-[7.5px] xs:text-[8.5px] sm:text-[10px] font-bold tracking-[0.2em] uppercase text-[#C49A32] leading-none mt-0.5 whitespace-nowrap">
+                  <span className="text-[7.5px] xs:text-[8px] sm:text-[10px] font-bold tracking-[0.2em] uppercase text-[#C49A32] leading-none mt-0.5 whitespace-nowrap">
                     HERITAGE TOURISM
                   </span>
                 </div>
@@ -210,7 +210,7 @@ const Navbar = () => {
             </div>
 
             {/* Desktop Menu */}
-            <div className="hidden xl:flex items-center space-x-1">
+            <div className="hidden xl:flex items-center justify-center gap-1 2xl:gap-2 flex-1 min-w-0 px-2">
               {navLinks.map((link) => {
                 if (link.isAnchor) {
                   return (
@@ -219,7 +219,7 @@ const Navbar = () => {
                       href={link.href}
                       onClick={(e) => handleAnchorClick(e, link.href)}
                       className={cn(
-                        'px-2.5 py-2 text-[11px] font-semibold uppercase tracking-wider rounded-xl transition-colors whitespace-nowrap',
+                        'px-2 2xl:px-2.5 py-1.5 text-[10.5px] 2xl:text-xs font-semibold uppercase tracking-wider rounded-xl transition-colors whitespace-nowrap',
                         scrolled || !isHome
                           ? 'text-[#25231F]/80 hover:text-[#A65F3D] hover:bg-[#EFE7D9]/50'
                           : 'text-white/85 hover:text-white hover:bg-white/10'
@@ -238,7 +238,7 @@ const Navbar = () => {
                     to={localizedHref}
                     className={({ isActive }) =>
                       cn(
-                        'px-2.5 py-2 text-[11px] font-semibold uppercase tracking-wider rounded-xl transition-colors whitespace-nowrap',
+                        'px-2 2xl:px-2.5 py-1.5 text-[10.5px] 2xl:text-xs font-semibold uppercase tracking-wider rounded-xl transition-colors whitespace-nowrap',
                         isActive
                           ? scrolled || !isHome
                             ? 'text-[#C49A32] font-black bg-[#EFE7D9]'
@@ -256,7 +256,7 @@ const Navbar = () => {
             </div>
 
             {/* Desktop Right Side CTA Buttons */}
-            <div className="hidden lg:flex items-center gap-2.5">
+            <div className="hidden lg:flex items-center gap-2 shrink-0 z-10">
               {/* 9-Language Selector Dropdown on Desktop */}
               <div className="relative" ref={langDropdownRef}>
                 <button
@@ -337,10 +337,10 @@ const Navbar = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => trackWhatsAppClick('navbar_cta')}
-                className="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold uppercase tracking-wider shadow-sm transition-all hover:scale-105 active:scale-95"
+                className="flex items-center gap-1.5 px-3 2xl:px-4 py-2.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold uppercase tracking-wider shadow-sm transition-all hover:scale-105 active:scale-95 shrink-0"
               >
                 <MessageCircle className="w-4 h-4" />
-                <span>{t.nav?.whatsappUs || 'WhatsApp Us'}</span>
+                <span>{t.nav?.whatsappUs || 'WhatsApp'}</span>
               </a>
             </div>
 
