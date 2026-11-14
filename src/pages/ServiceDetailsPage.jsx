@@ -1,13 +1,19 @@
 import React from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, NavLink } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { ShieldCheck, Compass, MessageCircle, Phone, CheckCircle2, ArrowRight, Car, Map, Hotel, Utensils, Coffee, Camera } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
 import { trackWhatsAppClick, trackPhoneCallClick } from '../utils/analytics';
+import { getLocalizedPath } from '../config/languages';
 
 const ServiceDetailsPage = () => {
     const { serviceId } = useParams();
     const location = useLocation();
+    const { t, lang } = useLanguage();
+
+    const pageT = t?.serviceDetails || {};
+    const taxiT = t?.taxi || {};
+    const guideT = t?.guide || {};
 
     // Deduce serviceId from path if routed from /private-guide or /private-taxi
     let effectiveService = serviceId;
@@ -26,52 +32,52 @@ const ServiceDetailsPage = () => {
             title: "Private Taxi Service in Chittorgarh | Cab Hire & Car Rental",
             description: "Hire a private taxi in Chittorgarh. Comfort cars, SUVs & tempo travellers for local sightseeing, Udaipur transfers, outstation tours. Professional drivers.",
             keywords: "Chittorgarh taxi service, cab hire in Chittorgarh, car rental Chittorgarh, Udaipur to Chittorgarh taxi, Chittorgarh fort taxi",
-            canonical: "/service/taxi"
+            canonical: getLocalizedPath('/service/taxi', lang)
         },
         guide: {
             title: "Expert Local Tour Guide in Chittorgarh | Certified Heritage Guide",
             description: "Book a certified local tour guide in Chittorgarh. Discover the rich history of Chittorgarh Fort, Rani Padmini, Vijay Stambh with expert Mewari historians.",
             keywords: "tour guide Chittorgarh, Chittorgarh fort guide, local guide in Chittorgarh, certified tourist guide Chittorgarh",
-            canonical: "/service/guide"
+            canonical: getLocalizedPath('/service/guide', lang)
         },
         hotel: {
             title: "Hotel Booking & Luxury Heritage Stays in Chittorgarh",
             description: "Find & book the best hotels and heritage stays in Chittorgarh. Exclusive deals on luxury heritage resorts and fort-view havelis.",
             keywords: "hotels in Chittorgarh booking, Chittorgarh hotels, heritage stay Chittorgarh, luxury resorts Chittorgarh",
-            canonical: "/service/hotel"
+            canonical: getLocalizedPath('/service/hotel', lang)
         },
         restaurant: {
             title: "Best Restaurants in Chittorgarh | Mewari Dining & Food Booking",
             description: "Reserve tables at the best restaurants in Chittorgarh. Savor authentic Mewari Thali, Dal Baati Churma, and dine with stunning fort views.",
             keywords: "restaurants in Chittorgarh, best food in Chittorgarh, Mewari thali Chittorgarh, fine dining Chittorgarh",
-            canonical: "/service/restaurant"
+            canonical: getLocalizedPath('/service/restaurant', lang)
         },
         cafe: {
             title: "Top Cafes in Chittorgarh | Best Hangout Spots & Fort Views",
             description: "Explore cozy cafes in Chittorgarh. Enjoy continental food, delicious coffee, and sunset fort views at top local hangouts.",
             keywords: "cafes in Chittorgarh, best coffee in Chittorgarh, fort view cafe Chittorgarh, hangout places in Chittorgarh",
-            canonical: "/service/cafe"
+            canonical: getLocalizedPath('/service/cafe', lang)
         },
         photographer: {
             title: "Professional Photographer in Chittorgarh | Fort Photo Shoots",
             description: "Hire a professional photographer in Chittorgarh. Book pre-wedding shoots, family portraits, and sunset shoots at Chittorgarh Fort.",
             keywords: "photographer in Chittorgarh, fort photo shoot Chittorgarh, pre-wedding shoot Chittorgarh",
-            canonical: "/service/photographer"
+            canonical: getLocalizedPath('/service/photographer', lang)
         },
         "horse-photo": {
             title: "Royal Horse Photography at Chittorgarh Fort | Souvenir Shoot",
             description: "Experience a royal photo shoot on horseback at Chittorgarh Fort in traditional Mewari attire.",
             keywords: "horse photography Chittorgarh, royal photoshoot Chittorgarh fort, traditional dress photo shoot",
-            canonical: "/service/horse-photo"
+            canonical: getLocalizedPath('/service/horse-photo', lang)
         }
     };
 
     const servicesContent = {
         taxi: {
-            title: "Private Taxi & Cab Service",
-            desc: "Punctual, sanitized private cabs for Chittorgarh Fort exploration, Udaipur airport transfers, and customized Rajasthan road trips. Chauffeurs are local, courteous, and highly experienced.",
-            question: "Why Book Our Private Cab Fleet?",
-            features: [
+            title: pageT.taxiTitle || taxiT.heading || "Private Taxi & Cab Service",
+            desc: pageT.taxiDesc || taxiT.desc || "Punctual, sanitized private cabs for Chittorgarh Fort exploration, Udaipur airport transfers, and customized Rajasthan road trips. Chauffeurs are local, courteous, and highly experienced.",
+            question: pageT.taxiWhy || "Why Book Our Private Cab Fleet?",
+            features: taxiT.features || [
                 "Available fleet: Swift Dzire, Innova Crysta, Ertiga & Tempo Travellers",
                 "Includes full internal driving between all 700-acre fort monuments",
                 "Punctual airport pickup from Udaipur (UDR) & Chittorgarh Railway Station",
@@ -94,10 +100,10 @@ const ServiceDetailsPage = () => {
             image: "/assets/images/Private Taxi.webp"
         },
         guide: {
-            title: "Authorized Private Tour Guide",
-            desc: "Unlock the epic history of Mewar with certified local historians who narrate the true legends of Rani Padmini, Maharana Kumbha, and the historic sieges with deep scholarly reverence.",
-            question: "What Makes Our Guides Exceptional?",
-            features: [
+            title: pageT.guideTitle || guideT.heading || "Authorized Private Tour Guide",
+            desc: pageT.guideDesc || guideT.desc || "Unlock the epic history of Mewar with certified local historians who narrate the true legends of Rani Padmini, Maharana Kumbha, and the historic sieges with deep scholarly reverence.",
+            question: pageT.guideWhy || "What Makes Our Guides Exceptional?",
+            features: guideT.features || [
                 "Govt. authorized and certified by tourism authorities",
                 "Fluent in English, Hindi, and regional Mewari dialect",
                 "Paced comfortably for families, children, and elderly travelers",
@@ -114,8 +120,8 @@ const ServiceDetailsPage = () => {
             image: "/assets/images/Guide.webp"
         },
         hotel: {
-            title: "Heritage Havelis & Curated Stays",
-            desc: "Rest like royalty in verified heritage havelis, boutique fort-view palaces, and comfortable luxury resorts with personalized concierge assistance.",
+            title: t.staysPage?.title || "Heritage Havelis & Curated Stays",
+            desc: t.staysPage?.desc || "Rest like royalty in verified heritage havelis, boutique fort-view palaces, and comfortable luxury resorts with personalized concierge assistance.",
             question: "Our Heritage Stay Promise",
             features: [
                 "Handpicked properties with direct view of Chittorgarh Fort",
@@ -126,8 +132,8 @@ const ServiceDetailsPage = () => {
             image: "/assets/images/Royal Stays.webp"
         },
         restaurant: {
-            title: "Traditional Mewari Fine Dining",
-            desc: "Indulge in royal Rajasthani recipes passed down through generations. Prepared in pure desi ghee with signature spice blends.",
+            title: t.flavorsPage?.title || "Traditional Mewari Fine Dining",
+            desc: t.flavorsPage?.desc || "Indulge in royal Rajasthani recipes passed down through generations. Prepared in pure desi ghee with signature spice blends.",
             question: "Culinary Highlights",
             features: [
                 "Signature Dal Baati Churma cooked with slow-fired baatis",
@@ -198,7 +204,9 @@ const ServiceDetailsPage = () => {
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Breadcrumbs */}
                 <nav className="text-xs text-[#25231F]/60 mb-6 flex items-center gap-2">
-                    <a href="/" className="hover:text-[#A65F3D]">Home</a>
+                    <NavLink to={getLocalizedPath('/', lang)} className="hover:text-[#A65F3D]">
+                        {t.directoryPage?.breadcrumbHome || 'Home'}
+                    </NavLink>
                     <span>/</span>
                     <span className="text-[#25231F] font-bold">{service.title}</span>
                 </nav>
@@ -207,7 +215,7 @@ const ServiceDetailsPage = () => {
                 <div className="bg-white rounded-3xl p-8 sm:p-12 border border-[#EFE7D9] shadow-heritage mb-12 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
                     <div className="lg:col-span-7 space-y-6">
                         <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A32] bg-[#EFE7D9] px-4 py-1.5 rounded-full inline-block">
-                            Verified Tourism Service
+                            {t.common?.verified || "Verified Tourism Partner"}
                         </span>
                         <h1 className="text-3xl sm:text-5xl font-serif font-black text-[#25231F] leading-tight">
                             {service.title}
@@ -236,14 +244,14 @@ const ServiceDetailsPage = () => {
                                 className="px-7 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-2xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-md transition-transform active:scale-95"
                             >
                                 <MessageCircle className="w-4 h-4" />
-                                Inquire on WhatsApp
+                                {t.packagesPage?.whatsappBtn || "WhatsApp Concierge"}
                             </button>
                             <button
                                 onClick={triggerPlanTrip}
                                 className="px-7 py-3.5 bg-[#C49A32] hover:bg-[#b08728] text-white rounded-2xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-md transition-transform active:scale-95"
                             >
                                 <Compass className="w-4 h-4" />
-                                Plan Custom Tour
+                                {t.packagesPage?.customBtn || "Plan Custom Tour"}
                             </button>
                         </div>
                     </div>
@@ -263,7 +271,7 @@ const ServiceDetailsPage = () => {
                 {service.vehicleCategories && (
                     <div className="mb-14">
                         <h2 className="text-2xl font-serif font-bold text-[#25231F] mb-6">
-                            Vehicle Fleet Categories
+                            {lang === 'hi' ? 'वाहन बेड़ा श्रेणियां' : lang === 'fr' ? 'Catégories de Véhicules' : lang === 'de' ? 'Fahrzeugkategorien' : lang === 'it' ? 'Flotta Veicoli Disponibili' : lang === 'ja' ? '車両フリートカテゴリ' : lang === 'es' ? 'Categorías de Vehículos' : lang === 'he' ? 'קטגוריות רכבים זמינים' : lang === 'ar' ? 'فئات أسطول السيارات' : 'Vehicle Fleet Categories'}
                         </h2>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                             {service.vehicleCategories.map((v, idx) => (
@@ -279,7 +287,7 @@ const ServiceDetailsPage = () => {
                                         onClick={handleWhatsApp}
                                         className="w-full py-2 bg-[#25231F] hover:bg-[#A65F3D] text-white rounded-lg text-xs font-bold uppercase tracking-wider transition-colors"
                                     >
-                                        Inquire Fare
+                                        {t.packagesPage?.inquireBtn || "Inquire Fare"}
                                     </button>
                                 </div>
                             ))}
@@ -291,7 +299,7 @@ const ServiceDetailsPage = () => {
                 {service.travelServices && (
                     <div className="bg-white rounded-3xl p-8 border border-[#EFE7D9] shadow-heritage mb-12">
                         <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#25231F] mb-6">
-                            Popular Service Routes & Options
+                            {lang === 'hi' ? 'लोकप्रिय सेवा मार्ग और विकल्प' : lang === 'fr' ? 'Itinéraires et Options Populaires' : lang === 'de' ? 'Beliebte Routen und Optionen' : lang === 'it' ? 'Rotte e Opzioni di Servizio' : lang === 'ja' ? '人気のサービスルート・オプション' : lang === 'es' ? 'Rutas y Opciones Populares' : lang === 'he' ? 'מסלולים ואפשרויות פופולריות' : lang === 'ar' ? 'خيارات ومسارات الخدمة الشائعة' : 'Popular Service Routes & Options'}
                         </h2>
                         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                             {service.travelServices.map((route, idx) => (
@@ -307,8 +315,12 @@ const ServiceDetailsPage = () => {
                 {/* Direct Contact Bar */}
                 <div className="bg-[#25231F] text-white rounded-3xl p-8 text-center flex flex-col sm:flex-row items-center justify-between gap-6">
                     <div className="text-left">
-                        <h3 className="text-xl font-serif font-bold text-white mb-1">Direct Assistance from Local Desk</h3>
-                        <p className="text-xs text-white/70">Our travel concierges are available on WhatsApp and phone.</p>
+                        <h3 className="text-xl font-serif font-bold text-white mb-1">
+                            {lang === 'hi' ? 'स्थानीय डेस्क से सीधा संपर्क' : lang === 'fr' ? 'Assistance Directe auprès du Concierge Local' : lang === 'de' ? 'Direkte Unterstützung vom Concierge-Desk' : lang === 'it' ? 'Assistenza Diretta dal Desk Locale' : lang === 'ja' ? '現地コンシェルジュ直通サポート' : lang === 'es' ? 'Asistencia Directa del Mostrador Local' : lang === 'he' ? 'סיוע ישיר מדלפק הקונסיירז’ המקומי' : lang === 'ar' ? 'مساعدة مباشرة من مكتب الكونسيرج المحلي' : 'Direct Assistance from Local Desk'}
+                        </h3>
+                        <p className="text-xs text-white/70">
+                            {lang === 'hi' ? 'हमारे यात्रा सहायक व्हाट्सएप और कॉल पर 24/7 उपलब्ध हैं।' : lang === 'fr' ? 'Nos concierges sont disponibles 24/7 par WhatsApp et téléphone.' : lang === 'de' ? 'Unser Concierge-Team steht Ihnen 24/7 via WhatsApp und Telefon zur Verfügung.' : lang === 'it' ? 'I nostri concierge sono disponibili su WhatsApp e telefono.' : lang === 'ja' ? '専属コンシェルジュがWhatsAppとお電話でサポートいたします。' : lang === 'es' ? 'Nuestros concierges están disponibles en WhatsApp y teléfono.' : lang === 'he' ? 'הקונסיירז’ים שלנו זמינים בוואטסאפ ובטלפון.' : lang === 'ar' ? 'فريق الكونسيرج متواجد على واتساب والهاتف.' : 'Our travel concierges are available on WhatsApp and phone.'}
+                        </p>
                     </div>
                     <div className="flex gap-3">
                         <a

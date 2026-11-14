@@ -263,7 +263,177 @@ export const es = {
     readMore: 'Leer Más',
     viewMap: 'Ver Mapa',
     bestPrice: 'Mejor Precio Garantizado',
-    verified: 'Socio Verificado'
-  }
-};
+    verified: 'Socio Verificado',
+  },
 
+  attractionsPage: {
+    "heroKicker": "Patrimonio e Historia",
+    "heroTitle": "La Gran Ciudadela",
+    "heroDesc": "Explore monumentos y santuarios históricos que simbolizan el coraje, el arte y la espiritualidad de Mewar.",
+    "mainPillarBadge": "Pilar Principal Destacado",
+    "locationLabel": "Ubicación",
+    "locationVal": "Distrito de Chittorgarh, Rajastán",
+    "bestTimeLabel": "Mejor Época de Visita",
+    "detailsBtn": "Información Detallada",
+    "bookTourBtn": "Reservar Tour Guiado",
+    "circuitHeading": "Tesoros Históricos en este Circuito",
+    "monumentsCount": "Monumentos Históricos Catalogados",
+    "otherPillars": "Explorar Otros Pilares de Mewar",
+    "categories": {
+      "fort": {
+        "title": "La Gran Ciudadela",
+        "subtitle": "Patrimonio e Historia"
+      },
+      "nature": {
+        "title": "Naturaleza y Fauna Silvestre",
+        "subtitle": "Santuario Ecológico"
+      },
+      "spiritual": {
+        "title": "Serenidad Espiritual",
+        "subtitle": "Mewar Sagrado"
+      },
+      "scenic": {
+        "title": "Paisajes Fascinantes",
+        "subtitle": "Arquitectura Natural"
+      }
+    }
+  },
+
+  packagesPage: {
+    "kicker": "Planes de Viaje Exclusivos en Rajastán",
+    "title": "Paquetes Turísticos y Experiencias",
+    "desc": "Viajes diseñados a medida para sumergirse en la historia heroica, los lugares de peregrinación divina y la hospitalidad real de Chittorgarh.",
+    "tabPackages": "Paquetes Turísticos",
+    "tabServices": "Servicios a Petición",
+    "inquireBtn": "Consultar y Personalizar",
+    "whatsappBtn": "Concierge de WhatsApp",
+    "customKicker": "Viajes a Medida",
+    "customTitle": "¿Desea un Itinerario Personalizado en Rajastán?",
+    "customDesc": "Indíquenos sus fechas de viaje, ciudad de origen y preferencias. Diseñaremos una ruta auténtica por Mewar sólo para usted.",
+    "customBtn": "Crear Itinerario Personalizado",
+    "learnMore": "Más Información y Reservas",
+    "packages": [
+      {
+        "id": 1,
+        "name": "Tour Exprés de Patrimonio (1 Día)",
+        "duration": "Día Completo (8-10 Horas)",
+        "desc": "Recorra las 7 puertas del fuerte, Vijay Stambha, Palacio Padmini, embalse de Gaumukh y el espectáculo de Luz y Sonido con guía oficial.",
+        "includes": [
+          "Historiador Certificado por el Gobierno",
+          "Coche Privado con Aire Acondicionado",
+          "Almuerzo Tradicional Dal Baati",
+          "Gestión del Espectáculo de Luz"
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Experiencia Mewar Completa (2 Días)",
+        "duration": "2 Días / 1 Noche",
+        "desc": "La experiencia patrimonial definitiva: visita a fondo de la fortaleza el día 1 y peregrinación al templo de Sanwariya Seth y Menal el día 2.",
+        "includes": [
+          "Guía Historiador Autorizado",
+          "Estancia en Haveli Tradicional",
+          "Vehículo SUV Privado",
+          "Asistencia en Entradas y Rituales"
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Ciudadela Real y Naturaleza (3 Días)",
+        "duration": "3 Días / 2 Noches",
+        "desc": "Gran escapada por Rajastán: Fuerte de Chittorgarh, reserva natural de Bassi, cascada de Menal y pueblos de artesanos tradicionales.",
+        "includes": [
+          "Vehículo Privado con Conductor",
+          "2 Noches en Hotel Boutique",
+          "Guías Locales Especializados",
+          "Degustación Gastronómica Típica"
+        ]
+      }
+    ],
+    "services": [
+      {
+        "title": "Guía Turístico Privado",
+        "desc": "Historiador oficial de Mewar con excelente dominio del inglés."
+      },
+      {
+        "title": "Taxi Privado con Chófer",
+        "desc": "Sedanes cómodos, Innova Crysta y furgonetas climatizadas."
+      },
+      {
+        "title": "Estancias en Havelis Reales",
+        "desc": "Palacetes tradicionales y hoteles boutique seleccionados."
+      },
+      {
+        "title": "Gastronomía Tradicional",
+        "desc": "Auténtico Dal Baati Churma elaborado con puro ghee artesanal."
+      },
+      {
+        "title": "Ruta Textil y Artesanía",
+        "desc": "Visite a los maestros del estampado en madera de Akola y orfebrería Thewa."
+      },
+      {
+        "title": "Sesión de Fotos en el Fuerte",
+        "desc": "Retratos profesionales y fotos al atardecer sobre las murallas."
+      }
+    ]
+  },
+
+  directoryPage: {
+    "badge": "Red de Viajes India y Global",
+    "title": "Guías de Viaje, Rutas y Monumentos de Chittorgarh",
+    "desc": "Encuentre distancias detalladas, traslados desde aeropuertos y trenes, normativas de acceso ASI e itinerarios a medida según su lugar de salida.",
+    "searchPlaceholder": "Buscar ciudad, estado, país, monumento o aeropuerto...",
+    "secAttractions": "Monumentos, Templos y Naturaleza",
+    "secPackages": "Paquetes e Itinerarios a Medida",
+    "secRajasthan": "Rutas por Carretera en Rajastán",
+    "secIndia": "Rutas entre Ciudades de la India",
+    "secHubs": "Conexiones de Aeropuertos y Tren",
+    "secStates": "Guías por Estados de la India",
+    "secCountries": "Guías de Viaje Internacionales",
+    "breadcrumbHome": "Inicio",
+    "breadcrumbDirectory": "Directorio de Destinos y Rutas"
+  },
+
+  serviceDetails: {
+    "taxiTitle": "Servicio de Taxi Privado en Chittorgarh",
+    "taxiDesc": "Vehículos privados higienizados y puntuales para recorrer la fortaleza, traslados al aeropuerto de Udaipur y circuitos por Rajastán con conductores expertos.",
+    "taxiWhy": "¿Por qué Elegir Nuestra Flota Privada?",
+    "guideTitle": "Guía Turístico Autorizado en Chittorgarh",
+    "guideDesc": "Descubra la grandiosa historia de Mewar junto a historiadores locales certificados que narran con emoción las gestas de Rani Padmini y Maharana Kumbha.",
+    "guideWhy": "¿Qué Hace Únicos a Nuestros Guías?",
+    "bookTaxi": "Reservar Taxi Privado",
+    "bookGuide": "Reservar Guía Oficial"
+  },
+
+  staysPage: {
+    "kicker": "Alojamientos Seleccionados",
+    "title": "Hoteles Históricos y Havelis",
+    "desc": "Disfrute de la hospitalidad de Mewar. Desde havelis con vistas a la fortaleza iluminada hasta apacibles hoteles de campo.",
+    "verifiedPartner": "Socio Oficial Verificado",
+    "inquireRates": "Consultar Tarifas"
+  },
+
+  flavorsPage: {
+    "kicker": "Patrimonio Culinario de Mewar",
+    "title": "Sabores Típicos Auténticos",
+    "desc": "Deguste la gastronomía genuina de Rajastán: Dal Baati Churma en puro ghee desi, exquisitos dulces tradicionales y cafeterías panorámicas.",
+    "filterAll": "Todos los Sabores",
+    "filterDishes": "Platos Emblemáticos",
+    "filterDining": "Restaurantes Tradicionales",
+    "filterCafes": "Cafés con Vista al Fuerte",
+    "mustTryTitle": "Manjares Imprescindibles de Mewar",
+    "desiGheeBadge": "Elaborado con Puro Ghee Desi"
+  },
+
+  localVocalPage: {
+    "kicker": "Artesanía y Tradición",
+    "title": "Vocal For Local — Artesanos de Mewar",
+    "desc": "Apoye a los artesanos locales de Chittorgarh: estampados tradicionales de Akola, alfarería artesanal y recuerdos genuinos de Rajastán."
+  },
+
+  howToReachPage: {
+    "kicker": "Conectividad y Guía de Transporte",
+    "title": "Cómo Llegar a Chittorgarh",
+    "desc": "Guía completa de transporte para viajeros que llegan por aire (aeropuerto de Udaipur UDR), tren o autopistas nacionales."
+  },
+};

@@ -106,9 +106,9 @@ const Navbar = () => {
     { name: t.nav?.packages || 'Packages', href: '/royal-journeys' },
     { name: t.nav?.guide || 'Guide', href: '/service/guide' },
     { name: t.nav?.taxi || 'Taxi', href: '/service/taxi' },
-    { name: t.nav?.blog || 'Blog', href: '/blog' },
-    { name: t.nav?.about || 'About', href: '/#about-us', isAnchor: true },
-    { name: t.nav?.contact || 'Contact', href: '/#contact', isAnchor: true },
+    { name: t.nav?.blog || 'Blog', href: '/blog', hideOnCompact: true },
+    { name: t.nav?.about || 'About', href: '/#about-us', isAnchor: true, hideOnCompact: true },
+    { name: t.nav?.contact || 'Contact', href: '/#contact', isAnchor: true, hideOnCompact: true },
   ];
 
   const handleAnchorClick = (e, href) => {
@@ -210,7 +210,7 @@ const Navbar = () => {
             </div>
 
             {/* Desktop Menu */}
-            <div className="hidden xl:flex items-center justify-center gap-1 2xl:gap-2 flex-1 min-w-0 px-2">
+            <div className="hidden xl:flex items-center justify-center gap-1 2xl:gap-2 flex-1 min-w-0 max-w-3xl mx-auto px-2">
               {navLinks.map((link) => {
                 if (link.isAnchor) {
                   return (
@@ -220,6 +220,7 @@ const Navbar = () => {
                       onClick={(e) => handleAnchorClick(e, link.href)}
                       className={cn(
                         'px-2 2xl:px-2.5 py-1.5 text-[10.5px] 2xl:text-xs font-semibold uppercase tracking-wider rounded-xl transition-colors whitespace-nowrap',
+                        link.hideOnCompact && 'hidden 2xl:inline-block',
                         scrolled || !isHome
                           ? 'text-[#25231F]/80 hover:text-[#A65F3D] hover:bg-[#EFE7D9]/50'
                           : 'text-white/85 hover:text-white hover:bg-white/10'
@@ -239,6 +240,7 @@ const Navbar = () => {
                     className={({ isActive }) =>
                       cn(
                         'px-2 2xl:px-2.5 py-1.5 text-[10.5px] 2xl:text-xs font-semibold uppercase tracking-wider rounded-xl transition-colors whitespace-nowrap',
+                        link.hideOnCompact && 'hidden 2xl:inline-block',
                         isActive
                           ? scrolled || !isHome
                             ? 'text-[#C49A32] font-black bg-[#EFE7D9]'

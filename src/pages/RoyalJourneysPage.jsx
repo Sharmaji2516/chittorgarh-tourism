@@ -4,6 +4,8 @@ import { ShieldCheck, ArrowRight, Car, Hotel, Map, History, Utensils, Coffee, Ca
 import { NavLink } from 'react-router-dom';
 import SEOHead from '../components/SEOHead';
 import { trackWhatsAppClick } from '../utils/analytics';
+import { useLanguage } from '../context/LanguageContext';
+import { getLocalizedPath } from '../config/languages';
 
 const JOURNEYS_SCHEMA = [
   {
@@ -16,8 +18,11 @@ const JOURNEYS_SCHEMA = [
   }
 ];
 
-const RoyalJourneysPage = ({ t }) => {
+const RoyalJourneysPage = () => {
+    const { t, lang } = useLanguage();
     const [activeTab, setActiveTab] = useState('packages');
+
+    const pageT = t?.packagesPage || {};
 
     const triggerPlanTrip = (pkg = null) => {
         if (pkg && pkg.name) {
@@ -34,14 +39,19 @@ const RoyalJourneysPage = ({ t }) => {
         }
     };
 
-    const packages = t?.packages?.items || [
+    const packageImages = [
+        "/Fort.webp",
+        "/assets/images/Sanvliya-ji-Temple.webp",
+        "/assets/images/nature_generated.webp"
+    ];
+
+    const rawPackages = pageT.packages || [
         {
             id: 1,
             name: "1-Day Heritage Express Tour",
             duration: "Full Day (8-10 Hours)",
             desc: "Explore all 7 gates, Vijay Stambha, Padmini Palace, Gaumukh Reservoir, and the evening Light & Sound Show with authorized guide.",
             includes: ["Govt. Certified Historian", "Private AC Cab for Fort Circuit", "Traditional Dal Baati Lunch", "Light Show Coordination"],
-            image: "/Fort.webp"
         },
         {
             id: 2,
@@ -49,7 +59,6 @@ const RoyalJourneysPage = ({ t }) => {
             duration: "2 Days / 1 Night",
             desc: "The complete heritage journey: in-depth fort exploration on Day 1 and spiritual darshan at Sanwariya Seth Temple & Menal Gorge on Day 2.",
             includes: ["Certified Historian Guide", "Boutique Heritage Haveli Stay", "Private SUV Transfer", "All Entry & Darshan Assistance"],
-            image: "/assets/images/Sanvliya-ji-Temple.webp"
         },
         {
             id: 3,
@@ -57,25 +66,45 @@ const RoyalJourneysPage = ({ t }) => {
             duration: "3 Days / 2 Nights",
             desc: "Extensive Rajasthan heritage vacation covering Chittorgarh Fort, Bassi Wildlife Sanctuary, Menal Waterfall, and countryside artisan villages.",
             includes: ["Private Dedicated AC Vehicle", "2 Nights Boutique Hotel", "Wildlife & Heritage Guides", "Traditional Cuisine Tastings"],
-            image: "/assets/images/nature_generated.webp"
         }
     ];
 
-    const onDemandServices = [
-        { title: "Private Tour Guide", desc: "Authorized Mewari historian fluent in English and Hindi.", icon: Map, link: "/service/guide" },
-        { title: "Private Taxi / Cab", desc: "Sanitized AC Sedans, Innova Crysta & Tempo Travellers.", icon: Car, link: "/service/taxi" },
-        { title: "Heritage Haveli Stay", desc: "Handpicked royal havelis and boutique resorts.", icon: Hotel, link: "/stays" },
-        { title: "Traditional Dining", desc: "Authentic Dal Baati Churma cooked in pure desi ghee.", icon: Utensils, link: "/flavors" },
-        { title: "Artisan & Textile Tour", desc: "Explore local Daabu mud-resist block printers & Thewa craft.", icon: Coffee, link: "/vocal-for-local" },
-        { title: "Fort Photography", desc: "Professional portraits & sunset photoshoot atop the ramparts.", icon: Camera, link: "/service/photographer" }
+    const packages = rawPackages.map((pkg, idx) => ({
+        ...pkg,
+        image: packageImages[idx] || "/Fort.webp"
+    }));
+
+    const rawServices = pageT.services || [
+        { title: "Private Tour Guide", desc: "Authorized Mewari historian fluent in English and Hindi." },
+        { title: "Private Taxi / Cab", desc: "Sanitized AC Sedans, Innova Crysta & Tempo Travellers." },
+        { title: "Heritage Haveli Stay", desc: "Handpicked royal havelis and boutique resorts." },
+        { title: "Traditional Dining", desc: "Authentic Dal Baati Churma cooked in pure desi ghee." },
+        { title: "Artisan & Textile Tour", desc: "Explore local Daabu mud-resist block printers & Thewa craft." },
+        { title: "Fort Photography", desc: "Professional portraits & sunset photoshoot atop the ramparts." }
     ];
+
+    const serviceIcons = [Map, Car, Hotel, Utensils, Coffee, Camera];
+    const serviceLinks = [
+        "/service/guide",
+        "/service/taxi",
+        "/stays",
+        "/flavors",
+        "/vocal-for-local",
+        "/service/photographer"
+    ];
+
+    const onDemandServices = rawServices.map((srv, idx) => ({
+        ...srv,
+        icon: serviceIcons[idx] || Map,
+        link: serviceLinks[idx] || "/service/guide"
+    }));
 
     return (
         <div className="min-h-screen bg-[#F8F5EF] text-[#25231F] pt-28 pb-24">
             <SEOHead
                 title="Chittorgarh Tour Packages & Guided Itineraries | Rajasthan Heritage Tours"
                 description="Curated 1-day, 2-day & 3-day Chittorgarh itineraries and tour packages. Book guided heritage tours, local taxis & custom Rajasthan travel plans."
-                canonical="/royal-journeys"
+                canonical={getLocalizedPath('/royal-journeys', lang)}
                 keywords="Chittorgarh tour package, Chittorgarh itinerary, 1 day Chittorgarh tour, 2 day Chittorgarh, Chittorgarh guided tour, Rajasthan tour package"
                 schema={JOURNEYS_SCHEMA}
             />
@@ -84,13 +113,13 @@ const RoyalJourneysPage = ({ t }) => {
                 {/* Header Section */}
                 <div className="text-center max-w-3xl mx-auto mb-12">
                     <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A32] bg-[#EFE7D9] px-4 py-1.5 rounded-full inline-block mb-3">
-                        Curated Rajasthan Travel Plans
+                        {pageT.kicker || "Curated Rajasthan Travel Plans"}
                     </span>
                     <h1 className="text-3xl sm:text-5xl font-serif font-black text-[#25231F] mb-4">
-                        Tour Packages & Experiences
+                        {pageT.title || "Tour Packages & Experiences"}
                     </h1>
                     <p className="text-sm sm:text-base text-[#25231F]/70 leading-relaxed font-light">
-                        Handcrafted journeys designed to immerse you into the heroic history, divine pilgrimage sites, and royal hospitality of Chittorgarh.
+                        {pageT.desc || "Handcrafted journeys designed to immerse you into the heroic history, divine pilgrimage sites, and royal hospitality of Chittorgarh."}
                     </p>
                 </div>
 
@@ -104,7 +133,7 @@ const RoyalJourneysPage = ({ t }) => {
                                 : 'text-[#25231F]/70 hover:text-[#25231F]'
                         }`}
                     >
-                        Tour Packages
+                        {pageT.tabPackages || "Tour Packages"}
                     </button>
                     <button
                         onClick={() => setActiveTab('services')}
@@ -114,7 +143,7 @@ const RoyalJourneysPage = ({ t }) => {
                                 : 'text-[#25231F]/70 hover:text-[#25231F]'
                         }`}
                     >
-                        On-Demand Services
+                        {pageT.tabServices || "On-Demand Services"}
                     </button>
                 </div>
 
@@ -148,7 +177,7 @@ const RoyalJourneysPage = ({ t }) => {
                                         </p>
 
                                         <div className="space-y-2.5 mb-6">
-                                            {pkg.includes.map((inc, i) => (
+                                            {(pkg.includes || []).map((inc, i) => (
                                                 <div key={i} className="flex items-center gap-2.5 text-xs text-[#25231F]/80">
                                                     <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                                                     <span>{inc}</span>
@@ -164,7 +193,7 @@ const RoyalJourneysPage = ({ t }) => {
                                         className="w-full py-3.5 bg-[#C49A32] hover:bg-[#b08728] text-white rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm transition-transform active:scale-95"
                                     >
                                         <Compass className="w-4 h-4" />
-                                        Inquire & Customize
+                                        {pageT.inquireBtn || "Inquire & Customize"}
                                     </button>
                                     <a
                                         href={`https://wa.me/917597451057?text=${encodeURIComponent(`Namaste! I would like to inquire about the *${pkg.name}* (${pkg.duration}). Please share details.`)}`}
@@ -174,7 +203,7 @@ const RoyalJourneysPage = ({ t }) => {
                                         className="w-full py-3 bg-[#F8F5EF] hover:bg-[#EFE7D9] text-[#25231F] rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 border border-[#EFE7D9] transition-colors"
                                     >
                                         <MessageCircle className="w-4 h-4 text-emerald-600" />
-                                        WhatsApp Concierge
+                                        {pageT.whatsappBtn || "WhatsApp Concierge"}
                                     </a>
                                 </div>
                             </div>
@@ -186,7 +215,7 @@ const RoyalJourneysPage = ({ t }) => {
                         {onDemandServices.map((srv, idx) => (
                             <NavLink
                                 key={idx}
-                                to={srv.link}
+                                to={getLocalizedPath(srv.link, lang)}
                                 className="bg-white rounded-3xl p-8 border border-[#EFE7D9] shadow-heritage hover:border-[#C49A32] hover:-translate-y-1 transition-all group flex flex-col justify-between"
                             >
                                 <div>
@@ -201,7 +230,7 @@ const RoyalJourneysPage = ({ t }) => {
                                     </p>
                                 </div>
                                 <div className="flex items-center text-xs font-bold text-[#C49A32] group-hover:text-[#A65F3D] gap-1">
-                                    <span>Learn More & Reserve</span>
+                                    <span>{pageT.learnMore || "Learn More & Reserve"}</span>
                                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                                 </div>
                             </NavLink>
@@ -213,13 +242,13 @@ const RoyalJourneysPage = ({ t }) => {
                 <div className="bg-[#25231F] text-white rounded-3xl p-8 sm:p-12 text-center flex flex-col lg:flex-row items-center justify-between gap-6 shadow-xl">
                     <div className="text-center lg:text-left">
                         <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#C49A32] block mb-1">
-                            Bespoke Travel Planning
+                            {pageT.customKicker || "Bespoke Travel Planning"}
                         </span>
                         <h3 className="text-2xl sm:text-3xl font-serif font-bold text-white mb-2">
-                            Need a Tailored Rajasthan Tour Itinerary?
+                            {pageT.customTitle || "Need a Tailored Rajasthan Tour Itinerary?"}
                         </h3>
                         <p className="text-xs sm:text-sm text-white/70 max-w-xl">
-                            Tell us your travel dates, pickup city, and group preferences. We will handcraft an authentic Mewar journey just for you.
+                            {pageT.customDesc || "Tell us your travel dates, pickup city, and group preferences. We will handcraft an authentic Mewar journey just for you."}
                         </p>
                     </div>
 
@@ -228,7 +257,7 @@ const RoyalJourneysPage = ({ t }) => {
                         className="px-8 py-4 bg-[#C49A32] hover:bg-[#b08728] text-white rounded-2xl text-xs font-bold uppercase tracking-wider shrink-0 shadow-lg transition-transform active:scale-95 flex items-center gap-2"
                     >
                         <Compass className="w-4 h-4" />
-                        Plan Custom Itinerary
+                        {pageT.customBtn || "Plan Custom Itinerary"}
                     </button>
                 </div>
             </div>

@@ -89,26 +89,23 @@ export const LanguageProvider = ({ children }) => {
 
   // Ensure full 19-item catalogue of attractions is never lost, and images are always preserved
   const baseAttractionItems = content.en?.attractions?.items || [];
-  const langAttractionItems = legacyContent?.attractions?.items || [];
+  const langAttractionItems = (content[lang] && content[lang].attractions?.items) || [];
 
   const mergedAttractions = {
     ...(legacyContent.attractions || {}),
-    kicker: currentTranslation.attractions?.kicker || legacyContent.attractions?.title || 'Citadel Monuments & Sacred Sites',
-    heading: currentTranslation.attractions?.heading || legacyContent.attractions?.title || 'Popular Attractions',
+    kicker: currentTranslation.attractionsPage?.heroKicker || currentTranslation.attractions?.kicker || 'Citadel Monuments & Sacred Sites',
+    heading: currentTranslation.attractionsPage?.heroTitle || currentTranslation.attractions?.heading || 'Popular Attractions',
     exploreAll: currentTranslation.attractions?.exploreAll || 'Explore All 15+ Monuments',
     viewDetails: currentTranslation.attractions?.viewDetails || 'View Details',
     inquireGuide: currentTranslation.attractions?.inquireGuide || 'Inquire Guide',
-    bestTimeLabel: currentTranslation.attractions?.bestTimeLabel || 'Best Time: ',
+    bestTimeLabel: currentTranslation.attractionsPage?.bestTimeLabel || currentTranslation.attractions?.bestTimeLabel || 'Best Time: ',
     items: baseAttractionItems.map((baseItem) => {
       const langItem = langAttractionItems.find((li) => li.id === baseItem.id) || {};
-      const transItem = (currentTranslation.attractions?.items || []).find((ti) => ti.name && (ti.id === baseItem.id || baseItem.name.includes(ti.name) || ti.name.includes(baseItem.name))) || {};
       return {
         ...baseItem,
-        ...langItem,
-        ...(transItem.desc ? { desc: transItem.desc } : {}),
-        ...(transItem.name ? { name: transItem.name } : {}),
-        ...(transItem.bestTime ? { bestTime: transItem.bestTime } : {}),
-        ...(transItem.badge ? { badge: transItem.badge } : {}),
+        ...(langItem.name ? { name: langItem.name } : {}),
+        ...(langItem.desc ? { desc: langItem.desc } : {}),
+        ...(langItem.bestTime ? { bestTime: langItem.bestTime } : {}),
         // Crucial: image must NEVER be empty or lost
         image: baseItem.image || langItem.image || '/assets/images/Chittorgarh Fort.webp',
       };

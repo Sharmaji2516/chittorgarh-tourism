@@ -5,6 +5,8 @@ import { NavLink } from 'react-router-dom';
 import SEOHead from '../components/SEOHead';
 import DirectionsButton from '../components/DirectionsButton';
 import { trackWhatsAppClick } from '../utils/analytics';
+import { useLanguage } from '../context/LanguageContext';
+import { getLocalizedPath } from '../config/languages';
 
 const HOW_TO_REACH_SCHEMA = [
   {
@@ -32,6 +34,9 @@ const HOW_TO_REACH_SCHEMA = [
 ];
 
 const HowToReach = () => {
+    const { t, lang } = useLanguage();
+    const pageT = t?.howToReachPage || {};
+
     const triggerPlanTrip = () => {
         window.dispatchEvent(new CustomEvent('openTripPlannerModal'));
     };
@@ -39,9 +44,9 @@ const HowToReach = () => {
     const transport = [
         {
             icon: Train,
-            title: "By Train",
+            title: lang === 'hi' ? 'ट्रेन द्वारा' : 'By Train',
             image: "/assets/images/Chittorgarh Railway Station.webp",
-            desc: "Chittorgarh Railway Station (COR) is a well-connected junction on Western Railway lines with direct trains from Delhi, Mumbai, Jaipur, and Kota.",
+            desc: lang === 'hi' ? 'चित्तौड़गढ़ रेलवे स्टेशन (सीओआर) दिल्ली, मुंबई, जयपुर और कोटा से सीधी ट्रेनों से जुड़ा हुआ प्रमुख जंक्शन है।' : "Chittorgarh Railway Station (COR) is a well-connected junction on Western Railway lines with direct trains from Delhi, Mumbai, Jaipur, and Kota.",
             highlights: [
                 "Chetak Express & Mewar Express direct",
                 "Connections: Kota, Ajmer, Ahmedabad, Indore",
@@ -52,22 +57,22 @@ const HowToReach = () => {
         },
         {
             icon: Plane,
-            title: "By Air",
+            title: lang === 'hi' ? 'हवाई मार्ग द्वारा' : 'By Air',
             image: "/assets/images/Udaipur Airport.webp",
-            desc: "Maharana Pratap Airport (UDR) in Udaipur is the nearest airport with regular flights from Delhi, Mumbai, Bangalore, and Jaipur.",
+            desc: lang === 'hi' ? 'उदयपुर का महाराणा प्रताप हवाई अड्डा (यूडीआर) निकटतम हवाई अड्डा है, जो दिल्ली, मुंबई और बैंगलोर से नियमित उड़ानों से जुड़ा है।' : "Maharana Pratap Airport (UDR) in Udaipur is the nearest airport with regular flights from Delhi, Mumbai, Bangalore, and Jaipur.",
             highlights: [
                 "Udaipur Airport (UDR): ~90 km via NH-27",
                 "Driving time: ~1 hour 45 minutes",
                 "Sanitized private cabs with flight tracking"
             ],
-            link: "/udaipur-to-chittorgarh-taxi",
+            link: getLocalizedPath('/udaipur-to-chittorgarh-taxi', lang),
             linkLabel: "Book Airport Cab →"
         },
         {
             icon: Bus,
-            title: "By Bus",
+            title: lang === 'hi' ? 'बस द्वारा' : 'By Bus',
             image: "/assets/images/Rsrtc Bus Stand.webp",
-            desc: "RSRTC operates frequent Super Deluxe, Volvo, and sleeper coaches connecting Chittorgarh to all major hubs across Rajasthan.",
+            desc: lang === 'hi' ? 'आरएसआरटीसी राजस्थान के सभी प्रमुख शहरों से चित्तौड़गढ़ के लिए नियमित वोल्वो और डीलक्स बसें संचालित करती है।' : "RSRTC operates frequent Super Deluxe, Volvo, and sleeper coaches connecting Chittorgarh to all major hubs across Rajasthan.",
             highlights: [
                 "Direct coaches from: Udaipur, Jaipur, Kota, Jodhpur",
                 "Volvo & AC Sleeper available nightly",
@@ -78,9 +83,9 @@ const HowToReach = () => {
         },
         {
             icon: Car,
-            title: "By Highway (Road)",
+            title: lang === 'hi' ? 'सड़क मार्ग द्वारा' : 'By Highway (Road)',
             image: "/assets/images/National Highway.webp",
-            desc: "Smooth driving along the Golden Quadrilateral (NH-48) and East-West Corridor (NH-27). Dual carriageway expressways with clean food plazas.",
+            desc: lang === 'hi' ? 'स्वर्णिम चतुर्भुज (एनएच-48) और पूर्व-पश्चिम गलियारे (एनएच-27) द्वारा उत्कृष्ट 4-लेन राजमार्ग कनेक्टिविटी।' : "Smooth driving along the Golden Quadrilateral (NH-48) and East-West Corridor (NH-27). Dual carriageway expressways with clean food plazas.",
             highlights: [
                 "Via NH-48 (Jaipur → Chittor, 5 hrs)",
                 "Via NH-27 (Udaipur → Chittor, 1.75 hrs)",
@@ -106,7 +111,7 @@ const HowToReach = () => {
             <SEOHead
                 title="How to Reach Chittorgarh | Trains, Flights, Bus & Highway Guide"
                 description="Complete travel instructions to Chittorgarh Fort by train, flight, bus or road. Distance and driving times from Udaipur, Jaipur, Delhi, and Mumbai."
-                canonical="/how-to-reach"
+                canonical={getLocalizedPath('/how-to-reach', lang)}
                 keywords="how to reach Chittorgarh, Delhi to Chittorgarh train, Udaipur to Chittorgarh distance, Jaipur to Chittorgarh bus, Chittorgarh railway station"
                 schema={HOW_TO_REACH_SCHEMA}
             />
@@ -115,13 +120,13 @@ const HowToReach = () => {
                 {/* Header */}
                 <div className="text-center max-w-3xl mx-auto mb-16">
                     <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A32] bg-[#EFE7D9] px-4 py-1.5 rounded-full inline-block mb-3">
-                        Transportation & Logistics
+                        {pageT.kicker || "Transportation & Logistics"}
                     </span>
                     <h1 className="text-3xl sm:text-5xl font-serif font-black text-[#25231F] mb-4">
-                        How to Reach Chittorgarh
+                        {pageT.title || "How to Reach Chittorgarh"}
                     </h1>
                     <p className="text-sm sm:text-base text-[#25231F]/70 leading-relaxed font-light">
-                        Centrally situated in southern Rajasthan at the crossing of NH-48 and NH-27. Convenient connectivity by express trains, highway cabs, and commercial flights.
+                        {pageT.desc || "Centrally situated in southern Rajasthan at the crossing of NH-48 and NH-27. Convenient connectivity by express trains, highway cabs, and commercial flights."}
                     </p>
                 </div>
 
@@ -153,7 +158,7 @@ const HowToReach = () => {
                                 </div>
                             </div>
                             <div className="p-6 pt-0 border-t border-[#EFE7D9]/60">
-                                {item.title === "By Highway (Road)" ? (
+                                {item.title === "By Highway (Road)" || item.title === "सड़क मार्ग द्वारा" ? (
                                     <DirectionsButton />
                                 ) : (
                                     <a
@@ -180,54 +185,24 @@ const HowToReach = () => {
                     <div className="overflow-x-auto">
                         <table className="w-full text-left text-xs">
                             <thead>
-                                <tr className="border-b border-[#EFE7D9] text-[#A65F3D] uppercase tracking-wider font-bold">
-                                    <th className="py-3 px-4">Origin City</th>
-                                    <th className="py-3 px-4">Distance</th>
-                                    <th className="py-3 px-4">By Highway Cab</th>
-                                    <th className="py-3 px-4">By Direct Train</th>
+                                <tr className="border-b border-[#EFE7D9] text-[#25231F]/60 uppercase tracking-wider font-bold">
+                                    <th className="pb-3">City</th>
+                                    <th className="pb-3">Distance</th>
+                                    <th className="pb-3">By Road</th>
+                                    <th className="pb-3">By Train</th>
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-[#EFE7D9]/60">
                                 {distances.map((d, i) => (
-                                    <tr key={i} className="hover:bg-[#F8F5EF] transition-colors">
-                                        <td className="py-3.5 px-4 font-bold text-[#25231F]">{d.city}</td>
-                                        <td className="py-3.5 px-4 text-[#25231F]/70">{d.dist}</td>
-                                        <td className="py-3.5 px-4 text-[#25231F]/70">{d.road}</td>
-                                        <td className="py-3.5 px-4 text-[#25231F]/70">{d.train}</td>
+                                    <tr key={i} className="hover:bg-[#F8F5EF]/60">
+                                        <td className="py-3 font-bold text-[#25231F]">{d.city}</td>
+                                        <td className="py-3">{d.dist}</td>
+                                        <td className="py-3">{d.road}</td>
+                                        <td className="py-3">{d.train}</td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
-                    </div>
-                </div>
-
-                {/* Pickup & Cab Assistance Banner */}
-                <div className="bg-[#25231F] text-white rounded-3xl p-8 sm:p-12 text-center flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
-                    <div className="text-center sm:text-left">
-                        <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#C49A32] block mb-1">
-                            Ground Transportation Concierge
-                        </span>
-                        <h3 className="text-2xl sm:text-3xl font-serif font-bold text-white mb-2">
-                            Need a Pickup from Udaipur Airport or Railway Station?
-                        </h3>
-                        <p className="text-xs sm:text-sm text-white/70 max-w-xl">
-                            Our private sanitized fleet awaits you right at arrival gates with flight tracking and transparent fixed billing.
-                        </p>
-                    </div>
-
-                    <div className="flex gap-3">
-                        <NavLink
-                            to="/udaipur-to-chittorgarh-taxi"
-                            className="px-6 py-3.5 bg-[#C49A32] hover:bg-[#b08728] text-white rounded-2xl text-xs font-bold uppercase tracking-wider"
-                        >
-                            Airport Taxi Service
-                        </NavLink>
-                        <button
-                            onClick={triggerPlanTrip}
-                            className="px-6 py-3.5 bg-white/10 hover:bg-white/20 text-white rounded-2xl text-xs font-bold uppercase tracking-wider border border-white/20"
-                        >
-                            Plan Trip
-                        </button>
                     </div>
                 </div>
             </div>

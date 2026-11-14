@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { Hotel, ArrowRight, ShieldCheck, MapPin, Star, Compass, MessageCircle, CheckCircle2 } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
 import { trackWhatsAppClick } from '../utils/analytics';
+import { useLanguage } from '../context/LanguageContext';
+import { getLocalizedPath } from '../config/languages';
 
 const STAYS_SCHEMA = [
   {
@@ -15,7 +17,10 @@ const STAYS_SCHEMA = [
   }
 ];
 
-const StaysPage = ({ t }) => {
+const StaysPage = () => {
+    const { t, lang } = useLanguage();
+    const pageT = t?.staysPage || {};
+
     const triggerPlanTrip = () => {
         window.dispatchEvent(new CustomEvent('openTripPlannerModal'));
     };
@@ -28,25 +33,25 @@ const StaysPage = ({ t }) => {
         window.open(`https://wa.me/917597451057?text=${encodeURIComponent(msg)}`, '_blank');
     };
 
-    const hotels = t?.hotels?.items || [
+    const hotels = [
         {
             id: 1,
-            name: "Boutique Heritage Haveli Stay",
-            desc: "Authentic Rajput haveli with traditional jharokhas, courtyards, and rooftop views of Chittorgarh Fort ramparts.",
+            name: lang === 'hi' ? 'बुटीक हेरिटेज हवेली स्टे' : lang === 'fr' ? 'Séjour en Haveli Historique de Charme' : lang === 'de' ? 'Historisches Boutique-Haveli' : lang === 'it' ? 'Haveli Storica di Charme' : lang === 'ja' ? '伝統ブティック・ハヴェリ宿泊' : lang === 'es' ? 'Estancia en Haveli Histórica Boutique' : lang === 'he' ? 'אירוח בהאוולי היסטורית בוטיק' : lang === 'ar' ? 'إقامة في قصر هافيلي تراثي فاخر' : "Boutique Heritage Haveli Stay",
+            desc: lang === 'hi' ? 'पारंपरिक झरोखों, आंगनों और दुर्ग की प्राचीर के दृश्यों वाली प्रामाणिक राजपूत हवेली।' : lang === 'fr' ? 'Haveli rajput authentique avec jharokhas sculptés, cours intérieures et vue sur les remparts.' : "Authentic Rajput haveli with traditional jharokhas, courtyards, and rooftop views of Chittorgarh Fort ramparts.",
             price: "₹3,500 - ₹6,500 / night",
             image: "/assets/images/Royal Stays.webp"
         },
         {
             id: 2,
-            name: "Royal Palace Luxury Resort",
-            desc: "Spacious luxury suites surrounded by lush gardens, swimming pool, and fine dining Mewari restaurant.",
+            name: lang === 'hi' ? 'रॉयल पैलेस लक्ज़री रिसॉर्ट' : lang === 'fr' ? 'Palais & Resort de Luxe Royal' : lang === 'de' ? 'Königliches Luxus-Resort' : lang === 'it' ? 'Resort di Lusso Royal Palace' : lang === 'ja' ? 'ロイヤルパレス・ラグジュアリーリゾート' : lang === 'es' ? 'Resort de Lujo Royal Palace' : lang === 'he' ? 'ריזורט יוקרתי רויאל פאלאס' : lang === 'ar' ? 'منتجع القصر الملكي الفاخر' : "Royal Palace Luxury Resort",
+            desc: lang === 'hi' ? 'हरे-भरे बगीचों, स्विमिंग पूल और उत्तम मेवाड़ी रेस्तरां से युक्त शानदार सुइट्स।' : lang === 'fr' ? 'Suites de grand confort entourées de jardins luxuriants, piscine et restaurant gastronomique du Mewar.' : "Spacious luxury suites surrounded by lush gardens, swimming pool, and fine dining Mewari restaurant.",
             price: "₹5,500 - ₹9,500 / night",
             image: "/assets/images/Dinning Hall.webp"
         },
         {
             id: 3,
-            name: "Fort View Comfort Inn",
-            desc: "Modern air-conditioned family hotel located conveniently near Chittorgarh Railway Station and Fort entrance road.",
+            name: lang === 'hi' ? 'फोर्ट व्यू कम्फर्ट इन' : lang === 'fr' ? 'Hôtel Confort avec Vue sur le Fort' : lang === 'de' ? 'Komforthotel mit Festungsblick' : lang === 'it' ? 'Hotel Comfort con Vista Forte' : lang === 'ja' ? 'フォートビュー・コンフォートイン' : lang === 'es' ? 'Hotel Confort con Vistas al Fuerte' : lang === 'he' ? 'מלון קומפורט מול המבצר' : lang === 'ar' ? 'فندق كومفورت بإطلالة على القلعة' : "Fort View Comfort Inn",
+            desc: lang === 'hi' ? 'रेलवे स्टेशन और दुर्ग प्रवेश मार्ग के निकट आधुनिक वातानुकूलित पारिवारिक होटल।' : lang === 'fr' ? 'Hôtel familial moderne climatisé situé idéalement près de la gare et de la route du fort.' : "Modern air-conditioned family hotel located conveniently near Chittorgarh Railway Station and Fort entrance road.",
             price: "₹1,800 - ₹3,200 / night",
             image: "/assets/images/Cafe.webp"
         }
@@ -57,7 +62,7 @@ const StaysPage = ({ t }) => {
             <SEOHead
                 title="Hotels in Chittorgarh | Heritage, Budget & Luxury Stays"
                 description="Book the best hotels in Chittorgarh — heritage havelis, budget guesthouses & luxury resorts. Handpicked stays with VIP rates and local concierge."
-                canonical="/stays"
+                canonical={getLocalizedPath('/stays', lang)}
                 keywords="hotels in Chittorgarh, Chittorgarh hotels, heritage hotel Chittorgarh, budget hotel Chittorgarh, luxury stay Chittorgarh"
                 schema={STAYS_SCHEMA}
             />
@@ -66,13 +71,13 @@ const StaysPage = ({ t }) => {
                 {/* Header */}
                 <div className="text-center max-w-3xl mx-auto mb-16">
                     <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A32] bg-[#EFE7D9] px-4 py-1.5 rounded-full inline-block mb-3">
-                        Curated Accommodations
+                        {pageT.kicker || "Curated Accommodations"}
                     </span>
                     <h1 className="text-3xl sm:text-5xl font-serif font-black text-[#25231F] mb-4">
-                        Heritage Hotels & Stays
+                        {pageT.title || "Heritage Hotels & Stays"}
                     </h1>
                     <p className="text-sm sm:text-base text-[#25231F]/70 leading-relaxed font-light">
-                        Experience authentic Mewari hospitality. From royal havelis overlooking the floodlit fort to tranquil countryside heritage resorts.
+                        {pageT.desc || "Experience authentic Mewari hospitality. From royal havelis overlooking the floodlit fort to tranquil countryside heritage resorts."}
                     </p>
                 </div>
 
@@ -92,7 +97,7 @@ const StaysPage = ({ t }) => {
                                     />
                                     <span className="absolute top-3 left-3 bg-[#25231F]/80 backdrop-blur-sm text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full flex items-center gap-1">
                                         <ShieldCheck className="w-3.5 h-3.5 text-[#C49A32]" />
-                                        Verified Partner
+                                        {pageT.verifiedPartner || "Verified Partner"}
                                     </span>
                                 </div>
 
@@ -127,13 +132,13 @@ const StaysPage = ({ t }) => {
                                     className="px-5 py-3 bg-[#C49A32] hover:bg-[#b08728] text-white rounded-xl text-xs font-bold uppercase tracking-wider flex items-center gap-2 shadow-sm transition-transform active:scale-95"
                                 >
                                     <MessageCircle className="w-4 h-4" />
-                                    Inquire Rates
+                                    {pageT.inquireRates || "Inquire Rates"}
                                 </button>
                                 <button
                                     onClick={triggerPlanTrip}
                                     className="px-4 py-3 bg-[#F8F5EF] hover:bg-[#EFE7D9] text-[#25231F] rounded-xl text-xs font-bold uppercase tracking-wider border border-[#EFE7D9]"
                                 >
-                                    Add to Tour
+                                    {t.packagesPage?.inquireBtn || "Add to Tour"}
                                 </button>
                             </div>
                         </div>
@@ -147,10 +152,10 @@ const StaysPage = ({ t }) => {
                             Visit Chittorgarh Concierge
                         </span>
                         <h3 className="text-2xl sm:text-3xl font-serif font-bold text-white mb-2">
-                            Need Hotel Recommendations or Group Bookings?
+                            {lang === 'hi' ? 'होटल अनुशंसा या समूह बुकिंग चाहिए?' : lang === 'fr' ? 'Besoin de Recommandations d’Hôtels ou Réservations de Groupe ?' : lang === 'de' ? 'Benötigen Sie Hotelempfehlungen oder Gruppenbuchungen?' : lang === 'it' ? 'Consigli su Hotel o Prenotazioni di Gruppo?' : lang === 'ja' ? 'ホテルのおすすめや団体予約のご相談ですか？' : lang === 'es' ? '¿Necesita Recomendaciones de Hoteles o Reservas de Grupo?' : lang === 'he' ? 'זקוקים להמלצות על מלונות או הזמנות קבוצתיות?' : lang === 'ar' ? 'هل تحتاج إلى ترشيحات فنادق أو حجوزات مجموعات؟' : 'Need Hotel Recommendations or Group Bookings?'}
                         </h3>
                         <p className="text-xs sm:text-sm text-white/70 max-w-xl">
-                            Our ground team coordinates directly with verified properties to guarantee best room categories and seamless check-in.
+                            {lang === 'hi' ? 'हमारी स्थानीय टीम सत्यापित संपत्तियों के साथ सर्वोत्तम कक्ष और सहज चेक-इन सुनिश्चित करती है।' : 'Our ground team coordinates directly with verified properties to guarantee best room categories and seamless check-in.'}
                         </p>
                     </div>
 
@@ -158,7 +163,7 @@ const StaysPage = ({ t }) => {
                         onClick={triggerPlanTrip}
                         className="px-8 py-4 bg-[#C49A32] hover:bg-[#b08728] text-white rounded-2xl text-xs font-bold uppercase tracking-wider shrink-0 shadow-lg"
                     >
-                        Inquire Stay Package
+                        {t.packagesPage?.customBtn || "Plan Custom Stay"}
                     </button>
                 </div>
             </div>

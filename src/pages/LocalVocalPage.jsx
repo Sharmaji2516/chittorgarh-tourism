@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { HeartHandshake, ArrowRight, ShieldCheck, ShoppingBag, Palette, MessageCircle, Compass } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
 import { trackWhatsAppClick } from '../utils/analytics';
+import { useLanguage } from '../context/LanguageContext';
+import { getLocalizedPath } from '../config/languages';
 
 const LOCAL_VOCAL_SCHEMA = [
     {
@@ -15,7 +17,10 @@ const LOCAL_VOCAL_SCHEMA = [
     }
 ];
 
-const LocalVocalPage = ({ t, filteredLocalVocal = [] }) => {
+const LocalVocalPage = () => {
+    const { t, lang } = useLanguage();
+    const pageT = t?.localVocalPage || {};
+
     const triggerPlanTrip = () => {
         window.dispatchEvent(new CustomEvent('openTripPlannerModal'));
     };
@@ -23,19 +28,19 @@ const LocalVocalPage = ({ t, filteredLocalVocal = [] }) => {
     const artisanCategories = [
         {
             title: "Thewa Gold-on-Glass Jewellery",
-            desc: "250-year-old royal art fusing hand-engraved 23K gold filigree onto vibrant Belgian glass.",
+            desc: lang === 'hi' ? 'जीवंत बेल्जियन कांच पर 23 कैरेट सोने की नक्काशीदार शाही आभूषण कला।' : "250-year-old royal art fusing hand-engraved 23K gold filigree onto vibrant Belgian glass.",
             badge: "UNESCO Heritage Craft",
             image: "/assets/images/nature_generated.webp"
         },
         {
             title: "Daabu Mud-Resist Block Printing",
-            desc: "Handcrafted natural indigo textiles printed using generational wooden blocks and organic mud resist in Akola.",
+            desc: lang === 'hi' ? 'अकोला के पीढ़ियों पुराने लकड़ी के ठप्पों और प्राकृतिक मिट्टी से रंगे पारंपरिक वस्त्र।' : "Handcrafted natural indigo textiles printed using generational wooden blocks and organic mud resist in Akola.",
             badge: "Authentic Textile Art",
             image: "/assets/images/temple_generated.webp"
         },
         {
             title: "Rajasthani Wooden Toys & Lac Bangles",
-            desc: "Traditional wooden craftsmanship, vibrant lacquered bangles, and hand-embroidered leather juttis from local artisans.",
+            desc: lang === 'hi' ? 'स्थानीय कारीगरों द्वारा निर्मित पारंपरिक लकड़ी के खिलौने, लाख की चूड़ियां और जूतियां।' : "Traditional wooden craftsmanship, vibrant lacquered bangles, and hand-embroidered leather juttis from local artisans.",
             badge: "Traditional Bazaars",
             image: "/assets/images/fort_generated.webp"
         }
@@ -46,7 +51,7 @@ const LocalVocalPage = ({ t, filteredLocalVocal = [] }) => {
             <SEOHead
                 title="Chittorgarh Shopping | Thewa Art, Daabu Prints & Handicrafts"
                 description="Shop authentic Chittorgarh handicrafts — Thewa gold jewelry, Daabu block-printed fabrics, and local artisan crafts. Support local generational masters."
-                canonical="/vocal-for-local"
+                canonical={getLocalizedPath('/vocal-for-local', lang)}
                 keywords="Chittorgarh shopping, Thewa jewelry Chittorgarh, handicrafts Chittorgarh, Daabu print, Rajasthani souvenirs, local market Chittorgarh"
                 schema={LOCAL_VOCAL_SCHEMA}
             />
@@ -55,70 +60,45 @@ const LocalVocalPage = ({ t, filteredLocalVocal = [] }) => {
                 {/* Header */}
                 <div className="text-center max-w-3xl mx-auto mb-16">
                     <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#A65F3D] bg-[#EFE7D9] px-4 py-1.5 rounded-full inline-block mb-3">
-                        Vocal for Local • Empowering Artisans
+                        {pageT.kicker || "Vocal for Local • Empowering Artisans"}
                     </span>
                     <h1 className="text-3xl sm:text-5xl font-serif font-black text-[#25231F] mb-4">
-                        Local Artisans & Handicrafts
+                        {pageT.title || "Vocal For Local — Mewar Artisans"}
                     </h1>
                     <p className="text-sm sm:text-base text-[#25231F]/70 leading-relaxed font-light">
-                        Support generational craft masters of Mewar. Buy directly from authentic artisans without middleman markups or counterfeit commercial souvenirs.
+                        {pageT.desc || "Support traditional local artisans in Chittorgarh: handcrafted Akola block-printed textiles, terracotta pottery, and authentic Rajasthani souvenirs."}
                     </p>
                 </div>
 
-                {/* Craft Highlights */}
+                {/* Artisan Crafts Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-                    {artisanCategories.map((craft, idx) => (
+                    {artisanCategories.map((art, idx) => (
                         <div
                             key={idx}
-                            className="bg-white rounded-3xl border border-[#EFE7D9] overflow-hidden shadow-heritage hover:border-[#C49A32] transition-all flex flex-col justify-between"
+                            className="bg-white rounded-3xl border border-[#EFE7D9] overflow-hidden shadow-heritage hover:border-[#C49A32] hover:-translate-y-1 transition-all group flex flex-col justify-between"
                         >
                             <div>
-                                <div className="h-52 overflow-hidden bg-[#EFE7D9] relative">
-                                    <img src={craft.image} alt={craft.title} className="w-full h-full object-cover" />
-                                    <span className="absolute top-3 left-3 bg-[#25231F]/80 text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">
-                                        {craft.badge}
+                                <div className="h-56 relative overflow-hidden bg-[#EFE7D9]">
+                                    <img
+                                        src={art.image}
+                                        alt={art.title}
+                                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                                    />
+                                    <span className="absolute top-3 left-3 bg-[#25231F]/80 backdrop-blur-sm text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full">
+                                        {art.badge}
                                     </span>
                                 </div>
                                 <div className="p-6 sm:p-8">
-                                    <h3 className="text-xl font-serif font-bold text-[#25231F] mb-3">{craft.title}</h3>
-                                    <p className="text-xs text-[#25231F]/70 leading-relaxed mb-6">{craft.desc}</p>
+                                    <h3 className="text-xl font-serif font-bold text-[#25231F] group-hover:text-[#A65F3D] transition-colors mb-2">
+                                        {art.title}
+                                    </h3>
+                                    <p className="text-xs text-[#25231F]/70 leading-relaxed">
+                                        {art.desc}
+                                    </p>
                                 </div>
-                            </div>
-                            <div className="p-6 sm:p-8 pt-0 border-t border-[#EFE7D9]/60">
-                                <a
-                                    href={`https://wa.me/917597451057?text=${encodeURIComponent(`Hello! Where can I visit authentic workshops for ${craft.title} in Chittorgarh?`)}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="w-full py-3 bg-[#25231F] hover:bg-[#A65F3D] text-white rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-colors"
-                                >
-                                    <MessageCircle className="w-4 h-4" />
-                                    Locate Verified Workshop
-                                </a>
                             </div>
                         </div>
                     ))}
-                </div>
-
-                {/* Artisan Support Statement */}
-                <div className="bg-[#25231F] text-white rounded-3xl p-8 sm:p-12 text-center flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
-                    <div className="text-center sm:text-left">
-                        <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#C49A32] block mb-1">
-                            Responsible Heritage Tourism
-                        </span>
-                        <h3 className="text-2xl sm:text-3xl font-serif font-bold text-white mb-2">
-                            Want an Artisan Studio Walking Tour?
-                        </h3>
-                        <p className="text-xs sm:text-sm text-white/70 max-w-xl">
-                            Our local guides take you into ancient weaver courtyards and silversmith workshops for authentic craft demonstrations.
-                        </p>
-                    </div>
-
-                    <button
-                        onClick={triggerPlanTrip}
-                        className="px-8 py-4 bg-[#C49A32] hover:bg-[#b08728] text-white rounded-2xl text-xs font-bold uppercase tracking-wider shrink-0 shadow-lg"
-                    >
-                        Inquire Artisan Tour
-                    </button>
                 </div>
             </div>
         </div>

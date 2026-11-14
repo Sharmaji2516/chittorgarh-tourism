@@ -4,18 +4,24 @@ import { useParams, Link } from 'react-router-dom';
 import AttractionCard from '../components/AttractionCard';
 import { MapPin, Info, Shield, Wind, Sunrise, Mountain, ArrowRight } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
+import { useLanguage } from '../context/LanguageContext';
+import { getLocalizedPath } from '../config/languages';
 
-const AttractionsPage = ({ t, filteredAttractions = [], setSelectedAttraction }) => {
+const AttractionsPage = ({ filteredAttractions = [], setSelectedAttraction }) => {
     const { category } = useParams();
+    const { t, lang } = useLanguage();
 
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [category]);
 
+    const pageT = t?.attractionsPage || {};
+    const catT = pageT?.categories || {};
+
     // Grouping & Data Selection
     const fortSubIds = [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 16];
     const fortSubAttractions = filteredAttractions.filter(a => fortSubIds.includes(a.id));
-    
+
     const categoriesData = {
         'fort': {
             main: filteredAttractions.find(a => a.id === 1) || {
@@ -27,8 +33,8 @@ const AttractionsPage = ({ t, filteredAttractions = [], setSelectedAttraction })
             subs: fortSubAttractions,
             icon: Shield,
             theme: "from-[#C49A32] to-[#A65F3D]",
-            title: t?.pillars?.fort?.title || "The Grand Citadel",
-            subtitle: "Heritage & History"
+            title: catT.fort?.title || "The Grand Citadel",
+            subtitle: catT.fort?.subtitle || pageT.heroKicker || "Heritage & History"
         },
         'nature': {
             main: filteredAttractions.find(a => a.id === 2) || {
@@ -40,8 +46,8 @@ const AttractionsPage = ({ t, filteredAttractions = [], setSelectedAttraction })
             subs: filteredAttractions.filter(a => a.id === 18),
             icon: Wind,
             theme: "from-[#526B50] to-[#3B4E3A]",
-            title: t?.pillars?.nature?.title || "Nature & Wilderness",
-            subtitle: "Ecological Haven"
+            title: catT.nature?.title || "Nature & Wilderness",
+            subtitle: catT.nature?.subtitle || "Ecological Haven"
         },
         'spiritual': {
             main: filteredAttractions.find(a => a.id === 3) || {
@@ -53,8 +59,8 @@ const AttractionsPage = ({ t, filteredAttractions = [], setSelectedAttraction })
             subs: filteredAttractions.filter(a => a.id === 17),
             icon: Sunrise,
             theme: "from-[#C49A32] to-[#DFBA5A]",
-            title: t?.pillars?.spiritual?.title || "Spiritual Serenity",
-            subtitle: "Divine Mewar"
+            title: catT.spiritual?.title || "Spiritual Serenity",
+            subtitle: catT.spiritual?.subtitle || "Divine Mewar"
         },
         'scenic': {
             main: filteredAttractions.find(a => a.id === 15) || {
@@ -66,8 +72,8 @@ const AttractionsPage = ({ t, filteredAttractions = [], setSelectedAttraction })
             subs: filteredAttractions.filter(a => a.id === 19),
             icon: Mountain,
             theme: "from-[#A65F3D] to-[#874628]",
-            title: t?.pillars?.scenic?.title || "Scenic Landscapes",
-            subtitle: "Nature's Architecture"
+            title: catT.scenic?.title || "Scenic Landscapes",
+            subtitle: catT.scenic?.subtitle || "Nature's Architecture"
         }
     };
 
@@ -104,7 +110,7 @@ const AttractionsPage = ({ t, filteredAttractions = [], setSelectedAttraction })
             <SEOHead
                 title={activeSEO.title}
                 description={activeSEO.description}
-                canonical={`/attractions/${category || 'fort'}`}
+                canonical={getLocalizedPath(`/attractions/${category || 'fort'}`, lang)}
                 keywords={activeSEO.keywords}
             />
 
@@ -122,7 +128,7 @@ const AttractionsPage = ({ t, filteredAttractions = [], setSelectedAttraction })
                     {title}
                 </h1>
                 <p className="text-xs sm:text-sm text-[#25231F]/70 max-w-xl mx-auto">
-                    Explore monuments and heritage sanctuaries that symbolize the courage, artistry, and spirituality of Mewar.
+                    {pageT.heroDesc || "Explore monuments and heritage sanctuaries that symbolize the courage, artistry, and spirituality of Mewar."}
                 </p>
             </div>
 
@@ -143,7 +149,7 @@ const AttractionsPage = ({ t, filteredAttractions = [], setSelectedAttraction })
                     <div className="lg:col-span-6 p-8 sm:p-12 flex flex-col justify-between">
                         <div>
                             <span className="text-[10px] font-bold uppercase tracking-widest text-[#A65F3D] block mb-1">
-                                Main Pillar Highlight
+                                {pageT.mainPillarBadge || "Main Pillar Highlight"}
                             </span>
                             <h2 className="text-2xl sm:text-4xl font-serif font-bold text-[#25231F] mb-4">
                                 {main.name}
@@ -154,11 +160,17 @@ const AttractionsPage = ({ t, filteredAttractions = [], setSelectedAttraction })
 
                             <div className="grid grid-cols-2 gap-4 text-xs mb-8">
                                 <div className="p-3 bg-[#F8F5EF] rounded-xl border border-[#EFE7D9]">
-                                    <span className="text-[#25231F]/60 text-[10px] uppercase font-bold block">Location</span>
-                                    <span className="font-semibold text-[#25231F]">Chittorgarh District</span>
+                                    <span className="text-[#25231F]/60 text-[10px] uppercase font-bold block">
+                                        {pageT.locationLabel || "Location"}
+                                    </span>
+                                    <span className="font-semibold text-[#25231F]">
+                                        {pageT.locationVal || "Chittorgarh District"}
+                                    </span>
                                 </div>
                                 <div className="p-3 bg-[#F8F5EF] rounded-xl border border-[#EFE7D9]">
-                                    <span className="text-[#25231F]/60 text-[10px] uppercase font-bold block">Best Visiting Time</span>
+                                    <span className="text-[#25231F]/60 text-[10px] uppercase font-bold block">
+                                        {pageT.bestTimeLabel || "Best Visiting Time"}
+                                    </span>
                                     <span className="font-semibold text-[#25231F]">{main.bestTime}</span>
                                 </div>
                             </div>
@@ -169,7 +181,7 @@ const AttractionsPage = ({ t, filteredAttractions = [], setSelectedAttraction })
                                 onClick={() => setSelectedAttraction && setSelectedAttraction(main)}
                                 className="px-6 py-3 bg-[#C49A32] hover:bg-[#b08728] text-white rounded-xl text-xs font-bold uppercase tracking-wider shadow-sm transition-all"
                             >
-                                Detailed Information
+                                {pageT.detailsBtn || "Detailed Information"}
                             </button>
                             <button
                                 onClick={() => window.dispatchEvent(new CustomEvent('openTripPlannerModal', {
@@ -182,7 +194,7 @@ const AttractionsPage = ({ t, filteredAttractions = [], setSelectedAttraction })
                                 }))}
                                 className="px-6 py-3 bg-[#25231F] hover:bg-[#A65F3D] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all"
                             >
-                                Book Guided Tour
+                                {pageT.bookTourBtn || "Book Guided Tour"}
                             </button>
                         </div>
                     </div>
@@ -194,10 +206,10 @@ const AttractionsPage = ({ t, filteredAttractions = [], setSelectedAttraction })
                 <div className="mb-20">
                     <div className="flex items-center justify-between mb-8 pb-4 border-b border-[#EFE7D9]">
                         <h3 className="text-2xl font-serif font-bold text-[#25231F]">
-                            Historic Treasures in this Circuit
+                            {pageT.circuitHeading || "Historic Treasures in this Circuit"}
                         </h3>
                         <span className="text-xs text-[#25231F]/60 font-medium">
-                            {subs.length} Monitored Monuments
+                            {subs.length} {pageT.monumentsCount || "Monitored Monuments"}
                         </span>
                     </div>
                     
@@ -218,14 +230,14 @@ const AttractionsPage = ({ t, filteredAttractions = [], setSelectedAttraction })
             {/* Navigation to Other Pillars */}
             <div className="pt-12 border-t border-[#EFE7D9] text-center">
                 <h4 className="text-xs font-bold uppercase tracking-[0.25em] text-[#25231F]/60 mb-6">
-                    Explore Other Mewar Pillars
+                    {pageT.otherPillars || "Explore Other Mewar Pillars"}
                 </h4>
                 <div className="flex flex-wrap justify-center gap-3">
                     {Object.entries(categoriesData).map(([key, data]) => (
                         key !== (category || 'fort') && (
                             <Link 
                                 key={key}
-                                to={`/attractions/${key}`}
+                                to={getLocalizedPath(`/attractions/${key}`, lang)}
                                 className="inline-flex items-center gap-2.5 px-5 py-3 rounded-2xl bg-white border border-[#EFE7D9] hover:border-[#C49A32] text-xs font-bold uppercase tracking-wider text-[#25231F] shadow-sm hover:shadow-md transition-all"
                             >
                                 <div className={`w-3 h-3 rounded-full bg-gradient-to-br ${data.theme}`}></div>
