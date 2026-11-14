@@ -3,7 +3,7 @@
   "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/((?!assets/|chittorgarh-tourism-logo.webp|chittorgarh-tourism-logo.png|apple-touch-icon.png|logo_maharana.webp|logo_maharana.png|logo_maharana_original.webp|favicon.png|favicon.svg|Fort.webp|Fort-mobile.webp|Fort.png|chittorgarh_fort.jpg|chittortech_logo.webp|chittortech_logo.png|logo.jpg|image.png|sw.js|robots.txt|sitemap.xml|google3fc9c5f66e3ce607.html|.*\\.html$).*)",
+      "source": "/:path*",
       "destination": "/index.html"
     }
   ],
