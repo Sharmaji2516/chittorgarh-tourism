@@ -246,24 +246,6 @@ const Footer = () => {
                                 <Mail className="w-4 h-4 text-[#C49A32] shrink-0" />
                                 <span>{VERIFIED_EMAIL}</span>
                             </a>
-
-                            {/* Android App Link */}
-                            <div className="pt-2 flex justify-center lg:justify-start">
-                                <a
-                                    href="https://play.google.com/store/apps/details?id=com.kushsharma.visitchittorgarh"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-2.5 px-3.5 py-2 rounded-xl bg-white/5 border border-white/10 hover:border-[#C49A32] transition-colors"
-                                >
-                                    <svg className="w-5 h-5 text-[#C49A32] shrink-0" viewBox="0 0 24 24" fill="currentColor">
-                                        <path d="M3.609 1.814L13.792 12 3.61 22.186a2.372 2.372 0 0 1-.61-1.615V3.429c0-.623.23-1.201.609-1.615zm11.604 11.608l2.677 2.677-12.019 6.94 9.342-9.617zm0-2.844L5.871 1.054l12.019 6.94-2.677 2.584zm1.422 1.422l3.493 2.017c.87.502.87 1.316 0 1.818l-3.493 2.017-2.617-2.617 2.617-3.235z"/>
-                                    </svg>
-                                    <div className="text-left">
-                                        <div className="text-[8px] uppercase tracking-wider text-[#F8F5EF]/60">Get Official App</div>
-                                        <div className="text-[11px] font-bold text-white">Google Play Store</div>
-                                    </div>
-                                </a>
-                            </div>
                         </div>
                     </div>
                 </div>
