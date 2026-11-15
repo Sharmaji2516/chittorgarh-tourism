@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShieldCheck, ArrowRight, Car, Hotel, Map, History, Utensils, Coffee, Camera, Compass, MessageCircle, Clock, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck, ArrowRight, Car, Hotel, Map, History, Utensils, Coffee, Camera, Compass, MessageCircle, Clock, CheckCircle2, Sparkles, Star } from 'lucide-react';
 import { NavLink } from 'react-router-dom';
 import SEOHead from '../components/SEOHead';
 import { trackWhatsAppClick } from '../utils/analytics';
@@ -84,44 +84,60 @@ const RoyalJourneysPage = () => {
 
     const serviceIcons = [Map, Car, Hotel, Utensils, Camera];
     const serviceImages = [
-        "/assets/images/Guide.webp",
+        "/assets/images/vijay-stambh-new.webp",
         "/assets/images/Private Taxi.webp",
-        "/assets/images/Royal Stays.webp",
-        "/assets/images/dal-batti-churma.webp",
+        "/assets/images/fateh-prakash-new.webp",
+        "/assets/images/dal-batti-churma-new.webp",
         "/assets/images/Photography.webp"
     ];
 
     const serviceBadges = [
-        "RTDC Certified",
+        "RTDC Govt. Licensed",
         "All-Inclusive AC Fleet",
-        "Handpicked Havelis",
-        "Pure Desi Ghee",
+        "Palatial Heritage Haveli",
+        "100% Pure Desi Ghee",
         "Golden Hour Shoot"
     ];
 
+    const servicePrices = [
+        { amount: "₹1,500", note: "Half Day (~$18 USD)" },
+        { amount: "₹3,500", note: "Roundtrip (~$42 USD)" },
+        { amount: "From ₹2,400", note: "Per Night with Breakfast" },
+        { amount: "₹350", note: "Unlimited Thali / Person" },
+        { amount: "₹1,200", note: "Sunset Rampart Session" }
+    ];
+
+    const serviceRatings = [
+        "4.9 ★ (180+ Tours)",
+        "4.9 ★ (320+ Trips)",
+        "4.8 ★ (95+ Stays)",
+        "4.9 ★ (410+ Meals)",
+        "5.0 ★ (140+ Shoots)"
+    ];
+
     const serviceHighlights = [
-        ["Govt. Licensed Mewari Historians", "English & Hindi Fluency", "Citadel Legends & Zero Forced Shopping"],
-        ["Clean AC Sedans & Innova Crysta SUVs", "Tolls, Parking & Fuel Included", "Udaipur & Local Fort Circuit"],
-        ["Authentic Heritage Havelis & Resorts", "Palatial Architecture & Courtyards", "Boutique Luxury & Verified Stays"],
-        ["Authentic Mewari Dal Baati Thali", "Pure Desi Ghee & Fresh Churma", "Sanitized & Verified Family Dining"],
-        ["Sunset & Rampart Portrait Sessions", "DSLR High-Resolution Raw & Edited", "Best Panoramic Fort Spots"]
+        ["Govt. Licensed Mewari Historian", "Fluent English & Hindi Fluency", "7 Fort Gates & Zero Forced Shopping"],
+        ["Sedan (Dzire) / Luxury SUV (Crysta)", "Tolls (NH27) & Parking Included", "Punctual Hotel / Airport Pickup"],
+        ["Authentic Mewari Courtyard Architecture", "Boutique Heritage Rooms with Modern AC", "Direct Best Tariff & Free Cancellation"],
+        ["Authentic Dal Baati & Fresh Churma", "Cooked in 100% Pure Desi Ghee", "Verified Hygienic Family Dining"],
+        ["High-Resolution DSLR Citadel Portraits", "All Raw Files + 15 Retouched Master Photos", "Secret Sunset Angles on Ramparts"]
     ];
 
     const getServiceWhatsAppUrl = (srv) => {
         const title = srv?.title || 'Tourism Service';
         const lower = title.toLowerCase();
-        let message = `Namaste Visit Chittorgarh! I am interested in booking *${title}*. Please share rates, availability, and full details.`;
+        let message = `Namaste Visit Chittorgarh! I am interested in booking *${title}* (${srv?.price?.amount || ''}). Please share rates, availability, and full details.`;
 
         if (lower.includes('guide')) {
-            message = `Namaste Visit Chittorgarh! I would like to book an *Authorized Mewari Tour Guide* for Chittorgarh Fort. Please share guide credentials, rates, and availability.`;
+            message = `Namaste Visit Chittorgarh! I would like to book an *Official RTDC Tour Guide* (₹1,500) for Chittorgarh Fort. Please share guide credentials and availability.`;
         } else if (lower.includes('taxi') || lower.includes('cab')) {
-            message = `Namaste Visit Chittorgarh! I need a *Private AC Taxi / Cab* for Chittorgarh & Udaipur. Please share vehicle options (Sedan/SUV), fixed pricing, and booking details.`;
+            message = `Namaste Visit Chittorgarh! I need a *Private AC Taxi / Cab* (₹3,500 Sedan / ₹5,500 SUV) for Udaipur ⇄ Chittorgarh. Please share pickup confirmation.`;
         } else if (lower.includes('haveli') || lower.includes('stay') || lower.includes('hotel')) {
-            message = `Namaste Visit Chittorgarh! I am inquiring about *Heritage Haveli & Boutique Stay* booking in Chittorgarh. Please share best recommendations and tariff.`;
+            message = `Namaste Visit Chittorgarh! I am inquiring about *Heritage Haveli Stay* booking in Chittorgarh. Please share best recommendations and tariff.`;
         } else if (lower.includes('dining') || lower.includes('bhojan') || lower.includes('dal baati') || lower.includes('food')) {
-            message = `Namaste Visit Chittorgarh! I would like to book a *Traditional Mewari Dining (Dal Baati Churma)* authentic royal experience. Please share location and reservation details.`;
+            message = `Namaste Visit Chittorgarh! I would like to reserve authentic *Traditional Mewari Dal Baati Churma* dining experience. Please share location and timing.`;
         } else if (lower.includes('photo') || lower.includes('shoot') || lower.includes('camera')) {
-            message = `Namaste Visit Chittorgarh! I want to book a *Fort Photography & Sunset Shoot* session at Chittorgarh Fort. Please share photographer portfolio, packages, and charges.`;
+            message = `Namaste Visit Chittorgarh! I want to book a *Fort Photography & Sunset Shoot* (₹1,200) session at Chittorgarh Fort. Please share portfolio and slots.`;
         }
 
         return `https://wa.me/917597451057?text=${encodeURIComponent(message)}`;
@@ -132,6 +148,8 @@ const RoyalJourneysPage = () => {
         icon: serviceIcons[idx] || Map,
         image: serviceImages[idx] || "/Fort.webp",
         badge: serviceBadges[idx],
+        price: servicePrices[idx] || { amount: "On Request", note: "Best Tariff" },
+        rating: serviceRatings[idx] || "4.9 ★",
         highlights: serviceHighlights[idx] || []
     }));
 
@@ -160,26 +178,28 @@ const RoyalJourneysPage = () => {
                 </div>
 
                 {/* Tab Switcher */}
-                <div className="max-w-md mx-auto mb-14 bg-white p-1.5 rounded-2xl border border-[#EFE7D9] shadow-sm flex gap-2">
+                <div className="max-w-md mx-auto mb-10 bg-white p-1.5 rounded-2xl border border-[#EFE7D9] shadow-sm flex gap-2">
                     <button
                         onClick={() => setActiveTab('packages')}
-                        className={`flex-1 py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${
+                        className={`flex-1 py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 ${
                             activeTab === 'packages'
                                 ? 'bg-[#25231F] text-white shadow-md'
                                 : 'text-[#25231F]/70 hover:text-[#25231F]'
                         }`}
                     >
-                        {pageT.tabPackages || "Tour Packages"}
+                        <Compass className="w-3.5 h-3.5 text-[#C49A32]" />
+                        <span>{pageT.tabPackages || "Tour Packages"}</span>
                     </button>
                     <button
                         onClick={() => setActiveTab('services')}
-                        className={`flex-1 py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all ${
+                        className={`flex-1 py-3 rounded-xl text-xs font-bold uppercase tracking-wider transition-all flex items-center justify-center gap-2 ${
                             activeTab === 'services'
                                 ? 'bg-[#25231F] text-white shadow-md'
                                 : 'text-[#25231F]/70 hover:text-[#25231F]'
                         }`}
                     >
-                        {pageT.tabServices || "On-Demand Services"}
+                        <Sparkles className="w-3.5 h-3.5 text-[#C49A32]" />
+                        <span>{pageT.tabServices || "On-Demand Services"}</span>
                     </button>
                 </div>
 
@@ -247,7 +267,7 @@ const RoyalJourneysPage = () => {
                     </div>
                 ) : (
                     /* On-Demand Services Grid */
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 mb-16">
                         {onDemandServices.map((srv, idx) => {
                             const waUrl = getServiceWhatsAppUrl(srv);
                             return (
@@ -256,38 +276,48 @@ const RoyalJourneysPage = () => {
                                     className="bg-white rounded-3xl border border-[#EFE7D9] overflow-hidden shadow-heritage hover:border-[#C49A32] hover:-translate-y-1 transition-all group flex flex-col justify-between"
                                 >
                                     <div>
-                                        <div className="h-52 relative overflow-hidden bg-[#EFE7D9]">
+                                        <div className="h-60 relative overflow-hidden bg-[#25231F]">
                                             <img
                                                 src={srv.image}
                                                 alt={srv.title}
                                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                                                 loading="lazy"
                                             />
-                                            {srv.badge && (
-                                                <span className="absolute bottom-3 left-3 bg-[#25231F]/90 backdrop-blur-sm text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full flex items-center gap-1.5 border border-[#C49A32]/30">
-                                                    <span className="w-1.5 h-1.5 rounded-full bg-[#C49A32]"></span>
+                                            {/* Gradient Scrim for readable text */}
+                                            <div className="absolute inset-0 bg-gradient-to-t from-[#25231F] via-[#25231F]/40 to-black/30 pointer-events-none" />
+
+                                            {/* Top Rating & Starting Price Pills */}
+                                            <span className="absolute top-3.5 left-3.5 bg-black/60 backdrop-blur-md text-amber-400 text-[11px] font-bold px-3 py-1 rounded-full flex items-center gap-1 border border-white/10 shadow-sm">
+                                                <Star className="w-3 h-3 fill-amber-400" />
+                                                <span>{srv.rating}</span>
+                                            </span>
+
+                                            <span className="absolute top-3.5 right-3.5 bg-[#C49A32] text-white text-[11px] font-black px-3.5 py-1 rounded-full shadow-lg tracking-wide">
+                                                {srv.price.amount}
+                                            </span>
+
+                                            {/* Title & Badge Overlaid on Bottom of Image */}
+                                            <div className="absolute bottom-3 left-4 right-4 text-white">
+                                                <span className="text-[#C49A32] text-[10px] font-bold uppercase tracking-wider block mb-0.5">
                                                     {srv.badge}
                                                 </span>
-                                            )}
-                                        </div>
-
-                                        <div className="p-6 sm:p-7">
-                                            <div className="flex items-center gap-2.5 mb-2.5">
-                                                <div className="w-9 h-9 rounded-xl bg-[#C49A32]/10 border border-[#C49A32]/25 flex items-center justify-center text-[#C49A32] shrink-0">
-                                                    <srv.icon className="w-4 h-4" />
-                                                </div>
-                                                <h3 className="text-xl font-serif font-bold text-[#25231F] group-hover:text-[#A65F3D] transition-colors leading-snug">
+                                                <h3 className="text-xl sm:text-2xl font-serif font-black text-white leading-tight drop-shadow-sm">
                                                     {srv.title}
                                                 </h3>
+                                                <p className="text-[11px] text-white/80 font-medium mt-0.5">
+                                                    {srv.price.note}
+                                                </p>
                                             </div>
+                                        </div>
 
-                                            <p className="text-xs text-[#25231F]/70 leading-relaxed mb-5">
+                                        <div className="p-5 sm:p-6">
+                                            <p className="text-xs text-[#25231F]/70 leading-relaxed mb-4">
                                                 {srv.desc}
                                             </p>
 
-                                            <div className="space-y-2 mb-2">
+                                            <div className="space-y-2 bg-[#F8F5EF] p-3.5 rounded-2xl border border-[#EFE7D9] mb-2">
                                                 {srv.highlights.map((item, i) => (
-                                                    <div key={i} className="flex items-center gap-2 text-xs text-[#25231F]/80">
+                                                    <div key={i} className="flex items-center gap-2 text-xs text-[#25231F]/85 font-medium">
                                                         <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                                                         <span>{item}</span>
                                                     </div>
@@ -296,16 +326,16 @@ const RoyalJourneysPage = () => {
                                         </div>
                                     </div>
 
-                                    <div className="p-6 sm:p-7 pt-0 border-t border-[#EFE7D9]/60">
+                                    <div className="p-5 sm:p-6 pt-0 border-t border-[#EFE7D9]/60">
                                         <a
                                             href={waUrl}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             onClick={() => trackWhatsAppClick('ondemand_service_wa', srv.title)}
-                                            className="w-full py-3.5 bg-[#25D366] hover:bg-[#1EBE5D] text-slate-950 font-black rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all active:scale-95"
+                                            className="w-full py-3.5 bg-[#128C7E] hover:bg-[#075E54] text-white font-black rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all active:scale-95"
                                         >
-                                            <MessageCircle className="w-4 h-4 fill-current text-slate-950" />
-                                            <span>WhatsApp Inquiry &amp; Booking</span>
+                                            <MessageCircle className="w-4 h-4 fill-white text-[#128C7E]" />
+                                            <span>Book on WhatsApp • {srv.price.amount}</span>
                                         </a>
                                     </div>
                                 </div>
