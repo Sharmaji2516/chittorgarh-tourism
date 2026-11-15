@@ -83,12 +83,28 @@ const RoyalJourneysPage = () => {
     ];
 
     const serviceIcons = [Map, Car, Hotel, Utensils, Camera];
-    const serviceLinks = [
-        "/service/guide",
-        "/service/taxi",
-        "/stays",
-        "/flavors",
-        "/service/photographer"
+    const serviceImages = [
+        "/assets/images/Guide.webp",
+        "/assets/images/Private Taxi.webp",
+        "/assets/images/Royal Stays.webp",
+        "/assets/images/dal-batti-churma.webp",
+        "/assets/images/Photography.webp"
+    ];
+
+    const serviceBadges = [
+        "RTDC Certified",
+        "All-Inclusive AC Fleet",
+        "Handpicked Havelis",
+        "Pure Desi Ghee",
+        "Golden Hour Shoot"
+    ];
+
+    const serviceHighlights = [
+        ["Govt. Licensed Mewari Historians", "English & Hindi Fluency", "Citadel Legends & Zero Forced Shopping"],
+        ["Clean AC Sedans & Innova Crysta SUVs", "Tolls, Parking & Fuel Included", "Udaipur & Local Fort Circuit"],
+        ["Authentic Heritage Havelis & Resorts", "Palatial Architecture & Courtyards", "Boutique Luxury & Verified Stays"],
+        ["Authentic Mewari Dal Baati Thali", "Pure Desi Ghee & Fresh Churma", "Sanitized & Verified Family Dining"],
+        ["Sunset & Rampart Portrait Sessions", "DSLR High-Resolution Raw & Edited", "Best Panoramic Fort Spots"]
     ];
 
     const getServiceWhatsAppUrl = (srv) => {
@@ -114,7 +130,9 @@ const RoyalJourneysPage = () => {
     const onDemandServices = rawServices.map((srv, idx) => ({
         ...srv,
         icon: serviceIcons[idx] || Map,
-        link: serviceLinks[idx] || "/service/guide"
+        image: serviceImages[idx] || "/Fort.webp",
+        badge: serviceBadges[idx],
+        highlights: serviceHighlights[idx] || []
     }));
 
     return (
@@ -229,45 +247,66 @@ const RoyalJourneysPage = () => {
                     </div>
                 ) : (
                     /* On-Demand Services Grid */
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
                         {onDemandServices.map((srv, idx) => {
                             const waUrl = getServiceWhatsAppUrl(srv);
                             return (
                                 <div
                                     key={idx}
-                                    className="bg-white rounded-3xl p-7 sm:p-8 border border-[#EFE7D9] shadow-heritage hover:border-[#C49A32] hover:-translate-y-1 transition-all group flex flex-col justify-between"
+                                    className="bg-white rounded-3xl border border-[#EFE7D9] overflow-hidden shadow-heritage hover:border-[#C49A32] hover:-translate-y-1 transition-all group flex flex-col justify-between"
                                 >
                                     <div>
-                                        <div className="w-14 h-14 rounded-2xl bg-[#C49A32]/10 border border-[#C49A32]/25 flex items-center justify-center text-[#C49A32] mb-5 group-hover:scale-110 transition-transform">
-                                            <srv.icon className="w-7 h-7" />
+                                        <div className="h-52 relative overflow-hidden bg-[#EFE7D9]">
+                                            <img
+                                                src={srv.image}
+                                                alt={srv.title}
+                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                                                loading="lazy"
+                                            />
+                                            {srv.badge && (
+                                                <span className="absolute bottom-3 left-3 bg-[#25231F]/90 backdrop-blur-sm text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full flex items-center gap-1.5 border border-[#C49A32]/30">
+                                                    <span className="w-1.5 h-1.5 rounded-full bg-[#C49A32]"></span>
+                                                    {srv.badge}
+                                                </span>
+                                            )}
                                         </div>
-                                        <h3 className="text-xl font-serif font-bold text-[#25231F] group-hover:text-[#A65F3D] transition-colors mb-2">
-                                            {srv.title}
-                                        </h3>
-                                        <p className="text-xs text-[#25231F]/70 leading-relaxed mb-6">
-                                            {srv.desc}
-                                        </p>
+
+                                        <div className="p-6 sm:p-7">
+                                            <div className="flex items-center gap-2.5 mb-2.5">
+                                                <div className="w-9 h-9 rounded-xl bg-[#C49A32]/10 border border-[#C49A32]/25 flex items-center justify-center text-[#C49A32] shrink-0">
+                                                    <srv.icon className="w-4 h-4" />
+                                                </div>
+                                                <h3 className="text-xl font-serif font-bold text-[#25231F] group-hover:text-[#A65F3D] transition-colors leading-snug">
+                                                    {srv.title}
+                                                </h3>
+                                            </div>
+
+                                            <p className="text-xs text-[#25231F]/70 leading-relaxed mb-5">
+                                                {srv.desc}
+                                            </p>
+
+                                            <div className="space-y-2 mb-2">
+                                                {srv.highlights.map((item, i) => (
+                                                    <div key={i} className="flex items-center gap-2 text-xs text-[#25231F]/80">
+                                                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                                                        <span>{item}</span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
                                     </div>
 
-                                    <div className="pt-4 border-t border-[#EFE7D9]/60 flex flex-col gap-2.5">
+                                    <div className="p-6 sm:p-7 pt-0 border-t border-[#EFE7D9]/60">
                                         <a
                                             href={waUrl}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             onClick={() => trackWhatsAppClick('ondemand_service_wa', srv.title)}
-                                            className="w-full py-3 bg-[#128C7E] hover:bg-[#0e7467] text-white rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm transition-all active:scale-95"
+                                            className="w-full py-3.5 bg-[#25D366] hover:bg-[#1EBE5D] text-slate-950 font-black rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all active:scale-95"
                                         >
-                                            <MessageCircle className="w-4 h-4" />
+                                            <MessageCircle className="w-4 h-4 fill-current text-slate-950" />
                                             <span>WhatsApp Inquiry &amp; Booking</span>
                                         </a>
-
-                                        <NavLink
-                                            to={getLocalizedPath(srv.link, lang)}
-                                            className="flex items-center justify-center text-[11px] font-bold text-[#25231F]/60 hover:text-[#C49A32] gap-1 py-1 transition-colors"
-                                        >
-                                            <span>{pageT.learnMore || "View Full Details"}</span>
-                                            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                                        </NavLink>
                                     </div>
                                 </div>
                             );
