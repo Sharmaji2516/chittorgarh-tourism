@@ -165,19 +165,20 @@ const AttractionsPage = ({ filteredAttractions = [], setSelectedAttraction }) =>
 
                     <div className="w-full lg:w-auto shrink-0 flex flex-col sm:flex-row lg:flex-col gap-3 pt-4 lg:pt-0 border-t lg:border-t-0 border-white/10">
                         <div className="text-left lg:text-right">
-                            <div className="text-[10px] uppercase font-bold text-[#C49A32] tracking-wider">All-Inclusive Fixed Rate</div>
+                            <div className="text-[10px] uppercase font-bold text-[#C49A32] tracking-wider">Starting From</div>
                             <div className="text-2xl sm:text-3xl font-serif font-black text-white">₹3,500 <span className="text-xs font-sans font-normal text-white/70">(~$42 USD)</span></div>
-                            <div className="text-[11px] text-white/60">Private AC Sedan Roundtrip</div>
+                            <div className="text-[11px] text-white/70 font-medium">Private AC Sedan (1-4 Guests)</div>
+                            <div className="text-[10px] text-amber-300/90 mt-0.5">*Rates may vary based on family / group size (Crysta SUV &amp; Tempo available)</div>
                         </div>
                         <a
-                            href={`https://wa.me/917597451057?text=${encodeURIComponent("Namaste Visit Chittorgarh! I saw your Attractions page and would like to book a Private Cab & RTDC Guide from Udaipur for Chittorgarh Fort. Please share availability.")}`}
+                            href={`https://wa.me/917597451057?text=${encodeURIComponent("Namaste Visit Chittorgarh! I saw your Attractions page and would like to book a Private Cab & RTDC Guide from Udaipur for Chittorgarh Fort. Please share availability and family rates.")}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             onClick={() => trackWhatsAppClick('attractions_banner_wa', 'Private Cab & Guide')}
                             className="py-3.5 px-6 bg-[#128C7E] hover:bg-[#0c6b60] text-white font-black rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg transition-transform active:scale-95"
                         >
                             <MessageCircle className="w-4 h-4 fill-white text-[#128C7E]" />
-                            <span>Book Private Cab on WhatsApp</span>
+                            <span>Book Private Cab on WhatsApp • Starting From ₹3,500</span>
                         </a>
                     </div>
                 </div>
