@@ -121,56 +121,147 @@ const UdaipurToChittorgarhTaxi = () => {
           </div>
         </div>
 
-        {/* 100% Transparent All-Inclusive Itemized Pricing & License Credentials Banner */}
-        <div className="bg-[#F8FAFC] border-2 border-[#0284C7] rounded-3xl p-6 sm:p-8 mb-10 shadow-heritage">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 mb-4 border-b border-[#0284C7]/20">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl bg-[#0284C7]/15 flex items-center justify-center text-[#0284C7] shrink-0 font-bold text-lg">
-                ✓
-              </div>
+        {/* 100% Transparent All-Inclusive Itemized Pricing & License Credentials Charter */}
+        <div className="bg-gradient-to-br from-[#25231F] via-[#2D2924] to-[#1E1C19] text-white rounded-3xl p-6 sm:p-9 mb-12 shadow-2xl border border-[#C49A32]/40 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-80 h-80 bg-[#C49A32]/10 blur-3xl pointer-events-none rounded-full" />
+          
+          <div className="relative z-10">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-5 mb-6 border-b border-white/10">
               <div>
-                <h3 className="text-lg sm:text-xl font-serif font-black text-[#0F172A]">
-                  100% Transparent All-Inclusive Pricing (Zero Hidden Fees)
-                </h3>
-                <p className="text-xs text-[#475569]">
-                  Itemized official rates for Udaipur ⇄ Chittorgarh transfers &amp; licensed monument guiding.
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-[#DFBA5A]/30 text-[#DFBA5A] text-[10px] sm:text-[11px] font-bold uppercase tracking-wider mb-2">
+                  <span className="text-[#DFBA5A]">🎖️</span>
+                  <span>Official Verified Rates • Zero Hidden Surcharges</span>
+                </div>
+                <h2 className="text-xl sm:text-2xl lg:text-3xl font-serif font-black text-white leading-tight">
+                  100% Transparent All-Inclusive Pricing
+                </h2>
+                <p className="text-xs sm:text-sm text-white/70 mt-1">
+                  Fixed door-to-door fares for Udaipur ⇄ Chittorgarh transfers &amp; licensed monument guiding.
                 </p>
               </div>
-            </div>
-            <span className="self-start sm:self-center bg-[#0284C7] text-white text-[10px] font-bold uppercase tracking-wider px-3.5 py-1 rounded-full shrink-0 shadow-xs">
-              Fixed &amp; Transparent
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
-            <div className="bg-white p-4 rounded-2xl border border-[#0284C7]/20 shadow-xs">
-              <span className="text-[11px] font-bold text-[#64748B] block uppercase tracking-wider">Private AC Sedan (Dzire / Etios)</span>
-              <span className="text-base sm:text-lg font-black text-[#0F172A] block mt-0.5">₹3,500 <span className="text-xs font-semibold text-[#0284C7]">(~$42 USD / €39 EUR)</span></span>
-              <span className="text-[11px] text-[#475569] mt-1 block">Full Day Udaipur ⇄ Fort Roundtrip</span>
+              <div className="self-start sm:self-center shrink-0">
+                <span className="inline-block bg-[#C49A32] text-white text-[11px] font-bold uppercase tracking-wider px-4 py-1.5 rounded-full shadow-md">
+                  Guaranteed Rates
+                </span>
+              </div>
             </div>
 
-            <div className="bg-white p-4 rounded-2xl border border-[#0284C7]/20 shadow-xs">
-              <span className="text-[11px] font-bold text-[#64748B] block uppercase tracking-wider">Luxury AC SUV (Innova Crysta)</span>
-              <span className="text-base sm:text-lg font-black text-[#0F172A] block mt-0.5">₹5,500 <span className="text-xs font-semibold text-[#0284C7]">(~$65 USD / €60 EUR)</span></span>
-              <span className="text-[11px] text-[#475569] mt-1 block">Max comfort, dual AC &amp; high clearance</span>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 mb-6">
+              {/* 1. Sedan */}
+              <div className="bg-white/5 hover:bg-white/10 border border-white/15 hover:border-[#DFBA5A]/50 rounded-2xl p-5 backdrop-blur-sm transition-all group flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-white/60 bg-white/10 px-2.5 py-1 rounded-md">
+                      1 - 4 Guests
+                    </span>
+                    <Car className="w-4 h-4 text-[#DFBA5A]" />
+                  </div>
+                  <span className="text-sm font-bold text-white/90 block">
+                    Private AC Sedan (Dzire / Etios)
+                  </span>
+                  <div className="mt-2 mb-1">
+                    <span className="text-2xl sm:text-3xl font-black text-white">₹3,500</span>
+                    <span className="text-xs font-bold text-[#DFBA5A] block mt-0.5">
+                      (~$42 USD / €39 EUR)
+                    </span>
+                  </div>
+                  <p className="text-xs text-white/65 mt-2">
+                    Full Day Udaipur ⇄ Fort Roundtrip with hotel pickup &amp; drop.
+                  </p>
+                </div>
+                <div className="pt-3 mt-3 border-t border-white/10 text-[11px] text-emerald-400 font-semibold flex items-center gap-1.5">
+                  <CheckCircle2 className="w-3.5 h-3.5 shrink-0" /> Tolls, Parking &amp; AC Included
+                </div>
+              </div>
+
+              {/* 2. SUV */}
+              <div className="bg-white/5 hover:bg-white/10 border-2 border-[#C49A32]/60 hover:border-[#C49A32] rounded-2xl p-5 backdrop-blur-sm transition-all group flex flex-col justify-between relative">
+                <span className="absolute -top-3 right-4 bg-[#C49A32] text-white text-[9px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full shadow-sm">
+                  Most Popular
+                </span>
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#DFBA5A] bg-[#C49A32]/20 px-2.5 py-1 rounded-md">
+                      5 - 7 Guests
+                    </span>
+                    <ShieldCheck className="w-4 h-4 text-[#DFBA5A]" />
+                  </div>
+                  <span className="text-sm font-bold text-white/90 block">
+                    Luxury AC SUV (Innova Crysta)
+                  </span>
+                  <div className="mt-2 mb-1">
+                    <span className="text-2xl sm:text-3xl font-black text-white">₹5,500</span>
+                    <span className="text-xs font-bold text-[#DFBA5A] block mt-0.5">
+                      (~$65 USD / €60 EUR)
+                    </span>
+                  </div>
+                  <p className="text-xs text-white/65 mt-2">
+                    Maximum highway comfort, dual-AC &amp; spacious luggage room.
+                  </p>
+                </div>
+                <div className="pt-3 mt-3 border-t border-white/10 text-[11px] text-emerald-400 font-semibold flex items-center gap-1.5">
+                  <CheckCircle2 className="w-3.5 h-3.5 shrink-0" /> Working Rear Seatbelts Included
+                </div>
+              </div>
+
+              {/* 3. Guide */}
+              <div className="bg-white/5 hover:bg-white/10 border border-white/15 hover:border-[#DFBA5A]/50 rounded-2xl p-5 backdrop-blur-sm transition-all group flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-white/60 bg-white/10 px-2.5 py-1 rounded-md">
+                      Half Day / 4 Hrs
+                    </span>
+                    <Compass className="w-4 h-4 text-[#DFBA5A]" />
+                  </div>
+                  <span className="text-sm font-bold text-white/90 block">
+                    Official RTDC Licensed Guide
+                  </span>
+                  <div className="mt-2 mb-1">
+                    <span className="text-2xl sm:text-3xl font-black text-white">₹1,500</span>
+                    <span className="text-xs font-bold text-[#DFBA5A] block mt-0.5">
+                      (~$18 USD / €16 EUR)
+                    </span>
+                  </div>
+                  <p className="text-xs text-white/65 mt-2">
+                    Authorized Mewari historian fluent in English, Hindi &amp; Mewari.
+                  </p>
+                </div>
+                <div className="pt-3 mt-3 border-t border-white/10 text-[11px] text-emerald-400 font-semibold flex items-center gap-1.5">
+                  <CheckCircle2 className="w-3.5 h-3.5 shrink-0" /> Govt. Photo ID Badge Verified
+                </div>
+              </div>
             </div>
 
-            <div className="bg-white p-4 rounded-2xl border border-[#0284C7]/20 shadow-xs">
-              <span className="text-[11px] font-bold text-[#64748B] block uppercase tracking-wider">Official RTDC Licensed English Guide</span>
-              <span className="text-base sm:text-lg font-black text-[#0F172A] block mt-0.5">₹1,500 <span className="text-xs font-semibold text-[#0284C7]">(~$18 USD / €16 EUR)</span></span>
-              <span className="text-[11px] text-[#475569] mt-1 block">Certified Mewari English/Hindi Historian</span>
-            </div>
-          </div>
+            {/* Inclusions & Credentials Badges */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-2">
+              <div className="bg-emerald-950/40 border border-emerald-500/30 rounded-2xl p-4 flex items-start gap-3">
+                <div className="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5">
+                  <ShieldCheck className="w-4 h-4" />
+                </div>
+                <div className="text-xs">
+                  <strong className="text-emerald-400 block font-bold mb-1">
+                    100% All-Inclusive Cover:
+                  </strong>
+                  <span className="text-emerald-100/80 leading-relaxed">
+                    Toll Taxes (NH27 Highway), Monument Parking Fees, Vehicle Fuel, Chauffeur Allowance, Fort Internal Movement, Zero Forced Shopping &amp; Complimentary Hotel/Airport Doorstep Pickup &amp; Drop.
+                  </span>
+                </div>
+              </div>
 
-          <div className="space-y-2 text-xs text-[#334155] border-t border-[#0284C7]/20 pt-4">
-            <p className="flex items-start gap-2">
-              <strong className="text-[#0284C7] shrink-0 font-bold">✓ 100% Included:</strong>
-              <span>Toll Taxes (NH27 Highway), Monument Parking, Fuel, Chauffeur Allowance, Fort Internal Movement, Zero Forced Shopping &amp; Free Hotel/Airport Pickup/Drop.</span>
-            </p>
-            <p className="flex items-start gap-2">
-              <strong className="text-[#0284C7] shrink-0 font-bold">🎖️ Guide Credentials:</strong>
-              <span>Rajasthan Tourism (RTDC) &amp; Ministry of Tourism Approved Regional Level Tourist Guides with official license badges.</span>
-            </p>
+              <div className="bg-amber-950/40 border border-[#C49A32]/40 rounded-2xl p-4 flex items-start gap-3">
+                <div className="w-8 h-8 rounded-xl bg-[#C49A32]/20 text-[#DFBA5A] flex items-center justify-center shrink-0 mt-0.5">
+                  <Compass className="w-4 h-4" />
+                </div>
+                <div className="text-xs">
+                  <strong className="text-[#DFBA5A] block font-bold mb-1">
+                    Official Guide Credentials:
+                  </strong>
+                  <span className="text-amber-100/80 leading-relaxed">
+                    Rajasthan Tourism (RTDC) &amp; Ministry of Tourism (Govt. of India) Approved Regional Level Tourist Guides with official government registration and verified badges.
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
