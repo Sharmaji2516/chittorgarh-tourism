@@ -35,6 +35,14 @@ const UdaipurToChittorgarhTaxi = () => {
     {
       q: "Are toll taxes, parking fees, and driver allowances included?",
       a: "Our quotations provide complete transparent pricing specifying toll taxes and parking fees upfront with no hidden surcharge surprises."
+    },
+    {
+      q: "Can we safely store our suitcases in the cab during the fort tour?",
+      a: "Yes, 100%. All our Sedans and Innova Crystas feature locked boot space for international-size suitcases. Your chauffeur stays stationed with the vehicle at all times while you explore."
+    },
+    {
+      q: "Do your drivers speak English and avoid forced shopping stops?",
+      a: "Yes. Our chauffeurs are experienced with international guests, speak conversational English, and follow a strict zero-commission shopping policy with Western safety standards (working rear seatbelts and dual AC)."
     }
   ];
 

@@ -39,7 +39,23 @@ const TIMINGS_FAQ_SCHEMA = {
       "name": "Is there luggage storage or cloakroom available at Chittorgarh Fort?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "There is no formal cloakroom atop the 700-acre fort. Visitors traveling with suitcases should either keep luggage locked inside their private AC taxi or store bags in the cloakroom at Chittorgarh Railway Station prior to ascending the fort."
+        "text": "There is no formal cloakroom atop the 700-acre fort. Visitors traveling with suitcases between Udaipur and Jaipur should keep luggage safely locked inside their private AC taxi boot. Chauffeurs remain with the vehicle at designated monument parking zones while you explore unburdened."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How to buy Chittorgarh Fort ASI entry tickets online with a foreign credit card?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Archaeological Survey of India (ASI) ticket portal often declines international Visa, Mastercard, and Amex credit cards due to Indian 3D-Secure OTP banking requirements. If your foreign card fails online, you can buy physical tickets at the entry gate, or contact the Visit Chittorgarh Travel Desk (+91-7597451057) to pre-arrange your entry tickets hassle-free."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is Chittorgarh Fort safe for solo female and foreign travelers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, Chittorgarh Fort is very safe and monitored by ASI heritage staff and Rajasthan Tourist Police. To avoid pushy unlicensed touts or commission stores, travelers are recommended to pre-book a verified Mewari historian guide and sanitized private cab through official channels."
       }
     }
   ]
