@@ -536,17 +536,53 @@ const HomePage = () => {
             </p>
           </div>
 
+          {/* International Anti-Scam & Trust Assurance Ribbon */}
+          <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-[#EFE7D9] shadow-heritage mb-8 sm:mb-10 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+            <div className="flex flex-col items-center gap-1.5 p-2">
+              <span className="w-9 h-9 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-base">🛡️</span>
+              <span className="text-xs font-bold text-[#25231F]">Zero-Commission Guarantee</span>
+              <span className="text-[10px] text-[#25231F]/65 leading-tight">100% No Forced Shopping Stops</span>
+            </div>
+            <div className="flex flex-col items-center gap-1.5 p-2">
+              <span className="w-9 h-9 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center text-base">⭐</span>
+              <span className="text-xs font-bold text-[#25231F]">English Chauffeurs</span>
+              <span className="text-[10px] text-[#25231F]/65 leading-tight">Courteous, Punctual &amp; Licensed</span>
+            </div>
+            <div className="flex flex-col items-center gap-1.5 p-2">
+              <span className="w-9 h-9 rounded-full bg-blue-100 text-blue-800 flex items-center justify-center text-base">🚗</span>
+              <span className="text-xs font-bold text-[#25231F]">Rear Seatbelts &amp; Dual AC</span>
+              <span className="text-[10px] text-[#25231F]/65 leading-tight">Western Safety Standards</span>
+            </div>
+            <div className="flex flex-col items-center gap-1.5 p-2">
+              <span className="w-9 h-9 rounded-full bg-purple-100 text-purple-800 flex items-center justify-center text-base">💧</span>
+              <span className="text-xs font-bold text-[#25231F]">Mineral Water Included</span>
+              <span className="text-[10px] text-[#25231F]/65 leading-tight">Complimentary on all Transfers</span>
+            </div>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
             {/* Sedan */}
             {taxiT.sedan && (
               <div className="bg-white rounded-2xl sm:rounded-3xl border border-[#EFE7D9] p-5 sm:p-6 shadow-heritage hover:border-[#C49A32] transition-all flex flex-col justify-between">
                 <div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#C49A32] bg-[#EFE7D9] px-2.5 py-1 rounded-md">
-                    {taxiT.sedan.capacity}
-                  </span>
-                  <h3 className="text-lg sm:text-xl font-serif font-bold text-[#25231F] mt-2 mb-2">
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#C49A32] bg-[#EFE7D9] px-2.5 py-1 rounded-md">
+                      {taxiT.sedan.capacity}
+                    </span>
+                    {taxiT.sedan.price && (
+                      <span className="text-xs font-black text-[#A65F3D] bg-[#F8F5EF] px-2.5 py-1 rounded-md border border-[#EFE7D9]">
+                        {taxiT.sedan.price}
+                      </span>
+                    )}
+                  </div>
+                  <h3 className="text-lg sm:text-xl font-serif font-bold text-[#25231F] mt-1 mb-1">
                     {taxiT.sedan.name}
                   </h3>
+                  {taxiT.sedan.priceSub && (
+                    <p className="text-[10px] text-[#A65F3D] font-semibold mb-2">
+                      {taxiT.sedan.priceSub}
+                    </p>
+                  )}
                   <p className="text-xs text-[#25231F]/70 leading-relaxed mb-4">
                     {taxiT.sedan.desc}
                   </p>
@@ -577,12 +613,24 @@ const HomePage = () => {
                   {taxiT.suv.badge || 'Most Popular'}
                 </span>
                 <div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#A65F3D] bg-[#EFE7D9] px-2.5 py-1 rounded-md">
-                    {taxiT.suv.capacity}
-                  </span>
-                  <h3 className="text-lg sm:text-xl font-serif font-bold text-[#25231F] mt-2 mb-2">
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#A65F3D] bg-[#EFE7D9] px-2.5 py-1 rounded-md">
+                      {taxiT.suv.capacity}
+                    </span>
+                    {taxiT.suv.price && (
+                      <span className="text-xs font-black text-[#A65F3D] bg-[#F8F5EF] px-2.5 py-1 rounded-md border border-[#C49A32]/40">
+                        {taxiT.suv.price}
+                      </span>
+                    )}
+                  </div>
+                  <h3 className="text-lg sm:text-xl font-serif font-bold text-[#25231F] mt-1 mb-1">
                     {taxiT.suv.name}
                   </h3>
+                  {taxiT.suv.priceSub && (
+                    <p className="text-[10px] text-[#A65F3D] font-semibold mb-2">
+                      {taxiT.suv.priceSub}
+                    </p>
+                  )}
                   <p className="text-xs text-[#25231F]/70 leading-relaxed mb-4">
                     {taxiT.suv.desc}
                   </p>
@@ -610,12 +658,24 @@ const HomePage = () => {
             {taxiT.tempo && (
               <div className="bg-white rounded-2xl sm:rounded-3xl border border-[#EFE7D9] p-5 sm:p-6 shadow-heritage hover:border-[#C49A32] transition-all flex flex-col justify-between">
                 <div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#526B50] bg-[#EFE7D9] px-2.5 py-1 rounded-md">
-                    {taxiT.tempo.capacity}
-                  </span>
-                  <h3 className="text-lg sm:text-xl font-serif font-bold text-[#25231F] mt-2 mb-2">
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#526B50] bg-[#EFE7D9] px-2.5 py-1 rounded-md">
+                      {taxiT.tempo.capacity}
+                    </span>
+                    {taxiT.tempo.price && (
+                      <span className="text-xs font-black text-[#526B50] bg-[#F8F5EF] px-2.5 py-1 rounded-md border border-[#EFE7D9]">
+                        {taxiT.tempo.price}
+                      </span>
+                    )}
+                  </div>
+                  <h3 className="text-lg sm:text-xl font-serif font-bold text-[#25231F] mt-1 mb-1">
                     {taxiT.tempo.name}
                   </h3>
+                  {taxiT.tempo.priceSub && (
+                    <p className="text-[10px] text-[#526B50] font-semibold mb-2">
+                      {taxiT.tempo.priceSub}
+                    </p>
+                  )}
                   <p className="text-xs text-[#25231F]/70 leading-relaxed mb-4">
                     {taxiT.tempo.desc}
                   </p>

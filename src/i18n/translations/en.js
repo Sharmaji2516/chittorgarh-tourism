@@ -172,48 +172,54 @@ export const en = {
     sedan: {
       name: 'Prime Sedan (Dzire / Etios)',
       capacity: '1 - 4 Passengers',
-      desc: 'Perfect for couples and small families. Air-conditioned, spacious boot space for luggage, and polite uniformed chauffeur.',
-      features: ['Fort Circuit Sightseeing', 'Udaipur Airport Pickup / Drop', 'Sanwaliya Ji Temple Transfer'],
+      price: '₹3,800 (~$45 USD / €42 EUR)',
+      priceSub: 'Full Day Udaipur ⇄ Fort Sightseeing',
+      desc: 'Perfect for couples and small families. Air-conditioned, working seatbelts, spacious boot space for luggage, and polite English-speaking chauffeur.',
+      features: ['Fort Circuit Sightseeing & Monument Transfers', 'Udaipur Airport / Hotel Pickup & Drop', 'Bottled Mineral Water & Tolls Included'],
       btn: 'Book Sedan'
     },
     suv: {
-      name: 'Royal SUV (Innova / Ertiga)',
-      badge: 'Most Popular',
+      name: 'Royal SUV (Innova Crysta)',
+      badge: 'Foreign Guests Favorite',
       capacity: '5 - 7 Passengers',
-      desc: 'High seating for scenic highway vistas. Maximum comfort for multi-generation family road trips across Rajasthan.',
-      features: ['Complete Fort + Menal Waterfall', 'Udaipur - Chittorgarh - Jaipur Corridor', 'Dual AC with extra luggage room'],
+      price: '₹5,500 (~$65 USD / €60 EUR)',
+      priceSub: 'Luxury Innova • High Clearance & Comfort',
+      desc: 'High seating for scenic highway vistas. Maximum comfort and ample luggage room for Udaipur to Chittorgarh to Jaipur transfers.',
+      features: ['Complete Fort Citadel + Menal Canyon', 'Udaipur - Chittorgarh - Jaipur Direct Transfer', 'Dual AC, Rear Seatbelts & Zero Shopping Pressure'],
       btn: 'Book SUV'
     },
     tempo: {
       name: 'Luxury Tempo Traveller',
       capacity: '9 - 16 Passengers',
-      desc: 'Engineered for group tours, corporate excursions, and pilgrimage groups visiting Sanwariya Seth and Chittorgarh.',
-      features: ['Reclining push-back seats', 'Dedicated group luggage carrier', 'Experienced highway drivers'],
+      price: '₹8,500 (~$100 USD / €95 EUR)',
+      priceSub: 'Push-back AC Luxury Group Fleet',
+      desc: 'Engineered for group tours, corporate excursions, and multi-generational family holidays visiting Chittorgarh and Sanwariya Seth.',
+      features: ['Reclining push-back seats with aisle space', 'Dedicated oversized luggage carrier', 'Senior-friendly low entry & experienced highway driver'],
       btn: 'Book Tempo Traveller'
     }
   },
 
   testimonials: {
-    kicker: 'Verified Traveler Experiences',
-    heading: 'What Our Guests Say',
+    kicker: 'Verified International Traveler Experiences',
+    heading: 'What Global Guests Say',
     items: [
       {
-        name: 'Dr. Arvind S. Kulkarni',
-        origin: 'Pune, Maharashtra',
-        text: 'Our guide was extraordinary. He explained the siege of 1303 and the architectural symmetry of Vijay Stambha with deep historical reverence. The cab was spotless.',
-        service: 'Full Day Fort Guided Tour'
+        name: 'David & Sarah Jenkins',
+        origin: 'London, United Kingdom 🇬🇧',
+        text: 'Our chauffeur collected us from Taj Lake Palace Udaipur with our luggage, guided us through Chittorgarh Fort seamlessly with an authorized English historian, and safely dropped us in Jaipur by evening. Flawless service, working seatbelts, and zero shopping stops!',
+        service: 'Udaipur to Jaipur via Fort Transfer'
       },
       {
         name: 'Elena & Marcus Vance',
-        origin: 'Melbourne, Australia',
-        text: 'Visit Chittorgarh made our excursion from Udaipur effortless. Transparent WhatsApp coordination, polite driver, and a historian who brought the citadel to life.',
-        service: 'Udaipur to Chittorgarh Private Transfer'
+        origin: 'Melbourne, Australia 🇦🇺',
+        text: 'Visit Chittorgarh made our excursion from Udaipur effortless. Transparent WhatsApp coordination in USD, sanitized Innova Crysta, chilled bottled water, and a licensed historian who brought the citadel to life.',
+        service: 'Full Day Private Tour & Cab'
       },
       {
-        name: 'Radhika Singhania',
-        origin: 'New Delhi',
-        text: 'The Dal Baati recommendation was outstanding, and having our guide navigate the 700-acre fort saved us hours of confusion. Pure Mewari hospitality!',
-        service: '2-Day Weekend Heritage Tour'
+        name: 'Jean-Pierre & Claire Laurent',
+        origin: 'Paris, France 🇫🇷',
+        text: 'An exceptional private day tour. Our Mewari guide was so knowledgeable about the 1303 siege and Rani Padmini. Far better value and personalized service than booking via Viator or GetYourGuide.',
+        service: 'Private English Guided Tour'
       }
     ]
   },

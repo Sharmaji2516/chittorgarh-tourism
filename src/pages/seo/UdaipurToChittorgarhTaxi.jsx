@@ -89,9 +89,33 @@ const UdaipurToChittorgarhTaxi = () => {
           </div>
         </div>
 
+        {/* Anti-Scam & Western Safety Standards Trust Ribbon */}
+        <div className="bg-white rounded-3xl p-6 border border-[#EFE7D9] shadow-heritage mb-10 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+          <div className="flex flex-col items-center gap-1.5 p-2">
+            <span className="w-10 h-10 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-lg">🛡️</span>
+            <span className="text-xs font-bold text-[#25231F]">Zero-Commission Guarantee</span>
+            <span className="text-[11px] text-[#25231F]/65 leading-tight">100% No Forced Shopping Stops</span>
+          </div>
+          <div className="flex flex-col items-center gap-1.5 p-2">
+            <span className="w-10 h-10 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center text-lg">⭐</span>
+            <span className="text-xs font-bold text-[#25231F]">English Chauffeurs</span>
+            <span className="text-[11px] text-[#25231F]/65 leading-tight">Punctual, Courteous &amp; Licensed</span>
+          </div>
+          <div className="flex flex-col items-center gap-1.5 p-2">
+            <span className="w-10 h-10 rounded-full bg-blue-100 text-blue-800 flex items-center justify-center text-lg">🚗</span>
+            <span className="text-xs font-bold text-[#25231F]">Working Rear Seatbelts</span>
+            <span className="text-[11px] text-[#25231F]/65 leading-tight">Dual High-Capacity AC</span>
+          </div>
+          <div className="flex flex-col items-center gap-1.5 p-2">
+            <span className="w-10 h-10 rounded-full bg-purple-100 text-purple-800 flex items-center justify-center text-lg">💧</span>
+            <span className="text-xs font-bold text-[#25231F]">Mineral Water Provided</span>
+            <span className="text-[11px] text-[#25231F]/65 leading-tight">Complimentary Bottles on Board</span>
+          </div>
+        </div>
+
         {/* Fleet Pricing Cards */}
         <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#25231F] mb-6">
-          Choose Your Vehicle
+          Transparent Indicative Rates &amp; Vehicle Options
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
@@ -101,50 +125,64 @@ const UdaipurToChittorgarhTaxi = () => {
               <div className="h-40 rounded-2xl overflow-hidden mb-4 bg-[#F8F5EF]">
                 <img src="/assets/images/sedan_taxi.webp" alt="Sedan Dzire" className="w-full h-full object-cover" />
               </div>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-[#C49A32] bg-[#EFE7D9] px-2.5 py-1 rounded-md">
-                1 - 4 Passengers
-              </span>
-              <h3 className="text-xl font-serif font-bold text-[#25231F] mt-2 mb-1">Sedan (Swift Dzire / Etios)</h3>
+              <div className="flex items-center justify-between gap-2 mb-2">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#C49A32] bg-[#EFE7D9] px-2.5 py-1 rounded-md">
+                  1 - 4 Passengers
+                </span>
+                <span className="text-xs font-black text-[#A65F3D] bg-[#F8F5EF] px-2.5 py-1 rounded-md border border-[#EFE7D9]">
+                  ₹3,800 (~$45 USD / €42)
+                </span>
+              </div>
+              <h3 className="text-xl font-serif font-bold text-[#25231F] mt-1 mb-1">Sedan (Swift Dzire / Etios)</h3>
+              <p className="text-[11px] text-[#A65F3D] font-semibold mb-2">Full Day Udaipur ⇄ Fort Sightseeing</p>
               <p className="text-xs text-[#25231F]/70 mb-4">Ideal for couples, solo travelers, and small families traveling light.</p>
               <ul className="text-xs text-[#25231F]/80 space-y-2 mb-6">
-                <li>✓ Full AC Climate Control</li>
+                <li>✓ Full AC Climate Control &amp; Seatbelts</li>
                 <li>✓ Punctual Airport / Hotel Pickup</li>
                 <li>✓ Fort Top Internal Circuit Driving</li>
+                <li>✓ Toll Taxes &amp; Parking Included</li>
               </ul>
             </div>
             <button
-              onClick={() => handleWhatsApp('Sedan Dzire')}
+              onClick={() => handleWhatsApp('Sedan Dzire (₹3,800 / $45 USD)')}
               className="w-full py-3 bg-[#25231F] hover:bg-[#A65F3D] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors flex items-center justify-center gap-2"
             >
-              <MessageCircle className="w-4 h-4" /> Inquire Sedan Fare
+              <MessageCircle className="w-4 h-4" /> Book Sedan via WhatsApp
             </button>
           </div>
 
           {/* SUV */}
           <div className="bg-white rounded-3xl p-6 border-2 border-[#C49A32] shadow-heritage flex flex-col justify-between relative">
             <span className="absolute -top-3 right-6 bg-[#C49A32] text-white text-[10px] font-bold uppercase px-3 py-1 rounded-full">
-              Recommended for Comfort
+              International Favorite
             </span>
             <div>
               <div className="h-40 rounded-2xl overflow-hidden mb-4 bg-[#F8F5EF]">
                 <img src="/assets/images/suv_taxi.webp" alt="Innova Crysta" className="w-full h-full object-cover" />
               </div>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-[#A65F3D] bg-[#EFE7D9] px-2.5 py-1 rounded-md">
-                5 - 7 Passengers
-              </span>
-              <h3 className="text-xl font-serif font-bold text-[#25231F] mt-2 mb-1">SUV (Innova Crysta / Ertiga)</h3>
-              <p className="text-xs text-[#25231F]/70 mb-4">Superior suspension, captain seats, and generous space for family luggage.</p>
+              <div className="flex items-center justify-between gap-2 mb-2">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#A65F3D] bg-[#EFE7D9] px-2.5 py-1 rounded-md">
+                  5 - 7 Passengers
+                </span>
+                <span className="text-xs font-black text-[#A65F3D] bg-[#F8F5EF] px-2.5 py-1 rounded-md border border-[#C49A32]/40">
+                  ₹5,500 (~$65 USD / €60)
+                </span>
+              </div>
+              <h3 className="text-xl font-serif font-bold text-[#25231F] mt-1 mb-1">SUV (Innova Crysta / Ertiga)</h3>
+              <p className="text-[11px] text-[#A65F3D] font-semibold mb-2">High Clearance &amp; Generous Luggage Room</p>
+              <p className="text-xs text-[#25231F]/70 mb-4">Superior suspension, captain seats, and ample boot space for Udaipur to Chittorgarh to Jaipur transfers.</p>
               <ul className="text-xs text-[#25231F]/80 space-y-2 mb-6">
                 <li>✓ Premium Captain / Bench Seating</li>
-                <li>✓ Dual High-Capacity AC</li>
+                <li>✓ Dual High-Capacity AC &amp; Seatbelts</li>
                 <li>✓ Sanwariya Seth Detour Friendly</li>
+                <li>✓ Luggage Storage for Full Day Tour</li>
               </ul>
             </div>
             <button
-              onClick={() => handleWhatsApp('SUV Innova Crysta')}
+              onClick={() => handleWhatsApp('SUV Innova Crysta (₹5,500 / $65 USD)')}
               className="w-full py-3 bg-[#C49A32] hover:bg-[#b08728] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors shadow-sm flex items-center justify-center gap-2"
             >
-              <MessageCircle className="w-4 h-4" /> Inquire SUV Fare
+              <MessageCircle className="w-4 h-4" /> Book SUV via WhatsApp
             </button>
           </div>
 
@@ -154,10 +192,15 @@ const UdaipurToChittorgarhTaxi = () => {
               <div className="h-40 rounded-2xl overflow-hidden mb-4 bg-[#F8F5EF]">
                 <img src="/assets/images/tempo_traveller.webp" alt="Tempo Traveller" className="w-full h-full object-cover" />
               </div>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-[#526B50] bg-[#EFE7D9] px-2.5 py-1 rounded-md">
-                9 - 16 Passengers
-              </span>
-              <h3 className="text-xl font-serif font-bold text-[#25231F] mt-2 mb-1">Luxury Tempo Traveller</h3>
+              <div className="flex items-center justify-between gap-2 mb-2">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#526B50] bg-[#EFE7D9] px-2.5 py-1 rounded-md">
+                  9 - 16 Passengers
+                </span>
+                <span className="text-xs font-black text-[#526B50] bg-[#F8F5EF] px-2.5 py-1 rounded-md border border-[#EFE7D9]">
+                  ₹8,500 (~$100 USD / €95)
+                </span>
+              </div>
+              <h3 className="text-xl font-serif font-bold text-[#25231F] mt-1 mb-1">Luxury Tempo Traveller</h3>
               <p className="text-xs text-[#25231F]/70 mb-4">For family reunions, pilgrim groups, and student heritage expeditions.</p>
               <ul className="text-xs text-[#25231F]/80 space-y-2 mb-6">
                 <li>✓ Individual Reclining Push-Back Seats</li>

@@ -103,8 +103,8 @@ const TripPlannerModal = ({
       return;
     }
     const cleanPhone = formData.phone.replace(/\D/g, '');
-    if (cleanPhone.length < 10) {
-      setValidationError('Please enter a valid 10-digit WhatsApp or mobile number.');
+    if (cleanPhone.length < 7 || cleanPhone.length > 16) {
+      setValidationError('Please enter a valid phone or WhatsApp number with country code (e.g. +1, +44, +91).');
       return;
     }
 
@@ -302,7 +302,7 @@ const TripPlannerModal = ({
                         required
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        placeholder="10-digit WhatsApp number"
+                        placeholder="WhatsApp / Phone (e.g. +1, +44, +91)"
                         className={INPUT_BASE}
                       />
                     </div>
@@ -398,7 +398,7 @@ const TripPlannerModal = ({
                             required
                             value={formData.phone}
                             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                            placeholder="10-digit WhatsApp number"
+                            placeholder="WhatsApp / Phone (e.g. +1, +44, +91)"
                             className={INPUT_BASE}
                           />
                         </div>
