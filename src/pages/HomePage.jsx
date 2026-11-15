@@ -17,6 +17,10 @@ import {
   Car,
   Droplets,
   UserCheck,
+  HelpCircle,
+  ChevronDown,
+  CreditCard,
+  Luggage,
 } from 'lucide-react';
 
 import Hero from '../components/Hero';
@@ -28,7 +32,47 @@ import { getLocalizedPath } from '../config/languages';
 const VERIFIED_WA_LINK =
   'https://wa.me/917597451057?text=Namaste!%20I%20am%20inquiring%20about%20Chittorgarh%20Fort%20Tour%20and%20Taxi%20from%20VisitChittorgarh.in';
 
+const HOME_FAQS = [
+  {
+    q: 'How to buy Chittorgarh Fort ASI entry tickets online with a foreign credit card?',
+    a: 'The Archaeological Survey of India (ASI) official ticketing portal frequently rejects international Visa, Mastercard, and Amex credit cards due to mandatory Indian 3D-Secure OTP banking requirements. If your international card is declined online, you can buy physical tickets at the entry gate, or contact the Visit Chittorgarh Travel Desk (+91-7597451057) to pre-arrange your entry tickets hassle-free alongside your private cab and guide.',
+    tag: 'Foreign Ticketing',
+  },
+  {
+    q: 'Can we safely store our suitcases/luggage in the car during the fort tour?',
+    a: 'Yes, 100%. All our Sedans, Innova Crystas, and Tempo Travellers feature dedicated locked boot space for international luggage. Your private chauffeur remains stationed with the vehicle at all times across all monument stops while you explore the citadel unburdened.',
+    tag: 'Luggage Storage',
+  },
+  {
+    q: 'Is Chittorgarh Fort safe for solo female and foreign travelers?',
+    a: 'Yes, Chittorgarh Fort is recognized as one of the safest UNESCO heritage sites in Rajasthan, monitored by ASI monument marshals and Rajasthan Tourist Police. To ensure complete peace of mind, foreign and solo female travelers book through our verified Mewari concierge for licensed guides, GPS-tracked private AC cabs, and a strict zero-tout / zero-harassment guarantee.',
+    tag: 'Safety & Security',
+  },
+  {
+    q: 'Can we do a day stopover in Chittorgarh between Udaipur and Jaipur?',
+    a: 'Yes! This is the most popular private transfer route in Rajasthan. Your private AC chauffeur collects you from your Udaipur hotel, drives you to Chittorgarh for a 3 to 4-hour guided fort tour with authentic Rajasthani lunch, and drops you at your Jaipur hotel doorstep by evening.',
+    tag: 'Udaipur ⇄ Jaipur',
+  },
+  {
+    q: 'Do your private drivers speak English and follow Western safety standards?',
+    a: 'Yes. Our verified chauffeurs speak conversational English, maintain valid commercial tourist permits, and strictly follow Western road safety standards including functional front and rear seatbelts, dual air-conditioning, complimentary bottled mineral water, and zero forced shopping stops.',
+    tag: 'Western Standards',
+  },
+];
+
 const HOME_SCHEMAS = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: HOME_FAQS.map((faq) => ({
+      '@type': 'Question',
+      name: faq.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.a,
+      },
+    })),
+  },
   {
     '@context': 'https://schema.org',
     '@type': 'Organization',
@@ -116,6 +160,7 @@ const ATTRACTION_IMAGES = [
 
 const HomePage = () => {
   const { lang, t } = useLanguage();
+  const [openFaq, setOpenFaq] = useState(0);
 
   const conciergeT = t.concierge || {};
   const card1 = conciergeT.card1 || {};
@@ -863,6 +908,82 @@ const HomePage = () => {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* SECTION 8: Essential Foreign & Domestic Traveler FAQs */}
+      <section className="py-12 sm:py-16 lg:py-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12">
+          <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A32] bg-[#EFE7D9] px-4 py-1.5 rounded-full inline-block mb-3">
+            Foreign &amp; Domestic Traveler Assistance
+          </span>
+          <h2 className="text-2xl xs:text-3xl sm:text-4xl font-serif font-black text-[#25231F]">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-xs sm:text-sm text-[#25231F]/70 mt-2">
+            Essential facts on international credit card ticketing, luggage storage, safety standards &amp; day trips.
+          </p>
+        </div>
+
+        <div className="space-y-3.5">
+          {HOME_FAQS.map((faq, idx) => {
+            const isOpen = openFaq === idx;
+            return (
+              <div
+                key={idx}
+                className="bg-white rounded-2xl border border-[#EFE7D9] overflow-hidden shadow-sm transition-all"
+              >
+                <button
+                  type="button"
+                  onClick={() => setOpenFaq(isOpen ? null : idx)}
+                  className="w-full text-left p-5 sm:p-6 flex items-center justify-between gap-4 hover:bg-[#F8F5EF]/60 transition-colors"
+                  aria-expanded={isOpen}
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#A65F3D] bg-[#F8F5EF] px-2.5 py-1 rounded-md border border-[#EFE7D9] shrink-0">
+                      {faq.tag}
+                    </span>
+                    <h3 className="text-sm sm:text-base font-serif font-bold text-[#25231F]">
+                      {faq.q}
+                    </h3>
+                  </div>
+                  <ChevronDown
+                    className={`w-5 h-5 text-[#C49A32] shrink-0 transition-transform duration-300 ${
+                      isOpen ? 'rotate-180' : ''
+                    }`}
+                  />
+                </button>
+                {isOpen && (
+                  <div className="px-5 pb-5 sm:px-6 sm:pb-6 pt-0 border-t border-[#EFE7D9]/60 mt-1">
+                    <p className="text-xs sm:text-sm text-[#25231F]/80 leading-relaxed pt-3">
+                      {faq.a}
+                    </p>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="mt-8 p-5 rounded-2xl bg-gradient-to-r from-[#25231F] to-[#3B3731] text-white flex flex-col sm:flex-row items-center justify-between gap-4 shadow-heritage">
+          <div>
+            <h4 className="text-sm font-bold font-serif text-[#DFBA5A]">
+              Have a Specific Travel Query or Custom Requirement?
+            </h4>
+            <p className="text-xs text-white/70 mt-0.5">
+              Chat directly with our Mewar Travel Desk on WhatsApp for fast answers within 5 minutes.
+            </p>
+          </div>
+          <a
+            href={VERIFIED_WA_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => trackWhatsAppClick('home_faq_banner')}
+            className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold uppercase tracking-wider shrink-0 transition-all shadow-sm flex items-center gap-2"
+          >
+            <MessageCircle className="w-4 h-4" />
+            Chat On WhatsApp
+          </a>
         </div>
       </section>
     </div>
