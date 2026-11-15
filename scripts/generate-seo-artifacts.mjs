@@ -374,6 +374,10 @@ const main = () => {
   const baseHtmlPath = path.join(DIST_DIR, 'index.html');
   const templateHtml = fs.readFileSync(baseHtmlPath, 'utf8');
 
+  // SPA fallback for static hosts (Vercel, Netlify, GitHub Pages) on unhandled subroute refresh
+  fs.writeFileSync(path.join(DIST_DIR, '404.html'), templateHtml, 'utf8');
+  fs.writeFileSync(path.join(PUBLIC_DIR, '404.html'), templateHtml, 'utf8');
+
   let prerenderCount = 0;
   for (const entry of entries) {
     if (entry.path === '/') {
