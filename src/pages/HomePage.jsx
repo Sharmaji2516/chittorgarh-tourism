@@ -34,9 +34,9 @@ const VERIFIED_WA_LINK =
 
 const HOME_FAQS = [
   {
-    q: 'How to buy Chittorgarh Fort ASI entry tickets online with a foreign credit card?',
-    a: 'The Archaeological Survey of India (ASI) official ticketing portal frequently rejects international Visa, Mastercard, and Amex credit cards due to mandatory Indian 3D-Secure OTP banking requirements. If your international card is declined online, you can buy physical tickets at the entry gate, or contact the Visit Chittorgarh Travel Desk (+91-7597451057) to pre-arrange your entry tickets hassle-free alongside your private cab and guide.',
-    tag: 'Foreign Ticketing',
+    q: 'How to buy Chittorgarh Fort ASI entry tickets without payment failures?',
+    a: 'Avoid online payment gateway errors and long monument ticket queues! Simply connect directly with our Visit Chittorgarh Concierge Desk on WhatsApp or Call (+91 75974 51057). Our authorized local team will arrange all your official ASI monument entry tickets, evening Sound & Light show passes, certified guide, and private cab seamlessly before you arrive.',
+    tag: 'Ticket Assistance',
   },
   {
     q: 'Can we safely store our suitcases/luggage in the car during the fort tour?',
