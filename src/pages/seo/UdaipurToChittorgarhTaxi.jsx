@@ -121,6 +121,59 @@ const UdaipurToChittorgarhTaxi = () => {
           </div>
         </div>
 
+        {/* 100% Transparent All-Inclusive Itemized Pricing & License Credentials Banner */}
+        <div className="bg-[#F8FAFC] border-2 border-[#0284C7] rounded-3xl p-6 sm:p-8 mb-10 shadow-heritage">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 mb-4 border-b border-[#0284C7]/20">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-2xl bg-[#0284C7]/15 flex items-center justify-center text-[#0284C7] shrink-0 font-bold text-lg">
+                ✓
+              </div>
+              <div>
+                <h3 className="text-lg sm:text-xl font-serif font-black text-[#0F172A]">
+                  100% Transparent All-Inclusive Pricing (Zero Hidden Fees)
+                </h3>
+                <p className="text-xs text-[#475569]">
+                  Itemized official rates for Udaipur ⇄ Chittorgarh transfers &amp; licensed monument guiding.
+                </p>
+              </div>
+            </div>
+            <span className="self-start sm:self-center bg-[#0284C7] text-white text-[10px] font-bold uppercase tracking-wider px-3.5 py-1 rounded-full shrink-0 shadow-xs">
+              Fixed &amp; Transparent
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
+            <div className="bg-white p-4 rounded-2xl border border-[#0284C7]/20 shadow-xs">
+              <span className="text-[11px] font-bold text-[#64748B] block uppercase tracking-wider">Private AC Sedan (Dzire / Etios)</span>
+              <span className="text-base sm:text-lg font-black text-[#0F172A] block mt-0.5">₹3,500 <span className="text-xs font-semibold text-[#0284C7]">(~$42 USD / €39 EUR)</span></span>
+              <span className="text-[11px] text-[#475569] mt-1 block">Full Day Udaipur ⇄ Fort Roundtrip</span>
+            </div>
+
+            <div className="bg-white p-4 rounded-2xl border border-[#0284C7]/20 shadow-xs">
+              <span className="text-[11px] font-bold text-[#64748B] block uppercase tracking-wider">Luxury AC SUV (Innova Crysta)</span>
+              <span className="text-base sm:text-lg font-black text-[#0F172A] block mt-0.5">₹5,500 <span className="text-xs font-semibold text-[#0284C7]">(~$65 USD / €60 EUR)</span></span>
+              <span className="text-[11px] text-[#475569] mt-1 block">Max comfort, dual AC &amp; high clearance</span>
+            </div>
+
+            <div className="bg-white p-4 rounded-2xl border border-[#0284C7]/20 shadow-xs">
+              <span className="text-[11px] font-bold text-[#64748B] block uppercase tracking-wider">Official RTDC Licensed English Guide</span>
+              <span className="text-base sm:text-lg font-black text-[#0F172A] block mt-0.5">₹1,500 <span className="text-xs font-semibold text-[#0284C7]">(~$18 USD / €16 EUR)</span></span>
+              <span className="text-[11px] text-[#475569] mt-1 block">Certified Mewari English/Hindi Historian</span>
+            </div>
+          </div>
+
+          <div className="space-y-2 text-xs text-[#334155] border-t border-[#0284C7]/20 pt-4">
+            <p className="flex items-start gap-2">
+              <strong className="text-[#0284C7] shrink-0 font-bold">✓ 100% Included:</strong>
+              <span>Toll Taxes (NH27 Highway), Monument Parking, Fuel, Chauffeur Allowance, Fort Internal Movement, Zero Forced Shopping &amp; Free Hotel/Airport Pickup/Drop.</span>
+            </p>
+            <p className="flex items-start gap-2">
+              <strong className="text-[#0284C7] shrink-0 font-bold">🎖️ Guide Credentials:</strong>
+              <span>Rajasthan Tourism (RTDC) &amp; Ministry of Tourism Approved Regional Level Tourist Guides with official license badges.</span>
+            </p>
+          </div>
+        </div>
+
         {/* Fleet Pricing Cards */}
         <h2 className="text-2xl sm:text-3xl font-serif font-bold text-[#25231F] mb-6">
           Transparent Indicative Rates &amp; Vehicle Options
