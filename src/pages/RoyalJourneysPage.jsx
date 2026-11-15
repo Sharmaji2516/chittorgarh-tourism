@@ -330,7 +330,7 @@ const RoyalJourneysPage = () => {
                                             className="w-full py-3.5 bg-[#128C7E] hover:bg-[#075E54] text-white font-black rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all active:scale-95"
                                         >
                                             <MessageCircle className="w-4 h-4 fill-white text-[#128C7E]" />
-                                            <span>Book on WhatsApp • Starting From {srv.price.amount}</span>
+                                            <span>Book on WhatsApp</span>
                                         </a>
                                     </div>
                                 </div>

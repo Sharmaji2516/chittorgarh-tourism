@@ -178,7 +178,7 @@ const AttractionsPage = ({ filteredAttractions = [], setSelectedAttraction }) =>
                             className="py-3.5 px-6 bg-[#128C7E] hover:bg-[#0c6b60] text-white font-black rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg transition-transform active:scale-95"
                         >
                             <MessageCircle className="w-4 h-4 fill-white text-[#128C7E]" />
-                            <span>Book Private Cab on WhatsApp • Starting From ₹3,500</span>
+                            <span>Book on WhatsApp</span>
                         </a>
                     </div>
                 </div>
