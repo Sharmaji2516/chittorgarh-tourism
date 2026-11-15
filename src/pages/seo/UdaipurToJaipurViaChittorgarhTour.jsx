@@ -117,9 +117,9 @@ const UdaipurToJaipurViaChittorgarhTour = () => {
               <div className="mb-4">
                 <div className="flex items-baseline gap-2">
                   <span className="text-4xl font-serif font-black text-[#25231F]">₹8,999</span>
-                  <span className="text-xs font-bold text-[#C49A32]">($108 USD / €99 EUR)</span>
+                  <span className="text-xs font-bold text-[#C49A32]">(Starts at ~$108 USD / €99 EUR)</span>
                 </div>
-                <span className="text-xs text-[#25231F]/60">All-inclusive door-to-door transfer</span>
+                <span className="text-xs text-[#25231F]/60">Starting rate • All-inclusive door-to-door transfer</span>
               </div>
               <ul className="space-y-2 text-xs text-[#25231F]/80 mb-6">
                 <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-600" /> Udaipur Hotel Pickup (e.g. 8:00 AM)</li>
@@ -147,9 +147,9 @@ const UdaipurToJaipurViaChittorgarhTour = () => {
               <div className="mb-4">
                 <div className="flex items-baseline gap-2">
                   <span className="text-4xl font-serif font-black text-[#25231F]">₹11,999</span>
-                  <span className="text-xs font-bold text-[#C49A32]">($144 USD / €132 EUR)</span>
+                  <span className="text-xs font-bold text-[#C49A32]">(Starts at ~$144 USD / €132 EUR)</span>
                 </div>
-                <span className="text-xs text-[#25231F]/60">All-inclusive door-to-door transfer</span>
+                <span className="text-xs text-[#25231F]/60">Starting rate • All-inclusive door-to-door transfer</span>
               </div>
               <ul className="space-y-2 text-xs text-[#25231F]/80 mb-6">
                 <li className="flex items-center gap-2"><CheckCircle2 className="w-4 h-4 text-emerald-600" /> Spacious seating for long highway journey</li>

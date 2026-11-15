@@ -130,7 +130,7 @@ const UdaipurToChittorgarhTaxi = () => {
                   1 - 4 Passengers
                 </span>
                 <span className="text-xs font-black text-[#A65F3D] bg-[#F8F5EF] px-2.5 py-1 rounded-md border border-[#EFE7D9]">
-                  ₹3,800 (~$45 USD / €42)
+                  Starting from ₹3,800 (~$45 USD / €42)
                 </span>
               </div>
               <h3 className="text-xl font-serif font-bold text-[#25231F] mt-1 mb-1">Sedan (Swift Dzire / Etios)</h3>
@@ -165,7 +165,7 @@ const UdaipurToChittorgarhTaxi = () => {
                   5 - 7 Passengers
                 </span>
                 <span className="text-xs font-black text-[#A65F3D] bg-[#F8F5EF] px-2.5 py-1 rounded-md border border-[#C49A32]/40">
-                  ₹5,500 (~$65 USD / €60)
+                  Starting from ₹5,500 (~$65 USD / €60)
                 </span>
               </div>
               <h3 className="text-xl font-serif font-bold text-[#25231F] mt-1 mb-1">SUV (Innova Crysta / Ertiga)</h3>
@@ -197,7 +197,7 @@ const UdaipurToChittorgarhTaxi = () => {
                   9 - 16 Passengers
                 </span>
                 <span className="text-xs font-black text-[#526B50] bg-[#F8F5EF] px-2.5 py-1 rounded-md border border-[#EFE7D9]">
-                  ₹8,500 (~$100 USD / €95)
+                  Starting from ₹8,500 (~$100 USD / €95)
                 </span>
               </div>
               <h3 className="text-xl font-serif font-bold text-[#25231F] mt-1 mb-1">Luxury Tempo Traveller</h3>

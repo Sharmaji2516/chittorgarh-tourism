@@ -172,7 +172,7 @@ export const en = {
     sedan: {
       name: 'Prime Sedan (Dzire / Etios)',
       capacity: '1 - 4 Passengers',
-      price: '₹3,800 (~$45 USD / €42 EUR)',
+      price: 'Starting from ₹3,800 (~$45 USD / €42 EUR)',
       priceSub: 'Full Day Udaipur ⇄ Fort Sightseeing',
       desc: 'Perfect for couples and small families. Air-conditioned, working seatbelts, spacious boot space for luggage, and polite English-speaking chauffeur.',
       features: ['Fort Circuit Sightseeing & Monument Transfers', 'Udaipur Airport / Hotel Pickup & Drop', 'Bottled Mineral Water & Tolls Included'],
@@ -182,7 +182,7 @@ export const en = {
       name: 'Royal SUV (Innova Crysta)',
       badge: 'Foreign Guests Favorite',
       capacity: '5 - 7 Passengers',
-      price: '₹5,500 (~$65 USD / €60 EUR)',
+      price: 'Starting from ₹5,500 (~$65 USD / €60 EUR)',
       priceSub: 'Luxury Innova • High Clearance & Comfort',
       desc: 'High seating for scenic highway vistas. Maximum comfort and ample luggage room for Udaipur to Chittorgarh to Jaipur transfers.',
       features: ['Complete Fort Citadel + Menal Canyon', 'Udaipur - Chittorgarh - Jaipur Direct Transfer', 'Dual AC, Rear Seatbelts & Zero Shopping Pressure'],
@@ -191,7 +191,7 @@ export const en = {
     tempo: {
       name: 'Luxury Tempo Traveller',
       capacity: '9 - 16 Passengers',
-      price: '₹8,500 (~$100 USD / €95 EUR)',
+      price: 'Starting from ₹8,500 (~$100 USD / €95 EUR)',
       priceSub: 'Push-back AC Luxury Group Fleet',
       desc: 'Engineered for group tours, corporate excursions, and multi-generational family holidays visiting Chittorgarh and Sanwariya Seth.',
       features: ['Reclining push-back seats with aisle space', 'Dedicated oversized luggage carrier', 'Senior-friendly low entry & experienced highway driver'],
