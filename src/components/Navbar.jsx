@@ -107,8 +107,8 @@ const Navbar = () => {
     { name: t.nav?.guide || 'Guide', href: '/service/guide' },
     { name: t.nav?.taxi || 'Taxi', href: '/service/taxi' },
     { name: t.nav?.blog || 'Blog', href: '/blog', hideOnCompact: true },
-    { name: t.nav?.about || 'About', href: '/#about-us', isAnchor: true, hideOnCompact: true },
-    { name: t.nav?.contact || 'Contact', href: '/#contact', isAnchor: true, hideOnCompact: true },
+    { name: t.nav?.about || 'About', href: '/about', hideOnCompact: true },
+    { name: t.nav?.contact || 'Contact', href: '/contact', hideOnCompact: true },
   ];
 
   const handleAnchorClick = (e, href) => {

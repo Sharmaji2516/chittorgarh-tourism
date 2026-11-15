@@ -492,6 +492,46 @@ export const es = {
     ]
   },
 
+  contactPage: {
+  "kicker": "Conserjería Oficial y Línea de Atención Turística",
+  "title": "Contactar con la Conserjería Oficial",
+  "desc": "¿Tiene dudas sobre horarios del fuerte, traslados en taxi desde Udaipur o contratación de un guía en español? Comuníquese directamente con nuestro equipo local.",
+  "chatWa": "Chatear por WhatsApp",
+  "callNow": "Llamar a la Conserjería",
+  "phoneChannelTitle": "Llamada Telefónica Directa",
+  "phoneChannelDesc": "Conexión directa con nuestra oficina central en Chittorgarh.",
+  "phoneBtn": "Llamar al Soporte",
+  "waChannelTitle": "Conserjería en WhatsApp",
+  "waChannelDesc": "Respuestas en menos de 5 minutos con tarifas y disponibilidad.",
+  "waBtn": "Chatear por WhatsApp",
+  "emailChannelTitle": "Correo Electrónico Oficial",
+  "emailChannelDesc": "Para viajes de grupo, presupuestos y alianzas.",
+  "emailBtn": "Enviar Correo",
+  "formKicker": "Consulta Directa",
+  "formTitle": "Enviar Solicitud de Reserva Rápida",
+  "formDesc": "Complete sus datos de viaje y conéctese al instante con nuestro equipo mediante WhatsApp.",
+  "nameLabel": "Nombre y Apellidos",
+  "namePlaceholder": "ej. Carlos Gómez",
+  "phoneLabel": "Teléfono / Número de WhatsApp",
+  "phonePlaceholder": "ej. +34 600 123 456",
+  "serviceLabel": "Servicio Requerido",
+  "dateLabel": "Fecha de Viaje",
+  "requestsLabel": "Peticiones Especiales / Tamaño del Grupo",
+  "requestsPlaceholder": "ej. 4 personas, recogida en aeropuerto de Udaipur, guía en español...",
+  "submitBtn": "Enviar por WhatsApp",
+  "reviewTitle": "Opiniones Verificadas en Google",
+  "reviewDesc": "¿Ha viajado con nosotros? Ayude a otros viajeros compartiendo su experiencia en Google.",
+  "reviewBtn": "Escribir Reseña en Google ★",
+  "standardsKicker": "Estándares Garantizados",
+  "standardsTitle": "¿Por Qué Reservar con Visit Chittorgarh?",
+  "standards": [
+    "Botellas de agua mineral selladas de cortesía en cada vehículo",
+    "Precios 100% transparentes — Peajes y aparcamientos incluidos",
+    "Guías oficiales de RTDC sin paradas comerciales obligadas",
+    "Recogida puntual en hotel, estación de tren o aeropuerto"
+  ]
+},
+
   attractionModal: {
     "about": "Información",
     "bestTime": "Mejor Época",

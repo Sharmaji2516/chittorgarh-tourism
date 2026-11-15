@@ -382,6 +382,20 @@ const Footer = () => {
 
           <div className="flex flex-wrap items-center justify-center gap-4 text-[11px]">
             <NavLink
+              to={getHref('/about')}
+              className="hover:text-[#C49A32] transition-colors"
+            >
+              About Us
+            </NavLink>
+            <span className="text-white/25">•</span>
+            <NavLink
+              to={getHref('/contact')}
+              className="hover:text-[#C49A32] transition-colors"
+            >
+              Contact Desk
+            </NavLink>
+            <span className="text-white/25">•</span>
+            <NavLink
               to={getHref('/chittorgarh-fort')}
               className="hover:text-[#C49A32] transition-colors"
             >

@@ -492,6 +492,46 @@ export const fr = {
     ]
   },
 
+  contactPage: {
+  "kicker": "Conciergerie Officielle & Assistance Touristique",
+  "title": "Contacter la Conciergerie Officielle",
+  "desc": "Des questions sur les horaires du fort, les transferts taxi depuis Udaipur ou la réservation d'un guide francophone officiel ? Contactez notre équipe locale.",
+  "chatWa": "Discuter sur WhatsApp",
+  "callNow": "Appeler la Conciergerie",
+  "phoneChannelTitle": "Appel Téléphonique Direct",
+  "phoneChannelDesc": "Connexion instantanée avec nos coordinateurs locaux.",
+  "phoneBtn": "Appeler le Support",
+  "waChannelTitle": "Conciergerie WhatsApp",
+  "waChannelDesc": "Réponses rapides en moins de 5 minutes avec tarifs et disponibilités.",
+  "waBtn": "Discuter sur WhatsApp",
+  "emailChannelTitle": "Email Officiel",
+  "emailChannelDesc": "Pour voyages de groupe, devis et partenariats.",
+  "emailBtn": "Envoyer un Email",
+  "formKicker": "Demande Directe",
+  "formTitle": "Envoyer une Demande de Réservation",
+  "formDesc": "Indiquez vos détails de voyage et échangez directement avec notre équipe via WhatsApp.",
+  "nameLabel": "Votre Nom Complet",
+  "namePlaceholder": "ex. Jean Dupont",
+  "phoneLabel": "Numéro de Téléphone / WhatsApp",
+  "phonePlaceholder": "ex. +33 6 12 34 56 78",
+  "serviceLabel": "Service Souhaité",
+  "dateLabel": "Date du Voyage",
+  "requestsLabel": "Besoins Particuliers / Taille du Groupe",
+  "requestsPlaceholder": "ex. 2 adultes, prise en charge aéroport d'Udaipur, guide francophone...",
+  "submitBtn": "Envoyer sur WhatsApp",
+  "reviewTitle": "Avis Google Vérifiés",
+  "reviewDesc": "Vous avez voyagé avec nous ? Aidez les futurs voyageurs en partageant votre avis sur Google.",
+  "reviewBtn": "Laisser un Avis Google ★",
+  "standardsKicker": "Nos Engagements",
+  "standardsTitle": "Pourquoi Réserver avec Visit Chittorgarh ?",
+  "standards": [
+    "Bouteilles d'eau minérale scellées offertes dans chaque véhicule",
+    "Tarifs 100% transparents — Péages NH27 et parkings inclus",
+    "Guides officiels RTDC sans arrêts shopping forcés",
+    "Prise en charge ponctuelle à l'hôtel, à la gare ou à l'aéroport"
+  ]
+},
+
   attractionModal: {
     "about": "À Propos",
     "bestTime": "Meilleure Période",

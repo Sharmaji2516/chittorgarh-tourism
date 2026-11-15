@@ -498,6 +498,46 @@ export const en = {
     ]
   },
 
+  contactPage: {
+  "kicker": "Official Concierge & Tourist Helpline",
+  "title": "Contact Official Concierge",
+  "desc": "Have questions about fort entry timings, Udaipur airport cab pickups, or hiring a government-certified multilingual historian? Reach out directly to our concierge team.",
+  "chatWa": "Chat on WhatsApp",
+  "callNow": "Call Concierge",
+  "phoneChannelTitle": "Direct Phone Call",
+  "phoneChannelDesc": "Instant voice connection with local ground dispatch.",
+  "phoneBtn": "Call Support",
+  "waChannelTitle": "WhatsApp Concierge",
+  "waChannelDesc": "Quick replies under 5 minutes with rates & availability.",
+  "waBtn": "Chat on WhatsApp",
+  "emailChannelTitle": "Official Email",
+  "emailChannelDesc": "For corporate trips, group quotes & partnerships.",
+  "emailBtn": "Send Email",
+  "formKicker": "Direct Inquiry",
+  "formTitle": "Send Quick Booking Request",
+  "formDesc": "Fill out your travel details and connect immediately with our verified team via WhatsApp.",
+  "nameLabel": "Your Full Name",
+  "namePlaceholder": "e.g. Rahul Sharma / David Miller",
+  "phoneLabel": "Phone / WhatsApp Number",
+  "phonePlaceholder": "e.g. +91 98765 43210",
+  "serviceLabel": "Service Required",
+  "dateLabel": "Travel Date",
+  "requestsLabel": "Special Requests / Group Size",
+  "requestsPlaceholder": "e.g. 4 family members, airport pickup from Udaipur, require senior citizen assistance...",
+  "submitBtn": "Send on WhatsApp",
+  "reviewTitle": "Verified Google Reviews",
+  "reviewDesc": "Traveled with us? Help other pilgrims and international visitors discover authentic Mewari hospitality by sharing your feedback on Google.",
+  "reviewBtn": "Leave a Google Review ★",
+  "standardsKicker": "Guaranteed Standards",
+  "standardsTitle": "Why Book with Visit Chittorgarh?",
+  "standards": [
+    "Complimentary sealed mineral water in every vehicle",
+    "100% transparent pricing — NH27 tolls & parking accounted",
+    "Licensed RTDC historians with zero commercial shopping stops",
+    "Punctual airport, railway station & hotel doorstep pickup"
+  ]
+},
+
   attractionModal: {
     "about": "About",
     "bestTime": "Best Time to Visit",

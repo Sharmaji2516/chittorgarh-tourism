@@ -127,7 +127,7 @@ const FlavorsPage = ({ filteredVendors = [], filteredCafes = [], searchQuery }) 
                             <div className="flex flex-wrap items-center gap-4 text-xs font-semibold text-white/90">
                                 <span className="flex items-center gap-1.5 text-emerald-400">
                                     <CheckCircle2 className="w-4 h-4 shrink-0" />
-                                    <span>₹0 Advance Required — Pay after the tour!</span>
+                                    <span>Complimentary Packaged Mineral Water Included</span>
                                 </span>
                                 <span className="flex items-center gap-1.5 text-amber-300">
                                     <CheckCircle2 className="w-4 h-4 shrink-0" />

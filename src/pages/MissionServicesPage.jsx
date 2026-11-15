@@ -4,6 +4,9 @@ import { NavLink } from 'react-router-dom';
 import SEOHead from '../components/SEOHead';
 import { trackWhatsAppClick, trackPhoneCallClick } from '../utils/analytics';
 
+import { useLanguage } from '../context/LanguageContext';
+import { getLocalizedPath } from '../config/languages';
+
 const MISSION_SCHEMA = [
   {
     "@context": "https://schema.org",
@@ -24,6 +27,7 @@ const MISSION_SCHEMA = [
 ];
 
 const MissionServicesPage = () => {
+    const { lang } = useLanguage();
     const triggerPlanTrip = () => {
         window.dispatchEvent(new CustomEvent('openTripPlannerModal'));
     };
@@ -42,23 +46,58 @@ const MissionServicesPage = () => {
             <SEOHead
                 title="About Us & Tourism Mission | Visit Chittorgarh"
                 description="Learn about Visit Chittorgarh's mission: promoting authentic Mewar heritage, empowering certified local guides, and providing safe, transparent tourism experiences."
-                canonical="/mission-services"
+                canonical={getLocalizedPath('/about', lang)}
                 keywords="About Visit Chittorgarh, Chittorgarh tourism mission, certified guides Chittorgarh, heritage tourism"
                 schema={MISSION_SCHEMA}
             />
 
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                {/* Header */}
-                <div className="text-center max-w-3xl mx-auto mb-16">
-                    <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A32] bg-[#EFE7D9] px-4 py-1.5 rounded-full inline-block mb-3">
-                        About Visit Chittorgarh
-                    </span>
-                    <h1 className="text-3xl sm:text-5xl font-serif font-black text-[#25231F] mb-4">
+                {/* Hero Showcase Card with Official Logo */}
+                <div className="bg-gradient-to-b from-white via-[#FCFAF6] to-[#F8F5EF] rounded-3xl p-8 sm:p-14 border border-[#C49A32]/35 shadow-xl mb-14 text-center">
+                    {/* Official Emblem Logo */}
+                    <div className="w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-5 p-2.5 bg-white rounded-3xl border border-[#EFE7D9] shadow-md flex items-center justify-center">
+                        <img
+                            src="/chittorgarh-tourism-logo.webp"
+                            alt="Visit Chittorgarh Official Heritage Emblem"
+                            width={80}
+                            height={80}
+                            className="w-full h-full object-contain filter contrast-105"
+                        />
+                    </div>
+
+                    <div className="inline-flex items-center gap-2 bg-[#C49A32]/10 border border-[#C49A32]/30 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-[0.2em] text-[#C49A32] mb-4">
+                        <Award className="w-4 h-4 text-[#C49A32]" />
+                        <span>Official Tourism &amp; Heritage Portal</span>
+                    </div>
+
+                    <h1 className="text-3xl sm:text-5xl font-serif font-black text-[#25231F] mb-4 max-w-2xl mx-auto">
                         Our Heritage Mission
                     </h1>
-                    <p className="text-sm sm:text-base text-[#25231F]/70 leading-relaxed font-light">
+
+                    <p className="text-sm sm:text-base text-[#25231F]/75 leading-relaxed font-light max-w-2xl mx-auto mb-8">
                         Dedicated to preserving the dignified history of Chittorgarh, empowering certified local guides, and connecting travelers with genuine Mewari hospitality.
                     </p>
+
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-3.5">
+                        <a
+                            href="https://wa.me/917597451057?text=Namaste%20Visit%20Chittorgarh!%20I%20would%20like%20to%20know%20more%20about%20your%20services."
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={() => trackWhatsAppClick('about_whatsapp')}
+                            className="w-full sm:w-auto px-7 py-3.5 bg-[#25D366] hover:bg-[#1EBE5D] text-white rounded-2xl text-xs font-black uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-emerald-600/25 transition-transform active:scale-95"
+                        >
+                            <MessageCircle className="w-4 h-4 fill-white text-[#25D366]" />
+                            <span>Connect on WhatsApp</span>
+                        </a>
+                        <a
+                            href="tel:+917597451057"
+                            onClick={() => trackPhoneCallClick('about_call')}
+                            className="w-full sm:w-auto px-7 py-3.5 bg-white hover:bg-[#F8F5EF] text-[#25231F] border border-[#EFE7D9] rounded-2xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm transition-colors"
+                        >
+                            <Phone className="w-4 h-4 text-[#C49A32]" />
+                            <span>Call Concierge: +91 75974 51057</span>
+                        </a>
+                    </div>
                 </div>
 
                 {/* Mission Narrative Card */}

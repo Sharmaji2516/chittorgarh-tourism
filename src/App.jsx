@@ -19,6 +19,7 @@ const AdminPage = lazy(() => import('./pages/AdminPage'));
 const VerificationPage = lazy(() => import('./pages/VerificationPage'));
 const StaffVerificationPage = lazy(() => import('./pages/StaffVerificationPage'));
 const FeedbackPage = lazy(() => import('./pages/FeedbackPage'));
+const ContactPage = lazy(() => import('./pages/ContactPage'));
 const TermsPage = lazy(() => import('./pages/TermsPage'));
 const ServiceDetailsPage = lazy(() => import('./pages/ServiceDetailsPage'));
 const BlogPage = lazy(() => import('./pages/BlogPage'));
@@ -155,6 +156,7 @@ const MainContent = () => {
       { path: 'blog', element: <BlogPage t={t} /> },
       { path: 'blog/:slug', element: <BlogPage t={t} /> },
       { path: 'terms', element: <TermsPage /> },
+      { path: 'contact', element: <ContactPage /> },
       { path: 'feedback', element: <FeedbackPage /> },
       { path: 'service/:serviceId', element: <ServiceDetailsPage /> },
       { path: 'private-guide', element: <ServiceDetailsPage /> },

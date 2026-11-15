@@ -492,6 +492,46 @@ export const ja = {
     ]
   },
 
+  contactPage: {
+  "kicker": "公式コンシェルジュ＆観光案内窓口",
+  "title": "公式コンシェルジュにお問い合わせ",
+  "desc": "チットールガル城塞の開門時間、ウダイプル空港からの専用車送迎、公認歴史ガイドの手配など、現地チームに直接お問い合わせください。",
+  "chatWa": "WhatsAppで問い合わせる",
+  "callNow": "コンシェルジュに電話",
+  "phoneChannelTitle": "直通お電話",
+  "phoneChannelDesc": "現地配車担当デスクへ直接つながります。",
+  "phoneBtn": "電話をかける",
+  "waChannelTitle": "WhatsAppコンシェルジュ",
+  "waChannelDesc": "5分以内に料金と空き状況をご案内いたします。",
+  "waBtn": "WhatsAppでチャット",
+  "emailChannelTitle": "公式Eメール",
+  "emailChannelDesc": "団体旅行、お見積もり、業務提携のお問い合わせ。",
+  "emailBtn": "メールを送信",
+  "formKicker": "直接お問い合わせ",
+  "formTitle": "クイック予約リクエストを送信",
+  "formDesc": "ご旅行の詳細をご入力いただくと、WhatsAppで担当スタッフへ即座に送信されます。",
+  "nameLabel": "お名前",
+  "namePlaceholder": "例：山田 太郎",
+  "phoneLabel": "お電話番号 / WhatsApp番号",
+  "phonePlaceholder": "例：+81 90 1234 5678",
+  "serviceLabel": "ご希望のサービス",
+  "dateLabel": "ご旅行予定日",
+  "requestsLabel": "ご要望・人数",
+  "requestsPlaceholder": "例：家族4名、ウダイプル空港送迎希望、日本語または英語ガイド希望...",
+  "submitBtn": "WhatsAppで送信する",
+  "reviewTitle": "Google公式クチコミ評価",
+  "reviewDesc": "ご利用いただき誠にありがとうございました。Googleレビューで皆様のご感想をお寄せください。",
+  "reviewBtn": "Googleレビューを投稿 ★",
+  "standardsKicker": "安心・信頼のお約束",
+  "standardsTitle": "Visit Chittorgarhが選ばれる理由",
+  "standards": [
+    "全車両に無料の密閉ミネラルウォーターボトルをご用意",
+    "高速料金・駐車場代込みの100%明朗会計",
+    "お土産屋への強制立ち寄りのない公式RTDC歴史ガイド",
+    "ホテル・駅・空港への正確な時間通りの送迎"
+  ]
+},
+
   attractionModal: {
     "about": "概要・見どころ",
     "bestTime": "おすすめの訪問時期",

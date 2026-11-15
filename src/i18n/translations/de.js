@@ -492,6 +492,46 @@ export const de = {
     ]
   },
 
+  contactPage: {
+  "kicker": "Offizieller Concierge & Touristen-Helpline",
+  "title": "Offiziellen Concierge Kontaktieren",
+  "desc": "Fragen zu Öffnungszeiten der Festung, Taxi-Transfers ab Udaipur oder der Buchung lizenzierter deutschsprachiger Guides? Kontaktieren Sie direkt unser Team in Chittorgarh.",
+  "chatWa": "Über WhatsApp Kontaktieren",
+  "callNow": "Concierge Anrufen",
+  "phoneChannelTitle": "Direkter Telefonanruf",
+  "phoneChannelDesc": "Sofortige Verbindung mit der lokalen Einsatzleitung.",
+  "phoneBtn": "Support Anrufen",
+  "waChannelTitle": "WhatsApp Concierge",
+  "waChannelDesc": "Antworten in unter 5 Minuten mit Preisen und Verfügbarkeiten.",
+  "waBtn": "Über WhatsApp Chatten",
+  "emailChannelTitle": "Offizielle E-Mail",
+  "emailChannelDesc": "Für Gruppenreisen, Angebote und Kooperationen.",
+  "emailBtn": "E-Mail Senden",
+  "formKicker": "Direktanfrage",
+  "formTitle": "Schnelle Buchungsanfrage Senden",
+  "formDesc": "Geben Sie Ihre Reisedaten ein und verbinden Sie sich sofort via WhatsApp mit unserem Team.",
+  "nameLabel": "Ihr Vollständiger Name",
+  "namePlaceholder": "z.B. Michael Schmidt",
+  "phoneLabel": "Telefon- / WhatsApp-Nummer",
+  "phonePlaceholder": "z.B. +49 170 1234567",
+  "serviceLabel": "Gewünschter Service",
+  "dateLabel": "Reisedatum",
+  "requestsLabel": "Besondere Wünsche / Gruppengröße",
+  "requestsPlaceholder": "z.B. 4 Personen, Abholung Flughafen Udaipur, Unterstützung für Senioren...",
+  "submitBtn": "Auf WhatsApp Senden",
+  "reviewTitle": "Verifizierte Google-Bewertungen",
+  "reviewDesc": "Haben Sie mit uns gereist? Helfen Sie anderen Reisenden mit Ihrem ehrlichen Feedback auf Google.",
+  "reviewBtn": "Google-Bewertung Abgeben ★",
+  "standardsKicker": "Garantierte Standards",
+  "standardsTitle": "Warum bei Visit Chittorgarh Buchen?",
+  "standards": [
+    "Kostenloses versiegeltes Mineralwasser in jedem Fahrzeug",
+    "100% transparente Preise — NH27 Maut & Parkgebühren inklusive",
+    "Lizenzierte RTDC Historiker ohne lästige Shopping-Stopps",
+    "Pünktliche Abholung an Hotel, Bahnhof und Flughafen"
+  ]
+},
+
   attractionModal: {
     "about": "Über das Bauwerk",
     "bestTime": "Beste Besuchszeit",

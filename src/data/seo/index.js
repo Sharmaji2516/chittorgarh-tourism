@@ -244,6 +244,20 @@ export const CORE_SITE_ROUTES = [
     priority: '0.82',
   },
   {
+    path: '/about',
+    title: 'About Visit Chittorgarh | Local Concierge, Guides & Heritage Mission',
+    description: 'Learn how Visit Chittorgarh empowers authorized Mewari historians, clean transport & heritage preservation.',
+    changefreq: 'monthly',
+    priority: '0.85',
+  },
+  {
+    path: '/contact',
+    title: 'Contact Concierge Desk | Visit Chittorgarh',
+    description: 'Direct 24/7 phone and WhatsApp concierge support (+91 75974 51057) for private taxis, RTDC tour guides, and Rajasthan travel bookings.',
+    changefreq: 'monthly',
+    priority: '0.85',
+  },
+  {
     path: '/mission-services',
     title: 'About Visit Chittorgarh | Local Concierge, Guides & Heritage Mission',
     description: 'Learn how Visit Chittorgarh empowers authorized Mewari historians, clean transport & heritage preservation.',

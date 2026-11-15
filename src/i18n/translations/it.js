@@ -492,6 +492,46 @@ export const it = {
     ]
   },
 
+  contactPage: {
+  "kicker": "Concierge Ufficiale & Assistenza Turistica",
+  "title": "Contatta il Concierge Ufficiale",
+  "desc": "Domande su orari di apertura, noleggio taxi con autista da Udaipur o prenotazione di guide abilitate in lingua italiana? Contatta direttamente il nostro team locale a Chittorgarh.",
+  "chatWa": "Chatta su WhatsApp",
+  "callNow": "Chiama il Concierge",
+  "phoneChannelTitle": "Chiamata Telefonica Diretta",
+  "phoneChannelDesc": "Collegamento immediato con il nostro centralino sul posto.",
+  "phoneBtn": "Chiama l'Assistenza",
+  "waChannelTitle": "Concierge WhatsApp",
+  "waChannelDesc": "Risposte rapide in meno di 5 minuti con tariffe e disponibilità.",
+  "waBtn": "Chatta su WhatsApp",
+  "emailChannelTitle": "Email Ufficiale",
+  "emailChannelDesc": "Per viaggi di gruppo, preventivi e collaborazioni.",
+  "emailBtn": "Invia un'Email",
+  "formKicker": "Richiesta Diretta",
+  "formTitle": "Invia Richiesta di Prenotazione",
+  "formDesc": "Inserisci i dettagli del viaggio e mettiti in contatto immediato via WhatsApp con il nostro staff verificato.",
+  "nameLabel": "Nome e Cognome",
+  "namePlaceholder": "es. Marco Rossi",
+  "phoneLabel": "Numero di Telefono / WhatsApp",
+  "phonePlaceholder": "es. +39 340 1234567",
+  "serviceLabel": "Servizio Richiesto",
+  "dateLabel": "Data del Viaggio",
+  "requestsLabel": "Richieste Particolari / Numero Ospiti",
+  "requestsPlaceholder": "es. 2 adulti, pick-up aeroporto di Udaipur, guida parlante italiano...",
+  "submitBtn": "Invia su WhatsApp",
+  "reviewTitle": "Recensioni Verificate su Google",
+  "reviewDesc": "Hai viaggiato con noi? Aiuta altri visitatori a scoprire la vera ospitalità del Mewar lasciando una recensione su Google.",
+  "reviewBtn": "Lascia una Recensione su Google ★",
+  "standardsKicker": "Standard Garantiti",
+  "standardsTitle": "Perché Prenotare con Visit Chittorgarh?",
+  "standards": [
+    "Bottiglie d'acqua minerale sigillata in omaggio in ogni veicolo",
+    "Prezzi 100% trasparenti — Pedaggi autostradali e parcheggi inclusi",
+    "Guide abilitate RTDC senza tappe commerciali forzate",
+    "Pick-up puntuale da hotel, stazione ferroviaria o aeroporto"
+  ]
+},
+
   attractionModal: {
     "about": "Descrizione",
     "bestTime": "Periodo Migliore",
