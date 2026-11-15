@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Section from '../components/Section';
 import VendorCard from '../components/VendorCard';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Utensils, Coffee, LayoutGrid, Star, ArrowRight, X, CheckCircle2, MessageCircle, Compass } from 'lucide-react';
+import { Utensils, Coffee, LayoutGrid, Star, ArrowRight, X, CheckCircle2, MessageCircle, Compass, Sparkles } from 'lucide-react';
 import SEOHead from '../components/SEOHead';
 import { trackWhatsAppClick } from '../utils/analytics';
 import { useLanguage } from '../context/LanguageContext';
@@ -74,7 +74,7 @@ const FlavorsPage = ({ filteredVendors = [], filteredCafes = [], searchQuery }) 
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
-                <div className="text-center max-w-3xl mx-auto mb-12">
+                <div className="text-center max-w-3xl mx-auto mb-10">
                     <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#A65F3D] bg-[#EFE7D9] px-4 py-1.5 rounded-full inline-block mb-3">
                         {pageT.kicker || "Culinary Heritage of Mewar"}
                     </span>
@@ -84,6 +84,56 @@ const FlavorsPage = ({ filteredVendors = [], filteredCafes = [], searchQuery }) 
                     <p className="text-sm sm:text-base text-[#25231F]/70 leading-relaxed font-light">
                         {pageT.desc || "Savor the authentic cuisine of Mewar. From traditional royal feasts cooked with pure desi ghee to beloved street snacks and fort-view rooftop cafes."}
                     </p>
+                </div>
+
+                {/* Udaipur to Chittorgarh Day Trip & Authentic Dining Conversion Banner */}
+                <div className="bg-gradient-to-br from-[#25231F] via-[#2D2822] to-[#1C1A17] text-white p-6 sm:p-8 rounded-3xl border border-[#C49A32]/40 shadow-xl mb-12">
+                    <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+                        <div className="flex-1">
+                            <div className="inline-flex items-center gap-2 bg-[#C49A32]/15 border border-[#C49A32]/30 px-3 py-1 rounded-full text-[11px] font-bold text-[#C49A32] uppercase tracking-wider mb-3">
+                                <Sparkles className="w-3.5 h-3.5" />
+                                <span>Udaipur ⇄ Chittorgarh Day Tour with Authentic Dining</span>
+                            </div>
+                            <h3 className="text-xl sm:text-2xl font-serif font-black text-white leading-snug mb-2">
+                                🏰 Planning a Day Trip from Udaipur? Savor Authentic Mewari Dining &amp; Fort Tour!
+                            </h3>
+                            <p className="text-xs sm:text-sm text-white/75 leading-relaxed mb-4 max-w-2xl font-light">
+                                Experience authentic pure desi ghee Dal Baati Churma while touring India’s largest UNESCO Fort. Book a private sanitized AC Cab with official RTDC English guide &amp; verified lunch stop.
+                            </p>
+                            <div className="flex flex-wrap items-center gap-4 text-xs font-semibold text-white/90">
+                                <span className="flex items-center gap-1.5 text-emerald-400">
+                                    <CheckCircle2 className="w-4 h-4 shrink-0" />
+                                    <span>₹0 Advance Required — Pay after the tour!</span>
+                                </span>
+                                <span className="flex items-center gap-1.5 text-amber-300">
+                                    <CheckCircle2 className="w-4 h-4 shrink-0" />
+                                    <span>Tolls (NH27 Highway) &amp; Parking Included</span>
+                                </span>
+                                <span className="flex items-center gap-1.5 text-white/80">
+                                    <CheckCircle2 className="w-4 h-4 shrink-0" />
+                                    <span>Free Hotel / Airport Pickup &amp; Drop</span>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div className="w-full lg:w-auto shrink-0 flex flex-col sm:flex-row lg:flex-col gap-3 pt-4 lg:pt-0 border-t lg:border-t-0 border-white/10">
+                            <div className="text-left lg:text-right">
+                                <div className="text-[10px] uppercase font-bold text-[#C49A32] tracking-wider">All-Inclusive Fixed Rate</div>
+                                <div className="text-2xl sm:text-3xl font-serif font-black text-white">₹3,500 <span className="text-xs font-sans font-normal text-white/70">(~$42 USD)</span></div>
+                                <div className="text-[11px] text-white/60">Private AC Sedan Roundtrip</div>
+                            </div>
+                            <a
+                                href={`https://wa.me/917597451057?text=${encodeURIComponent("Namaste Visit Chittorgarh! I saw your Flavors page and would like to book a Private AC Cab & Guide from Udaipur with authentic Dal Baati lunch stop. Please share availability.")}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={() => trackWhatsAppClick('flavors_banner_wa', 'Private Cab & Guide')}
+                                className="py-3.5 px-6 bg-[#128C7E] hover:bg-[#0c6b60] text-white font-black rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg transition-transform active:scale-95"
+                            >
+                                <MessageCircle className="w-4 h-4 fill-white text-[#128C7E]" />
+                                <span>Book Private Cab on WhatsApp</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
 
                 {/* Filter Pills */}
