@@ -23,7 +23,13 @@ const ServiceDetailsPage = () => {
         else effectiveService = 'guide';
     }
 
-    const triggerPlanTrip = () => {
+    const WHATSAPP_NUMBER = '917597451057';
+  const handleWhatsApp = (serviceTitle) => {
+    if (typeof window === 'undefined') return;
+    const msg = `Hello, I am interested in the service: ${serviceTitle || effectiveService}. Please share details and rates.`;
+    trackWhatsAppClick(`service_${effectiveService}_whatsapp`);
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+  };
         window.dispatchEvent(new CustomEvent('openTripPlannerModal'));
     };
 
