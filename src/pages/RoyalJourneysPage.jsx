@@ -102,7 +102,7 @@ const RoyalJourneysPage = () => {
     const servicePrices = [
         { amount: "₹1,500", note: "Half Day (~$18 USD)" },
         { amount: "₹3,500", note: "Roundtrip (~$42 USD)" },
-        { amount: "From ₹2,400", note: "Per Night with Breakfast" },
+        { amount: "₹2,400", note: "Per Night with Breakfast" },
         { amount: "₹350", note: "Unlimited Thali / Person" },
         { amount: "₹1,200", note: "Sunset Rampart Session" }
     ];
@@ -266,67 +266,62 @@ const RoyalJourneysPage = () => {
                         ))}
                     </div>
                 ) : (
-                    /* On-Demand Services Grid */
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 mb-16">
+                    /* On-Demand Services Grid (Text-Only Luxury Cards) */
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
                         {onDemandServices.map((srv, idx) => {
                             const waUrl = getServiceWhatsAppUrl(srv);
                             return (
                                 <div
                                     key={idx}
-                                    className="bg-white rounded-3xl border border-[#EFE7D9] overflow-hidden shadow-heritage hover:border-[#C49A32] hover:-translate-y-1 transition-all group flex flex-col justify-between"
+                                    className="bg-white rounded-3xl p-6 sm:p-7 border border-[#EFE7D9] shadow-heritage hover:border-[#C49A32] hover:-translate-y-1 transition-all group flex flex-col justify-between"
                                 >
                                     <div>
-                                        <div className="h-60 relative overflow-hidden bg-[#25231F]">
-                                            <img
-                                                src={srv.image}
-                                                alt={srv.title}
-                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                                                loading="lazy"
-                                            />
-                                            {/* Gradient Scrim for readable text */}
-                                            <div className="absolute inset-0 bg-gradient-to-t from-[#25231F] via-[#25231F]/40 to-black/30 pointer-events-none" />
-
-                                            {/* Top Rating & Starting Price Pills */}
-                                            <span className="absolute top-3.5 left-3.5 bg-black/60 backdrop-blur-md text-amber-400 text-[11px] font-bold px-3 py-1 rounded-full flex items-center gap-1 border border-white/10 shadow-sm">
-                                                <Star className="w-3 h-3 fill-amber-400" />
-                                                <span>{srv.rating}</span>
-                                            </span>
-
-                                            <span className="absolute top-3.5 right-3.5 bg-[#C49A32] text-white text-[11px] font-black px-3.5 py-1 rounded-full shadow-lg tracking-wide">
-                                                {srv.price.amount}
-                                            </span>
-
-                                            {/* Title & Badge Overlaid on Bottom of Image */}
-                                            <div className="absolute bottom-3 left-4 right-4 text-white">
-                                                <span className="text-[#C49A32] text-[10px] font-bold uppercase tracking-wider block mb-0.5">
-                                                    {srv.badge}
-                                                </span>
-                                                <h3 className="text-xl sm:text-2xl font-serif font-black text-white leading-tight drop-shadow-sm">
-                                                    {srv.title}
-                                                </h3>
-                                                <p className="text-[11px] text-white/80 font-medium mt-0.5">
+                                        {/* Top Header: Icon & Transparent Price */}
+                                        <div className="flex items-center justify-between gap-3 mb-4">
+                                            <div className="w-12 h-12 rounded-2xl bg-[#C49A32]/10 border border-[#C49A32]/25 flex items-center justify-center text-[#C49A32] group-hover:scale-105 transition-transform">
+                                                <srv.icon className="w-6 h-6" />
+                                            </div>
+                                            <div className="text-right">
+                                                <div className="text-[10px] font-bold uppercase tracking-wider text-[#C49A32] leading-none mb-1">
+                                                    Starting From
+                                                </div>
+                                                <div className="text-lg sm:text-xl font-serif font-black text-[#25231F] leading-tight">
+                                                    {srv.price.amount}
+                                                </div>
+                                                <div className="text-[10px] text-[#25231F]/60 font-medium mt-0.5">
                                                     {srv.price.note}
-                                                </p>
+                                                </div>
                                             </div>
                                         </div>
 
-                                        <div className="p-5 sm:p-6">
-                                            <p className="text-xs text-[#25231F]/70 leading-relaxed mb-4">
-                                                {srv.desc}
-                                            </p>
+                                        {/* Badge & Title */}
+                                        <div className="mb-3">
+                                            <span className="inline-flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-[#C49A32] bg-[#EFE7D9]/60 px-3 py-1 rounded-full mb-2">
+                                                <span className="w-1.5 h-1.5 rounded-full bg-[#C49A32]"></span>
+                                                {srv.badge}
+                                            </span>
+                                            <h3 className="text-xl sm:text-2xl font-serif font-bold text-[#25231F] group-hover:text-[#A65F3D] transition-colors leading-snug">
+                                                {srv.title}
+                                            </h3>
+                                        </div>
 
-                                            <div className="space-y-2 bg-[#F8F5EF] p-3.5 rounded-2xl border border-[#EFE7D9] mb-2">
-                                                {srv.highlights.map((item, i) => (
-                                                    <div key={i} className="flex items-center gap-2 text-xs text-[#25231F]/85 font-medium">
-                                                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                                                        <span>{item}</span>
-                                                    </div>
-                                                ))}
-                                            </div>
+                                        <p className="text-xs text-[#25231F]/70 leading-relaxed mb-5">
+                                            {srv.desc}
+                                        </p>
+
+                                        {/* Value Highlights Checklist */}
+                                        <div className="space-y-2 bg-[#F8F5EF] p-4 rounded-2xl border border-[#EFE7D9]/80 mb-6">
+                                            {srv.highlights.map((item, i) => (
+                                                <div key={i} className="flex items-center gap-2.5 text-xs text-[#25231F]/85 font-medium">
+                                                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                                                    <span>{item}</span>
+                                                </div>
+                                            ))}
                                         </div>
                                     </div>
 
-                                    <div className="p-5 sm:p-6 pt-0 border-t border-[#EFE7D9]/60">
+                                    {/* Action: Direct WhatsApp CTA Only */}
+                                    <div className="pt-2">
                                         <a
                                             href={waUrl}
                                             target="_blank"
@@ -335,7 +330,7 @@ const RoyalJourneysPage = () => {
                                             className="w-full py-3.5 bg-[#128C7E] hover:bg-[#075E54] text-white font-black rounded-xl text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all active:scale-95"
                                         >
                                             <MessageCircle className="w-4 h-4 fill-white text-[#128C7E]" />
-                                            <span>Book on WhatsApp • {srv.price.amount}</span>
+                                            <span>Book on WhatsApp • Starting From {srv.price.amount}</span>
                                         </a>
                                     </div>
                                 </div>
