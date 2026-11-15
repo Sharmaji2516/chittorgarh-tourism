@@ -141,7 +141,7 @@ const HomePage = () => {
 
   const topAttractions = (attractionsT.items || []).map((att, idx) => ({
     ...att,
-    image: ATTRACTION_IMAGES[idx] || '/assets/images/vijay-stambh-new.webp',
+    image: att.image || ATTRACTION_IMAGES[idx] || '/assets/images/vijay-stambh-new.webp',
   }));
 
   const whyVisitIcons = [Landmark, Award, Sparkles, HeartHandshake];

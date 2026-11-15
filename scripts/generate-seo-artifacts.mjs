@@ -183,7 +183,7 @@ const injectRouteHtml = (templateHtml, entry) => {
   }
 
   const fallbackBody = buildSemanticFallbackBody(entry);
-  html = html.replace('<div id="root"></div>', `<div id="root">${fallbackBody}</div>`);
+  html = html.replace(/<div id="root">[\s\S]*?<\/div>/i, `<div id="root">${fallbackBody}</div>`);
   return html;
 };
 
