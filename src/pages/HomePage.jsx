@@ -13,6 +13,10 @@ import {
   Sparkles,
   ChevronRight,
   HeartHandshake,
+  ShieldCheck,
+  Car,
+  Droplets,
+  UserCheck,
 } from 'lucide-react';
 
 import Hero from '../components/Hero';
@@ -523,179 +527,294 @@ const HomePage = () => {
       {/* SECTION 6: Private Taxi & Transportation */}
       <section className="py-12 sm:py-16 lg:py-20 bg-[#EFE7D9]/40 border-y border-[#EFE7D9]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-14">
-            <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#A65F3D]">
-              {taxiT.kicker || 'Sanitized AC Fleet & Transfers'}
-            </span>
-            <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-[#25231F] mt-2">
+          {/* Header */}
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#EFE7D9] border border-[#C49A32]/30 text-[#A65F3D] text-xs font-bold uppercase tracking-[0.2em] mb-3 shadow-xs">
+              <ShieldCheck className="w-4 h-4 text-[#C49A32]" />
+              <span>{taxiT.kicker || 'Sanitized AC Fleet & Transfers'}</span>
+            </div>
+            <h2 className="text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-[#25231F] leading-tight">
               {taxiT.heading || 'Private Taxi & Cab Service'}
             </h2>
-            <p className="text-xs sm:text-sm text-[#25231F]/70 mt-3 leading-relaxed">
+            <p className="text-xs sm:text-sm text-[#25231F]/70 mt-3 max-w-2xl mx-auto leading-relaxed">
               {taxiT.desc ||
                 'Safe, sanitized private transfers with experienced local chauffeurs. Pickup from Udaipur Airport, Chittorgarh Railway Station, or your hotel doorstep.'}
             </p>
           </div>
 
           {/* International Anti-Scam & Trust Assurance Ribbon */}
-          <div className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 border border-[#EFE7D9] shadow-heritage mb-8 sm:mb-10 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-            <div className="flex flex-col items-center gap-1.5 p-2">
-              <span className="w-9 h-9 rounded-full bg-emerald-100 text-emerald-800 flex items-center justify-center text-base">🛡️</span>
-              <span className="text-xs font-bold text-[#25231F]">Zero-Commission Guarantee</span>
-              <span className="text-[10px] text-[#25231F]/65 leading-tight">100% No Forced Shopping Stops</span>
+          <div className="bg-white rounded-3xl p-5 sm:p-7 border border-[#EFE7D9] shadow-heritage mb-10 sm:mb-12">
+            <div className="text-center mb-5 pb-3 border-b border-[#EFE7D9]/60">
+              <span className="text-[11px] font-bold uppercase tracking-widest text-[#C49A32]">
+                Our Foreign &amp; Domestic Traveler Guarantee
+              </span>
             </div>
-            <div className="flex flex-col items-center gap-1.5 p-2">
-              <span className="w-9 h-9 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center text-base">⭐</span>
-              <span className="text-xs font-bold text-[#25231F]">English Chauffeurs</span>
-              <span className="text-[10px] text-[#25231F]/65 leading-tight">Courteous, Punctual &amp; Licensed</span>
-            </div>
-            <div className="flex flex-col items-center gap-1.5 p-2">
-              <span className="w-9 h-9 rounded-full bg-blue-100 text-blue-800 flex items-center justify-center text-base">🚗</span>
-              <span className="text-xs font-bold text-[#25231F]">Rear Seatbelts &amp; Dual AC</span>
-              <span className="text-[10px] text-[#25231F]/65 leading-tight">Western Safety Standards</span>
-            </div>
-            <div className="flex flex-col items-center gap-1.5 p-2">
-              <span className="w-9 h-9 rounded-full bg-purple-100 text-purple-800 flex items-center justify-center text-base">💧</span>
-              <span className="text-xs font-bold text-[#25231F]">Mineral Water Included</span>
-              <span className="text-[10px] text-[#25231F]/65 leading-tight">Complimentary on all Transfers</span>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
+              <div className="flex flex-col items-center text-center p-3 rounded-2xl bg-[#F8F5EF]/60 hover:bg-[#F8F5EF] transition-colors border border-[#EFE7D9]/50">
+                <div className="w-11 h-11 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-700 flex items-center justify-center mb-2.5 shadow-xs">
+                  <ShieldCheck className="w-5 h-5" />
+                </div>
+                <span className="text-xs sm:text-sm font-bold text-[#25231F]">Zero-Commission Guarantee</span>
+                <span className="text-[11px] text-[#25231F]/65 mt-0.5">100% No Forced Shopping Stops</span>
+              </div>
+
+              <div className="flex flex-col items-center text-center p-3 rounded-2xl bg-[#F8F5EF]/60 hover:bg-[#F8F5EF] transition-colors border border-[#EFE7D9]/50">
+                <div className="w-11 h-11 rounded-2xl bg-amber-50 border border-amber-200 text-amber-700 flex items-center justify-center mb-2.5 shadow-xs">
+                  <UserCheck className="w-5 h-5" />
+                </div>
+                <span className="text-xs sm:text-sm font-bold text-[#25231F]">English Chauffeurs</span>
+                <span className="text-[11px] text-[#25231F]/65 mt-0.5">Courteous, Punctual &amp; Licensed</span>
+              </div>
+
+              <div className="flex flex-col items-center text-center p-3 rounded-2xl bg-[#F8F5EF]/60 hover:bg-[#F8F5EF] transition-colors border border-[#EFE7D9]/50">
+                <div className="w-11 h-11 rounded-2xl bg-blue-50 border border-blue-200 text-blue-700 flex items-center justify-center mb-2.5 shadow-xs">
+                  <Car className="w-5 h-5" />
+                </div>
+                <span className="text-xs sm:text-sm font-bold text-[#25231F]">Rear Seatbelts &amp; Dual AC</span>
+                <span className="text-[11px] text-[#25231F]/65 mt-0.5">Western Safety Standards</span>
+              </div>
+
+              <div className="flex flex-col items-center text-center p-3 rounded-2xl bg-[#F8F5EF]/60 hover:bg-[#F8F5EF] transition-colors border border-[#EFE7D9]/50">
+                <div className="w-11 h-11 rounded-2xl bg-purple-50 border border-purple-200 text-purple-700 flex items-center justify-center mb-2.5 shadow-xs">
+                  <Droplets className="w-5 h-5" />
+                </div>
+                <span className="text-xs sm:text-sm font-bold text-[#25231F]">Mineral Water Included</span>
+                <span className="text-[11px] text-[#25231F]/65 mt-0.5">Complimentary on all Transfers</span>
+              </div>
             </div>
           </div>
 
+          {/* 3 Vehicle Fleet Cards with Authentic Photos & Starting Rates */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-            {/* Sedan */}
+            {/* 1. Sedan */}
             {taxiT.sedan && (
-              <div className="bg-white rounded-2xl sm:rounded-3xl border border-[#EFE7D9] p-5 sm:p-6 shadow-heritage hover:border-[#C49A32] transition-all flex flex-col justify-between">
+              <div className="bg-white rounded-3xl border border-[#EFE7D9] overflow-hidden shadow-heritage hover:border-[#C49A32] hover:-translate-y-1 transition-all flex flex-col justify-between group">
                 <div>
-                  <div className="flex items-center justify-between gap-2 mb-2">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#C49A32] bg-[#EFE7D9] px-2.5 py-1 rounded-md">
+                  {/* Vehicle Image Container */}
+                  <div className="h-44 sm:h-48 relative overflow-hidden bg-gradient-to-br from-[#F8F5EF] to-[#EFE7D9]">
+                    <img
+                      src="/assets/images/sedan_taxi.webp"
+                      alt="Prime Sedan Swift Dzire or Etios"
+                      loading="lazy"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                    <span className="absolute top-3 left-3 bg-[#25231F]/85 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-sm">
                       {taxiT.sedan.capacity}
                     </span>
-                    {taxiT.sedan.price && (
-                      <span className="text-xs font-black text-[#A65F3D] bg-[#F8F5EF] px-2.5 py-1 rounded-md border border-[#EFE7D9]">
-                        {taxiT.sedan.price}
-                      </span>
-                    )}
+                    <span className="absolute bottom-2.5 right-3 bg-white/90 backdrop-blur-md text-[#25231F] text-[10px] font-bold px-2.5 py-0.5 rounded-md shadow-xs">
+                      ★ 4.9 (140+ Trips)
+                    </span>
                   </div>
-                  <h3 className="text-lg sm:text-xl font-serif font-bold text-[#25231F] mt-1 mb-1">
-                    {taxiT.sedan.name}
-                  </h3>
-                  {taxiT.sedan.priceSub && (
-                    <p className="text-[10px] text-[#A65F3D] font-semibold mb-2">
-                      {taxiT.sedan.priceSub}
+
+                  <div className="p-6">
+                    {/* Price Pill */}
+                    {taxiT.sedan.price && (
+                      <div className="mb-3">
+                        <span className="inline-block text-xs font-black text-[#A65F3D] bg-[#F8F5EF] px-3 py-1.5 rounded-lg border border-[#EFE7D9]">
+                          {taxiT.sedan.price}
+                        </span>
+                      </div>
+                    )}
+
+                    <h3 className="text-xl font-serif font-bold text-[#25231F] group-hover:text-[#A65F3D] transition-colors mb-1">
+                      {taxiT.sedan.name}
+                    </h3>
+                    {taxiT.sedan.priceSub && (
+                      <p className="text-[11px] text-[#A65F3D] font-semibold mb-3">
+                        {taxiT.sedan.priceSub}
+                      </p>
+                    )}
+                    <p className="text-xs text-[#25231F]/70 leading-relaxed mb-5">
+                      {taxiT.sedan.desc}
                     </p>
-                  )}
-                  <p className="text-xs text-[#25231F]/70 leading-relaxed mb-4">
-                    {taxiT.sedan.desc}
-                  </p>
-                  <ul className="text-xs text-[#25231F]/80 space-y-1.5 mb-6">
-                    {(taxiT.sedan.features || []).map((f, i) => (
-                      <li key={i}>• {f}</li>
-                    ))}
-                  </ul>
+
+                    <div className="pt-4 border-t border-[#EFE7D9]/60">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#C49A32] block mb-2">
+                        Included In Your Ride:
+                      </span>
+                      <ul className="text-xs text-[#25231F]/80 space-y-2">
+                        {(taxiT.sedan.features || []).map((f, i) => (
+                          <li key={i} className="flex items-start gap-2">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                            <span>{f}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
                 </div>
-                <button
-                  onClick={() =>
-                    triggerPlanTrip({
-                      itemName: 'Prime Sedan Taxi (Dzire / Etios)',
-                      category: 'Taxi',
-                    })
-                  }
-                  className="w-full py-3 bg-[#25231F] hover:bg-[#A65F3D] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors min-h-[44px]"
-                >
-                  {taxiT.sedan.btn || 'Book Sedan'}
-                </button>
+
+                <div className="p-6 pt-0">
+                  <button
+                    onClick={() =>
+                      triggerPlanTrip({
+                        itemName: 'Prime Sedan Taxi (Dzire / Etios)',
+                        category: 'Taxi',
+                      })
+                    }
+                    className="w-full py-3.5 bg-[#25231F] hover:bg-[#A65F3D] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors shadow-sm min-h-[46px] flex items-center justify-center gap-2"
+                  >
+                    <MessageCircle className="w-4 h-4 text-emerald-400" />
+                    <span>{taxiT.sedan.btn || 'Book Sedan'}</span>
+                  </button>
+                </div>
               </div>
             )}
 
-            {/* SUV */}
+            {/* 2. SUV (Innova Crysta) */}
             {taxiT.suv && (
-              <div className="bg-white rounded-2xl sm:rounded-3xl border-2 border-[#C49A32] p-5 sm:p-6 shadow-heritage transition-all flex flex-col justify-between relative">
-                <span className="absolute -top-3.5 right-6 bg-[#C49A32] text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-sm">
-                  {taxiT.suv.badge || 'Most Popular'}
+              <div className="bg-white rounded-3xl border-2 border-[#C49A32] overflow-hidden shadow-heritage hover:-translate-y-1 transition-all flex flex-col justify-between relative group">
+                <span className="absolute top-3 right-3 z-10 bg-[#C49A32] text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-md">
+                  {taxiT.suv.badge || 'Foreign Guests Favorite'}
                 </span>
+
                 <div>
-                  <div className="flex items-center justify-between gap-2 mb-2">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#A65F3D] bg-[#EFE7D9] px-2.5 py-1 rounded-md">
+                  {/* Vehicle Image Container */}
+                  <div className="h-44 sm:h-48 relative overflow-hidden bg-gradient-to-br from-[#F8F5EF] to-[#EFE7D9]">
+                    <img
+                      src="/assets/images/suv_taxi.webp"
+                      alt="Royal SUV Innova Crysta"
+                      loading="lazy"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                    <span className="absolute top-3 left-3 bg-[#A65F3D] text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-sm">
                       {taxiT.suv.capacity}
                     </span>
-                    {taxiT.suv.price && (
-                      <span className="text-xs font-black text-[#A65F3D] bg-[#F8F5EF] px-2.5 py-1 rounded-md border border-[#C49A32]/40">
-                        {taxiT.suv.price}
-                      </span>
-                    )}
+                    <span className="absolute bottom-2.5 right-3 bg-white/90 backdrop-blur-md text-[#25231F] text-[10px] font-bold px-2.5 py-0.5 rounded-md shadow-xs">
+                      ★ 4.9 (220+ Trips)
+                    </span>
                   </div>
-                  <h3 className="text-lg sm:text-xl font-serif font-bold text-[#25231F] mt-1 mb-1">
-                    {taxiT.suv.name}
-                  </h3>
-                  {taxiT.suv.priceSub && (
-                    <p className="text-[10px] text-[#A65F3D] font-semibold mb-2">
-                      {taxiT.suv.priceSub}
+
+                  <div className="p-6">
+                    {/* Price Pill */}
+                    {taxiT.suv.price && (
+                      <div className="mb-3">
+                        <span className="inline-block text-xs font-black text-[#A65F3D] bg-[#F8F5EF] px-3 py-1.5 rounded-lg border border-[#C49A32]/40 shadow-xs">
+                          {taxiT.suv.price}
+                        </span>
+                      </div>
+                    )}
+
+                    <h3 className="text-xl font-serif font-bold text-[#25231F] group-hover:text-[#A65F3D] transition-colors mb-1">
+                      {taxiT.suv.name}
+                    </h3>
+                    {taxiT.suv.priceSub && (
+                      <p className="text-[11px] text-[#A65F3D] font-semibold mb-3">
+                        {taxiT.suv.priceSub}
+                      </p>
+                    )}
+                    <p className="text-xs text-[#25231F]/70 leading-relaxed mb-5">
+                      {taxiT.suv.desc}
                     </p>
-                  )}
-                  <p className="text-xs text-[#25231F]/70 leading-relaxed mb-4">
-                    {taxiT.suv.desc}
-                  </p>
-                  <ul className="text-xs text-[#25231F]/80 space-y-1.5 mb-6">
-                    {(taxiT.suv.features || []).map((f, i) => (
-                      <li key={i}>• {f}</li>
-                    ))}
-                  </ul>
+
+                    <div className="pt-4 border-t border-[#EFE7D9]/60">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#C49A32] block mb-2">
+                        Included In Your Ride:
+                      </span>
+                      <ul className="text-xs text-[#25231F]/80 space-y-2">
+                        {(taxiT.suv.features || []).map((f, i) => (
+                          <li key={i} className="flex items-start gap-2">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                            <span>{f}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
                 </div>
-                <button
-                  onClick={() =>
-                    triggerPlanTrip({
-                      itemName: 'Royal SUV Taxi (Innova / Ertiga)',
-                      category: 'Taxi',
-                    })
-                  }
-                  className="w-full py-3 bg-[#C49A32] hover:bg-[#b08728] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors shadow-sm min-h-[44px]"
-                >
-                  {taxiT.suv.btn || 'Book SUV'}
-                </button>
+
+                <div className="p-6 pt-0">
+                  <button
+                    onClick={() =>
+                      triggerPlanTrip({
+                        itemName: 'Royal SUV Taxi (Innova Crysta)',
+                        category: 'Taxi',
+                      })
+                    }
+                    className="w-full py-3.5 bg-[#C49A32] hover:bg-[#b08728] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors shadow-md min-h-[46px] flex items-center justify-center gap-2"
+                  >
+                    <MessageCircle className="w-4 h-4 text-white" />
+                    <span>{taxiT.suv.btn || 'Book SUV'}</span>
+                  </button>
+                </div>
               </div>
             )}
 
-            {/* Tempo Traveller */}
+            {/* 3. Tempo Traveller */}
             {taxiT.tempo && (
-              <div className="bg-white rounded-2xl sm:rounded-3xl border border-[#EFE7D9] p-5 sm:p-6 shadow-heritage hover:border-[#C49A32] transition-all flex flex-col justify-between">
+              <div className="bg-white rounded-3xl border border-[#EFE7D9] overflow-hidden shadow-heritage hover:border-[#C49A32] hover:-translate-y-1 transition-all flex flex-col justify-between group">
                 <div>
-                  <div className="flex items-center justify-between gap-2 mb-2">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#526B50] bg-[#EFE7D9] px-2.5 py-1 rounded-md">
+                  {/* Vehicle Image Container */}
+                  <div className="h-44 sm:h-48 relative overflow-hidden bg-gradient-to-br from-[#F8F5EF] to-[#EFE7D9]">
+                    <img
+                      src="/assets/images/tempo_traveller.webp"
+                      alt="Luxury Tempo Traveller"
+                      loading="lazy"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                    <span className="absolute top-3 left-3 bg-[#526B50] text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-sm">
                       {taxiT.tempo.capacity}
                     </span>
-                    {taxiT.tempo.price && (
-                      <span className="text-xs font-black text-[#526B50] bg-[#F8F5EF] px-2.5 py-1 rounded-md border border-[#EFE7D9]">
-                        {taxiT.tempo.price}
-                      </span>
-                    )}
+                    <span className="absolute bottom-2.5 right-3 bg-white/90 backdrop-blur-md text-[#25231F] text-[10px] font-bold px-2.5 py-0.5 rounded-md shadow-xs">
+                      ★ 4.9 (95+ Trips)
+                    </span>
                   </div>
-                  <h3 className="text-lg sm:text-xl font-serif font-bold text-[#25231F] mt-1 mb-1">
-                    {taxiT.tempo.name}
-                  </h3>
-                  {taxiT.tempo.priceSub && (
-                    <p className="text-[10px] text-[#526B50] font-semibold mb-2">
-                      {taxiT.tempo.priceSub}
+
+                  <div className="p-6">
+                    {/* Price Pill */}
+                    {taxiT.tempo.price && (
+                      <div className="mb-3">
+                        <span className="inline-block text-xs font-black text-[#526B50] bg-[#F8F5EF] px-3 py-1.5 rounded-lg border border-[#EFE7D9]">
+                          {taxiT.tempo.price}
+                        </span>
+                      </div>
+                    )}
+
+                    <h3 className="text-xl font-serif font-bold text-[#25231F] group-hover:text-[#A65F3D] transition-colors mb-1">
+                      {taxiT.tempo.name}
+                    </h3>
+                    {taxiT.tempo.priceSub && (
+                      <p className="text-[11px] text-[#526B50] font-semibold mb-3">
+                        {taxiT.tempo.priceSub}
+                      </p>
+                    )}
+                    <p className="text-xs text-[#25231F]/70 leading-relaxed mb-5">
+                      {taxiT.tempo.desc}
                     </p>
-                  )}
-                  <p className="text-xs text-[#25231F]/70 leading-relaxed mb-4">
-                    {taxiT.tempo.desc}
-                  </p>
-                  <ul className="text-xs text-[#25231F]/80 space-y-1.5 mb-6">
-                    {(taxiT.tempo.features || []).map((f, i) => (
-                      <li key={i}>• {f}</li>
-                    ))}
-                  </ul>
+
+                    <div className="pt-4 border-t border-[#EFE7D9]/60">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-[#C49A32] block mb-2">
+                        Included In Your Ride:
+                      </span>
+                      <ul className="text-xs text-[#25231F]/80 space-y-2">
+                        {(taxiT.tempo.features || []).map((f, i) => (
+                          <li key={i} className="flex items-start gap-2">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                            <span>{f}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
                 </div>
-                <button
-                  onClick={() =>
-                    triggerPlanTrip({
-                      itemName: 'Luxury Tempo Traveller (Group)',
-                      category: 'Taxi',
-                    })
-                  }
-                  className="w-full py-3 bg-[#25231F] hover:bg-[#A65F3D] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors min-h-[44px]"
-                >
-                  {taxiT.tempo.btn || 'Book Tempo Traveller'}
-                </button>
+
+                <div className="p-6 pt-0">
+                  <button
+                    onClick={() =>
+                      triggerPlanTrip({
+                        itemName: 'Luxury Tempo Traveller (Group)',
+                        category: 'Taxi',
+                      })
+                    }
+                    className="w-full py-3.5 bg-[#25231F] hover:bg-[#A65F3D] text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-colors shadow-sm min-h-[46px] flex items-center justify-center gap-2"
+                  >
+                    <MessageCircle className="w-4 h-4 text-emerald-400" />
+                    <span>{taxiT.tempo.btn || 'Book Tempo Traveller'}</span>
+                  </button>
+                </div>
               </div>
             )}
           </div>
