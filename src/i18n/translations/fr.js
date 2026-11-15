@@ -368,10 +368,6 @@ export const fr = {
         "desc": "Authentique Dal Baati Churma préparé au pur beurre desi ghee."
       },
       {
-        "title": "Circuit Artisans & Textiles",
-        "desc": "Découvrez l’impression sur tissu d’Akola et l’artisanat d’art Thewa."
-      },
-      {
         "title": "Séance Photo au Fort",
         "desc": "Portraits professionnels et prises de vue au coucher du soleil sur les remparts."
       }

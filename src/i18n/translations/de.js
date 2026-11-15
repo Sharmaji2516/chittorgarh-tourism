@@ -368,10 +368,6 @@ export const de = {
         "desc": "Authentisches Dal Baati Churma, zubereitet mit reinem Desi-Ghee."
       },
       {
-        "title": "Handwerks- & Textiltour",
-        "desc": "Besuch traditioneller Akola-Stoffdrucker und Thewa-Goldschmiede."
-      },
-      {
         "title": "Festungs-Fotografie",
         "desc": "Professionelle Porträts und Sonnenuntergangs-Shootings auf den Mauern."
       }

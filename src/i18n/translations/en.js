@@ -374,10 +374,6 @@ export const en = {
         "desc": "Authentic Dal Baati Churma cooked in pure desi ghee."
       },
       {
-        "title": "Artisan & Textile Tour",
-        "desc": "Explore local Daabu mud-resist block printers & Thewa craft."
-      },
-      {
         "title": "Fort Photography",
         "desc": "Professional portraits & sunset photoshoot atop the ramparts."
       }

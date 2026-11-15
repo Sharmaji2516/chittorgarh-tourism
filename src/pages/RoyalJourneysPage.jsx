@@ -79,19 +79,37 @@ const RoyalJourneysPage = () => {
         { title: "Private Taxi / Cab", desc: "Sanitized AC Sedans, Innova Crysta & Tempo Travellers." },
         { title: "Heritage Haveli Stay", desc: "Handpicked royal havelis and boutique resorts." },
         { title: "Traditional Dining", desc: "Authentic Dal Baati Churma cooked in pure desi ghee." },
-        { title: "Artisan & Textile Tour", desc: "Explore local Daabu mud-resist block printers & Thewa craft." },
         { title: "Fort Photography", desc: "Professional portraits & sunset photoshoot atop the ramparts." }
     ];
 
-    const serviceIcons = [Map, Car, Hotel, Utensils, Coffee, Camera];
+    const serviceIcons = [Map, Car, Hotel, Utensils, Camera];
     const serviceLinks = [
         "/service/guide",
         "/service/taxi",
         "/stays",
         "/flavors",
-        "/vocal-for-local",
         "/service/photographer"
     ];
+
+    const getServiceWhatsAppUrl = (srv) => {
+        const title = srv?.title || 'Tourism Service';
+        const lower = title.toLowerCase();
+        let message = `Namaste Visit Chittorgarh! I am interested in booking *${title}*. Please share rates, availability, and full details.`;
+
+        if (lower.includes('guide')) {
+            message = `Namaste Visit Chittorgarh! I would like to book an *Authorized Mewari Tour Guide* for Chittorgarh Fort. Please share guide credentials, rates, and availability.`;
+        } else if (lower.includes('taxi') || lower.includes('cab')) {
+            message = `Namaste Visit Chittorgarh! I need a *Private AC Taxi / Cab* for Chittorgarh & Udaipur. Please share vehicle options (Sedan/SUV), fixed pricing, and booking details.`;
+        } else if (lower.includes('haveli') || lower.includes('stay') || lower.includes('hotel')) {
+            message = `Namaste Visit Chittorgarh! I am inquiring about *Heritage Haveli & Boutique Stay* booking in Chittorgarh. Please share best recommendations and tariff.`;
+        } else if (lower.includes('dining') || lower.includes('bhojan') || lower.includes('dal baati') || lower.includes('food')) {
+            message = `Namaste Visit Chittorgarh! I would like to book a *Traditional Mewari Dining (Dal Baati Churma)* authentic royal experience. Please share location and reservation details.`;
+        } else if (lower.includes('photo') || lower.includes('shoot') || lower.includes('camera')) {
+            message = `Namaste Visit Chittorgarh! I want to book a *Fort Photography & Sunset Shoot* session at Chittorgarh Fort. Please share photographer portfolio, packages, and charges.`;
+        }
+
+        return `https://wa.me/917597451057?text=${encodeURIComponent(message)}`;
+    };
 
     const onDemandServices = rawServices.map((srv, idx) => ({
         ...srv,
@@ -212,29 +230,48 @@ const RoyalJourneysPage = () => {
                 ) : (
                     /* On-Demand Services Grid */
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-                        {onDemandServices.map((srv, idx) => (
-                            <NavLink
-                                key={idx}
-                                to={getLocalizedPath(srv.link, lang)}
-                                className="bg-white rounded-3xl p-8 border border-[#EFE7D9] shadow-heritage hover:border-[#C49A32] hover:-translate-y-1 transition-all group flex flex-col justify-between"
-                            >
-                                <div>
-                                    <div className="w-14 h-14 rounded-2xl bg-[#C49A32]/10 border border-[#C49A32]/25 flex items-center justify-center text-[#C49A32] mb-5 group-hover:scale-110 transition-transform">
-                                        <srv.icon className="w-7 h-7" />
+                        {onDemandServices.map((srv, idx) => {
+                            const waUrl = getServiceWhatsAppUrl(srv);
+                            return (
+                                <div
+                                    key={idx}
+                                    className="bg-white rounded-3xl p-7 sm:p-8 border border-[#EFE7D9] shadow-heritage hover:border-[#C49A32] hover:-translate-y-1 transition-all group flex flex-col justify-between"
+                                >
+                                    <div>
+                                        <div className="w-14 h-14 rounded-2xl bg-[#C49A32]/10 border border-[#C49A32]/25 flex items-center justify-center text-[#C49A32] mb-5 group-hover:scale-110 transition-transform">
+                                            <srv.icon className="w-7 h-7" />
+                                        </div>
+                                        <h3 className="text-xl font-serif font-bold text-[#25231F] group-hover:text-[#A65F3D] transition-colors mb-2">
+                                            {srv.title}
+                                        </h3>
+                                        <p className="text-xs text-[#25231F]/70 leading-relaxed mb-6">
+                                            {srv.desc}
+                                        </p>
                                     </div>
-                                    <h3 className="text-xl font-serif font-bold text-[#25231F] group-hover:text-[#A65F3D] transition-colors mb-2">
-                                        {srv.title}
-                                    </h3>
-                                    <p className="text-xs text-[#25231F]/70 leading-relaxed mb-6">
-                                        {srv.desc}
-                                    </p>
+
+                                    <div className="pt-4 border-t border-[#EFE7D9]/60 flex flex-col gap-2.5">
+                                        <a
+                                            href={waUrl}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            onClick={() => trackWhatsAppClick('ondemand_service_wa', srv.title)}
+                                            className="w-full py-3 bg-[#128C7E] hover:bg-[#0e7467] text-white rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-sm transition-all active:scale-95"
+                                        >
+                                            <MessageCircle className="w-4 h-4" />
+                                            <span>WhatsApp Inquiry &amp; Booking</span>
+                                        </a>
+
+                                        <NavLink
+                                            to={getLocalizedPath(srv.link, lang)}
+                                            className="flex items-center justify-center text-[11px] font-bold text-[#25231F]/60 hover:text-[#C49A32] gap-1 py-1 transition-colors"
+                                        >
+                                            <span>{pageT.learnMore || "View Full Details"}</span>
+                                            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                                        </NavLink>
+                                    </div>
                                 </div>
-                                <div className="flex items-center text-xs font-bold text-[#C49A32] group-hover:text-[#A65F3D] gap-1">
-                                    <span>{pageT.learnMore || "Learn More & Reserve"}</span>
-                                    <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                                </div>
-                            </NavLink>
-                        ))}
+                            );
+                        })}
                     </div>
                 )}
 

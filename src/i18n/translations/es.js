@@ -368,10 +368,6 @@ export const es = {
         "desc": "Auténtico Dal Baati Churma elaborado con puro ghee artesanal."
       },
       {
-        "title": "Ruta Textil y Artesanía",
-        "desc": "Visite a los maestros del estampado en madera de Akola y orfebrería Thewa."
-      },
-      {
         "title": "Sesión de Fotos en el Fuerte",
         "desc": "Retratos profesionales y fotos al atardecer sobre las murallas."
       }

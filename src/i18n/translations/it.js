@@ -368,10 +368,6 @@ export const it = {
         "desc": "Autentico Dal Baati Churma cucinato nel puro burro chiarificato ghee."
       },
       {
-        "title": "Tour dell’Artigianato e Tessuti",
-        "desc": "Incontra i maestri della stampa Akola e i raffinati orafi Thewa."
-      },
-      {
         "title": "Servizio Fotografico al Forte",
         "desc": "Ritratti professionali e scatti al tramonto lungo le maestose mura."
       }
