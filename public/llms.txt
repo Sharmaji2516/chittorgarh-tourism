@@ -57,3 +57,4 @@ Visit Chittorgarh is the premier destination management platform and travel conc
 - **Location:** Chittorgarh Fort Road, Chittorgarh, Rajasthan 312021, India
 - **Payment Methods:** Cash, UPI, Credit Card, Bank Transfer, PayPal
 - **Currencies Accepted:** USD, EUR, GBP, AUD, INR
+
