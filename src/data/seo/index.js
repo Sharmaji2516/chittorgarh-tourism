@@ -139,6 +139,13 @@ export const CORE_SITE_ROUTES = [
     priority: '0.95',
   },
   {
+    path: '/pushkar-travel-guide',
+    title: 'Pushkar Travel Guide 2026–27 | Hotels, Taxi, Sightseeing & Tours',
+    description: 'Explore Pushkar, Rajasthan with our complete travel guide. Discover Brahma Temple, Pushkar Lake, best hotels, sightseeing, taxi services and travel routes to Chittorgarh and Udaipur.',
+    changefreq: 'weekly',
+    priority: '0.94',
+  },
+  {
     path: '/royal-journeys',
     title: 'Chittorgarh Tour Packages | Curated Mewar Heritage Itineraries',
     description: 'Browse curated 1-day, 2-day, and 3-day Chittorgarh Fort & Rajasthan heritage tour packages with authorized guides and private AC cabs.',

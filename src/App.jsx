@@ -36,6 +36,7 @@ const ChittorgarhTwoDaysTour = lazy(() => import('./pages/seo/ChittorgarhTwoDays
 const ChittorgarhThreeDaysTour = lazy(() => import('./pages/seo/ChittorgarhThreeDaysTour'));
 const PlacesToVisitPage = lazy(() => import('./pages/seo/PlacesToVisitPage'));
 const ChittorgarhTravelGuidePage = lazy(() => import('./pages/seo/ChittorgarhTravelGuidePage'));
+const PushkarTravelGuidePage = lazy(() => import('./pages/seo/PushkarTravelGuidePage'));
 const SEODirectoryPage = lazy(() => import('./pages/seo/SEODirectoryPage'));
 const SEODynamicPage = lazy(() => import('./pages/seo/SEODynamicPage'));
 
@@ -202,6 +203,10 @@ const MainContent = () => {
       {
         path: 'chittorgarh-travel-guide',
         element: <ChittorgarhTravelGuidePage />,
+      },
+      {
+        path: 'pushkar-travel-guide',
+        element: <PushkarTravelGuidePage />,
       },
       { path: 'destinations-and-routes', element: <SEODirectoryPage /> },
 

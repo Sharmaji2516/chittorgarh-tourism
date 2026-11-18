@@ -247,6 +247,14 @@ const Footer = () => {
               </li>
               <li>
                 <NavLink
+                  to={getHref('/pushkar-travel-guide')}
+                  className="hover:text-[#C49A32] transition-colors"
+                >
+                  {lang === 'hi' ? 'पुष्कर यात्रा गाइड (होटल व टैक्सी)' : 'Pushkar Travel Guide (Hotels & Taxi)'}
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
                   to={getHref('/destinations-and-routes')}
                   className="hover:text-[#C49A32] transition-colors font-semibold text-[#DFBA5A]"
                 >
