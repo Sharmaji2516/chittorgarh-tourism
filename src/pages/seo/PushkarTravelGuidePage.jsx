@@ -18,6 +18,9 @@ import {
   ExternalLink,
   MessageCircle,
   HelpCircle,
+  Heart,
+  Coffee,
+  Navigation,
 } from 'lucide-react';
 import SEOHead from '../../components/SEOHead';
 import { useLanguage } from '../../context/LanguageContext';
@@ -49,7 +52,7 @@ const PushkarTravelGuidePage = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const message = `Namaste Visit Chittorgarh! I am inquiring from Pushkar Travel Guide:%0A%0A👤 Name: ${encodeURIComponent(formState.name)}%0A📞 Phone: ${encodeURIComponent(formState.phone)}%0A📅 Travel Date: ${encodeURIComponent(formState.date)}%0A👥 Guests: ${encodeURIComponent(formState.guests)}%0A🚗 Service: ${encodeURIComponent(formState.service)}%0A%0APlease share availability and best quote.`;
+    const message = `Shalom / Namaste Visit Chittorgarh!%0A%0AInquiring from Pushkar Travel Guide:%0A👤 Name: ${encodeURIComponent(formState.name)}%0A📞 Phone: ${encodeURIComponent(formState.phone)}%0A📅 Travel Date: ${encodeURIComponent(formState.date)}%0A👥 Guests: ${encodeURIComponent(formState.guests)}%0A🚗 Service: ${encodeURIComponent(formState.service)}%0A%0APlease share availability and best quote.`;
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
   };
 
@@ -75,10 +78,10 @@ const PushkarTravelGuidePage = () => {
       {
         '@context': 'https://schema.org',
         '@type': 'TouristDestination',
-        name: 'Pushkar',
+        name: 'Pushkar, Rajasthan',
         description: content.seo.description,
         url: pageUrl,
-        touristType: ['Spiritual Tourism', 'Heritage Tourism', 'Cultural Tourism', 'Desert Safari'],
+        touristType: ['Spiritual Tourism', 'Heritage Tourism', 'Cultural Tourism', 'Desert Safari', 'Backpacker Tourism'],
         geo: {
           '@type': 'GeoCoordinates',
           latitude: '26.4899',
@@ -135,14 +138,14 @@ const PushkarTravelGuidePage = () => {
 
         {/* ─── Hero Section ────────────────────────────────────────── */}
         <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-[#1C1A17] via-[#2A2621] to-[#1C1A17] text-white p-8 sm:p-14 lg:p-16 mb-16 shadow-2xl border border-[#C49A32]/30">
-          <div className="relative z-10 max-w-3xl">
+          <div className="relative z-10 max-w-4xl">
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest bg-[#C49A32]/20 border border-[#C49A32]/40 text-[#E5C378] mb-6">
               <Sparkles className="w-3.5 h-3.5" /> {content.hero.badge}
             </span>
             <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-black tracking-tight text-white mb-6 leading-tight">
               {content.hero.heading}
             </h1>
-            <p className="text-sm sm:text-lg text-white/80 leading-relaxed mb-8 font-light">
+            <p className="text-sm sm:text-lg text-white/80 leading-relaxed mb-8 font-light max-w-3xl">
               {content.hero.subheading}
             </p>
 
@@ -181,7 +184,57 @@ const PushkarTravelGuidePage = () => {
           </div>
         </div>
 
-        {/* ─── Tourist Attractions Section ─────────────────────────── */}
+        {/* ─── ISRAELI TRAVELER & COMMUNITY SECTION ────────────────── */}
+        <section className="mb-20">
+          <div className="rounded-3xl p-8 sm:p-12 bg-gradient-to-br from-[#1E293B] via-[#0F172A] to-[#1E293B] text-white border-2 border-blue-400/40 shadow-xl relative overflow-hidden">
+            <div className="max-w-4xl relative z-10">
+              <span className="inline-flex items-center gap-2 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-blue-500/20 text-blue-300 border border-blue-400/30 mb-4">
+                🇮🇱 {content.israelSection.badge}
+              </span>
+              <h2 className="text-2xl sm:text-4xl font-serif font-black text-white mb-3">
+                {content.israelSection.heading}
+              </h2>
+              <p className="text-xs sm:text-base text-slate-300 leading-relaxed mb-8">
+                {content.israelSection.subheading}
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-8">
+                {content.israelSection.cards.map((c, idx) => (
+                  <div
+                    key={idx}
+                    className="p-5 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md hover:border-blue-400/50 transition-colors"
+                  >
+                    <div className="text-[11px] font-bold uppercase tracking-wider text-blue-400 mb-2">
+                      {c.tag}
+                    </div>
+                    <h3 className="text-lg font-serif font-bold text-white mb-2">
+                      {c.title}
+                    </h3>
+                    <p className="text-xs text-slate-300 leading-relaxed">
+                      {c.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex flex-wrap gap-4 items-center">
+                <a
+                  href={`https://wa.me/${WHATSAPP_NUMBER}?text=Shalom!%20I%20am%20an%20Israeli%20traveler%20in%20Pushkar%20looking%20for%20assistance%20and%20taxi%20booking.`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-2xl text-xs sm:text-sm uppercase tracking-wider flex items-center gap-2 shadow-lg transition-transform duration-200 hover:scale-[1.02]"
+                >
+                  <MessageCircle className="w-4 h-4" /> Shalom / Chat on WhatsApp
+                </a>
+                <span className="text-xs text-slate-400">
+                  Direct support for transfers to Chittorgarh Fort, Udaipur & Jaipur
+                </span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ─── Tourist Attractions Section (CLEAN NO-IMAGE CARDS) ──── */}
         <section id="attractions" className="mb-20">
           <div className="text-center max-w-3xl mx-auto mb-12">
             <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A32] bg-[#EFE7D9] px-4 py-1.5 rounded-full inline-block mb-3">
@@ -195,124 +248,47 @@ const PushkarTravelGuidePage = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {content.attractions.map((attraction) => (
               <div
                 key={attraction.id}
-                className="bg-white rounded-3xl overflow-hidden border border-[#EFE7D9] shadow-heritage hover:shadow-xl transition-all duration-300 flex flex-col group"
-              >
-                <div className="relative h-56 overflow-hidden bg-[#EFE7D9]">
-                  <img
-                    src={attraction.image}
-                    alt={attraction.alt}
-                    loading="lazy"
-                    decoding="async"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 bg-black/60 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-wider rounded-full border border-white/20">
-                      {attraction.tag}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="p-6 flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 className="text-xl font-serif font-bold text-[#25231F] mb-3 group-hover:text-[#A65F3D] transition-colors">
-                      {attraction.title}
-                    </h3>
-                    <p className="text-xs text-[#25231F]/75 leading-relaxed mb-4">
-                      {attraction.desc}
-                    </p>
-
-                    <div className="p-3.5 rounded-2xl bg-[#F8F5EF] border border-[#EFE7D9] mb-4 text-xs">
-                      <div className="font-bold text-[#A65F3D] mb-1 flex items-center gap-1.5">
-                        <Sparkles className="w-3.5 h-3.5" /> Why Visit:
-                      </div>
-                      <p className="text-[#25231F]/80 leading-snug">{attraction.whyVisit}</p>
-                    </div>
-                  </div>
-
-                  <div className="pt-4 border-t border-[#EFE7D9] flex items-center justify-between text-xs text-[#25231F]/60">
-                    <div className="flex items-center gap-1">
-                      <MapPin className="w-3.5 h-3.5 text-[#C49A32]" />
-                      <span className="truncate max-w-[150px]">{attraction.location}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Clock className="w-3.5 h-3.5 text-[#C49A32]" />
-                      <span>{attraction.duration}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* ─── Best Hotels Section ─────────────────────────────────── */}
-        <section id="hotels" className="mb-20">
-          <div className="text-center max-w-3xl mx-auto mb-12">
-            <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A32] bg-[#EFE7D9] px-4 py-1.5 rounded-full inline-block mb-3">
-              {content.hotelsSection.kicker}
-            </span>
-            <h2 className="text-3xl sm:text-4xl font-serif font-black text-[#25231F] mb-4">
-              {content.hotelsSection.heading}
-            </h2>
-            <p className="text-sm sm:text-base text-[#25231F]/75 mb-4">
-              {content.hotelsSection.subheading}
-            </p>
-            <p className="text-xs italic text-[#25231F]/60 bg-[#EFE7D9]/50 p-3 rounded-xl border border-[#EFE7D9]">
-              {content.hotelsSection.note}
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {content.hotelCategories.map((cat, i) => (
-              <div
-                key={i}
-                className="bg-white rounded-3xl p-6 sm:p-8 border border-[#EFE7D9] shadow-heritage flex flex-col justify-between hover:border-[#C49A32]/40 transition-colors"
+                className="bg-white rounded-3xl p-6 sm:p-7 border border-[#EFE7D9] shadow-heritage hover:border-[#C49A32]/60 hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <span className="w-10 h-10 rounded-2xl bg-[#EFE7D9] flex items-center justify-center text-[#C49A32]">
-                      <Hotel className="w-5 h-5" />
+                    <span className="text-2xl font-serif font-black text-[#C49A32]/30 group-hover:text-[#C49A32] transition-colors">
+                      {attraction.number}
                     </span>
-                    <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
-                      {cat.price}
+                    <span className="px-3 py-1 bg-[#F8F5EF] text-[#A65F3D] text-[10px] font-bold uppercase tracking-wider rounded-full border border-[#EFE7D9]">
+                      {attraction.tag}
                     </span>
                   </div>
 
-                  <h3 className="text-lg font-serif font-bold text-[#25231F] mb-2">
-                    {cat.category}
+                  <h3 className="text-xl font-serif font-bold text-[#25231F] mb-3 group-hover:text-[#A65F3D] transition-colors">
+                    {attraction.title}
                   </h3>
-                  <p className="text-xs text-[#25231F]/75 leading-relaxed mb-4">
-                    {cat.desc}
+                  <p className="text-xs text-[#25231F]/75 leading-relaxed mb-5">
+                    {attraction.desc}
                   </p>
 
-                  <div className="text-xs font-bold text-[#A65F3D] mb-3">
-                    Top Verified Stays: <span className="font-normal text-[#25231F]/80">{cat.examples}</span>
-                  </div>
-
-                  <div className="flex flex-wrap gap-1.5 mb-6">
-                    {cat.features.map((feat, fi) => (
-                      <span
-                        key={fi}
-                        className="text-[11px] bg-[#F8F5EF] text-[#25231F]/70 px-2.5 py-1 rounded-lg border border-[#EFE7D9]"
-                      >
-                        ✓ {feat}
-                      </span>
-                    ))}
+                  <div className="p-3.5 rounded-2xl bg-[#F8F5EF] border border-[#EFE7D9] mb-5 text-xs">
+                    <div className="font-bold text-[#A65F3D] mb-1 flex items-center gap-1.5">
+                      <Sparkles className="w-3.5 h-3.5" /> Why Visit:
+                    </div>
+                    <p className="text-[#25231F]/80 leading-snug">{attraction.whyVisit}</p>
                   </div>
                 </div>
 
-                <a
-                  href={`https://wa.me/${WHATSAPP_NUMBER}?text=Namaste!%20I%20am%20looking%20for%20verified%20hotel%20recommendations%20in%20Pushkar%20for%20category:%20${encodeURIComponent(cat.category)}.`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full py-2.5 text-center bg-[#F8F5EF] hover:bg-[#C49A32] text-[#25231F] hover:text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 border border-[#EFE7D9]"
-                >
-                  Enquire Hotel Availability
-                </a>
+                <div className="pt-4 border-t border-[#EFE7D9] flex items-center justify-between text-xs text-[#25231F]/60">
+                  <div className="flex items-center gap-1.5">
+                    <MapPin className="w-3.5 h-3.5 text-[#C49A32]" />
+                    <span className="truncate max-w-[150px]">{attraction.location}</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <Clock className="w-3.5 h-3.5 text-[#C49A32]" />
+                    <span>{attraction.duration}</span>
+                  </div>
+                </div>
               </div>
             ))}
           </div>
@@ -365,6 +341,75 @@ const PushkarTravelGuidePage = () => {
                 </a>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* ─── Best Hotels Section ─────────────────────────────────── */}
+        <section id="hotels" className="mb-20">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#C49A32] bg-[#EFE7D9] px-4 py-1.5 rounded-full inline-block mb-3">
+              {content.hotelsSection.kicker}
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-serif font-black text-[#25231F] mb-4">
+              {content.hotelsSection.heading}
+            </h2>
+            <p className="text-sm sm:text-base text-[#25231F]/75 mb-4">
+              {content.hotelsSection.subheading}
+            </p>
+            <p className="text-xs italic text-[#25231F]/60 bg-[#EFE7D9]/50 p-3 rounded-xl border border-[#EFE7D9]">
+              {content.hotelsSection.note}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {content.hotelCategories.map((cat, i) => (
+              <div
+                key={i}
+                className="bg-white rounded-3xl p-6 sm:p-8 border border-[#EFE7D9] shadow-heritage flex flex-col justify-between hover:border-[#C49A32]/40 transition-colors"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="w-10 h-10 rounded-2xl bg-[#EFE7D9] flex items-center justify-center text-[#C49A32]">
+                      <Hotel className="w-5 h-5" />
+                    </span>
+                    <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+                      {cat.price}
+                    </span>
+                  </div>
+
+                  <h3 className="text-lg font-serif font-bold text-[#25231F] mb-2">
+                    {cat.category}
+                  </h3>
+                  <p className="text-xs text-[#25231F]/75 leading-relaxed mb-4">
+                    {cat.desc}
+                  </p>
+
+                  <div className="text-xs font-bold text-[#A65F3D] mb-3">
+                    Top Stays: <span className="font-normal text-[#25231F]/80">{cat.examples}</span>
+                  </div>
+
+                  <div className="flex flex-wrap gap-1.5 mb-6">
+                    {cat.features.map((feat, fi) => (
+                      <span
+                        key={fi}
+                        className="text-[11px] bg-[#F8F5EF] text-[#25231F]/70 px-2.5 py-1 rounded-lg border border-[#EFE7D9]"
+                      >
+                        ✓ {feat}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                <a
+                  href={`https://wa.me/${WHATSAPP_NUMBER}?text=Namaste!%20I%20am%20looking%20for%20verified%20hotel%20recommendations%20in%20Pushkar%20for%20category:%20${encodeURIComponent(cat.category)}.`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-2.5 text-center bg-[#F8F5EF] hover:bg-[#C49A32] text-[#25231F] hover:text-white rounded-xl text-xs font-bold uppercase tracking-wider transition-all duration-200 border border-[#EFE7D9]"
+                >
+                  Enquire Hotel Availability
+                </a>
+              </div>
+            ))}
           </div>
         </section>
 
@@ -594,7 +639,7 @@ const PushkarTravelGuidePage = () => {
                   type="text"
                   name="name"
                   required
-                  placeholder="e.g. John Smith / राहुल शर्मा"
+                  placeholder="e.g. John / דניאל / राहुल"
                   value={formState.name}
                   onChange={handleFormChange}
                   className="w-full px-4 py-2.5 rounded-xl border border-[#EFE7D9] bg-[#F8F5EF] text-[#25231F] focus:outline-none focus:border-[#C49A32]"
@@ -609,7 +654,7 @@ const PushkarTravelGuidePage = () => {
                   type="tel"
                   name="phone"
                   required
-                  placeholder="+91 98765 43210"
+                  placeholder="+91 98765 43210 / +972 50..."
                   value={formState.phone}
                   onChange={handleFormChange}
                   className="w-full px-4 py-2.5 rounded-xl border border-[#EFE7D9] bg-[#F8F5EF] text-[#25231F] focus:outline-none focus:border-[#C49A32]"
